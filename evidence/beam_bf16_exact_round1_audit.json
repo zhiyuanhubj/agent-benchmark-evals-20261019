@@ -1,17 +1,16 @@
 {
-  "generated_utc": "2026-10-19T07:46:21.505511+00:00",
+  "generated_utc": "2026-10-19T07:48:27.390260+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T073402Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T074809Z.tar.zst",
   "expected": 89,
-  "terminal": 41,
-  "graded": 41,
-  "success": 30,
+  "terminal": 42,
+  "graded": 42,
+  "success": 31,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "install-windows-3.11",
-    "largest-eigenval",
     "make-doom-for-mips",
     "make-mips-interpreter",
     "mcmc-sampling-stan",
@@ -59,11 +58,8 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "largest-eigenval"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "make-mips-interpreter",
     "mcmc-sampling-stan",
     "merge-diff-arc-agi-task",
     "model-extraction-relu-logits",
@@ -379,6 +375,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/large-scale-text-editing__oAwuyPV/result.json",
       "raw_response_count": 11,
       "responses_with_reasoning_content": 11
+    },
+    "largest-eigenval": {
+      "reward": 1.0,
+      "result_sha256": "d389dacba99d4973687b8ddedf91729e17f5489be8d4bfbd0aa528bd020840f2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/largest-eigenval__dLZZjKp/result.json",
+      "raw_response_count": 44,
+      "responses_with_reasoning_content": 44
     },
     "llm-inference-batching-scheduler": {
       "reward": 1.0,
