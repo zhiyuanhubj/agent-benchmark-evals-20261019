@@ -1,18 +1,16 @@
 {
-  "generated_utc": "2026-10-19T17:37:52.501583+00:00",
+  "generated_utc": "2026-10-19T17:41:15.983715+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T173343Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T173950Z.tar.zst",
   "expected": 89,
-  "terminal": 7,
-  "graded": 7,
-  "success": 5,
+  "terminal": 9,
+  "graded": 9,
+  "success": 7,
   "missing_graded_tasks": [
-    "caffe-cifar-10",
     "chess-best-move",
-    "circuit-fibsqrt",
     "cobol-modernization",
     "code-from-image",
     "compile-compcert",
@@ -95,7 +93,7 @@
   ],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [
-    "circuit-fibsqrt"
+    "cobol-modernization"
   ],
   "missing_task_inputs_in_archive": [
     "video-processing",
@@ -151,12 +149,26 @@
       "raw_response_count": 31,
       "responses_with_reasoning_content": 31
     },
+    "caffe-cifar-10": {
+      "reward": 1.0,
+      "result_sha256": "94e1f534884fb7e87dcc7b2ce02080778b977a09cf3609a7a5fcca0c27db574a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/caffe-cifar-10__eZJzFKK/result.json",
+      "raw_response_count": 57,
+      "responses_with_reasoning_content": 57
+    },
     "cancel-async-tasks": {
       "reward": 0.0,
       "result_sha256": "a7725b86ceb0b47c5485cf4144e2678850647c7ef915ab39dafe31035b4e86e1",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/cancel-async-tasks__CUKKWzP/result.json",
       "raw_response_count": 20,
       "responses_with_reasoning_content": 20
+    },
+    "circuit-fibsqrt": {
+      "reward": 1.0,
+      "result_sha256": "50ab0e9524fba18a2b30b6f7bc579b7bef1337874c0bb1a9b40f852febbd98e7",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/circuit-fibsqrt__RdBkkxu/result.json",
+      "raw_response_count": 19,
+      "responses_with_reasoning_content": 19
     }
   }
 }
