@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T10:02:24.728359+00:00",
+  "generated_utc": "2026-10-19T10:15:52.288054+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 53,
-  "success_count": 44,
-  "scored_raw_response_count": 1681,
-  "scored_nonempty_reasoning_response_count": 1681,
+  "graded_task_count": 55,
+  "success_count": 45,
+  "scored_raw_response_count": 1843,
+  "scored_nonempty_reasoning_response_count": 1843,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -66,6 +66,7 @@
     ],
     "sampling_profile_unchanged": true
   },
+  "opportunistic_routes_2812": [],
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "count-dataset-tokens",
@@ -73,8 +74,6 @@
     "dna-assembly",
     "extract-moves-from-video",
     "fix-ocaml-gc",
-    "install-windows-3.11",
-    "large-scale-text-editing",
     "largest-eigenval",
     "llm-inference-batching-scheduler",
     "log-summary-date-ranges",
@@ -110,8 +109,7 @@
     "db-wal-recovery__fBa7T4g",
     "extract-moves-from-video__pA42NVn",
     "fix-ocaml-gc__caoUspF",
-    "install-windows-3.11__JZGpPLL",
-    "large-scale-text-editing__byNYEsg",
+    "largest-eigenval__wXyPqJk",
     "path-tracing-reverse__4covUwV",
     "path-tracing__au39ic5",
     "schemelike-metacircular-eval__nBsnCj5",
@@ -476,6 +474,17 @@
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
     },
+    "install-windows-3.11": {
+      "reward": 0.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b02/install-windows-3.11__JZGpPLL/result.json",
+      "result_sha256": "ba491f5c8fba74f8b23222efca596477bc68543e2dd78303dcf96a2dcc8ca1d2",
+      "finished_at": "2026-10-19T10:06:53.965288Z",
+      "raw_response_count": 92,
+      "responses_with_reasoning_content": 92
+    },
     "kv-store-grpc": {
       "reward": 1.0,
       "exception_type": null,
@@ -486,6 +495,17 @@
       "finished_at": "2026-10-19T08:35:02.395805Z",
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
+    },
+    "large-scale-text-editing": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b02/large-scale-text-editing__byNYEsg/result.json",
+      "result_sha256": "c53193ab7959fd4b432b85628c7a53289578bcf441d14c45d279b60250d53215",
+      "finished_at": "2026-10-19T10:02:33.231648Z",
+      "raw_response_count": 70,
+      "responses_with_reasoning_content": 70
     },
     "mteb-retrieve": {
       "reward": 0.0,

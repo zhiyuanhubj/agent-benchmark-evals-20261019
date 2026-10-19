@@ -1,19 +1,17 @@
 {
-  "generated_utc": "2026-10-19T10:02:35.427559+00:00",
+  "generated_utc": "2026-10-19T10:16:01.969343+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T095923Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T101333Z.tar.zst",
   "expected": 89,
-  "terminal": 45,
-  "graded": 45,
-  "success": 33,
+  "terminal": 47,
+  "graded": 47,
+  "success": 34,
   "missing_graded_tasks": [
-    "install-windows-3.11",
     "make-doom-for-mips",
     "make-mips-interpreter",
     "model-extraction-relu-logits",
-    "modernize-scientific-stack",
     "mteb-leaderboard",
     "mteb-retrieve",
     "multi-source-data-merger",
@@ -57,8 +55,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "modernize-scientific-stack",
-    "mteb-leaderboard",
     "mteb-retrieve",
     "multi-source-data-merger",
     "nginx-request-logging",
@@ -363,6 +359,13 @@
       "raw_response_count": 11,
       "responses_with_reasoning_content": 11
     },
+    "install-windows-3.11": {
+      "reward": 0.0,
+      "result_sha256": "1c38b61a008f8b102e0c1c7bc4d72c5755fcc3b62600f60623b4f95302c23e4c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/install-windows-3.11__DdTyvaK/result.json",
+      "raw_response_count": 169,
+      "responses_with_reasoning_content": 169
+    },
     "kv-store-grpc": {
       "reward": 1.0,
       "result_sha256": "1ad6637304c737d28084309caf4135a88a45aa71d34406d877e53734fcb1f2df",
@@ -418,6 +421,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/merge-diff-arc-agi-task__MG6nJcH/result.json",
       "raw_response_count": 17,
       "responses_with_reasoning_content": 17
+    },
+    "modernize-scientific-stack": {
+      "reward": 1.0,
+      "result_sha256": "2c13298b7b619d5a0c2147bc38d5e307fb426dc761a83b13f3d6d3f3ae08d3ee",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/modernize-scientific-stack__8hKRnk8/result.json",
+      "raw_response_count": 6,
+      "responses_with_reasoning_content": 6
     }
   }
 }
