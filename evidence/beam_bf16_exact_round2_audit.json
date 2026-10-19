@@ -1,19 +1,18 @@
 {
-  "generated_utc": "2026-10-19T18:22:20.913724+00:00",
+  "generated_utc": "2026-10-19T18:39:30.248194+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T181240Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T182745Z.tar.zst",
   "expected": 89,
-  "terminal": 19,
-  "graded": 19,
-  "success": 14,
+  "terminal": 20,
+  "graded": 20,
+  "success": 15,
   "missing_graded_tasks": [
     "chess-best-move",
     "code-from-image",
     "dna-assembly",
-    "extract-elf",
     "extract-moves-from-video",
     "feal-differential-cryptanalysis",
     "feal-linear-cryptanalysis",
@@ -82,9 +81,7 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "extract-elf"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -224,6 +221,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/dna-insert__4kMpLJd/result.json",
       "raw_response_count": 14,
       "responses_with_reasoning_content": 14
+    },
+    "extract-elf": {
+      "reward": 1.0,
+      "result_sha256": "a2794878209a8057458637b955c1088d15e3ed5af607fc7e156543c39e70dad2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/extract-elf__TDLZVxW/result.json",
+      "raw_response_count": 18,
+      "responses_with_reasoning_content": 18
     }
   }
 }

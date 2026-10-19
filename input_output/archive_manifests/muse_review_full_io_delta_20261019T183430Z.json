@@ -1,0 +1,30 @@
+{
+  "generated_utc": "2026-10-19T18:34:31.548816+00:00",
+  "group": "muse_review_full_io",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_review_full_io_delta_20261019T181753Z.json",
+  "cutoff_utc": "2026-10-19T18:12:54.673620+00:00",
+  "archive_name": "muse_review_full_io_delta_20261019T183430Z.tar.zst",
+  "archive_size_bytes": 923955,
+  "archive_sha256": "ddbdfba7c3ac527607dcb9143cca0e9e4d40aae0d748dfc0fba4a55c815b1dc5",
+  "file_count": 363,
+  "source_bytes": 39791305,
+  "filename_counts": {
+    "result.json": 9,
+    "completion.json": 293,
+    "openhands_sdk.txt": 9,
+    "trajectory.json": 7,
+    "trial.log": 9,
+    "report.json": 7,
+    "review_report.json": 7,
+    "reward.txt": 7,
+    "test-stdout.txt": 7,
+    "config.json": 8
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_30b_instruct2507_500/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/review_recovery_20261018/results"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "generated_utc": "2026-10-19T18:37:46.896287+00:00",
+  "group": "muse_review_verifier",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_review_verifier_delta_20261019T182029Z.json",
+  "cutoff_utc": "2026-10-19T18:15:29.186786+00:00",
+  "archive_name": "muse_review_verifier_delta_20261019T183746Z.tar.zst",
+  "archive_size_bytes": 9191,
+  "archive_sha256": "a3dd16fa627c0ddf361416096da2b0adfb7ac77c3467f8d940f4205a30a9084a",
+  "file_count": 39,
+  "source_bytes": 45342,
+  "filename_counts": {
+    "report.json": 10,
+    "review_report.json": 9,
+    "reward.txt": 10,
+    "test-stdout.txt": 10
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_30b_instruct2507_500/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/review_recovery_20261018/results"
+  ]
+}
