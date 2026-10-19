@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T11:05:39.806477+00:00",
+  "generated_utc": "2026-10-19T11:15:58.663783+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -103,14 +103,14 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 62,
-            "graded": 62,
+            "terminal": 63,
+            "graded": 63,
             "success": 51,
             "active_trial_dirs": 19,
             "archived_actual_model_responses": 503,
             "ungraded": 0,
             "exceptions": {
-              "AgentTimeoutError": 4
+              "AgentTimeoutError": 5
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -168,22 +168,23 @@
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
-            "1": 51,
+            "1": 52,
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 2731,
+          "new_raw_model_responses": 2788,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 556,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 573,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 34,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 507,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 46,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 515,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 13,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 453
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 460
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T11:05:36+00:00",
-          "active_recovery_trial_dirs": 7,
+          "latest_new_raw_model_response_utc": "2026-10-19T11:15:55+00:00",
+          "active_recovery_trial_dirs": 9,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
@@ -206,6 +207,30 @@
               "nodes": "",
               "scheduler_start": "2026-10-20T15:10:45"
             }
+          },
+          "b05_early_owner": {
+            "utc": 1792408240.1111329,
+            "pid": 1711311,
+            "cpu_allocation": 2922,
+            "model_allocation": 2812,
+            "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05",
+            "tasks": [
+              "portfolio-optimization",
+              "protein-assembly",
+              "prove-plus-comm",
+              "pypi-server",
+              "pytorch-model-cli",
+              "pytorch-model-recovery",
+              "qemu-alpine-ssh",
+              "qemu-startup",
+              "query-optimize",
+              "raman-fitting"
+            ],
+            "original_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b05.json",
+            "original_sha256": "e129232565bcab4a3146e95f22ce6abe59f7a2913afac60e82416893bef2cd87",
+            "route_receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-b05-extra-route.json",
+            "route_sha256": "e10f6c916c3ead7e45f4d2dd8bdcb8a335e37eed3776f1b4e901b6811b879d1b",
+            "endpoint": "http://10.1.101.159:31320/v1"
           },
           "qualification": "No graded task replay. Eight ungraded tasks interrupted by user BF16 node cutover receive explicitly identified infrastructure replacement attempts; their original partial responses remain archived. Remaining 70 r1 tasks were never sampled. Rounds 2 and 3 use original tasks/images and generation settings. No best-of selection."
         }
@@ -274,7 +299,7 @@
             "graded": 59,
             "success": 43,
             "active_trial_dirs": 63,
-            "archived_actual_model_responses": 2743,
+            "archived_actual_model_responses": 2759,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 4
@@ -326,17 +351,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 272,
+          "terminal": 276,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 273,
+          "terminal": 276,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 290,
+          "terminal": 293,
           "status": "partial_no_full_rrr"
         }
       }
@@ -345,9 +370,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 689,
-        "graded": 688,
-        "success": 424,
+        "terminal": 698,
+        "graded": 697,
+        "success": 432,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -360,9 +385,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 109,
-          "graded": 109,
-          "success": 41,
+          "terminal": 112,
+          "graded": 112,
+          "success": 43,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -418,7 +443,7 @@
             "graded": 88,
             "success": 70,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1688,
+            "archived_actual_model_responses": 1711,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -468,9 +493,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 41,
-        "graded": 41,
-        "success": 30,
+        "terminal": 42,
+        "graded": 42,
+        "success": 31,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
