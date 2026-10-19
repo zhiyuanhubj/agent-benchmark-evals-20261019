@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T11:45:59.964727+00:00",
+  "generated_utc": "2026-10-19T11:59:30.819379+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 67,
-  "success_count": 55,
-  "scored_raw_response_count": 2683,
-  "scored_nonempty_reasoning_response_count": 2682,
+  "graded_task_count": 68,
+  "success_count": 56,
+  "scored_raw_response_count": 2699,
+  "scored_nonempty_reasoning_response_count": 2698,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -138,7 +138,6 @@
     "polyglot-c-py",
     "polyglot-rust-c",
     "protein-assembly",
-    "pypi-server",
     "pytorch-model-cli",
     "pytorch-model-recovery",
     "qemu-alpine-ssh",
@@ -155,7 +154,7 @@
     "path-tracing-reverse__4covUwV",
     "polyglot-c-py__fWHkeak",
     "protein-assembly__XNUjRgT",
-    "pypi-server__AX42fGF",
+    "pytorch-model-cli__yN3JA4T",
     "train-fasttext__Mc2uuim"
   ],
   "errors": [],
@@ -712,6 +711,17 @@
       "finished_at": "2026-10-19T11:42:01.762049Z",
       "raw_response_count": 4,
       "responses_with_reasoning_content": 4
+    },
+    "pypi-server": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.101.159:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/pypi-server__AX42fGF/result.json",
+      "result_sha256": "14316ef99c043f32472c9c3f2aa01b87651b150fcc82aef400f32181fa3b398e",
+      "finished_at": "2026-10-19T11:51:11.312009Z",
+      "raw_response_count": 16,
+      "responses_with_reasoning_content": 16
     },
     "regex-chess": {
       "reward": 0.0,
