@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T14:32:52.291656+00:00",
+  "generated_utc": "2026-10-19T14:44:58.960741+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 81,
+  "graded_task_count": 82,
   "success_count": 65,
-  "scored_raw_response_count": 3649,
-  "scored_nonempty_reasoning_response_count": 3648,
+  "scored_raw_response_count": 3799,
+  "scored_nonempty_reasoning_response_count": 3798,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -14,6 +14,7 @@
     "db-wal-recovery",
     "extract-moves-from-video",
     "gcode-to-text",
+    "make-doom-for-mips",
     "path-tracing-reverse"
   ],
   "replica_handoff": {
@@ -126,7 +127,6 @@
   },
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
-    "make-doom-for-mips",
     "make-mips-interpreter",
     "mcmc-sampling-stan",
     "merge-diff-arc-agi-task",
@@ -136,8 +136,8 @@
     "raman-fitting"
   ],
   "active_or_unfinished_trials": [
-    "make-doom-for-mips__ayw35yd",
     "make-mips-interpreter__6BNKuxJ",
+    "mcmc-sampling-stan__UZFuygc",
     "raman-fitting__gccPUXq"
   ],
   "errors": [],
@@ -628,6 +628,17 @@
       "finished_at": "2026-10-19T12:42:38.097383Z",
       "raw_response_count": 100,
       "responses_with_reasoning_content": 100
+    },
+    "make-doom-for-mips": {
+      "reward": 0.0,
+      "exception_type": "AgentTimeoutError",
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-doom-for-mips__ayw35yd/result.json",
+      "result_sha256": "c9ea90f060b37b474a16db60b0c61524518bbcf905bb2d73821b39c488e43718",
+      "finished_at": "2026-10-19T14:41:28.256487Z",
+      "raw_response_count": 150,
+      "responses_with_reasoning_content": 150
     },
     "mteb-retrieve": {
       "reward": 0.0,
