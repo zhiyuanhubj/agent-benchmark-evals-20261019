@@ -71,6 +71,11 @@ def cycle():
             assert audit['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB first-round audit failed'
             assert (audit['graded_task_count'], audit['success_count']) == (reported['graded'], reported['success'])
         sync_native_archives(scores)
+        run([PYTHON, str(ROOT / 'verify_muse_exact_io.py')], timeout=180)
+        io_coverage = json.loads((ROOT / 'evidence/muse_nvfp4_exact_io_coverage.json').read_text())
+        assert not io_coverage['errors'], 'Muse NVFP4 exact TB inputs/outputs missing from verified release assets'
+        if reported['complete']:
+            assert io_coverage['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB release coverage incomplete'
         run([PYTHON, str(ROOT / 'export_snapshot.py')])
         run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence', 'input_output/manifest.json', 'input_output/archive_manifests'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
