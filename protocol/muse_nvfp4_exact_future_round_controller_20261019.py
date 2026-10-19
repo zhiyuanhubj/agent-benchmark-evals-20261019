@@ -9,19 +9,24 @@ import time
 import urllib.request
 from pathlib import Path
 
-from route_future_rounds import LANES, ROOT, STATE, WORK, claim_next, save, sha, validate_route
+from route_future_rounds import LANES, ROOT, STATE, WORK, claim_next, save, sha, valid_endpoint, validate_route
 
 PYTHON = '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python'
 ROUTES = STATE / 'future-routes'
 
 
 def endpoint_ready(allocation):
-    proof = WORK / f'state/extra_gpu/{allocation}-ready.json'
+    proof = (WORK / 'state/reassigned-2867/endpoint-ready.json' if allocation == 2867
+             else WORK / f'state/extra_gpu/{allocation}-ready.json')
     value = json.loads(proof.read_text())
-    assert value['job'] == allocation and value['phase'] == 'ready'
-    assert value.get('claimed_round1_batches') == [], 'Round-1 handoff takes priority'
-    endpoint = value['endpoint']
-    assert endpoint.startswith('http://10.') and endpoint.endswith(':31320/v1')
+    if allocation == 2867:
+        assert value['allocation'] == allocation and value['model'] == 'muse-spark-open-nvfp4'
+        endpoint = value['api_base']
+    else:
+        assert value['job'] == allocation and value['phase'] == 'ready'
+        assert value.get('claimed_round1_batches') == [], 'Round-1 handoff takes priority'
+        endpoint = value['endpoint']
+    assert valid_endpoint(allocation, endpoint)
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     with opener.open(endpoint + '/models', timeout=10) as response:
         models = json.load(response)['data']

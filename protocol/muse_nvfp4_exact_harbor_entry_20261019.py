@@ -14,7 +14,7 @@ if config_path and re.fullmatch(r'r[123]-completion-2866-b\d{2}\.json', config_p
     if extra_marker.exists():
         extra_owner = json.loads(extra_marker.read_text())
         assert extra_owner['config_sha256'] == hashlib.sha256(config_path.read_bytes()).hexdigest()
-        assert extra_owner['lane'] in (2, 3, 4, 5, 6, 7, 8)
+        assert extra_owner['lane'] in (2, 3, 4, 5, 6, 7, 8, 9)
         if os.environ.get('MUSE_TB_EXTRA_LANE') != str(extra_owner['lane']):
             exit_file = state / (config_path.stem + '-extra-exit.json')
             owner_lock_path = state / f'extra-lane{extra_owner["lane"]}-2866-controller.lock'

@@ -93,7 +93,7 @@ for batch in ('b03', 'b05'):
 for receipt_path in sorted((SOURCE / 'muse_nvfp4/state/future-routes').glob('r[23]-completion-2866-b*-route.json')):
     receipt_bytes = receipt_path.read_bytes()
     receipt = json.loads(receipt_bytes)
-    assert receipt['round'] in (2, 3) and receipt['allocation'] in (2923, 2924, 2927, 2928)
+    assert receipt['round'] in (2, 3) and receipt['allocation'] in (2867, 2923, 2924, 2927, 2928)
     original, effective = Path(receipt['original_config']), Path(receipt['effective_config'])
     assert original.is_file() and effective.is_file()
     assert hashlib.sha256(original.read_bytes()).hexdigest() == receipt['original_sha256']
@@ -101,9 +101,15 @@ for receipt_path in sorted((SOURCE / 'muse_nvfp4/state/future-routes').glob('r[2
     expected = json.loads(original.read_text())
     expected['agents'][0]['kwargs']['api_base'] = receipt['endpoint']
     assert json.loads(effective.read_text()) == expected
-    ready_path = SOURCE / f'muse_nvfp4/state/extra_gpu/{receipt["allocation"]}-ready.json'
+    ready_path = (SOURCE / 'muse_nvfp4/state/reassigned-2867/endpoint-ready.json'
+                  if receipt['allocation'] == 2867 else
+                  SOURCE / f'muse_nvfp4/state/extra_gpu/{receipt["allocation"]}-ready.json')
     ready = json.loads(ready_path.read_text())
-    assert ready['phase'] == 'ready' and ready['endpoint'] == receipt['endpoint']
+    if receipt['allocation'] == 2867:
+        assert ready['allocation'] == 2867 and ready['model'] == 'muse-spark-open-nvfp4'
+        assert ready['api_base'] == receipt['endpoint']
+    else:
+        assert ready['phase'] == 'ready' and ready['endpoint'] == receipt['endpoint']
     related = [receipt_path, SOURCE / f'muse_nvfp4/state/{original.stem}-extra-owner.json',
                SOURCE / f'muse_nvfp4/state/{original.stem}-extra-exit.json']
     for path in related:

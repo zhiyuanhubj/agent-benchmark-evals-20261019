@@ -13,8 +13,13 @@ WORK = ROOT / 'muse_nvfp4'
 STATE = WORK / 'state'
 ROUTES = STATE / 'future-routes'
 RESULTS = ROOT / 'results/muse_nvfp4'
-LANES = {2923: 5, 2924: 6, 2927: 7, 2928: 8}
+LANES = {2923: 5, 2924: 6, 2927: 7, 2928: 8, 2867: 9}
 NAME = re.compile(r'r[23]-completion-2866-b\d{2}\.json\Z')
+
+
+def valid_endpoint(allocation, endpoint):
+    port = 31321 if allocation == 2867 else 31320
+    return endpoint.startswith('http://10.') and endpoint.endswith(f':{port}/v1')
 
 
 def sha(path):
@@ -54,7 +59,7 @@ def validate_route(source, receipt, owner):
     assert receipt['job_name'] == row['job_name'] and receipt['tasks'] == row['tasks']
     assert receipt['original_config'] == str(source) and receipt['original_sha256'] == row['sha256']
     assert receipt['allocation'] in LANES and receipt['lane'] == LANES[receipt['allocation']]
-    assert receipt['endpoint'].startswith('http://10.') and receipt['endpoint'].endswith(':31320/v1')
+    assert valid_endpoint(receipt['allocation'], receipt['endpoint'])
     assert receipt['sampling_profile_unchanged'] is True
     assert effective.is_file() and sha(effective) == receipt['effective_sha256']
     expected = json.loads(json.dumps(original))
@@ -87,7 +92,7 @@ def original_entry_claim(source):
 
 def claim_next(allocation, endpoint):
     """Claim exactly one untouched planned batch for a ready new GPU replica."""
-    assert allocation in LANES and endpoint.startswith('http://10.') and endpoint.endswith(':31320/v1')
+    assert allocation in LANES and valid_endpoint(allocation, endpoint)
     plan = json.loads((STATE / 'completion-2866-plan.json').read_text())
     for row in plan['configurations']:
         if row['round'] not in (2, 3):

@@ -50,9 +50,12 @@ extra_lane_units = {str(lane): subprocess.run(['systemctl', '--user', 'is-active
 extra_gpu_watcher_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-extra-gpu-watcher-20261019.service'], capture_output=True, text=True).stdout.strip()
 replica_2867_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-serve-2867-20261019.service'], capture_output=True, text=True).stdout.strip()
 replica_2919_controller = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-handoff-2867-20261019.service'], capture_output=True, text=True).stdout.strip()
+replica_2867_r23_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-r23-replica-2867-20261019.service'], capture_output=True, text=True).stdout.strip()
 replica_state = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867'
 replica_handoff = read(replica_state / 'r1-b06-b07-handoff.json') if (replica_state / 'r1-b06-b07-handoff.json').exists() else None
 replica_ready = (replica_state / 'endpoint-ready.json').exists()
+replica_r23_status_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/2867-controller-status.json'
+replica_r23_status = read(replica_r23_status_path) if replica_r23_status_path.exists() else None
 extra_gpu_jobs = (2923, 2924, 2927, 2928)
 queued_gpu_result = subprocess.run(['squeue', '-h', '-j', ','.join(map(str, extra_gpu_jobs)), '-o', '%i|%T|%N|%S'], capture_output=True, text=True, check=True)
 extra_gpu_allocations = {}
@@ -220,6 +223,10 @@ snapshot = {
         'muse_bf16_exact_released_io_audit': str(bf16_io_path),
     },
 }
+snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['replica_2867'].update({
+    'round23_controller': replica_2867_r23_unit,
+    'round23_status': replica_r23_status,
+})
 write('results/scores.json', snapshot)
 
 files = {}
@@ -322,6 +329,13 @@ elif replica_2867_unit == 'active':
 else:
     replica_note_en = ''
     replica_note_zh = ''
+if replica_r23_status:
+    replica_note_en += (f" On 2867, the disjoint round-2/3 controller is {replica_2867_r23_unit} "
+                        f"with phase {replica_r23_status['phase']} and current batch "
+                        f"{replica_r23_status.get('job_name', 'none')}; its ownership receipt prevents a duplicate draw.")
+    replica_note_zh += (f" 2867 上独立的第 2/3 轮控制器状态为 {replica_2867_r23_unit}，"
+                        f"阶段 {replica_r23_status['phase']}，当前批次 "
+                        f"{replica_r23_status.get('job_name', '无')}；批次归属凭据阻止重复抽题。")
 readme = f'''# Agent benchmark evaluation snapshot
 
 Snapshot: **{now}**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
