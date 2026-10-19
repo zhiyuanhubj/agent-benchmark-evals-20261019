@@ -82,6 +82,14 @@ def cycle():
         assert not io_coverage['errors'], 'Muse NVFP4 exact TB inputs/outputs missing from verified release assets'
         if reported['complete']:
             assert io_coverage['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB release coverage incomplete'
+        run([PYTHON, str(ROOT / 'audit_other_exact_round1.py')], timeout=180)
+        for model in ('opus47', 'beam_bf16'):
+            other_audit = json.loads((ROOT / f'evidence/{model}_exact_round1_audit.json').read_text())
+            assert not other_audit['errors'], f'{model} exact TB released I/O audit failed'
+            other_reported = scores['models']['opus_4_7' if model == 'opus47' else 'beam_bf16']['tb2_1_exact_supplied_images']['rounds']['1']
+            if other_reported['complete']:
+                assert other_audit['qualification'] == 'complete_verified', f'{model} exact TB first round not verified'
+                assert (other_audit['graded'], other_audit['success']) == (other_reported['graded'], other_reported['success'])
         run([PYTHON, str(ROOT / 'export_snapshot.py')])
         run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence', 'input_output/manifest.json', 'input_output/archive_manifests'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
