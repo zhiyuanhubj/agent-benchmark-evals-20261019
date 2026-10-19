@@ -29,11 +29,6 @@ def run(command, timeout=180):
 def sync_native_archives(scores):
     recovery = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']
     manifest_dir = ROOT / 'input_output/archive_manifests'
-    for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16'):
-        previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
-        previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
-        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= 1800:
-            run([PYTHON, str(ROOT / 'archive_delta.py'), group, '--if-changed'], timeout=600)
     profiles = [
         ('muse_nvfp4', sum(recovery['new_terminal_by_round'].values()), [PYTHON, str(ROOT / 'snapshot_live_tb.py')]),
         ('opus47', sum(value['terminal'] for value in scores['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'].values()), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'opus47']),
@@ -42,11 +37,27 @@ def sync_native_archives(scores):
     for name, terminal, command in profiles:
         live_manifests = sorted(manifest_dir.glob(f'{name}_exact_tb_live_*.json'))
         archived_terminal = 0
+        latest_archive_time = None
+        latest_filename_counts = {}
         if live_manifests:
             latest = json.loads(live_manifests[-1].read_text())
             archived_terminal = latest.get('terminal_result_count', latest['filename_counts']['result'])
-        if terminal > archived_terminal:
+            latest_archive_time = datetime.fromisoformat(latest['generated_utc'])
+            latest_filename_counts = latest['filename_counts']
+        handoff_newer = False
+        if name == 'muse_nvfp4':
+            handoff_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
+            if handoff_path.exists():
+                handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
+                handoff_newer = (latest_archive_time is None or handoff_time > latest_archive_time
+                                 or latest_filename_counts.get('handoff_receipt', 0) != 1)
+        if terminal > archived_terminal or handoff_newer:
             run(command, timeout=300)
+    for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16'):
+        previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
+        previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
+        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= 1800:
+            run([PYTHON, str(ROOT / 'archive_delta.py'), group, '--if-changed'], timeout=600)
     live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
     delta_manifests = sorted(manifest_dir.glob('*_delta_*.json'))
     release = json.loads(subprocess.check_output([

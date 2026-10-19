@@ -45,6 +45,11 @@ for task, row in audit['tasks'].items():
         missing_raw.append(task)
     if trial_prefix + 'agent/trajectory.json' not in entries:
         missing_trajectories.append(task)
+required_handoff_files = []
+if audit.get('replica_handoff'):
+    required_handoff_files.append(str((BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json').relative_to(BASE)))
+    required_handoff_files.extend(str(Path(row['effective_config']).relative_to(BASE)) for row in audit['replica_handoff']['batches'])
+missing_handoff_files = sorted(set(required_handoff_files) - entries)
 
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())
 verified_names = {item['asset'] for item in remote_audit['items'] if item.get('sha256_matches') and item.get('bytes_match')}
@@ -58,6 +63,8 @@ if missing_raw:
     errors.append(f'{len(missing_raw)} scored raw-response sets missing')
 if missing_trajectories:
     errors.append(f'{len(missing_trajectories)} scored trajectories missing')
+if missing_handoff_files:
+    errors.append(f'{len(missing_handoff_files)} replica handoff configs/receipt missing')
 if unverified:
     errors.append(f'{len(unverified)} release assets not SHA/size verified')
 
@@ -74,6 +81,7 @@ record = {
     'missing_results': missing_results,
     'missing_raw_responses': missing_raw,
     'missing_trajectories': missing_trajectories,
+    'missing_handoff_files': missing_handoff_files,
     'unverified_assets': unverified,
     'errors': errors,
     'qualification': 'complete_verified' if not errors and audit['qualification'] == 'complete_verified' else 'partial_or_needs_review',
