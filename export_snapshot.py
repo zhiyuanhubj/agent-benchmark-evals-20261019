@@ -338,6 +338,7 @@ readme = readme.replace('Additional GPU allocation states:', replica_note_en + '
 readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
 if early_b05_owner:
     readme = readme.replace('This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 'At this snapshot, b05 is running early on CPU allocation 2922 against GPU 2812; an ownership receipt makes sequential lane 3 verify its completed tasks and skip a duplicate draw. This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 1)
+readme = readme.replace('Keyword screening does not clear other trajectories.', 'Keyword screening does not clear other trajectories. Targeted [manual notes](evidence/exact_tb_integrity_manual_notes.json) also flag Opus 4.7 `break-filter-js-from-html` for an unsuccessful `/tests` probe and Beam BF16 on the same task for a temporary copy of the exposed filter into `/tests/filter.py` (removed before grading); neither inspected output confirms hidden-answer retrieval, and both are excluded from clean training pending full review. The Opus `torch-pipeline-parallelism` keyword hit was only a Python-executable listing.', 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -375,5 +376,6 @@ chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_no
 chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
 if early_b05_owner:
     chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。本次快照中 b05 已由 CPU 节点 2922 提前启动，调用 GPU 节点 2812；原顺序控制器稍后会核查同一批终态结果并跳过重复抽题。', 1)
+chinese_report = chinese_report.replace('关键词未命中也不代表轨迹已获干净认证。', '关键词未命中也不代表轨迹已获干净认证。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)还标记了 Opus 4.7 在 `break-filter-js-from-html` 上对不存在的 `/tests` 的探查，以及 Beam BF16 在同题中把公开的过滤器临时复制到 `/tests/filter.py`、在判分前删除的行为；检查到的输出均未确认获得隐藏答案，两条轨迹暂不作为干净训练数据。Opus `torch-pipeline-parallelism` 的关键词命中只是列举 Python 可执行文件。', 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))
