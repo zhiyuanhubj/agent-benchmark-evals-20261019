@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T06:13:38.553867+00:00",
+  "utc": "2026-10-19T06:20:13.098820+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
@@ -196,17 +196,17 @@
   "opus47": {
     "pro": {
       "expected": 731,
-      "terminal": 498,
-      "unique_tasks": 498,
-      "graded": 497,
-      "success": 314,
+      "terminal": 502,
+      "unique_tasks": 502,
+      "graded": 501,
+      "success": 316,
       "missing_native_grader_completion": 1,
       "native_status_counts": {
-        "completed": 497,
+        "completed": 501,
         "eval_error": 1
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 233,
+      "missing_result_task_count": 229,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -263,14 +263,14 @@
       },
       "2": {
         "expected": 113,
-        "terminal": 45,
-        "unique_tasks": 45,
-        "graded": 45,
+        "terminal": 47,
+        "unique_tasks": 47,
+        "graded": 47,
         "success": 17,
         "exceptions": {},
         "duplicate_task_ids": [],
         "excluded_invalid_protocol_originals": [],
-        "missing_result_task_count": 68,
+        "missing_result_task_count": 66,
         "task_id_source": "Original trial config task path; finished native trial and binary reward required"
       },
       "3": {
@@ -381,16 +381,16 @@
     },
     "pro": {
       "expected": 731,
-      "terminal": 14,
-      "unique_tasks": 14,
-      "graded": 14,
+      "terminal": 16,
+      "unique_tasks": 16,
+      "graded": 16,
       "success": 12,
       "missing_native_grader_completion": 0,
       "native_status_counts": {
-        "completed": 14
+        "completed": 16
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 717,
+      "missing_result_task_count": 715,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -471,13 +471,13 @@
       }
     },
     "review_pipeline": {
-      "utc": 1792390420.3171341,
+      "utc": 1792390810.4580774,
       "phase": "queued_after_bf16_pro_first_round",
       "model_sampling_started": false
     }
   },
   "reserved_capacity": {
-    "utc": 1792390437.286284,
+    "utc": 1792390827.9990294,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2886": {
@@ -509,7 +509,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792390415.6272666,
+    "utc": 1792390805.7550817,
     "allocations": {
       "2887": {
         "phase": "waiting_for_allocation"
@@ -529,7 +529,7 @@
       "ready_splits": [],
       "complete": false,
       "benchmark_revision_sampling_started": false,
-      "utc": 1792390437.28999
+      "utc": 1792390828.0042748
     },
     "revision_queues": {
       "reviewers": {
@@ -586,7 +586,7 @@
         }
       },
       "qualification": "Canonical full review splits only, exact original generators, one declared revision attempt per rejected PR. Final DA/RRR awaits separate native grading audit.",
-      "utc": 1792390428.5417552
+      "utc": 1792390818.912725
     },
     "native_da_rrr": {
       "reviewers": {
@@ -653,7 +653,7 @@
           }
         }
       },
-      "utc": 1792390436.8819363
+      "utc": 1792390821.478985
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -4100,7 +4100,7 @@
       "qualification": "Original449 and469 have real observed weight differences. This does not establish a stronger checkpoint, full449 availability, full-model nonfinite clearance, or training-update magnitude over all parameters. No model sampling, data edits or GPU interruption."
     },
     "mix449_original_file_recovery": {
-      "utc": 1792390434.3083093,
+      "utc": 1792390825.8468378,
       "sources": {
         "2812": {
           "phase": "ready",
@@ -4799,17 +4799,17 @@
             },
             "tb": {
               "expected": 24,
-              "native_graded": 19,
+              "native_graded": 20,
               "candidate_success": 11,
-              "unknown_native_reward": 5,
+              "unknown_native_reward": 4,
               "success_fraction_lower": 0.4583333333333333,
-              "success_fraction_upper": 0.6666666666666666,
+              "success_fraction_upper": 0.625,
               "complete": false,
               "pass_rate": null,
               "base_success": 16,
               "base_pass_rate": 0.6666666666666666,
               "paired_on_native_graded_only": {
-                "base0_mix4690": 4,
+                "base0_mix4690": 5,
                 "base1_mix4691": 10,
                 "base1_mix4690": 4,
                 "base0_mix4691": 1
@@ -4845,13 +4845,13 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792390380.9709907
+      "utc": 1792390801.549577
     },
     "queue_states": {
       "mix449": {
         "phase": "waiting_for_complete_original_artifact",
         "candidate": "mix449",
-        "utc": 1792390428.3641734
+        "utc": 1792390818.569597
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
@@ -4871,7 +4871,7 @@
       "phase": "waiting_for_complete_original449_artifact",
       "model_generation_started": false,
       "frozen_top_two_unchanged": true,
-      "utc": 1792390410.9891765
+      "utc": 1792390831.1524496
     },
     "original449_export_controller": null,
     "original449_inference_ready": null,

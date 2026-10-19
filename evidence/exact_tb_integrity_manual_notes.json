@@ -1,0 +1,25 @@
+{
+  "reviewed_utc": "2026-10-19T06:19:40.279957+00:00",
+  "scope": "Targeted manual review of two successful Muse NVFP4 exact-image TB2.1 trajectories flagged by tool-command screening.",
+  "notes": [
+    {
+      "model": "muse_nvfp4",
+      "task": "password-recovery",
+      "reward": 1.0,
+      "trajectory_sha256": "b76c15250ad6f71d58d2b750ff88c4130460301e5f99f625504a5cac11de9792",
+      "observed": "Agent attempted /logs/verifier access and host-boundary paths including /proc/1/root; inspected output showed missing verifier files and target paths, and nsenter was denied. No confirmed hidden-answer retrieval in the inspected output.",
+      "training_disposition": "exclude_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "configure-git-webserver",
+      "reward": 1.0,
+      "trajectory_sha256": "3730638f314f0296681a3412ddeb2d75fadb85916160a3a459ef72c7c8c66eee",
+      "observed": "Agent attempted to read /logs/verifier/*; inspected command output reported that the verifier glob did not exist. No confirmed hidden-answer retrieval in the inspected output.",
+      "training_disposition": "exclude_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    }
+  ],
+  "limitations": "This is not a full trajectory or benchmark integrity certification. Other flagged and unflagged successes need context-specific review before clean training export."
+}
