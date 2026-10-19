@@ -1,0 +1,19 @@
+{
+  "generated_utc": "2026-10-19T15:14:06.976354+00:00",
+  "group": "beam_legacy",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/beam_legacy_delta_20261019T150009Z.json",
+  "cutoff_utc": "2026-10-19T14:55:09.089171+00:00",
+  "archive_name": "beam_legacy_delta_20261019T151406Z.tar.zst",
+  "archive_size_bytes": 49518,
+  "archive_sha256": "f06fdd27443e97a72ca87b6a79d2a80f0a1c72f82faec673a86a8a222d8e2a2c",
+  "file_count": 3,
+  "source_bytes": 611352,
+  "filename_counts": {
+    "task.json": 2,
+    "result.json": 1
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018"
+  ]
+}

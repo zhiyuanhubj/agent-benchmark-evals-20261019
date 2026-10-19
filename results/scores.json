@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T15:06:56.629483+00:00",
+  "generated_utc": "2026-10-19T15:14:26.378403+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -182,41 +182,41 @@
             "2": 2,
             "3": 0
           },
-          "new_raw_model_responses": 3833,
+          "new_raw_model_responses": 3864,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 391,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 400,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 387,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 394,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 76
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 91
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T15:06:48+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T15:14:21+00:00",
           "active_recovery_trial_dirs": 5,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T15:10:45"
+              "scheduler_start": "2026-10-20T16:00:05"
             },
             "2924": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T15:10:45"
+              "scheduler_start": "2026-10-20T16:00:05"
             },
             "2927": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T15:10:45"
+              "scheduler_start": "2026-10-20T16:00:05"
             },
             "2928": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T15:10:45"
+              "scheduler_start": "2026-10-20T16:00:05"
             }
           },
           "b05_early_owner": {
@@ -251,9 +251,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 70,
-        "graded": 69,
-        "success": 42,
+        "terminal": 71,
+        "graded": 70,
+        "success": 43,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -310,7 +310,7 @@
             "graded": 68,
             "success": 49,
             "active_trial_dirs": 72,
-            "archived_actual_model_responses": 3238,
+            "archived_actual_model_responses": 3245,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 5
@@ -410,8 +410,8 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 57,
-          "graded": 57,
+          "terminal": 60,
+          "graded": 60,
           "success": 16,
           "status": "partial_no_full_score"
         }
@@ -471,11 +471,11 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 85,
-            "graded": 85,
+            "terminal": 86,
+            "graded": 86,
             "success": 67,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1675,
+            "archived_actual_model_responses": 1698,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -511,8 +511,8 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 60,
-        "graded": 60,
+        "terminal": 61,
+        "graded": 61,
         "success": 42,
         "status": "partial_no_full_score"
       },
