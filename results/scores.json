@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T17:02:23.630107+00:00",
+  "generated_utc": "2026-10-19T17:18:22.047921+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -119,9 +119,9 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 10,
-            "graded": 10,
-            "success": 10,
+            "terminal": 12,
+            "graded": 12,
+            "success": 12,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 0,
@@ -179,23 +179,23 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 77,
-            "2": 10,
+            "2": 12,
             "3": 0
           },
-          "new_raw_model_responses": 4513,
+          "new_raw_model_responses": 4594,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 616,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 641,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 334,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 156
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 356,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 190
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T17:02:21+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T17:18:19+00:00",
           "active_recovery_trial_dirs": 5,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -260,9 +260,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 66,
-          "graded": 66,
-          "success": 22,
+          "terminal": 67,
+          "graded": 67,
+          "success": 23,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -311,7 +311,7 @@
             "graded": 79,
             "success": 56,
             "active_trial_dirs": 83,
-            "archived_actual_model_responses": 3696,
+            "archived_actual_model_responses": 3805,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 7
@@ -323,11 +323,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 0,
-            "graded": 0,
-            "success": 0,
-            "active_trial_dirs": 0,
-            "archived_actual_model_responses": 0,
+            "terminal": 2,
+            "graded": 2,
+            "success": 1,
+            "active_trial_dirs": 6,
+            "archived_actual_model_responses": 54,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -363,17 +363,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 310,
+          "terminal": 313,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 312,
+          "terminal": 316,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 331,
+          "terminal": 336,
           "status": "partial_no_full_rrr"
         }
       }
@@ -411,9 +411,9 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 77,
-          "graded": 77,
-          "success": 22,
+          "terminal": 83,
+          "graded": 83,
+          "success": 26,
           "status": "partial_no_full_score"
         }
       },
@@ -520,9 +520,9 @@
       "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
-          "terminal": 29,
-          "graded": 29,
-          "success": 25,
+          "terminal": 30,
+          "graded": 30,
+          "success": 26,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -545,9 +545,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 29,
-            "graded": 29,
-            "success": 25,
+            "terminal": 30,
+            "graded": 30,
+            "success": 26,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,

@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T17:00:01.730210+00:00",
+  "utc": "2026-10-19T17:17:06.580448+00:00",
   "source_image_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/image-identity-plan.json",
   "source_image_plan_sha256": "e8ce45c5101dd43938bea69810d1dd1098895d5d64520370e23e252c2d57b22b",
   "models": {
@@ -11,7 +11,7 @@
           "graded": 79,
           "success": 56,
           "active_trial_dirs": 83,
-          "archived_actual_model_responses": 3696,
+          "archived_actual_model_responses": 3805,
           "ungraded": 0,
           "exceptions": {
             "AgentTimeoutError": 7
@@ -23,11 +23,11 @@
         },
         "2": {
           "expected": 89,
-          "terminal": 0,
-          "graded": 0,
-          "success": 0,
-          "active_trial_dirs": 0,
-          "archived_actual_model_responses": 0,
+          "terminal": 2,
+          "graded": 2,
+          "success": 1,
+          "active_trial_dirs": 6,
+          "archived_actual_model_responses": 54,
           "ungraded": 0,
           "exceptions": {},
           "excluded_user_reassignment_trials": [],
@@ -52,6 +52,11 @@
       },
       "unit": {
         "MainPID": "798397",
+        "Result": "success",
+        "ActiveState": "active"
+      },
+      "replica_unit": {
+        "MainPID": "2767688",
         "Result": "success",
         "ActiveState": "active"
       },
@@ -111,6 +116,7 @@
         "Result": "success",
         "ActiveState": "inactive"
       },
+      "replica_unit": null,
       "exact_supplied_images_ready": true,
       "cpu_allocation": 2919,
       "all_three_complete": true,
@@ -167,6 +173,7 @@
         "Result": "exit-code",
         "ActiveState": "failed"
       },
+      "replica_unit": null,
       "exact_supplied_images_ready": true,
       "cpu_allocation": 2922,
       "all_three_complete": false,

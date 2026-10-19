@@ -1,6 +1,6 @@
 {
-  "reviewed_utc": "2026-10-19T14:56:21.003733+00:00",
-  "scope": "Targeted manual review of selected exact-image TB2.1 trajectories across Muse NVFP4 rounds 1/2, Muse BF16, Opus 4.7, and Beam BF16; pattern-flagged successes remain review leads.",
+  "reviewed_utc": "2026-10-19T17:17:08.555572+00:00",
+  "scope": "Targeted manual review of selected exact-image TB2.1 trajectories across Muse NVFP4 rounds 1/2, Muse BF16, Opus 4.7, and Beam BF16 rounds 1/2; pattern-flagged successes remain review leads.",
   "notes": [
     {
       "model": "muse_nvfp4",
@@ -181,6 +181,15 @@
       "result_sha256": "60f95c3e3489b380d4fe28032850a503bb36f3c8c3a8452017a6d67ddb5a241e",
       "trajectory_sha256": "88d7c36c7122295e49b06f93a769de69e5d5fce8f2a5f73d394e20d5ce6ff265",
       "observed": "At step 5 the agent listed /logs/verifier and /protected. The captured terminal output showed an empty verifier directory and only an encrypted archive name under /protected. The inspected agent commands did not show opening verifier output or decrypting that archive; hidden-answer retrieval is unconfirmed. The probe merits full manual review.",
+      "training_disposition": "exclude_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "task": "break-filter-js-from-html",
+      "reward": 1.0,
+      "trajectory_sha256": "8cd2cd9d69ea8d319f93dbfe2679f3b7e660bcb2334c48f863f78b73f04bd3dd",
+      "observed": "In the second Beam BF16 exact-image round, the agent probed /tests at step 8, then created /tests/filter.py as a symlink to the public /app/filter.py at step 11 and ran the exposed /app/test_outputs.py test. The visible subsequent steps do not remove the symlink before grading. The recorded reward is 1, but writing into the verifier path means this trajectory is not certified as a clean task solution; the reviewed commands do not establish retrieval of a hidden answer.",
       "training_disposition": "exclude_pending_full_manual_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }
