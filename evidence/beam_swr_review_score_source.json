@@ -1,5 +1,5 @@
 {
-  "utc": 1792428011.500249,
+  "utc": 1792428924.3721006,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 304,
+      "terminal": 310,
       "exceptions": 7,
       "prepared_image_phases": {
         "image_ready": 336
@@ -377,7 +377,7 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 309,
+      "terminal": 312,
       "exceptions": 5,
       "prepared_image_phases": {
         "image_ready": 336
@@ -409,7 +409,7 @@
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 326,
+      "terminal": 331,
       "exceptions": 6,
       "prepared_image_phases": {
         "image_ready": 352
@@ -454,8 +454,8 @@
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
-    "2888|beam-review-reserve-2888|PENDING||(None)",
-    "2886|muse-bf16-pair-2886|PENDING||(None)",
+    "2888|beam-review-reserve-2888|PENDING||(AssocGrpNodeLimit)",
+    "2886|muse-bf16-pair-2886|PENDING||(AssocGrpNodeLimit)",
     "2906|mix449-cpu-salvage-10-1-122-30|PENDING||(Priority)",
     "2887|beam-review-reserve-2887|RUNNING|ip-10-1-69-108|ip-10-1-69-108",
     "2869|mix3-eval-extra-4|RUNNING|ip-10-1-77-106|ip-10-1-77-106",

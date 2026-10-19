@@ -1,21 +1,18 @@
 {
-  "generated_utc": "2026-10-19T16:44:53.047187+00:00",
+  "generated_utc": "2026-10-19T16:58:48.026895+00:00",
   "model": "beam_bf16",
   "round": 1,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T164201Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T165514Z.tar.zst",
   "expected": 89,
-  "terminal": 75,
-  "graded": 75,
-  "success": 52,
+  "terminal": 78,
+  "graded": 78,
+  "success": 55,
   "missing_graded_tasks": [
     "regex-chess",
     "sam-cell-seg",
     "schemelike-metacircular-eval",
-    "sparql-university",
-    "sqlite-db-truncate",
-    "sqlite-with-gcov",
     "torch-pipeline-parallelism",
     "torch-tensor-parallelism",
     "train-fasttext",
@@ -26,13 +23,8 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "sparql-university"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "sqlite-db-truncate",
-    "sqlite-with-gcov",
-    "torch-pipeline-parallelism",
     "torch-tensor-parallelism",
     "train-fasttext",
     "tune-mjcf",
@@ -571,6 +563,27 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/sanitize-git-repo__pnNAir9/result.json",
       "raw_response_count": 21,
       "responses_with_reasoning_content": 21
+    },
+    "sparql-university": {
+      "reward": 1.0,
+      "result_sha256": "223dc5e112bd6a013ca3517130ce8466211259887b6be7e7509e01ba656e2894",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/sparql-university__TBQJZtg/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
+    "sqlite-db-truncate": {
+      "reward": 1.0,
+      "result_sha256": "78b47ee8d21e7860a9f41f73415bc862bdddba48ec016a3ad25493cc88c4337c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/sqlite-db-truncate__PUBYki4/result.json",
+      "raw_response_count": 9,
+      "responses_with_reasoning_content": 9
+    },
+    "sqlite-with-gcov": {
+      "reward": 1.0,
+      "result_sha256": "559b8a1443f65e6b860ceec37f44b3ef30b1ec387ed3d3ce2cc7db340fcf378e",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/sqlite-with-gcov__xjmJHDA/result.json",
+      "raw_response_count": 13,
+      "responses_with_reasoning_content": 13
     }
   }
 }

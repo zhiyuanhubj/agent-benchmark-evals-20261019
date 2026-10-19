@@ -1,24 +1,22 @@
 {
-  "generated_utc": "2026-10-19T16:39:22.728583+00:00",
+  "generated_utc": "2026-10-19T16:59:02.390939+00:00",
   "model": "opus47",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "feb9f67ee2afded391e904be146ed377b6f07b98c7b3c7d12ef168f87d1d30f1",
-  "archive_name": "opus47_exact_tb_live_20261019T163752Z.tar.zst",
+  "archive_name": "opus47_exact_tb_live_20261019T165447Z.tar.zst",
   "expected": 89,
-  "terminal": 88,
-  "graded": 88,
-  "success": 68,
-  "missing_graded_tasks": [
-    "winning-avg-corewars"
-  ],
+  "terminal": 89,
+  "graded": 89,
+  "success": 69,
+  "missing_graded_tasks": [],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
-  "qualification": "partial_or_needs_review",
-  "accuracy": null,
+  "qualification": "complete_verified",
+  "accuracy": 0.7752808988764045,
   "reasoning_note": "Nonempty reasoning_content is counted in preserved raw responses; this does not certify absence of reward hacking.",
   "tasks": {
     "adaptive-rejection-sampler": {
@@ -629,6 +627,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/opus47/opus47-tb-v1-exact-r3/vulnerable-secret__6qwhYWi/result.json",
       "raw_response_count": 11,
       "responses_with_reasoning_content": 6
+    },
+    "winning-avg-corewars": {
+      "reward": 1.0,
+      "result_sha256": "eeeee695d4140dc38717b36ad6dacb649e2881c99619e0062c6645d31ea26a72",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/opus47/opus47-tb-v1-exact-r3/winning-avg-corewars__5xZr4ma/result.json",
+      "raw_response_count": 181,
+      "responses_with_reasoning_content": 39
     },
     "write-compressor": {
       "reward": 1.0,
