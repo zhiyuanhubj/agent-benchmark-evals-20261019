@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-19T11:39:31.084380+00:00",
+  "generated_utc": "2026-10-19T11:46:02.084158+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 15,
-  "success_count": 12,
+  "scored_tasks": 16,
+  "success_count": 13,
   "tasks": {
     "dna-assembly": {
       "reward": 0.0,
@@ -11,6 +11,10 @@
     "hf-model-inference": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/hf-model-inference__ddcVLKD/result.json"
+    },
+    "pypi-server": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/pypi-server__YbwX8ds/result.json"
     },
     "fix-code-vulnerability": {
       "reward": 1.0,
@@ -66,17 +70,21 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 15,
-  "covered_raw_response_sets": 15,
-  "covered_trajectories": 15,
-  "scored_raw_response_count": 395,
-  "nonempty_reasoning_response_count": 395,
+  "covered_results": 16,
+  "covered_raw_response_sets": 16,
+  "covered_trajectories": 16,
+  "scored_raw_response_count": 405,
+  "nonempty_reasoning_response_count": 405,
   "raw_reasoning_by_task": {
     "dna-assembly": {
       "raw_responses": 22,
       "nonempty_reasoning_content": 22
     },
     "hf-model-inference": {
+      "raw_responses": 10,
+      "nonempty_reasoning_content": 10
+    },
+    "pypi-server": {
       "raw_responses": 10,
       "nonempty_reasoning_content": 10
     },
@@ -154,6 +162,7 @@
     "muse_bf16_delta_20261019T111545Z.tar.zst",
     "muse_bf16_delta_20261019T113350Z.tar.zst",
     "muse_bf16_delta_20261019T113553Z.tar.zst",
+    "muse_bf16_delta_20261019T114542Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

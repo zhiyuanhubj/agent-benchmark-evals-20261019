@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T11:39:28.322550+00:00",
+  "generated_utc": "2026-10-19T11:45:59.964727+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 64,
-  "success_count": 52,
-  "scored_raw_response_count": 2637,
-  "scored_nonempty_reasoning_response_count": 2636,
+  "graded_task_count": 67,
+  "success_count": 55,
+  "scored_raw_response_count": 2683,
+  "scored_nonempty_reasoning_response_count": 2682,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -126,7 +126,6 @@
   "missing_graded_tasks": [
     "db-wal-recovery",
     "dna-assembly",
-    "llm-inference-batching-scheduler",
     "mailman",
     "make-doom-for-mips",
     "make-mips-interpreter",
@@ -138,9 +137,7 @@
     "path-tracing-reverse",
     "polyglot-c-py",
     "polyglot-rust-c",
-    "portfolio-optimization",
     "protein-assembly",
-    "prove-plus-comm",
     "pypi-server",
     "pytorch-model-cli",
     "pytorch-model-recovery",
@@ -153,12 +150,12 @@
   "active_or_unfinished_trials": [
     "db-wal-recovery__fBa7T4g",
     "dna-assembly__fLvhUtU",
-    "llm-inference-batching-scheduler__Lbi33h5",
     "mailman__GGFCS4h",
+    "make-doom-for-mips__ayw35yd",
     "path-tracing-reverse__4covUwV",
     "polyglot-c-py__fWHkeak",
-    "portfolio-optimization__ACqpwZp",
     "protein-assembly__XNUjRgT",
+    "pypi-server__AX42fGF",
     "train-fasttext__Mc2uuim"
   ],
   "errors": [],
@@ -595,6 +592,17 @@
       "raw_response_count": 27,
       "responses_with_reasoning_content": 27
     },
+    "llm-inference-batching-scheduler": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/llm-inference-batching-scheduler__Lbi33h5/result.json",
+      "result_sha256": "4e17cfdcdc2f48607cc7f8561ba83432e240a3a5afead102ea8e7c1f7267dd33",
+      "finished_at": "2026-10-19T11:40:29.565343Z",
+      "raw_response_count": 24,
+      "responses_with_reasoning_content": 24
+    },
     "log-summary-date-ranges": {
       "reward": 1.0,
       "exception_type": null,
@@ -682,6 +690,28 @@
       "finished_at": "2026-10-19T11:36:25.211287Z",
       "raw_response_count": 265,
       "responses_with_reasoning_content": 265
+    },
+    "portfolio-optimization": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.101.159:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/portfolio-optimization__ACqpwZp/result.json",
+      "result_sha256": "5b62de547c23345b22726671d0babd2041b15ec854746e6b6b781e7a5bae936e",
+      "finished_at": "2026-10-19T11:41:00.403083Z",
+      "raw_response_count": 18,
+      "responses_with_reasoning_content": 18
+    },
+    "prove-plus-comm": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.101.159:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/prove-plus-comm__gh2GYDU/result.json",
+      "result_sha256": "0edfacc6c508e9c8b824af3bb79a722833854f4057b8f6c5205098c6bdc0c3b0",
+      "finished_at": "2026-10-19T11:42:01.762049Z",
+      "raw_response_count": 4,
+      "responses_with_reasoning_content": 4
     },
     "regex-chess": {
       "reward": 0.0,
