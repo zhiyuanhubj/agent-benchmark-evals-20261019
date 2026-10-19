@@ -54,7 +54,7 @@ def sync_native_archives(scores):
 
 def cycle():
     with LOCK.open('a') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(lock, fcntl.LOCK_EX)
         for source in SOURCES:
             run([PYTHON, str(source)])
         run([PYTHON, str(ROOT / 'export_snapshot.py')])
