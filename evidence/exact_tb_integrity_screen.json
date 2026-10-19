@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T08:07:36.823232+00:00",
+  "generated_utc": "2026-10-19T08:11:29.694869+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 31,
+      "scored_trajectories_checked": 33,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -253,6 +253,17 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "constraints-scheduling",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b00/constraints-scheduling__jPjVKiL/agent/trajectory.json",
+      "trajectory_sha256": "6c139c61001100e9890a506f2ab9ac3c51ebb936d18d6f376345ad8e8a98152a",
+      "steps": 8,
+      "tool_calls": 16,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "muse_nvfp4",
@@ -516,6 +527,17 @@
       "trajectory_sha256": "690afee3ad321d9a7bae32e31304cefacb438e710dbd5fcdea00291fe2f673c5",
       "steps": 7,
       "tool_calls": 16,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "rstan-to-pystan",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/rstan-to-pystan__QdMvhLN/agent/trajectory.json",
+      "trajectory_sha256": "72f8a074bad6a591299f54d5be01c7359200ec80e59e9cc720122081d656e97d",
+      "steps": 19,
+      "tool_calls": 62,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

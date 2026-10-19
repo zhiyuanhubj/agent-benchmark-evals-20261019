@@ -1,6 +1,6 @@
 {
-  "reviewed_utc": "2026-10-19T08:05:30+00:00",
-  "scope": "Targeted manual review of four flagged and two newly successful Muse NVFP4 exact-image TB2.1 trajectories.",
+  "reviewed_utc": "2026-10-19T08:10:00+00:00",
+  "scope": "Targeted manual review of four flagged and three newly successful Muse NVFP4 exact-image TB2.1 trajectories.",
   "notes": [
     {
       "model": "muse_nvfp4",
@@ -53,6 +53,15 @@
       "reward": 1.0,
       "trajectory_sha256": "042245260edc111a24da7ad80e461d38b0ec140e9fe5406f3b3792ded6336ef3",
       "observed": "The sidecar_html_navigation keyword hits at steps 6, 8, 11, and 12 occur inside local XSS test-input strings written under /tmp; the public task asks for an HTML JavaScript filter. Inspected commands edit /app/filter.py and run it against those local examples. The matched text is not a browser navigation or a request for hidden benchmark material. This is targeted context review, not a full clean-trajectory certification.",
+      "training_disposition": "candidate_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "constraints-scheduling",
+      "reward": 1.0,
+      "trajectory_sha256": "6c139c61001100e9890a506f2ab9ac3c51ebb936d18d6f376345ad8e8a98152a",
+      "observed": "All 16 agent tool calls were inspected. The agent read the three public /app calendar inputs, wrote local scheduling checks under /tmp, and created /app/meeting_scheduled.ics. No verifier-log, reward-file, host-boundary, or hidden-answer access appeared in these commands. This is a targeted command review, not a full clean-trajectory certification.",
       "training_disposition": "candidate_pending_full_manual_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }
