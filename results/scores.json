@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T16:57:36.294566+00:00",
+  "generated_utc": "2026-10-19T17:01:19.273734+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -119,9 +119,9 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 9,
-            "graded": 9,
-            "success": 9,
+            "terminal": 10,
+            "graded": 10,
+            "success": 10,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 0,
@@ -179,23 +179,23 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 77,
-            "2": 9,
+            "2": 10,
             "3": 0
           },
-          "new_raw_model_responses": 4477,
+          "new_raw_model_responses": 4505,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 612,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 616,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 327,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 131
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 333,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 149
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T16:57:32+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T17:01:19+00:00",
           "active_recovery_trial_dirs": 5,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -252,9 +252,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 76,
-        "graded": 75,
-        "success": 46,
+        "terminal": 79,
+        "graded": 78,
+        "success": 49,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -307,11 +307,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 78,
-            "graded": 78,
-            "success": 55,
-            "active_trial_dirs": 82,
-            "archived_actual_model_responses": 3668,
+            "terminal": 79,
+            "graded": 79,
+            "success": 56,
+            "active_trial_dirs": 83,
+            "archived_actual_model_responses": 3696,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 7
@@ -411,8 +411,8 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 76,
-          "graded": 76,
+          "terminal": 77,
+          "graded": 77,
           "success": 22,
           "status": "partial_no_full_score"
         }

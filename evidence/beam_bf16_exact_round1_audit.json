@@ -1,17 +1,16 @@
 {
-  "generated_utc": "2026-10-19T16:58:48.026895+00:00",
+  "generated_utc": "2026-10-19T17:01:50.190344+00:00",
   "model": "beam_bf16",
   "round": 1,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T165514Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T170054Z.tar.zst",
   "expected": 89,
-  "terminal": 78,
-  "graded": 78,
-  "success": 55,
+  "terminal": 79,
+  "graded": 79,
+  "success": 56,
   "missing_graded_tasks": [
     "regex-chess",
-    "sam-cell-seg",
     "schemelike-metacircular-eval",
     "torch-pipeline-parallelism",
     "torch-tensor-parallelism",
@@ -25,7 +24,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "torch-tensor-parallelism",
     "train-fasttext",
     "tune-mjcf",
     "video-processing",
@@ -556,6 +554,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/rstan-to-pystan__vNYsC3h/result.json",
       "raw_response_count": 32,
       "responses_with_reasoning_content": 32
+    },
+    "sam-cell-seg": {
+      "reward": 1.0,
+      "result_sha256": "e68b7d1f93e14ea4db5e0ebdcae3109775f77ff4de9020de90cc87cd85887053",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/sam-cell-seg__JZQntRN/result.json",
+      "raw_response_count": 51,
+      "responses_with_reasoning_content": 51
     },
     "sanitize-git-repo": {
       "reward": 0.0,
