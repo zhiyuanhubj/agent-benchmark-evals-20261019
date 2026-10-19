@@ -21,6 +21,23 @@ def read(path):
     return json.loads(path.read_text())
 
 
+def completed_jsonl_ids(path):
+    if not path.exists():
+        return set()
+    ids = set()
+    with path.open() as stream:
+        for line in stream:
+            if not line.endswith('\n'):
+                break  # A producer may still be writing its last JSONL record.
+            if not line.strip():
+                continue
+            value = json.loads(line)
+            item = value['instance_id']
+            assert item not in ids, f'Duplicate native JSONL instance: {item}'
+            ids.add(item)
+    return ids
+
+
 def write(rel, value):
     path = ROOT / rel
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -391,12 +408,23 @@ bf16_exact_zh_pending = '' if bf16_tb_round1['complete'] else f'；指定精确�
 bf16_review_state_path = BF / 'review_bench/state/current.json'
 bf16_review_state = read(bf16_review_state_path) if bf16_review_state_path.exists() else {}
 bf16_review_phase = bf16_review_state.get('phase')
+bf16_swr_generated = completed_jsonl_ids(BF / 'review_bench/swrbench/generation.jsonl')
+bf16_swr_judged = completed_jsonl_ids(BF / 'review_bench/swrbench/evaluation-gpt-5.5.json.tmp.jsonl')
+assert bf16_swr_judged <= bf16_swr_generated
+assert len(bf16_swr_generated) <= 1000
+bf16_review_ready_images = sum(
+    read(path).get('phase') == 'image_ready'
+    for path in (BF / 'review_bench/queue/images').glob('*.json'))
 if bf16_review_phase == 'queued_for_verified_2886_bf16_endpoint':
     bf16_review_en = 'Queued on verified BF16 pair 2886; awaiting model load and tool/thinking preflight'
     bf16_review_zh = '；SWRBench 与 SWE-Review 已排到 2886 双节点，等待模型加载及工具调用/thinking 预检'
 elif bf16_review_phase == 'verified_2886_swr_generation_judging_and_review_pipeline_started':
-    bf16_review_en = 'Running on verified BF16 pair 2886; final score pending'
-    bf16_review_zh = '；SWRBench 与 SWE-Review 已在 2886 双节点启动，最终分数待完成'
+    bf16_review_en = (f'Running on verified BF16 pair 2886; SWRBench '
+                      f'{len(bf16_swr_generated)}/1000 generated, '
+                      f'{len(bf16_swr_judged)}/1000 judged; final score pending')
+    bf16_review_zh = (f'；SWRBench 已在 2886 双节点生成 {len(bf16_swr_generated)}/1000、'
+                      f'裁判 {len(bf16_swr_judged)}/1000；SWE-Review 已预建 '
+                      f'{bf16_review_ready_images} 个任务镜像，最终分数待完成')
 else:
     bf16_review_en = 'Incomplete; current launch state needs review'
     bf16_review_zh = '；SWRBench 与 SWE-Review 尚未完成，启动状态待核查'
