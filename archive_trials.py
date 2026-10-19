@@ -23,12 +23,14 @@ GROUPS = {
     'muse_deep_canonical_3round': [M / 'remaining_deep3_2812_20261018/state/three-round-completion-audit.json'],
     'muse_review': [*(M / 'review_bench_20261018/swe_review' / split / 'results' for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')), M / 'review_bench_20261018/review_recovery_20261018/results'],
     'muse_review_full_io': [*(M / 'review_bench_20261018/swe_review' / split / 'results' for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')), M / 'review_bench_20261018/review_recovery_20261018/results'],
+    'muse_review_verifier': [*(M / 'review_bench_20261018/swe_review' / split / 'results' for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')), M / 'review_bench_20261018/review_recovery_20261018/results'],
     'muse_swr_raw': [M / 'review_bench_20261018/swrbench/raw_responses', M / 'review_bench_20261018/swrbench/judge_raw_responses'],
     'muse_tb_recovery': [M / 'infra_repair', M / 'review_bench_20261018/tb_remaining_after_swr/results'],
     'beam_legacy': [B / 'legacy_bench_20261018'],
     'beam_exact_tb': [B / 'tb_v1_exact_images_20261019/results/beam_bf16'],
     'beam_review': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'beam_review_full_io': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
+    'beam_review_verifier': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'beam_swr_raw': [B / 'review_bench/swrbench/raw_responses', B / 'review_bench/swrbench/judge_raw_responses'],
     'opus47_legacy': [O],
     'opus47_exact_tb': [B / 'tb_v1_exact_images_20261019/results/opus47'],
@@ -38,6 +40,11 @@ GROUPS = {
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    verifier_file = 'verifier' in rel.parts and path.name in ('review_report.json', 'report.json', 'reward.txt', 'test-stdout.txt')
+    if group.endswith('review_verifier'):
+        return verifier_file
+    if group.endswith('review_full_io') and verifier_file:
+        return True
     if group.endswith('_swr_raw'):
         return path.suffix == '.json'
     if group.startswith('muse_harbor_shard') and 'muse-pro' in rel.parts:
@@ -78,7 +85,12 @@ def iter_files(group):
         if not root.exists():
             continue
         for directory, dirs, names in os.walk(root):
-            dirs[:] = [d for d in dirs if d not in ('.git', '__pycache__', '.venv', 'node_modules', 'sandbox', 'artifacts', 'verifier')]
+            excluded = {'.git', '__pycache__', '.venv', 'node_modules', 'sandbox', 'artifacts'}
+            if not (group.endswith('review_verifier') or group.endswith('review_full_io')):
+                excluded.add('verifier')
+            if group.endswith('review_verifier'):
+                excluded.update({'agent', 'completions', 'logs'})
+            dirs[:] = [d for d in dirs if d not in excluded]
             for name in names:
                 path = Path(directory) / name
                 if not path.is_file() or path.is_symlink() or not include(path, root, group):

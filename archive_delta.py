@@ -12,7 +12,9 @@ from pathlib import Path
 
 BASE = Path('/fsx/home/zhiyuan')
 ROOT = Path(__file__).resolve().parent
-ALLOWED = ('opus47_legacy', 'beam_legacy', 'muse_bf16')
+ALLOWED = ('opus47_legacy', 'beam_legacy', 'muse_bf16',
+           'muse_review_full_io', 'beam_review_full_io',
+           'muse_review_verifier', 'beam_review_verifier')
 parser = argparse.ArgumentParser()
 parser.add_argument('group', choices=ALLOWED)
 parser.add_argument('--if-changed', action='store_true', help='Succeed without an archive if no source file changed')
