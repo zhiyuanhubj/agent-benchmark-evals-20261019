@@ -351,6 +351,7 @@ bf16_excluded = sorted(n['task'] for n in manual_notes if n['model'] == 'muse_bf
 nvfp4_r2_excluded = sorted(n['task'] for n in manual_notes if n['model'] == 'muse_nvfp4_r2'
                            and n['reward'] == 1 and n['training_disposition'].startswith('exclude_'))
 nvfp4_excluded_names = ', '.join(f'`{name}`' for name in nvfp4_excluded)
+bf16_excluded_names = ', '.join(f'`{name}`' for name in bf16_excluded)
 nvfp4_r2_excluded_names = ', '.join(f'`{name}`' for name in nvfp4_r2_excluded)
 beam_tb_rounds = be['tb2_1_exact_supplied_images']['rounds']
 be_tb = beam_tb_rounds['1']
@@ -522,6 +523,9 @@ Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evid
 The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anchored manual notes](evidence/exact_tb_integrity_manual_notes.json) currently exclude {len(nvfp4_excluded)} successful Muse NVFP4 trajectories and {len(bf16_excluded)} successful Muse BF16 trajectories from clean training export. The excluded NVFP4 tasks are {nvfp4_excluded_names}; their targeted notes document verifier-log probes, a copy into `/tests/filter.py`, or timing manipulation; the reviewed verifier probes did not confirm hidden-answer retrieval. Both BF16 and NVFP4 `largest-eigenval` scored reward 1.0 after patching timers and slowing the reference eigensolver. Their raw rewards are retained and [the NVFP4 final trajectory review](evidence/muse_nvfp4_largest_eigenval_live_integrity_alert.json) is anchored by SHA-256, but neither reward demonstrates an unmodified speedup. A separate pre-score alert records NVFP4 [host-boundary probes on `db-wal-recovery`](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json); it does not prove successful access or a final score. Keyword screening does not clear other trajectories.
 '''
 readme = readme.replace('Additional GPU allocation states:', replica_note_en + ' Additional GPU allocation states:', 1)
+if bf16_excluded:
+    readme = readme.replace('Both BF16 and NVFP4 `largest-eigenval`',
+        f'The excluded BF16 tasks are {bf16_excluded_names}; see the per-task notes for their distinct reasons. The newly reviewed verifier and host-boundary probes did not confirm hidden-answer retrieval in the inspected output. Both BF16 and NVFP4 `largest-eigenval`', 1)
 readme = readme.replace('A batch that starts locally first cannot be redrawn on another node.', 'A batch that starts locally first cannot be redrawn on another node. The four queued extra GPU allocations are also prepared to take only untouched round-2/3 batches if granted after the round-1 handoffs are claimed. Per-batch locks and ownership receipts prevent the original controller from drawing the same task; the effective config changes only the model endpoint.', 1)
 if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists():
     readme = readme.replace('For actively changing Pro/legacy/Deep results,',
@@ -615,6 +619,9 @@ Beam 精确镜像 TB 第 2 轮现由 2887 上核验过的 BF16 副本独立执�
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `{latest_legacy_deltas['opus47_legacy']['archive_name']}`、`{latest_legacy_deltas['beam_legacy']['archive_name']}`、`{latest_legacy_deltas['muse_bf16']['archive_name']}`；截止时间和文件范围见各自清单。
 '''
 chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_note_zh + ' 新增 GPU 申请状态：', 1)
+if bf16_excluded:
+    chinese_report = chinese_report.replace('BF16 和 NVFP4 的 `largest-eigenval`',
+        f'排除的 BF16 题目是 {bf16_excluded_names}，各题原因见逐题核查；新核查的 verifier 与宿主边界探查在已检查输出中未证实获得隐藏答案。BF16 和 NVFP4 的 `largest-eigenval`', 1)
 if nvfp4_r2_excluded:
     chinese_report = chinese_report.replace('仍在增长的 Pro/旧镜像/DeepSWE 结果，',
         f'第 2 轮 Muse NVFP4 的成功轨迹 {nvfp4_r2_excluded_names} 曾探查 verifier 目录；已检查的返回为空，未证实获得隐藏答案。原始 reward 保留，轨迹暂不进入干净训练数据，见[哈希锚定核查](evidence/exact_tb_integrity_manual_notes.json)和[命令筛查](evidence/exact_tb_integrity_screen.json)。\n\n仍在增长的 Pro/旧镜像/DeepSWE 结果，', 1)
