@@ -27,6 +27,10 @@ def published_complete():
     round_three = score['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds']['3']
     audit = json.loads((ROOT / 'evidence/opus47_r3_thinking_transport_audit.json').read_text())
     release = json.loads((ROOT / 'evidence/release-assets-verification.json').read_text())
+    manifests = sorted((ROOT / 'input_output/archive_manifests').glob('opus47_exact_tb_live_*.json'))
+    if not manifests:
+        return False
+    manifest = json.loads(manifests[-1].read_text())
     if (round_three['expected'], round_three['graded']) != (89, 89) or not round_three['complete']:
         return False
     if audit['counts']['scored_tasks'] != 89 or audit['counts']['raw_responses'] != sum(
@@ -36,6 +40,14 @@ def published_complete():
                                               'without_text_unknown_reasoning_tokens')):
         return False
     if release['errors'] or release['manifest_count'] != release['sha256_and_size_match_count']:
+        return False
+    counts = manifest['filename_counts']
+    if (manifest['terminal_result_count'], counts['result'], counts['trial_config'],
+            counts['trajectory'], counts['task_input']) != (267, 267, 267, 267, 89):
+        return False
+    expected_responses = sum(round_info['archived_actual_model_responses'] for round_info in
+                             score['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'].values())
+    if counts['raw_response'] < expected_responses:
         return False
     local = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     remote = subprocess.check_output(['git', 'ls-remote', 'origin', 'HEAD'], cwd=ROOT, text=True, timeout=30).split()[0]
