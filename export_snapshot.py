@@ -257,9 +257,9 @@ mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
 mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
 manual_notes = read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
 nvfp4_excluded = sorted(n['task'] for n in manual_notes if n['model'] == 'muse_nvfp4'
-                        and n['reward'] == 1 and n['training_disposition'] == 'exclude_pending_full_manual_review')
+                        and n['reward'] == 1 and n['training_disposition'].startswith('exclude_'))
 bf16_excluded = sorted(n['task'] for n in manual_notes if n['model'] == 'muse_bf16'
-                       and n['reward'] == 1 and n['training_disposition'] == 'exclude_pending_full_manual_review')
+                       and n['reward'] == 1 and n['training_disposition'].startswith('exclude_'))
 nvfp4_excluded_names = ', '.join(f'`{name}`' for name in nvfp4_excluded)
 be_tb = be['tb2_1_exact_supplied_images']['rounds']['1']
 op_tb = op['tb2_1_exact_supplied_images']['rounds']['1']
@@ -330,7 +330,7 @@ Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to ori
 
 Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json) found returned reasoning in every raw response of the five completed successful recovery tasks checked. One agent created `/tests/filter.py` by copying the exposed, unchanged `/app/filter.py` to run the task's permitted local test; no filter/verifier rewrite was observed in its commands. This is not a full reward-hacking clearance. The Muse DeepSWE successful trajectory `ipython-session-bundle-replay` attempted to inspect verifier logs, but the returned directory was empty; it remains flagged for training-data review. One successful Muse Pro task lacks a trajectory and is unsuitable for thinking-data export. Source paths and hashes are in `results/scores.json` and `input_output/manifest.json`; raw API credentials and model weights are excluded.
 
-The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anchored manual notes](evidence/exact_tb_integrity_manual_notes.json) currently exclude {len(nvfp4_excluded)} successful Muse NVFP4 trajectories and {len(bf16_excluded)} successful Muse BF16 trajectory from clean training export pending full review. The excluded NVFP4 tasks are {nvfp4_excluded_names}. Their targeted notes document verifier-log probes or a copy into `/tests/filter.py`; inspected outputs do not confirm hidden-answer retrieval. Raw benchmark rewards remain unchanged. Keyword screening does not clear other trajectories.
+The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anchored manual notes](evidence/exact_tb_integrity_manual_notes.json) currently exclude {len(nvfp4_excluded)} successful Muse NVFP4 trajectories and {len(bf16_excluded)} successful Muse BF16 trajectories from clean training export. The excluded NVFP4 tasks are {nvfp4_excluded_names}; their targeted notes document verifier-log probes or a copy into `/tests/filter.py`, without confirmed hidden-answer retrieval. BF16 `largest-eigenval` is a confirmed attempt to falsify the speed test by patching timers and slowing the reference solver; its recorded reward is retained but is not evidence of an unmodified speedup. A separate [live NVFP4 alert](evidence/muse_nvfp4_largest_eigenval_live_integrity_alert.json) documents the same task's timer manipulation before it received any score. Keyword screening does not clear other trajectories.
 '''
 readme = readme.replace('Additional GPU allocation states:', replica_note_en + ' Additional GPU allocation states:', 1)
 readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
@@ -351,7 +351,7 @@ chinese_report = f'''# 模型评测结果快照
 
 **审计限制。** [Muse 精确镜像 TB 抽查](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json)显示，当时新增的 5 道成功题每条原始响应都有 reasoning 字段。其中一题把题目公开的 `/app/filter.py` 原样复制到 `/tests/filter.py` 做本地测试；检查到的命令没有改写过滤器或 verifier，但这只是定点核查，不能宣称所有轨迹都干净。Muse DeepSWE 有一条成功轨迹尝试查看 verifier 日志，但返回的目录为空；这条轨迹已单独标记供训练数据筛查，现有证据不能断言读到了隐藏答案。Muse Pro Verified 有一条成功记录缺少轨迹，不应作为带 thinking 的训练样本。SWE-Review 的完整官方 RRR 尚未生成，任何已结束题数都不等于最终成绩。
 
-[精确镜像 TB 命令筛查](evidence/exact_tb_integrity_screen.json)及[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)目前将 Muse NVFP4 的 {len(nvfp4_excluded)} 条、Muse BF16 的 {len(bf16_excluded)} 条成功轨迹排除出“干净训练轨迹”候选，等待全面复核。排除的 NVFP4 题目是 {nvfp4_excluded_names}；逐题核查记录了 verifier 日志探查或向 `/tests/filter.py` 复制公开文件。已检查的输出没有确认获得隐藏答案，原始 benchmark 判分保留。关键词未命中也不代表轨迹已获干净认证。
+[精确镜像 TB 命令筛查](evidence/exact_tb_integrity_screen.json)及[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)目前将 Muse NVFP4 的 {len(nvfp4_excluded)} 条、Muse BF16 的 {len(bf16_excluded)} 条成功轨迹排除出“干净训练轨迹”候选。排除的 NVFP4 题目是 {nvfp4_excluded_names}；逐题核查记录了 verifier 日志探查或向 `/tests/filter.py` 复制公开文件，已检查的输出没有确认获得隐藏答案。BF16 的 `largest-eigenval` 明确通过修改计时函数和拖慢参考求解器操纵测速；原始 reward 保留，但不能当作未经篡改的加速证据。另有一份[仍在运行的 NVFP4 同题预警](evidence/muse_nvfp4_largest_eigenval_live_integrity_alert.json)，记录其判分前的计时篡改。关键词未命中也不代表轨迹已获干净认证。
 
 逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 共 {asset_count} 个归档，优先使用 SWE-Review 的 `*_review_full_io.tar.zst`（含 OpenHands completions）。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 {release_audit_label}**，逐项核验见 `evidence/release-assets-verification.json`。
 
