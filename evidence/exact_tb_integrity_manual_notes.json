@@ -1,6 +1,6 @@
 {
-  "reviewed_utc": "2026-10-19T13:03:39.605914+00:00",
-  "scope": "Targeted manual review of selected Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16 exact-image TB2.1 trajectories, including all currently pattern-flagged successes.",
+  "reviewed_utc": "2026-10-19T14:56:21.003733+00:00",
+  "scope": "Targeted manual review of selected exact-image TB2.1 trajectories across Muse NVFP4 rounds 1/2, Muse BF16, Opus 4.7, and Beam BF16; pattern-flagged successes remain review leads.",
   "notes": [
     {
       "model": "muse_nvfp4",
@@ -171,6 +171,17 @@
       "trajectory_sha256": "e7d519750cf5bc3607d2d2fff2e1400cd77815c4ff5fde327d4df2a5a5a71e0b",
       "observed": "The completed 84-response trajectory has one raw response without a separate reasoning_content field. Its content contains the task JSON analysis/plan/commands, which does not establish preservation of separate thinking. See evidence/muse_nvfp4_winning_avg_corewars_thinking_gap.json for the anchored raw response and metadata.",
       "training_disposition": "exclude_whole_trajectory_from_full_thinking_training_until_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "adaptive-rejection-sampler",
+      "reward": 1.0,
+      "result_sha256": "60f95c3e3489b380d4fe28032850a503bb36f3c8c3a8452017a6d67ddb5a241e",
+      "trajectory_sha256": "88d7c36c7122295e49b06f93a769de69e5d5fce8f2a5f73d394e20d5ce6ff265",
+      "observed": "At step 5 the agent listed /logs/verifier and /protected. The captured terminal output showed an empty verifier directory and only an encrypted archive name under /protected. The inspected agent commands did not show opening verifier output or decrypting that archive; hidden-answer retrieval is unconfirmed. The probe merits full manual review.",
+      "training_disposition": "exclude_pending_full_manual_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }
   ],
