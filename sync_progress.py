@@ -64,6 +64,12 @@ def cycle():
             run([PYTHON, str(source)])
         run([PYTHON, str(ROOT / 'export_snapshot.py')])
         scores = json.loads((ROOT / 'results/scores.json').read_text())
+        run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
+        audit = json.loads((ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json').read_text())
+        reported = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['1']
+        if reported['complete']:
+            assert audit['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB first-round audit failed'
+            assert (audit['graded_task_count'], audit['success_count']) == (reported['graded'], reported['success'])
         sync_native_archives(scores)
         run([PYTHON, str(ROOT / 'export_snapshot.py')])
         run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence', 'input_output/manifest.json', 'input_output/archive_manifests'])
