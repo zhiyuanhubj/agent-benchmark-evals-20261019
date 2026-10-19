@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T16:29:42.424558+00:00",
+  "generated_utc": "2026-10-19T16:39:00.189609+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 87,
+  "graded_task_count": 88,
   "success_count": 68,
-  "scored_raw_response_count": 4035,
-  "scored_nonempty_reasoning_response_count": 4034,
+  "scored_raw_response_count": 4167,
+  "scored_nonempty_reasoning_response_count": 4166,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -127,11 +127,9 @@
   },
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
-    "make-mips-interpreter",
     "mteb-leaderboard"
   ],
   "active_or_unfinished_trials": [
-    "make-mips-interpreter__6BNKuxJ",
     "mteb-leaderboard__EAhfXHh"
   ],
   "errors": [],
@@ -633,6 +631,17 @@
       "finished_at": "2026-10-19T14:41:28.256487Z",
       "raw_response_count": 150,
       "responses_with_reasoning_content": 150
+    },
+    "make-mips-interpreter": {
+      "reward": 0.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-mips-interpreter__6BNKuxJ/result.json",
+      "result_sha256": "865b84029ca15738bc421e8fa04398cf81433e450d3795529432f4053fc27f64",
+      "finished_at": "2026-10-19T16:37:06.391983Z",
+      "raw_response_count": 132,
+      "responses_with_reasoning_content": 132
     },
     "mcmc-sampling-stan": {
       "reward": 1.0,
