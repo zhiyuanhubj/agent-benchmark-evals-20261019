@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T05:02:37.114967+00:00",
+  "generated_utc": "2026-10-19T05:06:23.889164+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -148,6 +148,10 @@
         "recovery": {
           "controller": "active",
           "parallel_controller": "active",
+          "extra_lane_controllers": {
+            "2": "active",
+            "3": "active"
+          },
           "extra_gpu_watcher": "active",
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
@@ -156,7 +160,7 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 173,
+          "new_raw_model_responses": 194,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {

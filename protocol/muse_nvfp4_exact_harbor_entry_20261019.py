@@ -4,7 +4,49 @@ E=Path(__file__).resolve().parent
 sys.path.insert(0,'/fsx/home/zhiyuan/bench/tb21_v1_four_models_20261012')
 import os, hashlib, fcntl
 config_path = Path(sys.argv[1]).resolve() if len(sys.argv) == 2 else None
-if config_path and config_path.name.startswith('r1-completion-2866-b') and os.environ.get('MUSE_TB_PARALLEL_OWNER') != '1':
+extra_owner = None
+if config_path and config_path.name.startswith('r1-completion-2866-b'):
+    state = E / 'state'
+    extra_marker = state / (config_path.stem + '-extra-owner.json')
+    if extra_marker.exists():
+        extra_owner = json.loads(extra_marker.read_text())
+        assert extra_owner['config_sha256'] == hashlib.sha256(config_path.read_bytes()).hexdigest()
+        assert extra_owner['lane'] in (2, 3)
+        if os.environ.get('MUSE_TB_EXTRA_LANE') != str(extra_owner['lane']):
+            exit_file = state / (config_path.stem + '-extra-exit.json')
+            owner_lock_path = state / f'extra-lane{extra_owner["lane"]}-2866-controller.lock'
+            def owner_alive():
+                with owner_lock_path.open('a') as owner_lock:
+                    try:
+                        fcntl.flock(owner_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    except BlockingIOError:
+                        return True
+                    return False
+            if os.environ.get('MUSE_TB_PARALLEL_OWNER') == '1':
+                assert exit_file.exists() or owner_alive(), 'Extra lane stopped; preserve outputs and audit'
+                if exit_file.exists():
+                    assert json.loads(exit_file.read_text())['returncode'] == 0
+                print(f'Extra lane owns {config_path.stem}; primary parallel lane skips duplicate draw', flush=True)
+                raise SystemExit(0)
+            assert os.environ.get('SLURM_JOB_ID') == '2922'
+            while not exit_file.exists():
+                assert owner_alive(), 'Extra lane stopped; preserve outputs and audit'
+                time.sleep(15)
+            status = json.loads(exit_file.read_text())
+            assert status['returncode'] == 0 and status['config_sha256'] == extra_owner['config_sha256']
+            config = json.loads(config_path.read_text())
+            expected = {Path(task['path']).name for task in config['tasks']}
+            found = set()
+            for result_path in (Path(config['jobs_dir']) / config['job_name']).glob('*/result.json'):
+                result = json.loads(result_path.read_text())
+                if result.get('finished_at'):
+                    task = Path(result['config']['task']['path']).name
+                    assert task in expected and task not in found
+                    found.add(task)
+            assert found == expected, f'Extra lane missing terminal tasks: {expected - found}'
+            print(f'Extra lane completed {config["job_name"]}: {len(found)} terminal tasks', flush=True)
+            raise SystemExit(0)
+if config_path and config_path.name.startswith('r1-completion-2866-b') and os.environ.get('MUSE_TB_PARALLEL_OWNER') != '1' and extra_owner is None:
     state = E / 'state'
     marker = state / (config_path.stem + '-parallel-owner.json')
     if marker.exists():
