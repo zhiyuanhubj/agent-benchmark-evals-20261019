@@ -1,6 +1,6 @@
 # Agent benchmark evaluation snapshot
 
-Snapshot: **2026-10-19T04:31:53.644641+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
+Snapshot: **2026-10-19T04:34:05.999570+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
@@ -16,7 +16,7 @@ The TB2.1 **legacy cached-tag image profile is separate** from the exact user-su
 
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
-The 25 release assets were checked against GitHub's reported SHA-256 digests: **25/25 matched** their committed archive manifests. The latest live exact-image TB archive is a timestamped snapshot of in-progress trials, not scored results.
+The 26 release assets were checked against GitHub's reported SHA-256 digests: **26/26 matched** their committed archive manifests. The latest live exact-image TB archive is a timestamped snapshot of in-progress trials, not scored results.
 
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Two disjoint continuation lanes are now active on the surviving NVFP4 node 2866: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. The original controller waits for the parallel lane's finished results and verifies task coverage, preventing duplicate scoring. Additional GPU allocations 2923 and 2924 are queued. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
