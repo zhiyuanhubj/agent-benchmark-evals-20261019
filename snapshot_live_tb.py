@@ -22,7 +22,8 @@ assert not archive.exists()
 
 payloads = {}
 counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
-for job in sorted(RESULTS.glob('muse-nvfp4-tb-v1-exact-r1-completion-2866-b*')):
+terminal_results = 0
+for job in sorted(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*')):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
     if config.exists():
         payloads[config] = config.read_bytes()
@@ -33,9 +34,11 @@ for job in sorted(RESULTS.glob('muse-nvfp4-tb-v1-exact-r1-completion-2866-b*')):
         for category, path in [('trial_config', trial / 'config.json'), ('trajectory', trial / 'agent/trajectory.json'), ('result', trial / 'result.json')]:
             if path.exists() and path.is_file() and not path.is_symlink():
                 data = path.read_bytes()
-                json.loads(data)
+                parsed = json.loads(data)
                 payloads[path] = data
                 counts[category] += 1
+                if category == 'result' and parsed.get('finished_at'):
+                    terminal_results += 1
         for path in sorted((trial / 'agent/raw_responses').glob('*.json')):
             data = path.read_bytes()
             json.loads(data)
@@ -73,6 +76,7 @@ manifest = {
     'archive_sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
     'file_count': len(payloads),
     'filename_counts': counts,
+    'terminal_result_count': terminal_results,
     'source': str(RESULTS),
 }
 out = ROOT / 'input_output/archive_manifests' / f'{name}.json'
