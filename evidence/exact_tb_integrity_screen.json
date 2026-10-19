@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T13:11:12.110500+00:00",
+  "generated_utc": "2026-10-19T13:17:40.791906+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 78,
+      "scored_trajectories_checked": 79,
       "pattern_hit_trajectories": 12,
       "pattern_hit_successes": 9,
       "rule_hit_counts": {
@@ -449,6 +449,17 @@
       "trajectory_sha256": "24ef84552a81453acd090f29ee0b8e44b9477045a99a84b987e7eaccfb6c2b39",
       "steps": 7,
       "tool_calls": 13,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "dna-assembly",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b00/dna-assembly__fLvhUtU/agent/trajectory.json",
+      "trajectory_sha256": "c9a47684e6ff1f726a73cfdfb49439124cdd74174340f858bc8e618598a3f145",
+      "steps": 31,
+      "tool_calls": 58,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -3596,9 +3607,9 @@
         "model": "muse_nvfp4",
         "task": "make-doom-for-mips",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-doom-for-mips__ayw35yd",
-        "trajectory_sha256_at_screen": "8a68732066c48a017cc73dec177c1e25cc14df558942b4b22551f42c364825a6",
-        "steps_at_screen": 86,
-        "tool_calls_at_screen": 390,
+        "trajectory_sha256_at_screen": "72f9afb609a78a3236a85fdfa819a52c9eeabac4a8354a0133d560e04d6d63d0",
+        "steps_at_screen": 91,
+        "tool_calls_at_screen": 413,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3606,9 +3617,9 @@
         "model": "muse_nvfp4",
         "task": "make-mips-interpreter",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-mips-interpreter__6BNKuxJ",
-        "trajectory_sha256_at_screen": "9a98d2359fd10dd4c3cdbe50e241d4a94248f33e83a836ebf717f917dcaab8d0",
-        "steps_at_screen": 29,
-        "tool_calls_at_screen": 119,
+        "trajectory_sha256_at_screen": "8fec2c3e50b9910b2e1cff4a04a7bccd9f757e0186d3b948ebb7b8cad2ff6ce6",
+        "steps_at_screen": 34,
+        "tool_calls_at_screen": 142,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3616,9 +3627,9 @@
         "model": "muse_nvfp4",
         "task": "raman-fitting",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/raman-fitting__gccPUXq",
-        "trajectory_sha256_at_screen": "a7b84880618dfc943694e0430299034e05bceb72905ac9496ed42215ab0fa2f1",
-        "steps_at_screen": 14,
-        "tool_calls_at_screen": 38,
+        "trajectory_sha256_at_screen": "e51c5421c1d8d99b796c7fb35d3ba03b2faa78325553996c832e053b575f08b2",
+        "steps_at_screen": 19,
+        "tool_calls_at_screen": 49,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3626,9 +3637,9 @@
         "model": "muse_nvfp4",
         "task": "query-optimize",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/query-optimize__WQt26zo",
-        "trajectory_sha256_at_screen": "9d3fe80544203e32a84c637e3e9796c2fe5ef761d91d9a82261e3d2a6ead5347",
-        "steps_at_screen": 22,
-        "tool_calls_at_screen": 78,
+        "trajectory_sha256_at_screen": "a6b9a0a4998f3f37869d8f940b6bf73af6f4e56b96483518d73ab33cea719eaf",
+        "steps_at_screen": 26,
+        "tool_calls_at_screen": 99,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3636,9 +3647,9 @@
         "model": "muse_nvfp4",
         "task": "train-fasttext",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b07/train-fasttext__Mc2uuim",
-        "trajectory_sha256_at_screen": "8afd64f4e2ca93c1057deff4b756f890796fd9488b917d0b2910a783a13db543",
-        "steps_at_screen": 261,
-        "tool_calls_at_screen": 1410,
+        "trajectory_sha256_at_screen": "bac272a9ccce4c6eed58be6d64d5d45d643376e1c646350075c293390b720f32",
+        "steps_at_screen": 269,
+        "tool_calls_at_screen": 1458,
         "hits": [],
         "status": "in_progress_not_scored"
       }
