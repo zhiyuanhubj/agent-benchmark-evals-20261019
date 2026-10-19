@@ -14,6 +14,7 @@ BASE = Path('/fsx/home/zhiyuan')
 PYTHON = str(BASE / 'AgentCompass/.venv/bin/python')
 SOURCES = [
     BASE / '.private/beam_20261018/expanded_status.py',
+    BASE / '.private/beam_20261018/status.py',
     BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/status.py',
     BASE / '.private/muse_spark_open_20261016/review_bench_20261018/status.py',
     BASE / '.private/muse_bf16_20261018/status.py',
@@ -24,7 +25,12 @@ RAW_ARCHIVE_INTERVAL_SECONDS = 600  # Keep live I/O snapshots within each 15-min
 
 
 def run(command, timeout=180):
-    return subprocess.run(command, cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, timeout=timeout, check=True)
+    try:
+        return subprocess.run(command, cwd=ROOT, stdout=subprocess.DEVNULL,
+                              stderr=subprocess.PIPE, text=True, timeout=timeout, check=True)
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError(f'Command failed ({error.returncode}): {command}; '
+                           f'stderr tail: {(error.stderr or "")[-4000:]}') from error
 
 
 def sync_native_archives(scores, force_bf16=False):
