@@ -39,6 +39,15 @@ def published_complete():
                                               'without_text_positive_reasoning_tokens',
                                               'without_text_unknown_reasoning_tokens')):
         return False
+    for number in ('2', '3'):
+        path = ROOT / f'evidence/opus47_exact_round{number}_audit.json'
+        if not path.exists():
+            return False
+        round_audit = json.loads(path.read_text())
+        reported = score['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'][number]
+        if (round_audit['errors'] or round_audit['qualification'] != 'complete_verified'
+                or (round_audit['graded'], round_audit['success']) != (89, reported['success'])):
+            return False
     if release['errors'] or release['manifest_count'] != release['sha256_and_size_match_count']:
         return False
     counts = manifest['filename_counts']

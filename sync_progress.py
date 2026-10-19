@@ -171,6 +171,15 @@ def cycle():
             if other_reported['complete']:
                 assert other_audit['qualification'] == 'complete_verified', f'{model} exact TB first round not verified'
                 assert (other_audit['graded'], other_audit['success']) == (other_reported['graded'], other_reported['success'])
+        for round_number in ('2', '3'):
+            run([PYTHON, str(ROOT / 'audit_other_exact_round1.py'), '--model', 'opus47',
+                 '--round', round_number], timeout=180)
+            other_audit = json.loads((ROOT / f'evidence/opus47_exact_round{round_number}_audit.json').read_text())
+            assert not other_audit['errors'], f'Opus exact TB round {round_number} released I/O audit failed'
+            other_reported = scores['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'][round_number]
+            if other_reported['complete']:
+                assert other_audit['qualification'] == 'complete_verified', f'Opus exact TB round {round_number} not verified'
+                assert (other_audit['graded'], other_audit['success']) == (other_reported['graded'], other_reported['success'])
         run([PYTHON, str(ROOT / 'screen_exact_tb_integrity.py')], timeout=180)
         screen = json.loads((ROOT / 'evidence/exact_tb_integrity_screen.json').read_text())
         screened = {(row['model'], row['task']): row for row in screen['records']}

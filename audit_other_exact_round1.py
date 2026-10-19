@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Reconcile Beam and Opus exact-image TB first-round scores with release I/O."""
+"""Reconcile Beam and Opus exact-image TB round scores with release I/O."""
 
+import argparse
 import hashlib
 import json
 import subprocess
@@ -14,6 +15,12 @@ MANIFESTS = ROOT / 'input_output/archive_manifests'
 remote = json.loads((ROOT / 'evidence/release-assets-verification.json').read_text())
 verified_assets = {row['asset'] for row in remote['items'] if row.get('sha256_matches') and row.get('bytes_match')}
 PROFILES = {'opus47': 'opus47', 'beam_bf16': 'beam'}
+parser = argparse.ArgumentParser()
+parser.add_argument('--model', choices=PROFILES)
+parser.add_argument('--round', type=int, choices=(1, 2, 3), default=1)
+args = parser.parse_args()
+if args.round != 1 and not args.model:
+    parser.error('--model is required when auditing rounds 2 or 3')
 
 
 def digest(path):
@@ -22,7 +29,9 @@ def digest(path):
 
 
 for model, config_dir in PROFILES.items():
-    config_path = SOURCE / config_dir / 'configs/r1.json'
+    if args.model and model != args.model:
+        continue
+    config_path = SOURCE / config_dir / f'configs/r{args.round}.json'
     config = json.loads(config_path.read_text())
     expected = {Path(item['path']).name: item['path'] for item in config['tasks']}
     assert len(expected) == 89
@@ -40,7 +49,7 @@ for model, config_dir in PROFILES.items():
     if manifest['archive_name'] not in verified_assets:
         errors.append('Latest archive is not SHA-256 and size verified on GitHub')
     if str(config_path.relative_to(BASE)) not in entries:
-        errors.append('Original round-one job config missing from archive')
+        errors.append(f'Original round-{args.round} job config missing from archive')
     missing_inputs = sorted(
         task for task, path in expected.items()
         if str((Path(path) / 'task.toml').relative_to(BASE)) not in entries
@@ -62,6 +71,8 @@ for model, config_dir in PROFILES.items():
         if task not in expected or task in rows:
             errors.append(f'unexpected or duplicate terminal task: {task}')
             continue
+        if value['config']['task']['path'] != expected[task]:
+            errors.append(f'terminal task path differs from the declared input: {task}')
         result_key = str(result.relative_to(BASE))
         if result_key not in entries and datetime.fromtimestamp(result.stat().st_mtime, timezone.utc) >= archive_started:
             unarchived_new_terminal.append(task)
@@ -77,6 +88,9 @@ for model, config_dir in PROFILES.items():
             errors.append(f'result missing from release archive: {task}')
         if not any(entry.startswith(trial_key + 'agent/raw_responses/') for entry in entries):
             errors.append(f'raw responses missing from release archive: {task}')
+        missing_raw = [raw.name for raw in raw_files if str(raw.relative_to(BASE)) not in entries]
+        if missing_raw:
+            errors.append(f'{len(missing_raw)} original model responses missing from release archive: {task}')
         if trial_key + 'agent/trajectory.json' not in entries:
             errors.append(f'trajectory missing from release archive: {task}')
         reasoning_count = 0
@@ -101,6 +115,7 @@ for model, config_dir in PROFILES.items():
     record = {
         'generated_utc': datetime.now(timezone.utc).isoformat(),
         'model': model,
+        'round': args.round,
         'profile': 'exact user-supplied prebuilt TB2.1 images',
         'job_config_sha256': digest(config_path),
         'archive_name': manifest['archive_name'],
@@ -119,6 +134,6 @@ for model, config_dir in PROFILES.items():
         'reasoning_note': 'Nonempty reasoning_content is counted in preserved raw responses; this does not certify absence of reward hacking.',
         'tasks': {task: rows[task] for task in sorted(rows)},
     }
-    out = ROOT / 'evidence' / f'{model}_exact_round1_audit.json'
+    out = ROOT / 'evidence' / f'{model}_exact_round{args.round}_audit.json'
     out.write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps({key: record[key] for key in ('model', 'graded', 'success', 'qualification', 'errors')}))
