@@ -51,7 +51,9 @@ try:
             info.mtime = int(path.stat().st_mtime)
             tar.addfile(info, io.BytesIO(data))
             source_bytes += len(data)
-            category = 'api_archive.json' if 'api_archive' in path.parts else ('raw_response.json' if 'raw_responses' in path.parts else path.name)
+            category = ('api_archive.json' if 'api_archive' in path.parts else
+                        'raw_response.json' if 'raw_responses' in path.parts else
+                        'completion.json' if 'completions' in path.parts else path.name)
             counts[category] = counts.get(category, 0) + 1
     proc.stdin.close()
     assert proc.wait() == 0
