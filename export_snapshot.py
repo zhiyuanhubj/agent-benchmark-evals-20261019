@@ -94,25 +94,47 @@ for label, base in [('muse_nvfp4', M / 'review_bench_20261018'), ('beam_bf16', B
         shutil.copy2(source, dest)
         files[str(dest.relative_to(ROOT))] = {'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(), 'size_bytes': dest.stat().st_size, 'source': str(source)}
 
-for label, source in [('muse_pro_identity', M / 'state/pro-round1-task-evidence.json'), ('muse_deep_completion', M / 'remaining_deep3_2812_20261018/state/current.json')]:
+for label, source in [
+    ('muse_pro_identity', M / 'state/pro-round1-task-evidence.json'),
+    ('muse_pro_score_source', M / 'state/monitor-current.json'),
+    ('muse_deep_completion', M / 'remaining_deep3_2812_20261018/state/current.json'),
+    ('muse_deep_canonical_results', M / 'remaining_deep3_2812_20261018/state/three-round-completion-audit.json'),
+    ('muse_swr_review_score_source', M / 'review_bench_20261018/state/current.json'),
+    ('beam_opus_bf16_score_source', B / 'expanded-current.json'),
+    ('beam_swr_review_score_source', B / 'current.json'),
+    ('tb_exact_image_score_source', B / 'tb_v1_exact_images_20261019/status-current.json'),
+]:
     dest = ROOT / 'evidence' / (label + '.json')
     dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, dest)
     files[str(dest.relative_to(ROOT))] = {'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(), 'size_bytes': dest.stat().st_size, 'source': str(source)}
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
+def partial(d):
+    return f"{d['success']}/{d['graded']} graded, partial" if d.get('graded') else 'No graded score yet'
+
+def review(d):
+    return ', '.join(f"{v['terminal']}/{v['expected']} terminal" for v in d.values()) + '; official RRR incomplete'
+
+models = snapshot['models']
+mn = models['muse_nvfp4']
+be = models['beam_bf16']
+op = models['opus_4_7']
+mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
+be_tb = be['tb2_1_exact_supplied_images']['rounds']['1']
+op_tb = op['tb2_1_exact_supplied_images']['rounds']['1']
 readme = f'''# Agent benchmark evaluation snapshot
 
 Snapshot: **{now}**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/`; full native trial archives are being added as release assets with checksums.
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
-| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | 10/11 graded, round 1 partial | 473/500, 439/462, 422/422 terminal; official RRR incomplete |
-| Beam BF16 | 31/41 graded, partial | 9/43 graded, round 1 partial | **55.6%** (1000/1000 judged) | 24/32 graded, round 1 partial | Partial; see `results/scores.json` |
-| Opus 4.7 | 244/390 graded, partial | **51/113**, round 1 complete; round 2 partial | — | 45/59 graded, round 1 partial | — |
+| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {mn_tb['success']}/{mn_tb['graded']} graded, round 1 partial | {review(mn['swe_review'])} |
+| Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {be_tb['success']}/{be_tb['graded']} graded, round 1 partial | {review(be['swe_review'])} |
+| Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | **51/113**, round 1 complete; round 2 partial | — | {op_tb['success']}/{op_tb['graded']} graded, round 1 partial | — |
 | Muse original BF16 | Running; no complete score | Running; no complete score | Queued after Pro round 1 | Running; no complete score | Queued after Pro round 1 |
 
-The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. Muse legacy round 1 was **68/88 graded on raw first draw** (one ungraded); its separately labeled score after declared infrastructure replacement draws is **71/89**. Muse legacy rounds 2/3 remain **63/85** and **59/76** graded. Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is 15/22 graded and partial. None of these partial counts is a full benchmark accuracy. The exact-image TB2.1 scores must not be pooled with legacy-image scores.
+The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. Muse legacy round 1 was **68/88 graded on raw first draw** (one ungraded); its separately labeled score after declared infrastructure replacement draws is **71/89**. Muse legacy rounds 2/3 remain **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}** and **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}** graded. Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is {be['tb2_1_legacy_cached_tag']['1']['success']}/{be['tb2_1_legacy_cached_tag']['1']['graded']} graded and partial. None of these partial counts is a full benchmark accuracy. The exact-image TB2.1 scores must not be pooled with legacy-image scores.
 
 `input_output/swrbench/*/generation.jsonl` holds each exact input prompt and generated review; the adjacent judge JSON holds per-item GPT-5.5 scoring details. `evidence/muse_pro_identity.json` maps all 731 Pro tasks to native result files and hashes. `evidence/muse_deep_completion.json` documents the three completed DeepSWE rounds and audit flags. Native per-task I/O, tool traces and returned thinking are too large for ordinary Git objects; release archive manifests identify their coverage and SHA-256 once uploaded.
 

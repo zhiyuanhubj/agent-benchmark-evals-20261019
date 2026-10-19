@@ -1,0 +1,1261 @@
+{
+  "utc": "2026-10-17T15:34:35.435587+00:00",
+  "units": {
+    "weights": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "deploy": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "start-evaluation": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "serve-2680": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "143",
+      "ActiveState": "failed"
+    },
+    "serve-2811": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "143",
+      "ActiveState": "failed"
+    },
+    "serve-2675": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "137",
+      "ActiveState": "failed"
+    },
+    "serve-2674": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "143",
+      "ActiveState": "failed"
+    },
+    "serve-2733": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "137",
+      "ActiveState": "failed"
+    },
+    "eval-shard0": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "1",
+      "ActiveState": "failed"
+    },
+    "eval-shard1": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "1",
+      "ActiveState": "failed"
+    },
+    "eval-shard2": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "eval-shard3": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "1",
+      "ActiveState": "failed"
+    },
+    "deep-repeat-shard0": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "1",
+      "ActiveState": "failed",
+      "handoff_note": "Source allocation expired; canonical third-round job resumed on2733 under deep3-expiry-resume-shard0. Original terminal results preserved."
+    },
+    "deep-repeat-shard1": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainStatus": "1",
+      "ActiveState": "failed",
+      "handoff_note": "Source intentionally stopped after verified snapshots; remaining third-round tasks run under deep3-endpoint-handoff-shard1. Do not restart the original controller."
+    },
+    "deep-repeat-shard2": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "deep-repeat-shard3": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "pro-recovery-shard3": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "tb3-handoff-shard0": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "deep3-expiry-resume-shard0": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "deep3-endpoint-handoff-shard1": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "reshard-recorder-recovery-r1": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "break-filter-recorder-recovery-r2": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "tb23-shard1-2733": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "tb-images-2733": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "qemu-startup-r1-verifier-recovery": {
+      "MainPID": "0",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "qemu-alpine-ssh-r1-verifier-recovery": {
+      "MainPID": "0",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    },
+    "tb2-shard3-expiry-recovery": {
+      "MainPID": "0",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive"
+    }
+  },
+  "shards": {
+    "0": {
+      "harbor_counts": {
+        "muse-tb-r2-shard0": {
+          "finished": 23,
+          "reward_one": 18,
+          "reward_zero": 5,
+          "missing_reward": 0
+        },
+        "muse-deep-r2-shard0": {
+          "finished": 29,
+          "reward_one": 13,
+          "reward_zero": 16,
+          "missing_reward": 0
+        },
+        "muse-deep-shard0": {
+          "finished": 29,
+          "reward_one": 13,
+          "reward_zero": 16,
+          "missing_reward": 0
+        },
+        "muse-tb-r1-shard0": {
+          "finished": 23,
+          "reward_one": 17,
+          "reward_zero": 6,
+          "missing_reward": 0
+        },
+        "muse-deep-r3-shard0": {
+          "finished": 27,
+          "reward_one": 11,
+          "reward_zero": 16,
+          "missing_reward": 0
+        },
+        "muse-tb-r3-shard0": {
+          "finished": 23,
+          "reward_one": 18,
+          "reward_zero": 5,
+          "missing_reward": 0
+        }
+      },
+      "pro_counts": {
+        "result_files": 183,
+        "unique_tasks_with_results": 183,
+        "correct_true": 126,
+        "correct_false": 57,
+        "correct_missing": 0,
+        "with_error": 0,
+        "unreadable_results": 0,
+        "successful_empty_trajectory": 0,
+        "successful_empty_trajectory_paths": [],
+        "statuses": {
+          "completed": 183
+        }
+      },
+      "worker_outcomes": {
+        "time": 1792194026.2102716,
+        "finished": [
+          "pro",
+          "tb",
+          "deep"
+        ],
+        "failed_workers": [
+          "tb"
+        ]
+      },
+      "tb3_handoff": {
+        "unit": "muse-spark-tb3-handoff-shard0-20261016.service",
+        "source_job": 2811,
+        "destination_job": 2680,
+        "requested": true,
+        "claimed": true,
+        "complete": true,
+        "note": "Original TB thread exit75 is planned delegation; use replacement unit and canonical results for progress."
+      }
+    },
+    "1": {
+      "harbor_counts": {
+        "muse-deep-r3-shard1": {
+          "finished": 20,
+          "reward_one": 11,
+          "reward_zero": 7,
+          "missing_reward": 2
+        },
+        "muse-tb-r1-shard1": {
+          "finished": 22,
+          "reward_one": 17,
+          "reward_zero": 4,
+          "missing_reward": 1
+        },
+        "muse-tb-r2-shard1": {
+          "finished": 10,
+          "reward_one": 8,
+          "reward_zero": 2,
+          "missing_reward": 0
+        },
+        "muse-deep-r2-shard1": {
+          "finished": 28,
+          "reward_one": 15,
+          "reward_zero": 13,
+          "missing_reward": 0
+        },
+        "muse-deep-shard1": {
+          "finished": 28,
+          "reward_one": 15,
+          "reward_zero": 13,
+          "missing_reward": 0
+        }
+      },
+      "pro_counts": {
+        "result_files": 183,
+        "unique_tasks_with_results": 183,
+        "correct_true": 134,
+        "correct_false": 49,
+        "correct_missing": 0,
+        "with_error": 0,
+        "unreadable_results": 0,
+        "successful_empty_trajectory": 0,
+        "successful_empty_trajectory_paths": [],
+        "statuses": {
+          "completed": 183
+        }
+      },
+      "worker_outcomes": {
+        "time": 1792191730.697105,
+        "finished": [
+          "pro",
+          "tb",
+          "deep"
+        ],
+        "failed_workers": [
+          "tb"
+        ]
+      },
+      "future_tb_handoff": {
+        "unit": "muse-spark-tb23-shard1-2733-20261016.service",
+        "destination_job": 2733,
+        "destination_ip": "10.1.25.253",
+        "model_smoke_ready": true,
+        "original_worker_delegated": false,
+        "rounds": {
+          "2": {
+            "claimed": true,
+            "complete": false
+          },
+          "3": {
+            "claimed": false,
+            "complete": false
+          }
+        },
+        "note": "Original TB worker exit75 is planned delegation, not a failed trial. New controller runs only scheduled rounds2/3."
+      }
+    },
+    "2": {
+      "harbor_counts": {
+        "muse-deep-shard2": {
+          "finished": 28,
+          "reward_one": 14,
+          "reward_zero": 14,
+          "missing_reward": 0
+        },
+        "muse-deep-r3-shard2": {
+          "finished": 28,
+          "reward_one": 18,
+          "reward_zero": 10,
+          "missing_reward": 0
+        },
+        "muse-tb-r2-shard2": {
+          "finished": 6,
+          "reward_one": 3,
+          "reward_zero": 2,
+          "missing_reward": 1
+        },
+        "muse-tb-r1-shard2": {
+          "finished": 22,
+          "reward_one": 16,
+          "reward_zero": 6,
+          "missing_reward": 0
+        },
+        "muse-deep-r2-shard2": {
+          "finished": 28,
+          "reward_one": 14,
+          "reward_zero": 14,
+          "missing_reward": 0
+        }
+      },
+      "pro_counts": {
+        "result_files": 183,
+        "unique_tasks_with_results": 183,
+        "correct_true": 118,
+        "correct_false": 65,
+        "correct_missing": 0,
+        "with_error": 0,
+        "unreadable_results": 0,
+        "successful_empty_trajectory": 0,
+        "successful_empty_trajectory_paths": [],
+        "statuses": {
+          "completed": 183
+        }
+      },
+      "worker_outcomes": {
+        "time": 1792188358.8074887,
+        "finished": [
+          "pro",
+          "deep"
+        ],
+        "failed_workers": []
+      }
+    },
+    "3": {
+      "harbor_counts": {
+        "muse-deep-r3-shard3": {
+          "finished": 28,
+          "reward_one": 14,
+          "reward_zero": 14,
+          "missing_reward": 0
+        },
+        "muse-tb-r1-shard3": {
+          "finished": 22,
+          "reward_one": 18,
+          "reward_zero": 4,
+          "missing_reward": 0
+        },
+        "muse-tb-r3-shard3": {
+          "finished": 13,
+          "reward_one": 8,
+          "reward_zero": 5,
+          "missing_reward": 0
+        },
+        "muse-deep-shard3": {
+          "finished": 28,
+          "reward_one": 15,
+          "reward_zero": 13,
+          "missing_reward": 0
+        },
+        "muse-tb-r2-shard3-expiry-recovery": {
+          "finished": 3,
+          "reward_one": 1,
+          "reward_zero": 2,
+          "missing_reward": 0
+        },
+        "muse-tb-r2-shard3": {
+          "finished": 22,
+          "reward_one": 16,
+          "reward_zero": 3,
+          "missing_reward": 3
+        },
+        "muse-deep-r2-shard3": {
+          "finished": 28,
+          "reward_one": 17,
+          "reward_zero": 11,
+          "missing_reward": 0
+        }
+      },
+      "pro_counts": {
+        "result_files": 182,
+        "unique_tasks_with_results": 182,
+        "correct_true": 118,
+        "correct_false": 64,
+        "correct_missing": 0,
+        "with_error": 0,
+        "unreadable_results": 0,
+        "successful_empty_trajectory": 1,
+        "successful_empty_trajectory_paths": [
+          "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-pro/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/pro-shard3-quota-recovery1/details/instance_qutebrowser__qutebrowser-2dd8966fdcf11972062c540b7a787e4d0de8d372-v363c--a395c3c131cbe695f06459ecfd748cae53d59463209d653ce2d8b9e7061f2112/attempt-1/result.json"
+        ],
+        "statuses": {
+          "completed": 182
+        }
+      },
+      "worker_outcomes": {
+        "time": 1792249830.0954404,
+        "finished": [
+          "pro",
+          "tb",
+          "deep"
+        ],
+        "failed_workers": [
+          "pro",
+          "tb"
+        ]
+      },
+      "pro_recovery_unit": "muse-spark-pro-recovery-shard3-20261016.service"
+    }
+  },
+  "user_quota": {
+    "returncode": 0,
+    "output": "Disk quotas for usr zhiyuan (uid 3071):\n     Filesystem  kbytes   quota   limit   grace   files   quota   limit   grace\n      /fsx/home 9962477262  10000000000 10000000000       - 5865375  100000000 100000000       -\n",
+    "warning": null,
+    "used_kib": 9962477262,
+    "hard_limit_kib": 10000000000,
+    "remaining_kib": 37522738
+  },
+  "qemu_verifier_recovery": {
+    "qemu-startup": {
+      "claimed": true,
+      "completion": {
+        "utc": "2026-10-17T00:06:39.536366+00:00",
+        "task": "qemu-startup",
+        "command": [
+          "/usr/local/bin/srun",
+          "--jobid=2680",
+          "--overlap",
+          "--gres=none",
+          "-N1",
+          "-n1",
+          "--cpus-per-task=12",
+          "env",
+          "OPENAI_API_KEY=EMPTY",
+          "MIX_SERVER_IP=10.1.105.182",
+          "HF_HOME=/fsx/home/zhiyuan/bench/hf_home",
+          "UV_CACHE_DIR=/fsx/home/zhiyuan/bench/uv_cache",
+          "/fsx/home/zhiyuan/AgentCompass/.venv/bin/python",
+          "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard0/harbor_entry.py",
+          "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/configs/qemu-startup.json"
+        ],
+        "round": 1,
+        "original_result_sha256": "b0d74aaee412b8bb6726c383ed01e78eefcde3fe84e203f789a81467084317ac",
+        "config_sha256": "e56753860aac7a66929e52b0cbb8d0d092a1daa8942ff44e161baa1e7d595c6a",
+        "qualification": "Exactly one predeclared infrastructure replacement attempt per task. Original zero scores and trajectories remain untouched. This is a new model attempt after verifier-setup repair, not an exact regrade; report raw and replacement outcomes separately. No best-of selection, no fourth full round.",
+        "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/results/muse-tb-r1-qemu-startup-verifier-recovery/qemu-startup__azut56X/result.json",
+        "result_sha256": "a4c990a40675184cec8f959f7cf58df63d7e705f3358a2bd4fe571c2f765fc9d",
+        "reward": 1.0,
+        "exception_type": null
+      },
+      "qualification": "Separate predeclared R1 infrastructure replacement attempt; original zero retained. Validate actual pytest execution before treating recovery score as resolved."
+    },
+    "qemu-alpine-ssh": {
+      "claimed": true,
+      "completion": {
+        "utc": "2026-10-17T00:06:39.537140+00:00",
+        "task": "qemu-alpine-ssh",
+        "command": [
+          "/usr/local/bin/srun",
+          "--jobid=2680",
+          "--overlap",
+          "--gres=none",
+          "-N1",
+          "-n1",
+          "--cpus-per-task=12",
+          "env",
+          "OPENAI_API_KEY=EMPTY",
+          "MIX_SERVER_IP=10.1.105.182",
+          "HF_HOME=/fsx/home/zhiyuan/bench/hf_home",
+          "UV_CACHE_DIR=/fsx/home/zhiyuan/bench/uv_cache",
+          "/fsx/home/zhiyuan/AgentCompass/.venv/bin/python",
+          "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard0/harbor_entry.py",
+          "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/configs/qemu-alpine-ssh.json"
+        ],
+        "round": 1,
+        "original_result_sha256": "82c356f7c3b5648a1a0f156edf507c37171fe816e6ea61e9a3805b43542753ee",
+        "config_sha256": "dddfe436be06303e90b5fa4760c7922e1d127a346393657672593f10cda23f18",
+        "qualification": "Exactly one predeclared infrastructure replacement attempt per task. Original zero scores and trajectories remain untouched. This is a new model attempt after verifier-setup repair, not an exact regrade; report raw and replacement outcomes separately. No best-of selection, no fourth full round.",
+        "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/results/muse-tb-r1-qemu-alpine-ssh-verifier-recovery/qemu-alpine-ssh__hkxKKau/result.json",
+        "result_sha256": "16117935391f46d8f70da22a0989ea9ff60cdbf63b8a49467b830c3b961d0101",
+        "reward": 1.0,
+        "exception_type": null
+      },
+      "qualification": "Separate predeclared R1 infrastructure replacement attempt; original zero retained. Validate actual pytest execution before treating recovery score as resolved."
+    }
+  },
+  "shard3_round2_expiry_recovery": {
+    "recovery_job": "muse-tb-r2-shard3-expiry-recovery",
+    "expected": 22,
+    "effective_graded": 22,
+    "effective_success": 17,
+    "unresolved": 0,
+    "complete": true,
+    "accuracy": 0.7727272727272727,
+    "original_interrupted_trials": [
+      "regex-chess__dpWeNQS",
+      "train-fasttext__PrnpDwC",
+      "winning-avg-corewars__6PXFTRv"
+    ],
+    "recovery_finished": 3,
+    "tasks": [
+      {
+        "task": "build-cython-ext",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/build-cython-ext__qb3Vysx/result.json"
+      },
+      {
+        "task": "winning-avg-corewars",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3-expiry-recovery/winning-avg-corewars__2dh4Lpk/result.json"
+      },
+      {
+        "task": "code-from-image",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/code-from-image__4oDthZi/result.json"
+      },
+      {
+        "task": "mteb-retrieve",
+        "reward": 0.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/mteb-retrieve__6xzW5vd/result.json"
+      },
+      {
+        "task": "overfull-hbox",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/overfull-hbox__pSPymxt/result.json"
+      },
+      {
+        "task": "extract-moves-from-video",
+        "reward": 0.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/extract-moves-from-video__cFKoajq/result.json"
+      },
+      {
+        "task": "headless-terminal",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/headless-terminal__4iMQvvk/result.json"
+      },
+      {
+        "task": "count-dataset-tokens",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/count-dataset-tokens__g8NZs7i/result.json"
+      },
+      {
+        "task": "distribution-search",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/distribution-search__hz8auB9/result.json"
+      },
+      {
+        "task": "regex-chess",
+        "reward": 0.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3-expiry-recovery/regex-chess__Eo736Hk/result.json"
+      },
+      {
+        "task": "mailman",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/mailman__YG2V9Wx/result.json"
+      },
+      {
+        "task": "gcode-to-text",
+        "reward": 0.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/gcode-to-text__hM9zsNf/result.json"
+      },
+      {
+        "task": "sqlite-db-truncate",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/sqlite-db-truncate__87tyjdz/result.json"
+      },
+      {
+        "task": "prove-plus-comm",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/prove-plus-comm__6sxafJC/result.json"
+      },
+      {
+        "task": "sam-cell-seg",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/sam-cell-seg__Vdzf4Vg/result.json"
+      },
+      {
+        "task": "financial-document-processor",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/financial-document-processor__Gn2G4jY/result.json"
+      },
+      {
+        "task": "polyglot-c-py",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/polyglot-c-py__DdVv2XC/result.json"
+      },
+      {
+        "task": "qemu-alpine-ssh",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/qemu-alpine-ssh__wB4YANg/result.json"
+      },
+      {
+        "task": "large-scale-text-editing",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/large-scale-text-editing__VrYN4Pc/result.json"
+      },
+      {
+        "task": "cancel-async-tasks",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/cancel-async-tasks__TqTtXdP/result.json"
+      },
+      {
+        "task": "train-fasttext",
+        "reward": 0.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3-expiry-recovery/train-fasttext__TzCrqrs/result.json"
+      },
+      {
+        "task": "merge-diff-arc-agi-task",
+        "reward": 1.0,
+        "effective_source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard3/results/muse-tb-r2-shard3/merge-diff-arc-agi-task__nHpzWeg/result.json"
+      }
+    ],
+    "qualification": "Declared infrastructure replacements, not additional repetitions; original attempts preserved."
+  },
+  "pro_round1_verified_completion": {
+    "utc": "2026-10-17T01:25:23.122272+00:00",
+    "model": "muse-spark-open-nvfp4",
+    "benchmark": "swebench_pro_verified",
+    "round": 1,
+    "expected": 731,
+    "completed": 731,
+    "success": 496,
+    "accuracy": 0.6785225718194254,
+    "error_results": 0,
+    "missing_scores": 0,
+    "duplicate_task_ids": 0,
+    "per_shard": {
+      "0": {
+        "tasks": 183,
+        "success": 126
+      },
+      "1": {
+        "tasks": 183,
+        "success": 134
+      },
+      "2": {
+        "tasks": 183,
+        "success": 118
+      },
+      "3": {
+        "tasks": 182,
+        "success": 118
+      }
+    },
+    "successful_tasks_missing_trajectory": [
+      "instance_qutebrowser__qutebrowser-2dd8966fdcf11972062c540b7a787e4d0de8d372-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d"
+    ],
+    "training_export_hold_required": true,
+    "identity_audit": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/state/pro-round1-task-evidence.json",
+    "identity_audit_sha256": "b223943fb9b93dcb96a07d8b03b7b99224bd30f165322ae3b797db67eef564f2",
+    "qualification": "Complete first-round 731-task evaluation including predeclared recovery of uncompleted tasks, not a three-round average. One successful task lacks trajectory and must not be treated as usable thinking training data. This completion audit does not establish that all trajectories are clean."
+  },
+  "weights": {
+    "shards": 127,
+    "bytes": 533011023472
+  },
+  "reshard_recorder_recovery": {
+    "utc": "2026-10-17T15:34:56.785040+00:00",
+    "raw_round1": {
+      "expected": 89,
+      "terminal_tasks": 89,
+      "graded_tasks": 88,
+      "success": 68,
+      "missing_reward": 1
+    },
+    "with_declared_infrastructure_replacement": {
+      "expected": 89,
+      "terminal_tasks": 89,
+      "graded_tasks": 89,
+      "success": 69,
+      "missing_reward": 0
+    },
+    "replacement": {
+      "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/reshard-r1-recorder-recovery/results/muse-tb-r1-reshard-recorder-recovery/reshard-c4-data__wiccNMk/result.json",
+      "sha256": "64ba7447348fd4e74e3ba5a10f9b939511719233908a9d152c107e47a93e7efd",
+      "reward": 1.0,
+      "recorder_fix_verified": true,
+      "exception": null
+    },
+    "unit": "MainPID=0\nExecMainStatus=0\nActiveState=inactive\n",
+    "qualification": "Raw scores remain unchanged. The legacy replacement field covers only reshard; the combined field additionally applies explicitly audited QEMU replacements by task ID. These are predeclared new attempts after infrastructure repairs, not exact regrades or best-of scores. Pending QEMU cases retain their original zeros; this does not certify all trajectories as clean.",
+    "with_all_verified_declared_replacements": {
+      "expected": 89,
+      "terminal_tasks": 89,
+      "graded_tasks": 89,
+      "success": 71,
+      "missing_reward": 0
+    },
+    "qemu_verified_replacements": {
+      "qemu-startup": {
+        "reward": 1.0,
+        "audit": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/state/qemu-startup-verification-audit.json",
+        "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/results/muse-tb-r1-qemu-startup-verifier-recovery/qemu-startup__azut56X/result.json"
+      },
+      "qemu-alpine-ssh": {
+        "reward": 1.0,
+        "audit": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/state/qemu-alpine-ssh-verification-audit.json",
+        "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/qemu-r1-verifier-recovery/results/muse-tb-r1-qemu-alpine-ssh-verifier-recovery/qemu-alpine-ssh__hkxKKau/result.json"
+      }
+    },
+    "qemu_pending_verification": []
+  },
+  "deep3_expiry_resume": {
+    "source_job": 2811,
+    "destination_job": 2733,
+    "model_job": 2680,
+    "claimed": true,
+    "complete": false,
+    "controller_state": "inactive",
+    "qualification": "Only unfinished shard0 Deep round3 tasks may resume; claimed records launch and controller_state reports current process state. Shard1 endpoint recovery remains separate."
+  },
+  "break_filter_recorder_recovery": {
+    "utc": "2026-10-17T15:34:57.616081+00:00",
+    "raw_round2": {
+      "expected": 89,
+      "terminal_tasks": 61,
+      "graded_tasks": 57,
+      "success": 45,
+      "missing_reward": 4
+    },
+    "with_declared_infrastructure_replacement": {
+      "expected": 89,
+      "terminal_tasks": 61,
+      "graded_tasks": 58,
+      "success": 46,
+      "missing_reward": 3
+    },
+    "claimed": true,
+    "replacement": {
+      "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair/break-filter-r2-recorder-recovery/results/muse-tb-r2-break-filter-recorder-recovery/break-filter-js-from-html__24eTjkH/result.json",
+      "sha256": "4f75152f8e78d4d734cfc7c24d16ab3827ab6adc4c54977bd81c511084f1d5d4",
+      "reward": 1.0,
+      "original_reward": null
+    },
+    "qualification": "One predeclared recorder-stall replacement, not an additional task or best-of result; source and raw score retained. Incomplete round is not a final accuracy."
+  },
+  "deep3_endpoint_recovery_counts": {
+    "utc": "2026-10-17T15:34:58.003826+00:00",
+    "claimed": true,
+    "raw_round3": {
+      "expected": 113,
+      "terminal_tasks": 103,
+      "graded_tasks": 101,
+      "success": 54,
+      "missing_reward": 2,
+      "complete_with_rewards": false,
+      "accuracy": null
+    },
+    "with_declared_endpoint_recovery": {
+      "expected": 113,
+      "terminal_tasks": 110,
+      "graded_tasks": 110,
+      "success": 60,
+      "missing_reward": 0,
+      "complete_with_rewards": false,
+      "accuracy": null
+    },
+    "replacement_results": {
+      "pest-character-class-coalescing": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/pest-character-class-coalescing__R7VKdgG/result.json",
+        "sha256": "033ae013670a16044815bd01aba7a2d317af821a515f94a4187f5e0f40fc9c73",
+        "reward": 0
+      },
+      "testem-bail-on-test-failure": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/testem-bail-on-test-failure__8oa7Q92/result.json",
+        "sha256": "7caefc32b407a97be2bc9f74a26e85e2e6d9db57ff849af17126964cf7ae1adb",
+        "reward": 1
+      },
+      "pwntools-tube-multiplexing": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/pwntools-tube-multiplexing__CT3GVmW/result.json",
+        "sha256": "81b0e3e68a8a15cde78887038b0c6bf78abf6adbee86aad46fb9c7c1781dd6fe",
+        "reward": 0
+      },
+      "wazero-multi-module-snapshots": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/wazero-multi-module-snapshots__GokLeKc/result.json",
+        "sha256": "96e8444da7e316f328c24eb642bc98622ff92f8626104022463864e11ce2963e",
+        "reward": 1
+      },
+      "sql-formatter-bigquery-pipe-formatting": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/sql-formatter-bigquery-pipe-form__38DnpAW/result.json",
+        "sha256": "770366ff57d0e137f7fb9a93991b3fc02e50cb4de447595daef2c2516e0806c8",
+        "reward": 1
+      },
+      "tomlkit-toml-table-converters": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/tomlkit-toml-table-converters__pkVzBzm/result.json",
+        "sha256": "b011b6de943e0367742453f051e97c23d47f95df20abeafd87e1bd7e42b8cff0",
+        "reward": 0
+      },
+      "task-task-graph-export": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/task-task-graph-export__u8CLoHs/result.json",
+        "sha256": "5c3bb69440711c29398ca517081473458b5ee3d256e13fe595ddaaf88d84a160",
+        "reward": 1
+      },
+      "returns-validated-error-accumulation": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/returns-validated-error-accumula__WNw8HXL/result.json",
+        "sha256": "91ba2a50567e5762745a5f42af6d07995a8795c149da01c227d6999d7da80bdf",
+        "reward": 1
+      },
+      "optique-conditional-option-dependencies": {
+        "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/continuity_archive/shard1-deep3-endpoint-handoff/results/muse-deep-r3-shard1-endpoint-recovery/optique-conditional-option-depen__r36c2aj/result.json",
+        "sha256": "b3435a0161ede94babf517670d0318ec6baf0e38ea8df47586de14cfe23f5f53",
+        "reward": 1
+      }
+    },
+    "qualification": "Exact task-ID overlay for unfinished third-round tasks only. Every completed original success and failure is retained. Raw results are unchanged; incomplete rounds have no final accuracy."
+  },
+  "shard1_deep3_endpoint_handoff": {
+    "planned_status": "armed_waiting_for_2355",
+    "controller_state": "inactive",
+    "scheduled_at": "2026-10-16T23:55:00+00:00",
+    "claimed": true,
+    "complete": false,
+    "qualification": "Separate third-round recovery, only ungraded unfinished tasks; completed failures retained."
+  },
+  "in_place_tool_timeout_recovery": {
+    "trial": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/shard2/results/muse-deep-r3-shard2/mnamer-daemon-watch-lifecycle__66qcoyw",
+    "classification": "in_place_tool_timeout_pipe_cleanup",
+    "prior_message_prefix_preserved": true,
+    "trajectory_age_seconds": 57665.019671440125,
+    "finished_at": "2026-10-16T23:36:32.016779Z",
+    "reward": 0,
+    "qualification": "Continue same attempt and original deadline; no model retry, no code or patch modification. Record infrastructure intervention explicitly; two-hour stall already consumed wall-clock budget."
+  },
+  "allocation_2811": {
+    "query_exit_code": 1,
+    "JobState": null,
+    "EndTime": null,
+    "NodeList": null
+  },
+  "scale_correction_experiment": {
+    "allocation": 2866,
+    "endpoint": "http://10.1.95.27:31321",
+    "units": {
+      "muse-scale-candidate-2866-20261017": {
+        "query_returncode": 0,
+        "MainPID": "0",
+        "ExecMainStatus": "137",
+        "ActiveState": "failed"
+      },
+      "muse-scale-candidate-smoke-2866-20261017": {
+        "query_returncode": 0,
+        "MainPID": "0",
+        "ExecMainStatus": "0",
+        "ActiveState": "inactive"
+      },
+      "muse-scale-paired-response-2866-20261017": {
+        "query_returncode": 0,
+        "MainPID": "0",
+        "ExecMainStatus": "0",
+        "ActiveState": "inactive"
+      },
+      "muse-scale-paired-long-response-2866-20261017": {
+        "query_returncode": 0,
+        "MainPID": "0",
+        "ExecMainStatus": "0",
+        "ActiveState": "inactive"
+      },
+      "muse-scale-task-original-20261017": {
+        "query_returncode": 0,
+        "MainPID": "0",
+        "ExecMainStatus": "0",
+        "ActiveState": "inactive"
+      },
+      "muse-scale-task-candidate-20261017": {
+        "query_returncode": 0,
+        "MainPID": "0",
+        "ExecMainStatus": "0",
+        "ActiveState": "inactive"
+      }
+    },
+    "smoke": {
+      "job": 2866,
+      "api": "http://10.1.95.27:31321",
+      "time": 1792226259.8027318,
+      "text": true,
+      "tool_roundtrip": true,
+      "reasoning_archived": true,
+      "tokenization": true
+    },
+    "real_weight_validation": {
+      "ranks": {
+        "0": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            1.1327015161514282
+          ],
+          "passed": true
+        },
+        "1": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            1.0
+          ],
+          "passed": true
+        },
+        "2": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            0.9686098098754883
+          ],
+          "passed": true
+        },
+        "3": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            1.0717488527297974
+          ],
+          "passed": true
+        },
+        "4": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            0.9686098098754883
+          ],
+          "passed": true
+        },
+        "5": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            0.5663507580757141
+          ],
+          "passed": true
+        },
+        "6": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            1.641255497932434
+          ],
+          "passed": true
+        },
+        "7": {
+          "relative_output_l2": 0.004833939019590616,
+          "ratio_present": true,
+          "ratios": [
+            1.748878836631775
+          ],
+          "passed": true
+        }
+      },
+      "passed": true,
+      "threshold": 0.02,
+      "deployed": false,
+      "scope": "Layer1 eight real experts [0,7,31,63,95,114,191,255], H4096/I4096, TP8/EP8/top8/SiLU, one token; not full-model accuracy",
+      "script_sha256": "478a27859be0791792e29ba64d487d191a931782ecff7eb1732224290865b3e0",
+      "runtime_note": "Completed normally before attempted diagnostic stop; safe_open CPU was overridden by CUDA default, raising read overhead. No results invalidated or thresholds changed."
+    },
+    "paired_response_diagnostics": {
+      "scope": "Matched first-user-message response diagnostics only. No sandbox, no task execution, no success/accuracy scoring, not an additional benchmark repetition.",
+      "results": [
+        {
+          "task": "build-pmars",
+          "variant": "original",
+          "latency_seconds": 2.891935110092163,
+          "tokenize_count": 970,
+          "usage": {
+            "prompt_tokens": 970,
+            "total_tokens": 1201,
+            "completion_tokens": 231,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 27
+          },
+          "finish_reason": "stop",
+          "content_chars": 653,
+          "reasoning_chars": 110,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_responses/build-pmars/original/response.json",
+          "response_sha256": "b03bdb7a67d403f79d8b1446bcac880899465f00cc1a09ad929c9516b01d68fe",
+          "success_score": null
+        },
+        {
+          "task": "build-pmars",
+          "variant": "candidate",
+          "latency_seconds": 3.070051431655884,
+          "tokenize_count": 970,
+          "usage": {
+            "prompt_tokens": 970,
+            "total_tokens": 1216,
+            "completion_tokens": 246,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 43
+          },
+          "finish_reason": "stop",
+          "content_chars": 632,
+          "reasoning_chars": 151,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_responses/build-pmars/candidate/response.json",
+          "response_sha256": "efcf66aeb2d93b794cabeafc0622c262741c345f9436e009a574ca9b343bc012",
+          "success_score": null
+        },
+        {
+          "task": "regex-log",
+          "variant": "original",
+          "latency_seconds": 32.5416042804718,
+          "tokenize_count": 1050,
+          "usage": {
+            "prompt_tokens": 1050,
+            "total_tokens": 3716,
+            "completion_tokens": 2666,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 2494
+          },
+          "finish_reason": "stop",
+          "content_chars": 543,
+          "reasoning_chars": 9761,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_responses/regex-log/original/response.json",
+          "response_sha256": "85e9ddbe9805ba9c3c1dbaf9ac5265443bd5c116316bf9051920b3e0817f7e6a",
+          "success_score": null
+        },
+        {
+          "task": "regex-log",
+          "variant": "candidate",
+          "latency_seconds": 49.969613790512085,
+          "tokenize_count": 1050,
+          "usage": {
+            "prompt_tokens": 1050,
+            "total_tokens": 5146,
+            "completion_tokens": 4096,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 4096
+          },
+          "finish_reason": "length",
+          "content_chars": 0,
+          "reasoning_chars": 15063,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_responses/regex-log/candidate/response.json",
+          "response_sha256": "f08a0227685d55d75653e6cba61bb6da6cb43c7d8dfc434f93fdf8b28179474f",
+          "success_score": null
+        },
+        {
+          "task": "password-recovery",
+          "variant": "original",
+          "latency_seconds": 6.236532688140869,
+          "tokenize_count": 953,
+          "usage": {
+            "prompt_tokens": 953,
+            "total_tokens": 1457,
+            "completion_tokens": 504,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 296
+          },
+          "finish_reason": "stop",
+          "content_chars": 638,
+          "reasoning_chars": 1277,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_responses/password-recovery/original/response.json",
+          "response_sha256": "55fd544866a9f718e304edb936cc6b23dd2808c7055213421aa66f71bea08eba",
+          "success_score": null
+        },
+        {
+          "task": "password-recovery",
+          "variant": "candidate",
+          "latency_seconds": 3.7898805141448975,
+          "tokenize_count": 953,
+          "usage": {
+            "prompt_tokens": 953,
+            "total_tokens": 1262,
+            "completion_tokens": 309,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 78
+          },
+          "finish_reason": "stop",
+          "content_chars": 693,
+          "reasoning_chars": 357,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_responses/password-recovery/candidate/response.json",
+          "response_sha256": "3aed59a3c6fe51a542a1347e647cea85d387b06bcdeb1508bf8e79b4747effc1",
+          "success_score": null
+        }
+      ]
+    },
+    "diagnostic_responses_recorded": 6,
+    "paired_diagnostics_finished": true,
+    "paired_long_response_diagnostics": {
+      "scope": "Diagnostic follow-up for the 4096-token truncation, same regex-log input on both endpoints with max_tokens=81920. No sandbox, no reward, no benchmark repetition.",
+      "results": [
+        {
+          "task": "regex-log",
+          "variant": "original",
+          "latency_seconds": 51.715815782547,
+          "tokenize_count": 1050,
+          "usage": {
+            "prompt_tokens": 1050,
+            "total_tokens": 5275,
+            "completion_tokens": 4225,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 4040
+          },
+          "finish_reason": "stop",
+          "content_chars": 588,
+          "reasoning_chars": 14405,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_long_responses/regex-log/original/response.json",
+          "response_sha256": "8f1c7dacd1be61a056a3e0320327821e5b7f9e3e9f13745031036d731b0484d9",
+          "success_score": null
+        },
+        {
+          "task": "regex-log",
+          "variant": "candidate",
+          "latency_seconds": 41.88919138908386,
+          "tokenize_count": 1050,
+          "usage": {
+            "prompt_tokens": 1050,
+            "total_tokens": 4472,
+            "completion_tokens": 3422,
+            "prompt_tokens_details": null,
+            "reasoning_tokens": 3235
+          },
+          "finish_reason": "stop",
+          "content_chars": 596,
+          "reasoning_chars": 12181,
+          "response": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/scale_candidate_2866_20261017/paired_long_responses/regex-log/candidate/response.json",
+          "response_sha256": "39d2fafc23e653c2a4189d236af3c36bd9cd8f9ac517f3208d03aa431bf09dc5",
+          "success_score": null
+        }
+      ]
+    },
+    "paired_full_task_experiment": {
+      "original": {
+        "planned_tasks": 3,
+        "trials": [
+          {
+            "trial": "build-pmars__FMSp3Qu",
+            "finished": true,
+            "rewards": {
+              "reward": 1.0
+            },
+            "exception_type": null,
+            "steps": 20,
+            "raw_responses": 19
+          },
+          {
+            "trial": "password-recovery__BkntbLZ",
+            "finished": true,
+            "rewards": {
+              "reward": 1.0
+            },
+            "exception_type": null,
+            "steps": 28,
+            "raw_responses": 27
+          },
+          {
+            "trial": "regex-log__hLN4pTB",
+            "finished": true,
+            "rewards": {
+              "reward": 1.0
+            },
+            "exception_type": null,
+            "steps": 8,
+            "raw_responses": 7
+          }
+        ]
+      },
+      "candidate": {
+        "planned_tasks": 3,
+        "trials": [
+          {
+            "trial": "build-pmars__UN4R9Sg",
+            "finished": true,
+            "rewards": {
+              "reward": 1.0
+            },
+            "exception_type": null,
+            "steps": 23,
+            "raw_responses": 22
+          },
+          {
+            "trial": "password-recovery__aBAoJ7x",
+            "finished": true,
+            "rewards": {
+              "reward": 1.0
+            },
+            "exception_type": null,
+            "steps": 31,
+            "raw_responses": 30
+          },
+          {
+            "trial": "regex-log__UEDjUXp",
+            "finished": true,
+            "rewards": {
+              "reward": 1.0
+            },
+            "exception_type": null,
+            "steps": 6,
+            "raw_responses": 5
+          }
+        ]
+      }
+    },
+    "formal_benchmark_switched": false,
+    "qualification": "Independent scale-correction experiment. Raw thinking retained. Response probes have no task success score and are not additional benchmark repetitions. Existing benchmark results remain under original backend qualification."
+  },
+  "node_handoff_reservation": {
+    "utc": 1792203207.7657309,
+    "user_authorized": true,
+    "paused_nodes": [
+      2675,
+      2733,
+      2676,
+      2814
+    ],
+    "retain_nodes": [
+      2674,
+      2680,
+      2679
+    ],
+    "units": [
+      "muse-spark-eval-shard2-20261016",
+      "muse-spark-deep3-endpoint-handoff-shard1-20261016",
+      "muse-spark-deep3-expiry-resume-shard0-20261016",
+      "muse-spark-tb23-shard1-2733-20261016",
+      "mix3-early95-tb-round3-20261016",
+      "mix3-early95-deep-repeats-20261017",
+      "muse-spark-serve-2675-20261016",
+      "muse-spark-serve-2733-20261016"
+    ],
+    "reason": "User requested pausing half of Muse and Nemotron to free roughly four nodes",
+    "preserve_slurm_allocations": true
+  },
+  "handoff_result_audit": "/fsx/home/zhiyuan/onevision-zh-20261016/node-handoff-20261017/benchmark-result-pause-audit.json",
+  "handoff_qualification": "Reserved allocations must not restart. Interrupted tasks are paused, not model failures; raw counts are incomplete. See handoff result audit."
+}

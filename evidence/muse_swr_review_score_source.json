@@ -1,0 +1,998 @@
+{
+  "utc": "2026-10-19T03:53:56.848938+00:00",
+  "model": "Muse-Spark-Open-816B-A42B-NVFP4",
+  "replicas": {
+    "2865": {
+      "controller": "MainPID=0\nResult=exit-code\nActiveState=failed\n",
+      "allocation_state": "RUNNING",
+      "readiness_receipt_exists": true,
+      "ready": false,
+      "qualification": "Owned running allocation and active controller with historical startup readiness receipt; not a live health probe."
+    },
+    "2866": {
+      "controller": "MainPID=4084145\nResult=success\nActiveState=active\n",
+      "allocation_state": "RUNNING",
+      "readiness_receipt_exists": true,
+      "ready": true,
+      "qualification": "Owned running allocation and active controller with historical startup readiness receipt; not a live health probe."
+    },
+    "2869": {
+      "controller": "MainPID=0\nResult=exit-code\nActiveState=failed\n",
+      "allocation_state": "RUNNING",
+      "readiness_receipt_exists": true,
+      "ready": false,
+      "qualification": "Owned running allocation and active controller with historical startup readiness receipt; not a live health probe."
+    }
+  },
+  "swe_review": {
+    "glm5_500": {
+      "expected": 500,
+      "terminal": 473,
+      "raw_terminal_records": 500,
+      "infrastructure_before_model": [
+        {
+          "task": "sympy__sympy-21379",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-21379__SNPNnGN/result.json",
+          "sha256": "7fa2f8b271f269333cd37fd7e6891c1b5d94032cd1843ab1eb266e3ecd409478"
+        },
+        {
+          "task": "sympy__sympy-17655",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-17655__nDKfMyZ/result.json",
+          "sha256": "47d00e7b9343847ad0fe1ee04e4b713b512e318bf7771f86101f6ece14ea3901"
+        },
+        {
+          "task": "sympy__sympy-22080",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-22080__NjYN2Po/result.json",
+          "sha256": "2469c90561d8cc2f43af9461174f0345372ae89366c24ce08209db2be9a6113d"
+        },
+        {
+          "task": "sympy__sympy-18698",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-18698__uUmjpG4/result.json",
+          "sha256": "5d935ab0c3a164e0899abcc74ecd82b4a0a4b21c1e10eadf4c7be150a4e85dfa"
+        },
+        {
+          "task": "sympy__sympy-21596",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-21596__yLKLRpC/result.json",
+          "sha256": "693e12a0ccd55f98b9283d9b12aec4235c91b0bf88467add1c80e636e84e3d47"
+        },
+        {
+          "task": "sympy__sympy-24443",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24443__4MXVEhy/result.json",
+          "sha256": "50ccf076234ee882a2ffb7ee53698045b16f730f05fb39a5c5ce3a0ccf2f2cc0"
+        },
+        {
+          "task": "sympy__sympy-24661",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24661__58moFps/result.json",
+          "sha256": "d8c0518fdf8a0c08f58dc72850f4d83f7837600f3a7cbea1767c0f19cbaa9a90"
+        },
+        {
+          "task": "sympy__sympy-18199",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-18199__WTitSKy/result.json",
+          "sha256": "c61643b201616feeb26cefa46e35937872bfee6bcaadf1d5e45920bbc060a254"
+        },
+        {
+          "task": "sympy__sympy-20801",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-20801__9ChZSBQ/result.json",
+          "sha256": "33320e33ec4bd6050f9e08bc5ff5824714553d253ffb7b0253e760f7a8878ac6"
+        },
+        {
+          "task": "sympy__sympy-17318",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-17318__E6wV4i4/result.json",
+          "sha256": "427f36356f38ffd1858ae482596687c2d32ad8ebbcaa62ee387dfc50f3e0e86e"
+        },
+        {
+          "task": "sympy__sympy-19346",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19346__VDpdeKK/result.json",
+          "sha256": "25fa2a368ab813942ea22ffc155ac059384149d5ee3d3eeef769a4ce0c97fd8d"
+        },
+        {
+          "task": "sympy__sympy-20154",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-20154__6trdwSR/result.json",
+          "sha256": "a119a96ef3e6c24137cd6cd2f5bf49bd46144cf47e9730e5efe139f4e8314af9"
+        },
+        {
+          "task": "sympy__sympy-23534",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-23534__zu2V7tU/result.json",
+          "sha256": "835a9c5519d78e8b4ed278ad3c043906f21a1312648feca8cb12bca8ba85b199"
+        },
+        {
+          "task": "sympy__sympy-20438",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-20438__FoHJxmu/result.json",
+          "sha256": "cf3f224150488996ad1c3f39802e7121b2e674f815a50cc178427336d4de189c"
+        },
+        {
+          "task": "sympy__sympy-22456",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-22456__YgdWBJH/result.json",
+          "sha256": "ce969dd53e4ce4aef154c918c8201eb7cb0efd2fe3e52a97e69f105d5dd7dcfb"
+        },
+        {
+          "task": "sympy__sympy-18189",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-18189__n2DDWSX/result.json",
+          "sha256": "8930d5800d4e5164dbd96ac7866c885f99edac562808afcec322ee4724f92332"
+        },
+        {
+          "task": "sympy__sympy-19040",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19040__8LLx3E2/result.json",
+          "sha256": "0cd74260cae4831e141ca44b4e61a58b44ffc7449d31024a739e70a5c11a2c36"
+        },
+        {
+          "task": "sympy__sympy-23262",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-23262__wmoA4KS/result.json",
+          "sha256": "627f62eb03a4d4c64dc15fd0a93f3e9e8af2bc9e2f9284c1fd853b9a84de542c"
+        },
+        {
+          "task": "sympy__sympy-19637",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19637__vmcq7pb/result.json",
+          "sha256": "d394d414d871932e3fa9bf811f6ed984c7a6f0f6e7151d9050b10eec741be3e9"
+        },
+        {
+          "task": "sympy__sympy-19783",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19783__i3D65Sa/result.json",
+          "sha256": "50671ca06af7edd46687f1a73ab99a9001fa73ff095e68021087c4f270d457af"
+        },
+        {
+          "task": "sympy__sympy-24562",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24562__QbvSGvt/result.json",
+          "sha256": "449748950f4cdce7e1cd5e943f6c611b8926e23582dd3fc6fe0838df1f9ced57"
+        },
+        {
+          "task": "sympy__sympy-24539",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24539__yTkgqAg/result.json",
+          "sha256": "2465563ce10915a684e6974e56d037b5e2795909ae15dd235965468f0bc0fe08"
+        },
+        {
+          "task": "sympy__sympy-22914",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-22914__wtimbHf/result.json",
+          "sha256": "25179fe6c8ac25ce977e80cc06dae68af85e1eee54e69e11301da534e4e4dd6f"
+        },
+        {
+          "task": "sympy__sympy-24213",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24213__nhM4xuu/result.json",
+          "sha256": "40c906ac161a1449fa4d291be01ffbd2e6f7be32034d0498b2cb32c6ada574b9"
+        },
+        {
+          "task": "sympy__sympy-23950",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-23950__oetCz68/result.json",
+          "sha256": "38ea669493f0c456c9518b43e033b11de13cad3837fddcc267322609040840e1"
+        },
+        {
+          "task": "sympy__sympy-19495",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19495__iqRn3ox/result.json",
+          "sha256": "92774c73544e65d5bb169481930f5c2c910606f9d868b65c62f2da95e3411aa6"
+        },
+        {
+          "task": "sympy__sympy-21612",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-21612__P7Vmf8W/result.json",
+          "sha256": "3f9eb2f8b68599a89a33e6871a5142887059e804be944ab4f95dae2a1fd58f81"
+        }
+      ],
+      "recovered_before_response_infrastructure_tasks": 336,
+      "recovery_infrastructure_exceptions": [],
+      "complete": false,
+      "metrics_on_terminal_subset": {
+        "DA": 75.8,
+        "DA_total_50": 73.7,
+        "CR": 91.8,
+        "FAR": 64.6,
+        "FRR": 7.5,
+        "total": 473,
+        "correct": 329,
+        "model_fail": 39,
+        "produced": 434,
+        "TP": 284,
+        "FP": 82,
+        "TN": 45,
+        "FN": 23
+      },
+      "exceptions": [],
+      "invalid_decisions": [],
+      "qualification": "Official DA routine on evaluated terminal records only. Proven pre-agent registry rate-limit failures are excluded and await infrastructure recovery. Partial scores are not final. Revision and RRR are separate and have not run."
+    },
+    "qwen3_coder_30b_500": {
+      "expected": 462,
+      "terminal": 439,
+      "raw_terminal_records": 462,
+      "infrastructure_before_model": [
+        {
+          "task": "sympy__sympy-19637",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-19637__KkT9WmC/result.json",
+          "sha256": "e64481df83987818076de0fee91b75f41025a36ba228f8f4bbd2fb8b80f244c6"
+        },
+        {
+          "task": "sympy__sympy-24443",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-24443__jgM8mZ6/result.json",
+          "sha256": "e8ce707e890befbfe29466d1a13220808022d9cc570febe9fcf6f69d3a8bc73a"
+        },
+        {
+          "task": "sympy__sympy-23534",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-23534__7CiwT5F/result.json",
+          "sha256": "0e4d55580b25f1193bd3df025c39d49dff8ea0a942be664cbc9b60f633ea4f31"
+        },
+        {
+          "task": "sympy__sympy-21930",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-21930__znW7Nn2/result.json",
+          "sha256": "7192e501a620176f5d0f0c7122879165b5db811692a2813997857e9a30c8e5b2"
+        },
+        {
+          "task": "sympy__sympy-19954",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-19954__tfBWYBs/result.json",
+          "sha256": "ec6961d8446b56968259ea67b5ad18a1c826e6dc8e757047f78a02ff71f9a65f"
+        },
+        {
+          "task": "sympy__sympy-18763",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-18763__Y5qVYrv/result.json",
+          "sha256": "8e088a04e90e482cb963d4a65d3a765369e0d70d2cb093589797ec160160c498"
+        },
+        {
+          "task": "sympy__sympy-24066",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-24066__NXUEZMe/result.json",
+          "sha256": "9ecb467c3897db37725e8dde02027bc2904c6682f9aa4a6f04cdf7423bda3179"
+        },
+        {
+          "task": "sympy__sympy-22714",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-22714__oq3Krfa/result.json",
+          "sha256": "9a6d6b9ec3b0956bf7dcead7712de5db5814577dd5607142fcfdb779ff781bc7"
+        },
+        {
+          "task": "sympy__sympy-22914",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-22914__nm3UfM2/result.json",
+          "sha256": "dd51457d55a5177e3351e55881760ab00fbf88a8788a2e03c5b3450cd0ad4331"
+        },
+        {
+          "task": "sympy__sympy-17630",
+          "classification": "cancelled_2868_endpoint_before_first_model_response",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-17630__fRXWdwy/result.json",
+          "sha256": "ef31715816395d4da6e4a0f54eb83265fa7af1772428567003ae94e966e643fa"
+        },
+        {
+          "task": "sympy__sympy-20916",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-20916__McP393m/result.json",
+          "sha256": "592b3bb85472f200775ea9b0eec8c58430ecf9cb11c25cb64eecb74dee5f1be8"
+        },
+        {
+          "task": "sympy__sympy-20438",
+          "classification": "cancelled_2868_endpoint_before_first_model_response",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-20438__k24FsJY/result.json",
+          "sha256": "dae31c8f729b746a7bfef9e15e3bb58247038ae9e71e2373dde415dd0da95799"
+        },
+        {
+          "task": "sympy__sympy-17655",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-17655__9WrmeZe/result.json",
+          "sha256": "f2b2864cac83941ce26c4e4b138012438712aaa2825c8361db547cf3472d1800"
+        },
+        {
+          "task": "sympy__sympy-19783",
+          "classification": "cancelled_2868_endpoint_before_first_model_response",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-19783__RfN9CT3/result.json",
+          "sha256": "97e16c56fa725a253c26fa8e7cafdd93ee1564e730ae934436159d296c6d36cd"
+        },
+        {
+          "task": "sympy__sympy-24539",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-24539__oe525b9/result.json",
+          "sha256": "0325f3fbf795d45f137d723b56d02363519e0b64b33418f6864bcfc9f7b5b3e4"
+        },
+        {
+          "task": "sympy__sympy-22456",
+          "classification": "cancelled_2868_endpoint_before_first_model_response",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-22456__StTLJAs/result.json",
+          "sha256": "7f4d6a7511044ffdcff6183c9b89f4550f2875370eef3c5e212e0c8cb5f7216f"
+        },
+        {
+          "task": "sympy__sympy-23262",
+          "classification": "cancelled_2868_endpoint_before_first_model_response",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-23262__ZqNAYbM/result.json",
+          "sha256": "aaf476e5805e8be910ad57efb0ff6d94ef37b90e9747298a8069bdbf58f40e50"
+        },
+        {
+          "task": "sympy__sympy-23950",
+          "classification": "cancelled_2868_endpoint_before_first_model_response",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-23950__YxNWwMT/result.json",
+          "sha256": "db80fc19fd170980f3c274b703729fc39f2e82374f35cb1d971d6b7507c12e94"
+        },
+        {
+          "task": "sympy__sympy-18211",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-18211__BfWz6bP/result.json",
+          "sha256": "2a4fcc1259a87132f553725d15398c92560f86649d4eae1149daf515f7fdf82f"
+        },
+        {
+          "task": "sympy__sympy-21847",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-21847__EtQ5kwS/result.json",
+          "sha256": "00c76006c7439c17299abb1a1168c072701c3b6667f35dbe722f44e0d6dd09de"
+        },
+        {
+          "task": "sympy__sympy-20428",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-20428__tEvQnph/result.json",
+          "sha256": "314bc5e38e8e78007d2f57cc95f5d622735a0af63e1849c34ca956bcbebe1d61"
+        },
+        {
+          "task": "sympy__sympy-19040",
+          "classification": "cancelled_2868_endpoint_before_first_model_response",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-19040__aKXf5rN/result.json",
+          "sha256": "9883dcc0f32b0b451d529937df4271d407345eff2d3cdb23461caeff1c2668fe"
+        },
+        {
+          "task": "sympy__sympy-19495",
+          "classification": "docker_hub_rate_limit_before_agent",
+          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-19495__9cGuqX3/result.json",
+          "sha256": "d9faabcf15c801cd0e66dfac226de7f4bcc53fac1253accd4f3f3ada1c578699"
+        }
+      ],
+      "recovered_before_response_infrastructure_tasks": 328,
+      "recovery_infrastructure_exceptions": [],
+      "complete": false,
+      "metrics_on_terminal_subset": {
+        "DA": 82.0,
+        "DA_total_50": 79.0,
+        "CR": 90.9,
+        "FAR": 14.6,
+        "FRR": 21.4,
+        "total": 439,
+        "correct": 327,
+        "model_fail": 40,
+        "produced": 399,
+        "TP": 158,
+        "FP": 29,
+        "TN": 169,
+        "FN": 43
+      },
+      "exceptions": [],
+      "invalid_decisions": [],
+      "qualification": "Official DA routine on evaluated terminal records only. Proven pre-agent registry rate-limit failures are excluded and await infrastructure recovery. Partial scores are not final. Revision and RRR are separate and have not run."
+    },
+    "qwen3_30b_instruct2507_500": {
+      "expected": 422,
+      "terminal": 422,
+      "raw_terminal_records": 422,
+      "infrastructure_before_model": [],
+      "recovered_before_response_infrastructure_tasks": 296,
+      "recovery_infrastructure_exceptions": [],
+      "complete": true,
+      "metrics_on_terminal_subset": {
+        "DA": 87.2,
+        "DA_total_50": 82.5,
+        "CR": 87.2,
+        "FAR": 9.0,
+        "FRR": 22.8,
+        "total": 422,
+        "correct": 321,
+        "model_fail": 54,
+        "produced": 368,
+        "TP": 78,
+        "FP": 24,
+        "TN": 243,
+        "FN": 23
+      },
+      "exceptions": [],
+      "invalid_decisions": [],
+      "qualification": "Official DA routine on evaluated terminal records only. Proven pre-agent registry rate-limit failures are excluded and await infrastructure recovery. Partial scores are not final. Revision and RRR are separate and have not run."
+    }
+  },
+  "retired_allocations": {
+    "2868": "Cancelled by Slurm at 2026-10-18T16:00:02; old readiness receipt is not current availability."
+  },
+  "swrbench": {
+    "expected": 1000,
+    "generated": 1000,
+    "nonempty_reviews": 954,
+    "generation_complete": true,
+    "judge_status": {
+      "status": "complete",
+      "judged": 1000,
+      "expected": 1000,
+      "time": 1792344429.7033632,
+      "model": "gpt-5.5",
+      "api_base": "https://llm.zhiyuanllm.com/v1"
+    },
+    "final_metrics": {
+      "submit": 1000,
+      "valid": 1000,
+      "error": 0,
+      "overall": {
+        "precision": 0.5646,
+        "recall": 0.472,
+        "f1": 0.5142,
+        "accuracy": 0.554,
+        "precision_point": 0.073,
+        "recall_point": 0.4384,
+        "f1_point": 0.1252,
+        "tp": 236,
+        "fp": 182,
+        "fn": 264,
+        "tn": 318,
+        "tp_point": 416,
+        "fp_point": 5280,
+        "fn_point": 533,
+        "avg_pred_points": 5.696,
+        "avg_pred_severity": 3.602879213483146
+      },
+      "change": {
+        "precision_avg": 0.1518888,
+        "recall_avg": 0.48909720000000007,
+        "f1_avg": 0.211007,
+        "severity_avg": 3.3009315993536683,
+        "precision_total": 0.1419,
+        "recall_total": 0.4384,
+        "f1_total": 0.2144,
+        "severity_total": 3.664619583759809,
+        "identified_as_good_rate": 0.528,
+        "identified_as_good": 264,
+        "tp_total": 416,
+        "fp_total": 2515,
+        "fn_total": 533,
+        "pred_points_total": 2931,
+        "gt_points_total": 949,
+        "pred_points_avg": 5.862,
+        "gt_points_avg": 1.898,
+        "pred_types_count": {
+          "E.1.1": 1031,
+          "F.6": 40,
+          "F.3": 104,
+          "E.3.2": 609,
+          "E.2": 144,
+          "F.2": 248,
+          "F.1": 129,
+          "F.4": 159,
+          "F.5": 243,
+          "E.3.1": 200,
+          "E.1.2": 24
+        },
+        "gt_types_count": {
+          "E.1.1": 209,
+          "E.3.2": 250,
+          "E.2": 68,
+          "F.2": 100,
+          "F.1": 44,
+          "E.3.1": 94,
+          "F.3": 26,
+          "F.6": 32,
+          "F.5": 70,
+          "F.4": 35,
+          "E.1.2": 21
+        },
+        "count": 500
+      },
+      "clean": {
+        "pred_points_total": 2765,
+        "pred_points_avg": 5.53,
+        "severity_avg": 3.1068544600824017,
+        "identified_as_good_rate": 0.636,
+        "identified_as_good": 318,
+        "pred_types_count": {
+          "E.1.1": 1030,
+          "F.5": 231,
+          "E.2": 125,
+          "F.6": 45,
+          "E.3.2": 527,
+          "E.3.1": 252,
+          "F.1": 149,
+          "F.4": 114,
+          "F.3": 100,
+          "F.2": 168,
+          "E.1.2": 24
+        },
+        "count": 500
+      },
+      "change_by_type": {
+        "E.1": {
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "avg_pred_points": 0.0,
+          "avg_gt_points": 0.0,
+          "avg_severity": NaN,
+          "count": 1000
+        },
+        "E.1.1": {
+          "precision": 0.0354,
+          "recall": 0.365,
+          "f1": 0.0646,
+          "tp": 73,
+          "fp": 1988,
+          "fn": 127,
+          "avg_pred_points": 2.061,
+          "avg_gt_points": 0.209,
+          "avg_severity": 2.2338670548277535,
+          "count": 1000
+        },
+        "E.1.2": {
+          "precision": 0.125,
+          "recall": 0.3,
+          "f1": 0.1765,
+          "tp": 6,
+          "fp": 42,
+          "fn": 14,
+          "avg_pred_points": 0.048,
+          "avg_gt_points": 0.021,
+          "avg_severity": 3.125,
+          "count": 1000
+        },
+        "E.2": {
+          "precision": 0.0818,
+          "recall": 0.3284,
+          "f1": 0.131,
+          "tp": 22,
+          "fp": 247,
+          "fn": 45,
+          "avg_pred_points": 0.269,
+          "avg_gt_points": 0.068,
+          "avg_severity": 1.899628252788104,
+          "count": 1000
+        },
+        "E.3": {
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "avg_pred_points": 0.0,
+          "avg_gt_points": 0.0,
+          "avg_severity": NaN,
+          "count": 1000
+        },
+        "E.3.1": {
+          "precision": 0.0841,
+          "recall": 0.4222,
+          "f1": 0.1402,
+          "tp": 38,
+          "fp": 414,
+          "fn": 52,
+          "avg_pred_points": 0.452,
+          "avg_gt_points": 0.094,
+          "avg_severity": 2.674778761061947,
+          "count": 1000
+        },
+        "E.3.2": {
+          "precision": 0.0898,
+          "recall": 0.4215,
+          "f1": 0.148,
+          "tp": 102,
+          "fp": 1034,
+          "fn": 140,
+          "avg_pred_points": 1.136,
+          "avg_gt_points": 0.25,
+          "avg_severity": 3.5440140845070425,
+          "count": 1000
+        },
+        "F.1": {
+          "precision": 0.1043,
+          "recall": 0.6042,
+          "f1": 0.1779,
+          "tp": 29,
+          "fp": 249,
+          "fn": 19,
+          "avg_pred_points": 0.278,
+          "avg_gt_points": 0.044,
+          "avg_severity": 6.172661870503597,
+          "count": 1000
+        },
+        "F.2": {
+          "precision": 0.1346,
+          "recall": 0.5437,
+          "f1": 0.2158,
+          "tp": 56,
+          "fp": 360,
+          "fn": 47,
+          "avg_pred_points": 0.416,
+          "avg_gt_points": 0.1,
+          "avg_severity": 6.105769230769231,
+          "count": 1000
+        },
+        "F.3": {
+          "precision": 0.0784,
+          "recall": 0.6667,
+          "f1": 0.1404,
+          "tp": 16,
+          "fp": 188,
+          "fn": 8,
+          "avg_pred_points": 0.204,
+          "avg_gt_points": 0.026,
+          "avg_severity": 5.970588235294118,
+          "count": 1000
+        },
+        "F.4": {
+          "precision": 0.0733,
+          "recall": 0.5556,
+          "f1": 0.1294,
+          "tp": 20,
+          "fp": 253,
+          "fn": 16,
+          "avg_pred_points": 0.273,
+          "avg_gt_points": 0.035,
+          "avg_severity": 5.509157509157509,
+          "count": 1000
+        },
+        "F.5": {
+          "precision": 0.0781,
+          "recall": 0.5068,
+          "f1": 0.1353,
+          "tp": 37,
+          "fp": 437,
+          "fn": 36,
+          "avg_pred_points": 0.474,
+          "avg_gt_points": 0.07,
+          "avg_severity": 5.217299578059071,
+          "count": 1000
+        },
+        "F.6": {
+          "precision": 0.2,
+          "recall": 0.5312,
+          "f1": 0.2906,
+          "tp": 17,
+          "fp": 68,
+          "fn": 15,
+          "avg_pred_points": 0.085,
+          "avg_gt_points": 0.032,
+          "avg_severity": 6.7176470588235295,
+          "count": 1000
+        },
+        "F.": {
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "avg_pred_points": 0.0,
+          "avg_gt_points": 0.0,
+          "avg_severity": NaN,
+          "count": 1000
+        },
+        "E.": {
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "avg_pred_points": 0.0,
+          "avg_gt_points": 0.0,
+          "avg_severity": NaN,
+          "count": 1000
+        }
+      },
+      "change_by_F": {
+        "precision": 0.1012,
+        "recall": 0.5538,
+        "f1": 0.1711,
+        "tp": 175,
+        "fp": 1555,
+        "fn": 141,
+        "avg_pred_points": 1.73,
+        "avg_gt_points": 0.307,
+        "avg_severity": 5.793063583815029,
+        "count": 1000
+      },
+      "change_by_E": {
+        "precision": 0.0608,
+        "recall": 0.3893,
+        "f1": 0.1051,
+        "tp": 241,
+        "fp": 3725,
+        "fn": 378,
+        "avg_pred_points": 3.966,
+        "avg_gt_points": 0.642,
+        "avg_severity": 2.6475037821482603,
+        "count": 1000
+      }
+    },
+    "judge_controller": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "judged": 1000
+  },
+  "qualification": "One round per new benchmark. Original unrelated evaluations continue. Separate preserved thinking from review text; independent judge required for SWRBench scores.",
+  "revision_preparation": {
+    "role": "Original patch generators used only as official revision dependencies for Muse reviewer evaluation.",
+    "allocation": 2869,
+    "revision_generation_started": false,
+    "prefetch": {
+      "started_utc": "2026-10-18T16:48:42.317096+00:00",
+      "plan_sha256": "39b2407719a1c9d49acf20702bb5b5874d6a631b7c08d90fc74e5ab624c5b3a5",
+      "allocation": 2869,
+      "models": {
+        "qwen3_coder_30b_500": {
+          "repo": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+          "revision": "b2cff646eb4bb1d68355c01b18ae02e7cf42d120",
+          "local_path": "/opt/dlami/nvme/zhiyuan-swe-review-revision-recovery-20261018/models/qwen3_coder_30b_500",
+          "expected_files": 27,
+          "status": "verified",
+          "completed_files": 27,
+          "completed_file_bytes": 61079825275,
+          "download_returncode": 0,
+          "index_shards": 16,
+          "verification_returncode": 0
+        },
+        "qwen3_30b_instruct2507_500": {
+          "repo": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+          "revision": "0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe",
+          "local_path": "/opt/dlami/nvme/zhiyuan-swe-review-revision-recovery-20261018/models/qwen3_30b_instruct2507_500",
+          "expected_files": 26,
+          "status": "verified",
+          "completed_files": 26,
+          "completed_file_bytes": 61084261393,
+          "download_returncode": 0,
+          "index_shards": 16,
+          "verification_returncode": 0
+        },
+        "glm5_500": {
+          "repo": "zai-org/GLM-5",
+          "revision": "c183ef8c61faee82855eca1ed9bb3a9a7ce3b0b2",
+          "local_path": "/opt/dlami/nvme/zhiyuan-swe-review-revision-recovery-20261018/models/glm5_500",
+          "expected_files": 289,
+          "status": "verified",
+          "completed_files": 289,
+          "completed_file_bytes": 1507761488638,
+          "download_returncode": 0,
+          "index_shards": 282,
+          "verification_returncode": 0
+        }
+      },
+      "complete": true,
+      "active_split": null,
+      "utc": "2026-10-18T17:06:15.884852+00:00",
+      "available_bytes": 2667878105088
+    },
+    "controller": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "qualification": "Preparing weights does not constitute revision completion or an RRR score.",
+    "task_preparation": {
+      "plan_sha256": "f3f2477ab37fddcb1b7ed6aed72e7597e147e69caebea4b2cd7d490c100b5da4",
+      "phase": "waiting_for_completed_review_splits",
+      "splits": {
+        "qwen3_30b_instruct2507_500": {
+          "status": "tasks_prepared",
+          "count": 266,
+          "receipt": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/qwen3_30b_instruct2507_500/receipt.json",
+          "sha256": "b1e9ece8d4656bfe337b6c1c88fe6fc7293c9c155d3ca3497c450427e5c4a29b"
+        }
+      },
+      "complete": false,
+      "model_generation_started": false,
+      "utc": "2026-10-19T03:53:28.081375+00:00",
+      "grader_preflight_passed": true
+    },
+    "task_preparation_controller": "MainPID=4150849\nResult=success\nActiveState=active\n"
+  },
+  "revision_capacity_preparation": {
+    "utc": 1792382058.7789457,
+    "phase": "waiting_for_reserved_allocations",
+    "candidate_allocations": [
+      2888,
+      2899,
+      2900
+    ],
+    "assignments": {},
+    "complete": false,
+    "gpu_model_services_started": false,
+    "model_sampling_started": false,
+    "qualification": "Only pinned revision dependency preparation. Additional reserve nodes remain unassigned by this controller. No existing running evaluation is stopped or replaced.",
+    "controller": "MainPID=114339\nResult=success\nActiveState=active\n"
+  },
+  "parallel_review_recovery": {
+    "phase": "relayed_remaining_reviews_running",
+    "complete": false,
+    "healthy": true,
+    "runner": {
+      "MainPID": "490327",
+      "Result": "success",
+      "ActiveState": "active"
+    },
+    "workers": {
+      "2865": {
+        "utc": 1792378897.4297845,
+        "phase": "running",
+        "split": "qwen3_coder_30b_500",
+        "batch": 14,
+        "tasks": [
+          "sympy__sympy-16450",
+          "sympy__sympy-16766",
+          "sympy__sympy-16792",
+          "sympy__sympy-16886",
+          "sympy__sympy-17318",
+          "sympy__sympy-17630",
+          "sympy__sympy-17655",
+          "sympy__sympy-18189",
+          "sympy__sympy-18211",
+          "sympy__sympy-18763",
+          "sympy__sympy-19040",
+          "sympy__sympy-19495",
+          "sympy__sympy-19637",
+          "sympy__sympy-19783",
+          "sympy__sympy-19954",
+          "sympy__sympy-20428"
+        ],
+        "model_allocation": 2865,
+        "review_concurrency": 4
+      },
+      "2869": {
+        "utc": 1792379682.4691043,
+        "phase": "running",
+        "split": "qwen3_coder_30b_500",
+        "batch": 15,
+        "tasks": [
+          "sympy__sympy-20438",
+          "sympy__sympy-20590",
+          "sympy__sympy-20801",
+          "sympy__sympy-20916",
+          "sympy__sympy-21847",
+          "sympy__sympy-21930",
+          "sympy__sympy-22456",
+          "sympy__sympy-22714",
+          "sympy__sympy-22914",
+          "sympy__sympy-23262",
+          "sympy__sympy-23534",
+          "sympy__sympy-23950",
+          "sympy__sympy-24066",
+          "sympy__sympy-24443",
+          "sympy__sympy-24539"
+        ],
+        "model_allocation": 2869,
+        "review_concurrency": 4
+      },
+      "2866": {
+        "utc": 1792379506.3884933,
+        "phase": "running",
+        "split": "glm5_500",
+        "batch": 15,
+        "tasks": [
+          "sympy__sympy-17318",
+          "sympy__sympy-17655",
+          "sympy__sympy-18189",
+          "sympy__sympy-18199",
+          "sympy__sympy-18698",
+          "sympy__sympy-19040",
+          "sympy__sympy-19346",
+          "sympy__sympy-19495",
+          "sympy__sympy-19637",
+          "sympy__sympy-19783",
+          "sympy__sympy-20154",
+          "sympy__sympy-20438",
+          "sympy__sympy-20801",
+          "sympy__sympy-21379",
+          "sympy__sympy-21596",
+          "sympy__sympy-21612"
+        ],
+        "model_allocation": 2866,
+        "review_concurrency": 8
+      }
+    },
+    "previous_good_native_batch_drained": true,
+    "paused_dispatcher_retired": true,
+    "isolated_pre_response_infra_attempts": 32,
+    "remaining_declared_actual_model_draws": 706,
+    "old_parent_frozen_only": false,
+    "successor_root": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/review_recovery_20261018/parallel_20261018/relayed_20261018",
+    "review_slots": {
+      "2865": 4,
+      "2869": 4,
+      "2866": 8
+    },
+    "relay": "10.1.115.182:31320 -> same verified Muse NVFP4 on 10.1.77.106:31320",
+    "qualification": "Frozen harness, generation kwargs and official verifier unchanged. All actual previous model responses preserved. Only positively proven pre-response transport failures are isolated and get a first actual model draw. No best-of selection. Obsolete paused dispatcher retires only after its good sampled native children finish. All actual model outcomes remain preserved.",
+    "utc": 1792379863.3466554,
+    "old_parent_retired": true,
+    "worker_states": {
+      "worker-2866": {
+        "utc": 1792379506.3884933,
+        "phase": "running",
+        "split": "glm5_500",
+        "batch": 15,
+        "tasks": [
+          "sympy__sympy-17318",
+          "sympy__sympy-17655",
+          "sympy__sympy-18189",
+          "sympy__sympy-18199",
+          "sympy__sympy-18698",
+          "sympy__sympy-19040",
+          "sympy__sympy-19346",
+          "sympy__sympy-19495",
+          "sympy__sympy-19637",
+          "sympy__sympy-19783",
+          "sympy__sympy-20154",
+          "sympy__sympy-20438",
+          "sympy__sympy-20801",
+          "sympy__sympy-21379",
+          "sympy__sympy-21596",
+          "sympy__sympy-21612"
+        ],
+        "model_allocation": 2866,
+        "review_concurrency": 8
+      },
+      "worker-2865": {
+        "utc": 1792378897.4297845,
+        "phase": "running",
+        "split": "qwen3_coder_30b_500",
+        "batch": 14,
+        "tasks": [
+          "sympy__sympy-16450",
+          "sympy__sympy-16766",
+          "sympy__sympy-16792",
+          "sympy__sympy-16886",
+          "sympy__sympy-17318",
+          "sympy__sympy-17630",
+          "sympy__sympy-17655",
+          "sympy__sympy-18189",
+          "sympy__sympy-18211",
+          "sympy__sympy-18763",
+          "sympy__sympy-19040",
+          "sympy__sympy-19495",
+          "sympy__sympy-19637",
+          "sympy__sympy-19783",
+          "sympy__sympy-19954",
+          "sympy__sympy-20428"
+        ],
+        "model_allocation": 2865,
+        "review_concurrency": 4
+      },
+      "worker-2869": {
+        "utc": 1792379682.4691043,
+        "phase": "running",
+        "split": "qwen3_coder_30b_500",
+        "batch": 15,
+        "tasks": [
+          "sympy__sympy-20438",
+          "sympy__sympy-20590",
+          "sympy__sympy-20801",
+          "sympy__sympy-20916",
+          "sympy__sympy-21847",
+          "sympy__sympy-21930",
+          "sympy__sympy-22456",
+          "sympy__sympy-22714",
+          "sympy__sympy-22914",
+          "sympy__sympy-23262",
+          "sympy__sympy-23534",
+          "sympy__sympy-23950",
+          "sympy__sympy-24066",
+          "sympy__sympy-24443",
+          "sympy__sympy-24539"
+        ],
+        "model_allocation": 2869,
+        "review_concurrency": 4
+      }
+    },
+    "provenance": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/review_recovery_20261018/parallel_20261018/relayed_20261018/parallel-plan.json"
+  }
+}

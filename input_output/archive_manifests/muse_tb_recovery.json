@@ -1,0 +1,24 @@
+{
+  "group": "muse_tb_recovery",
+  "generated_utc": "2026-10-19T03:53:26.242348+00:00",
+  "archive_name": "muse_tb_recovery.tar.zst",
+  "archive_size_bytes": 36350699,
+  "archive_sha256": "ff78b17ed7bc06de06cd18feecfb9227b0c16eeb0f2548a48d08768981ccf841",
+  "file_count": 4613,
+  "input_file_count": 80,
+  "output_file_count": 217,
+  "raw_response_count": 4308,
+  "filename_counts": {
+    "result.json": 78,
+    "config.json": 80,
+    "raw_response.json": 4308,
+    "trajectory.json": 69,
+    "exception.txt": 8,
+    "trial.log": 70
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/infra_repair",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/tb_remaining_after_swr/results"
+  ],
+  "scope": "Native task/config inputs, result outputs, trajectories, raw API responses and trial logs present at snapshot time. Excludes model weights, Docker images, caches, artifacts, sandbox and verifier internals."
+}

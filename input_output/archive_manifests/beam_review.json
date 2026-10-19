@@ -1,0 +1,23 @@
+{
+  "group": "beam_review",
+  "generated_utc": "2026-10-19T03:54:30.234260+00:00",
+  "archive_name": "beam_review.tar.zst",
+  "archive_size_bytes": 11921744,
+  "archive_sha256": "e4cf0002d6869a753bc0dc69959473560688b990a9bf1df733bc53760b349af0",
+  "file_count": 2786,
+  "input_file_count": 721,
+  "output_file_count": 2051,
+  "raw_response_count": 0,
+  "filename_counts": {
+    "trajectory.json": 659,
+    "config.json": 721,
+    "result.json": 715,
+    "trial.log": 677,
+    "exception.txt": 14
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/swe_review",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results"
+  ],
+  "scope": "Native task/config inputs, result outputs, trajectories, raw API responses and trial logs present at snapshot time. Excludes model weights, Docker images, caches, artifacts, sandbox and verifier internals."
+}

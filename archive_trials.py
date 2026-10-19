@@ -20,19 +20,24 @@ GROUPS = {
     **{f'muse_pro_shard{i}': [M / f'shard{i}/results/muse-pro'] for i in range(4)},
     **{f'muse_harbor_shard{i}': [M / f'shard{i}/results'] for i in range(4)},
     'muse_deep_round3_remainder': [M / 'remaining_deep3_2812_20261018/results'],
-    'muse_review': [M / 'review_bench_20261018/swe_review'],
+    'muse_deep_canonical_3round': [M / 'remaining_deep3_2812_20261018/state/three-round-completion-audit.json'],
+    'muse_review': [M / 'review_bench_20261018/swe_review', M / 'review_bench_20261018/review_recovery_20261018'],
+    'muse_swr_raw': [M / 'review_bench_20261018/swrbench/raw_responses', M / 'review_bench_20261018/swrbench/judge_raw_responses'],
     'muse_tb_recovery': [M / 'infra_repair', M / 'review_bench_20261018/tb_remaining_after_swr/results'],
     'beam_legacy': [B / 'legacy_bench_20261018'],
     'beam_exact_tb': [B / 'tb_v1_exact_images_20261019/results/beam_bf16'],
-    'beam_review': [B / 'review_bench/swe_review'],
+    'beam_review': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
+    'beam_swr_raw': [B / 'review_bench/swrbench/raw_responses', B / 'review_bench/swrbench/judge_raw_responses'],
     'opus47_legacy': [O],
     'opus47_exact_tb': [B / 'tb_v1_exact_images_20261019/results/opus47'],
     'muse_exact_tb': [B / 'tb_v1_exact_images_20261019/results/muse_nvfp4'],
-    'muse_bf16': [BF / 'legacy_bench/results', BF / 'review_bench'],
+    'muse_bf16': [BF / 'legacy_bench/pro-results', BF / 'legacy_bench/tb-results', BF / 'legacy_bench/deep-results', BF / 'review_bench/swe_review', BF / 'review_bench/queue/results'],
 }
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    if group.endswith('_swr_raw'):
+        return path.suffix == '.json'
     if group.startswith('muse_harbor_shard') and 'muse-pro' in rel.parts:
         return False
     if group == 'opus47_legacy' and not any(x in rel.parts for x in ('pro-results', 'tb-results', 'deep-results', 'api_archive')):
@@ -50,6 +55,21 @@ def include(path, root, group):
 
 def iter_files(group):
     seen = set()
+    if group == 'muse_deep_canonical_3round':
+        audit = json.loads(GROUPS[group][0].read_text())
+        for rnd in audit['rounds']:
+            for row in rnd['rows'].values():
+                result = Path(row['result'])
+                if not result.exists():
+                    raise FileNotFoundError(result)
+                for directory, dirs, names in os.walk(result.parent):
+                    dirs[:] = [d for d in dirs if d not in ('artifacts', 'verifier', 'sandbox')]
+                    for name in names:
+                        path = Path(directory) / name
+                        if path.is_file() and not path.is_symlink() and include(path, result.parent, group) and path not in seen:
+                            seen.add(path)
+                            yield path
+        return
     for root in GROUPS[group]:
         if not root.exists():
             continue
@@ -86,10 +106,11 @@ def main():
             for path in files:
                 arcname = str(path.relative_to(BASE))
                 tar.add(str(path), arcname=arcname, recursive=False)
-                counts[path.name] = counts.get(path.name, 0) + 1
+                category = 'judge_raw_response.json' if 'judge_raw_responses' in path.parts else ('raw_response.json' if 'raw_responses' in path.parts else ('api_archive.json' if 'api_archive' in path.parts else path.name))
+                counts[category] = counts.get(category, 0) + 1
                 input_count += path.name in ('task.json', 'config.json')
                 output_count += path.name in ('result.json', 'trajectory.json', 'trial.log')
-                raw_count += 'raw_responses' in path.parts
+                raw_count += 'raw_responses' in path.parts or 'judge_raw_responses' in path.parts
         proc.stdin.close()
         rc = proc.wait()
         if rc:
@@ -117,7 +138,7 @@ def main():
     out = HERE / 'input_output/archive_manifests' / f'{group}.json'
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(manifest, indent=2) + '\n')
-    print(json.dumps(manifest))
+    print(json.dumps({k: manifest[k] for k in ('group', 'archive_name', 'archive_size_bytes', 'archive_sha256', 'file_count', 'input_file_count', 'output_file_count', 'raw_response_count')}))
 
 if __name__ == '__main__':
     main()
