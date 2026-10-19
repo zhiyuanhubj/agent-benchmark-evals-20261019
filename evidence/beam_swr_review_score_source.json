@@ -1,5 +1,5 @@
 {
-  "utc": 1792402719.2815158,
+  "utc": 1792403618.8509233,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 261,
+      "terminal": 263,
       "exceptions": 7,
       "prepared_image_phases": {
         "image_ready": 288
@@ -377,64 +377,64 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 254,
+      "terminal": 257,
       "exceptions": 3,
       "prepared_image_phases": {
-        "image_ready": 272
+        "image_ready": 288
       },
       "controller": {
-        "utc": 1792391650.937842,
+        "utc": 1792403304.4264762,
         "phase": "running",
-        "batch": 15,
+        "batch": 16,
         "tasks": [
-          "matplotlib__matplotlib-20859",
-          "matplotlib__matplotlib-21568",
-          "matplotlib__matplotlib-22719",
-          "matplotlib__matplotlib-22865",
-          "matplotlib__matplotlib-23299",
-          "matplotlib__matplotlib-23314",
-          "matplotlib__matplotlib-23412",
-          "matplotlib__matplotlib-23476",
-          "matplotlib__matplotlib-24026",
-          "matplotlib__matplotlib-24177",
-          "matplotlib__matplotlib-24627",
-          "matplotlib__matplotlib-24637",
-          "matplotlib__matplotlib-24870",
-          "matplotlib__matplotlib-24970",
-          "matplotlib__matplotlib-25122",
-          "matplotlib__matplotlib-25287"
+          "matplotlib__matplotlib-25311",
+          "matplotlib__matplotlib-25332",
+          "matplotlib__matplotlib-25479",
+          "matplotlib__matplotlib-25775",
+          "matplotlib__matplotlib-25960",
+          "matplotlib__matplotlib-26113",
+          "matplotlib__matplotlib-26208",
+          "matplotlib__matplotlib-26291",
+          "matplotlib__matplotlib-26342",
+          "matplotlib__matplotlib-26466",
+          "mwaskom__seaborn-3069",
+          "mwaskom__seaborn-3187",
+          "pallets__flask-5014",
+          "psf__requests-1142",
+          "psf__requests-1724",
+          "psf__requests-1766"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 271,
+      "terminal": 275,
       "exceptions": 6,
       "prepared_image_phases": {
-        "image_ready": 288
+        "image_ready": 304
       },
       "controller": {
-        "utc": 1792395069.0581715,
+        "utc": 1792403028.8413303,
         "phase": "running",
-        "batch": 16,
+        "batch": 17,
         "tasks": [
-          "pydata__xarray-4687",
-          "pydata__xarray-4695",
-          "pydata__xarray-4966",
-          "pydata__xarray-6461",
-          "pydata__xarray-6599",
-          "pydata__xarray-6721",
-          "pydata__xarray-6744",
-          "pydata__xarray-6938",
-          "pydata__xarray-6992",
-          "pydata__xarray-7229",
-          "pydata__xarray-7233",
-          "pydata__xarray-7393",
-          "pylint-dev__pylint-4551",
-          "pylint-dev__pylint-4604",
-          "pylint-dev__pylint-4661",
-          "pylint-dev__pylint-4970"
+          "pylint-dev__pylint-6386",
+          "pylint-dev__pylint-6528",
+          "pylint-dev__pylint-6903",
+          "pylint-dev__pylint-7080",
+          "pylint-dev__pylint-7277",
+          "pylint-dev__pylint-8898",
+          "pytest-dev__pytest-10051",
+          "pytest-dev__pytest-10081",
+          "pytest-dev__pytest-10356",
+          "pytest-dev__pytest-5262",
+          "pytest-dev__pytest-5631",
+          "pytest-dev__pytest-5809",
+          "pytest-dev__pytest-6197",
+          "pytest-dev__pytest-6202",
+          "pytest-dev__pytest-7205",
+          "pytest-dev__pytest-7490"
         ]
       },
       "full_official_rrr_complete": false
