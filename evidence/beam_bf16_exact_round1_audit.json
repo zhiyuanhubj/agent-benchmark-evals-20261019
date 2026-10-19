@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-19T12:09:26.156860+00:00",
+  "generated_utc": "2026-10-19T12:17:54.379024+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T120117Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T121514Z.tar.zst",
   "expected": 89,
-  "terminal": 60,
-  "graded": 60,
-  "success": 43,
+  "terminal": 61,
+  "graded": 61,
+  "success": 44,
   "missing_graded_tasks": [
     "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "prove-plus-comm",
     "pypi-server",
     "pytorch-model-cli",
     "pytorch-model-recovery",
@@ -40,11 +39,8 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "prove-plus-comm"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "pypi-server",
     "pytorch-model-cli",
     "pytorch-model-recovery",
     "qemu-alpine-ssh",
@@ -495,6 +491,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/protein-assembly__f9z8QAw/result.json",
       "raw_response_count": 36,
       "responses_with_reasoning_content": 36
+    },
+    "prove-plus-comm": {
+      "reward": 1.0,
+      "result_sha256": "03cb0736e666ae81680b14571fb0e5f79d727d31dfef7c836ca6b73327601bb3",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/prove-plus-comm__ouzQd9R/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
     }
   }
 }
