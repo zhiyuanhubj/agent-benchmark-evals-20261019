@@ -1,12 +1,12 @@
 # 模型评测结果快照
 
-更新时间：**2026-10-19T05:01:38.006780+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot) 和 `input_output/archive_manifests/`。当前仓库为私有。
+更新时间：**2026-10-19T05:02:37.114967+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot) 和 `input_output/archive_manifests/`。当前仓库为私有。
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
 | Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）** | 精确镜像 TB2.1 首轮 **13/89 已判分、12 成功**；SWE-Review 三组尚无完整官方 RRR |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）** | Pro Verified **43/731 已判分、32 成功**；DeepSWE 首轮 **45/113、9 成功**；精确镜像 TB2.1 首轮 **34/89、26 成功**；SWE-Review 未完成 |
-| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 首轮 **51/113（45.13%）** | Pro Verified **450/731 已判分、284 成功**；精确镜像 TB2.1 首轮 **85/89、68 成功** |
+| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 首轮 **51/113（45.13%）** | Pro Verified **451/731 已判分、285 成功**；精确镜像 TB2.1 首轮 **85/89、68 成功** |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | 暂无完整 benchmark 分数 | Pro Verified **7/731 已判分**；**旧缓存镜像** TB2.1 首轮 **4/89 已判分**；精确镜像尚未启动，DeepSWE 运行中 |
 
