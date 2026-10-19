@@ -126,6 +126,8 @@ def cycle():
         fcntl.flock(lock, fcntl.LOCK_EX)
         for source in SOURCES:
             run([PYTHON, str(source)])
+        run([PYTHON, str(ROOT / 'audit_swe_review_da.py')], timeout=180)
+        run([PYTHON, str(ROOT / 'audit_swe_review_recovery.py')], timeout=180)
         force_bf16 = False
         for attempt in range(3):
             if attempt:

@@ -36,6 +36,11 @@ tb_recovery = read(M / 'state/monitor-current.json')['reshard_recorder_recovery'
 tb_legacy_remaining = read(ROOT / 'results/muse_tb_legacy_status.json')
 deep = read(M / 'remaining_deep3_2812_20261018/state/current.json')['three_round_summary']
 mr = read(M / 'review_bench_20261018/state/current.json')
+review_da = read(ROOT / 'evidence/swe_review_complete_split_da.json')
+review_recovery = read(ROOT / 'evidence/swe_review_recovery_control.json')
+for split, row in review_da['reviewers'].get('muse-nvfp4', {}).items():
+    assert mr['swe_review'][split]['terminal'] == row['expected']
+    assert mr['swe_review'][split]['metrics_on_terminal_subset'] == row['metrics']
 ex = read(B / 'expanded-current.json')
 br = read(B / 'current.json')
 exact = read(B / 'tb_v1_exact_images_20261019/status-current.json')
@@ -168,7 +173,18 @@ snapshot = {
             'swe_bench_pro_verified': {'round_1': {'status': 'complete', 'expected': 731, 'graded': 731, 'success': pro['success'], 'accuracy': pro['accuracy'], 'qualification': pro['qualification']}},
             'deepswe': {'rounds': deep['rounds'], 'mean_three_round_accuracy': deep['benchmark_recorded_mean_accuracy'], 'status': 'complete_three_rounds', 'qualification': deep['metric_scope'], 'trajectory_review_flag': deep['targeted_review']['successful_trajectory_with_verifier_log_probe']},
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
-            'swe_review': {key: metric(value, key, 'partial_no_full_rrr') for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
+            'swe_review': {key: metric(value, key, 'final_da_rrr_pending' if key in review_da['reviewers'].get('muse-nvfp4', {}) else 'partial_no_full_rrr') |
+                           ({'DA': review_da['reviewers']['muse-nvfp4'][key]['metrics'], 'RRR': None,
+                             'evidence': 'evidence/swe_review_complete_split_da.json'}
+                            if key in review_da['reviewers'].get('muse-nvfp4', {}) else {})
+                           for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
+            'swe_review_execution': {
+                'old_controller': review_recovery['old_controller'],
+                'never_claimed_continuation': review_recovery['disjoint_never_claimed_continuation'],
+                'no_trial_continuation': review_recovery['disjoint_no_trial_continuation'],
+                'interrupted_partial_sampled_count': review_recovery['interrupted_tasks_with_partial_sampled_trajectory_preserved'],
+                'evidence': 'evidence/swe_review_recovery_control.json',
+            },
             'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
             'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'b05_early_owner': early_b05_owner, 'qualification': nvfp4_recovery['qualification']}},
         },
@@ -278,7 +294,10 @@ def partial(d):
     return f"{d['graded']}/{d['expected']} graded; {d['success']} success (partial)" if d.get('graded') else f"0/{d['expected']} graded"
 
 def review(d):
-    return ', '.join(f"{v['terminal']}/{v['expected']} terminal" for v in d.values()) + '; official RRR incomplete'
+    return ', '.join((f"{v['terminal']}/{v['expected']} terminal; final split DA {v['DA']['DA']}% "
+                      f"(DA_total_50 {v['DA']['DA_total_50']}%)" if v.get('DA')
+                      else f"{v['terminal']}/{v['expected']} terminal")
+                     for v in d.values()) + '; official RRR incomplete'
 
 models = snapshot['models']
 asset_count = len(list((ROOT / 'input_output/archive_manifests').glob('*.json')))
@@ -292,6 +311,7 @@ latest_legacy_deltas = {group: read(sorted((ROOT / 'input_output/archive_manifes
 mn = models['muse_nvfp4']
 be = models['beam_bf16']
 op = models['opus_4_7']
+review_instruct_da = mn['swe_review']['qwen3_30b_instruct2507_500']['DA']
 mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
 mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
 manual_notes = read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
@@ -397,6 +417,10 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | Queued after Pro round 1 | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | Queued after Pro round 1 |
 
+Muse NVFP4 has one **final SWE-Review decision-only split score**: Qwen3-30B-Instruct 422/422, official DA **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} parseable decisions, with {review_instruct_da['model_fail']} model failures; official DA_total_50 **{review_instruct_da['DA_total_50']}%**. The [sealed-input audit](evidence/swe_review_complete_split_da.json) verifies every canonical result hash against the official metric. This is not the combined three-split score or RRR. Original-generator revisions for rejected patches have not been graded.
+
+The [SWE-Review controller audit](evidence/swe_review_recovery_control.json) records that the old reviewer queue was killed at 03:17 UTC. Two disjoint continuations now own the 11 tasks never claimed and the 23 claimed tasks for which no native trial directory existed, using the same Muse NVFP4 model. Another 16 interrupted tasks have partial model output; those trajectories remain preserved and require per-trial reconciliation before any new draw. The stale old health file is not evidence of an active controller.
+
 The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. Muse NVFP4 legacy round 1 was **68/88 graded on raw first draw** (one ungraded); its separately labeled score after declared infrastructure replacement draws is **71/89**. Muse NVFP4 legacy rounds 2/3 remain **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}** and **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}** graded. Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is {be['tb2_1_legacy_cached_tag']['1']['success']}/{be['tb2_1_legacy_cached_tag']['1']['graded']} graded and partial. The original BF16 run is an exception to the old file label: its 89 image identities and tasks match the supplied archive, so its historical `tb2_1_legacy_cached_tag` field and exact-image field refer to **the same trials**, not two samples. None of the partial counts is a full benchmark accuracy. Independent exact-image and legacy-image trials must not be pooled.
 
 `input_output/swrbench/*/generation.jsonl` holds each exact input prompt and generated review; the adjacent judge JSON holds per-item GPT-5.5 scoring details. `evidence/muse_pro_identity.json` maps all 731 Pro tasks to native result files and hashes. `evidence/muse_deep_canonical_results.json` maps all 339 graded DeepSWE trials to their exact native results. Native per-task I/O, tool traces and returned thinking are too large for ordinary Git objects; use the release archives and `input_output/archive_manifests/` to check coverage and SHA-256. For SWE-Review, use the `*_review_full_io` assets, which include OpenHands completion JSON in addition to trajectories.
@@ -462,11 +486,15 @@ chinese_report = f'''# 模型评测结果快照
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
-| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**{muse_exact_zh_done} | {muse_exact_zh_pending}SWE-Review 三组尚无完整官方 RRR |
+| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review Qwen3-30B-Instruct 子集官方 DA **{review_instruct_da['DA']}%（422/422）**{muse_exact_zh_done} | {muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 未完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | {'暂无完整 benchmark 分数' if not bf16_tb_round1['complete'] else bf16_exact_zh_done.lstrip('；')} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中 |
+
+**SWE-Review 的最终子集 DA。** Muse NVFP4 的 Qwen3-30B-Instruct 组 422 题全部有规范终态记录，官方 `compute_da.py` 得 **{review_instruct_da['DA']}%**（{review_instruct_da['produced']} 个可解析决定，{review_instruct_da['model_fail']} 个模型无有效决定）；将无有效决定按 0.5 计的 `DA_total_50` 为 **{review_instruct_da['DA_total_50']}%**。[逐题哈希与评分源码核验](evidence/swe_review_complete_split_da.json)可复查。另两组仍未完整，原始生成模型修复与判分尚未产生 RRR，因此没有可汇报的 SWE-Review 整体最终 RRR。
+
+[SWE-Review 控制器核验](evidence/swe_review_recovery_control.json)确认旧队列于 03:17 UTC 中断：11 题从未领取、23 题虽被领取却没有任何原生题目目录；这 34 题已拆成互不重叠的两条续跑队列，继续用同一 Muse NVFP4 模型。另有 16 题留下部分模型输出，已保留原轨迹，需逐题核对后才能决定后续处理。旧状态文件中的 healthy 是停机前的记录，不能当作当前运行状态。
 
 **TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}**、**{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}**，尚无三轮均值。BF16 的历史字段虽名为 `tb2_1_legacy_cached_tag`，[镜像身份审计](evidence/muse_bf16_exact_image_identity.json)已证实启动前及运行节点上的 89 个镜像与指定归档一致，题目和推理设置也一致；它与精确镜像字段指向**同一轮测试**，不能相加。{mn_exact_note_zh}两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成四条互不重叠的队列，最多 8 题并行。本次快照中恢复任务已有 {new_raw_responses} 条原始模型响应、{active_recovery_trial_dirs} 个运行中题目目录，最新响应时间为 {new_raw_response_latest_utc}；这些是活跃度，不是分数。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；[首轮逐题核验](evidence/muse_nvfp4_exact_round1_audit.json)会检查重复、缺题、原始结果哈希、判分和 thinking 原始响应，满 89 题且核验通过后才发布首轮准确率。新增 GPU 申请状态：{extra_gpu_status}。排队节点获配后监控器会启动同一 NVFP4 模型服务，并逐批加锁领取 b03、b05 中尚未启动的一批；early95 结束后腾出的 2812 最多可领取两批。原 CPU 评测器继续使用原题目和镜像，仅模型端点变化；若本地批次先启动，不会在其他节点重复抽题。
 
