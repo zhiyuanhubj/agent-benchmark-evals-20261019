@@ -29,6 +29,11 @@ def run(command, timeout=180):
 def sync_native_archives(scores):
     recovery = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']
     manifest_dir = ROOT / 'input_output/archive_manifests'
+    for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16'):
+        previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
+        previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
+        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= 1800:
+            run([PYTHON, str(ROOT / 'archive_delta.py'), group, '--if-changed'], timeout=600)
     profiles = [
         ('muse_nvfp4', sum(recovery['new_terminal_by_round'].values()), [PYTHON, str(ROOT / 'snapshot_live_tb.py')]),
         ('opus47', sum(value['terminal'] for value in scores['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'].values()), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'opus47']),
@@ -43,11 +48,12 @@ def sync_native_archives(scores):
         if terminal > archived_terminal:
             run(command, timeout=300)
     live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
+    delta_manifests = sorted(manifest_dir.glob('*_delta_*.json'))
     release = json.loads(subprocess.check_output([
         'gh', 'api', 'repos/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tags/2026-10-19-snapshot'
     ], cwd=ROOT, text=True, timeout=60))
     remote = {asset['name'] for asset in release['assets']}
-    for manifest_path in live_manifests:
+    for manifest_path in [*live_manifests, *delta_manifests]:
         manifest = json.loads(manifest_path.read_text())
         archive_name = manifest['archive_name']
         if archive_name not in remote:

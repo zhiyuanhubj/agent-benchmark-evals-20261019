@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent
 ALLOWED = ('opus47_legacy', 'beam_legacy', 'muse_bf16')
 parser = argparse.ArgumentParser()
 parser.add_argument('group', choices=ALLOWED)
+parser.add_argument('--if-changed', action='store_true', help='Succeed without an archive if no source file changed')
 args = parser.parse_args()
 group = args.group
 spec = importlib.util.spec_from_file_location('archive_trials', ROOT / 'archive_trials.py')
@@ -25,6 +26,9 @@ previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_
 previous_manifest = json.loads(previous.read_text())
 cutoff = datetime.fromisoformat(previous_manifest['generated_utc']) - timedelta(minutes=5)
 files = sorted(path for path in archive_trials.iter_files(group) if path.stat().st_mtime > cutoff.timestamp())
+if not files and args.if_changed:
+    print(json.dumps({'group': group, 'skipped': 'no_changed_files'}))
+    raise SystemExit(0)
 assert files, f'No new native input/output files for {group}'
 stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
 name = f'{group}_delta_{stamp}'
@@ -54,6 +58,8 @@ except BaseException:
     proc.kill()
     temp.unlink(missing_ok=True)
     raise
+with archive.open('rb') as stream:
+    digest = hashlib.file_digest(stream, 'sha256').hexdigest()
 manifest = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
     'group': group,
@@ -62,7 +68,7 @@ manifest = {
     'cutoff_utc': cutoff.isoformat(),
     'archive_name': archive.name,
     'archive_size_bytes': archive.stat().st_size,
-    'archive_sha256': hashlib.file_digest(archive.open('rb'), 'sha256').hexdigest(),
+    'archive_sha256': digest,
     'file_count': len(files),
     'source_bytes': source_bytes,
     'filename_counts': counts,
