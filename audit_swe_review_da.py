@@ -51,6 +51,10 @@ def main():
                     except json.JSONDecodeError as error:
                         invalid_reports.append({'instance_id': iid, 'path': str(report_path),
                                                 'sha256': digest(report_path), 'parse_error': str(error)})
+                decision = (report or {}).get('decision')
+                if isinstance(decision, dict):
+                    decision = decision.get('recommendation')
+                assert decision == row['decision'], f'Canonical decision changed: {reviewer}/{split}/{iid}'
                 reviews.append({'instance_id': iid, 'report': report})
             metrics = compute_da(reviews, json.loads(benchmark_path.read_text()))
             assert metrics['total'] == spec['expected']
