@@ -39,7 +39,7 @@ def published_complete():
         return False
     if coverage['errors'] or coverage['qualification'] != 'complete_verified':
         return False
-    if release['errors'] or release['manifest_count'] != release['sha256_and_size_match_count']:
+    if release.get('errors', []) or release['manifest_count'] != release['sha256_and_size_match_count']:
         return False
     local = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     remote = subprocess.check_output(['git', 'ls-remote', 'origin', 'HEAD'], cwd=ROOT, text=True, timeout=30).split()[0]

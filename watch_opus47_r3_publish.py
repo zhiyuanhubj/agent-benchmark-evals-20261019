@@ -48,7 +48,7 @@ def published_complete():
         if (round_audit['errors'] or round_audit['qualification'] != 'complete_verified'
                 or (round_audit['graded'], round_audit['success']) != (89, reported['success'])):
             return False
-    if release['errors'] or release['manifest_count'] != release['sha256_and_size_match_count']:
+    if release.get('errors', []) or release['manifest_count'] != release['sha256_and_size_match_count']:
         return False
     counts = manifest['filename_counts']
     if (manifest['terminal_result_count'], counts['result'], counts['trial_config'],
