@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T20:37:07.418597+00:00",
+  "generated_utc": "2026-10-19T20:52:32.454387+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 21,
+      "scored_trajectories_checked": 22,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -4715,6 +4715,18 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "extract-elf",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/extract-elf__oXxJBFZ/agent/trajectory.json",
+      "trajectory_sha256": "761df8e63babee2bdf593d9bf986bc1b8c7ddaed242411360e2db3b7967da77b",
+      "steps": 36,
+      "tool_calls": 170,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "dna-insert",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/dna-insert__oGPv4nX/agent/trajectory.json",
@@ -5101,9 +5113,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "4ee895ffa09328a93e7e96fd7d9da74a5b1f390e5a31d968b12dba4a0cfa00e1",
-        "steps_at_screen": 329,
-        "tool_calls_at_screen": 1010,
+        "trajectory_sha256_at_screen": "25ffee58ac76570330f4bc9c0efa6c78ee2cd00d94a0cf991f3621831efb40a2",
+        "steps_at_screen": 342,
+        "tool_calls_at_screen": 1024,
         "hits": [],
         "status": "in_progress_not_scored"
       }
