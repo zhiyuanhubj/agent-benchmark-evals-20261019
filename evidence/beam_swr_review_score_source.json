@@ -1,5 +1,5 @@
 {
-  "utc": 1792447008.7961297,
+  "utc": 1792448807.9400482,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 368,
+      "terminal": 374,
       "exceptions": 7,
       "prepared_image_phases": {
         "image_ready": 400
@@ -377,55 +377,47 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 373,
+      "terminal": 387,
       "exceptions": 6,
       "prepared_image_phases": {
-        "image_ready": 400
+        "image_ready": 416
       },
       "controller": {
-        "utc": 1792446225.2439022,
+        "utc": 1792448303.196122,
         "phase": "running",
-        "batch": 23,
+        "batch": 24,
         "tasks": [
-          "sphinx-doc__sphinx-7910",
-          "sphinx-doc__sphinx-7985",
-          "sphinx-doc__sphinx-8035",
-          "sphinx-doc__sphinx-8056",
-          "sphinx-doc__sphinx-8120",
-          "sphinx-doc__sphinx-8265",
-          "sphinx-doc__sphinx-8269",
-          "sphinx-doc__sphinx-8459",
-          "sphinx-doc__sphinx-8475",
-          "sphinx-doc__sphinx-8548",
-          "sphinx-doc__sphinx-8551",
-          "sphinx-doc__sphinx-8593",
-          "sphinx-doc__sphinx-8595",
-          "sphinx-doc__sphinx-8621",
-          "sphinx-doc__sphinx-8638",
-          "sphinx-doc__sphinx-8721"
+          "sphinx-doc__sphinx-9229",
+          "sphinx-doc__sphinx-9230",
+          "sphinx-doc__sphinx-9258",
+          "sphinx-doc__sphinx-9281",
+          "sphinx-doc__sphinx-9320",
+          "sphinx-doc__sphinx-9367",
+          "sphinx-doc__sphinx-9461",
+          "sphinx-doc__sphinx-9591",
+          "sphinx-doc__sphinx-9602",
+          "sphinx-doc__sphinx-9658",
+          "sphinx-doc__sphinx-9673",
+          "sphinx-doc__sphinx-9698",
+          "sphinx-doc__sphinx-9711",
+          "sympy__sympy-12096",
+          "sympy__sympy-12419",
+          "sympy__sympy-12481"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 417,
+      "terminal": 422,
       "exceptions": 8,
       "prepared_image_phases": {
         "image_ready": 422
       },
       "controller": {
-        "utc": 1792446747.6258504,
-        "phase": "running",
-        "batch": 26,
-        "tasks": [
-          "sympy__sympy-24066",
-          "sympy__sympy-24213",
-          "sympy__sympy-24443",
-          "sympy__sympy-24539",
-          "sympy__sympy-24562",
-          "sympy__sympy-24661"
-        ]
+        "utc": 1792447379.5740533,
+        "phase": "scheduled_attempts_finished",
+        "expected": 422
       },
       "full_official_rrr_complete": false
     }
@@ -458,10 +450,17 @@
   "revision_preparation": {
     "plan_sha256": "10fd107b75565aa5deceb28641eae22935b87fa051e31324426d3e9fdf078053",
     "phase": "waiting_for_completed_review_splits",
-    "splits": {},
+    "splits": {
+      "qwen3_30b_instruct2507_500": {
+        "status": "tasks_prepared",
+        "count": 279,
+        "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_30b_instruct2507_500/receipt.json",
+        "sha256": "72339a332b1a223146589bc8f391a5bc3efea2df2d115fb48914ede3ddcba94c"
+      }
+    },
     "complete": false,
     "model_generation_started": false,
-    "utc": "2026-10-19T21:56:01.970923+00:00",
+    "utc": "2026-10-19T22:26:44.738373+00:00",
     "grader_preflight_passed": true
   },
   "revision_preparation_controller": "MainPID=3430427\nResult=success\nActiveState=active\n",

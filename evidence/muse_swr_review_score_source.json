@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T21:55:57.491139+00:00",
+  "utc": "2026-10-19T22:25:57.024313+00:00",
   "model": "Muse-Spark-Open-816B-A42B-NVFP4",
   "replicas": {
     "2865": {
@@ -495,25 +495,38 @@
     "controller": "MainPID=0\nResult=success\nActiveState=inactive\n",
     "qualification": "Preparing weights does not constitute revision completion or an RRR score.",
     "task_preparation": {
-      "plan_sha256": "f3f2477ab37fddcb1b7ed6aed72e7597e147e69caebea4b2cd7d490c100b5da4",
-      "phase": "waiting_for_completed_review_splits",
+      "plan_sha256": "f67a0d253b833efccd6f9599f662df17e95461af6c44a3c36a459a89ba685a6e",
+      "phase": "all_revision_tasks_prepared",
       "splits": {
         "qwen3_30b_instruct2507_500": {
           "status": "tasks_prepared",
           "count": 266,
           "receipt": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/qwen3_30b_instruct2507_500/receipt.json",
           "sha256": "b1e9ece8d4656bfe337b6c1c88fe6fc7293c9c155d3ca3497c450427e5c4a29b"
+        },
+        "glm5_500": {
+          "status": "tasks_prepared",
+          "count": 73,
+          "receipt": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/glm5_500/receipt.json",
+          "sha256": "b9927129a9119e4287d52f600106375ed7e557ca57745446d67b1643b4019969"
+        },
+        "qwen3_coder_30b_500": {
+          "status": "tasks_prepared",
+          "count": 222,
+          "receipt": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/qwen3_coder_30b_500/receipt.json",
+          "sha256": "2a7613fe3bd8b108d7e60a3483c6e28e75242dc921ad07e6421810be32c0c44b"
         }
       },
-      "complete": false,
+      "complete": true,
       "model_generation_started": false,
-      "utc": "2026-10-19T21:56:45.703935+00:00",
+      "utc": "2026-10-19T22:00:00.288850+00:00",
       "grader_preflight_passed": true
     },
-    "task_preparation_controller": "MainPID=3387708\nResult=success\nActiveState=active\n"
+    "task_preparation_controller": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "superseded_task_preparation_controller": "MainPID=0\nResult=success\nActiveState=inactive\n"
   },
   "revision_capacity_preparation": {
-    "utc": 1792446998.9166641,
+    "utc": 1792448802.113473,
     "phase": "waiting_for_reserved_allocations",
     "candidate_allocations": [
       2888,
