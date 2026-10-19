@@ -54,21 +54,35 @@ extra_gpu_status = ', '.join(f'{job} {extra_gpu_allocations.get(str(job), {}).ge
 nvfp4_rounds = json.loads(json.dumps(exact['models']['muse_nvfp4']['rounds']))
 new_terminal_by_round = {str(i): {} for i in (1, 2, 3)}
 new_raw_responses = 0
+new_raw_response_latest_mtime = None
+new_raw_response_by_batch = {}
+active_recovery_trial_dirs = 0
 for item in nvfp4_recovery['configurations']:
     rnd = str(item['round'])
+    batch_raw_count = 0
     for trial in (B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / item['job_name']).glob('*'):
         if not trial.is_dir():
             continue
-        new_raw_responses += sum(1 for _ in (trial / 'agent/raw_responses').glob('*.json'))
+        raw_files = list((trial / 'agent/raw_responses').glob('*.json'))
+        new_raw_responses += len(raw_files)
+        batch_raw_count += len(raw_files)
+        for raw_file in raw_files:
+            stamp = raw_file.stat().st_mtime
+            new_raw_response_latest_mtime = stamp if new_raw_response_latest_mtime is None else max(new_raw_response_latest_mtime, stamp)
         result = trial / 'result.json'
         if not result.exists():
+            active_recovery_trial_dirs += 1
             continue
         value = read(result)
         if not value.get('finished_at'):
+            active_recovery_trial_dirs += 1
             continue
         task = Path(value['config']['task']['path']).name
         assert task in item['tasks'] and task not in new_terminal_by_round[rnd]
         new_terminal_by_round[rnd][task] = {'reward': ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward'), 'source': str(result)}
+    if batch_raw_count:
+        new_raw_response_by_batch[item['job_name']] = batch_raw_count
+new_raw_response_latest_utc = datetime.fromtimestamp(new_raw_response_latest_mtime, timezone.utc).isoformat() if new_raw_response_latest_mtime is not None else None
 for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['terminal'] += len(rows)
     nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
@@ -86,7 +100,7 @@ snapshot = {
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
             'swe_review': {key: metric(value, key, 'partial_no_full_rrr') for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
             'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
-            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': 'complete_three_rounds' if all(r['complete'] for r in nvfp4_rounds.values()) else 'partial_no_full_score', 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'qualification': nvfp4_recovery['qualification']}},
+            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': 'complete_three_rounds' if all(r['complete'] for r in nvfp4_rounds.values()) else 'partial_no_full_score', 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'qualification': nvfp4_recovery['qualification']}},
         },
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',
@@ -202,7 +216,7 @@ The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory 
 
 The release has {asset_count} archive manifests; **{release_audit_label} assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
 
-Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. The original controller verifies delegated batches before advancing, preventing duplicate scoring. Additional GPU allocation states: {extra_gpu_status}. A watcher starts the pinned Muse service when one of these allocations is granted; evaluator task assignment still requires a disjoint-task handoff. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
+Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. At this snapshot, the continuation has {new_raw_responses} raw model responses, {active_recovery_trial_dirs} active trial directories, and the latest response at {new_raw_response_latest_utc}; these are activity indicators, not scores. The original controller verifies delegated batches before advancing, preventing duplicate scoring. Additional GPU allocation states: {extra_gpu_status}. A watcher starts the pinned Muse service when one of these allocations is granted; evaluator task assignment still requires a disjoint-task handoff. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
 Scores are benchmark-recorded values. The Muse DeepSWE successful trajectory `ipython-session-bundle-replay` attempted to inspect verifier logs, but the returned directory was empty; it remains flagged for training-data review. One successful Muse Pro task lacks a trajectory and is unsuitable for thinking-data export. This report does not certify every trajectory clean. Source paths and hashes are in `results/scores.json` and `input_output/manifest.json`; raw API credentials and model weights are excluded.
 '''
@@ -219,7 +233,7 @@ chinese_report = f'''# 模型评测结果快照
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | 暂无完整 benchmark 分数 | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**；**旧缓存镜像** TB2.1 首轮 **{models['muse_bf16']['tb2_1_legacy_cached_tag']['1']['graded']}/89 已判分**；精确镜像尚未启动，DeepSWE 运行中 |
 
-**TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}**、**{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}**，尚无三轮均值。精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成四条互不重叠的队列，最多 8 题并行。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；新增 GPU 申请状态：{extra_gpu_status}。监控器会在获配后自动启动同一 NVFP4 模型服务，题目移交仍需核对互不重叠的任务清单。
+**TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}**、**{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}**，尚无三轮均值。精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成四条互不重叠的队列，最多 8 题并行。本次快照中恢复任务已有 {new_raw_responses} 条原始模型响应、{active_recovery_trial_dirs} 个运行中题目目录，最新响应时间为 {new_raw_response_latest_utc}；这些是活跃度，不是分数。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；新增 GPU 申请状态：{extra_gpu_status}。监控器会在获配后自动启动同一 NVFP4 模型服务，题目移交仍需核对互不重叠的任务清单。
 
 **审计限制。** Muse DeepSWE 有一条成功轨迹尝试查看 verifier 日志，但返回的目录为空；这条轨迹已单独标记供训练数据筛查，现有证据不能断言读到了隐藏答案。Muse Pro Verified 有一条成功记录缺少轨迹，不应作为带 thinking 的训练样本。SWE-Review 的完整官方 RRR 尚未生成，任何已结束题数都不等于最终成绩。
 
