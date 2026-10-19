@@ -1,0 +1,43 @@
+{
+  "generated_utc": "2026-10-19T18:55:00.381440+00:00",
+  "model": "meta-models/Muse-Spark-Open-816B-A42B",
+  "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
+  "precision": "original BF16, no NVFP4 cast",
+  "image_digest": "lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a",
+  "pair_plan_sha256": "06b64874da6f59506346c9047d35357737136e6ab5a1c7fa7b5f13b173ff8026",
+  "source_verification_sha256": "39ee39c7bf3f1ef141333f8269ee55d811176af884dc300d1b8145f0d2a10f46",
+  "source_verified_file_count": 78,
+  "ranks": [
+    {
+      "rank": 0,
+      "host": "ip-10-1-13-41",
+      "verification_sha256": "ffdf2f86e5552deb3fee92beb5a02e50339f51aea4a9a7b9c32a043e47ccb901",
+      "file_count": 78,
+      "verified_bytes": 1644365720753,
+      "remaining_disk_bytes": 668304314368,
+      "runtime_sha256": "b96d92a88b1024178d6ec37637b3054cf38fb75018efe413c0fb15d5888c04f4",
+      "nccl_probe_sha256": "2761f52f83e304174fe6ee79a9a5555ffb029c4928afa33cd8494ade4f47eb7e",
+      "model_launch_sha256": "da1897de13a553c67613a748d711080fe80a4f3d85c0fae2bdd17038ed640a9f"
+    },
+    {
+      "rank": 1,
+      "host": "ip-10-1-122-30",
+      "verification_sha256": "ffdf2f86e5552deb3fee92beb5a02e50339f51aea4a9a7b9c32a043e47ccb901",
+      "file_count": 78,
+      "verified_bytes": 1644365720753,
+      "remaining_disk_bytes": 2361660784640,
+      "runtime_sha256": "4735cf68e54dddb53b80f5314f96898f5fb20bc71dc12de3981597eba533d54b",
+      "nccl_probe_sha256": "7f332e94734bea6675e1fc1b8b3d9ceee75869c34aec84e4fe3ab57984ba71af",
+      "model_launch_sha256": "b15549f238cb6e38b9801021a1e110b38763ed0b148a4559b5ee439223191d43"
+    }
+  ],
+  "endpoint": "http://10.1.13.41:31324/v1",
+  "endpoint_receipt_sha256": "27155dcccacbf206dd0c27b96f6a8f11a76d32e4e770bf013aec5f8f3550e978",
+  "preflight_receipt_sha256": "bb7ac462a16f927c145502d3859b949e4f4251aadb60e4cdc9db1442c3d0e351",
+  "nonbenchmark_tool_first_sha256": "aceaceb60d358a30cab969106663748f0d812c3c1dffa405df1b1e5771c5950d",
+  "nonbenchmark_tool_roundtrip_sha256": "ebaf638e45b752b28f3b4b3eb54ba7553b8b381a188ea8ecf9aa574a05e4eb30",
+  "review_plan_sha256": "d758f7f0b01b85e923ebf9ad2e5c5c358fb620aa377fc2e54a23bc432bf7a977",
+  "review_sandbox_host": "ip-10-1-122-30",
+  "swr_launch_sha256": "3747a247f66b66aa7b1d206431935dfff34ebe9b20a67b871ad52be47eb187b3",
+  "qualification": "Pinned bytes and native launch receipts audited. These checks prove the serving identity and tool/thinking transport, not benchmark accuracy or clean trajectories."
+}

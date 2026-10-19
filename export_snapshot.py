@@ -466,6 +466,8 @@ Beam exact-image TB round 2 runs on the verified BF16 replica at allocation 2887
 
 The [Muse BF16 exact-image I/O audit](evidence/muse_bf16_exact_io_coverage.json) checks that every scored BF16 result, raw response and trajectory is present in SHA-verified release archives, along with all 89 task inputs. Of its currently scored raw replies, **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)}** contain nonempty thinking. It is the same BF16 trial set named by the historical cached-tag field.
 
+The [job-2886 BF16 deployment audit](evidence/muse_bf16_2886_deployment_audit.json) verifies both hosts' 78 pinned weight files, the fixed SGLang image, 16-GPU NCCL/EFA preflight, BF16 endpoint, nonbenchmark tool/thinking roundtrip and the separate review sandbox route. It does not certify a benchmark score.
+
 For actively changing Pro/legacy/Deep results, apply each timestamped delta after its base archive, replacing earlier files with the same path. Current delta assets are `{latest_legacy_deltas['opus47_legacy']['archive_name']}`, `{latest_legacy_deltas['beam_legacy']['archive_name']}`, and `{latest_legacy_deltas['muse_bf16']['archive_name']}`. Their manifests state the cutoff and source scope.
 
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
@@ -540,6 +542,8 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 [Muse NVFP4 首轮逐题审计](evidence/muse_nvfp4_exact_round1_audit.json)目前确认已判分题的原始回复中 **{mn_audit.get('scored_nonempty_reasoning_response_count', 0)}/{mn_audit.get('scored_raw_response_count', 0)} 条含非空 thinking**。这只核验字段留存，不表示轨迹可直接作为干净训练数据。
 
 [Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)} 条含非空 thinking**。
+
+[BF16 2886 双节点部署核验](evidence/muse_bf16_2886_deployment_audit.json)记录两台节点各 78 个固定权重文件的校验、SGLang 镜像版本、16 卡 NCCL/EFA 预检、BF16 接口，以及与正式评测分开的工具调用和 thinking 往返检查；这不是 benchmark 成绩。
 
 Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 `{latest_opus_exact_archive['archive_name']}`（{latest_opus_exact_archive['terminal_result_count']} 个终态结果）和 `{latest_beam_exact_archive['archive_name']}`（{latest_beam_exact_archive['terminal_result_count']} 个终态结果）。其中运行中的轨迹不算已判分，未满 89 题的轮次不报告最终准确率。
 
