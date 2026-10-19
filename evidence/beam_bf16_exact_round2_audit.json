@@ -1,19 +1,17 @@
 {
-  "generated_utc": "2026-10-19T17:55:42.454599+00:00",
+  "generated_utc": "2026-10-19T18:08:02.796582+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T175423Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T175742Z.tar.zst",
   "expected": 89,
-  "terminal": 14,
-  "graded": 14,
-  "success": 11,
+  "terminal": 16,
+  "graded": 16,
+  "success": 13,
   "missing_graded_tasks": [
     "chess-best-move",
     "code-from-image",
-    "compile-compcert",
-    "custom-memory-heap-crash",
     "db-wal-recovery",
     "distribution-search",
     "dna-assembly",
@@ -88,7 +86,8 @@
   ],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [
-    "compile-compcert"
+    "db-wal-recovery",
+    "distribution-search"
   ],
   "missing_task_inputs_in_archive": [
     "vulnerable-secret",
@@ -171,6 +170,13 @@
       "raw_response_count": 55,
       "responses_with_reasoning_content": 55
     },
+    "compile-compcert": {
+      "reward": 1.0,
+      "result_sha256": "8762f99679f40865385ba481082256b68f49cbe1e4039f49b2f69ace2261ddc9",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/compile-compcert__P5tQFkY/result.json",
+      "raw_response_count": 41,
+      "responses_with_reasoning_content": 41
+    },
     "configure-git-webserver": {
       "reward": 1.0,
       "result_sha256": "7f45bfc1dd947619a1b8b3743a17731ee7a810087958fe6f20025e55cc35d7e3",
@@ -198,6 +204,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/crack-7z-hash__gDHKuSZ/result.json",
       "raw_response_count": 12,
       "responses_with_reasoning_content": 12
+    },
+    "custom-memory-heap-crash": {
+      "reward": 1.0,
+      "result_sha256": "314e2e78d3a1dd591da92a16808acd06c7e65ca47f7ed4560fb0f77343de8dda",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/custom-memory-heap-crash__EjcAJAg/result.json",
+      "raw_response_count": 21,
+      "responses_with_reasoning_content": 21
     }
   }
 }
