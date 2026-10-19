@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T06:54:07.722246+00:00",
+  "generated_utc": "2026-10-19T07:11:25.501367+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -103,8 +103,8 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 23,
-            "graded": 23,
+            "terminal": 24,
+            "graded": 24,
             "success": 20,
             "active_trial_dirs": 19,
             "archived_actual_model_responses": 503,
@@ -156,40 +156,40 @@
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
-            "1": 12,
+            "1": 13,
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 737,
+          "new_raw_model_responses": 811,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 206,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 166,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 130,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 235
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 226,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 183,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 141,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 261
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T06:54:01+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T07:11:18+00:00",
           "active_recovery_trial_dirs": 8,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T07:07:07"
+              "scheduler_start": "2026-10-20T07:27:13"
             },
             "2924": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T07:07:07"
+              "scheduler_start": "2026-10-20T07:27:13"
             },
             "2927": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T07:07:07"
+              "scheduler_start": "2026-10-20T07:27:13"
             },
             "2928": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T07:07:07"
+              "scheduler_start": "2026-10-19T19:07:00"
             }
           },
           "qualification": "No graded task replay. Eight ungraded tasks interrupted by user BF16 node cutover receive explicitly identified infrastructure replacement attempts; their original partial responses remain archived. Remaining 70 r1 tasks were never sampled. Rounds 2 and 3 use original tasks/images and generation settings. No best-of selection."
@@ -200,9 +200,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 46,
-        "graded": 45,
-        "success": 32,
+        "terminal": 48,
+        "graded": 47,
+        "success": 33,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -255,11 +255,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 38,
-            "graded": 38,
-            "success": 28,
-            "active_trial_dirs": 42,
-            "archived_actual_model_responses": 1490,
+            "terminal": 40,
+            "graded": 40,
+            "success": 30,
+            "active_trial_dirs": 44,
+            "archived_actual_model_responses": 1591,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 2
@@ -311,17 +311,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 242,
+          "terminal": 248,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 240,
+          "terminal": 242,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 241,
+          "terminal": 245,
           "status": "partial_no_full_rrr"
         }
       }
@@ -330,9 +330,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 531,
-        "graded": 530,
-        "success": 336,
+        "terminal": 543,
+        "graded": 542,
+        "success": 342,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -345,9 +345,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 54,
-          "graded": 54,
-          "success": 18,
+          "terminal": 57,
+          "graded": 57,
+          "success": 19,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -399,11 +399,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 18,
-            "graded": 18,
-            "success": 15,
-            "active_trial_dirs": 22,
-            "archived_actual_model_responses": 328,
+            "terminal": 22,
+            "graded": 22,
+            "success": 18,
+            "active_trial_dirs": 26,
+            "archived_actual_model_responses": 399,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -453,16 +453,16 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 19,
-        "graded": 19,
-        "success": 13,
+        "terminal": 21,
+        "graded": 21,
+        "success": 15,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
-          "terminal": 4,
-          "graded": 4,
+          "terminal": 5,
+          "graded": 5,
           "success": 4,
           "status": "partial_no_full_score"
         },

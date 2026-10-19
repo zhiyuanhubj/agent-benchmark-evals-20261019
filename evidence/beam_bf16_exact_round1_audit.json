@@ -1,19 +1,17 @@
 {
-  "generated_utc": "2026-10-19T06:54:05.114068+00:00",
+  "generated_utc": "2026-10-19T07:11:23.375044+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T063806Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T071052Z.tar.zst",
   "expected": 89,
-  "terminal": 38,
-  "graded": 38,
-  "success": 28,
+  "terminal": 40,
+  "graded": 40,
+  "success": 30,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "install-windows-3.11",
     "largest-eigenval",
-    "llm-inference-batching-scheduler",
-    "log-summary-date-ranges",
     "mailman",
     "make-doom-for-mips",
     "make-mips-interpreter",
@@ -63,8 +61,6 @@
   ],
   "ungraded_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "log-summary-date-ranges",
-    "mailman",
     "make-doom-for-mips",
     "make-mips-interpreter",
     "mcmc-sampling-stan",
@@ -382,6 +378,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/large-scale-text-editing__oAwuyPV/result.json",
       "raw_response_count": 11,
       "responses_with_reasoning_content": 11
+    },
+    "llm-inference-batching-scheduler": {
+      "reward": 1.0,
+      "result_sha256": "db6602af188d509e45ee6dacdcf87f9f1236ba118a97f800a5fdb0b9b67f418e",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/llm-inference-batching-scheduler__HZk8T2n/result.json",
+      "raw_response_count": 32,
+      "responses_with_reasoning_content": 32
+    },
+    "log-summary-date-ranges": {
+      "reward": 1.0,
+      "result_sha256": "9d3e8db7917274a9b7d60b0bc8a5665cf29e2979ba820a57b1a1c849fa12fc00",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/log-summary-date-ranges__PQs9ZnU/result.json",
+      "raw_response_count": 5,
+      "responses_with_reasoning_content": 5
     }
   }
 }

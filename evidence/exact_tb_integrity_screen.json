@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T06:54:07.395615+00:00",
+  "generated_utc": "2026-10-19T07:11:25.230968+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 23,
+      "scored_trajectories_checked": 24,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -26,7 +26,7 @@
       }
     },
     "beam_bf16": {
-      "scored_trajectories_checked": 38,
+      "scored_trajectories_checked": 40,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -189,6 +189,17 @@
       "trajectory_sha256": "84f53980774a35eec98552624d6ab296313f1ef0ce6bbfa484dab96551049f44",
       "steps": 22,
       "tool_calls": 69,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "chess-best-move",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b00/chess-best-move__hiKUfGp/agent/trajectory.json",
+      "trajectory_sha256": "20853f5ffd73b54f87107fe23eb103fd17573bd18ca53d3145582245999b6028",
+      "steps": 150,
+      "tool_calls": 407,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -1930,6 +1941,28 @@
       "trajectory_sha256": "af19c90c586047c5fc632baef99a237489349433035343a53b871632468c6f0c",
       "steps": 12,
       "tool_calls": 16,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
+      "task": "llm-inference-batching-scheduler",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/llm-inference-batching-scheduler__HZk8T2n/agent/trajectory.json",
+      "trajectory_sha256": "06fb871e5f44ccbb20e13ce9ecc10c28b60c95347a18c8122111c8a710469d5d",
+      "steps": 33,
+      "tool_calls": 39,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
+      "task": "log-summary-date-ranges",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/log-summary-date-ranges__PQs9ZnU/agent/trajectory.json",
+      "trajectory_sha256": "39ab9c8fe399fdd9bd26f41227b04ec4c311ac316e035e928670b43371980d3d",
+      "steps": 6,
+      "tool_calls": 9,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     }
