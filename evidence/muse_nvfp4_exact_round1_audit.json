@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T09:03:14.987312+00:00",
+  "generated_utc": "2026-10-19T09:12:02.877963+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 41,
-  "success_count": 35,
+  "graded_task_count": 43,
+  "success_count": 36,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -102,8 +102,6 @@
     "query-optimize",
     "raman-fitting",
     "regex-chess",
-    "reshard-c4-data",
-    "sanitize-git-repo",
     "schemelike-metacircular-eval",
     "sparql-university",
     "sqlite-db-truncate",
@@ -125,8 +123,8 @@
     "path-tracing-reverse__4covUwV",
     "path-tracing__au39ic5",
     "regex-chess__53F7VDd",
-    "reshard-c4-data__pPAcemJ",
-    "sanitize-git-repo__dS7F3uo",
+    "schemelike-metacircular-eval__nBsnCj5",
+    "sparql-university__b2KdJnu",
     "train-fasttext__Mc2uuim",
     "tune-mjcf__cgx3dH4",
     "video-processing__FZRHQnL"
@@ -543,6 +541,17 @@
       "raw_response_count": 6,
       "responses_with_reasoning_content": 6
     },
+    "reshard-c4-data": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/reshard-c4-data__pPAcemJ/result.json",
+      "result_sha256": "771e0ae2bd8848a987451bfd3b48f733a6498894a9afdc1e4669e9ffc7f01d6c",
+      "finished_at": "2026-10-19T09:08:14.496966Z",
+      "raw_response_count": 98,
+      "responses_with_reasoning_content": 98
+    },
     "rstan-to-pystan": {
       "reward": 1.0,
       "exception_type": null,
@@ -564,6 +573,17 @@
       "finished_at": "2026-10-19T08:44:02.878131Z",
       "raw_response_count": 32,
       "responses_with_reasoning_content": 32
+    },
+    "sanitize-git-repo": {
+      "reward": 0.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/sanitize-git-repo__dS7F3uo/result.json",
+      "result_sha256": "a10815167ce7e3fa94bd03053f38e3a777f9a4b514d869ba8e9ff96b579c3bff",
+      "finished_at": "2026-10-19T09:10:35.918915Z",
+      "raw_response_count": 34,
+      "responses_with_reasoning_content": 34
     },
     "torch-pipeline-parallelism": {
       "reward": 1.0,

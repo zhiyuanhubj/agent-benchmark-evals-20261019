@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T09:03:27.563199+00:00",
+  "generated_utc": "2026-10-19T09:12:14.350505+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 41,
+      "scored_trajectories_checked": 43,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 6,
       "rule_hit_counts": {
@@ -604,6 +604,17 @@
     },
     {
       "model": "muse_nvfp4",
+      "task": "reshard-c4-data",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/reshard-c4-data__pPAcemJ/agent/trajectory.json",
+      "trajectory_sha256": "891bb37d15349c478ac9f6916b4db87d6002c77a56f6c7a2cf7562a98e52be82",
+      "steps": 99,
+      "tool_calls": 241,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
       "task": "rstan-to-pystan",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/rstan-to-pystan__QdMvhLN/agent/trajectory.json",
@@ -621,6 +632,17 @@
       "trajectory_sha256": "4e77edfa7bb96c8bff2994fcf649410dec941e82a54f21d77665ca014d7040a8",
       "steps": 33,
       "tool_calls": 137,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "sanitize-git-repo",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/sanitize-git-repo__dS7F3uo/agent/trajectory.json",
+      "trajectory_sha256": "5b725bf07429f6ad2724762185803c8053f361402f0dcd11f61ebe35521b588c",
+      "steps": 35,
+      "tool_calls": 290,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
