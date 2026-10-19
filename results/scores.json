@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T04:36:47.886929+00:00",
+  "generated_utc": "2026-10-19T04:40:07.938436+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -148,6 +148,7 @@
         "recovery": {
           "controller": "active",
           "parallel_controller": "active",
+          "extra_gpu_watcher": "active",
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
@@ -155,7 +156,7 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 89,
+          "new_raw_model_responses": 98,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
@@ -195,8 +196,8 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 44,
-          "graded": 44,
+          "terminal": 45,
+          "graded": 45,
           "success": 9,
           "status": "partial_no_full_score"
         },
@@ -246,7 +247,7 @@
             "graded": 34,
             "success": 26,
             "active_trial_dirs": 38,
-            "archived_actual_model_responses": 1307,
+            "archived_actual_model_responses": 1320,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -296,17 +297,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 233,
+          "terminal": 236,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 236,
+          "terminal": 238,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 232,
+          "terminal": 234,
           "status": "partial_no_full_rrr"
         }
       }
@@ -315,9 +316,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 428,
-        "graded": 427,
-        "success": 268,
+        "terminal": 431,
+        "graded": 430,
+        "success": 270,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -330,8 +331,8 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 23,
-          "graded": 23,
+          "terminal": 26,
+          "graded": 26,
           "success": 11,
           "status": "partial_no_full_score"
         },
@@ -370,11 +371,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 77,
-            "graded": 77,
-            "success": 61,
-            "active_trial_dirs": 81,
-            "archived_actual_model_responses": 1620,
+            "terminal": 80,
+            "graded": 80,
+            "success": 64,
+            "active_trial_dirs": 84,
+            "archived_actual_model_responses": 1655,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
