@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T07:34:35.163128+00:00",
+  "generated_utc": "2026-10-19T07:37:45.922587+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 25,
-  "success_count": 20,
+  "graded_task_count": 26,
+  "success_count": 21,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization"
@@ -73,7 +73,6 @@
     "db-wal-recovery",
     "dna-assembly",
     "extract-moves-from-video",
-    "feal-linear-cryptanalysis",
     "filter-js-from-html",
     "financial-document-processor",
     "fix-code-vulnerability",
@@ -134,7 +133,7 @@
     "code-from-image__EJoH7oT",
     "compile-compcert__w9HS5rZ",
     "extract-moves-from-video__pA42NVn",
-    "feal-linear-cryptanalysis__Yab3rpa",
+    "filter-js-from-html__KhugWyF",
     "gcode-to-text__iF8eaFS",
     "gpt2-codegolf__j32jY8c",
     "path-tracing-reverse__4covUwV",
@@ -331,6 +330,17 @@
       "finished_at": "2026-10-19T05:30:42.648903Z",
       "raw_response_count": 9,
       "responses_with_reasoning_content": 9
+    },
+    "feal-linear-cryptanalysis": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b01/feal-linear-cryptanalysis__Yab3rpa/result.json",
+      "result_sha256": "9abf6994a06a8e3d0e77fead97a45e2bd0db4a615cc54973243372c4a309da57",
+      "finished_at": "2026-10-19T07:35:51.433687Z",
+      "raw_response_count": 43,
+      "responses_with_reasoning_content": 43
     },
     "git-leak-recovery": {
       "reward": 1.0,

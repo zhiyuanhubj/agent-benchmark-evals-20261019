@@ -1,5 +1,5 @@
 {
-  "utc": 1792394595.023385,
+  "utc": 1792395493.0733974,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 254,
+      "terminal": 255,
       "exceptions": 7,
       "prepared_image_phases": {
         "image_ready": 272
@@ -377,7 +377,7 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 243,
+      "terminal": 245,
       "exceptions": 3,
       "prepared_image_phases": {
         "image_ready": 272
@@ -409,32 +409,32 @@
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 251,
+      "terminal": 258,
       "exceptions": 6,
       "prepared_image_phases": {
-        "image_ready": 272
+        "image_ready": 288
       },
       "controller": {
-        "utc": 1792391589.2549808,
+        "utc": 1792395069.0581715,
         "phase": "running",
-        "batch": 15,
+        "batch": 16,
         "tasks": [
-          "pallets__flask-5014",
-          "psf__requests-1142",
-          "psf__requests-1724",
-          "psf__requests-1766",
-          "psf__requests-1921",
-          "psf__requests-2317",
-          "psf__requests-2931",
-          "psf__requests-5414",
-          "pydata__xarray-3095",
-          "pydata__xarray-3151",
-          "pydata__xarray-3677",
-          "pydata__xarray-3993",
-          "pydata__xarray-4075",
-          "pydata__xarray-4094",
-          "pydata__xarray-4356",
-          "pydata__xarray-4629"
+          "pydata__xarray-4687",
+          "pydata__xarray-4695",
+          "pydata__xarray-4966",
+          "pydata__xarray-6461",
+          "pydata__xarray-6599",
+          "pydata__xarray-6721",
+          "pydata__xarray-6744",
+          "pydata__xarray-6938",
+          "pydata__xarray-6992",
+          "pydata__xarray-7229",
+          "pydata__xarray-7233",
+          "pydata__xarray-7393",
+          "pylint-dev__pylint-4551",
+          "pylint-dev__pylint-4604",
+          "pylint-dev__pylint-4661",
+          "pylint-dev__pylint-4970"
         ]
       },
       "full_official_rrr_complete": false
@@ -446,8 +446,7 @@
     "2904|mix449-cpu-salvage-10-1-119-14|PENDING||(Priority)",
     "2905|mix449-cpu-salvage-10-1-31-190|PENDING||(Priority)",
     "2903|mix449-cpu-salvage-10-1-113-136|PENDING||(Priority)",
-    "2887|beam-review-reserve-2887|PENDING||(Resources)",
-    "2888|beam-review-reserve-2888|PENDING||(Priority)",
+    "2888|beam-review-reserve-2888|PENDING||(Resources)",
     "2899|beam-review-extra-1|PENDING||(Priority)",
     "2900|beam-review-extra-2|PENDING||(Priority)",
     "2901|beam-review-extra-3|PENDING||(Priority)",
@@ -455,7 +454,8 @@
     "2923|muse-nvfp4-tb-exact-extra-2|PENDING||(Priority)",
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
-    "2886|muse-bf16-pair-2886|PENDING||(AssocGrpNodeLimit)",
+    "2887|beam-review-reserve-2887|PENDING||(None)",
+    "2886|muse-bf16-pair-2886|PENDING||(None)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
     "2906|mix449-cpu-salvage-10-1-122-30|PENDING||(Priority)",
     "2869|mix3-eval-extra-4|RUNNING|ip-10-1-77-106|ip-10-1-77-106",
