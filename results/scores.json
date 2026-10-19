@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T16:38:47.608925+00:00",
+  "generated_utc": "2026-10-19T16:44:24.703416+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -119,9 +119,9 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 6,
-            "graded": 6,
-            "success": 6,
+            "terminal": 7,
+            "graded": 7,
+            "success": 7,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 0,
@@ -179,23 +179,23 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 77,
-            "2": 6,
+            "2": 7,
             "3": 0
           },
-          "new_raw_model_responses": 4354,
+          "new_raw_model_responses": 4388,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 586,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 595,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 295,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 66
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 302,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 84
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T16:38:48+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T16:44:20+00:00",
           "active_recovery_trial_dirs": 5,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -307,11 +307,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 74,
-            "graded": 74,
-            "success": 51,
-            "active_trial_dirs": 78,
-            "archived_actual_model_responses": 3520,
+            "terminal": 75,
+            "graded": 75,
+            "success": 52,
+            "active_trial_dirs": 79,
+            "archived_actual_model_responses": 3558,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 7
@@ -363,17 +363,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 300,
+          "terminal": 304,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 304,
+          "terminal": 309,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 319,
+          "terminal": 326,
           "status": "partial_no_full_rrr"
         }
       }
@@ -476,7 +476,7 @@
             "graded": 88,
             "success": 68,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1888,
+            "archived_actual_model_responses": 1893,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -512,8 +512,8 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 68,
-        "graded": 68,
+        "terminal": 69,
+        "graded": 69,
         "success": 44,
         "status": "partial_no_full_score"
       },
@@ -563,9 +563,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 28,
-          "graded": 28,
-          "success": 9,
+          "terminal": 30,
+          "graded": 30,
+          "success": 11,
           "status": "partial_no_full_score"
         },
         "2": {

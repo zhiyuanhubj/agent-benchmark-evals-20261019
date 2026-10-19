@@ -1,17 +1,16 @@
 {
-  "generated_utc": "2026-10-19T16:39:14.643395+00:00",
+  "generated_utc": "2026-10-19T16:44:53.047187+00:00",
   "model": "beam_bf16",
   "round": 1,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T163818Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T164201Z.tar.zst",
   "expected": 89,
-  "terminal": 74,
-  "graded": 74,
-  "success": 51,
+  "terminal": 75,
+  "graded": 75,
+  "success": 52,
   "missing_graded_tasks": [
     "regex-chess",
-    "rstan-to-pystan",
     "sam-cell-seg",
     "schemelike-metacircular-eval",
     "sparql-university",
@@ -27,9 +26,10 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "sparql-university"
+  ],
   "missing_task_inputs_in_archive": [
-    "sparql-university",
     "sqlite-db-truncate",
     "sqlite-with-gcov",
     "torch-pipeline-parallelism",
@@ -557,6 +557,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/reshard-c4-data__sL389Ru/result.json",
       "raw_response_count": 15,
       "responses_with_reasoning_content": 15
+    },
+    "rstan-to-pystan": {
+      "reward": 1.0,
+      "result_sha256": "ca58b6662fe834b437e8af99503410ca5cacc018cc4ba611d281cf14153e79a5",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/rstan-to-pystan__vNYsC3h/result.json",
+      "raw_response_count": 32,
+      "responses_with_reasoning_content": 32
     },
     "sanitize-git-repo": {
       "reward": 0.0,
