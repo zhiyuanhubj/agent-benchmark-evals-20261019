@@ -30,6 +30,7 @@ profiles = {
 }
 records = []
 missing_trajectories = []
+ungraded_terminal_trials = []
 for model, filename in profiles.items():
     audit = json.loads((ROOT / 'evidence' / filename).read_text())
     for task, row in audit['tasks'].items():
@@ -85,7 +86,14 @@ for item in plan['configurations']:
         assert task in item['tasks'] and task not in future_seen[round_number]
         future_seen[round_number].add(task)
         reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
-        assert reward in (0, 1), (result, reward)
+        if reward not in (0, 1):
+            assert reward is None and value.get('exception_info'), (result, reward)
+            ungraded_terminal_trials.append({'model': f'muse_nvfp4_r{round_number}',
+                'task': task, 'result_path': str(result.relative_to(BASE)),
+                'result_sha256': hashlib.sha256(result.read_bytes()).hexdigest(),
+                'exception_type': value['exception_info'].get('exception_type'),
+                'qualification': 'Native terminal trial without a verifier reward; excluded from scored trajectory counts.'})
+            continue
         trajectory = result.parent / 'agent/trajectory.json'
         model = f'muse_nvfp4_r{round_number}'
         if not trajectory.is_file():
@@ -123,7 +131,14 @@ for round_number in (2, 3):
         assert task in expected and task not in seen
         seen.add(task)
         reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
-        assert reward in (0, 1), (result, reward)
+        if reward not in (0, 1):
+            assert reward is None and value.get('exception_info'), (result, reward)
+            ungraded_terminal_trials.append({'model': f'beam_bf16_r{round_number}',
+                'task': task, 'result_path': str(result.relative_to(BASE)),
+                'result_sha256': hashlib.sha256(result.read_bytes()).hexdigest(),
+                'exception_type': value['exception_info'].get('exception_type'),
+                'qualification': 'Native terminal trial without a verifier reward; excluded from scored trajectory counts.'})
+            continue
         trajectory = result.parent / 'agent/trajectory.json'
         model = f'beam_bf16_r{round_number}'
         if not trajectory.is_file():
@@ -208,6 +223,7 @@ report = {
     'method': 'Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.',
     'summary': summary,
     'missing_trajectories': missing_trajectories,
+    'ungraded_terminal_trials': ungraded_terminal_trials,
     'records': records,
     'active_muse_nvfp4': {
         'unscored_trajectories_checked': len(active_records),
