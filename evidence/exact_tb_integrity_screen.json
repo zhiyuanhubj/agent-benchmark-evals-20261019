@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T18:39:37.658952+00:00",
+  "generated_utc": "2026-10-19T19:12:10.588259+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -69,7 +69,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 20,
+      "scored_trajectories_checked": 22,
       "pattern_hit_trajectories": 2,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -4793,6 +4793,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "dna-assembly",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/dna-assembly__kGYB37e/agent/trajectory.json",
+      "trajectory_sha256": "13f9c4e0853cec57bac13f12ee192e03d0939ab9a43f3e824a9c86656dac756c",
+      "steps": 36,
+      "tool_calls": 45,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "adaptive-rejection-sampler",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/adaptive-rejection-sampler__vNbBmW7/agent/trajectory.json",
@@ -4853,6 +4865,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "feal-differential-cryptanalysis",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/feal-differential-cryptanalysis__GUAZiHP/agent/trajectory.json",
+      "trajectory_sha256": "45066f739e57388e97054d52a662fe086275ec5e8c7dc7e4fb6181b5b78a23b8",
+      "steps": 30,
+      "tool_calls": 34,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "cobol-modernization",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/cobol-modernization__5UxWXk5/agent/trajectory.json",
@@ -4871,9 +4895,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "d41af500c0661aefef849b62501b926b94bfccca21427176732f2a3908f27e3b",
-        "steps_at_screen": 221,
-        "tool_calls_at_screen": 918,
+        "trajectory_sha256_at_screen": "4d9d9510ef073e4530a32aaba27a27440d8d6024733e656917bdf9d5bb66b0e8",
+        "steps_at_screen": 251,
+        "tool_calls_at_screen": 948,
         "hits": [],
         "status": "in_progress_not_scored"
       }
