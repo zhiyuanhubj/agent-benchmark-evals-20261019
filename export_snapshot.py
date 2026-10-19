@@ -516,6 +516,16 @@ The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anch
 '''
 readme = readme.replace('Additional GPU allocation states:', replica_note_en + ' Additional GPU allocation states:', 1)
 readme = readme.replace('A batch that starts locally first cannot be redrawn on another node.', 'A batch that starts locally first cannot be redrawn on another node. The four queued extra GPU allocations are also prepared to take only untouched round-2/3 batches if granted after the round-1 handoffs are claimed. Per-batch locks and ownership receipts prevent the original controller from drawing the same task; the effective config changes only the model endpoint.', 1)
+if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists():
+    readme = readme.replace('For actively changing Pro/legacy/Deep results,',
+        'The [Muse BF16 SWE-Review input archive](input_output/archive_manifests/muse_bf16_review_inputs.json) contains the 96 prepared model-visible task cards, instructions, Dockerfiles and public task data, plus queue and image receipts. It excludes hidden solutions and tests. Review outputs will be archived separately as trials finish.\n\nFor actively changing Pro/legacy/Deep results,', 1)
+slot1_route_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/r2-completion-2866-b02-route.json'
+if slot1_route_path.exists():
+    slot1_route = read(slot1_route_path)
+    assert slot1_route['allocation'] == 2812 and slot1_route['round'] == 2
+    assert slot1_route['job_name'] == 'muse-nvfp4-tb-v1-exact-r2-completion-2866-b02'
+    readme = readme.replace('Scores are benchmark-recorded values.',
+        'On allocation 2812, an additional controller slot claimed untouched exact-image round-2 batch b02 while b01\'s final task was still running. Both controllers use the same pinned NVFP4 endpoint, with two task trials per batch and the server\'s eight-request limit. The [controller source](protocol/muse_nvfp4_exact_future_round_controller_20261019.py) uses separate slot locks and the existing per-batch atomic claim; the b02 route receipt and original/effective config hashes are included in live I/O snapshots. Neither round-1 task nor a previously sampled round-2 task was redrawn.\n\nScores are benchmark-recorded values.', 1)
 readme = readme.replace('Scores are benchmark-recorded values.', f'Opus 4.7 Pro counts only its original 731-task run; verifier-only saved-patch retries are retained as separate evidence and never increase the first-round task denominator. One original task still lacks a native verifier score after two 3600-second timeouts. {opus_crosshost_en}\n\nScores are benchmark-recorded values.', 1)
 if nvfp4_r2_excluded:
     readme = readme.replace('Scores are benchmark-recorded values.',
@@ -542,6 +552,10 @@ if db_wal_note:
     new = 'The earlier [host-boundary alert for `db-wal-recovery`](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json) now has a terminal result: the agent timed out after 10800 seconds with recorded reward 0. [Manual notes](evidence/exact_tb_integrity_manual_notes.json) exclude its trajectory from clean training; the inspected probes do not establish successful host access. The raw benchmark result remains unchanged.'
     assert readme.count(old) == 1
     readme = readme.replace(old, new, 1)
+if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists():
+    assert readme.count('The [Muse BF16 SWE-Review input archive]') == 1
+if slot1_route_path.exists():
+    assert readme.count('an additional controller slot claimed untouched') == 1
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -608,10 +622,20 @@ if early_b05_owner:
         b05_note_zh = '首轮 b05 正在 CPU 2922、GPU 2812 运行；归属凭据阻止重复抽题。'
     chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。' + b05_note_zh, 1)
 chinese_report = chinese_report.replace('关键词未命中也不代表轨迹已获干净认证。', '关键词未命中也不代表轨迹已获干净认证。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)还标记了 Opus 4.7 在 `break-filter-js-from-html` 上对不存在的 `/tests` 的探查，以及 Beam BF16 在同题中把公开的过滤器临时复制到 `/tests/filter.py`、在判分前删除的行为；检查到的输出均未确认获得隐藏答案，两条轨迹暂不作为干净训练数据。Opus `torch-pipeline-parallelism` 的关键词命中只是列举 Python 可执行文件。', 1)
+if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists():
+    chinese_report = chinese_report.replace('Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照',
+        '[BF16 SWE-Review 输入归档](input_output/archive_manifests/muse_bf16_review_inputs.json)保存了 96 道已准备题目的模型可见任务卡、指令、Dockerfile、公开题目数据，以及队列与镜像记录；不含隐藏解法和测试。正式轨迹与判分将在任务完成后另行归档。\n\nOpus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照', 1)
+if slot1_route_path.exists():
+    chinese_report = chinese_report.replace('Opus 4.7 Pro 只统计原始运行的 731 道题',
+        'GPU 2812 的第二个控制器槽在 b01 最后一题仍运行时领取了未抽样的精确镜像第 2 轮 b02 批次；两条控制器共用已固定的 NVFP4 服务，各批次并发 2 题，服务上限为 8 个请求。[控制器源码](protocol/muse_nvfp4_exact_future_round_controller_20261019.py)使用独立槽锁和原有逐批原子领取；b02 接管凭据及原始/实际配置哈希收录于原始输入输出快照。首轮题目及已抽样的第 2 轮题目均未重抽。\n\nOpus 4.7 Pro 只统计原始运行的 731 道题', 1)
 if db_wal_note:
     old = '另一份判分前预警记录了 NVFP4 [`db-wal-recovery` 对宿主边界的探查](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)，它不证明边界探查成功，也不是最终分数。'
     new = '此前的 NVFP4 [`db-wal-recovery` 宿主边界探查预警](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)现已有终态：agent 运行 10800 秒后超时，原始奖励为 0。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)将该轨迹排除出干净训练数据；抽查输出未证明成功越过宿主边界，原始评测结果保持不变。'
     assert chinese_report.count(old) == 1
     chinese_report = chinese_report.replace(old, new, 1)
+if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists():
+    assert chinese_report.count('[BF16 SWE-Review 输入归档]') == 1
+if slot1_route_path.exists():
+    assert chinese_report.count('GPU 2812 的第二个控制器槽') == 1
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))
