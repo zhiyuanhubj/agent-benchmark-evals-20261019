@@ -1,0 +1,22 @@
+{
+  "generated_utc": "2026-10-19T17:36:17.908560+00:00",
+  "group": "opus47_legacy",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/opus47_legacy_delta_20261019T171542Z.json",
+  "cutoff_utc": "2026-10-19T17:10:44.574353+00:00",
+  "archive_name": "opus47_legacy_delta_20261019T173614Z.tar.zst",
+  "archive_size_bytes": 24343171,
+  "archive_sha256": "bc8a2fe15730581b09734f514c08f2957249dd923b0a54c5328b40010fe7140e",
+  "file_count": 582,
+  "source_bytes": 312726799,
+  "filename_counts": {
+    "api_archive.json": 556,
+    "trajectory.json": 6,
+    "result.json": 6,
+    "trial.log": 9,
+    "config.json": 5
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/bench/opus47_full_20261018"
+  ]
+}

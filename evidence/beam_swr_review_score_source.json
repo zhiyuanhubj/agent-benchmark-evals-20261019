@@ -1,5 +1,5 @@
 {
-  "utc": 1792429826.5340636,
+  "utc": 1792430733.9192672,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 313,
+      "terminal": 319,
       "exceptions": 7,
       "prepared_image_phases": {
         "image_ready": 336
@@ -377,42 +377,42 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 316,
+      "terminal": 320,
       "exceptions": 5,
       "prepared_image_phases": {
-        "image_ready": 336
+        "image_ready": 352
       },
       "controller": {
-        "utc": 1792426947.293014,
+        "utc": 1792430538.740781,
         "phase": "running",
-        "batch": 19,
+        "batch": 20,
         "tasks": [
-          "pylint-dev__pylint-8898",
-          "pytest-dev__pytest-10051",
-          "pytest-dev__pytest-10356",
-          "pytest-dev__pytest-5262",
-          "pytest-dev__pytest-5631",
-          "pytest-dev__pytest-5787",
-          "pytest-dev__pytest-5809",
-          "pytest-dev__pytest-5840",
-          "pytest-dev__pytest-6197",
-          "pytest-dev__pytest-6202",
-          "pytest-dev__pytest-7205",
-          "pytest-dev__pytest-7236",
-          "pytest-dev__pytest-7324",
-          "pytest-dev__pytest-7432",
-          "pytest-dev__pytest-7490",
-          "pytest-dev__pytest-7521"
+          "pytest-dev__pytest-7571",
+          "pytest-dev__pytest-7982",
+          "pytest-dev__pytest-8399",
+          "scikit-learn__scikit-learn-10297",
+          "scikit-learn__scikit-learn-10844",
+          "scikit-learn__scikit-learn-10908",
+          "scikit-learn__scikit-learn-11310",
+          "scikit-learn__scikit-learn-11578",
+          "scikit-learn__scikit-learn-12585",
+          "scikit-learn__scikit-learn-12682",
+          "scikit-learn__scikit-learn-12973",
+          "scikit-learn__scikit-learn-13124",
+          "scikit-learn__scikit-learn-13142",
+          "scikit-learn__scikit-learn-13328",
+          "scikit-learn__scikit-learn-13439",
+          "scikit-learn__scikit-learn-13496"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 336,
+      "terminal": 342,
       "exceptions": 6,
       "prepared_image_phases": {
-        "image_ready": 354
+        "image_ready": 368
       },
       "controller": {
         "utc": 1792429821.8611603,
@@ -454,8 +454,8 @@
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
-    "2888|beam-review-reserve-2888|PENDING||(AssocGrpNodeLimit)",
-    "2886|muse-bf16-pair-2886|PENDING||(AssocGrpNodeLimit)",
+    "2888|beam-review-reserve-2888|PENDING||(None)",
+    "2886|muse-bf16-pair-2886|PENDING||(None)",
     "2906|mix449-cpu-salvage-10-1-122-30|PENDING||(Priority)",
     "2887|beam-review-reserve-2887|RUNNING|ip-10-1-69-108|ip-10-1-69-108",
     "2869|mix3-eval-extra-4|RUNNING|ip-10-1-77-106|ip-10-1-77-106",

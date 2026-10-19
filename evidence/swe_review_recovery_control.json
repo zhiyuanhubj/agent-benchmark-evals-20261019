@@ -1,0 +1,56 @@
+{
+  "generated_utc": "2026-10-19T17:36:16.261867+00:00",
+  "old_controller": {
+    "MainPID": "0",
+    "Result": "exit-code",
+    "ActiveState": "failed"
+  },
+  "old_plan_sha256": "543a38f4f4574a01976d135c01bfb1ad2fbad3af0f571a82773762ffc7375e01",
+  "old_claims": 44,
+  "old_exits": 41,
+  "interrupted_claimed_batches": {
+    "glm5_500-15": {
+      "declared": 16,
+      "terminal": 0,
+      "ungraded_or_not_terminal": 16
+    },
+    "qwen3_coder_30b_500-14": {
+      "declared": 16,
+      "terminal": 6,
+      "ungraded_or_not_terminal": 10
+    },
+    "qwen3_coder_30b_500-15": {
+      "declared": 15,
+      "terminal": 2,
+      "ungraded_or_not_terminal": 13
+    }
+  },
+  "interrupted_tasks_without_trial_directory": 23,
+  "interrupted_tasks_with_partial_sampled_trajectory_preserved": 16,
+  "disjoint_never_claimed_continuation": {
+    "controller": {
+      "MainPID": "2825215",
+      "Result": "success",
+      "ActiveState": "active"
+    },
+    "plan_sha256": "5f947a0e235118ae66b2dc0d1434e2b26b8ff4a7d953065936649bff988617ee",
+    "receipt_sha256": "4410e21521b4f18a0324a8e925df60a386ae8a007a61e05f30b56d919d846f93",
+    "task_count": 11,
+    "claimed": true,
+    "sandbox_allocation": 2869,
+    "model_allocation": 2866
+  },
+  "disjoint_no_trial_continuation": {
+    "controller": {
+      "MainPID": "2828078",
+      "Result": "success",
+      "ActiveState": "active"
+    },
+    "plan_sha256": "e6a9e4590c4da117156fac122f51343bc76c20db50ffedbd82d47cfc745a52af",
+    "receipt_sha256": "931a4a4ad663152ea04be5b8c0ea8510dbda7eccb367800f10b3c7c84b8c54d4",
+    "task_count": 23,
+    "sandbox_allocation": 2869,
+    "model_allocation": 2866
+  },
+  "qualification": "The old controller was killed before three claimed batches ended. Two new controllers own only 11 unclaimed tasks and 23 claimed tasks with no native trial directory. The 16 interrupted trajectories containing sampled model output remain untouched for separate per-trial reconciliation."
+}

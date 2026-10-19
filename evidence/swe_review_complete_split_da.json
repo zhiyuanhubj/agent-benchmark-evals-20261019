@@ -1,0 +1,36 @@
+{
+  "generated_utc": "2026-10-19T17:32:59.853567+00:00",
+  "metric": "Official SWE-Review compute_da.py, complete canonical review splits only",
+  "metric_source_sha256": "35fdc90b8a5a14034df40fab7d70c7f3d5be587c0e8f92b67e0155996b52b035",
+  "plan_sha256": "85414c294153273b0f4a975470233afebd9dd3fb8d116c6642a337f4837eea3c",
+  "reviewers": {
+    "muse-nvfp4": {
+      "qwen3_30b_instruct2507_500": {
+        "status": "final_da_for_this_split",
+        "expected": 422,
+        "metrics": {
+          "DA": 87.2,
+          "DA_total_50": 82.5,
+          "CR": 87.2,
+          "FAR": 9.0,
+          "FRR": 22.8,
+          "total": 422,
+          "correct": 321,
+          "model_fail": 54,
+          "produced": 368,
+          "TP": 78,
+          "FP": 24,
+          "TN": 243,
+          "FN": 23
+        },
+        "canonical_receipt_sha256": "b1e9ece8d4656bfe337b6c1c88fe6fc7293c9c155d3ca3497c450427e5c4a29b",
+        "benchmark_sha256": "531d636f1ebe470b0c4b571d87874002c37c7a45cdfec49f17a0774cf929be11",
+        "verified_review_count": 422,
+        "RRR": null,
+        "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
+      }
+    },
+    "beam-bf16": {},
+    "muse-bf16": {}
+  }
+}

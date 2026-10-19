@@ -1,19 +1,17 @@
 {
-  "generated_utc": "2026-10-19T17:22:13.544379+00:00",
+  "generated_utc": "2026-10-19T17:37:36.132461+00:00",
   "model": "beam_bf16",
   "round": 1,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T171752Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T173343Z.tar.zst",
   "expected": 89,
-  "terminal": 79,
-  "graded": 79,
+  "terminal": 81,
+  "graded": 81,
   "success": 56,
   "missing_graded_tasks": [
     "regex-chess",
     "schemelike-metacircular-eval",
-    "torch-pipeline-parallelism",
-    "torch-tensor-parallelism",
     "train-fasttext",
     "tune-mjcf",
     "video-processing",
@@ -22,12 +20,8 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "torch-pipeline-parallelism"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "train-fasttext",
-    "tune-mjcf",
     "video-processing",
     "vulnerable-secret",
     "winning-avg-corewars",
@@ -591,6 +585,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/sqlite-with-gcov__xjmJHDA/result.json",
       "raw_response_count": 13,
       "responses_with_reasoning_content": 13
+    },
+    "torch-pipeline-parallelism": {
+      "reward": 0.0,
+      "result_sha256": "59b50bedcfddea85a74900a4d2220c679456c1d9c774a33c703f5505b26793fd",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/torch-pipeline-parallelism__Cn8jfPM/result.json",
+      "raw_response_count": 15,
+      "responses_with_reasoning_content": 15
+    },
+    "torch-tensor-parallelism": {
+      "reward": 0.0,
+      "result_sha256": "b4457edefb3e6dff127fc892503c1b9939194fa05f6e7a8cbdecba9a8bb994f7",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/torch-tensor-parallelism__MYezQpU/result.json",
+      "raw_response_count": 17,
+      "responses_with_reasoning_content": 17
     }
   }
 }
