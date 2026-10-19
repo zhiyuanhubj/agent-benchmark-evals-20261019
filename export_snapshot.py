@@ -307,7 +307,7 @@ Current exact-image TB2.1 native I/O snapshots: `{latest_opus_exact_archive['arc
 
 The [Opus 4.7](evidence/opus47_exact_round1_audit.json) and [Beam](evidence/beam_bf16_exact_round1_audit.json) first-round audits reconcile each task with its reward and released input, raw response, and trajectory. A full round is reported only when all 89 task results pass this check.
 
-The [Muse BF16 exact-image I/O audit](evidence/muse_bf16_exact_io_coverage.json) checks that every scored BF16 result, raw response and trajectory is present in SHA-verified release archives, along with all 89 task inputs. It is the same BF16 trial set named by the historical cached-tag field.
+The [Muse BF16 exact-image I/O audit](evidence/muse_bf16_exact_io_coverage.json) checks that every scored BF16 result, raw response and trajectory is present in SHA-verified release archives, along with all 89 task inputs. Of its currently scored raw replies, **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)}** contain nonempty thinking. It is the same BF16 trial set named by the historical cached-tag field.
 
 For actively changing Pro/legacy/Deep results, apply each timestamped delta after its base archive, replacing earlier files with the same path. Current delta assets are `{latest_legacy_deltas['opus47_legacy']['archive_name']}`, `{latest_legacy_deltas['beam_legacy']['archive_name']}`, and `{latest_legacy_deltas['muse_bf16']['archive_name']}`. Their manifests state the cutoff and source scope.
 
@@ -348,7 +348,7 @@ chinese_report = f'''# 模型评测结果快照
 
 Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜像身份校验在 `muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst`；[输入输出覆盖核验](evidence/muse_nvfp4_exact_io_coverage.json)逐题确认已判分结果、原始响应、轨迹和任务输入均在远端校验过的归档中。
 
-[Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖。
+[Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)} 条含非空 thinking**。
 
 Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 `{latest_opus_exact_archive['archive_name']}`（{latest_opus_exact_archive['terminal_result_count']} 个终态结果）和 `{latest_beam_exact_archive['archive_name']}`（{latest_beam_exact_archive['terminal_result_count']} 个终态结果）。其中运行中的轨迹不算已判分，未满 89 题的轮次不报告最终准确率。
 

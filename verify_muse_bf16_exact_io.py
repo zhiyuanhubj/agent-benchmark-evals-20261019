@@ -25,6 +25,8 @@ assert len(expected) == 89 and not identity['errors']
 
 scored = {}
 errors = []
+raw_reasoning_by_task = {}
+thinking_warnings = []
 for result_path in (BF / 'tb-results/muse-bf16-tb-r1').glob('*/result.json'):
     row = load(result_path)
     if not row.get('finished_at'):
@@ -38,6 +40,19 @@ for result_path in (BF / 'tb-results/muse-bf16-tb-r1').glob('*/result.json'):
         errors.append(f'ungraded BF16 terminal task: {task}')
         continue
     scored[task] = {'reward': reward, 'result_path': str(result_path.relative_to(BASE))}
+    raw_files = sorted((result_path.parent / 'agent/raw_responses').glob('*.json'))
+    with_reasoning = 0
+    for raw_path in raw_files:
+        raw = load(raw_path)
+        if raw.get('model') != 'muse-spark-open-bf16':
+            errors.append(f'BF16 raw response has an unexpected model name: {task}')
+        if any(bool(choice.get('message', {}).get('reasoning_content')) for choice in raw.get('choices', [])):
+            with_reasoning += 1
+    raw_reasoning_by_task[task] = {'raw_responses': len(raw_files), 'nonempty_reasoning_content': with_reasoning}
+    if with_reasoning != len(raw_files):
+        thinking_warnings.append(task)
+    if not raw_files:
+        errors.append(f'BF16 scored task lacks native raw responses: {task}')
 if (score['graded'], score['success']) != (len(scored), sum(row['reward'] == 1 for row in scored.values())):
     errors.append('BF16 published graded/success counts differ from native terminal results')
 
@@ -82,6 +97,9 @@ audit = {'generated_utc': datetime.now(timezone.utc).isoformat(), 'expected_task
          'covered_inputs': 89 - len(missing_inputs), 'covered_results': len(scored) - len(missing_results),
          'covered_raw_response_sets': len(scored) - len(missing_raw),
          'covered_trajectories': len(scored) - len(missing_trajectories),
+         'scored_raw_response_count': sum(row['raw_responses'] for row in raw_reasoning_by_task.values()),
+         'nonempty_reasoning_response_count': sum(row['nonempty_reasoning_content'] for row in raw_reasoning_by_task.values()),
+         'raw_reasoning_by_task': raw_reasoning_by_task, 'thinking_warnings': thinking_warnings,
          'archives': [row['archive_name'] for row in manifests],
          'missing_inputs': missing_inputs, 'missing_results': missing_results,
          'missing_raw_responses': missing_raw, 'missing_trajectories': missing_trajectories,
@@ -90,5 +108,6 @@ audit = {'generated_utc': datetime.now(timezone.utc).isoformat(), 'expected_task
 (EVIDENCE / 'muse_bf16_exact_io_coverage.json').write_text(json.dumps(audit, indent=2) + '\n')
 print(json.dumps({key: audit[key] for key in ('scored_tasks', 'success_count', 'covered_inputs',
                                               'covered_results', 'covered_raw_response_sets',
-                                              'covered_trajectories', 'errors')}))
+                                              'covered_trajectories', 'scored_raw_response_count',
+                                              'nonempty_reasoning_response_count', 'thinking_warnings', 'errors')}))
 raise SystemExit(1 if errors else 0)
