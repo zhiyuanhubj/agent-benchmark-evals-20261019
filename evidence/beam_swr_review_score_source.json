@@ -1,5 +1,5 @@
 {
-  "utc": 1792445178.6940644,
+  "utc": 1792447008.7961297,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,96 +345,86 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 362,
+      "terminal": 368,
       "exceptions": 7,
       "prepared_image_phases": {
-        "image_ready": 384
+        "image_ready": 400
       },
       "controller": {
-        "utc": 1792440746.875227,
+        "utc": 1792446583.659577,
         "phase": "running",
-        "batch": 22,
+        "batch": 23,
         "tasks": [
-          "scikit-learn__scikit-learn-11310",
-          "scikit-learn__scikit-learn-11578",
-          "scikit-learn__scikit-learn-12585",
-          "scikit-learn__scikit-learn-12682",
-          "scikit-learn__scikit-learn-12973",
-          "scikit-learn__scikit-learn-13124",
-          "scikit-learn__scikit-learn-13135",
-          "scikit-learn__scikit-learn-13142",
-          "scikit-learn__scikit-learn-13328",
-          "scikit-learn__scikit-learn-13439",
-          "scikit-learn__scikit-learn-13496",
-          "scikit-learn__scikit-learn-13779",
-          "scikit-learn__scikit-learn-14053",
-          "scikit-learn__scikit-learn-14087",
-          "scikit-learn__scikit-learn-14141",
-          "scikit-learn__scikit-learn-14496"
+          "scikit-learn__scikit-learn-14629",
+          "scikit-learn__scikit-learn-14710",
+          "scikit-learn__scikit-learn-14894",
+          "scikit-learn__scikit-learn-14983",
+          "scikit-learn__scikit-learn-15100",
+          "scikit-learn__scikit-learn-25102",
+          "scikit-learn__scikit-learn-25232",
+          "scikit-learn__scikit-learn-25747",
+          "scikit-learn__scikit-learn-25931",
+          "scikit-learn__scikit-learn-25973",
+          "scikit-learn__scikit-learn-26194",
+          "scikit-learn__scikit-learn-26323",
+          "scikit-learn__scikit-learn-9288",
+          "sphinx-doc__sphinx-10323",
+          "sphinx-doc__sphinx-10435",
+          "sphinx-doc__sphinx-10449"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 361,
+      "terminal": 373,
       "exceptions": 6,
       "prepared_image_phases": {
-        "image_ready": 384
+        "image_ready": 400
       },
       "controller": {
-        "utc": 1792442826.9171183,
+        "utc": 1792446225.2439022,
         "phase": "running",
-        "batch": 22,
+        "batch": 23,
         "tasks": [
-          "scikit-learn__scikit-learn-9288",
-          "sphinx-doc__sphinx-10323",
-          "sphinx-doc__sphinx-10435",
-          "sphinx-doc__sphinx-10449",
-          "sphinx-doc__sphinx-10466",
-          "sphinx-doc__sphinx-10614",
-          "sphinx-doc__sphinx-10673",
-          "sphinx-doc__sphinx-11445",
-          "sphinx-doc__sphinx-11510",
-          "sphinx-doc__sphinx-7440",
-          "sphinx-doc__sphinx-7454",
-          "sphinx-doc__sphinx-7462",
-          "sphinx-doc__sphinx-7590",
-          "sphinx-doc__sphinx-7748",
-          "sphinx-doc__sphinx-7757",
-          "sphinx-doc__sphinx-7889"
+          "sphinx-doc__sphinx-7910",
+          "sphinx-doc__sphinx-7985",
+          "sphinx-doc__sphinx-8035",
+          "sphinx-doc__sphinx-8056",
+          "sphinx-doc__sphinx-8120",
+          "sphinx-doc__sphinx-8265",
+          "sphinx-doc__sphinx-8269",
+          "sphinx-doc__sphinx-8459",
+          "sphinx-doc__sphinx-8475",
+          "sphinx-doc__sphinx-8548",
+          "sphinx-doc__sphinx-8551",
+          "sphinx-doc__sphinx-8593",
+          "sphinx-doc__sphinx-8595",
+          "sphinx-doc__sphinx-8621",
+          "sphinx-doc__sphinx-8638",
+          "sphinx-doc__sphinx-8721"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 405,
+      "terminal": 417,
       "exceptions": 8,
       "prepared_image_phases": {
         "image_ready": 422
       },
       "controller": {
-        "utc": 1792442911.4275582,
+        "utc": 1792446747.6258504,
         "phase": "running",
-        "batch": 25,
+        "batch": 26,
         "tasks": [
-          "sympy__sympy-20801",
-          "sympy__sympy-20916",
-          "sympy__sympy-21379",
-          "sympy__sympy-21596",
-          "sympy__sympy-21612",
-          "sympy__sympy-21847",
-          "sympy__sympy-21930",
-          "sympy__sympy-22080",
-          "sympy__sympy-22456",
-          "sympy__sympy-22714",
-          "sympy__sympy-22914",
-          "sympy__sympy-23262",
-          "sympy__sympy-23413",
-          "sympy__sympy-23534",
-          "sympy__sympy-23824",
-          "sympy__sympy-23950"
+          "sympy__sympy-24066",
+          "sympy__sympy-24213",
+          "sympy__sympy-24443",
+          "sympy__sympy-24539",
+          "sympy__sympy-24562",
+          "sympy__sympy-24661"
         ]
       },
       "full_official_rrr_complete": false
@@ -455,7 +445,7 @@
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
-    "2888|beam-review-reserve-2888|PENDING||(AssocGrpNodeLimit)",
+    "2888|beam-review-reserve-2888|PENDING||(None)",
     "2886|muse-bf16-pair-2886|RUNNING|ip-10-1-13-41,ip-10-1-122-30|ip-10-1-13-41,ip-10-1-122-30",
     "2887|beam-review-reserve-2887|RUNNING|ip-10-1-69-108|ip-10-1-69-108",
     "2869|mix3-eval-extra-4|RUNNING|ip-10-1-77-106|ip-10-1-77-106",
@@ -466,17 +456,16 @@
     "2733|beam-bf16-swr-swe-2733|RUNNING|ip-10-1-25-253|ip-10-1-25-253"
   ],
   "revision_preparation": {
-    "plan_sha256": "841bc479606534ca6b576a25a807135a9cbc5b93a3fb7669ef9fb5fc7f7b76b6",
-    "phase": "preparation_requires_review",
+    "plan_sha256": "10fd107b75565aa5deceb28641eae22935b87fa051e31324426d3e9fdf078053",
+    "phase": "waiting_for_completed_review_splits",
     "splits": {},
     "complete": false,
     "model_generation_started": false,
-    "utc": "2026-10-18T20:26:38.487598+00:00",
-    "grader_preflight_passed": true,
-    "error_type": "JSONDecodeError",
-    "error_summary": "Extra data: line 28 column 1 (char 2571)"
+    "utc": "2026-10-19T21:56:01.970923+00:00",
+    "grader_preflight_passed": true
   },
-  "revision_preparation_controller": "MainPID=0\nResult=exit-code\nActiveState=failed\n",
+  "revision_preparation_controller": "MainPID=3430427\nResult=success\nActiveState=active\n",
+  "revision_preparation_superseded_controller": "MainPID=0\nResult=exit-code\nActiveState=failed\n",
   "shared_original_generator_prefetch": {
     "started_utc": "2026-10-18T16:48:42.317096+00:00",
     "plan_sha256": "39b2407719a1c9d49acf20702bb5b5874d6a631b7c08d90fc74e5ab624c5b3a5",

@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T21:27:01.765436+00:00",
+  "utc": "2026-10-19T21:57:36.625487+00:00",
   "source_image_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/image-identity-plan.json",
   "source_image_plan_sha256": "e8ce45c5101dd43938bea69810d1dd1098895d5d64520370e23e252c2d57b22b",
   "models": {
@@ -7,11 +7,11 @@
       "rounds": {
         "1": {
           "expected": 89,
-          "terminal": 87,
-          "graded": 87,
+          "terminal": 88,
+          "graded": 88,
           "success": 62,
           "active_trial_dirs": 89,
-          "archived_actual_model_responses": 4529,
+          "archived_actual_model_responses": 4585,
           "ungraded": 0,
           "exceptions": {
             "AgentTimeoutError": 7
@@ -23,13 +23,16 @@
         },
         "2": {
           "expected": 89,
-          "terminal": 28,
-          "graded": 28,
-          "success": 19,
-          "active_trial_dirs": 32,
-          "archived_actual_model_responses": 1535,
-          "ungraded": 0,
-          "exceptions": {},
+          "terminal": 31,
+          "graded": 30,
+          "success": 20,
+          "active_trial_dirs": 35,
+          "archived_actual_model_responses": 1768,
+          "ungraded": 1,
+          "exceptions": {
+            "AgentTimeoutError": 1,
+            "RuntimeError": 1
+          },
           "excluded_user_reassignment_trials": [],
           "complete": false,
           "accuracy": null,

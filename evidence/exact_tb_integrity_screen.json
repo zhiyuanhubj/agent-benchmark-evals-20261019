@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T21:53:46.142107+00:00",
+  "generated_utc": "2026-10-19T22:06:49.629667+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 27,
+      "scored_trajectories_checked": 29,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -4784,6 +4784,30 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "fix-ocaml-gc",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b03/fix-ocaml-gc__arF3uHd/agent/trajectory.json",
+      "trajectory_sha256": "f3e07780ef4d52577d8b331325c8c0294b726017f65b7a3d5347e7188e2b2545",
+      "steps": 112,
+      "tool_calls": 355,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "git-leak-recovery",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b03/git-leak-recovery__EjwwLAA/agent/trajectory.json",
+      "trajectory_sha256": "d0ccb763634e35f442a2967060d74bfe25f8dff2c73a871fb78ea5c01dceffd7",
+      "steps": 15,
+      "tool_calls": 82,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "largest-eigenval",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b04/largest-eigenval__jq62DKD/agent/trajectory.json",
@@ -5334,9 +5358,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "862a851278f27e495e85dfc40faf15b133a4a7c891e6ddf37fb591680a63a496",
-        "steps_at_screen": 396,
-        "tool_calls_at_screen": 1110,
+        "trajectory_sha256_at_screen": "6b6ed8fa18e5674f74f112cec5677f00b6439acbfe4580bbf48a146e89497a50",
+        "steps_at_screen": 409,
+        "tool_calls_at_screen": 1119,
         "hits": [],
         "status": "in_progress_not_scored"
       }

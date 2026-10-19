@@ -1,20 +1,18 @@
 {
-  "generated_utc": "2026-10-19T21:38:50.785285+00:00",
+  "generated_utc": "2026-10-19T22:06:41.616894+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T212731Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T215658Z.tar.zst",
   "expected": 89,
-  "terminal": 28,
-  "graded": 28,
-  "success": 19,
+  "terminal": 31,
+  "graded": 30,
+  "success": 20,
   "missing_graded_tasks": [
-    "code-from-image",
     "feal-linear-cryptanalysis",
     "fix-ocaml-gc",
     "gcode-to-text",
-    "git-leak-recovery",
     "git-multibranch",
     "gpt2-codegolf",
     "headless-terminal",
@@ -72,11 +70,10 @@
     "winning-avg-corewars",
     "write-compressor"
   ],
-  "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "code-from-image",
-    "git-leak-recovery"
+  "ungraded_terminal_tasks": [
+    "git-multibranch"
   ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -160,6 +157,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/cobol-modernization__5UxWXk5/result.json",
       "raw_response_count": 55,
       "responses_with_reasoning_content": 55
+    },
+    "code-from-image": {
+      "reward": 0.0,
+      "result_sha256": "c572f920dbd8746a55eab6aac930e998f292b236d2f38e48857166796df1fdd5",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/code-from-image__tJboqxD/result.json",
+      "raw_response_count": 459,
+      "responses_with_reasoning_content": 459
     },
     "compile-compcert": {
       "reward": 1.0,
@@ -279,6 +283,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/fix-git__Md9e6JA/result.json",
       "raw_response_count": 9,
       "responses_with_reasoning_content": 9
+    },
+    "git-leak-recovery": {
+      "reward": 1.0,
+      "result_sha256": "2015d84d618b349e9fd711fb0f3cfb68a57e5fd5fd2edf06bdfece1701b60971",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/git-leak-recovery__MDTEHLN/result.json",
+      "raw_response_count": 6,
+      "responses_with_reasoning_content": 6
+    },
+    "git-multibranch": {
+      "reward": null,
+      "result_sha256": "0402b05e90ac5a360439991c3bbd3128ab5e15bb403408b7820bfb9e9607f39f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/git-multibranch__46Fqx2D/result.json",
+      "raw_response_count": 6,
+      "responses_with_reasoning_content": 6
     }
   }
 }
