@@ -106,6 +106,22 @@ if handoff:
     if set(handoff_batches) != expected_handoff_names or handoff['destination_allocation'] != 2867:
         errors.append('unexpected Muse replica handoff batches or allocation')
 
+routes_2812 = {}
+for batch, lane in (('b03', 2), ('b05', 3)):
+    receipt_path = WORK / f'state/extra_gpu/r1-{batch}-2812-route.json'
+    if not receipt_path.exists():
+        continue
+    route = read(receipt_path)
+    job_name = f'muse-nvfp4-tb-v1-exact-r1-completion-2866-{batch}'
+    if (route.get('batch') != batch or route.get('lane') != lane or
+            route.get('allocation') != 2812 or route.get('job_name') != job_name or
+            route.get('endpoint') != 'http://10.1.101.159:31320/v1' or
+            not route.get('sampling_profile_unchanged')):
+        errors.append(f'invalid 2812 route receipt: {batch}')
+    if (WORK / f'state/extra_gpu/r1-{batch}-local-started.json').exists():
+        errors.append(f'local and 2812 route both claimed: {batch}')
+    routes_2812[job_name] = {'receipt_path': str(receipt_path), **route}
+
 for item in recovery:
     config_path = Path(item['path'])
     if sha256(config_path) != item['sha256']:
@@ -131,6 +147,22 @@ for item in recovery:
             if effective_config != expected_config:
                 errors.append(f'handoff changed benchmark profile: {item["job_name"]}')
         effective_endpoint = handoff['endpoint']
+    if item['job_name'] in routes_2812:
+        if item['job_name'] in handoff_batches:
+            errors.append(f'two replica routes claim batch: {item["job_name"]}')
+        moved = routes_2812[item['job_name']]
+        effective_path = Path(moved['effective_config'])
+        if (moved['original_config'] != str(config_path) or moved['original_sha256'] != item['sha256']
+                or moved['tasks'] != item['tasks']):
+            errors.append(f'2812 route source mismatch: {item["job_name"]}')
+        if not effective_path.is_file() or sha256(effective_path) != moved['effective_sha256']:
+            errors.append(f'2812 route effective config mismatch: {item["job_name"]}')
+        else:
+            expected_config = json.loads(json.dumps(config))
+            expected_config['agents'][0]['kwargs']['api_base'] = moved['endpoint']
+            if read(effective_path) != expected_config:
+                errors.append(f'2812 route changed benchmark profile: {item["job_name"]}')
+        effective_endpoint = moved['endpoint']
     allowed = set(item['tasks'])
     seen = set()
     job_dir = RESULTS / item['job_name']
@@ -170,6 +202,7 @@ audit = {
     'scored_nonempty_reasoning_response_count': sum(value['responses_with_reasoning_content'] for value in graded.values()),
     'graded_agent_timeout_tasks': sorted(task for task, value in graded.items() if value['exception_type'] == 'AgentTimeoutError'),
     'replica_handoff': handoff,
+    'opportunistic_routes_2812': list(routes_2812.values()),
     'ungraded_terminal_tasks': sorted(set(ungraded)),
     'missing_graded_tasks': missing,
     'active_or_unfinished_trials': sorted(active),

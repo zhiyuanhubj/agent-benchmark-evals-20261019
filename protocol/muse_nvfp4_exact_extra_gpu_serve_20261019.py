@@ -70,7 +70,17 @@ def main():
             raise RuntimeError('Muse NVFP4 endpoint did not become ready within one hour')
         ip = socket.gethostbyname(socket.gethostname())
         assert ip.startswith('10.'), f'Unexpected node IP: {ip}'
-        save(job, 'ready', endpoint=f'http://{ip}:31320/v1', model='muse-spark-open-nvfp4', pid=process.pid)
+        endpoint = f'http://{ip}:31320/v1'
+        save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4', pid=process.pid)
+        if job == 2812:
+            from muse_nvfp4.route_2812 import prepare_routes
+            try:
+                routes = prepare_routes(endpoint)
+                save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4',
+                     pid=process.pid, claimed_round1_batches=routes)
+            except Exception as exc:
+                save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4',
+                     pid=process.pid, route_error=repr(exc))
         result = process.wait()
         save(job, 'exited', returncode=result)
         raise SystemExit(result)

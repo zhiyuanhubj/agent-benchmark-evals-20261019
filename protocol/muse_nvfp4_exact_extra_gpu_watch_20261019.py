@@ -51,6 +51,24 @@ def early95_released():
     return pid in ('', '0')
 
 
+def untouched_round1_batch():
+    for batch in ('b03', 'b05'):
+        job = f'muse-nvfp4-tb-v1-exact-r1-completion-2866-{batch}'
+        if ((ROOT / 'results/muse_nvfp4' / job).exists()
+                or (STATE / f'r1-{batch}-local-started.json').exists()):
+            continue
+        return True
+    return False
+
+
+def gpu_released(job):
+    probe = subprocess.run([
+        '/usr/local/bin/srun', f'--jobid={job}', '--overlap', '-N1', '-n1', '-c1', '--immediate=5',
+        'nvidia-smi', '--query-compute-apps=pid', '--format=csv,noheader',
+    ], capture_output=True, text=True, timeout=20)
+    return probe.returncode == 0 and not probe.stdout.strip()
+
+
 def launch(job, node):
     claim = STATE / f'{job}-launch-claim.json'
     if claim.exists():
@@ -82,10 +100,13 @@ def cycle():
         if rows.get(job, {}).get('state') != 'RUNNING':
             continue
         launch(job, rows[job]['nodes'])
-    if not round_one_finished() and early95_released():
+    if not round_one_finished() and untouched_round1_batch() and early95_released():
         allocation = subprocess.run(['squeue', '-h', '-j', '2812', '-o', '%T|%N'], capture_output=True, text=True, check=True).stdout.strip()
         if allocation.startswith('RUNNING|'):
-            launch(2812, allocation.split('|', 1)[1])
+            if gpu_released(2812):
+                launch(2812, allocation.split('|', 1)[1])
+            else:
+                log(phase='wait_2812_gpu_cleanup')
     log(phase='poll', allocations=rows)
 
 

@@ -70,6 +70,20 @@ if handoff.exists():
         if effective not in payloads:
             payloads[effective] = effective.read_bytes()
             counts['job_config'] += 1
+for batch in ('b03', 'b05'):
+    receipt_path = SOURCE / f'muse_nvfp4/state/extra_gpu/r1-{batch}-2812-route.json'
+    if not receipt_path.exists():
+        continue
+    receipt_bytes = receipt_path.read_bytes()
+    receipt = json.loads(receipt_bytes)
+    assert receipt['batch'] == batch and receipt['allocation'] == 2812
+    payloads[receipt_path] = receipt_bytes
+    counts['handoff_receipt'] += 1
+    for config_path in (Path(receipt['original_config']), Path(receipt['effective_config'])):
+        assert config_path.is_file()
+        if config_path not in payloads:
+            payloads[config_path] = config_path.read_bytes()
+            counts['job_config'] += 1
 assert counts['raw_response'] > 0 and counts['task_input'] > 0
 proc = subprocess.Popen(['zstd', '-q', '-T2', '-3', '-o', str(temp)], stdin=subprocess.PIPE)
 try:
@@ -89,7 +103,7 @@ except BaseException:
     raise
 manifest = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
-    'scope': 'Immutable JSON snapshots of live Muse NVFP4 exact-image TB2.1 recovery. Includes launched task descriptions, original and replica-effective configs, handoff receipt, raw model responses with thinking and current trajectories. Running trials are not scored until result.json is terminal.',
+    'scope': 'Immutable JSON snapshots of live Muse NVFP4 exact-image TB2.1 recovery. Includes launched task descriptions, original and replica-effective configs, handoff receipts, raw model responses with thinking and current trajectories. Running trials are not scored until result.json is terminal.',
     'archive_name': archive.name,
     'archive_size_bytes': archive.stat().st_size,
     'archive_sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),

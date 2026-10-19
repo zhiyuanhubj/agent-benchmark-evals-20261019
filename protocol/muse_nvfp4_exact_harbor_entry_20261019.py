@@ -11,7 +11,7 @@ if config_path and config_path.name.startswith('r1-completion-2866-b'):
     if extra_marker.exists():
         extra_owner = json.loads(extra_marker.read_text())
         assert extra_owner['config_sha256'] == hashlib.sha256(config_path.read_bytes()).hexdigest()
-        assert extra_owner['lane'] in (2, 3)
+        assert extra_owner['lane'] in (2, 3, 4)
         if os.environ.get('MUSE_TB_EXTRA_LANE') != str(extra_owner['lane']):
             exit_file = state / (config_path.stem + '-extra-exit.json')
             owner_lock_path = state / f'extra-lane{extra_owner["lane"]}-2866-controller.lock'
@@ -90,6 +90,10 @@ if len(sys.argv) == 2 and Path(sys.argv[1]).resolve() in {E/'configs/tb-r2.json'
     claim = json.loads((E/'state'/f'{config_path.stem}-2733-claim.json').read_text())
     assert claim['config_sha256'] == expected and claim['job'] == 2733
     os.environ['MIX_SERVER_IP'] = plan['destination_ip']
+if config_path and config_path.name in ('r1-completion-2866-b03.json', 'r1-completion-2866-b05.json') and os.environ.get('MUSE_TB_EXTRA_LANE'):
+    from route_2812 import route_for_extra_lane
+    config_path = route_for_extra_lane(config_path, os.environ['MUSE_TB_EXTRA_LANE'])
+    sys.argv[1] = str(config_path)
 from harbor.job import Job
 from harbor.models.job.config import JobConfig
 async def main():
