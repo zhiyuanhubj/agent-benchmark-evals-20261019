@@ -1,6 +1,6 @@
 # Agent benchmark evaluation snapshot
 
-Snapshot: **2026-10-19T05:06:23.889164+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
+Snapshot: **2026-10-19T05:07:18.831034+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
@@ -16,7 +16,7 @@ The TB2.1 **legacy cached-tag image profile is separate** from the exact user-su
 
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
-The release has 27 archive manifests; **27/27 assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
+The release has 28 archive manifests; **28/28 assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
 
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. The original controller verifies delegated batches before advancing, preventing duplicate scoring. Additional GPU allocation states: 2923 PENDING, 2924 PENDING, 2927 PENDING, 2928 PENDING. A watcher starts the pinned Muse service when one of these allocations is granted; evaluator task assignment still requires a disjoint-task handoff. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
