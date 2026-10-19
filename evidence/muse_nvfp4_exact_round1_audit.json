@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T09:59:47.948647+00:00",
+  "generated_utc": "2026-10-19T10:02:24.728359+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 52,
-  "success_count": 43,
-  "scored_raw_response_count": 1613,
-  "scored_nonempty_reasoning_response_count": 1613,
+  "graded_task_count": 53,
+  "success_count": 44,
+  "scored_raw_response_count": 1681,
+  "scored_nonempty_reasoning_response_count": 1681,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -102,7 +102,6 @@
     "raman-fitting",
     "schemelike-metacircular-eval",
     "train-fasttext",
-    "tune-mjcf",
     "winning-avg-corewars",
     "write-compressor"
   ],
@@ -117,8 +116,8 @@
     "path-tracing__au39ic5",
     "schemelike-metacircular-eval__nBsnCj5",
     "train-fasttext__Mc2uuim",
-    "tune-mjcf__cgx3dH4",
-    "winning-avg-corewars__52KLeCD"
+    "winning-avg-corewars__52KLeCD",
+    "write-compressor__ry6gp7K"
   ],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -674,6 +673,17 @@
       "finished_at": "2026-10-19T08:01:40.251225Z",
       "raw_response_count": 15,
       "responses_with_reasoning_content": 15
+    },
+    "tune-mjcf": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b07/tune-mjcf__cgx3dH4/result.json",
+      "result_sha256": "4bdc9ce7facefb1d848e3b23bbf0f9ca5f966de3a7276996031fb9a89d8c9066",
+      "finished_at": "2026-10-19T10:01:00.565318Z",
+      "raw_response_count": 68,
+      "responses_with_reasoning_content": 68
     },
     "video-processing": {
       "reward": 0.0,
