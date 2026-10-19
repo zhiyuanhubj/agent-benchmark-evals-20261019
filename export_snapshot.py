@@ -389,6 +389,12 @@ opus_deep_zh_pending = ''.join(
 bf16_exact_zh_done = f'；指定精确镜像 TB2.1 首轮 {tb_zh(bf16_tb_round1)}' if bf16_tb_round1['complete'] else ''
 bf16_exact_zh_pending = '' if bf16_tb_round1['complete'] else f'；指定精确镜像 TB2.1 首轮 {tb_zh(bf16_tb_round1)}'
 mn_exact_note_zh = f"精确镜像首轮已完成：**{mn_tb['success']}/89（{mn_tb['accuracy']:.2%}）**。" if mn_tb['complete'] else f"精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。"
+if not mn_tb['complete'] and mn_tb['graded'] == 88 and mn_audit['missing_graded_tasks'] == ['mteb-leaderboard']:
+    lower = mn_tb['success'] / 89
+    upper = (mn_tb['success'] + 1) / 89
+    mn_exact_note_zh += (f'已判分 {mn_tb["success"]} 题成功；若最后一题按协议得到有效评分，'
+                         f'完整首轮将是 {mn_tb["success"]}/89（{lower:.2%}）或 '
+                         f'{mn_tb["success"] + 1}/89（{upper:.2%}），目前尚不能确定是哪一个。')
 mteb_timeout_note_zh = ''
 if not mn_tb['complete'] and mn_audit['missing_graded_tasks'] == ['mteb-leaderboard']:
     mteb_card = Path('/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/mteb-leaderboard/task.toml')

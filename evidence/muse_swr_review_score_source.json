@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T18:26:46.579814+00:00",
+  "utc": "2026-10-19T18:41:48.561237+00:00",
   "model": "Muse-Spark-Open-816B-A42B-NVFP4",
   "replicas": {
     "2865": {
@@ -103,27 +103,9 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 454,
+      "terminal": 460,
       "raw_terminal_records": 462,
       "infrastructure_before_model": [
-        {
-          "task": "sympy__sympy-24443",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-24443__jgM8mZ6/result.json",
-          "sha256": "e8ce707e890befbfe29466d1a13220808022d9cc570febe9fcf6f69d3a8bc73a"
-        },
-        {
-          "task": "sympy__sympy-23534",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-23534__7CiwT5F/result.json",
-          "sha256": "0e4d55580b25f1193bd3df025c39d49dff8ea0a942be664cbc9b60f633ea4f31"
-        },
-        {
-          "task": "sympy__sympy-24066",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-24066__NXUEZMe/result.json",
-          "sha256": "9ecb467c3897db37725e8dde02027bc2904c6682f9aa4a6f04cdf7423bda3179"
-        },
         {
           "task": "sympy__sympy-17630",
           "classification": "cancelled_2868_endpoint_before_first_model_response",
@@ -135,43 +117,25 @@
           "classification": "docker_hub_rate_limit_before_agent",
           "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-17655__9WrmeZe/result.json",
           "sha256": "f2b2864cac83941ce26c4e4b138012438712aaa2825c8361db547cf3472d1800"
-        },
-        {
-          "task": "sympy__sympy-24539",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-24539__oe525b9/result.json",
-          "sha256": "0325f3fbf795d45f137d723b56d02363519e0b64b33418f6864bcfc9f7b5b3e4"
-        },
-        {
-          "task": "sympy__sympy-23262",
-          "classification": "cancelled_2868_endpoint_before_first_model_response",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-23262__ZqNAYbM/result.json",
-          "sha256": "aaf476e5805e8be910ad57efb0ff6d94ef37b90e9747298a8069bdbf58f40e50"
-        },
-        {
-          "task": "sympy__sympy-23950",
-          "classification": "cancelled_2868_endpoint_before_first_model_response",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-23950__YxNWwMT/result.json",
-          "sha256": "db80fc19fd170980f3c274b703729fc39f2e82374f35cb1d971d6b7507c12e94"
         }
       ],
-      "recovered_before_response_infrastructure_tasks": 343,
+      "recovered_before_response_infrastructure_tasks": 349,
       "recovery_infrastructure_exceptions": [],
       "complete": false,
       "metrics_on_terminal_subset": {
-        "DA": 81.4,
+        "DA": 81.3,
         "DA_total_50": 78.5,
-        "CR": 91.0,
-        "FAR": 15.6,
-        "FRR": 21.6,
-        "total": 454,
-        "correct": 336,
-        "model_fail": 41,
-        "produced": 413,
-        "TP": 163,
+        "CR": 90.9,
+        "FAR": 15.5,
+        "FRR": 21.7,
+        "total": 460,
+        "correct": 340,
+        "model_fail": 42,
+        "produced": 418,
+        "TP": 166,
         "FP": 32,
-        "TN": 173,
-        "FN": 45
+        "TN": 174,
+        "FN": 46
       },
       "exceptions": [],
       "invalid_decisions": [],
@@ -587,13 +551,13 @@
       },
       "complete": false,
       "model_generation_started": false,
-      "utc": "2026-10-19T18:26:14.814713+00:00",
+      "utc": "2026-10-19T18:41:49.869588+00:00",
       "grader_preflight_passed": true
     },
     "task_preparation_controller": "MainPID=4150849\nResult=success\nActiveState=active\n"
   },
   "revision_capacity_preparation": {
-    "utc": 1792434406.5622172,
+    "utc": 1792435308.1600125,
     "phase": "waiting_for_reserved_allocations",
     "candidate_allocations": [
       2888,

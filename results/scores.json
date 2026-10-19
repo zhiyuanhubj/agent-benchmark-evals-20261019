@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T18:38:25.490084+00:00",
+  "generated_utc": "2026-10-19T18:43:06.796775+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -59,7 +59,7 @@
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 454,
+          "terminal": 460,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
@@ -246,20 +246,20 @@
             "2": 18,
             "3": 0
           },
-          "new_raw_model_responses": 4885,
+          "new_raw_model_responses": 4894,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 707,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 710,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 492,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 279
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 496,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 281
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T18:38:11+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T18:42:09+00:00",
           "active_recovery_trial_dirs": 3,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -316,9 +316,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 90,
-        "graded": 89,
-        "success": 57,
+        "terminal": 91,
+        "graded": 90,
+        "success": 58,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -375,7 +375,7 @@
             "graded": 86,
             "success": 61,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 4221,
+            "archived_actual_model_responses": 4241,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 7
@@ -391,7 +391,7 @@
             "graded": 20,
             "success": 15,
             "active_trial_dirs": 24,
-            "archived_actual_model_responses": 698,
+            "archived_actual_model_responses": 800,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -427,17 +427,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 334,
+          "terminal": 337,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 334,
+          "terminal": 335,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 360,
+          "terminal": 363,
           "status": "partial_no_full_rrr"
         }
       }
@@ -475,9 +475,9 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 102,
-          "graded": 102,
-          "success": 32,
+          "terminal": 105,
+          "graded": 105,
+          "success": 33,
           "status": "partial_no_full_score"
         }
       },
@@ -627,9 +627,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 33,
-          "graded": 33,
-          "success": 12,
+          "terminal": 34,
+          "graded": 34,
+          "success": 13,
           "status": "partial_no_full_score"
         },
         "2": {
