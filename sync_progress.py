@@ -64,6 +64,19 @@ def sync_native_archives(scores, force_bf16=False):
                     route_allocations.add(route_value['allocation'])
                     route_time = datetime.fromtimestamp(route_value['utc'], timezone.utc)
                     handoff_newer |= latest_archive_time is None or route_time > latest_archive_time
+            future_routes = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes'
+            for route in future_routes.glob('r[23]-completion-2866-b*-route.json'):
+                value = json.loads(route.read_text())
+                route_allocations.add(value['allocation'])
+                original_stem = Path(value['original_config']).stem
+                related = [route,
+                           BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/{original_stem}-extra-owner.json',
+                           BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/{original_stem}-extra-exit.json']
+                for marker in related:
+                    if marker.exists():
+                        expected_receipts += 1
+                        marker_time = datetime.fromtimestamp(json.loads(marker.read_text())['utc'], timezone.utc)
+                        handoff_newer |= latest_archive_time is None or marker_time > latest_archive_time
             for name in ('r1-b05-early-owner.json', 'r1-b05-early-exit.json', 'r1-b05-normal-started.json'):
                 marker = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu' / name
                 if marker.exists():

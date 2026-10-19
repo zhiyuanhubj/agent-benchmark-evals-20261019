@@ -1,17 +1,20 @@
 from pathlib import Path
-import asyncio,json,sys,time
+import asyncio,json,re,sys,time
 E=Path(__file__).resolve().parent
 sys.path.insert(0,'/fsx/home/zhiyuan/bench/tb21_v1_four_models_20261012')
 import os, hashlib, fcntl
 config_path = Path(sys.argv[1]).resolve() if len(sys.argv) == 2 else None
 extra_owner = None
-if config_path and config_path.name.startswith('r1-completion-2866-b'):
+if config_path and re.fullmatch(r'r[23]-completion-2866-b\d{2}\.json', config_path.name):
+    from route_future_rounds import original_entry_claim
+    original_entry_claim(config_path)
+if config_path and re.fullmatch(r'r[123]-completion-2866-b\d{2}\.json', config_path.name):
     state = E / 'state'
     extra_marker = state / (config_path.stem + '-extra-owner.json')
     if extra_marker.exists():
         extra_owner = json.loads(extra_marker.read_text())
         assert extra_owner['config_sha256'] == hashlib.sha256(config_path.read_bytes()).hexdigest()
-        assert extra_owner['lane'] in (2, 3, 4)
+        assert extra_owner['lane'] in (2, 3, 4, 5, 6, 7, 8)
         if os.environ.get('MUSE_TB_EXTRA_LANE') != str(extra_owner['lane']):
             exit_file = state / (config_path.stem + '-extra-exit.json')
             owner_lock_path = state / f'extra-lane{extra_owner["lane"]}-2866-controller.lock'

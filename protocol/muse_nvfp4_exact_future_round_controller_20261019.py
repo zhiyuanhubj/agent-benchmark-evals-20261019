@@ -1,0 +1,93 @@
+"""Run disjoint planned round-2/3 TB batches on one newly granted NVFP4 GPU."""
+
+import fcntl
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.request
+from pathlib import Path
+
+from route_future_rounds import LANES, ROOT, STATE, WORK, claim_next, save, sha, validate_route
+
+PYTHON = '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python'
+ROUTES = STATE / 'future-routes'
+
+
+def endpoint_ready(allocation):
+    proof = WORK / f'state/extra_gpu/{allocation}-ready.json'
+    value = json.loads(proof.read_text())
+    assert value['job'] == allocation and value['phase'] == 'ready'
+    assert value.get('claimed_round1_batches') == [], 'Round-1 handoff takes priority'
+    endpoint = value['endpoint']
+    assert endpoint.startswith('http://10.') and endpoint.endswith(':31320/v1')
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    with opener.open(endpoint + '/models', timeout=10) as response:
+        models = json.load(response)['data']
+    assert any(row.get('id') == 'muse-spark-open-nvfp4' for row in models)
+    return endpoint
+
+
+def terminal_coverage(receipt):
+    expected = set(receipt['tasks'])
+    found = set()
+    directory = ROOT / 'results/muse_nvfp4' / receipt['job_name']
+    for path in directory.glob('*/result.json'):
+        value = json.loads(path.read_text())
+        if not value.get('finished_at'):
+            continue
+        task = Path(value['config']['task']['path']).name
+        assert task in expected and task not in found
+        assert value['config']['agent']['kwargs']['api_base'] == receipt['endpoint']
+        found.add(task)
+    return expected, found
+
+
+def main():
+    allocation = int(sys.argv[1])
+    assert allocation in LANES and os.environ.get('SLURM_JOB_ID') == '2919'
+    images = json.loads((ROOT / 'allocation-2919/images-ready.json').read_text())
+    assert images['count'] == 89 and images['all_archive_identities_verified']
+    assert json.loads((ROOT / 'allocation-2919/official-policy-preflight-ready.json').read_text())['passed']
+    lane = LANES[allocation]
+    ROUTES.mkdir(parents=True, exist_ok=True)
+    with (STATE / f'extra-lane{lane}-2866-controller.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        endpoint = endpoint_ready(allocation)
+        save(ROUTES / f'{allocation}-controller-status.json',
+             {'utc': time.time(), 'allocation': allocation, 'lane': lane,
+              'endpoint': endpoint, 'phase': 'ready'})
+        env = os.environ.copy()
+        env.update(OPENAI_API_KEY='EMPTY', HF_HOME='/fsx/home/zhiyuan/bench/hf_home',
+                   UV_CACHE_DIR='/fsx/home/zhiyuan/bench/uv_cache')
+        completed = []
+        while receipt := claim_next(allocation, endpoint):
+            source = Path(receipt['original_config'])
+            effective = validate_route(source, receipt,
+                                       json.loads((STATE / f'{source.stem}-extra-owner.json').read_text()))
+            save(ROUTES / f'{allocation}-controller-status.json',
+                 {'utc': time.time(), 'allocation': allocation, 'lane': lane,
+                  'endpoint': endpoint, 'phase': 'running',
+                  'job_name': receipt['job_name'], 'completed_batches': completed})
+            log = ROUTES / f'{receipt["job_name"]}-{allocation}.log'
+            with log.open('a') as stream:
+                result = subprocess.run([PYTHON, str(WORK / 'harbor_entry.py'), str(effective)],
+                                        env=env, stdout=stream, stderr=subprocess.STDOUT)
+            expected, found = terminal_coverage(receipt)
+            code = result.returncode if result.returncode else (0 if found == expected else 1)
+            save(STATE / f'{source.stem}-extra-exit.json',
+                 {'utc': time.time(), 'lane': lane, 'job_name': receipt['job_name'],
+                  'returncode': code, 'config_sha256': sha(source),
+                  'effective_config_sha256': sha(effective),
+                  'missing_terminal_tasks': sorted(expected - found)})
+            assert code == 0, 'Handoff batch failed; preserve results and audit before resuming'
+            completed.append(receipt['job_name'])
+        save(ROUTES / f'{allocation}-controller-status.json',
+             {'utc': time.time(), 'allocation': allocation, 'lane': lane,
+              'endpoint': endpoint, 'phase': 'no_unclaimed_round23_batches',
+              'completed_batches': completed})
+
+
+if __name__ == '__main__':
+    main()

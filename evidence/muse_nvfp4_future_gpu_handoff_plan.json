@@ -1,0 +1,48 @@
+{
+  "prepared_utc": "2026-10-19T12:05:42.816339+00:00",
+  "status": "prepared_no_extra_gpu_allocation_granted",
+  "queued_gpu_allocations": [
+    2923,
+    2924,
+    2927,
+    2928
+  ],
+  "cpu_allocation": 2919,
+  "model": "Muse-Spark-Open-816B-A42B-NVFP4",
+  "benchmark": "TB2.1 exact user-supplied images",
+  "rounds": [
+    2,
+    3
+  ],
+  "planned_batches": 18,
+  "planned_task_draws": 178,
+  "original_plan_sha256": "7cdf58f945713bfd45a16cb68728aa727914f5424ee897f34a1244b4ea5d01ea",
+  "batch_config_sha256": {
+    "r2-completion-2866-b00.json": "39e9358d7e9a781a2024bd0d16d7bdff037bebe735f9b88edb8eb3e72a6eafde",
+    "r2-completion-2866-b01.json": "57d9a64492b884603ad4a61cfc996412a0db57babcd8e9e8afee1434b9e39773",
+    "r2-completion-2866-b02.json": "4a9b18c4b38d2e5124701bfabe6d7f045cc2b97ca09d949e1c83e62ffe739b1c",
+    "r2-completion-2866-b03.json": "6be6a0ccb1ebccef7ff68086a769318787abb4b2ba016fd1505bd39fdfd386e3",
+    "r2-completion-2866-b04.json": "deb17e5edacc6f18f1141dac740cd761741aa1f088b775c74e81d47bd000ea6d",
+    "r2-completion-2866-b05.json": "4017ad9fb00e2fe0d896d4357dcf6afba756a874251a6e4fcbd624ed7406ed1e",
+    "r2-completion-2866-b06.json": "d2319285df1746802dee41db3c33248d1817e3041370761d397da2a995bc7c9a",
+    "r2-completion-2866-b07.json": "2e2d0397e4d159932a4a309707e297cefd6c351011a4c2f8ed2ecd8ec65fcd4d",
+    "r2-completion-2866-b08.json": "8b5060cae570550c08e641f6e5743070dbc4fed5abd71573ac86631ea4e85a01",
+    "r3-completion-2866-b00.json": "682b25f4e9a5b8821f568fa8579c9b68b93be1350d315f8a1a6ea1afb4570939",
+    "r3-completion-2866-b01.json": "cff32fcdbae313eae5d7bcedc8bc78fb032470cbed9c3f55f3c2fec1cead6639",
+    "r3-completion-2866-b02.json": "b118ec0fb52ccae36241b9bf22c0d9dc4062b55a9c48b69cf752bbf8aa50b657",
+    "r3-completion-2866-b03.json": "96b46a63486903051e344500bde51401fb1ed5d76e4cd3d1aaf6847d6c4da2bf",
+    "r3-completion-2866-b04.json": "fa6dae300c22e298755ff292e2c85848cf60cfcd64309a6217ad9ff8c2cb780b",
+    "r3-completion-2866-b05.json": "f49d5e35c22f1beac02c5322f1e57a88dcb3905590df2480b59208b9e4c17b90",
+    "r3-completion-2866-b06.json": "0d32125c15bf7dce27b335f4a0f42d0238dfc056ab8a32b6e18b8351034ad746",
+    "r3-completion-2866-b07.json": "6fda3918187ebf39cffcaf10cef99b989be11ca3014546f440be7bcb229fca6b",
+    "r3-completion-2866-b08.json": "5b9ec773a1155ca7bcf0658111e3276ff438b1f572d17712959dba51d6b84026"
+  },
+  "protocol_script_sha256": {
+    "muse_nvfp4_exact_future_round_routes_20261019.py": "3a5317d08fcdab451bb56bb9dddfa9bbf5a0bbe9b6e6d26305f6b9da6044c059",
+    "muse_nvfp4_exact_future_round_controller_20261019.py": "64c9528ed9cbd6effaa4f904cb98864ffd725c8113a7c81ac2fe2a78cb30813d",
+    "muse_nvfp4_exact_harbor_entry_20261019.py": "d0802e3ce542f1b22b05cc9c43d23aa6bbbbcd5ec9c6dc648125c9e88fafca29",
+    "muse_nvfp4_exact_extra_gpu_watch_20261019.py": "11b9d9aae9a7b42dbd766ea0a044abe414ab36a906c4678488502de636f49dfd"
+  },
+  "handoff_rule": "Newly granted replicas may claim only untouched round-2/3 batches under a per-batch lock. The original controller records local ownership before model inference, or waits for an external exit receipt and exact terminal coverage. Effective configs change only api_base. No round-1 draw is repeated.",
+  "score_rule": "Each terminal task counts once in its planned round; partial counts are never reported as full-round accuracy."
+}

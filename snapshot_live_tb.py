@@ -90,6 +90,33 @@ for batch in ('b03', 'b05'):
         if config_path not in payloads:
             payloads[config_path] = config_path.read_bytes()
             counts['job_config'] += 1
+for receipt_path in sorted((SOURCE / 'muse_nvfp4/state/future-routes').glob('r[23]-completion-2866-b*-route.json')):
+    receipt_bytes = receipt_path.read_bytes()
+    receipt = json.loads(receipt_bytes)
+    assert receipt['round'] in (2, 3) and receipt['allocation'] in (2923, 2924, 2927, 2928)
+    original, effective = Path(receipt['original_config']), Path(receipt['effective_config'])
+    assert original.is_file() and effective.is_file()
+    assert hashlib.sha256(original.read_bytes()).hexdigest() == receipt['original_sha256']
+    assert hashlib.sha256(effective.read_bytes()).hexdigest() == receipt['effective_sha256']
+    expected = json.loads(original.read_text())
+    expected['agents'][0]['kwargs']['api_base'] = receipt['endpoint']
+    assert json.loads(effective.read_text()) == expected
+    ready_path = SOURCE / f'muse_nvfp4/state/extra_gpu/{receipt["allocation"]}-ready.json'
+    ready = json.loads(ready_path.read_text())
+    assert ready['phase'] == 'ready' and ready['endpoint'] == receipt['endpoint']
+    related = [receipt_path, SOURCE / f'muse_nvfp4/state/{original.stem}-extra-owner.json',
+               SOURCE / f'muse_nvfp4/state/{original.stem}-extra-exit.json']
+    for path in related:
+        if path.exists() and path not in payloads:
+            payloads[path] = path.read_bytes()
+            counts['handoff_receipt'] += 1
+    if ready_path not in payloads:
+        payloads[ready_path] = ready_path.read_bytes()
+        counts['ready_proof'] += 1
+    for config_path in (original, effective):
+        if config_path not in payloads:
+            payloads[config_path] = config_path.read_bytes()
+            counts['job_config'] += 1
 for marker_name in ('r1-b05-early-owner.json', 'r1-b05-early-exit.json', 'r1-b05-normal-started.json'):
     marker = SOURCE / 'muse_nvfp4/state/extra_gpu' / marker_name
     if marker.exists():

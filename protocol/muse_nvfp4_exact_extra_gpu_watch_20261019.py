@@ -101,6 +101,53 @@ def launch(job, node):
     log(phase='launch_attempt', job=job, node=node, unit=unit, returncode=launched.returncode, message=(launched.stdout + launched.stderr)[-1000:])
 
 
+def launch_future_round_controller(job):
+    """Use newly ready replicas for untouched rounds 2/3, never r1 redraws."""
+    ready_path = STATE / f'{job}-ready.json'
+    serve_claim_path = STATE / f'{job}-launch-claim.json'
+    if not ready_path.exists() or not serve_claim_path.exists():
+        return
+    ready = json.loads(ready_path.read_text())
+    serve_claim = json.loads(serve_claim_path.read_text())
+    if ready.get('claimed_round1_batches') != []:
+        return
+    started = datetime.fromisoformat(serve_claim['utc']).timestamp()
+    if ready.get('utc', 0) < started:
+        return  # Stale proof from an earlier failed server attempt.
+    server_state = subprocess.run(['systemctl', '--user', 'is-active', serve_claim['unit'] + '.service'],
+                                  capture_output=True, text=True, timeout=10)
+    if server_state.stdout.strip() != 'active':
+        return
+    claim = STATE / f'{job}-future-controller-claim.json'
+    status = ROOT / f'muse_nvfp4/state/future-routes/{job}-controller-status.json'
+    if claim.exists():
+        previous = json.loads(claim.read_text())
+        state = subprocess.run(['systemctl', '--user', 'is-active', previous['unit'] + '.service'],
+                               capture_output=True, text=True, timeout=10)
+        if state.stdout.strip() in ('active', 'activating'):
+            return
+        if status.exists() and json.loads(status.read_text()).get('phase') == 'no_unclaimed_round23_batches':
+            return
+        log(phase='future_controller_stopped_requires_audit', job=job, unit=previous['unit'])
+        return
+    unit = f'muse-nvfp4-exact-r23-extra-{job}-20261019'
+    log_file = STATE / f'{job}-future-controller.log'
+    command = [
+        'systemd-run', '--user', f'--unit={unit}',
+        f'--property=StandardOutput=append:{log_file}',
+        f'--property=StandardError=append:{log_file}',
+        '/usr/local/bin/srun', '--jobid=2919', '--overlap', '--gres=none', '-N1', '-n1', '-c8',
+        '--immediate=10', PYTHON, str(ROOT / 'muse_nvfp4/future_round_controller.py'), str(job),
+    ]
+    launched = subprocess.run(command, capture_output=True, text=True)
+    if launched.returncode == 0:
+        claim.write_text(json.dumps({'utc': datetime.now(timezone.utc).isoformat(),
+                                     'allocation': job, 'endpoint': ready['endpoint'],
+                                     'unit': unit}, indent=2) + '\n')
+    log(phase='future_controller_launch_attempt', job=job, unit=unit,
+        returncode=launched.returncode, message=(launched.stdout + launched.stderr)[-1000:])
+
+
 def cycle():
     result = subprocess.run(['squeue', '-h', '-j', ','.join(map(str, JOBS)), '-o', '%i|%T|%N'], capture_output=True, text=True, check=True)
     rows = {}
@@ -114,6 +161,7 @@ def cycle():
         if rows.get(job, {}).get('state') != 'RUNNING':
             continue
         launch(job, rows[job]['nodes'])
+        launch_future_round_controller(job)
     if not round_one_finished() and untouched_round1_batch() and early95_released():
         allocation = subprocess.run(['squeue', '-h', '-j', '2812', '-o', '%T|%N'], capture_output=True, text=True, check=True).stdout.strip()
         if allocation.startswith('RUNNING|'):
