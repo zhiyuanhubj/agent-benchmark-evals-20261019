@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T07:33:44.502676+00:00",
+  "generated_utc": "2026-10-19T07:34:35.163128+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
@@ -9,7 +9,60 @@
     "chess-best-move",
     "cobol-modernization"
   ],
-  "replica_handoff": null,
+  "replica_handoff": {
+    "utc": 1792395252.4120455,
+    "source_allocation": 2866,
+    "destination_allocation": 2867,
+    "cpu_allocation": 2919,
+    "endpoint": "http://10.1.105.182:31321/v1",
+    "batches": [
+      {
+        "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06",
+        "tasks": [
+          "regex-chess",
+          "regex-log",
+          "reshard-c4-data",
+          "rstan-to-pystan",
+          "sam-cell-seg",
+          "sanitize-git-repo",
+          "schemelike-metacircular-eval",
+          "sparql-university",
+          "sqlite-db-truncate",
+          "sqlite-with-gcov"
+        ],
+        "original_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b06.json",
+        "original_sha256": "7b4fd178f11122437b42ad0ff3d70e546d052edada35b3289be4c948d56e6f30",
+        "effective_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-handoff-2867-b06.json",
+        "effective_sha256": "8a33a819d0cc3820446ced59631722a5e77873aafd96faaca9660450d0ddb8e1",
+        "changes": {
+          "api_base": "http://10.1.105.182:31321/v1",
+          "n_concurrent_trials": 3
+        }
+      },
+      {
+        "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07",
+        "tasks": [
+          "torch-pipeline-parallelism",
+          "torch-tensor-parallelism",
+          "train-fasttext",
+          "tune-mjcf",
+          "video-processing",
+          "vulnerable-secret",
+          "winning-avg-corewars",
+          "write-compressor"
+        ],
+        "original_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b07.json",
+        "original_sha256": "c11d6d84b8bbbdcc96b13c5e37737e32c07c1ef4beb7ee58810568a99d772764",
+        "effective_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-handoff-2867-b07.json",
+        "effective_sha256": "ea8a050f0155230f7976769cfb2affad8734d3a4cbbd3cf14ae30d68d079e01c",
+        "changes": {
+          "api_base": "http://10.1.105.182:31321/v1",
+          "n_concurrent_trials": 3
+        }
+      }
+    ],
+    "sampling_profile_unchanged": true
+  },
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "code-from-image",
