@@ -34,7 +34,12 @@ for job in sorted(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*')):
         for category, path in [('trial_config', trial / 'config.json'), ('trajectory', trial / 'agent/trajectory.json'), ('result', trial / 'result.json')]:
             if path.exists() and path.is_file() and not path.is_symlink():
                 data = path.read_bytes()
-                parsed = json.loads(data)
+                try:
+                    parsed = json.loads(data)
+                except json.JSONDecodeError:
+                    if category == 'trajectory':
+                        continue  # Active trajectories may be rewritten mid-snapshot.
+                    raise
                 payloads[path] = data
                 counts[category] += 1
                 if category == 'result' and parsed.get('finished_at'):
