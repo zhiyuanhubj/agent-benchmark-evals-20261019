@@ -65,6 +65,10 @@ for line in queued_gpu_result.stdout.splitlines():
 extra_gpu_status = ', '.join(f'{job} {extra_gpu_allocations.get(str(job), {}).get("state", "not_in_queue")}' for job in extra_gpu_jobs)
 early_b05_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-b05-early-owner.json'
 early_b05_owner = read(early_b05_path) if early_b05_path.exists() else None
+early_b05_exit_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-b05-early-exit.json'
+early_b05_exit = read(early_b05_exit_path) if early_b05_exit_path.exists() else None
+replica_2812_r23_status_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/2812-controller-status.json'
+replica_2812_r23_status = read(replica_2812_r23_status_path) if replica_2812_r23_status_path.exists() else None
 nvfp4_rounds = json.loads(json.dumps(exact['models']['muse_nvfp4']['rounds']))
 new_terminal_by_round = {str(i): {} for i in (1, 2, 3)}
 new_raw_responses = 0
@@ -391,7 +395,14 @@ if opus_thinking_audit:
         f'The [Opus 4.7 round-3 thinking transport audit](evidence/opus47_r3_thinking_transport_audit.json), generated {opus_thinking_audit["generated_utc"]}, covers {oc["scored_tasks"]} terminal tasks: {oc["with_thinking_text"]}/{oc["raw_responses"]} archived replies contain thinking text, {oc["without_text_zero_reasoning_tokens"]} report zero reasoning tokens, and {oc["without_text_positive_reasoning_tokens"]} report positive reasoning tokens but have no thinking text even in saved upstream SSE. Those upstream events contain signed empty thinking blocks. Do not use the latter replies as full-thinking training examples.\n\nScores are benchmark-recorded values.', 1)
 readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
 if early_b05_owner:
-    readme = readme.replace('This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 'At this snapshot, b05 is running early on CPU allocation 2922 against GPU 2812; an ownership receipt makes sequential lane 3 verify its completed tasks and skip a duplicate draw. This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 1)
+    if early_b05_exit and early_b05_exit['returncode'] == 0:
+        b05_note = 'The b05 first-round batch finished on GPU 2812 and CPU 2922 with all 10 native results; its ownership receipt prevents a duplicate draw.'
+        if replica_2812_r23_status:
+            b05_note += (f" GPU 2812 now runs an untouched round-2/3 batch "
+                         f"{replica_2812_r23_status.get('job_name', 'none')} under a separate locked route; only the model endpoint changes.")
+    else:
+        b05_note = 'The b05 batch runs early on CPU allocation 2922 against GPU 2812; its ownership receipt prevents a duplicate draw.'
+    readme = readme.replace('This continuation is separate from both the legacy-image scores and the BF16 evaluation.', b05_note + ' This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 1)
 readme = readme.replace('Keyword screening does not clear other trajectories.', 'Keyword screening does not clear other trajectories. Targeted [manual notes](evidence/exact_tb_integrity_manual_notes.json) also flag Opus 4.7 `break-filter-js-from-html` for an unsuccessful `/tests` probe and Beam BF16 on the same task for a temporary copy of the exposed filter into `/tests/filter.py` (removed before grading); neither inspected output confirms hidden-answer retrieval, and both are excluded from clean training pending full review. The Opus `torch-pipeline-parallelism` keyword hit was only a Python-executable listing.', 1)
 db_wal_note = next((note for note in manual_notes if note['model'] == 'muse_nvfp4' and note['task'] == 'db-wal-recovery'), None)
 if db_wal_note:
@@ -445,7 +456,14 @@ chinese_report = chinese_report.replace('若本地批次先启动，不会在其
 chinese_report = chinese_report.replace('**审计限制。**', f'Opus 4.7 Pro 只统计原始运行的 731 道题；同一补丁的纯验证重试单独留证，不能增加首轮题数或成功数。原始运行仍有 1 题在两次 3600 秒验证超时后缺少有效评分。{opus_crosshost_zh}\n\n**审计限制。**', 1)
 chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
 if early_b05_owner:
-    chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。本次快照中 b05 已由 CPU 节点 2922 提前启动，调用 GPU 节点 2812；原顺序控制器稍后会核查同一批终态结果并跳过重复抽题。', 1)
+    if early_b05_exit and early_b05_exit['returncode'] == 0:
+        b05_note_zh = '首轮 b05 已在 GPU 2812、CPU 2922 完成 10 道原生题；归属凭据阻止重复抽题。'
+        if replica_2812_r23_status:
+            b05_note_zh += (f"GPU 2812 现以独立加锁接管运行未抽取的第 2/3 轮批次 "
+                            f"{replica_2812_r23_status.get('job_name', '无')}；仅改变模型端点。")
+    else:
+        b05_note_zh = '首轮 b05 正在 CPU 2922、GPU 2812 运行；归属凭据阻止重复抽题。'
+    chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。' + b05_note_zh, 1)
 chinese_report = chinese_report.replace('关键词未命中也不代表轨迹已获干净认证。', '关键词未命中也不代表轨迹已获干净认证。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)还标记了 Opus 4.7 在 `break-filter-js-from-html` 上对不存在的 `/tests` 的探查，以及 Beam BF16 在同题中把公开的过滤器临时复制到 `/tests/filter.py`、在判分前删除的行为；检查到的输出均未确认获得隐藏答案，两条轨迹暂不作为干净训练数据。Opus `torch-pipeline-parallelism` 的关键词命中只是列举 Python 可执行文件。', 1)
 if db_wal_note:
     old = '另一份判分前预警记录了 NVFP4 [`db-wal-recovery` 对宿主边界的探查](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)，它不证明边界探查成功，也不是最终分数。'

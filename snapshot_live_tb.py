@@ -93,7 +93,7 @@ for batch in ('b03', 'b05'):
 for receipt_path in sorted((SOURCE / 'muse_nvfp4/state/future-routes').glob('r[23]-completion-2866-b*-route.json')):
     receipt_bytes = receipt_path.read_bytes()
     receipt = json.loads(receipt_bytes)
-    assert receipt['round'] in (2, 3) and receipt['allocation'] in (2867, 2923, 2924, 2927, 2928)
+    assert receipt['round'] in (2, 3) and receipt['allocation'] in (2812, 2867, 2923, 2924, 2927, 2928)
     original, effective = Path(receipt['original_config']), Path(receipt['effective_config'])
     assert original.is_file() and effective.is_file()
     assert hashlib.sha256(original.read_bytes()).hexdigest() == receipt['original_sha256']
@@ -110,6 +110,10 @@ for receipt_path in sorted((SOURCE / 'muse_nvfp4/state/future-routes').glob('r[2
         assert ready['api_base'] == receipt['endpoint']
     else:
         assert ready['phase'] == 'ready' and ready['endpoint'] == receipt['endpoint']
+        if receipt['allocation'] == 2812:
+            assert ready['claimed_round1_batches'] == ['b05']
+            b05_exit = json.loads((SOURCE / 'muse_nvfp4/state/extra_gpu/r1-b05-early-exit.json').read_text())
+            assert b05_exit['returncode'] == 0 and b05_exit['missing_terminal_tasks'] == []
     related = [receipt_path, SOURCE / f'muse_nvfp4/state/{original.stem}-extra-owner.json',
                SOURCE / f'muse_nvfp4/state/{original.stem}-extra-exit.json']
     for path in related:
