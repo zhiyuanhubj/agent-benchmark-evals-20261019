@@ -1,21 +1,18 @@
 {
-  "generated_utc": "2026-10-19T17:41:15.983715+00:00",
+  "generated_utc": "2026-10-19T17:52:22.175934+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T173950Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T174725Z.tar.zst",
   "expected": 89,
-  "terminal": 9,
-  "graded": 9,
-  "success": 7,
+  "terminal": 12,
+  "graded": 12,
+  "success": 10,
   "missing_graded_tasks": [
     "chess-best-move",
-    "cobol-modernization",
     "code-from-image",
     "compile-compcert",
-    "configure-git-webserver",
-    "constraints-scheduling",
     "count-dataset-tokens",
     "crack-7z-hash",
     "custom-memory-heap-crash",
@@ -93,10 +90,10 @@
   ],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [
-    "cobol-modernization"
+    "count-dataset-tokens",
+    "crack-7z-hash"
   ],
   "missing_task_inputs_in_archive": [
-    "video-processing",
     "vulnerable-secret",
     "winning-avg-corewars",
     "write-compressor"
@@ -169,6 +166,27 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/circuit-fibsqrt__RdBkkxu/result.json",
       "raw_response_count": 19,
       "responses_with_reasoning_content": 19
+    },
+    "cobol-modernization": {
+      "reward": 1.0,
+      "result_sha256": "8cb581d7084b028589a2e71e031af8f1f5cf2baceebef46a5474c778610606b2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/cobol-modernization__5UxWXk5/result.json",
+      "raw_response_count": 55,
+      "responses_with_reasoning_content": 55
+    },
+    "configure-git-webserver": {
+      "reward": 1.0,
+      "result_sha256": "7f45bfc1dd947619a1b8b3743a17731ee7a810087958fe6f20025e55cc35d7e3",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/configure-git-webserver__cEWZs76/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "constraints-scheduling": {
+      "reward": 1.0,
+      "result_sha256": "15e2c8cbd0f7bb6aa8acc8364935df65b1fa3ff262441677cf6e9610834b9fce",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/constraints-scheduling__neZfcgQ/result.json",
+      "raw_response_count": 4,
+      "responses_with_reasoning_content": 4
     }
   }
 }

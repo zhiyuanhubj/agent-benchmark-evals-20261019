@@ -1,5 +1,5 @@
 {
-  "utc": 1792430733.9192672,
+  "utc": 1792431640.2475467,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,39 +345,39 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 319,
+      "terminal": 320,
       "exceptions": 7,
       "prepared_image_phases": {
-        "image_ready": 336
+        "image_ready": 352
       },
       "controller": {
-        "utc": 1792427807.615339,
+        "utc": 1792430983.2855554,
         "phase": "running",
-        "batch": 19,
+        "batch": 20,
         "tasks": [
-          "pydata__xarray-4075",
-          "pydata__xarray-4094",
-          "pydata__xarray-4356",
-          "pydata__xarray-4629",
-          "pydata__xarray-4687",
-          "pydata__xarray-4695",
-          "pydata__xarray-4966",
-          "pydata__xarray-6461",
-          "pydata__xarray-6599",
-          "pydata__xarray-6721",
-          "pydata__xarray-6744",
-          "pydata__xarray-6938",
-          "pydata__xarray-6992",
-          "pydata__xarray-7229",
-          "pydata__xarray-7233",
-          "pydata__xarray-7393"
+          "pylint-dev__pylint-4551",
+          "pylint-dev__pylint-4604",
+          "pylint-dev__pylint-4661",
+          "pylint-dev__pylint-4970",
+          "pylint-dev__pylint-6386",
+          "pylint-dev__pylint-6528",
+          "pylint-dev__pylint-6903",
+          "pylint-dev__pylint-7080",
+          "pylint-dev__pylint-7277",
+          "pylint-dev__pylint-8898",
+          "pytest-dev__pytest-10051",
+          "pytest-dev__pytest-10081",
+          "pytest-dev__pytest-10356",
+          "pytest-dev__pytest-5262",
+          "pytest-dev__pytest-5631",
+          "pytest-dev__pytest-5787"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 320,
+      "terminal": 324,
       "exceptions": 5,
       "prepared_image_phases": {
         "image_ready": 352
@@ -409,7 +409,7 @@
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 342,
+      "terminal": 345,
       "exceptions": 6,
       "prepared_image_phases": {
         "image_ready": 368

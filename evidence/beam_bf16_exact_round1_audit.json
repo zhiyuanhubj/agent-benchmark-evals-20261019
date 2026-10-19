@@ -1,19 +1,18 @@
 {
-  "generated_utc": "2026-10-19T17:41:00.289085+00:00",
+  "generated_utc": "2026-10-19T17:52:03.110299+00:00",
   "model": "beam_bf16",
   "round": 1,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T173950Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T174725Z.tar.zst",
   "expected": 89,
-  "terminal": 81,
-  "graded": 81,
-  "success": 56,
+  "terminal": 82,
+  "graded": 82,
+  "success": 57,
   "missing_graded_tasks": [
     "regex-chess",
     "schemelike-metacircular-eval",
     "train-fasttext",
-    "tune-mjcf",
     "video-processing",
     "vulnerable-secret",
     "winning-avg-corewars",
@@ -22,7 +21,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "video-processing",
     "vulnerable-secret",
     "winning-avg-corewars",
     "write-compressor"
@@ -599,6 +597,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/torch-tensor-parallelism__MYezQpU/result.json",
       "raw_response_count": 17,
       "responses_with_reasoning_content": 17
+    },
+    "tune-mjcf": {
+      "reward": 1.0,
+      "result_sha256": "31335bb20c4439fa438b9c22b629e218cb31710207650a0128fd31fe8cab41ed",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/tune-mjcf__kwixybS/result.json",
+      "raw_response_count": 28,
+      "responses_with_reasoning_content": 28
     }
   }
 }
