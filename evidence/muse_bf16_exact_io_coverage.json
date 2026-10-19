@@ -1,9 +1,13 @@
 {
-  "generated_utc": "2026-10-19T15:32:58.280793+00:00",
+  "generated_utc": "2026-10-19T15:42:22.001905+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 24,
-  "success_count": 20,
+  "scored_tasks": 26,
+  "success_count": 22,
   "tasks": {
+    "circuit-fibsqrt": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/circuit-fibsqrt__eWa7Tv3/result.json"
+    },
     "regex-log": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/regex-log__ynqEXWv/result.json"
@@ -27,6 +31,10 @@
     "multi-source-data-merger": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/multi-source-data-merger__6Xrmvzw/result.json"
+    },
+    "build-pov-ray": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/build-pov-ray__BN9pD6p/result.json"
     },
     "sqlite-with-gcov": {
       "reward": 1.0,
@@ -102,12 +110,16 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 24,
-  "covered_raw_response_sets": 24,
-  "covered_trajectories": 24,
-  "scored_raw_response_count": 604,
-  "nonempty_reasoning_response_count": 604,
+  "covered_results": 26,
+  "covered_raw_response_sets": 26,
+  "covered_trajectories": 26,
+  "scored_raw_response_count": 687,
+  "nonempty_reasoning_response_count": 687,
   "raw_reasoning_by_task": {
+    "circuit-fibsqrt": {
+      "raw_responses": 12,
+      "nonempty_reasoning_content": 12
+    },
     "regex-log": {
       "raw_responses": 7,
       "nonempty_reasoning_content": 7
@@ -131,6 +143,10 @@
     "multi-source-data-merger": {
       "raw_responses": 7,
       "nonempty_reasoning_content": 7
+    },
+    "build-pov-ray": {
+      "raw_responses": 71,
+      "nonempty_reasoning_content": 71
     },
     "sqlite-with-gcov": {
       "raw_responses": 13,
@@ -244,6 +260,7 @@
     "muse_bf16_delta_20261019T150012Z.tar.zst",
     "muse_bf16_delta_20261019T151409Z.tar.zst",
     "muse_bf16_delta_20261019T152633Z.tar.zst",
+    "muse_bf16_delta_20261019T154134Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

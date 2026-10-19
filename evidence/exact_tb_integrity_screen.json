@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T15:33:13.425029+00:00",
+  "generated_utc": "2026-10-19T15:42:41.072429+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, plus scored Muse NVFP4 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -18,7 +18,7 @@
       }
     },
     "muse_bf16": {
-      "scored_trajectories_checked": 24,
+      "scored_trajectories_checked": 26,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -1361,6 +1361,17 @@
     },
     {
       "model": "muse_bf16",
+      "task": "circuit-fibsqrt",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/circuit-fibsqrt__eWa7Tv3/agent/trajectory.json",
+      "trajectory_sha256": "7ad16506de0d664a1dc85e896093ef6c27f9d1838254f0cb7d732db9c05d5c83",
+      "steps": 13,
+      "tool_calls": 28,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_bf16",
       "task": "regex-log",
       "reward": 1.0,
       "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/regex-log__ynqEXWv/agent/trajectory.json",
@@ -1428,6 +1439,17 @@
       "trajectory_sha256": "cde4b15fb5ae4389f5b326228c0aa587fd07cc3d62cb85c60c5e195531601743",
       "steps": 8,
       "tool_calls": 19,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "build-pov-ray",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/build-pov-ray__BN9pD6p/agent/trajectory.json",
+      "trajectory_sha256": "ef781505a079dda524bd1e7b48b2b6de9648acba58a221d404c85cf26634547a",
+      "steps": 72,
+      "tool_calls": 382,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -3816,9 +3838,9 @@
         "model": "muse_nvfp4",
         "task": "model-extraction-relu-logits",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/model-extraction-relu-logits__Pp3LAYE",
-        "trajectory_sha256_at_screen": "299ca6546d0605e9065f25398c187b426a9dcd94a7ffa744b37b01ec75339c6a",
-        "steps_at_screen": 8,
-        "tool_calls_at_screen": 11,
+        "trajectory_sha256_at_screen": "0d66cc3d5070ef4c1f4d7287113898c02bd9359be06db40cd267359f55cc80f9",
+        "steps_at_screen": 13,
+        "tool_calls_at_screen": 17,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3826,9 +3848,9 @@
         "model": "muse_nvfp4",
         "task": "make-mips-interpreter",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-mips-interpreter__6BNKuxJ",
-        "trajectory_sha256_at_screen": "19f1b4ace6c922a39369845c3ef0a568fb4e9c887cf730738ed2ff7ff6ac9c46",
-        "steps_at_screen": 88,
-        "tool_calls_at_screen": 373,
+        "trajectory_sha256_at_screen": "ea3a0ca9ca495dff1444aadc79a467721b5e8f2b2ad359ee4070cc5bbf735964",
+        "steps_at_screen": 99,
+        "tool_calls_at_screen": 425,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3836,9 +3858,9 @@
         "model": "muse_nvfp4",
         "task": "raman-fitting",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/raman-fitting__gccPUXq",
-        "trajectory_sha256_at_screen": "26ec9174913af838f80701782dfe19c7eea2d837957641b1a88d5e4e82cfb559",
-        "steps_at_screen": 151,
-        "tool_calls_at_screen": 443,
+        "trajectory_sha256_at_screen": "557ee572228a665b79b0124696067d5eb8e94bca87a27072d3d9f885e1dd15de",
+        "steps_at_screen": 164,
+        "tool_calls_at_screen": 472,
         "hits": [
           {
             "rule": "execution_override",

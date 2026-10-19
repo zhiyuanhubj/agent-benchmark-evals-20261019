@@ -1,0 +1,27 @@
+{
+  "generated_utc": "2026-10-19T15:41:34.553614+00:00",
+  "group": "muse_bf16",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_delta_20261019T152633Z.json",
+  "cutoff_utc": "2026-10-19T15:21:33.304103+00:00",
+  "archive_name": "muse_bf16_delta_20261019T154134Z.tar.zst",
+  "archive_size_bytes": 1508475,
+  "archive_sha256": "12ba7da86de3953a5ff7b82820971133f7369f435a23a5f8598deecf15b77194",
+  "file_count": 49,
+  "source_bytes": 15108434,
+  "filename_counts": {
+    "result.json": 7,
+    "trajectory.json": 5,
+    "trial.log": 6,
+    "config.json": 3,
+    "task.json": 4,
+    "raw_response.json": 24
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/pro-results",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/swe_review",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/queue/results"
+  ]
+}
