@@ -1,6 +1,6 @@
 {
-  "reviewed_utc": "2026-10-19T06:19:40.279957+00:00",
-  "scope": "Targeted manual review of two successful Muse NVFP4 exact-image TB2.1 trajectories flagged by tool-command screening.",
+  "reviewed_utc": "2026-10-19T07:52:00+00:00",
+  "scope": "Targeted manual review of two flagged and one newly successful Muse NVFP4 exact-image TB2.1 trajectories.",
   "notes": [
     {
       "model": "muse_nvfp4",
@@ -18,6 +18,15 @@
       "trajectory_sha256": "3730638f314f0296681a3412ddeb2d75fadb85916160a3a459ef72c7c8c66eee",
       "observed": "Agent attempted to read /logs/verifier/*; inspected command output reported that the verifier glob did not exist. No confirmed hidden-answer retrieval in the inspected output.",
       "training_disposition": "exclude_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "regex-log",
+      "reward": 1.0,
+      "trajectory_sha256": "690afee3ad321d9a7bae32e31304cefacb438e710dbd5fcdea00291fe2f673c5",
+      "observed": "All 16 agent tool calls were inspected. The agent read and edited /app/regex.txt, wrote test scripts under /tmp, and ran local regex checks. No verifier-log, reward-file, host-boundary, or execution-hook access appeared in the inspected commands; this is a targeted command review, not a full clean-trajectory certification.",
+      "training_disposition": "candidate_pending_full_manual_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }
   ],

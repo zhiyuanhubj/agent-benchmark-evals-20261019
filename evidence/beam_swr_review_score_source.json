@@ -1,5 +1,5 @@
 {
-  "utc": 1792395493.0733974,
+  "utc": 1792396398.0272057,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,39 +345,39 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 255,
+      "terminal": 256,
       "exceptions": 7,
       "prepared_image_phases": {
-        "image_ready": 272
+        "image_ready": 280
       },
       "controller": {
-        "utc": 1792390595.3571782,
+        "utc": 1792396317.620433,
         "phase": "running",
-        "batch": 15,
+        "batch": 16,
         "tasks": [
-          "django__django-16667",
-          "django__django-16801",
-          "django__django-16819",
-          "django__django-16877",
-          "django__django-16899",
-          "django__django-16901",
-          "django__django-16938",
-          "django__django-16950",
-          "django__django-17029",
-          "django__django-17084",
-          "django__django-17087",
-          "django__django-7530",
-          "django__django-9296",
-          "matplotlib__matplotlib-13989",
-          "matplotlib__matplotlib-14623",
-          "matplotlib__matplotlib-20488"
+          "matplotlib__matplotlib-20676",
+          "matplotlib__matplotlib-20826",
+          "matplotlib__matplotlib-20859",
+          "matplotlib__matplotlib-21568",
+          "matplotlib__matplotlib-22719",
+          "matplotlib__matplotlib-22865",
+          "matplotlib__matplotlib-22871",
+          "matplotlib__matplotlib-23299",
+          "matplotlib__matplotlib-23314",
+          "matplotlib__matplotlib-23412",
+          "matplotlib__matplotlib-23476",
+          "matplotlib__matplotlib-24026",
+          "matplotlib__matplotlib-24149",
+          "matplotlib__matplotlib-24177",
+          "matplotlib__matplotlib-24570",
+          "matplotlib__matplotlib-24627"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 245,
+      "terminal": 246,
       "exceptions": 3,
       "prepared_image_phases": {
         "image_ready": 272
@@ -409,7 +409,7 @@
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 258,
+      "terminal": 262,
       "exceptions": 6,
       "prepared_image_phases": {
         "image_ready": 288
@@ -454,8 +454,8 @@
     "2923|muse-nvfp4-tb-exact-extra-2|PENDING||(Priority)",
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
-    "2887|beam-review-reserve-2887|PENDING||(None)",
-    "2886|muse-bf16-pair-2886|PENDING||(None)",
+    "2887|beam-review-reserve-2887|PENDING||(AssocGrpNodeLimit)",
+    "2886|muse-bf16-pair-2886|PENDING||(AssocGrpNodeLimit)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
     "2906|mix449-cpu-salvage-10-1-122-30|PENDING||(Priority)",
     "2869|mix3-eval-extra-4|RUNNING|ip-10-1-77-106|ip-10-1-77-106",
