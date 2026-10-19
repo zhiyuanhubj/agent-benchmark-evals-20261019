@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T21:11:22.865143+00:00",
+  "utc": "2026-10-19T21:36:35.378007+00:00",
   "model": "Muse-Spark-Open-816B-A42B-NVFP4",
   "replicas": {
     "2865": {
@@ -27,123 +27,79 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 492,
-      "raw_terminal_records": 500,
-      "infrastructure_before_model": [
-        {
-          "task": "sympy__sympy-17655",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-17655__nDKfMyZ/result.json",
-          "sha256": "47d00e7b9343847ad0fe1ee04e4b713b512e318bf7771f86101f6ece14ea3901"
-        },
-        {
-          "task": "sympy__sympy-18698",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-18698__uUmjpG4/result.json",
-          "sha256": "5d935ab0c3a164e0899abcc74ecd82b4a0a4b21c1e10eadf4c7be150a4e85dfa"
-        },
-        {
-          "task": "sympy__sympy-18199",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-18199__WTitSKy/result.json",
-          "sha256": "c61643b201616feeb26cefa46e35937872bfee6bcaadf1d5e45920bbc060a254"
-        },
-        {
-          "task": "sympy__sympy-17318",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-17318__E6wV4i4/result.json",
-          "sha256": "427f36356f38ffd1858ae482596687c2d32ad8ebbcaa62ee387dfc50f3e0e86e"
-        },
-        {
-          "task": "sympy__sympy-19346",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19346__VDpdeKK/result.json",
-          "sha256": "25fa2a368ab813942ea22ffc155ac059384149d5ee3d3eeef769a4ce0c97fd8d"
-        },
-        {
-          "task": "sympy__sympy-18189",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-18189__n2DDWSX/result.json",
-          "sha256": "8930d5800d4e5164dbd96ac7866c885f99edac562808afcec322ee4724f92332"
-        },
-        {
-          "task": "sympy__sympy-19040",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19040__8LLx3E2/result.json",
-          "sha256": "0cd74260cae4831e141ca44b4e61a58b44ffc7449d31024a739e70a5c11a2c36"
-        },
-        {
-          "task": "sympy__sympy-19495",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19495__iqRn3ox/result.json",
-          "sha256": "92774c73544e65d5bb169481930f5c2c910606f9d868b65c62f2da95e3411aa6"
-        }
+      "terminal": 500,
+      "harbor_terminal_results": 492,
+      "native_verifier_complete_without_harbor_summary": [
+        "sympy__sympy-17318",
+        "sympy__sympy-17655",
+        "sympy__sympy-18189",
+        "sympy__sympy-18199",
+        "sympy__sympy-18698",
+        "sympy__sympy-19040",
+        "sympy__sympy-19346",
+        "sympy__sympy-19495"
       ],
-      "recovered_before_response_infrastructure_tasks": 355,
+      "raw_terminal_records": 500,
+      "infrastructure_before_model": [],
+      "recovered_before_response_infrastructure_tasks": 363,
       "recovery_infrastructure_exceptions": [],
-      "complete": false,
+      "complete": true,
       "metrics_on_terminal_subset": {
-        "DA": 76.1,
-        "DA_total_50": 74.0,
-        "CR": 91.9,
-        "FAR": 64.3,
-        "FRR": 7.7,
-        "total": 492,
-        "correct": 344,
+        "DA": 75.7,
+        "DA_total_50": 73.6,
+        "CR": 92.0,
+        "FAR": 64.9,
+        "FRR": 8.2,
+        "total": 500,
+        "correct": 348,
         "model_fail": 40,
-        "produced": 452,
-        "TP": 298,
-        "FP": 83,
+        "produced": 460,
+        "TP": 302,
+        "FP": 85,
         "TN": 46,
-        "FN": 25
+        "FN": 27
       },
       "exceptions": [],
       "invalid_decisions": [],
-      "qualification": "Official DA routine on evaluated terminal records only. Proven pre-agent registry rate-limit failures are excluded and await infrastructure recovery. Partial scores are not final. Revision and RRR are separate and have not run."
+      "qualification": "Official DA routine on the canonical evaluated reviews. Native verifier-complete records lacking a Harbor summary are included only after source-hash and model-finish checks. Incomplete splits remain partial. Revision and RRR are separate."
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 460,
-      "raw_terminal_records": 462,
-      "infrastructure_before_model": [
-        {
-          "task": "sympy__sympy-17630",
-          "classification": "cancelled_2868_endpoint_before_first_model_response",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-17630__fRXWdwy/result.json",
-          "sha256": "ef31715816395d4da6e4a0f54eb83265fa7af1772428567003ae94e966e643fa"
-        },
-        {
-          "task": "sympy__sympy-17655",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-17655__9WrmeZe/result.json",
-          "sha256": "f2b2864cac83941ce26c4e4b138012438712aaa2825c8361db547cf3472d1800"
-        }
+      "terminal": 462,
+      "harbor_terminal_results": 460,
+      "native_verifier_complete_without_harbor_summary": [
+        "sympy__sympy-17630",
+        "sympy__sympy-17655"
       ],
-      "recovered_before_response_infrastructure_tasks": 349,
+      "raw_terminal_records": 462,
+      "infrastructure_before_model": [],
+      "recovered_before_response_infrastructure_tasks": 351,
       "recovery_infrastructure_exceptions": [],
-      "complete": false,
+      "complete": true,
       "metrics_on_terminal_subset": {
-        "DA": 81.3,
-        "DA_total_50": 78.5,
+        "DA": 81.2,
+        "DA_total_50": 78.4,
         "CR": 90.9,
         "FAR": 15.5,
-        "FRR": 21.7,
-        "total": 460,
-        "correct": 340,
+        "FRR": 22.1,
+        "total": 462,
+        "correct": 341,
         "model_fail": 42,
-        "produced": 418,
+        "produced": 420,
         "TP": 166,
         "FP": 32,
-        "TN": 174,
-        "FN": 46
+        "TN": 175,
+        "FN": 47
       },
       "exceptions": [],
       "invalid_decisions": [],
-      "qualification": "Official DA routine on evaluated terminal records only. Proven pre-agent registry rate-limit failures are excluded and await infrastructure recovery. Partial scores are not final. Revision and RRR are separate and have not run."
+      "qualification": "Official DA routine on the canonical evaluated reviews. Native verifier-complete records lacking a Harbor summary are included only after source-hash and model-finish checks. Incomplete splits remain partial. Revision and RRR are separate."
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
       "terminal": 422,
+      "harbor_terminal_results": 422,
+      "native_verifier_complete_without_harbor_summary": [],
       "raw_terminal_records": 422,
       "infrastructure_before_model": [],
       "recovered_before_response_infrastructure_tasks": 296,
@@ -166,7 +122,7 @@
       },
       "exceptions": [],
       "invalid_decisions": [],
-      "qualification": "Official DA routine on evaluated terminal records only. Proven pre-agent registry rate-limit failures are excluded and await infrastructure recovery. Partial scores are not final. Revision and RRR are separate and have not run."
+      "qualification": "Official DA routine on the canonical evaluated reviews. Native verifier-complete records lacking a Harbor summary are included only after source-hash and model-finish checks. Incomplete splits remain partial. Revision and RRR are separate."
     }
   },
   "retired_allocations": {
@@ -551,13 +507,13 @@
       },
       "complete": false,
       "model_generation_started": false,
-      "utc": "2026-10-19T21:10:44.760478+00:00",
+      "utc": "2026-10-19T21:37:29.028898+00:00",
       "grader_preflight_passed": true
     },
-    "task_preparation_controller": "MainPID=4150849\nResult=success\nActiveState=active\n"
+    "task_preparation_controller": "MainPID=3387708\nResult=success\nActiveState=active\n"
   },
   "revision_capacity_preparation": {
-    "utc": 1792444294.1201923,
+    "utc": 1792445826.8364935,
     "phase": "waiting_for_reserved_allocations",
     "candidate_allocations": [
       2888,
@@ -572,9 +528,9 @@
     "controller": "MainPID=114339\nResult=success\nActiveState=active\n"
   },
   "parallel_review_recovery": {
-    "phase": "relayed_remaining_reviews_running",
+    "phase": "controller_stopped",
     "complete": false,
-    "healthy": true,
+    "healthy": false,
     "runner": {
       "MainPID": "490327",
       "Result": "success",
@@ -673,6 +629,12 @@
     "relay": "10.1.115.182:31320 -> same verified Muse NVFP4 on 10.1.77.106:31320",
     "qualification": "Frozen harness, generation kwargs and official verifier unchanged. All actual previous model responses preserved. Only positively proven pre-response transport failures are isolated and get a first actual model draw. No best-of selection. Obsolete paused dispatcher retires only after its good sampled native children finish. All actual model outcomes remain preserved.",
     "utc": 1792379863.3466554,
+    "recorded_phase": "relayed_remaining_reviews_running",
+    "controller": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ActiveState": "failed"
+    },
     "old_parent_retired": true,
     "worker_states": {
       "worker-2866": {

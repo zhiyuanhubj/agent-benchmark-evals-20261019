@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T21:24:09.459640+00:00",
+  "generated_utc": "2026-10-19T21:38:59.529404+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 28,
+      "scored_trajectories_checked": 30,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -5015,12 +5015,36 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "git-leak-recovery",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/git-leak-recovery__MDTEHLN/agent/trajectory.json",
+      "trajectory_sha256": "89db6706f8dfd5c44a34e54c658e7c43aa5091f5c858b7d79154a9d26e2e9691",
+      "steps": 7,
+      "tool_calls": 11,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "constraints-scheduling",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/constraints-scheduling__neZfcgQ/agent/trajectory.json",
       "trajectory_sha256": "11e0462c4776f49df16d1dd66f73d7a8f133f00ded3434976c6c273d4a748425",
       "steps": 5,
       "tool_calls": 9,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "code-from-image",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/code-from-image__tJboqxD/agent/trajectory.json",
+      "trajectory_sha256": "104124efa7f5507ede5012c7cfca7ede5feb053fdca302b3aadd3b8aa138898e",
+      "steps": 459,
+      "tool_calls": 463,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -5277,9 +5301,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "6f6bace2c119bc24d59ef69c2090f60c1f3966cb9a67cc4b09a8546bbe07d9eb",
-        "steps_at_screen": 366,
-        "tool_calls_at_screen": 1091,
+        "trajectory_sha256_at_screen": "1bf5925ac50165e794285cf1c157413be9cec55de8054772d7021c55de8cc9ee",
+        "steps_at_screen": 382,
+        "tool_calls_at_screen": 1103,
         "hits": [],
         "status": "in_progress_not_scored"
       }

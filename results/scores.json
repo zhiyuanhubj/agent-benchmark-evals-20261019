@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T21:22:43.272262+00:00",
+  "generated_utc": "2026-10-19T21:37:44.363735+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -54,13 +54,49 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 492,
-          "status": "partial_no_full_rrr"
+          "terminal": 500,
+          "status": "supplementary_complete_da_rrr_pending",
+          "DA": {
+            "DA": 75.7,
+            "DA_total_50": 73.6,
+            "CR": 92.0,
+            "FAR": 64.9,
+            "FRR": 8.2,
+            "total": 500,
+            "correct": 348,
+            "model_fail": 40,
+            "produced": 460,
+            "TP": 302,
+            "FP": 85,
+            "TN": 46,
+            "FN": 27
+          },
+          "RRR": null,
+          "evidence": "evidence/swe_review_native_complete_da.json",
+          "native_verifier_complete_without_harbor_summary": 8
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 460,
-          "status": "partial_no_full_rrr"
+          "terminal": 462,
+          "status": "supplementary_complete_da_rrr_pending",
+          "DA": {
+            "DA": 81.2,
+            "DA_total_50": 78.4,
+            "CR": 90.9,
+            "FAR": 15.5,
+            "FRR": 22.1,
+            "total": 462,
+            "correct": 341,
+            "model_fail": 42,
+            "produced": 420,
+            "TP": 166,
+            "FP": 32,
+            "TN": 175,
+            "FN": 47
+          },
+          "RRR": null,
+          "evidence": "evidence/swe_review_native_complete_da.json",
+          "native_verifier_complete_without_harbor_summary": 2
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
@@ -82,7 +118,8 @@
             "FN": 23
           },
           "RRR": null,
-          "evidence": "evidence/swe_review_complete_split_da.json"
+          "evidence": "evidence/swe_review_complete_split_da.json",
+          "native_verifier_complete_without_harbor_summary": 0
         }
       },
       "swe_review_execution": {
@@ -250,23 +287,23 @@
             "2": 26,
             "3": 0
           },
-          "new_raw_model_responses": 5626,
+          "new_raw_model_responses": 5729,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 851,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 866,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 126,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 183,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 97
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 149,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 218,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 127
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T21:22:28+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T21:37:50+00:00",
           "active_recovery_trial_dirs": 7,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -331,8 +368,8 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 76,
-          "graded": 75,
+          "terminal": 77,
+          "graded": 76,
           "success": 24,
           "status": "partial_no_full_score"
         },
@@ -382,7 +419,7 @@
             "graded": 87,
             "success": 62,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 4454,
+            "archived_actual_model_responses": 4529,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 7
@@ -394,11 +431,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 23,
-            "graded": 23,
-            "success": 17,
-            "active_trial_dirs": 27,
-            "archived_actual_model_responses": 1383,
+            "terminal": 28,
+            "graded": 28,
+            "success": 19,
+            "active_trial_dirs": 32,
+            "archived_actual_model_responses": 1535,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -434,17 +471,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 358,
+          "terminal": 362,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 354,
+          "terminal": 361,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 400,
+          "terminal": 405,
           "status": "partial_no_full_rrr"
         }
       }
@@ -583,9 +620,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 89,
-        "graded": 89,
-        "success": 55,
+        "terminal": 92,
+        "graded": 92,
+        "success": 57,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
@@ -634,8 +671,8 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 40,
-          "graded": 40,
+          "terminal": 41,
+          "graded": 41,
           "success": 17,
           "status": "partial_no_full_score"
         },
