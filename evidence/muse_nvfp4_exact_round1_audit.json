@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T08:52:45.012313+00:00",
+  "generated_utc": "2026-10-19T08:57:29.611578+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 40,
-  "success_count": 34,
+  "graded_task_count": 41,
+  "success_count": 35,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -72,7 +72,6 @@
     "db-wal-recovery",
     "dna-assembly",
     "extract-moves-from-video",
-    "fix-code-vulnerability",
     "fix-git",
     "fix-ocaml-gc",
     "install-windows-3.11",
@@ -120,7 +119,7 @@
     "compile-compcert__w9HS5rZ",
     "count-dataset-tokens__QuGJimY",
     "extract-moves-from-video__pA42NVn",
-    "fix-code-vulnerability__UDb6DsZ",
+    "fix-git__SXFZPeA",
     "install-windows-3.11__JZGpPLL",
     "large-scale-text-editing__byNYEsg",
     "path-tracing-reverse__4covUwV",
@@ -378,6 +377,17 @@
       "finished_at": "2026-10-19T08:44:47.690759Z",
       "raw_response_count": 41,
       "responses_with_reasoning_content": 41
+    },
+    "fix-code-vulnerability": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b01/fix-code-vulnerability__UDb6DsZ/result.json",
+      "result_sha256": "1f3b5445aec3f44b2cafbd1622f24bff68d46b5140d18d219ee33a0d0f5d665e",
+      "finished_at": "2026-10-19T08:55:41.010815Z",
+      "raw_response_count": 17,
+      "responses_with_reasoning_content": 17
     },
     "gcode-to-text": {
       "reward": 0.0,

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T08:52:39.890199+00:00",
+  "generated_utc": "2026-10-19T08:57:24.684648+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -103,9 +103,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 40,
-            "graded": 40,
-            "success": 34,
+            "terminal": 41,
+            "graded": 41,
+            "success": 35,
             "active_trial_dirs": 19,
             "archived_actual_model_responses": 503,
             "ungraded": 0,
@@ -168,20 +168,20 @@
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
-            "1": 29,
+            "1": 30,
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 1690,
+          "new_raw_model_responses": 1746,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 379,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 295,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 287,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 392,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 161,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 176
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 387,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 306,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 294,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 397,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 176,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 186
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T08:52:34+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T08:57:22+00:00",
           "active_recovery_trial_dirs": 14,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -273,7 +273,7 @@
             "graded": 43,
             "success": 31,
             "active_trial_dirs": 47,
-            "archived_actual_model_responses": 2075,
+            "archived_actual_model_responses": 2093,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 3
@@ -330,12 +330,12 @@
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 249,
+          "terminal": 250,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 267,
+          "terminal": 268,
           "status": "partial_no_full_rrr"
         }
       }
@@ -344,9 +344,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 603,
-        "graded": 602,
-        "success": 378,
+        "terminal": 605,
+        "graded": 604,
+        "success": 380,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -359,8 +359,8 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 76,
-          "graded": 76,
+          "terminal": 78,
+          "graded": 78,
           "success": 24,
           "status": "partial_no_full_score"
         },
@@ -413,11 +413,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 57,
-            "graded": 57,
-            "success": 46,
-            "active_trial_dirs": 61,
-            "archived_actual_model_responses": 1166,
+            "terminal": 61,
+            "graded": 61,
+            "success": 50,
+            "active_trial_dirs": 65,
+            "archived_actual_model_responses": 1200,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -512,6 +512,7 @@
         "status": "partial_no_full_score",
         "same_trials_as_legacy_named_bf16_tb": true,
         "image_identity_audit": "evidence/muse_bf16_exact_image_identity.json",
+        "released_io_audit": "evidence/muse_bf16_exact_io_coverage.json",
         "qualification": "The 89 supplied archive image identities, task paths and agent settings were verified before BF16 round 1 launched and rechecked on the running node. A full-round accuracy awaits all 89 native results and task-level audit."
       },
       "deepswe": {
@@ -551,6 +552,7 @@
     "muse_tb_legacy": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/results/muse_tb_legacy_status.json",
     "opus48_pro_full": "/fsx/home/zhiyuan/.private/opus48_sbpv_20261004/completed_full_evaluation_result.json",
     "muse_nvfp4_exact_recovery_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json",
-    "muse_bf16_exact_image_identity_audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_exact_image_identity.json"
+    "muse_bf16_exact_image_identity_audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_exact_image_identity.json",
+    "muse_bf16_exact_released_io_audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_exact_io_coverage.json"
   }
 }
