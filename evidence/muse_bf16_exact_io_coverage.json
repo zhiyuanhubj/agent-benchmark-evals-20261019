@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-10-19T13:27:15.214625+00:00",
+  "generated_utc": "2026-10-19T13:44:35.858060+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 20,
+  "scored_tasks": 21,
   "success_count": 17,
   "tasks": {
     "regex-log": {
@@ -76,6 +76,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/password-recovery__voqitCL/result.json"
     },
+    "sanitize-git-repo": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/sanitize-git-repo__xRsFtjF/result.json"
+    },
     "adaptive-rejection-sampler": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/adaptive-rejection-sampler__k7gSWxM/result.json"
@@ -86,11 +90,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 20,
-  "covered_raw_response_sets": 20,
-  "covered_trajectories": 20,
-  "scored_raw_response_count": 505,
-  "nonempty_reasoning_response_count": 505,
+  "covered_results": 21,
+  "covered_raw_response_sets": 21,
+  "covered_trajectories": 21,
+  "scored_raw_response_count": 551,
+  "nonempty_reasoning_response_count": 551,
   "raw_reasoning_by_task": {
     "regex-log": {
       "raw_responses": 7,
@@ -164,6 +168,10 @@
       "raw_responses": 28,
       "nonempty_reasoning_content": 28
     },
+    "sanitize-git-repo": {
+      "raw_responses": 46,
+      "nonempty_reasoning_content": 46
+    },
     "adaptive-rejection-sampler": {
       "raw_responses": 8,
       "nonempty_reasoning_content": 8
@@ -201,6 +209,8 @@
     "muse_bf16_delta_20261019T125550Z.tar.zst",
     "muse_bf16_delta_20261019T131032Z.tar.zst",
     "muse_bf16_delta_20261019T132443Z.tar.zst",
+    "muse_bf16_delta_20261019T134158Z.tar.zst",
+    "muse_bf16_delta_20261019T134410Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
