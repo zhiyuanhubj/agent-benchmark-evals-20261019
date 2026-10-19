@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T15:59:07.645313+00:00",
+  "utc": "2026-10-19T16:01:01.709197+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
@@ -480,13 +480,13 @@
       }
     },
     "review_pipeline": {
-      "utc": 1792425562.2453556,
+      "utc": 1792425682.275732,
       "phase": "queued_after_bf16_pro_first_round",
       "model_sampling_started": false
     }
   },
   "reserved_capacity": {
-    "utc": 1792425570.8409388,
+    "utc": 1792425691.3060403,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2901": {
@@ -501,27 +501,47 @@
         "model": "beam",
         "hosts": []
       },
-      "2887": {
-        "state": "PENDING",
-        "node_count": 1,
-        "model": "beam",
-        "hosts": []
-      },
       "2886": {
         "state": "PENDING",
         "node_count": 2,
         "model": "muse_bf16",
         "hosts": []
+      },
+      "2887": {
+        "state": "RUNNING",
+        "node_count": 1,
+        "model": "beam",
+        "hosts": [
+          {
+            "hostname": "ip-10-1-69-108",
+            "rank": 0,
+            "prefetch_complete": false,
+            "models": {
+              "beam": {
+                "repo": "reflection/Beam-1.0-501B-A23B",
+                "revision": "78f8f654d40a40919b8e9954b40dd879ecb9a692",
+                "local_path": "/opt/dlami/nvme/zhiyuan-expanded-bench-20261018-2887-0/models/beam",
+                "expected_files": 198,
+                "status": "downloading",
+                "completed_files": 8,
+                "completed_file_bytes": 5368802415
+              }
+            },
+            "available_bytes": 8278368792576,
+            "proof": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2887-rank-0/prefetch-current.json"
+          }
+        ]
       }
     },
     "complete": false,
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792425557.3973212,
+    "utc": 1792425677.4685993,
     "allocations": {
       "2887": {
-        "phase": "waiting_for_allocation"
+        "phase": "preparing_weights_image_or_loading",
+        "proof": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2887-rank-0/serving-conformance-ready.json"
       },
       "2901": {
         "phase": "waiting_for_allocation"
@@ -538,7 +558,7 @@
       "ready_splits": [],
       "complete": false,
       "benchmark_revision_sampling_started": false,
-      "utc": 1792425570.8470619
+      "utc": 1792425691.0671096
     },
     "revision_queues": {
       "reviewers": {
@@ -595,7 +615,7 @@
         }
       },
       "qualification": "Canonical full review splits only, exact original generators, one declared revision attempt per rejected PR. Final DA/RRR awaits separate native grading audit.",
-      "utc": 1792425560.2020276
+      "utc": 1792425680.2989807
     },
     "native_da_rrr": {
       "reviewers": {
@@ -662,7 +682,7 @@
           }
         }
       },
-      "utc": 1792425574.6671624
+      "utc": 1792425638.4140866
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -4109,7 +4129,7 @@
       "qualification": "Original449 and469 have real observed weight differences. This does not establish a stronger checkpoint, full449 availability, full-model nonfinite clearance, or training-update magnitude over all parameters. No model sampling, data edits or GPU interruption."
     },
     "mix449_original_file_recovery": {
-      "utc": 1792425577.2599137,
+      "utc": 1792425682.6567905,
       "sources": {
         "2812": {
           "phase": "ready",
@@ -4854,13 +4874,13 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792425515.3439944
+      "utc": 1792425654.1881776
     },
     "queue_states": {
       "mix449": {
         "phase": "waiting_for_complete_original_artifact",
         "candidate": "mix449",
-        "utc": 1792425574.7592967
+        "utc": 1792425664.801008
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
@@ -4880,7 +4900,7 @@
       "phase": "waiting_for_complete_original449_artifact",
       "model_generation_started": false,
       "frozen_top_two_unchanged": true,
-      "utc": 1792425555.5611963
+      "utc": 1792425675.6042879
     },
     "original449_export_controller": null,
     "original449_inference_ready": null,
