@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T15:42:18.781480+00:00",
+  "generated_utc": "2026-10-19T15:44:25.708213+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 84,
+  "graded_task_count": 85,
   "success_count": 67,
-  "scored_raw_response_count": 3847,
-  "scored_nonempty_reasoning_response_count": 3846,
+  "scored_raw_response_count": 4010,
+  "scored_nonempty_reasoning_response_count": 4009,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -101,7 +101,7 @@
   ],
   "early_b05_handoff": {
     "owner_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-b05-early-owner.json",
-    "exit_path": null,
+    "exit_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-b05-early-exit.json",
     "utc": 1792408240.1111329,
     "pid": 1711311,
     "cpu_allocation": 2922,
@@ -130,13 +130,11 @@
     "make-mips-interpreter",
     "model-extraction-relu-logits",
     "modernize-scientific-stack",
-    "mteb-leaderboard",
-    "raman-fitting"
+    "mteb-leaderboard"
   ],
   "active_or_unfinished_trials": [
     "make-mips-interpreter__6BNKuxJ",
-    "model-extraction-relu-logits__Pp3LAYE",
-    "raman-fitting__gccPUXq"
+    "model-extraction-relu-logits__Pp3LAYE"
   ],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -868,6 +866,17 @@
       "finished_at": "2026-10-19T13:33:47.035346Z",
       "raw_response_count": 38,
       "responses_with_reasoning_content": 38
+    },
+    "raman-fitting": {
+      "reward": 0.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.101.159:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/raman-fitting__gccPUXq/result.json",
+      "result_sha256": "0b142d9cdaaef10ce45edc9fe5674a1d7b4800d290a9e2b1745b206a8b06fa48",
+      "finished_at": "2026-10-19T15:42:43.864403Z",
+      "raw_response_count": 163,
+      "responses_with_reasoning_content": 163
     },
     "regex-chess": {
       "reward": 0.0,
