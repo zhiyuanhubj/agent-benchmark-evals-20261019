@@ -1,19 +1,17 @@
 {
-  "generated_utc": "2026-10-19T10:48:47.431590+00:00",
+  "generated_utc": "2026-10-19T11:00:34.004782+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T104710Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T105620Z.tar.zst",
   "expected": 89,
-  "terminal": 57,
-  "graded": 57,
-  "success": 41,
+  "terminal": 59,
+  "graded": 59,
+  "success": 43,
   "missing_graded_tasks": [
     "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "polyglot-rust-c",
-    "portfolio-optimization",
     "protein-assembly",
     "prove-plus-comm",
     "pypi-server",
@@ -45,8 +43,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "portfolio-optimization",
-    "protein-assembly",
     "prove-plus-comm",
     "pypi-server",
     "pytorch-model-cli",
@@ -478,6 +474,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/polyglot-c-py__DhLYdEA/result.json",
       "raw_response_count": 30,
       "responses_with_reasoning_content": 30
+    },
+    "polyglot-rust-c": {
+      "reward": 1.0,
+      "result_sha256": "35b25a90a417b6a9ca91a984dac4d54d1c833577fc6884a9f5edff645ea71446",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/polyglot-rust-c__xLky6wF/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
+    "portfolio-optimization": {
+      "reward": 1.0,
+      "result_sha256": "eb53d32648fb9c89cf474f418e03dd189d954b48600033790e54015784fbabf0",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/portfolio-optimization__HS2VhyD/result.json",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
     }
   }
 }

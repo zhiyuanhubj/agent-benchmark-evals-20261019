@@ -1,5 +1,5 @@
 {
-  "utc": 1792406330.9256437,
+  "utc": 1792407237.6587296,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,48 +345,21 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 270,
+      "terminal": 272,
       "exceptions": 7,
       "prepared_image_phases": {
-        "image_ready": 288
+        "image_ready": 304
       },
       "controller": {
-        "utc": 1792396317.620433,
+        "utc": 1792407012.8197267,
         "phase": "running",
-        "batch": 16,
+        "batch": 17,
         "tasks": [
-          "matplotlib__matplotlib-20676",
-          "matplotlib__matplotlib-20826",
-          "matplotlib__matplotlib-20859",
-          "matplotlib__matplotlib-21568",
-          "matplotlib__matplotlib-22719",
-          "matplotlib__matplotlib-22865",
-          "matplotlib__matplotlib-22871",
-          "matplotlib__matplotlib-23299",
-          "matplotlib__matplotlib-23314",
-          "matplotlib__matplotlib-23412",
-          "matplotlib__matplotlib-23476",
-          "matplotlib__matplotlib-24026",
-          "matplotlib__matplotlib-24149",
-          "matplotlib__matplotlib-24177",
-          "matplotlib__matplotlib-24570",
-          "matplotlib__matplotlib-24627"
-        ]
-      },
-      "full_official_rrr_complete": false
-    },
-    "qwen3_coder_30b_500": {
-      "expected": 462,
-      "terminal": 270,
-      "exceptions": 3,
-      "prepared_image_phases": {
-        "image_ready": 288
-      },
-      "controller": {
-        "utc": 1792403304.4264762,
-        "phase": "running",
-        "batch": 16,
-        "tasks": [
+          "matplotlib__matplotlib-24637",
+          "matplotlib__matplotlib-24870",
+          "matplotlib__matplotlib-24970",
+          "matplotlib__matplotlib-25122",
+          "matplotlib__matplotlib-25287",
           "matplotlib__matplotlib-25311",
           "matplotlib__matplotlib-25332",
           "matplotlib__matplotlib-25479",
@@ -397,44 +370,71 @@
           "matplotlib__matplotlib-26291",
           "matplotlib__matplotlib-26342",
           "matplotlib__matplotlib-26466",
-          "mwaskom__seaborn-3069",
-          "mwaskom__seaborn-3187",
-          "pallets__flask-5014",
-          "psf__requests-1142",
-          "psf__requests-1724",
-          "psf__requests-1766"
+          "mwaskom__seaborn-3069"
+        ]
+      },
+      "full_official_rrr_complete": false
+    },
+    "qwen3_coder_30b_500": {
+      "expected": 462,
+      "terminal": 273,
+      "exceptions": 4,
+      "prepared_image_phases": {
+        "image_ready": 304
+      },
+      "controller": {
+        "utc": 1792406696.4666839,
+        "phase": "running",
+        "batch": 17,
+        "tasks": [
+          "psf__requests-1921",
+          "psf__requests-2317",
+          "psf__requests-5414",
+          "psf__requests-6028",
+          "pydata__xarray-2905",
+          "pydata__xarray-3151",
+          "pydata__xarray-3305",
+          "pydata__xarray-3677",
+          "pydata__xarray-3993",
+          "pydata__xarray-4094",
+          "pydata__xarray-4356",
+          "pydata__xarray-4629",
+          "pydata__xarray-4687",
+          "pydata__xarray-4695",
+          "pydata__xarray-4966",
+          "pydata__xarray-6599"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 287,
+      "terminal": 290,
       "exceptions": 6,
       "prepared_image_phases": {
-        "image_ready": 304
+        "image_ready": 320
       },
       "controller": {
-        "utc": 1792403028.8413303,
+        "utc": 1792406500.2953775,
         "phase": "running",
-        "batch": 17,
+        "batch": 18,
         "tasks": [
-          "pylint-dev__pylint-6386",
-          "pylint-dev__pylint-6528",
-          "pylint-dev__pylint-6903",
-          "pylint-dev__pylint-7080",
-          "pylint-dev__pylint-7277",
-          "pylint-dev__pylint-8898",
-          "pytest-dev__pytest-10051",
-          "pytest-dev__pytest-10081",
-          "pytest-dev__pytest-10356",
-          "pytest-dev__pytest-5262",
-          "pytest-dev__pytest-5631",
-          "pytest-dev__pytest-5809",
-          "pytest-dev__pytest-6197",
-          "pytest-dev__pytest-6202",
-          "pytest-dev__pytest-7205",
-          "pytest-dev__pytest-7490"
+          "pytest-dev__pytest-7521",
+          "pytest-dev__pytest-8399",
+          "scikit-learn__scikit-learn-10297",
+          "scikit-learn__scikit-learn-10844",
+          "scikit-learn__scikit-learn-11310",
+          "scikit-learn__scikit-learn-11578",
+          "scikit-learn__scikit-learn-12585",
+          "scikit-learn__scikit-learn-12682",
+          "scikit-learn__scikit-learn-13135",
+          "scikit-learn__scikit-learn-13142",
+          "scikit-learn__scikit-learn-13328",
+          "scikit-learn__scikit-learn-13439",
+          "scikit-learn__scikit-learn-13496",
+          "scikit-learn__scikit-learn-13779",
+          "scikit-learn__scikit-learn-14053",
+          "scikit-learn__scikit-learn-14141"
         ]
       },
       "full_official_rrr_complete": false
