@@ -1,0 +1,366 @@
+{
+  "generated_utc": "2026-10-19T03:45:10.384305+00:00",
+  "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
+  "models": {
+    "muse_nvfp4": {
+      "model": "Muse-Spark-Open-816B-A42B-NVFP4",
+      "swe_bench_pro_verified": {
+        "round_1": {
+          "status": "complete",
+          "expected": 731,
+          "graded": 731,
+          "success": 496,
+          "accuracy": 0.6785225718194254,
+          "qualification": "Complete first-round 731-task evaluation including predeclared recovery of uncompleted tasks, not a three-round average. One successful task lacks trajectory and must not be treated as usable thinking training data. This completion audit does not establish that all trajectories are clean."
+        }
+      },
+      "deepswe": {
+        "rounds": [
+          {
+            "round": 1,
+            "expected": 113,
+            "graded": 113,
+            "success": 57,
+            "accuracy": 0.504424778761062
+          },
+          {
+            "round": 2,
+            "expected": 113,
+            "graded": 113,
+            "success": 59,
+            "accuracy": 0.5221238938053098
+          },
+          {
+            "round": 3,
+            "expected": 113,
+            "graded": 113,
+            "success": 63,
+            "accuracy": 0.5575221238938053
+          }
+        ],
+        "mean_three_round_accuracy": 0.528023598820059,
+        "status": "complete_three_rounds",
+        "qualification": "Benchmark-recorded rewards. Exceptional graded records are explicitly flagged; this is not a claim that every zero was an ordinary model failure.",
+        "trajectory_review_flag": "ipython-session-bundle-replay"
+      },
+      "swrbench": {
+        "status": "complete",
+        "expected": 1000,
+        "judged": 1000,
+        "accuracy": 0.554,
+        "f1": 0.5142,
+        "judge": "gpt-5.5"
+      },
+      "swe_review": {
+        "glm5_500": {
+          "expected": 500,
+          "terminal": 473,
+          "status": "partial_no_full_rrr"
+        },
+        "qwen3_coder_30b_500": {
+          "expected": 462,
+          "terminal": 439,
+          "status": "partial_no_full_rrr"
+        },
+        "qwen3_30b_instruct2507_500": {
+          "expected": 422,
+          "terminal": 422,
+          "status": "partial_no_full_rrr"
+        }
+      },
+      "tb2_1_exact_supplied_images": {
+        "rounds": {
+          "1": {
+            "expected": 89,
+            "terminal": 11,
+            "graded": 11,
+            "success": 10,
+            "active_trial_dirs": 19,
+            "archived_actual_model_responses": 503,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          },
+          "2": {
+            "expected": 89,
+            "terminal": 0,
+            "graded": 0,
+            "success": 0,
+            "active_trial_dirs": 0,
+            "archived_actual_model_responses": 0,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          },
+          "3": {
+            "expected": 89,
+            "terminal": 0,
+            "graded": 0,
+            "success": 0,
+            "active_trial_dirs": 0,
+            "archived_actual_model_responses": 0,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          }
+        },
+        "status": "partial_no_full_score"
+      }
+    },
+    "beam_bf16": {
+      "model": "reflection/Beam-1.0-501B-A23B",
+      "swe_bench_pro_verified": {
+        "expected": 731,
+        "terminal": 42,
+        "graded": 41,
+        "success": 31,
+        "status": "partial_no_full_score"
+      },
+      "deepswe": {
+        "1": {
+          "expected": 113,
+          "terminal": 43,
+          "graded": 43,
+          "success": 9,
+          "status": "partial_no_full_score"
+        },
+        "2": {
+          "expected": 113,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        },
+        "3": {
+          "expected": 113,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        }
+      },
+      "tb2_1_legacy_cached_tag": {
+        "1": {
+          "expected": 89,
+          "terminal": 24,
+          "graded": 22,
+          "success": 15,
+          "status": "partial_no_full_score"
+        },
+        "2": {
+          "expected": 89,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        },
+        "3": {
+          "expected": 89,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        }
+      },
+      "tb2_1_exact_supplied_images": {
+        "rounds": {
+          "1": {
+            "expected": 89,
+            "terminal": 32,
+            "graded": 32,
+            "success": 24,
+            "active_trial_dirs": 36,
+            "archived_actual_model_responses": 1134,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          },
+          "2": {
+            "expected": 89,
+            "terminal": 0,
+            "graded": 0,
+            "success": 0,
+            "active_trial_dirs": 0,
+            "archived_actual_model_responses": 0,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          },
+          "3": {
+            "expected": 89,
+            "terminal": 0,
+            "graded": 0,
+            "success": 0,
+            "active_trial_dirs": 0,
+            "archived_actual_model_responses": 0,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          }
+        },
+        "status": "partial_no_full_score"
+      },
+      "swrbench": {
+        "status": "complete",
+        "expected": 1000,
+        "judged": 1000,
+        "accuracy": 0.556,
+        "f1": 0.4676,
+        "judge": "gpt-5.5"
+      },
+      "swe_review": {
+        "glm5_500": {
+          "expected": 500,
+          "terminal": 214,
+          "status": "partial_no_full_rrr"
+        },
+        "qwen3_coder_30b_500": {
+          "expected": 462,
+          "terminal": 218,
+          "status": "partial_no_full_rrr"
+        },
+        "qwen3_30b_instruct2507_500": {
+          "expected": 422,
+          "terminal": 221,
+          "status": "partial_no_full_rrr"
+        }
+      }
+    },
+    "opus_4_7": {
+      "model": "Claude Opus 4.7",
+      "swe_bench_pro_verified": {
+        "expected": 731,
+        "terminal": 391,
+        "graded": 390,
+        "success": 244,
+        "status": "partial_no_full_score"
+      },
+      "deepswe": {
+        "1": {
+          "expected": 113,
+          "terminal": 113,
+          "graded": 113,
+          "success": 51,
+          "status": "complete"
+        },
+        "2": {
+          "expected": 113,
+          "terminal": 13,
+          "graded": 13,
+          "success": 7,
+          "status": "partial_no_full_score"
+        },
+        "3": {
+          "expected": 113,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        }
+      },
+      "tb2_1_legacy_cached_tag": {
+        "1": {
+          "expected": 89,
+          "terminal": 89,
+          "graded": 89,
+          "success": 70,
+          "status": "complete"
+        },
+        "2": {
+          "expected": 89,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        },
+        "3": {
+          "expected": 89,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        }
+      },
+      "tb2_1_exact_supplied_images": {
+        "rounds": {
+          "1": {
+            "expected": 89,
+            "terminal": 59,
+            "graded": 59,
+            "success": 45,
+            "active_trial_dirs": 63,
+            "archived_actual_model_responses": 1304,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          },
+          "2": {
+            "expected": 89,
+            "terminal": 0,
+            "graded": 0,
+            "success": 0,
+            "active_trial_dirs": 0,
+            "archived_actual_model_responses": 0,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          },
+          "3": {
+            "expected": 89,
+            "terminal": 0,
+            "graded": 0,
+            "success": 0,
+            "active_trial_dirs": 0,
+            "archived_actual_model_responses": 0,
+            "ungraded": 0,
+            "exceptions": {},
+            "excluded_user_reassignment_trials": [],
+            "complete": false,
+            "accuracy": null,
+            "legacy_cached_tag_scores_included": false
+          }
+        },
+        "status": "partial_no_full_score"
+      }
+    },
+    "muse_bf16": {
+      "model": "meta-models/Muse-Spark-Open-816B-A42B",
+      "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
+      "status": "in_progress",
+      "qualification": "Original BF16 native Pro, TB2.1 and DeepSWE started after real inference and tool/thinking preflight; no complete benchmark scores at this snapshot."
+    }
+  },
+  "source_files": {
+    "muse_pro": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/state/monitor-current.json",
+    "muse_pro_task_evidence": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/state/pro-round1-task-evidence.json",
+    "muse_deep_three_round": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/remaining_deep3_2812_20261018/state/current.json",
+    "muse_swr_review": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/state/current.json",
+    "beam_opus_bf16": "/fsx/home/zhiyuan/.private/beam_20261018/expanded-current.json",
+    "beam_swr_review": "/fsx/home/zhiyuan/.private/beam_20261018/current.json",
+    "tb_exact_images": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/status-current.json"
+  }
+}
