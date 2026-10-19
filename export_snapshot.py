@@ -187,7 +187,7 @@ The TB2.1 **legacy cached-tag image profile is separate** from the exact user-su
 
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
-The {asset_count} release assets were checked against GitHub's reported SHA-256 digests: **{asset_count}/{asset_count} matched** their committed archive manifests. The latest live exact-image TB archive is a timestamped snapshot of in-progress trials, not scored results.
+The {asset_count} release assets were checked against GitHub's reported SHA-256 digests: **{asset_count}/{asset_count} matched** their committed archive manifests; see `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
 
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Two disjoint continuation lanes are now active on the surviving NVFP4 node 2866: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. The original controller waits for the parallel lane's finished results and verifies task coverage, preventing duplicate scoring. Additional GPU allocations 2923 and 2924 are queued. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
@@ -210,7 +210,7 @@ chinese_report = f'''# 模型评测结果快照
 
 **审计限制。** Muse DeepSWE 有一条成功轨迹尝试查看 verifier 日志，但返回的目录为空；这条轨迹已单独标记供训练数据筛查，现有证据不能断言读到了隐藏答案。Muse Pro Verified 有一条成功记录缺少轨迹，不应作为带 thinking 的训练样本。SWE-Review 的完整官方 RRR 尚未生成，任何已结束题数都不等于最终成绩。
 
-逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 共 {asset_count} 个归档，优先使用 SWE-Review 的 `*_review_full_io.tar.zst`（含 OpenHands completions）。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 是正在运行题目的原始输入输出快照，未到判分阶段。**GitHub 返回的 SHA-256 与提交的清单 {asset_count}/{asset_count} 全部一致。**
+逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 共 {asset_count} 个归档，优先使用 SWE-Review 的 `*_review_full_io.tar.zst`（含 OpenHands completions）。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单 {asset_count}/{asset_count} 全部一致**，逐项核验见 `evidence/release-assets-verification.json`。
 '''
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))
