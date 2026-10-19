@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T17:18:55.452028+00:00",
+  "generated_utc": "2026-10-19T17:22:13.544379+00:00",
   "model": "beam_bf16",
   "round": 1,
   "profile": "exact user-supplied prebuilt TB2.1 images",
@@ -22,7 +22,9 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "torch-pipeline-parallelism"
+  ],
   "missing_task_inputs_in_archive": [
     "train-fasttext",
     "tune-mjcf",
