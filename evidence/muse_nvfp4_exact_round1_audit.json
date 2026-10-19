@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T15:46:25.276212+00:00",
+  "generated_utc": "2026-10-19T15:51:15.493589+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 86,
-  "success_count": 67,
-  "scored_raw_response_count": 4028,
-  "scored_nonempty_reasoning_response_count": 4027,
+  "graded_task_count": 87,
+  "success_count": 68,
+  "scored_raw_response_count": 4035,
+  "scored_nonempty_reasoning_response_count": 4034,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -128,12 +128,11 @@
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "make-mips-interpreter",
-    "modernize-scientific-stack",
     "mteb-leaderboard"
   ],
   "active_or_unfinished_trials": [
     "make-mips-interpreter__6BNKuxJ",
-    "modernize-scientific-stack__PSEyUkm"
+    "mteb-leaderboard__EAhfXHh"
   ],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -667,6 +666,17 @@
       "finished_at": "2026-10-19T15:45:32.354598Z",
       "raw_response_count": 18,
       "responses_with_reasoning_content": 18
+    },
+    "modernize-scientific-stack": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/modernize-scientific-stack__PSEyUkm/result.json",
+      "result_sha256": "643d6d51ebf3de406f5da9be36e460cdcf277ad9eaf20117c4d45d58e783c8f1",
+      "finished_at": "2026-10-19T15:47:34.336541Z",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
     },
     "mteb-retrieve": {
       "reward": 0.0,

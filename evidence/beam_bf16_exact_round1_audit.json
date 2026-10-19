@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-19T15:46:39.138871+00:00",
+  "generated_utc": "2026-10-19T15:51:28.058216+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T153944Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T155039Z.tar.zst",
   "expected": 89,
-  "terminal": 69,
-  "graded": 69,
-  "success": 49,
+  "terminal": 70,
+  "graded": 70,
+  "success": 50,
   "missing_graded_tasks": [
     "path-tracing",
     "path-tracing-reverse",
     "regex-chess",
-    "regex-log",
     "reshard-c4-data",
     "rstan-to-pystan",
     "sam-cell-seg",
@@ -31,11 +30,8 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "regex-log"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "reshard-c4-data",
     "rstan-to-pystan",
     "sam-cell-seg",
     "sanitize-git-repo",
@@ -540,6 +536,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/raman-fitting__ot4928W/result.json",
       "raw_response_count": 41,
       "responses_with_reasoning_content": 41
+    },
+    "regex-log": {
+      "reward": 1.0,
+      "result_sha256": "e19badb558dcf9242adcfbfbe0f5d8e6aaed2d81aff29865b01e5bbd99eae276",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/regex-log__uV7GMsB/result.json",
+      "raw_response_count": 5,
+      "responses_with_reasoning_content": 5
     }
   }
 }
