@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T15:44:25.708213+00:00",
+  "generated_utc": "2026-10-19T15:46:25.276212+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 85,
+  "graded_task_count": 86,
   "success_count": 67,
-  "scored_raw_response_count": 4010,
-  "scored_nonempty_reasoning_response_count": 4009,
+  "scored_raw_response_count": 4028,
+  "scored_nonempty_reasoning_response_count": 4027,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -128,13 +128,12 @@
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "make-mips-interpreter",
-    "model-extraction-relu-logits",
     "modernize-scientific-stack",
     "mteb-leaderboard"
   ],
   "active_or_unfinished_trials": [
     "make-mips-interpreter__6BNKuxJ",
-    "model-extraction-relu-logits__Pp3LAYE"
+    "modernize-scientific-stack__PSEyUkm"
   ],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -657,6 +656,17 @@
       "finished_at": "2026-10-19T15:24:59.450704Z",
       "raw_response_count": 19,
       "responses_with_reasoning_content": 19
+    },
+    "model-extraction-relu-logits": {
+      "reward": 0.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/model-extraction-relu-logits__Pp3LAYE/result.json",
+      "result_sha256": "dd041f0021672a4abbbb396afacb0f4be455e1cb2bf7e93af334cddb2080f5d1",
+      "finished_at": "2026-10-19T15:45:32.354598Z",
+      "raw_response_count": 18,
+      "responses_with_reasoning_content": 18
     },
     "mteb-retrieve": {
       "reward": 0.0,
