@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T09:23:19.931334+00:00",
+  "generated_utc": "2026-10-19T09:31:18.995575+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 44,
-  "success_count": 36,
-  "scored_raw_response_count": 1353,
-  "scored_nonempty_reasoning_response_count": 1353,
+  "graded_task_count": 50,
+  "success_count": 41,
+  "scored_raw_response_count": 1477,
+  "scored_nonempty_reasoning_response_count": 1477,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -74,7 +74,6 @@
     "db-wal-recovery",
     "dna-assembly",
     "extract-moves-from-video",
-    "fix-git",
     "fix-ocaml-gc",
     "install-windows-3.11",
     "large-scale-text-editing",
@@ -104,13 +103,8 @@
     "query-optimize",
     "raman-fitting",
     "schemelike-metacircular-eval",
-    "sparql-university",
-    "sqlite-db-truncate",
-    "sqlite-with-gcov",
     "train-fasttext",
     "tune-mjcf",
-    "video-processing",
-    "vulnerable-secret",
     "winning-avg-corewars",
     "write-compressor"
   ],
@@ -118,17 +112,15 @@
     "compile-compcert__w9HS5rZ",
     "count-dataset-tokens__QuGJimY",
     "extract-moves-from-video__pA42NVn",
-    "fix-git__SXFZPeA",
+    "fix-ocaml-gc__caoUspF",
     "install-windows-3.11__JZGpPLL",
     "large-scale-text-editing__byNYEsg",
     "path-tracing-reverse__4covUwV",
     "path-tracing__au39ic5",
     "schemelike-metacircular-eval__nBsnCj5",
-    "sparql-university__b2KdJnu",
-    "sqlite-db-truncate__p89aycw",
     "train-fasttext__Mc2uuim",
     "tune-mjcf__cgx3dH4",
-    "video-processing__FZRHQnL"
+    "winning-avg-corewars__52KLeCD"
   ],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -388,6 +380,17 @@
       "raw_response_count": 17,
       "responses_with_reasoning_content": 17
     },
+    "fix-git": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b01/fix-git__SXFZPeA/result.json",
+      "result_sha256": "1b97e25939343fc20763e76270c647cb03a4d33aa2c6d454f895f350bdbbc226",
+      "finished_at": "2026-10-19T09:23:37.503755Z",
+      "raw_response_count": 35,
+      "responses_with_reasoning_content": 35
+    },
     "gcode-to-text": {
       "reward": 0.0,
       "exception_type": "AgentTimeoutError",
@@ -597,6 +600,39 @@
       "raw_response_count": 34,
       "responses_with_reasoning_content": 34
     },
+    "sparql-university": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/sparql-university__b2KdJnu/result.json",
+      "result_sha256": "f805829b8bab5ff63b2f511da7811b01deb76daa4ef6277d67650638524b4e26",
+      "finished_at": "2026-10-19T09:23:30.890992Z",
+      "raw_response_count": 12,
+      "responses_with_reasoning_content": 12
+    },
+    "sqlite-db-truncate": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/sqlite-db-truncate__p89aycw/result.json",
+      "result_sha256": "30f1af6427ee0e162e4ba6ab234db3398773d092ed698810ed984391142e3a61",
+      "finished_at": "2026-10-19T09:28:44.834036Z",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
+    },
+    "sqlite-with-gcov": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/sqlite-with-gcov__Ts9ULHn/result.json",
+      "result_sha256": "91c76a11b9349f730d8b8538ebf7adbb4af2e27d58263ff382dd14d9ff8d72f1",
+      "finished_at": "2026-10-19T09:28:56.225702Z",
+      "raw_response_count": 13,
+      "responses_with_reasoning_content": 13
+    },
     "torch-pipeline-parallelism": {
       "reward": 1.0,
       "exception_type": null,
@@ -618,6 +654,28 @@
       "finished_at": "2026-10-19T08:01:40.251225Z",
       "raw_response_count": 15,
       "responses_with_reasoning_content": 15
+    },
+    "video-processing": {
+      "reward": 0.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b07/video-processing__FZRHQnL/result.json",
+      "result_sha256": "a2c13c31ff001a58ce1d1b617819478cab4d2a3f2445f7ac8eceb00923063cd1",
+      "finished_at": "2026-10-19T09:24:24.844370Z",
+      "raw_response_count": 42,
+      "responses_with_reasoning_content": 42
+    },
+    "vulnerable-secret": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b07/vulnerable-secret__snUCaPH/result.json",
+      "result_sha256": "9b56da0075c3ae706ee7220fe0cb8781e00b24dd14457acfa815b81e8383e2ef",
+      "finished_at": "2026-10-19T09:28:44.996658Z",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
     }
   }
 }
