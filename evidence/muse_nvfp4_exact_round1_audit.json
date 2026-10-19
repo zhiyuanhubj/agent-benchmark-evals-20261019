@@ -1,15 +1,16 @@
 {
-  "generated_utc": "2026-10-19T10:38:38.454224+00:00",
+  "generated_utc": "2026-10-19T10:43:49.287370+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 57,
+  "graded_task_count": 58,
   "success_count": 47,
-  "scored_raw_response_count": 1942,
-  "scored_nonempty_reasoning_response_count": 1941,
+  "scored_raw_response_count": 2077,
+  "scored_nonempty_reasoning_response_count": 2076,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
+    "extract-moves-from-video",
     "gcode-to-text"
   ],
   "replica_handoff": {
@@ -66,13 +67,12 @@
     ],
     "sampling_profile_unchanged": true
   },
-  "opportunistic_routes_2812": [],
+  "opportunistic_routes_extra_gpu": [],
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "count-dataset-tokens",
     "db-wal-recovery",
     "dna-assembly",
-    "extract-moves-from-video",
     "fix-ocaml-gc",
     "largest-eigenval",
     "llm-inference-batching-scheduler",
@@ -105,7 +105,6 @@
   "active_or_unfinished_trials": [
     "count-dataset-tokens__QuGJimY",
     "db-wal-recovery__fBa7T4g",
-    "extract-moves-from-video__pA42NVn",
     "fix-ocaml-gc__caoUspF",
     "largest-eigenval__wXyPqJk",
     "path-tracing-reverse__4covUwV",
@@ -337,6 +336,17 @@
       "finished_at": "2026-10-19T05:21:20.746698Z",
       "raw_response_count": 53,
       "responses_with_reasoning_content": 53
+    },
+    "extract-moves-from-video": {
+      "reward": 0.0,
+      "exception_type": "AgentTimeoutError",
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b01/extract-moves-from-video__pA42NVn/result.json",
+      "result_sha256": "90f8bed7b256db0761c98f75e3526f68392211cf24d7145aad7a8e1227208081",
+      "finished_at": "2026-10-19T10:42:35.965026Z",
+      "raw_response_count": 135,
+      "responses_with_reasoning_content": 135
     },
     "feal-differential-cryptanalysis": {
       "reward": 1.0,
