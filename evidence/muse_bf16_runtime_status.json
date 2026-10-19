@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T18:42:10.866000+00:00",
+  "utc": "2026-10-19T18:58:46.178512+00:00",
   "precision": "BF16",
   "model_repo": "meta-models/Muse-Spark-Open-816B-A42B",
   "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
@@ -17,7 +17,13 @@
     true,
     true
   ],
-  "paired_runtime_launched": false,
+  "paired_runtime_launched": true,
+  "replica_2886": {
+    "weights_verified_both_ranks": true,
+    "endpoint_ready": true,
+    "tool_thinking_preflight_ready": true,
+    "review_phase": "verified_2886_swr_generation_judging_and_review_pipeline_started"
+  },
   "manual_pair": {
     "allocations_by_rank": [
       2869,
@@ -42,12 +48,11 @@
     "capacity": true,
     "pair": false,
     "benchmark": false,
-    "review": true
+    "review": true,
+    "replica_2886_rank0": true,
+    "replica_2886_rank1": true
   },
   "model_sampling_started": true,
-  "problems": [
-    "BF16 rank 0 weight prefetch stopped before verification",
-    "BF16 rank 1 weight prefetch stopped before verification"
-  ],
+  "problems": [],
   "qualification": "BF16 results remain separate from NVFP4; source staging and pending jobs are not model samples."
 }

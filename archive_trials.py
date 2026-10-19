@@ -36,10 +36,20 @@ GROUPS = {
     'opus47_exact_tb': [B / 'tb_v1_exact_images_20261019/results/opus47'],
     'muse_exact_tb': [B / 'tb_v1_exact_images_20261019/results/muse_nvfp4'],
     'muse_bf16': [BF / 'legacy_bench/pro-results', BF / 'legacy_bench/tb-results', BF / 'legacy_bench/deep-results', BF / 'review_bench/swe_review', BF / 'review_bench/queue/results'],
+    'muse_bf16_swr': [BF / 'review_bench/swrbench', BASE / 'bench/code-review-eval/data/repos/swrbench/data'],
 }
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    if group == 'muse_bf16_swr':
+        if root == BASE / 'bench/code-review-eval/data/repos/swrbench/data':
+            return path.name == 'swr_datasets_d5c5.jsonl'
+        return (path.name in ('generation.jsonl', 'evaluation-gpt-5.5.json.tmp.jsonl',
+                             'evaluation-gpt-5.5.json', 'launch.json',
+                             'controller-complete.json', 'judge-state.json',
+                             'completion-audit-current.json', 'failures.json')
+                or ('raw_responses' in rel.parts and path.suffix == '.json')
+                or ('judge_raw_responses' in rel.parts and path.suffix == '.json'))
     verifier_file = 'verifier' in rel.parts and path.name in ('review_report.json', 'report.json', 'reward.txt', 'test-stdout.txt')
     if group.endswith('review_verifier'):
         return verifier_file
@@ -124,8 +134,14 @@ def main():
                 tar.add(str(path), arcname=arcname, recursive=False)
                 category = 'judge_raw_response.json' if 'judge_raw_responses' in path.parts else ('raw_response.json' if 'raw_responses' in path.parts else ('completion.json' if 'completions' in path.parts else ('api_archive.json' if 'api_archive' in path.parts else path.name)))
                 counts[category] = counts.get(category, 0) + 1
-                input_count += path.name in ('task.json', 'config.json')
-                output_count += path.name in ('result.json', 'trajectory.json', 'trial.log')
+                if group == 'muse_bf16_swr':
+                    input_count += path.name in ('swr_datasets_d5c5.jsonl', 'launch.json')
+                    output_count += path.name in ('generation.jsonl',
+                                                  'evaluation-gpt-5.5.json.tmp.jsonl',
+                                                  'evaluation-gpt-5.5.json')
+                else:
+                    input_count += path.name in ('task.json', 'config.json')
+                    output_count += path.name in ('result.json', 'trajectory.json', 'trial.log')
                 raw_count += 'raw_responses' in path.parts or 'judge_raw_responses' in path.parts or 'completions' in path.parts
         proc.stdin.close()
         rc = proc.wait()
@@ -149,7 +165,9 @@ def main():
         'raw_response_count': raw_count,
         'filename_counts': counts,
         'source_roots': [str(x) for x in GROUPS[group]],
-        'scope': 'Native task/config inputs, result outputs, trajectories, raw API responses and trial logs present at snapshot time. Excludes model weights, Docker images, caches, artifacts, sandbox and verifier internals.',
+        'scope': ('The exact 1000-item SWRBench source dataset, launch config, live generated reviews, GPT-5.5 judge records and raw responses present at snapshot time; later deltas replace growing JSONL files. Excludes credentials and model weights.'
+                  if group == 'muse_bf16_swr' else
+                  'Native task/config inputs, result outputs, trajectories, raw API responses and trial logs present at snapshot time. Excludes model weights, Docker images, caches, artifacts, sandbox and verifier internals.'),
     }
     out = HERE / 'input_output/archive_manifests' / f'{group}.json'
     out.parent.mkdir(parents=True, exist_ok=True)

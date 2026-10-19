@@ -100,7 +100,7 @@ def sync_native_archives(scores, force_bf16=False):
                             and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS)
         if terminal > archived_terminal or handoff_newer or raw_snapshot_due:
             run(command, timeout=300)
-    for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16',
+    for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
                   'muse_review_full_io', 'beam_review_full_io',
                   'muse_review_verifier', 'beam_review_verifier'):
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]

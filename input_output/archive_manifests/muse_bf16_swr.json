@@ -1,0 +1,27 @@
+{
+  "group": "muse_bf16_swr",
+  "generated_utc": "2026-10-19T18:57:11.151947+00:00",
+  "archive_name": "muse_bf16_swr.tar.zst",
+  "archive_size_bytes": 5283714,
+  "archive_sha256": "108820e633ee65ca5145e1009204f489ab8e8b9592c03fd0530bfd58de5635d4",
+  "file_count": 30,
+  "input_file_count": 2,
+  "output_file_count": 2,
+  "raw_response_count": 23,
+  "filename_counts": {
+    "completion-audit-current.json": 1,
+    "evaluation-gpt-5.5.json.tmp.jsonl": 1,
+    "failures.json": 1,
+    "generation.jsonl": 1,
+    "judge-state.json": 1,
+    "judge_raw_response.json": 11,
+    "launch.json": 1,
+    "raw_response.json": 12,
+    "swr_datasets_d5c5.jsonl": 1
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/swrbench",
+    "/fsx/home/zhiyuan/bench/code-review-eval/data/repos/swrbench/data"
+  ],
+  "scope": "The exact 1000-item SWRBench source dataset, launch config, live generated reviews, GPT-5.5 judge records and raw responses present at snapshot time; later deltas replace growing JSONL files. Excludes credentials and model weights."
+}
