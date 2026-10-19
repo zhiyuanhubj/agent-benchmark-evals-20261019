@@ -1,5 +1,5 @@
 {
-  "reviewed_utc": "2026-10-19T11:19:13.730497+00:00",
+  "reviewed_utc": "2026-10-19T11:50:35.529163+00:00",
   "scope": "Targeted manual review of selected Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16 exact-image TB2.1 trajectories, including all currently pattern-flagged successes.",
   "notes": [
     {
@@ -153,6 +153,15 @@
       "trajectory_sha256": "63eb1417819bc4e6b07445c6e19e9a502ddcb4da56ee2b8822aeef94ff181d72",
       "observed": "The public task asks for an XSS payload and explicitly permits /app/test_outputs.py. Steps 3-4 build local HTML/browser tests. At step 8 the agent found /tests absent; at step 9 it temporarily copied the exposed /app/filter.py to /tests/filter.py, ran the public test successfully, and removed /tests before grading. The supplied environment copies of both filter files have identical SHA-256. No hidden-answer retrieval or persistent verifier rewrite is confirmed, but writing a verifier path makes this unsuitable for clean training export pending full review.",
       "training_disposition": "exclude_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "winning-avg-corewars",
+      "reward": 1.0,
+      "trajectory_sha256": "e7d519750cf5bc3607d2d2fff2e1400cd77815c4ff5fde327d4df2a5a5a71e0b",
+      "observed": "The completed 84-response trajectory has one raw response without a separate reasoning_content field. Its content contains the task JSON analysis/plan/commands, which does not establish preservation of separate thinking. See evidence/muse_nvfp4_winning_avg_corewars_thinking_gap.json for the anchored raw response and metadata.",
+      "training_disposition": "exclude_whole_trajectory_from_full_thinking_training_until_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }
   ],
