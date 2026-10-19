@@ -1,6 +1,7 @@
 {
-  "generated_utc": "2026-10-19T16:24:19.467442+00:00",
+  "generated_utc": "2026-10-19T16:29:58.931227+00:00",
   "model": "beam_bf16",
+  "round": 1,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
   "archive_name": "beam_bf16_exact_tb_live_20261019T162326Z.tar.zst",
@@ -30,7 +31,10 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "path-tracing",
+    "path-tracing-reverse"
+  ],
   "missing_task_inputs_in_archive": [
     "rstan-to-pystan",
     "sam-cell-seg",

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T16:23:54.216651+00:00",
+  "generated_utc": "2026-10-19T16:29:30.130338+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -119,9 +119,9 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 5,
-            "graded": 5,
-            "success": 5,
+            "terminal": 6,
+            "graded": 6,
+            "success": 6,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 0,
@@ -179,23 +179,23 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 76,
-            "2": 5,
+            "2": 6,
             "3": 0
           },
-          "new_raw_model_responses": 4257,
+          "new_raw_model_responses": 4296,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 552,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 565,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 263,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 35
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 275,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 49
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T16:23:54+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T16:29:27+00:00",
           "active_recovery_trial_dirs": 6,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -252,17 +252,17 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 74,
-        "graded": 73,
+        "terminal": 75,
+        "graded": 74,
         "success": 45,
         "status": "partial_no_full_score"
       },
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 63,
-          "graded": 63,
-          "success": 19,
+          "terminal": 64,
+          "graded": 64,
+          "success": 20,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -311,7 +311,7 @@
             "graded": 70,
             "success": 50,
             "active_trial_dirs": 74,
-            "archived_actual_model_responses": 3431,
+            "archived_actual_model_responses": 3440,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 5
@@ -363,17 +363,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 296,
+          "terminal": 300,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 300,
+          "terminal": 304,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 315,
+          "terminal": 319,
           "status": "partial_no_full_rrr"
         }
       }
@@ -411,8 +411,8 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 73,
-          "graded": 73,
+          "terminal": 74,
+          "graded": 74,
           "success": 21,
           "status": "partial_no_full_score"
         }
@@ -476,7 +476,7 @@
             "graded": 88,
             "success": 68,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1861,
+            "archived_actual_model_responses": 1871,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
