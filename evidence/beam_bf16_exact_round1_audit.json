@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-19T11:59:42.485466+00:00",
+  "generated_utc": "2026-10-19T12:02:13.175391+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T115646Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T120117Z.tar.zst",
   "expected": 89,
-  "terminal": 59,
-  "graded": 59,
+  "terminal": 60,
+  "graded": 60,
   "success": 43,
   "missing_graded_tasks": [
     "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "protein-assembly",
     "prove-plus-comm",
     "pypi-server",
     "pytorch-model-cli",
@@ -41,11 +40,8 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "protein-assembly"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "prove-plus-comm",
     "pypi-server",
     "pytorch-model-cli",
     "pytorch-model-recovery",
@@ -490,6 +486,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/portfolio-optimization__HS2VhyD/result.json",
       "raw_response_count": 8,
       "responses_with_reasoning_content": 8
+    },
+    "protein-assembly": {
+      "reward": 0.0,
+      "result_sha256": "13e725c940cf066f789361ab1bea77c560d66e97d0bc7be55870086d64a0e5c8",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/protein-assembly__f9z8QAw/result.json",
+      "raw_response_count": 36,
+      "responses_with_reasoning_content": 36
     }
   }
 }
