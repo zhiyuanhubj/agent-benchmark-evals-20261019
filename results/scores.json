@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T15:51:03.935596+00:00",
+  "generated_utc": "2026-10-19T16:00:26.206841+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -119,9 +119,9 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 3,
-            "graded": 3,
-            "success": 3,
+            "terminal": 4,
+            "graded": 4,
+            "success": 4,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 0,
@@ -179,22 +179,22 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 76,
-            "2": 3,
+            "2": 4,
             "3": 0
           },
-          "new_raw_model_responses": 4060,
+          "new_raw_model_responses": 4118,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 474,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 507,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 179
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 204
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T15:50:56+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T16:00:14+00:00",
           "active_recovery_trial_dirs": 4,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -259,9 +259,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 62,
-          "graded": 62,
-          "success": 18,
+          "terminal": 63,
+          "graded": 63,
+          "success": 19,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -310,7 +310,7 @@
             "graded": 70,
             "success": 50,
             "active_trial_dirs": 74,
-            "archived_actual_model_responses": 3354,
+            "archived_actual_model_responses": 3379,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 5
@@ -362,17 +362,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 291,
+          "terminal": 293,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 294,
+          "terminal": 298,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 311,
+          "terminal": 313,
           "status": "partial_no_full_rrr"
         }
       }
@@ -410,9 +410,9 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 67,
-          "graded": 67,
-          "success": 18,
+          "terminal": 69,
+          "graded": 69,
+          "success": 19,
           "status": "partial_no_full_score"
         }
       },
@@ -471,11 +471,11 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 87,
-            "graded": 87,
+            "terminal": 88,
+            "graded": 88,
             "success": 68,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1808,
+            "archived_actual_model_responses": 1827,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -519,9 +519,9 @@
       "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
-          "terminal": 26,
-          "graded": 26,
-          "success": 22,
+          "terminal": 27,
+          "graded": 27,
+          "success": 23,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -544,9 +544,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 26,
-            "graded": 26,
-            "success": 22,
+            "terminal": 27,
+            "graded": 27,
+            "success": 23,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
