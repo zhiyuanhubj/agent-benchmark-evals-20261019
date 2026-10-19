@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T11:36:08.153072+00:00",
+  "generated_utc": "2026-10-19T11:39:28.322550+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 63,
-  "success_count": 51,
-  "scored_raw_response_count": 2372,
-  "scored_nonempty_reasoning_response_count": 2371,
+  "graded_task_count": 64,
+  "success_count": 52,
+  "scored_raw_response_count": 2637,
+  "scored_nonempty_reasoning_response_count": 2636,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -135,7 +135,6 @@
     "model-extraction-relu-logits",
     "modernize-scientific-stack",
     "mteb-leaderboard",
-    "path-tracing",
     "path-tracing-reverse",
     "polyglot-c-py",
     "polyglot-rust-c",
@@ -157,7 +156,7 @@
     "llm-inference-batching-scheduler__Lbi33h5",
     "mailman__GGFCS4h",
     "path-tracing-reverse__4covUwV",
-    "path-tracing__au39ic5",
+    "polyglot-c-py__fWHkeak",
     "portfolio-optimization__ACqpwZp",
     "protein-assembly__XNUjRgT",
     "train-fasttext__Mc2uuim"
@@ -672,6 +671,17 @@
       "finished_at": "2026-10-19T06:10:30.390927Z",
       "raw_response_count": 22,
       "responses_with_reasoning_content": 22
+    },
+    "path-tracing": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b04/path-tracing__au39ic5/result.json",
+      "result_sha256": "9281fea5d0b1b55967d95b449c90647efc87d9a52f1d2014889324d608d9a30c",
+      "finished_at": "2026-10-19T11:36:25.211287Z",
+      "raw_response_count": 265,
+      "responses_with_reasoning_content": 265
     },
     "regex-chess": {
       "reward": 0.0,
