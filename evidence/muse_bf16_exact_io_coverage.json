@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-19T16:15:30.056951+00:00",
+  "generated_utc": "2026-10-19T16:18:35.420802+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 27,
-  "success_count": 23,
+  "scored_tasks": 28,
+  "success_count": 24,
   "tasks": {
     "circuit-fibsqrt": {
       "reward": 1.0,
@@ -31,6 +31,10 @@
     "multi-source-data-merger": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/multi-source-data-merger__6Xrmvzw/result.json"
+    },
+    "configure-git-webserver": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/configure-git-webserver__mPdpvuC/result.json"
     },
     "custom-memory-heap-crash": {
       "reward": 1.0,
@@ -114,11 +118,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 27,
-  "covered_raw_response_sets": 27,
-  "covered_trajectories": 27,
-  "scored_raw_response_count": 700,
-  "nonempty_reasoning_response_count": 700,
+  "covered_results": 28,
+  "covered_raw_response_sets": 28,
+  "covered_trajectories": 28,
+  "scored_raw_response_count": 725,
+  "nonempty_reasoning_response_count": 725,
   "raw_reasoning_by_task": {
     "circuit-fibsqrt": {
       "raw_responses": 12,
@@ -147,6 +151,10 @@
     "multi-source-data-merger": {
       "raw_responses": 7,
       "nonempty_reasoning_content": 7
+    },
+    "configure-git-webserver": {
+      "raw_responses": 25,
+      "nonempty_reasoning_content": 25
     },
     "custom-memory-heap-crash": {
       "raw_responses": 13,
@@ -272,6 +280,7 @@
     "muse_bf16_delta_20261019T155851Z.tar.zst",
     "muse_bf16_delta_20261019T160019Z.tar.zst",
     "muse_bf16_delta_20261019T161455Z.tar.zst",
+    "muse_bf16_delta_20261019T161813Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
