@@ -73,6 +73,7 @@ def add_result(task, path, source, claimed_reward=None):
             errors.append(f'invalid raw response for {task}: {raw.name}: {exc}')
     rows[task] = {
         'reward': reward,
+        'exception_type': (value.get('exception_info') or {}).get('exception_type'),
         'source': source,
         'result_path': str(path.relative_to(BASE)),
         'result_sha256': sha256(path),
@@ -137,6 +138,7 @@ audit = {
     'expected_task_count': 89,
     'graded_task_count': len(graded),
     'success_count': sum(value['reward'] == 1 for value in graded.values()),
+    'graded_agent_timeout_tasks': sorted(task for task, value in graded.items() if value['exception_type'] == 'AgentTimeoutError'),
     'ungraded_terminal_tasks': sorted(set(ungraded)),
     'missing_graded_tasks': missing,
     'active_or_unfinished_trials': sorted(active),

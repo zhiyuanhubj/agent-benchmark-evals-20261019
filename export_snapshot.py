@@ -79,7 +79,11 @@ for item in nvfp4_recovery['configurations']:
             continue
         task = Path(value['config']['task']['path']).name
         assert task in item['tasks'] and task not in new_terminal_by_round[rnd]
-        new_terminal_by_round[rnd][task] = {'reward': ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward'), 'source': str(result)}
+        new_terminal_by_round[rnd][task] = {
+            'reward': ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward'),
+            'exception': (value.get('exception_info') or {}).get('exception_type'),
+            'source': str(result),
+        }
     if batch_raw_count:
         new_raw_response_by_batch[item['job_name']] = batch_raw_count
 new_raw_response_latest_utc = datetime.fromtimestamp(new_raw_response_latest_mtime, timezone.utc).isoformat() if new_raw_response_latest_mtime is not None else None
@@ -87,6 +91,10 @@ for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['terminal'] += len(rows)
     nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
     nvfp4_rounds[rnd]['success'] += sum(row['reward'] == 1 for row in rows.values())
+    for row in rows.values():
+        if row['exception']:
+            kind = row['exception']
+            nvfp4_rounds[rnd]['exceptions'][kind] = nvfp4_rounds[rnd]['exceptions'].get(kind, 0) + 1
     nvfp4_rounds[rnd]['complete'] = nvfp4_rounds[rnd]['graded'] == 89
     nvfp4_rounds[rnd]['accuracy'] = nvfp4_rounds[rnd]['success'] / 89 if nvfp4_rounds[rnd]['complete'] else None
 
@@ -226,6 +234,9 @@ beam_exact_zh_pending = '' if be_tb['complete'] else f'；精确镜像 TB2.1 首
 opus_exact_zh_done = f'；精确镜像 TB2.1 首轮 {tb_zh(op_tb)}' if op_tb['complete'] else ''
 opus_exact_zh_pending = '' if op_tb['complete'] else f'；精确镜像 TB2.1 首轮 {tb_zh(op_tb)}'
 mn_exact_note_zh = f"精确镜像首轮已完成：**{mn_tb['success']}/89（{mn_tb['accuracy']:.2%}）**。" if mn_tb['complete'] else f"精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。"
+mn_timeout_count = mn_tb['exceptions'].get('AgentTimeoutError', 0)
+mn_timeout_en = f"Of the graded Muse exact-image tasks, {mn_timeout_count} received a verifier score after reaching the protocol's agent time limit. Their timeout status remains visible in the task audit; these tasks are not resampled within round 1.\n\n" if mn_timeout_count else ''
+mn_timeout_zh = f"**超时判分说明。** Muse 精确镜像已判分题目中有 {mn_timeout_count} 题达到协议规定的 agent 时限后仍得到 verifier 分数；逐题审计保留超时标记，首轮不重抽这些题。\n\n" if mn_timeout_count else ''
 readme = f'''# Agent benchmark evaluation snapshot
 
 Snapshot: **{now}**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
@@ -260,6 +271,7 @@ Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evid
 
 The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anchored manual notes](evidence/exact_tb_integrity_manual_notes.json) flag two successful Muse NVFP4 trajectories (`password-recovery`, `configure-git-webserver`) that attempted verifier-log or host-boundary access. Inspected outputs did not show successful hidden-answer retrieval. Their raw benchmark rewards are retained; both are excluded from clean training export pending full review. Keyword screening does not clear other trajectories.
 '''
+readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -289,5 +301,6 @@ Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 
 
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `{latest_legacy_deltas['opus47_legacy']['archive_name']}`、`{latest_legacy_deltas['beam_legacy']['archive_name']}`、`{latest_legacy_deltas['muse_bf16']['archive_name']}`；截止时间和文件范围见各自清单。
 '''
+chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))
