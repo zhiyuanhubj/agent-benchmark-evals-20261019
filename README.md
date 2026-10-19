@@ -1,12 +1,12 @@
 # Agent benchmark evaluation snapshot
 
-Snapshot: **2026-10-19T04:44:02.181262+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
+Snapshot: **2026-10-19T04:46:57.676209+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
 | Muse NVFP4 | **496/731 = 67.85%**, round 1 complete | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | 13/89 graded; 12 success, round 1 partial | 473/500 terminal, 439/462 terminal, 422/422 terminal; official RRR incomplete |
 | Beam BF16 | 42/731 graded; 31 success (partial) | 45/113 graded; 9 success (partial), round 1 | **55.6%** (1000/1000 judged) | 34/89 graded; 26 success, round 1 partial | 236/500 terminal, 238/462 terminal, 234/422 terminal; official RRR incomplete |
-| Opus 4.7 | 434/731 graded; 273 success (partial) | **51/113**, round 1 complete; round 2 partial | — | 81/89 graded; 65 success, round 1 partial | — |
+| Opus 4.7 | 437/731 graded; 275 success (partial) | **51/113**, round 1 complete; round 2 partial | — | 82/89 graded; 66 success, round 1 partial | — |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | 5/731 graded; 5 success (partial) | 2/113 graded; 1 success (partial), round 1 | Queued after Pro round 1 | Not started; legacy cached-tag round 1: 2/89 graded; 2 success (partial) | Queued after Pro round 1 |
 
@@ -16,7 +16,7 @@ The TB2.1 **legacy cached-tag image profile is separate** from the exact user-su
 
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
-The release has 26 archive manifests; **26/26 assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
+The release has 27 archive manifests; **27/27 assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
 
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Two disjoint continuation lanes are now active on the surviving NVFP4 node 2866: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. The original controller waits for the parallel lane's finished results and verifies task coverage, preventing duplicate scoring. Additional GPU allocation states: 2923 PENDING, 2924 PENDING, 2927 PENDING, 2928 PENDING. A watcher starts the pinned Muse service when one of these allocations is granted; evaluator task assignment still requires a disjoint-task handoff. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
