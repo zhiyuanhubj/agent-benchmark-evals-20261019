@@ -15,8 +15,10 @@ def read(path):
 
 def summarize(model, round_number):
     work = ROOT / ('beam' if model == 'beam_bf16' else model)
-    pattern = f'r{round_number}-shard[123].json' if model == 'muse_nvfp4' else f'r{round_number}*.json'
-    configs = sorted((work / 'configs').glob(pattern))
+    # Replica handoffs retain their effective job configs beside the frozen
+    # round config. Count each declared task only once.
+    configs = (sorted((work / 'configs').glob(f'r{round_number}-shard[123].json'))
+               if model == 'muse_nvfp4' else [work / 'configs' / f'r{round_number}.json'])
     expected = {}
     for path in configs:
         config = read(path)
@@ -76,7 +78,12 @@ def main():
         rounds = {str(n): summarize(name, n) for n in [1, 2, 3]}
         unit_rows = subprocess.check_output(['systemctl', '--user', 'show', units[name], '-p', 'MainPID', '-p', 'ActiveState', '-p', 'Result'], text=True).splitlines()
         unit = {key: value for key, value in (line.split('=', 1) for line in unit_rows)}
-        models[name] = dict(rounds=rounds, unit=unit, exact_supplied_images_ready=bool(ready and ready['count']==89 and ready['all_archive_identities_verified']),
+        replica_unit = None
+        if name == 'beam_bf16' and (ROOT / 'beam/state/r23-2887-handoff.json').exists():
+            replica_rows = subprocess.check_output(['systemctl', '--user', 'show',
+                'beam-exact-r23-replica-2887-20261019', '-p', 'MainPID', '-p', 'ActiveState', '-p', 'Result'], text=True).splitlines()
+            replica_unit = {key: value for key, value in (line.split('=', 1) for line in replica_rows)}
+        models[name] = dict(rounds=rounds, unit=unit, replica_unit=replica_unit, exact_supplied_images_ready=bool(ready and ready['count']==89 and ready['all_archive_identities_verified']),
                             cpu_allocation=allocation, all_three_complete=all(x['complete'] for x in rounds.values()),
                             three_round_mean=sum(x['accuracy'] for x in rounds.values())/3 if all(x['complete'] for x in rounds.values()) else None,
                             user_authorized_bf16_reassignment=bool(name == 'muse_nvfp4' and (MUSE_BF16_CUTOVER / 'cutover-intent.json').exists()))
@@ -88,7 +95,9 @@ def main():
     temp.write_text(json.dumps(receipt, indent=2) + '\n')
     temp.replace(state)
     print(json.dumps({model: {'images_ready': value['exact_supplied_images_ready'], 'rounds': {n:{k:v[k] for k in ['terminal','graded','success','archived_actual_model_responses']} for n,v in value['rounds'].items()}} for model,value in models.items()}))
-    assert all(x['all_three_complete'] or x['unit']['ActiveState'] == 'active' or x['user_authorized_bf16_reassignment'] for x in models.values()), 'Unfinished supplied-image profile has no active controller'
+    assert all(x['all_three_complete'] or x['unit']['ActiveState'] == 'active' or
+               (x['replica_unit'] and x['replica_unit']['ActiveState'] == 'active') or
+               x['user_authorized_bf16_reassignment'] for x in models.values()), 'Unfinished supplied-image profile has no active controller'
 
 if __name__ == '__main__':
     main()
