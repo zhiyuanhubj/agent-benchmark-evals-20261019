@@ -90,6 +90,11 @@ if len(sys.argv) == 2 and Path(sys.argv[1]).resolve() in {E/'configs/tb-r2.json'
     claim = json.loads((E/'state'/f'{config_path.stem}-2733-claim.json').read_text())
     assert claim['config_sha256'] == expected and claim['job'] == 2733
     os.environ['MIX_SERVER_IP'] = plan['destination_ip']
+if config_path and config_path.name == 'r1-completion-2866-b05.json' and os.environ.get('MUSE_TB_EXTRA_LANE') == '3':
+    from early_b05 import coordinate
+    if not coordinate(config_path):
+        print('Early b05 owner completed; sequential lane 3 skips duplicate draw', flush=True)
+        raise SystemExit(0)
 if config_path and config_path.name in ('r1-completion-2866-b03.json', 'r1-completion-2866-b05.json') and os.environ.get('MUSE_TB_EXTRA_LANE'):
     from route_2812 import route_for_extra_lane
     config_path = route_for_extra_lane(config_path, os.environ['MUSE_TB_EXTRA_LANE'])
@@ -100,3 +105,7 @@ async def main():
  c=JobConfig.model_validate(json.loads(Path(sys.argv[1]).read_text()));job=await Job.create(c);r=await job.run()
  (E/'state'/f'{c.job_name}-done.json').write_text(r.model_dump_json(indent=2))
 asyncio.run(main())
+if config_path and os.environ.get('MUSE_TB_B05_EARLY_OWNER') == '1':
+    from early_b05 import coverage
+    expected, found = coverage(json.loads(config_path.read_text()))
+    assert found == expected, f'Early b05 missing terminal tasks: {expected - found}'

@@ -64,6 +64,12 @@ def sync_native_archives(scores, force_bf16=False):
                     route_allocations.add(route_value['allocation'])
                     route_time = datetime.fromtimestamp(route_value['utc'], timezone.utc)
                     handoff_newer |= latest_archive_time is None or route_time > latest_archive_time
+            for name in ('r1-b05-early-owner.json', 'r1-b05-early-exit.json', 'r1-b05-normal-started.json'):
+                marker = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu' / name
+                if marker.exists():
+                    expected_receipts += 1
+                    marker_time = datetime.fromtimestamp(json.loads(marker.read_text())['utc'], timezone.utc)
+                    handoff_newer |= latest_archive_time is None or marker_time > latest_archive_time
             handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < expected_receipts
             handoff_newer |= latest_filename_counts.get('ready_proof', 0) < len(route_allocations)
         raw_snapshot_due = (latest_archive_time is not None and raw_count > latest_filename_counts.get('raw_response', 0)

@@ -54,6 +54,11 @@ for route in audit.get('opportunistic_routes_extra_gpu', []):
     required_handoff_files.append(str(Path(route['effective_config']).relative_to(BASE)))
     ready_path = BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/{route["allocation"]}-ready.json'
     required_handoff_files.append(str(ready_path.relative_to(BASE)))
+if audit.get('early_b05_handoff'):
+    handoff = audit['early_b05_handoff']
+    required_handoff_files.append(str(Path(handoff['owner_path']).relative_to(BASE)))
+    if handoff.get('exit_path'):
+        required_handoff_files.append(str(Path(handoff['exit_path']).relative_to(BASE)))
 missing_handoff_files = sorted(set(required_handoff_files) - entries)
 
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())

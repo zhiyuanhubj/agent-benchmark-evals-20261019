@@ -126,6 +126,34 @@ for batch, lane in (('b03', 2), ('b05', 3)):
         errors.append(f'local and extra GPU route both claimed: {batch}')
     routes_extra[job_name] = {'receipt_path': str(receipt_path), **route}
 
+early_owner_path = WORK / 'state/extra_gpu/r1-b05-early-owner.json'
+early_normal_path = WORK / 'state/extra_gpu/r1-b05-normal-started.json'
+early_exit_path = WORK / 'state/extra_gpu/r1-b05-early-exit.json'
+early_b05 = None
+if early_owner_path.exists():
+    early_b05 = read(early_owner_path)
+    route = routes_extra.get('muse-nvfp4-tb-v1-exact-r1-completion-2866-b05')
+    original_b05 = next(row for row in recovery if row['job_name'].endswith('-b05'))
+    receipt_path = Path(route['receipt_path']) if route else None
+    if (early_normal_path.exists() or route is None or
+            early_b05.get('original_sha256') != original_b05['sha256'] or
+            early_b05.get('tasks') != original_b05['tasks'] or
+            early_b05.get('cpu_allocation') != 2922 or
+            early_b05.get('model_allocation') != route.get('allocation') or
+            early_b05.get('endpoint') != route.get('endpoint') or
+            early_b05.get('route_receipt') != str(receipt_path) or
+            early_b05.get('route_sha256') != sha256(receipt_path)):
+        errors.append('invalid early b05 ownership or model route')
+    if early_exit_path.exists():
+        outcome = read(early_exit_path)
+        if (outcome.get('returncode') != 0 or
+                outcome.get('original_sha256') != original_b05['sha256'] or
+                outcome.get('route_sha256') != early_b05.get('route_sha256') or
+                outcome.get('terminal_tasks') != sorted(original_b05['tasks'])):
+            errors.append('early b05 exit failed or lacks complete terminal coverage')
+elif early_exit_path.exists():
+    errors.append('early b05 exit exists without ownership receipt')
+
 for item in recovery:
     config_path = Path(item['path'])
     if sha256(config_path) != item['sha256']:
@@ -194,6 +222,8 @@ for interrupted in plan['user_cutover_interrupted_ungraded_trials'].values():
             errors.append(f'cutover trial unexpectedly graded: {result}')
 
 graded = {task: value for task, value in rows.items() if value['reward'] in (0, 1)}
+if early_owner_path.exists() and len(graded) == 89 and not early_exit_path.exists():
+    errors.append('early b05 exit receipt missing at full-round completion')
 missing = sorted(set(expected) - set(graded))
 audit = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
@@ -207,6 +237,9 @@ audit = {
     'graded_agent_timeout_tasks': sorted(task for task, value in graded.items() if value['exception_type'] == 'AgentTimeoutError'),
     'replica_handoff': handoff,
     'opportunistic_routes_extra_gpu': list(routes_extra.values()),
+    'early_b05_handoff': ({'owner_path': str(early_owner_path),
+                           'exit_path': str(early_exit_path) if early_exit_path.exists() else None,
+                           **early_b05} if early_b05 else None),
     'ungraded_terminal_tasks': sorted(set(ungraded)),
     'missing_graded_tasks': missing,
     'active_or_unfinished_trials': sorted(active),

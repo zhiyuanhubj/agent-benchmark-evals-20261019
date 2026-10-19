@@ -90,6 +90,11 @@ for batch in ('b03', 'b05'):
         if config_path not in payloads:
             payloads[config_path] = config_path.read_bytes()
             counts['job_config'] += 1
+for name in ('r1-b05-early-owner.json', 'r1-b05-early-exit.json', 'r1-b05-normal-started.json'):
+    marker = SOURCE / 'muse_nvfp4/state/extra_gpu' / name
+    if marker.exists():
+        payloads[marker] = marker.read_bytes()
+        counts['handoff_receipt'] += 1
 assert counts['raw_response'] > 0 and counts['task_input'] > 0
 proc = subprocess.Popen(['zstd', '-q', '-T2', '-3', '-o', str(temp)], stdin=subprocess.PIPE)
 try:
