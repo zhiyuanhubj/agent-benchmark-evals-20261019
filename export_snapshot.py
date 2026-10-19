@@ -131,6 +131,27 @@ bf16_tb_round1 = metric(bf16_source_round1, '1', 'complete' if bf16_complete els
 }
 
 
+opus_pro_source = ex['opus47']['pro']
+assert opus_pro_source['scoring_run_id'] == 'opus47-pro-full-r1'
+assert opus_pro_source['terminal'] == opus_pro_source['unique_tasks'] == 731
+assert not opus_pro_source['duplicate_task_ids']
+opus_crosshost_path = ROOT / 'evidence/opus47_pro_eval_crosshost_2922.json'
+opus_crosshost = read(opus_crosshost_path) if opus_crosshost_path.exists() else {}
+opus_crosshost_status = opus_crosshost.get('status', 'not_started')
+assert opus_crosshost_status in ('not_started', 'running', 'completed', 'needs_review')
+opus_crosshost_en = {
+    'not_started': 'An independent-host verification has not started.',
+    'running': 'An independent-host verification of the same saved patch is in progress.',
+    'completed': 'The independent-host verification completed; its separately recorded result awaits explicit score reconciliation.',
+    'needs_review': 'The independent-host verification ended without a reconciled native score and needs review.',
+}[opus_crosshost_status]
+opus_crosshost_zh = {
+    'not_started': '独立节点补验尚未启动。',
+    'running': '同一补丁已在另一 CPU 节点独立补验，仍在运行。',
+    'completed': '独立节点补验已完成，其单独记录的结果仍待明确并入计分。',
+    'needs_review': '独立节点补验未得到已核对的原生评分，需进一步检查。',
+}[opus_crosshost_status]
+
 snapshot = {
     'generated_utc': now,
     'metric_policy': 'Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.',
@@ -155,7 +176,12 @@ snapshot = {
         },
         'opus_4_7': {
             'model': 'Claude Opus 4.7',
-            'swe_bench_pro_verified': metric(ex['opus47']['pro'], 'pro', 'partial_no_full_score'),
+            'swe_bench_pro_verified': metric(opus_pro_source, 'pro', 'partial_no_full_score') | {
+                'scoring_run_id': opus_pro_source['scoring_run_id'],
+                'verifier_recovery_run_ids_excluded': opus_pro_source['excluded_verifier_recovery_run_ids'],
+                'crosshost_verifier_recovery_status': opus_crosshost_status,
+                'qualification': 'Only the original 731-task run is counted. Saved-patch verifier-only retries are separate provenance and cannot add tasks or successes to the first-round score.',
+            },
             'deepswe': {k: metric(v, k, 'complete' if v['graded'] == v['expected'] else 'partial_no_full_score') for k, v in ex['opus47']['deep'].items()},
             'tb2_1_legacy_cached_tag': {k: metric(v, k, 'complete' if v['graded'] == v['expected'] else 'partial_no_full_score') for k, v in ex['opus47']['tb'].items()},
             'tb2_1_exact_supplied_images': {'rounds': exact['models']['opus47']['rounds'], 'status': tb_profile_status(exact['models']['opus47']['rounds'])},
@@ -336,10 +362,18 @@ The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anch
 '''
 readme = readme.replace('Additional GPU allocation states:', replica_note_en + ' Additional GPU allocation states:', 1)
 readme = readme.replace('A batch that starts locally first cannot be redrawn on another node.', 'A batch that starts locally first cannot be redrawn on another node. The four queued extra GPU allocations are also prepared to take only untouched round-2/3 batches if granted after the round-1 handoffs are claimed. Per-batch locks and ownership receipts prevent the original controller from drawing the same task; the effective config changes only the model endpoint.', 1)
+readme = readme.replace('Scores are benchmark-recorded values.', f'Opus 4.7 Pro counts only its original 731-task run; verifier-only saved-patch retries are retained as separate evidence and never increase the first-round task denominator. One original task still lacks a native verifier score after two 3600-second timeouts. {opus_crosshost_en}\n\nScores are benchmark-recorded values.', 1)
 readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
 if early_b05_owner:
     readme = readme.replace('This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 'At this snapshot, b05 is running early on CPU allocation 2922 against GPU 2812; an ownership receipt makes sequential lane 3 verify its completed tasks and skip a duplicate draw. This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 1)
 readme = readme.replace('Keyword screening does not clear other trajectories.', 'Keyword screening does not clear other trajectories. Targeted [manual notes](evidence/exact_tb_integrity_manual_notes.json) also flag Opus 4.7 `break-filter-js-from-html` for an unsuccessful `/tests` probe and Beam BF16 on the same task for a temporary copy of the exposed filter into `/tests/filter.py` (removed before grading); neither inspected output confirms hidden-answer retrieval, and both are excluded from clean training pending full review. The Opus `torch-pipeline-parallelism` keyword hit was only a Python-executable listing.', 1)
+db_wal_note = next((note for note in manual_notes if note['model'] == 'muse_nvfp4' and note['task'] == 'db-wal-recovery'), None)
+if db_wal_note:
+    assert db_wal_note['reward'] == 0.0
+    old = 'A separate pre-score alert records NVFP4 [host-boundary probes on `db-wal-recovery`](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json); it does not prove successful access or a final score.'
+    new = 'The earlier [host-boundary alert for `db-wal-recovery`](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json) now has a terminal result: the agent timed out after 10800 seconds with recorded reward 0. [Manual notes](evidence/exact_tb_integrity_manual_notes.json) exclude its trajectory from clean training; the inspected probes do not establish successful host access. The raw benchmark result remains unchanged.'
+    assert readme.count(old) == 1
+    readme = readme.replace(old, new, 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -375,9 +409,15 @@ Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 
 '''
 chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_note_zh + ' 新增 GPU 申请状态：', 1)
 chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。另有四个排队 GPU 节点获配后只领取第 2/3 轮尚未启动的批次；逐批文件锁和接管凭据阻止原控制器重复抽题，实际配置仅修改模型端点。', 1)
+chinese_report = chinese_report.replace('**审计限制。**', f'Opus 4.7 Pro 只统计原始运行的 731 道题；同一补丁的纯验证重试单独留证，不能增加首轮题数或成功数。原始运行仍有 1 题在两次 3600 秒验证超时后缺少有效评分。{opus_crosshost_zh}\n\n**审计限制。**', 1)
 chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
 if early_b05_owner:
     chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。本次快照中 b05 已由 CPU 节点 2922 提前启动，调用 GPU 节点 2812；原顺序控制器稍后会核查同一批终态结果并跳过重复抽题。', 1)
 chinese_report = chinese_report.replace('关键词未命中也不代表轨迹已获干净认证。', '关键词未命中也不代表轨迹已获干净认证。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)还标记了 Opus 4.7 在 `break-filter-js-from-html` 上对不存在的 `/tests` 的探查，以及 Beam BF16 在同题中把公开的过滤器临时复制到 `/tests/filter.py`、在判分前删除的行为；检查到的输出均未确认获得隐藏答案，两条轨迹暂不作为干净训练数据。Opus `torch-pipeline-parallelism` 的关键词命中只是列举 Python 可执行文件。', 1)
+if db_wal_note:
+    old = '另一份判分前预警记录了 NVFP4 [`db-wal-recovery` 对宿主边界的探查](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)，它不证明边界探查成功，也不是最终分数。'
+    new = '此前的 NVFP4 [`db-wal-recovery` 宿主边界探查预警](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)现已有终态：agent 运行 10800 秒后超时，原始奖励为 0。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)将该轨迹排除出干净训练数据；抽查输出未证明成功越过宿主边界，原始评测结果保持不变。'
+    assert chinese_report.count(old) == 1
+    chinese_report = chinese_report.replace(old, new, 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))

@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T13:17:22.261917+00:00",
+  "generated_utc": "2026-10-19T13:25:03.761755+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 79,
-  "success_count": 63,
-  "scored_raw_response_count": 3343,
-  "scored_nonempty_reasoning_response_count": 3342,
+  "graded_task_count": 80,
+  "success_count": 64,
+  "scored_raw_response_count": 3611,
+  "scored_nonempty_reasoning_response_count": 3610,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -134,15 +134,13 @@
     "modernize-scientific-stack",
     "mteb-leaderboard",
     "query-optimize",
-    "raman-fitting",
-    "train-fasttext"
+    "raman-fitting"
   ],
   "active_or_unfinished_trials": [
     "make-doom-for-mips__ayw35yd",
     "make-mips-interpreter__6BNKuxJ",
     "query-optimize__WQt26zo",
-    "raman-fitting__gccPUXq",
-    "train-fasttext__Mc2uuim"
+    "raman-fitting__gccPUXq"
   ],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -962,6 +960,17 @@
       "finished_at": "2026-10-19T08:01:40.251225Z",
       "raw_response_count": 15,
       "responses_with_reasoning_content": 15
+    },
+    "train-fasttext": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b07/train-fasttext__Mc2uuim/result.json",
+      "result_sha256": "7a1046ddb3c4de955ad625384997eac0c93690484e56483045b53b40744d022b",
+      "finished_at": "2026-10-19T13:19:30.313162Z",
+      "raw_response_count": 268,
+      "responses_with_reasoning_content": 268
     },
     "tune-mjcf": {
       "reward": 1.0,

@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-19T13:17:25.574533+00:00",
+  "generated_utc": "2026-10-19T13:25:06.452735+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 19,
-  "success_count": 16,
+  "scored_tasks": 20,
+  "success_count": 17,
   "tasks": {
     "regex-log": {
       "reward": 1.0,
@@ -27,6 +27,10 @@
     "multi-source-data-merger": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/multi-source-data-merger__6Xrmvzw/result.json"
+    },
+    "sqlite-with-gcov": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/sqlite-with-gcov__wHeYKdi/result.json"
     },
     "polyglot-rust-c": {
       "reward": 1.0,
@@ -82,11 +86,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 19,
-  "covered_raw_response_sets": 19,
-  "covered_trajectories": 19,
-  "scored_raw_response_count": 492,
-  "nonempty_reasoning_response_count": 492,
+  "covered_results": 20,
+  "covered_raw_response_sets": 20,
+  "covered_trajectories": 20,
+  "scored_raw_response_count": 505,
+  "nonempty_reasoning_response_count": 505,
   "raw_reasoning_by_task": {
     "regex-log": {
       "raw_responses": 7,
@@ -111,6 +115,10 @@
     "multi-source-data-merger": {
       "raw_responses": 7,
       "nonempty_reasoning_content": 7
+    },
+    "sqlite-with-gcov": {
+      "raw_responses": 13,
+      "nonempty_reasoning_content": 13
     },
     "polyglot-rust-c": {
       "raw_responses": 16,
@@ -192,6 +200,7 @@
     "muse_bf16_delta_20261019T124114Z.tar.zst",
     "muse_bf16_delta_20261019T125550Z.tar.zst",
     "muse_bf16_delta_20261019T131032Z.tar.zst",
+    "muse_bf16_delta_20261019T132443Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

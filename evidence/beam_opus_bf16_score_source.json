@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T13:15:43.006567+00:00",
+  "utc": "2026-10-19T13:23:00.830820+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
@@ -403,16 +403,16 @@
     "tb": {
       "1": {
         "expected": 89,
-        "terminal": 19,
-        "unique_tasks": 19,
-        "graded": 19,
-        "success": 16,
+        "terminal": 20,
+        "unique_tasks": 20,
+        "graded": 20,
+        "success": 17,
         "exceptions": {
           "AgentTimeoutError": 2
         },
         "duplicate_task_ids": [],
         "excluded_invalid_protocol_originals": [],
-        "missing_result_task_count": 70,
+        "missing_result_task_count": 69,
         "task_id_source": "Original trial config task path; finished native trial and binary reward required"
       },
       "2": {
@@ -479,13 +479,13 @@
       }
     },
     "review_pipeline": {
-      "utc": 1792415749.3192883,
+      "utc": 1792416199.4664323,
       "phase": "queued_after_bf16_pro_first_round",
       "model_sampling_started": false
     }
   },
   "reserved_capacity": {
-    "utc": 1792415773.508687,
+    "utc": 1792416194.2483578,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2901": {
@@ -517,7 +517,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792415774.2966015,
+    "utc": 1792416194.4060726,
     "allocations": {
       "2887": {
         "phase": "waiting_for_allocation"
@@ -537,7 +537,7 @@
       "ready_splits": [],
       "complete": false,
       "benchmark_revision_sampling_started": false,
-      "utc": 1792415773.5125368
+      "utc": 1792416194.253019
     },
     "revision_queues": {
       "reviewers": {
@@ -594,7 +594,7 @@
         }
       },
       "qualification": "Canonical full review splits only, exact original generators, one declared revision attempt per rejected PR. Final DA/RRR awaits separate native grading audit.",
-      "utc": 1792415772.2206917
+      "utc": 1792416192.6035228
     },
     "native_da_rrr": {
       "reviewers": {
@@ -661,7 +661,7 @@
           }
         }
       },
-      "utc": 1792415738.9422483
+      "utc": 1792416186.2907574
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -4108,7 +4108,7 @@
       "qualification": "Original449 and469 have real observed weight differences. This does not establish a stronger checkpoint, full449 availability, full-model nonfinite clearance, or training-update magnitude over all parameters. No model sampling, data edits or GPU interruption."
     },
     "mix449_original_file_recovery": {
-      "utc": 1792415762.7789161,
+      "utc": 1792416199.4318676,
       "sources": {
         "2812": {
           "phase": "ready",
@@ -4853,13 +4853,13 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792415742.2418103
+      "utc": 1792416162.0947237
     },
     "queue_states": {
       "mix449": {
         "phase": "waiting_for_complete_original_artifact",
         "candidate": "mix449",
-        "utc": 1792415760.5328171
+        "utc": 1792416210.7462053
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
@@ -4879,7 +4879,7 @@
       "phase": "waiting_for_complete_original449_artifact",
       "model_generation_started": false,
       "frozen_top_two_unchanged": true,
-      "utc": 1792415771.7919283
+      "utc": 1792416191.9667976
     },
     "original449_export_controller": null,
     "original449_inference_ready": null,
