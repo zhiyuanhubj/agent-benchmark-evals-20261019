@@ -43,9 +43,9 @@ def main():
                 assert json.loads((EARLY95 / f'state/job-{index}-exit.json').read_text())['returncode'] == 0
             last = json.loads((EARLY95 / 'results/early95-tb-r3-never-started-20261018/train-fasttext__y5h5Rq5/result.json').read_text())
             assert last.get('finished_at'), 'Last early95 TB task has not finished'
-            pid = subprocess.check_output(['systemctl', '--user', 'show',
-                'mix3-early95-existing-rounds-after-muse-swr-20261018.service', '-p', 'MainPID', '--value'], text=True).strip()
-            assert pid in ('', '0'), 'Prior early95 controller is still running'
+            # The head-node watcher verifies the prior systemd unit has exited.
+            # Compute nodes do not have that user's systemd bus; the GPU-process
+            # check below prevents launching while its former model still runs.
         assert (WEIGHTS / 'config.json').exists()
         docker_env = os.environ.copy()
         for key in ('DOCKER_HOST', 'DOCKER_CONTEXT', 'DOCKER_TLS', 'DOCKER_TLS_VERIFY', 'DOCKER_CERT_PATH'):

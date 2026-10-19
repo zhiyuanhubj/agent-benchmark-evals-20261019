@@ -72,11 +72,24 @@ def gpu_released(job):
 
 def launch(job, node):
     claim = STATE / f'{job}-launch-claim.json'
+    attempt = 0
     if claim.exists():
-        return
-    unit = f'muse-nvfp4-exact-extra-{job}-20261019'
+        previous = json.loads(claim.read_text())
+        previous_unit = previous['unit'] + '.service'
+        state = subprocess.run(['systemctl', '--user', 'show', previous_unit,
+                                '-p', 'ActiveState', '--value'],
+                               capture_output=True, text=True, timeout=10)
+        if state.returncode == 0 and state.stdout.strip() in ('active', 'activating'):
+            return
+        if not gpu_released(job):
+            log(phase='failed_unit_gpu_still_occupied', job=job, unit=previous_unit)
+            return
+        attempt = previous.get('attempt', 0) + 1
+    suffix = f'-retry{attempt}' if attempt else ''
+    unit = f'muse-nvfp4-exact-extra-{job}{suffix}-20261019'
     log_file = STATE / f'{job}-server.log'
-    claim.write_text(json.dumps({'utc': datetime.now(timezone.utc).isoformat(), 'job': job, 'unit': unit, 'node': node}, indent=2) + '\n')
+    claim.write_text(json.dumps({'utc': datetime.now(timezone.utc).isoformat(), 'job': job,
+                                 'unit': unit, 'node': node, 'attempt': attempt}, indent=2) + '\n')
     command = [
         'systemd-run', '--user', f'--unit={unit}',
         f'--property=StandardOutput=append:{log_file}',
