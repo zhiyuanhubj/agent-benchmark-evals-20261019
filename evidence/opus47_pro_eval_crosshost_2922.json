@@ -38,7 +38,7 @@
   "recovery_result_sha256": "88824b69298f1dbac5c3d542c173c291b0e862cde248f2f2bbf9e0b5902032e7",
   "recovery_status": "eval_error",
   "recovery_correct": null,
-  "same_patch": false,
+  "same_patch": null,
   "phases": [
     "plan",
     "recover_evaluation",
@@ -47,5 +47,8 @@
     "save_partial"
   ],
   "no_new_model_run": true,
-  "status": "needs_review"
+  "status": "needs_review",
+  "recovery_final_answer_recorded": false,
+  "source_patch_matches_source_result": true,
+  "same_patch_qualification": "null means the timed-out verifier did not write final_answer; saved source patch identity was verified before the recovery run"
 }

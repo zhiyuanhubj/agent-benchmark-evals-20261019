@@ -59,7 +59,9 @@ def main():
         output['recovery_result_sha256'] = original.sha(results[0])
         output['recovery_status'] = recovered['status']
         output['recovery_correct'] = recovered.get('metrics', {}).get('correct')
-        output['same_patch'] = recovered.get('final_answer') == original.PATCH.read_text()
+        final_answer = recovered.get('final_answer')
+        output['recovery_final_answer_recorded'] = final_answer is not None
+        output['same_patch'] = None if final_answer is None else final_answer == original.PATCH.read_text()
     phases = []
     journal = target / 'progress.jsonl'
     if journal.exists():
