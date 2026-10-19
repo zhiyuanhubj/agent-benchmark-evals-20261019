@@ -254,6 +254,7 @@ mn = models['muse_nvfp4']
 be = models['beam_bf16']
 op = models['opus_4_7']
 mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
+mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
 be_tb = be['tb2_1_exact_supplied_images']['rounds']['1']
 op_tb = op['tb2_1_exact_supplied_images']['rounds']['1']
 
@@ -317,6 +318,8 @@ The release has {asset_count} archive manifests; **{release_audit_label} assets*
 
 Muse NVFP4 round-one inputs are in `muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst` (all 89 public `task.toml` files, original job configs, and image identity checks). The [I/O coverage audit](evidence/muse_nvfp4_exact_io_coverage.json) verifies that the released archives contain every scored result, its raw response and trajectory, and all task inputs.
 
+The [round-one task audit](evidence/muse_nvfp4_exact_round1_audit.json) currently finds nonempty returned thinking in **{mn_audit.get('scored_nonempty_reasoning_response_count', 0)}/{mn_audit.get('scored_raw_response_count', 0)}** raw responses of scored Muse NVFP4 tasks. This is a field-preservation check, not a clean-trajectory verdict.
+
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. At this snapshot, the continuation has {new_raw_responses} raw model responses, {active_recovery_trial_dirs} active trial directories, and the latest response at {new_raw_response_latest_utc}; these are activity indicators, not scores. The original controller verifies delegated batches before advancing, preventing duplicate scoring. The [first-round task audit](evidence/muse_nvfp4_exact_round1_audit.json) checks task coverage, duplicate draws, frozen original results, endpoint settings, rewards, and preserved raw reasoning; the final score is published only after all 89 tasks pass reconciliation. Additional GPU allocation states: {extra_gpu_status}. A watcher starts the pinned Muse service when one of these allocations is granted; evaluator task assignment still requires a disjoint-task handoff. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
 Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json) found returned reasoning in every raw response of the five completed successful recovery tasks checked. One agent created `/tests/filter.py` by copying the exposed, unchanged `/app/filter.py` to run the task's permitted local test; no filter/verifier rewrite was observed in its commands. This is not a full reward-hacking clearance. The Muse DeepSWE successful trajectory `ipython-session-bundle-replay` attempted to inspect verifier logs, but the returned directory was empty; it remains flagged for training-data review. One successful Muse Pro task lacks a trajectory and is unsuitable for thinking-data export. Source paths and hashes are in `results/scores.json` and `input_output/manifest.json`; raw API credentials and model weights are excluded.
@@ -347,6 +350,8 @@ chinese_report = f'''# 模型评测结果快照
 逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 共 {asset_count} 个归档，优先使用 SWE-Review 的 `*_review_full_io.tar.zst`（含 OpenHands completions）。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 {release_audit_label}**，逐项核验见 `evidence/release-assets-verification.json`。
 
 Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜像身份校验在 `muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst`；[输入输出覆盖核验](evidence/muse_nvfp4_exact_io_coverage.json)逐题确认已判分结果、原始响应、轨迹和任务输入均在远端校验过的归档中。
+
+[Muse NVFP4 首轮逐题审计](evidence/muse_nvfp4_exact_round1_audit.json)目前确认已判分题的原始回复中 **{mn_audit.get('scored_nonempty_reasoning_response_count', 0)}/{mn_audit.get('scored_raw_response_count', 0)} 条含非空 thinking**。这只核验字段留存，不表示轨迹可直接作为干净训练数据。
 
 [Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)} 条含非空 thinking**。
 

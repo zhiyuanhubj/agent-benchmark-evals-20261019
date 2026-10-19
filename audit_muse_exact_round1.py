@@ -166,6 +166,8 @@ audit = {
     'expected_task_count': 89,
     'graded_task_count': len(graded),
     'success_count': sum(value['reward'] == 1 for value in graded.values()),
+    'scored_raw_response_count': sum(value['raw_response_count'] for value in graded.values()),
+    'scored_nonempty_reasoning_response_count': sum(value['responses_with_reasoning_content'] for value in graded.values()),
     'graded_agent_timeout_tasks': sorted(task for task, value in graded.items() if value['exception_type'] == 'AgentTimeoutError'),
     'replica_handoff': handoff,
     'ungraded_terminal_tasks': sorted(set(ungraded)),
