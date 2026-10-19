@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T20:52:32.454387+00:00",
+  "generated_utc": "2026-10-19T21:09:51.974396+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 22,
+      "scored_trajectories_checked": 24,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -4737,6 +4737,30 @@
       "review_status": "no_pattern_hit_not_cleared"
     },
     {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "dna-assembly",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/dna-assembly__L3qFWYT/agent/trajectory.json",
+      "trajectory_sha256": "bd600444f03df711bb6f85209eb5f22d9a8387ddf9a47a89b81cc1c638e88098",
+      "steps": 28,
+      "tool_calls": 39,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "largest-eigenval",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b04/largest-eigenval__jq62DKD/agent/trajectory.json",
+      "trajectory_sha256": "15184d76ff1b94454c214ad0cd3c36864bd7f62191b4fea36c7b568641e8a370",
+      "steps": 28,
+      "tool_calls": 100,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
       "model": "beam_bf16_r2",
       "round": 2,
       "task": "custom-memory-heap-crash",
@@ -5113,9 +5137,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "25ffee58ac76570330f4bc9c0efa6c78ee2cd00d94a0cf991f3621831efb40a2",
-        "steps_at_screen": 342,
-        "tool_calls_at_screen": 1024,
+        "trajectory_sha256_at_screen": "284ede37a2f5a32934578653dbc6c3592bfcf1348f7cc7a7e7f71092508c2325",
+        "steps_at_screen": 356,
+        "tool_calls_at_screen": 1034,
         "hits": [],
         "status": "in_progress_not_scored"
       }
