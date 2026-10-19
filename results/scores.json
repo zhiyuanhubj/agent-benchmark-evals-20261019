@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T03:45:10.384305+00:00",
+  "generated_utc": "2026-10-19T03:47:13.628881+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -67,6 +67,37 @@
           "terminal": 422,
           "status": "partial_no_full_rrr"
         }
+      },
+      "tb2_1_legacy_cached_tag": {
+        "round_1_raw": {
+          "expected": 89,
+          "terminal_tasks": 89,
+          "graded_tasks": 88,
+          "success": 68,
+          "missing_reward": 1
+        },
+        "round_1_with_all_declared_infrastructure_replacements": {
+          "expected": 89,
+          "terminal_tasks": 89,
+          "graded_tasks": 89,
+          "success": 71,
+          "missing_reward": 0
+        },
+        "rounds_2_3": {
+          "2": {
+            "expected": 89,
+            "graded": 85,
+            "success": 63,
+            "status": "partial_no_full_score"
+          },
+          "3": {
+            "expected": 89,
+            "graded": 76,
+            "success": 59,
+            "status": "partial_no_full_score"
+          }
+        },
+        "qualification": "Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean."
       },
       "tb2_1_exact_supplied_images": {
         "rounds": {
@@ -361,6 +392,7 @@
     "muse_swr_review": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/state/current.json",
     "beam_opus_bf16": "/fsx/home/zhiyuan/.private/beam_20261018/expanded-current.json",
     "beam_swr_review": "/fsx/home/zhiyuan/.private/beam_20261018/current.json",
-    "tb_exact_images": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/status-current.json"
+    "tb_exact_images": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/status-current.json",
+    "muse_tb_legacy": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/results/muse_tb_legacy_status.json"
   }
 }

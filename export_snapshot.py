@@ -29,6 +29,8 @@ def metric(d, name, status=None):
 
 now = datetime.now(timezone.utc).isoformat()
 pro = read(M / 'state/monitor-current.json')['pro_round1_verified_completion']
+tb_recovery = read(M / 'state/monitor-current.json')['reshard_recorder_recovery']
+tb_legacy_remaining = read(ROOT / 'results/muse_tb_legacy_status.json')
 deep = read(M / 'remaining_deep3_2812_20261018/state/current.json')['three_round_summary']
 mr = read(M / 'review_bench_20261018/state/current.json')
 ex = read(B / 'expanded-current.json')
@@ -44,6 +46,7 @@ snapshot = {
             'deepswe': {'rounds': deep['rounds'], 'mean_three_round_accuracy': deep['benchmark_recorded_mean_accuracy'], 'status': 'complete_three_rounds', 'qualification': deep['metric_scope'], 'trajectory_review_flag': deep['targeted_review']['successful_trajectory_with_verifier_log_probe']},
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
             'swe_review': {key: metric(value, key, 'partial_no_full_rrr') for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
+            'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
             'tb2_1_exact_supplied_images': {'rounds': exact['models']['muse_nvfp4']['rounds'], 'status': 'partial_no_full_score'},
         },
         'beam_bf16': {
@@ -77,6 +80,7 @@ snapshot = {
         'beam_opus_bf16': str(B / 'expanded-current.json'),
         'beam_swr_review': str(B / 'current.json'),
         'tb_exact_images': str(B / 'tb_v1_exact_images_20261019/status-current.json'),
+        'muse_tb_legacy': str(ROOT / 'results/muse_tb_legacy_status.json'),
     },
 }
 write('results/scores.json', snapshot)
@@ -108,7 +112,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Opus 4.7 | 244/390 graded, partial | **51/113**, round 1 complete; round 2 partial | — | 45/59 graded, round 1 partial | — |
 | Muse original BF16 | Running; no complete score | Running; no complete score | Queued after Pro round 1 | Running; no complete score | Queued after Pro round 1 |
 
-The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. For reference, Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is 15/22 graded and partial. None of these partial counts is a full benchmark accuracy. The exact-image TB2.1 scores must not be pooled with legacy-image scores.
+The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. Muse legacy round 1 was **68/88 graded on raw first draw** (one ungraded); its separately labeled score after declared infrastructure replacement draws is **71/89**. Muse legacy rounds 2/3 remain **63/85** and **59/76** graded. Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is 15/22 graded and partial. None of these partial counts is a full benchmark accuracy. The exact-image TB2.1 scores must not be pooled with legacy-image scores.
 
 `input_output/swrbench/*/generation.jsonl` holds each exact input prompt and generated review; the adjacent judge JSON holds per-item GPT-5.5 scoring details. `evidence/muse_pro_identity.json` maps all 731 Pro tasks to native result files and hashes. `evidence/muse_deep_completion.json` documents the three completed DeepSWE rounds and audit flags. Native per-task I/O, tool traces and returned thinking are too large for ordinary Git objects; release archive manifests identify their coverage and SHA-256 once uploaded.
 
