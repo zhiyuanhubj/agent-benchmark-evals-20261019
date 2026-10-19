@@ -1,5 +1,5 @@
 {
-  "utc": 1792414456.01585,
+  "utc": 1792415356.5227141,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 283,
+      "terminal": 285,
       "exceptions": 7,
       "prepared_image_phases": {
         "image_ready": 304
@@ -377,39 +377,39 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 287,
+      "terminal": 288,
       "exceptions": 5,
       "prepared_image_phases": {
-        "image_ready": 304
+        "image_ready": 320
       },
       "controller": {
-        "utc": 1792406696.4666839,
+        "utc": 1792414848.0725892,
         "phase": "running",
-        "batch": 17,
+        "batch": 18,
         "tasks": [
-          "psf__requests-1921",
-          "psf__requests-2317",
-          "psf__requests-5414",
-          "psf__requests-6028",
-          "pydata__xarray-2905",
-          "pydata__xarray-3151",
-          "pydata__xarray-3305",
-          "pydata__xarray-3677",
-          "pydata__xarray-3993",
-          "pydata__xarray-4094",
-          "pydata__xarray-4356",
-          "pydata__xarray-4629",
-          "pydata__xarray-4687",
-          "pydata__xarray-4695",
-          "pydata__xarray-4966",
-          "pydata__xarray-6599"
+          "pydata__xarray-6721",
+          "pydata__xarray-6744",
+          "pydata__xarray-6938",
+          "pydata__xarray-6992",
+          "pydata__xarray-7229",
+          "pydata__xarray-7233",
+          "pydata__xarray-7393",
+          "pylint-dev__pylint-4551",
+          "pylint-dev__pylint-4604",
+          "pylint-dev__pylint-4661",
+          "pylint-dev__pylint-4970",
+          "pylint-dev__pylint-6386",
+          "pylint-dev__pylint-6528",
+          "pylint-dev__pylint-6903",
+          "pylint-dev__pylint-7080",
+          "pylint-dev__pylint-7277"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 304,
+      "terminal": 305,
       "exceptions": 6,
       "prepared_image_phases": {
         "image_ready": 336

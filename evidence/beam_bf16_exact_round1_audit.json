@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-19T13:03:17.022095+00:00",
+  "generated_utc": "2026-10-19T13:11:07.122709+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T125409Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T131017Z.tar.zst",
   "expected": 89,
-  "terminal": 63,
-  "graded": 63,
-  "success": 45,
+  "terminal": 64,
+  "graded": 64,
+  "success": 46,
   "missing_graded_tasks": [
     "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "pytorch-model-recovery",
     "qemu-alpine-ssh",
     "qemu-startup",
     "query-optimize",
@@ -39,7 +38,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "qemu-alpine-ssh",
     "qemu-startup",
     "query-optimize",
     "raman-fitting",
@@ -508,6 +506,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/pytorch-model-cli__wumLa6Z/result.json",
       "raw_response_count": 26,
       "responses_with_reasoning_content": 26
+    },
+    "pytorch-model-recovery": {
+      "reward": 1.0,
+      "result_sha256": "2333913c52d73d70900db1983558c23c1762e7710bfe309e6ba8ac0b522a4206",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/pytorch-model-recovery__NAsY6zH/result.json",
+      "raw_response_count": 18,
+      "responses_with_reasoning_content": 18
     }
   }
 }

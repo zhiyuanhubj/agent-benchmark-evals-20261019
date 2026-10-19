@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-19T13:03:06.507034+00:00",
+  "generated_utc": "2026-10-19T13:10:55.103044+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 18,
-  "success_count": 15,
+  "scored_tasks": 19,
+  "success_count": 16,
   "tasks": {
     "regex-log": {
       "reward": 1.0,
@@ -35,6 +35,10 @@
     "compile-compcert": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/compile-compcert__nFHB2JM/result.json"
+    },
+    "qemu-startup": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/qemu-startup__VGgCtbr/result.json"
     },
     "make-doom-for-mips": {
       "reward": 0.0,
@@ -78,11 +82,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 18,
-  "covered_raw_response_sets": 18,
-  "covered_trajectories": 18,
-  "scored_raw_response_count": 440,
-  "nonempty_reasoning_response_count": 440,
+  "covered_results": 19,
+  "covered_raw_response_sets": 19,
+  "covered_trajectories": 19,
+  "scored_raw_response_count": 492,
+  "nonempty_reasoning_response_count": 492,
   "raw_reasoning_by_task": {
     "regex-log": {
       "raw_responses": 7,
@@ -115,6 +119,10 @@
     "compile-compcert": {
       "raw_responses": 32,
       "nonempty_reasoning_content": 32
+    },
+    "qemu-startup": {
+      "raw_responses": 52,
+      "nonempty_reasoning_content": 52
     },
     "make-doom-for-mips": {
       "raw_responses": 107,
@@ -183,6 +191,7 @@
     "muse_bf16_delta_20261019T121716Z.tar.zst",
     "muse_bf16_delta_20261019T124114Z.tar.zst",
     "muse_bf16_delta_20261019T125550Z.tar.zst",
+    "muse_bf16_delta_20261019T131032Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

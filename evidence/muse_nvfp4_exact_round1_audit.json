@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T13:03:04.113667+00:00",
+  "generated_utc": "2026-10-19T13:10:52.725403+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 77,
-  "success_count": 62,
-  "scored_raw_response_count": 3285,
-  "scored_nonempty_reasoning_response_count": 3284,
+  "graded_task_count": 78,
+  "success_count": 63,
+  "scored_raw_response_count": 3313,
+  "scored_nonempty_reasoning_response_count": 3312,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -134,7 +134,6 @@
     "model-extraction-relu-logits",
     "modernize-scientific-stack",
     "mteb-leaderboard",
-    "polyglot-rust-c",
     "query-optimize",
     "raman-fitting",
     "train-fasttext"
@@ -143,7 +142,6 @@
     "dna-assembly__fLvhUtU",
     "make-doom-for-mips__ayw35yd",
     "make-mips-interpreter__6BNKuxJ",
-    "polyglot-rust-c__oUpAYEa",
     "query-optimize__WQt26zo",
     "raman-fitting__gccPUXq",
     "train-fasttext__Mc2uuim"
@@ -724,6 +722,17 @@
       "finished_at": "2026-10-19T12:11:47.513394Z",
       "raw_response_count": 12,
       "responses_with_reasoning_content": 12
+    },
+    "polyglot-rust-c": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b04/polyglot-rust-c__oUpAYEa/result.json",
+      "result_sha256": "91edd9127a85111c4e8550bb7a827c1023994418372557d65df377c820cd6926",
+      "finished_at": "2026-10-19T13:05:15.325577Z",
+      "raw_response_count": 28,
+      "responses_with_reasoning_content": 28
     },
     "portfolio-optimization": {
       "reward": 1.0,
