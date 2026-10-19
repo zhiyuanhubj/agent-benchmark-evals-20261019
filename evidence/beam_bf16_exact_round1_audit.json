@@ -1,17 +1,16 @@
 {
-  "generated_utc": "2026-10-19T06:30:33.653565+00:00",
+  "generated_utc": "2026-10-19T06:38:27.028088+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T063008Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T063806Z.tar.zst",
   "expected": 89,
-  "terminal": 37,
-  "graded": 37,
-  "success": 27,
+  "terminal": 38,
+  "graded": 38,
+  "success": 28,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "install-windows-3.11",
-    "large-scale-text-editing",
     "largest-eigenval",
     "llm-inference-batching-scheduler",
     "log-summary-date-ranges",
@@ -64,7 +63,6 @@
   ],
   "ungraded_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "llm-inference-batching-scheduler",
     "log-summary-date-ranges",
     "mailman",
     "make-doom-for-mips",
@@ -377,6 +375,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/kv-store-grpc__pUA2gtz/result.json",
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
+    },
+    "large-scale-text-editing": {
+      "reward": 1.0,
+      "result_sha256": "db9e1def6d29a815420439b4f0a042fa22ab8f197e42a0d5a90d64f1f638f87a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/large-scale-text-editing__oAwuyPV/result.json",
+      "raw_response_count": 11,
+      "responses_with_reasoning_content": 11
     }
   }
 }
