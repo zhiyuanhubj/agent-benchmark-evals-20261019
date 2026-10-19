@@ -131,6 +131,7 @@ def cycle():
             run([PYTHON, str(source)])
         run([PYTHON, str(ROOT / 'audit_swe_review_da.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_swe_review_recovery.py')], timeout=180)
+        run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
         force_bf16 = False
         for attempt in range(3):
             if attempt:

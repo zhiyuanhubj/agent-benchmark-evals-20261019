@@ -150,6 +150,8 @@ def tb_profile_status(rounds):
 
 bf16_io_path = ROOT / 'evidence/muse_bf16_exact_io_coverage.json'
 bf16_io = read(bf16_io_path) if bf16_io_path.exists() else {}
+bf16_swr_alignment_path = ROOT / 'evidence/muse_bf16_swr_alignment.json'
+bf16_swr_alignment = read(bf16_swr_alignment_path) if bf16_swr_alignment_path.exists() else {}
 bf16_source_round1 = ex['muse_bf16']['tb']['1']
 bf16_complete = (bf16_source_round1['graded'] == 89 and
                  bf16_io.get('qualification') == 'complete_verified' and
@@ -308,6 +310,11 @@ files[str(bf16_audit_path.relative_to(ROOT))] = {'sha256': hashlib.sha256(bf16_a
 if bf16_io_path.exists():
     files[str(bf16_io_path.relative_to(ROOT))] = {'sha256': hashlib.sha256(bf16_io_path.read_bytes()).hexdigest(),
         'size_bytes': bf16_io_path.stat().st_size, 'source': str(bf16_io_path)}
+if bf16_swr_alignment_path.exists():
+    files[str(bf16_swr_alignment_path.relative_to(ROOT))] = {
+        'sha256': hashlib.sha256(bf16_swr_alignment_path.read_bytes()).hexdigest(),
+        'size_bytes': bf16_swr_alignment_path.stat().st_size,
+        'source': str(bf16_swr_alignment_path)}
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
 def partial(d):
@@ -519,6 +526,10 @@ readme = readme.replace('A batch that starts locally first cannot be redrawn on 
 if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists():
     readme = readme.replace('For actively changing Pro/legacy/Deep results,',
         'The [Muse BF16 SWE-Review input archive](input_output/archive_manifests/muse_bf16_review_inputs.json) contains the 96 prepared model-visible task cards, instructions, Dockerfiles and public task data, plus queue and image receipts. It excludes hidden solutions and tests. Review outputs will be archived separately as trials finish.\n\nFor actively changing Pro/legacy/Deep results,', 1)
+if bf16_swr_alignment:
+    assert not bf16_swr_alignment['errors']
+    readme = readme.replace('For actively changing Pro/legacy/Deep results,',
+        f"The [BF16 SWRBench generation/judge alignment audit](evidence/muse_bf16_swr_alignment.json) at {bf16_swr_alignment['generated_utc']} matches {bf16_swr_alignment['judged']} judged IDs to {bf16_swr_alignment['generated']} generated reviews, with no mismatched review after the pinned official evaluator's apostrophe normalization ({bf16_swr_alignment['official_apostrophe_normalization_count']} affected rows). These are live I/O checks, not a final accuracy.\n\nFor actively changing Pro/legacy/Deep results,", 1)
 slot1_route_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/r2-completion-2866-b02-route.json'
 if slot1_route_path.exists():
     slot1_route = read(slot1_route_path)
@@ -556,6 +567,8 @@ if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists
     assert readme.count('The [Muse BF16 SWE-Review input archive]') == 1
 if slot1_route_path.exists():
     assert readme.count('an additional controller slot claimed untouched') == 1
+if bf16_swr_alignment:
+    assert readme.count('[BF16 SWRBench generation/judge alignment audit]') == 1
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -625,6 +638,10 @@ chinese_report = chinese_report.replace('关键词未命中也不代表轨迹已
 if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists():
     chinese_report = chinese_report.replace('Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照',
         '[BF16 SWE-Review 输入归档](input_output/archive_manifests/muse_bf16_review_inputs.json)保存了 96 道已准备题目的模型可见任务卡、指令、Dockerfile、公开题目数据，以及队列与镜像记录；不含隐藏解法和测试。正式轨迹与判分将在任务完成后另行归档。\n\nOpus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照', 1)
+if bf16_swr_alignment:
+    assert not bf16_swr_alignment['errors']
+    chinese_report = chinese_report.replace('Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照',
+        f"[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 {bf16_swr_alignment['generated_utc']} 将 {bf16_swr_alignment['judged']} 条裁判记录逐题对到 {bf16_swr_alignment['generated']} 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 {bf16_swr_alignment['official_apostrophe_normalization_count']} 条）。这仅是进行中输入输出核验，不是最终准确率。\n\nOpus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照", 1)
 if slot1_route_path.exists():
     chinese_report = chinese_report.replace('Opus 4.7 Pro 只统计原始运行的 731 道题',
         'GPU 2812 的第二个控制器槽在 b01 最后一题仍运行时领取了未抽样的精确镜像第 2 轮 b02 批次；两条控制器共用已固定的 NVFP4 服务，各批次并发 2 题，服务上限为 8 个请求。[控制器源码](protocol/muse_nvfp4_exact_future_round_controller_20261019.py)使用独立槽锁和原有逐批原子领取；b02 接管凭据及原始/实际配置哈希收录于原始输入输出快照。首轮题目及已抽样的第 2 轮题目均未重抽。\n\nOpus 4.7 Pro 只统计原始运行的 731 道题', 1)
@@ -637,5 +654,7 @@ if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists
     assert chinese_report.count('[BF16 SWE-Review 输入归档]') == 1
 if slot1_route_path.exists():
     assert chinese_report.count('GPU 2812 的第二个控制器槽') == 1
+if bf16_swr_alignment:
+    assert chinese_report.count('[BF16 SWRBench 生成与裁判对齐核验]') == 1
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))
