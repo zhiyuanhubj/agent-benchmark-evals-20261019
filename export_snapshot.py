@@ -41,6 +41,30 @@ exact = read(B / 'tb_v1_exact_images_20261019/status-current.json')
 opus48 = read(O48 / 'completed_full_evaluation_result.json')
 nvfp4_recovery = read(B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json')
 nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-completion-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
+nvfp4_rounds = json.loads(json.dumps(exact['models']['muse_nvfp4']['rounds']))
+new_terminal_by_round = {str(i): {} for i in (1, 2, 3)}
+new_raw_responses = 0
+for item in nvfp4_recovery['configurations']:
+    rnd = str(item['round'])
+    for trial in (B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / item['job_name']).glob('*'):
+        if not trial.is_dir():
+            continue
+        new_raw_responses += sum(1 for _ in (trial / 'agent/raw_responses').glob('*.json'))
+        result = trial / 'result.json'
+        if not result.exists():
+            continue
+        value = read(result)
+        if not value.get('finished_at'):
+            continue
+        task = Path(value['config']['task']['path']).name
+        assert task in item['tasks'] and task not in new_terminal_by_round[rnd]
+        new_terminal_by_round[rnd][task] = {'reward': ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward'), 'source': str(result)}
+for rnd, rows in new_terminal_by_round.items():
+    nvfp4_rounds[rnd]['terminal'] += len(rows)
+    nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
+    nvfp4_rounds[rnd]['success'] += sum(row['reward'] == 1 for row in rows.values())
+    nvfp4_rounds[rnd]['complete'] = nvfp4_rounds[rnd]['graded'] == 89
+    nvfp4_rounds[rnd]['accuracy'] = nvfp4_rounds[rnd]['success'] / 89 if nvfp4_rounds[rnd]['complete'] else None
 snapshot = {
     'generated_utc': now,
     'metric_policy': 'Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.',
@@ -52,7 +76,7 @@ snapshot = {
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
             'swe_review': {key: metric(value, key, 'partial_no_full_rrr') for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
             'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
-            'tb2_1_exact_supplied_images': {'rounds': exact['models']['muse_nvfp4']['rounds'], 'status': 'partial_no_full_score', 'recovery': {'controller': nvfp4_recovery_unit, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations_queued': [2923, 2924], 'qualification': nvfp4_recovery['qualification']}},
+            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': 'complete_three_rounds' if all(r['complete'] for r in nvfp4_rounds.values()) else 'partial_no_full_score', 'recovery': {'controller': nvfp4_recovery_unit, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations_queued': [2923, 2924], 'qualification': nvfp4_recovery['qualification']}},
         },
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',

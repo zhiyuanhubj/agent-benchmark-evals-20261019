@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T04:08:39.637302+00:00",
+  "generated_utc": "2026-10-19T04:11:26.848746+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -149,6 +149,12 @@
           "controller": "active",
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
+          "new_terminal_by_round": {
+            "1": 0,
+            "2": 0,
+            "3": 0
+          },
+          "new_raw_model_responses": 19,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations_queued": [
             2923,
