@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-19T11:29:15.598607+00:00",
+  "generated_utc": "2026-10-19T11:36:10.252607+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 14,
-  "success_count": 11,
+  "scored_tasks": 15,
+  "success_count": 12,
   "tasks": {
     "dna-assembly": {
       "reward": 0.0,
@@ -19,6 +19,10 @@
     "multi-source-data-merger": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/multi-source-data-merger__6Xrmvzw/result.json"
+    },
+    "polyglot-rust-c": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/polyglot-rust-c__V9nNznY/result.json"
     },
     "compile-compcert": {
       "reward": 1.0,
@@ -62,11 +66,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 14,
-  "covered_raw_response_sets": 14,
-  "covered_trajectories": 14,
-  "scored_raw_response_count": 379,
-  "nonempty_reasoning_response_count": 379,
+  "covered_results": 15,
+  "covered_raw_response_sets": 15,
+  "covered_trajectories": 15,
+  "scored_raw_response_count": 395,
+  "nonempty_reasoning_response_count": 395,
   "raw_reasoning_by_task": {
     "dna-assembly": {
       "raw_responses": 22,
@@ -83,6 +87,10 @@
     "multi-source-data-merger": {
       "raw_responses": 7,
       "nonempty_reasoning_content": 7
+    },
+    "polyglot-rust-c": {
+      "raw_responses": 16,
+      "nonempty_reasoning_content": 16
     },
     "compile-compcert": {
       "raw_responses": 32,
@@ -144,6 +152,8 @@
     "muse_bf16_delta_20261019T104824Z.tar.zst",
     "muse_bf16_delta_20261019T110004Z.tar.zst",
     "muse_bf16_delta_20261019T111545Z.tar.zst",
+    "muse_bf16_delta_20261019T113350Z.tar.zst",
+    "muse_bf16_delta_20261019T113553Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

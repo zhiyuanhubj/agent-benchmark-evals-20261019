@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T11:29:05.002518+00:00",
+  "generated_utc": "2026-10-19T11:35:59.425897+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -172,18 +172,18 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 2857,
+          "new_raw_model_responses": 2896,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 586,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 594,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 64,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 525,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 29,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 74,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 533,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 36,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 472
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 478
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T11:28:47+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T11:35:57+00:00",
           "active_recovery_trial_dirs": 9,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -299,7 +299,7 @@
             "graded": 59,
             "success": 43,
             "active_trial_dirs": 63,
-            "archived_actual_model_responses": 2785,
+            "archived_actual_model_responses": 2797,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 4
@@ -370,9 +370,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 708,
-        "graded": 707,
-        "success": 439,
+        "terminal": 713,
+        "graded": 712,
+        "success": 441,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -392,9 +392,9 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 2,
-          "graded": 2,
-          "success": 0,
+          "terminal": 5,
+          "graded": 5,
+          "success": 1,
           "status": "partial_no_full_score"
         }
       },
@@ -453,11 +453,11 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 3,
-            "graded": 3,
-            "success": 3,
-            "active_trial_dirs": 7,
-            "archived_actual_model_responses": 75,
+            "terminal": 6,
+            "graded": 6,
+            "success": 5,
+            "active_trial_dirs": 10,
+            "archived_actual_model_responses": 148,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -501,9 +501,9 @@
       "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
-          "terminal": 14,
-          "graded": 14,
-          "success": 11,
+          "terminal": 15,
+          "graded": 15,
+          "success": 12,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -526,9 +526,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 14,
-            "graded": 14,
-            "success": 11,
+            "terminal": 15,
+            "graded": 15,
+            "success": 12,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
