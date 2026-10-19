@@ -42,12 +42,13 @@ opus48 = read(O48 / 'completed_full_evaluation_result.json')
 nvfp4_recovery = read(B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json')
 nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-completion-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 nvfp4_parallel_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-parallel-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
-queued_gpu_result = subprocess.run(['squeue', '-h', '-j', '2923,2924', '-o', '%i|%T|%N|%S'], capture_output=True, text=True, check=True)
+extra_gpu_jobs = (2923, 2924, 2927, 2928)
+queued_gpu_result = subprocess.run(['squeue', '-h', '-j', ','.join(map(str, extra_gpu_jobs)), '-o', '%i|%T|%N|%S'], capture_output=True, text=True, check=True)
 extra_gpu_allocations = {}
 for line in queued_gpu_result.stdout.splitlines():
     job, state, nodes, start = line.split('|', 3)
     extra_gpu_allocations[job] = {'state': state, 'nodes': nodes, 'scheduler_start': start}
-extra_gpu_status = ', '.join(f'{job} {extra_gpu_allocations.get(str(job), {}).get("state", "not_in_queue")}' for job in (2923, 2924))
+extra_gpu_status = ', '.join(f'{job} {extra_gpu_allocations.get(str(job), {}).get("state", "not_in_queue")}' for job in extra_gpu_jobs)
 nvfp4_rounds = json.loads(json.dumps(exact['models']['muse_nvfp4']['rounds']))
 new_terminal_by_round = {str(i): {} for i in (1, 2, 3)}
 new_raw_responses = 0
