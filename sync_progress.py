@@ -28,16 +28,21 @@ def run(command, timeout=180):
 
 def sync_native_archives(scores):
     recovery = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']
-    terminal = sum(recovery['new_terminal_by_round'].values())
     manifest_dir = ROOT / 'input_output/archive_manifests'
-    live_manifests = sorted(manifest_dir.glob('muse_nvfp4_exact_tb_live_*.json'))
-    archived_terminal = 0
-    if live_manifests:
-        latest = json.loads(live_manifests[-1].read_text())
-        archived_terminal = latest.get('terminal_result_count', latest['filename_counts']['result'])
-    if terminal > archived_terminal:
-        run([PYTHON, str(ROOT / 'snapshot_live_tb.py')], timeout=180)
-        live_manifests = sorted(manifest_dir.glob('muse_nvfp4_exact_tb_live_*.json'))
+    profiles = [
+        ('muse_nvfp4', sum(recovery['new_terminal_by_round'].values()), [PYTHON, str(ROOT / 'snapshot_live_tb.py')]),
+        ('opus47', sum(value['terminal'] for value in scores['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'].values()), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'opus47']),
+        ('beam_bf16', sum(value['terminal'] for value in scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds'].values()), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'beam_bf16']),
+    ]
+    for name, terminal, command in profiles:
+        live_manifests = sorted(manifest_dir.glob(f'{name}_exact_tb_live_*.json'))
+        archived_terminal = 0
+        if live_manifests:
+            latest = json.loads(live_manifests[-1].read_text())
+            archived_terminal = latest.get('terminal_result_count', latest['filename_counts']['result'])
+        if terminal > archived_terminal:
+            run(command, timeout=300)
+    live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
     release = json.loads(subprocess.check_output([
         'gh', 'api', 'repos/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tags/2026-10-19-snapshot'
     ], cwd=ROOT, text=True, timeout=60))
