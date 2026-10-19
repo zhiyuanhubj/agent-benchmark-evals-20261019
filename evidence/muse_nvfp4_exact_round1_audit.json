@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T11:02:38.018733+00:00",
+  "generated_utc": "2026-10-19T11:05:48.260529+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
@@ -67,7 +67,34 @@
     ],
     "sampling_profile_unchanged": true
   },
-  "opportunistic_routes_extra_gpu": [],
+  "opportunistic_routes_extra_gpu": [
+    {
+      "receipt_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-b05-extra-route.json",
+      "utc": 1792407828.205086,
+      "batch": "b05",
+      "lane": 3,
+      "allocation": 2812,
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05",
+      "tasks": [
+        "portfolio-optimization",
+        "protein-assembly",
+        "prove-plus-comm",
+        "pypi-server",
+        "pytorch-model-cli",
+        "pytorch-model-recovery",
+        "qemu-alpine-ssh",
+        "qemu-startup",
+        "query-optimize",
+        "raman-fitting"
+      ],
+      "original_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b05.json",
+      "original_sha256": "e129232565bcab4a3146e95f22ce6abe59f7a2913afac60e82416893bef2cd87",
+      "effective_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-route-extra-b05.json",
+      "effective_sha256": "62c6cc82c54f5b6933155b209eb05be56fec87919392ab5f79a464c3a8a91747",
+      "endpoint": "http://10.1.101.159:31320/v1",
+      "sampling_profile_unchanged": true
+    }
+  ],
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "count-dataset-tokens",
