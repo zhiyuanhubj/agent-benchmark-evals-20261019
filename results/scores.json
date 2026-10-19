@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T10:43:42.053049+00:00",
+  "generated_utc": "2026-10-19T10:48:28.267349+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -172,16 +172,16 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 2609,
+          "new_raw_model_responses": 2629,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 537,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 426,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 419,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 490,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 308,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 429
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 541,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 428,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 422,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 492,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 313,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 433
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T10:43:23+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T10:48:16+00:00",
           "active_recovery_trial_dirs": 8,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -269,11 +269,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 56,
-            "graded": 56,
-            "success": 40,
-            "active_trial_dirs": 60,
-            "archived_actual_model_responses": 2665,
+            "terminal": 57,
+            "graded": 57,
+            "success": 41,
+            "active_trial_dirs": 61,
+            "archived_actual_model_responses": 2688,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 4
@@ -344,9 +344,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 673,
-        "graded": 672,
-        "success": 416,
+        "terminal": 678,
+        "graded": 677,
+        "success": 418,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -359,8 +359,8 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 105,
-          "graded": 105,
+          "terminal": 106,
+          "graded": 106,
           "success": 38,
           "status": "partial_no_full_score"
         },
@@ -413,11 +413,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 87,
-            "graded": 87,
-            "success": 69,
+            "terminal": 88,
+            "graded": 88,
+            "success": 70,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1668,
+            "archived_actual_model_responses": 1671,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -475,8 +475,8 @@
       "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
-          "terminal": 11,
-          "graded": 11,
+          "terminal": 12,
+          "graded": 12,
           "success": 9,
           "status": "partial_no_full_score"
         },
@@ -500,8 +500,8 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 11,
-            "graded": 11,
+            "terminal": 12,
+            "graded": 12,
             "success": 9,
             "status": "partial_no_full_score",
             "complete": false,
@@ -518,8 +518,8 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 15,
-          "graded": 15,
+          "terminal": 16,
+          "graded": 16,
           "success": 3,
           "status": "partial_no_full_score"
         },

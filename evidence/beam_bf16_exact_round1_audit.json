@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-19T10:44:00.183738+00:00",
+  "generated_utc": "2026-10-19T10:48:47.431590+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T103623Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T104710Z.tar.zst",
   "expected": 89,
-  "terminal": 56,
-  "graded": 56,
-  "success": 40,
+  "terminal": 57,
+  "graded": 57,
+  "success": 41,
   "missing_graded_tasks": [
     "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "polyglot-c-py",
     "polyglot-rust-c",
     "portfolio-optimization",
     "protein-assembly",
@@ -46,7 +45,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "polyglot-rust-c",
     "portfolio-optimization",
     "protein-assembly",
     "prove-plus-comm",
@@ -473,6 +471,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/password-recovery__3u8Fvrg/result.json",
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
+    },
+    "polyglot-c-py": {
+      "reward": 1.0,
+      "result_sha256": "f5d8994eaaa14bba951f21f4836228a75c7c9068c2ccd6f635524ff1fb6dac47",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/polyglot-c-py__DhLYdEA/result.json",
+      "raw_response_count": 30,
+      "responses_with_reasoning_content": 30
     }
   }
 }
