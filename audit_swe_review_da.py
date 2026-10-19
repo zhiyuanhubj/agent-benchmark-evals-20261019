@@ -39,12 +39,19 @@ def main():
             benchmark_path = Path(spec['benchmark_snapshot'])
             assert digest(benchmark_path) == spec['benchmark_snapshot_sha256']
             reviews = []
+            invalid_reports = []
             for iid, row in sorted(receipt['reviews'].items()):
                 for source, expected in row['source_hashes'].items():
                     assert digest(source) == expected, source
                 report_path = Path(row['trial']) / 'verifier/review_report.json'
-                reviews.append({'instance_id': iid,
-                                'report': json.loads(report_path.read_text()) if report_path.exists() else None})
+                report = None
+                if report_path.exists():
+                    try:
+                        report = json.loads(report_path.read_text())
+                    except json.JSONDecodeError as error:
+                        invalid_reports.append({'instance_id': iid, 'path': str(report_path),
+                                                'sha256': digest(report_path), 'parse_error': str(error)})
+                reviews.append({'instance_id': iid, 'report': report})
             metrics = compute_da(reviews, json.loads(benchmark_path.read_text()))
             assert metrics['total'] == spec['expected']
             result['reviewers'][reviewer][split] = {
@@ -54,6 +61,8 @@ def main():
                 'canonical_receipt_sha256': digest(receipt_path),
                 'benchmark_sha256': digest(benchmark_path),
                 'verified_review_count': len(reviews),
+                'invalid_report_count': len(invalid_reports),
+                'invalid_reports': invalid_reports,
                 'RRR': None,
                 'qualification': 'DA is final for this split; RRR requires the separate original-generator revision stage.',
             }

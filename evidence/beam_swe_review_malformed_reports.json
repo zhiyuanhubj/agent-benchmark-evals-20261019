@@ -1,0 +1,99 @@
+{
+  "generated_utc": "2026-10-19T21:43:37.208352+00:00",
+  "plan_sha256": "10fd107b75565aa5deceb28641eae22935b87fa051e31324426d3e9fdf078053",
+  "selector_sha256": "66ec86bdf0bbeee4863ad07e8f0829a91251bb8c5a9aef6e3351a32de902f657",
+  "preparation_controller_sha256": "06d5b166ae9b5bb1217541c6b345207f52102c25aeefda337718784882233cf0",
+  "official_generator_sha256": "2d7e957b928033abc68dfa93fe2ebf6b56ced22bdab9dc5a2d08dbc3f703859c",
+  "splits": {
+    "glm5_500": {
+      "terminal_results_seen": 367,
+      "invalid_report_count": 0,
+      "invalid_reports": []
+    },
+    "qwen3_coder_30b_500": {
+      "terminal_results_seen": 368,
+      "invalid_report_count": 1,
+      "invalid_reports": [
+        {
+          "task": "psf__requests-2317",
+          "trial": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_coder_30b_500/beam-review-20261018-qwen3_coder_30b_500-batch17/psf__requests-2317__M8N5Jj7",
+          "parse_error": "Extra data: line 28 column 1 (char 2315)",
+          "result_sha256": "b71200c54b102df05546300e48242b4b96b03d7382a82cd769327a26d444cf77",
+          "invalid_report_sha256": "638107758e72430ef231c63459f1cc040ace269dc03a7ec379199eea6b13c399",
+          "raw_model_response_count": 50,
+          "raw_model_responses_sha256": "fa298086f7a2c7e1dadf5fda3415eedcd2a0b1740279f4f632f9fa6aceb24111",
+          "verifier_report_exists": false,
+          "verifier_reward_exists": false,
+          "selection_policy": "decision=None; no resampling; raw report bytes preserved"
+        }
+      ]
+    },
+    "qwen3_30b_instruct2507_500": {
+      "terminal_results_seen": 412,
+      "invalid_report_count": 5,
+      "invalid_reports": [
+        {
+          "task": "django__django-11490",
+          "trial": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch2/django__django-11490__eAv4JwQ",
+          "parse_error": "Extra data: line 28 column 1 (char 2571)",
+          "result_sha256": "83d9f0c014e4388de4105f6da6ddb4f94fb9b4b23a86989b174d37725aa8621a",
+          "invalid_report_sha256": "9e8d443ae1d539e9a5a51b8c3700ff1d855859863c59f20538564988cfc8cf67",
+          "raw_model_response_count": 46,
+          "raw_model_responses_sha256": "58d52603bad81668f90ebda7c9d1ca7dd5bb3e30824b1c957c8b855e77960fb9",
+          "verifier_report_exists": false,
+          "verifier_reward_exists": false,
+          "selection_policy": "decision=None; no resampling; raw report bytes preserved"
+        },
+        {
+          "task": "django__django-11740",
+          "trial": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch3/django__django-11740__hcUDVwe",
+          "parse_error": "Extra data: line 21 column 1 (char 1877)",
+          "result_sha256": "06a71b7f36a7f6cc7252ce4ebc24a38ebdc2ed771e02b0f4041d132c706e89d7",
+          "invalid_report_sha256": "3d77646e3f7f99ef007872cc7615578a5519b98c3897e1eacfb7b5347c54a4e1",
+          "raw_model_response_count": 60,
+          "raw_model_responses_sha256": "eee5b59cf2717fd75e591512c8eb822e4fd57f8c4b02ff881b0efc563e986124",
+          "verifier_report_exists": false,
+          "verifier_reward_exists": false,
+          "selection_policy": "decision=None; no resampling; raw report bytes preserved"
+        },
+        {
+          "task": "matplotlib__matplotlib-25287",
+          "trial": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch14/matplotlib__matplotlib-25287__HPmoZBy",
+          "parse_error": "Extra data: line 47 column 1 (char 2675)",
+          "result_sha256": "beed07e03ee1876c625bb32e0daeb80feb01399217f0c10cbbf42991bc484c78",
+          "invalid_report_sha256": "30b241bfcd7b0526a59c0647d26d1fd49435502b388049ec07db6c48dba8e7ac",
+          "raw_model_response_count": 43,
+          "raw_model_responses_sha256": "431fb48352dac987a98dcdf173faae25647b9404f2b539dd64421551cc2a549f",
+          "verifier_report_exists": false,
+          "verifier_reward_exists": false,
+          "selection_policy": "decision=None; no resampling; raw report bytes preserved"
+        },
+        {
+          "task": "sphinx-doc__sphinx-9591",
+          "trial": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch21/sphinx-doc__sphinx-9591__dZc2hAj",
+          "parse_error": "Extra data: line 28 column 1 (char 2303)",
+          "result_sha256": "265b8584ec5791dbcad3ffb0318522ccb4d04e59c2ddb100cb4a45286b07cd35",
+          "invalid_report_sha256": "5bf687a5761e3d874e3066412b9cc0a621b25fe1522d6b7cd5ee5dd233ef968f",
+          "raw_model_response_count": 78,
+          "raw_model_responses_sha256": "2e08b48a9b9ba7a95054aad26530fe5c924eda3f077ad49bfa7f6687cebda995",
+          "verifier_report_exists": false,
+          "verifier_reward_exists": false,
+          "selection_policy": "decision=None; no resampling; raw report bytes preserved"
+        },
+        {
+          "task": "sympy__sympy-12489",
+          "trial": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch22/sympy__sympy-12489__Ah8tXnS",
+          "parse_error": "Extra data: line 28 column 1 (char 2139)",
+          "result_sha256": "11421fbf18fa5ce608d477804594d7c5a411554aa9d1e7ae98e8d8ad964a4d84",
+          "invalid_report_sha256": "9e22468c4c8bf41707f23972fcb814e9a1ec4e8f7ff1478deefe7bbf1f8e9022",
+          "raw_model_response_count": 23,
+          "raw_model_responses_sha256": "e4b9f24fc7b1fa65cdcdc933c198476af3180beba8f8b38dbacefa11272410ab",
+          "verifier_report_exists": false,
+          "verifier_reward_exists": false,
+          "selection_policy": "decision=None; no resampling; raw report bytes preserved"
+        }
+      ]
+    }
+  },
+  "qualification": "These are actual sampled terminal tasks. The official revision generator skips invalid JSON reports. The v2 selector records their original file hashes and treats them as missing decisions without parsing a leading JSON fragment or running another model attempt."
+}

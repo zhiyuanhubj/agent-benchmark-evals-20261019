@@ -131,6 +131,7 @@ def cycle():
             run([PYTHON, str(source)])
         run([PYTHON, str(ROOT / 'audit_swe_review_da.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_swe_review_recovery.py')], timeout=180)
+        run([PYTHON, str(ROOT / 'audit_beam_malformed_reviews.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
         force_bf16 = False
         for attempt in range(3):
@@ -217,7 +218,8 @@ def cycle():
         run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence',
              'input_output/manifest.json', 'input_output/archive_manifests',
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
-             'export_snapshot.py', 'sync_progress.py'])
+             'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
+             'protocol/beam_review_revision_v2', 'export_snapshot.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
             run(['git', 'commit', '-m', 'Refresh live benchmark results'])
