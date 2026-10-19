@@ -1,0 +1,50 @@
+{
+  "utc": "2026-10-19T04:08:05.166289+00:00",
+  "precision": "BF16",
+  "model_repo": "meta-models/Muse-Spark-Open-816B-A42B",
+  "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
+  "job": {
+    "id": "2886",
+    "owner": "zhiyuan",
+    "name": "muse-bf16-pair-2886",
+    "state": "PENDING",
+    "nodes": "2",
+    "host_expression": "",
+    "estimated_start": "2026-10-20T08:00:05"
+  },
+  "verified_staged_source": true,
+  "paired_node_claims": [
+    false,
+    false
+  ],
+  "paired_runtime_launched": false,
+  "manual_pair": {
+    "allocations_by_rank": [
+      2869,
+      2865
+    ],
+    "prefetch_complete": true,
+    "prefetch_completed_gib": 1531.43,
+    "cutover_phase": "bf16_endpoint_promoted_native_evaluations_armed",
+    "cutover_controller_active": false,
+    "retry_phase": "checking_real_two_node_inference",
+    "cutover_complete": true,
+    "endpoint_ready": true
+  },
+  "endpoint_ready": true,
+  "tool_thinking_preflight_ready": true,
+  "native_complete": {
+    "pro": false,
+    "tb": false,
+    "deep": false
+  },
+  "controllers_active": {
+    "capacity": true,
+    "pair": false,
+    "benchmark": false,
+    "review": true
+  },
+  "model_sampling_started": true,
+  "problems": [],
+  "qualification": "BF16 results remain separate from NVFP4; source staging and pending jobs are not model samples."
+}

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T03:55:20.846458+00:00",
+  "generated_utc": "2026-10-19T04:08:39.637302+00:00",
   "files": {
     "input_output/swrbench/muse_nvfp4/generation.jsonl": {
       "sha256": "bef428f7a50c1e53cbddeba884921c2c28b468209418f096c06a62ff49a95f15",
@@ -32,7 +32,7 @@
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/state/monitor-current.json"
     },
     "evidence/muse_deep_completion.json": {
-      "sha256": "d1a2093380279f88a7a98a2f09e165f3b12e3f6ff84738618224eca0e9db187e",
+      "sha256": "b7e61bd6a4472a04f83b2b2c5c66a784be23dd853e246e87786ab07d9aca724b",
       "size_bytes": 4423,
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/remaining_deep3_2812_20261018/state/current.json"
     },
@@ -42,24 +42,49 @@
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/remaining_deep3_2812_20261018/state/three-round-completion-audit.json"
     },
     "evidence/muse_swr_review_score_source.json": {
-      "sha256": "cfeb50f05978b1fc7b5bd98481adb66ce0c02da7f98a72bec75ce9dcfee89c68",
+      "sha256": "b7e232ffaeb64b5909515c33dfc2dbec7026bbc2f170879a9810f07e962967fc",
       "size_bytes": 42590,
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/state/current.json"
     },
     "evidence/beam_opus_bf16_score_source.json": {
-      "sha256": "ad32c896bc205a4ab924c7fefc827bc73a3250a685bd776ae7f1d2deec8d5995",
-      "size_bytes": 244054,
+      "sha256": "1c5167e616f99af021e6fc9d6eb7abd1eca446fd4e5f3188d3602f12e8a59eb9",
+      "size_bytes": 244043,
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded-current.json"
     },
     "evidence/beam_swr_review_score_source.json": {
-      "sha256": "3849c1f2580412af1a4094685ef2307470e912d503f89da56addc8eea2479d99",
-      "size_bytes": 15531,
+      "sha256": "c39df8a13ea2ae1ba7ca03b019223444899365ab9991c3e42ba3d93765f9c237",
+      "size_bytes": 15738,
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/current.json"
     },
     "evidence/tb_exact_image_score_source.json": {
       "sha256": "a2889db5b6ccee2958634be00c4f4687e14707f5cd50e6d2c442f852c6f0fbce",
       "size_bytes": 5346,
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/status-current.json"
+    },
+    "evidence/opus48_pro_full_score_source.json": {
+      "sha256": "e966debffb87071c7ddc46bb7372b76f3447382fc02a55a0d63e646e01e69888",
+      "size_bytes": 1386,
+      "source": "/fsx/home/zhiyuan/.private/opus48_sbpv_20261004/completed_full_evaluation_result.json"
+    },
+    "evidence/opus48_pro_trajectory_index.json": {
+      "sha256": "e3f98d18135aa0510a9957a961723807dc2f21c98ce183bf060e8aea03ba21cc",
+      "size_bytes": 329427,
+      "source": "/fsx/home/zhiyuan/.private/opus48_sbpv_20261004/trajectory_export_20261004/index.json"
+    },
+    "evidence/opus48_pro_protocol.json": {
+      "sha256": "7536daf29f68bb18755e9ad9f737a25766230f39506e52f3969719019ef38c5b",
+      "size_bytes": 1776,
+      "source": "/fsx/home/zhiyuan/.private/opus48_sbpv_20261004/trajectory_export_20261004/protocol.json"
+    },
+    "evidence/muse_nvfp4_exact_recovery_plan.json": {
+      "sha256": "7cdf58f945713bfd45a16cb68728aa727914f5424ee897f34a1244b4ea5d01ea",
+      "size_bytes": 22561,
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json"
+    },
+    "evidence/muse_bf16_runtime_status.json": {
+      "sha256": "93388ddb122553e742d6802b34f813af2975e3fc5dac152483218d067bccfb8e",
+      "size_bytes": 1325,
+      "source": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/status-current.json"
     }
   }
 }

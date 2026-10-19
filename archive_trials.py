@@ -21,12 +21,14 @@ GROUPS = {
     **{f'muse_harbor_shard{i}': [M / f'shard{i}/results'] for i in range(4)},
     'muse_deep_round3_remainder': [M / 'remaining_deep3_2812_20261018/results'],
     'muse_deep_canonical_3round': [M / 'remaining_deep3_2812_20261018/state/three-round-completion-audit.json'],
-    'muse_review': [M / 'review_bench_20261018/swe_review', M / 'review_bench_20261018/review_recovery_20261018'],
+    'muse_review': [*(M / 'review_bench_20261018/swe_review' / split / 'results' for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')), M / 'review_bench_20261018/review_recovery_20261018/results'],
+    'muse_review_full_io': [*(M / 'review_bench_20261018/swe_review' / split / 'results' for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')), M / 'review_bench_20261018/review_recovery_20261018/results'],
     'muse_swr_raw': [M / 'review_bench_20261018/swrbench/raw_responses', M / 'review_bench_20261018/swrbench/judge_raw_responses'],
     'muse_tb_recovery': [M / 'infra_repair', M / 'review_bench_20261018/tb_remaining_after_swr/results'],
     'beam_legacy': [B / 'legacy_bench_20261018'],
     'beam_exact_tb': [B / 'tb_v1_exact_images_20261019/results/beam_bf16'],
     'beam_review': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
+    'beam_review_full_io': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'beam_swr_raw': [B / 'review_bench/swrbench/raw_responses', B / 'review_bench/swrbench/judge_raw_responses'],
     'opus47_legacy': [O],
     'opus47_exact_tb': [B / 'tb_v1_exact_images_20261019/results/opus47'],
@@ -45,9 +47,11 @@ def include(path, root, group):
     if group == 'beam_legacy' and not any(x in rel.parts for x in ('pro-results', 'tb-results', 'deep-results', 'results', 'remaining_pro', 'remaining_tb', 'remaining_deep')):
         return False
     parts = rel.parts
-    if path.name in ('result.json', 'task.json', 'config.json', 'trajectory.json', 'exception.txt', 'trial.log'):
+    if path.name in ('result.json', 'task.json', 'config.json', 'trajectory.json', 'exception.txt', 'trial.log', 'openhands_sdk.txt'):
         return True
     if 'raw_responses' in parts and path.suffix == '.json':
+        return True
+    if 'completions' in parts and path.suffix == '.json':
         return True
     if group == 'opus47_legacy' and 'api_archive' in parts and path.suffix == '.json':
         return True
@@ -106,11 +110,11 @@ def main():
             for path in files:
                 arcname = str(path.relative_to(BASE))
                 tar.add(str(path), arcname=arcname, recursive=False)
-                category = 'judge_raw_response.json' if 'judge_raw_responses' in path.parts else ('raw_response.json' if 'raw_responses' in path.parts else ('api_archive.json' if 'api_archive' in path.parts else path.name))
+                category = 'judge_raw_response.json' if 'judge_raw_responses' in path.parts else ('raw_response.json' if 'raw_responses' in path.parts else ('completion.json' if 'completions' in path.parts else ('api_archive.json' if 'api_archive' in path.parts else path.name)))
                 counts[category] = counts.get(category, 0) + 1
                 input_count += path.name in ('task.json', 'config.json')
                 output_count += path.name in ('result.json', 'trajectory.json', 'trial.log')
-                raw_count += 'raw_responses' in path.parts or 'judge_raw_responses' in path.parts
+                raw_count += 'raw_responses' in path.parts or 'judge_raw_responses' in path.parts or 'completions' in path.parts
         proc.stdin.close()
         rc = proc.wait()
         if rc:

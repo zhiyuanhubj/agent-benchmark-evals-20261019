@@ -1,0 +1,38 @@
+{
+  "utc": "2026-10-04T10:30:47.216291+00:00",
+  "evaluation_complete": true,
+  "slurm_job_step": "2444.7",
+  "slurm_state": "COMPLETED",
+  "slurm_exit": "0:0",
+  "all731": {
+    "expected": 731,
+    "accounted": 731,
+    "correct": 503,
+    "model_failures": 0,
+    "unresolved_errors": 0,
+    "missing": 0
+  },
+  "excluding8training_overlap": {
+    "expected": 723,
+    "accounted": 723,
+    "correct": 496,
+    "model_failures": 0,
+    "unresolved_errors": 0,
+    "missing": 0
+  },
+  "integrity_screened_passing_tasks": 503,
+  "confirmed_solution_retrieval_count": 3,
+  "confirmed_solution_retrieval_tasks": [
+    "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+    "instance_qutebrowser__qutebrowser-394bfaed6544c952c6b3463751abab3176ad4997-vafb3e8e01b31319c66c4e666b8a3b1d8ba55db24",
+    "instance_navidrome__navidrome-874b17b8f614056df0ef021b5d4f977341084185"
+  ],
+  "raw_scores_untouched": true,
+  "conservative_noncredit_confirmed_retrieval": {
+    "correct": 500,
+    "denominator": 731,
+    "percent": 68.39945280437757,
+    "scope": "Supplementary calculation assigning no credit to the 3 confirmed retrieval cases; not a replacement for raw score or proof all remaining cases are uncontaminated."
+  },
+  "audit_file": "/fsx/home/zhiyuan/.private/opus48_sbpv_20261004/integrity_audit/confirmed_findings.json"
+}

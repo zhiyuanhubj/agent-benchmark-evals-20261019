@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T03:55:20.846458+00:00",
+  "generated_utc": "2026-10-19T04:08:39.637302+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -144,7 +144,18 @@
             "legacy_cached_tag_scores_included": false
           }
         },
-        "status": "partial_no_full_score"
+        "status": "partial_no_full_score",
+        "recovery": {
+          "controller": "active",
+          "existing_graded_round_1": 11,
+          "queued_round_1": 78,
+          "user_cutover_interrupted_ungraded": 8,
+          "extra_gpu_allocations_queued": [
+            2923,
+            2924
+          ],
+          "qualification": "No graded task replay. Eight ungraded tasks interrupted by user BF16 node cutover receive explicitly identified infrastructure replacement attempts; their original partial responses remain archived. Remaining 70 r1 tasks were never sampled. Rounds 2 and 3 use original tasks/images and generation settings. No best-of selection."
+        }
       }
     },
     "beam_bf16": {
@@ -159,8 +170,8 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 43,
-          "graded": 43,
+          "terminal": 44,
+          "graded": 44,
           "success": 9,
           "status": "partial_no_full_score"
         },
@@ -260,17 +271,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 221,
+          "terminal": 226,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 225,
+          "terminal": 229,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 223,
+          "terminal": 227,
           "status": "partial_no_full_rrr"
         }
       }
@@ -279,9 +290,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 401,
-        "graded": 400,
-        "success": 251,
+        "terminal": 411,
+        "graded": 410,
+        "success": 257,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -294,9 +305,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 16,
-          "graded": 16,
-          "success": 9,
+          "terminal": 19,
+          "graded": 19,
+          "success": 10,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -378,11 +389,82 @@
         "status": "partial_no_full_score"
       }
     },
+    "opus_4_8_historical": {
+      "model": "Claude Opus 4.8",
+      "swe_bench_pro_verified": {
+        "status": "complete_historical_run",
+        "expected": 731,
+        "graded": 731,
+        "success": 503,
+        "accuracy": 0.6880984952120383,
+        "confirmed_solution_retrieval_cases": 3,
+        "conservative_noncredit_for_confirmed_retrieval": {
+          "correct": 500,
+          "denominator": 731,
+          "percent": 68.39945280437757,
+          "scope": "Supplementary calculation assigning no credit to the 3 confirmed retrieval cases; not a replacement for raw score or proof all remaining cases are uncontaminated."
+        },
+        "qualification": "Three confirmed solution retrieval cases; raw benchmark score is unchanged and not a claim all other trajectories are clean."
+      }
+    },
     "muse_bf16": {
       "model": "meta-models/Muse-Spark-Open-816B-A42B",
       "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
       "status": "in_progress",
-      "qualification": "Original BF16 native Pro, TB2.1 and DeepSWE started after real inference and tool/thinking preflight; no complete benchmark scores at this snapshot."
+      "swe_bench_pro_verified": {
+        "expected": 731,
+        "terminal": 2,
+        "graded": 2,
+        "success": 2,
+        "status": "partial_no_full_score"
+      },
+      "tb2_1": {
+        "1": {
+          "expected": 89,
+          "terminal": 2,
+          "graded": 2,
+          "success": 2,
+          "status": "partial_no_full_score"
+        },
+        "2": {
+          "expected": 89,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        },
+        "3": {
+          "expected": 89,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        }
+      },
+      "deepswe": {
+        "1": {
+          "expected": 113,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        },
+        "2": {
+          "expected": 113,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        },
+        "3": {
+          "expected": 113,
+          "terminal": 0,
+          "graded": 0,
+          "success": 0,
+          "status": "partial_no_full_score"
+        }
+      },
+      "qualification": "Original BF16 native Pro, TB2.1 and DeepSWE started after real inference and tool/thinking preflight; partial counts are progress, not accuracy."
     }
   },
   "source_files": {
@@ -393,6 +475,8 @@
     "beam_opus_bf16": "/fsx/home/zhiyuan/.private/beam_20261018/expanded-current.json",
     "beam_swr_review": "/fsx/home/zhiyuan/.private/beam_20261018/current.json",
     "tb_exact_images": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/status-current.json",
-    "muse_tb_legacy": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/results/muse_tb_legacy_status.json"
+    "muse_tb_legacy": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/results/muse_tb_legacy_status.json",
+    "opus48_pro_full": "/fsx/home/zhiyuan/.private/opus48_sbpv_20261004/completed_full_evaluation_result.json",
+    "muse_nvfp4_exact_recovery_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json"
   }
 }

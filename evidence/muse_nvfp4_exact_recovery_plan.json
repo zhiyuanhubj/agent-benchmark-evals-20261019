@@ -1,0 +1,570 @@
+{
+  "utc": 1792382657.620863,
+  "profile": "user-supplied exact prebuilt TB2.1 images",
+  "model": "Muse NVFP4",
+  "endpoint": "http://10.1.95.27:31320/v1",
+  "cpu_allocation": 2922,
+  "model_allocation": 2866,
+  "existing_scored_results": {
+    "1": {
+      "circuit-fibsqrt": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard1/circuit-fibsqrt__4Qjuix9/result.json",
+        "sha256": "e7d74989ec23cf34c0144276784b51afb72972069aa6e83e1301cbf2a3dc4c7f",
+        "reward": 1.0
+      },
+      "caffe-cifar-10": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard1/caffe-cifar-10__PgqgLTg/result.json",
+        "sha256": "3be5d21773d6888bf2fa951a168f89ebd2807a474d0f67f76ac0330340ca4fa1",
+        "reward": 1.0
+      },
+      "build-cython-ext": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard1/build-cython-ext__hki7mzz/result.json",
+        "sha256": "e7da5091c2b8f60711fcb675e94554dcd0b0d3082de4d20ca017939426c9e1fe",
+        "reward": 1.0
+      },
+      "adaptive-rejection-sampler": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard1/adaptive-rejection-sampler__Ggww4yR/result.json",
+        "sha256": "3605b45235c86a5ebdbbf75f1c5d4810dc4ee9ea3c3e1e1a6a1648be4be97007",
+        "reward": 0.0
+      },
+      "build-pmars": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/build-pmars__gr64VZv/result.json",
+        "sha256": "3cd942cf9c0c3b39ab71a8e9f22e892d14b392464ae53d64f861e6eb74c405b6",
+        "reward": 1.0
+      },
+      "bn-fit-modify": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/bn-fit-modify__jBzj4da/result.json",
+        "sha256": "d20629309fb76977a0908947c47098b79785365a60b568a1d3b625bbcc3fe3ea",
+        "reward": 1.0
+      },
+      "cancel-async-tasks": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/cancel-async-tasks__sBXUen2/result.json",
+        "sha256": "6cecaf8bceb4e6d059d60d912880e31bd8646e270ee84f754b986c71e6cf52a0",
+        "reward": 1.0
+      },
+      "crack-7z-hash": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/crack-7z-hash__uUF9mVm/result.json",
+        "sha256": "7a773b2ec80a3fd51bec43f0eaaab71d736936315e1c0f90d7b6d8258ba5f169",
+        "reward": 1.0
+      },
+      "configure-git-webserver": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/configure-git-webserver__okU89AG/result.json",
+        "sha256": "0329fbc2462ab7ac2a3a1b74954a0086366165a0456a340c34370f749eac03e2",
+        "reward": 1.0
+      },
+      "distribution-search": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/distribution-search__GWa7tdY/result.json",
+        "sha256": "56659a97defe772908a10bf1b49ee98d9a0e063c03bea82e06e47142093d4e5d",
+        "reward": 1.0
+      },
+      "build-pov-ray": {
+        "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard3/build-pov-ray__NvgBo6s/result.json",
+        "sha256": "625b8c9df2f7e67e4e6534bb51352c10b8e557a7925a944edd9b395b39884583",
+        "reward": 1.0
+      }
+    },
+    "2": {},
+    "3": {}
+  },
+  "user_cutover_interrupted_ungraded_trials": {
+    "count-dataset-tokens": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard1/count-dataset-tokens__h93kQxJ",
+      "raw_model_responses": 12
+    },
+    "compile-compcert": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard1/compile-compcert__UBKjjML",
+      "raw_model_responses": 36
+    },
+    "db-wal-recovery": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard1/db-wal-recovery__d8ZnPf8",
+      "raw_model_responses": 9
+    },
+    "extract-elf": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/extract-elf__gVa4BUP",
+      "raw_model_responses": 35
+    },
+    "feal-linear-cryptanalysis": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/feal-linear-cryptanalysis__ZRcbSrP",
+      "raw_model_responses": 20
+    },
+    "cobol-modernization": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard2/cobol-modernization__kDzx6NX",
+      "raw_model_responses": 27
+    },
+    "chess-best-move": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard3/chess-best-move__9ayMD4V",
+      "raw_model_responses": 55
+    },
+    "break-filter-js-from-html": {
+      "trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-shard3/break-filter-js-from-html__M3WKwC7",
+      "raw_model_responses": 36
+    }
+  },
+  "configurations": [
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b00.json",
+      "sha256": "19a914a9fabf1ccd632b4a4ec0b3273219c9cd909343eab47f760bcacc2785c8",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00",
+      "tasks": [
+        "break-filter-js-from-html",
+        "chess-best-move",
+        "cobol-modernization",
+        "code-from-image",
+        "compile-compcert",
+        "constraints-scheduling",
+        "count-dataset-tokens",
+        "custom-memory-heap-crash",
+        "db-wal-recovery",
+        "dna-assembly"
+      ]
+    },
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b01.json",
+      "sha256": "279eeb12f66c7f9a8118034fab226364733b8118bbb96ac91733948364f5c9de",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01",
+      "tasks": [
+        "dna-insert",
+        "extract-elf",
+        "extract-moves-from-video",
+        "feal-differential-cryptanalysis",
+        "feal-linear-cryptanalysis",
+        "filter-js-from-html",
+        "financial-document-processor",
+        "fix-code-vulnerability",
+        "fix-git",
+        "fix-ocaml-gc"
+      ]
+    },
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b02.json",
+      "sha256": "5bd7221ce45772ed0cf3b62fd660a97560bc7ed33bd1a266f30db92e3ba2e376",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02",
+      "tasks": [
+        "gcode-to-text",
+        "git-leak-recovery",
+        "git-multibranch",
+        "gpt2-codegolf",
+        "headless-terminal",
+        "hf-model-inference",
+        "install-windows-3.11",
+        "kv-store-grpc",
+        "large-scale-text-editing",
+        "largest-eigenval"
+      ]
+    },
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b03.json",
+      "sha256": "263709f4107278b105e39e473aa57d0b45324f77d83e08bc87bd7c288c3881b5",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03",
+      "tasks": [
+        "llm-inference-batching-scheduler",
+        "log-summary-date-ranges",
+        "mailman",
+        "make-doom-for-mips",
+        "make-mips-interpreter",
+        "mcmc-sampling-stan",
+        "merge-diff-arc-agi-task",
+        "model-extraction-relu-logits",
+        "modernize-scientific-stack",
+        "mteb-leaderboard"
+      ]
+    },
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b04.json",
+      "sha256": "da3391c1d40c159657124612b25d9923bef7a83eb1366abac46b86bcac7d02a1",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04",
+      "tasks": [
+        "mteb-retrieve",
+        "multi-source-data-merger",
+        "nginx-request-logging",
+        "openssl-selfsigned-cert",
+        "overfull-hbox",
+        "password-recovery",
+        "path-tracing",
+        "path-tracing-reverse",
+        "polyglot-c-py",
+        "polyglot-rust-c"
+      ]
+    },
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b05.json",
+      "sha256": "e129232565bcab4a3146e95f22ce6abe59f7a2913afac60e82416893bef2cd87",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05",
+      "tasks": [
+        "portfolio-optimization",
+        "protein-assembly",
+        "prove-plus-comm",
+        "pypi-server",
+        "pytorch-model-cli",
+        "pytorch-model-recovery",
+        "qemu-alpine-ssh",
+        "qemu-startup",
+        "query-optimize",
+        "raman-fitting"
+      ]
+    },
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b06.json",
+      "sha256": "7b4fd178f11122437b42ad0ff3d70e546d052edada35b3289be4c948d56e6f30",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06",
+      "tasks": [
+        "regex-chess",
+        "regex-log",
+        "reshard-c4-data",
+        "rstan-to-pystan",
+        "sam-cell-seg",
+        "sanitize-git-repo",
+        "schemelike-metacircular-eval",
+        "sparql-university",
+        "sqlite-db-truncate",
+        "sqlite-with-gcov"
+      ]
+    },
+    {
+      "round": 1,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r1-completion-2866-b07.json",
+      "sha256": "c11d6d84b8bbbdcc96b13c5e37737e32c07c1ef4beb7ee58810568a99d772764",
+      "job_name": "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07",
+      "tasks": [
+        "torch-pipeline-parallelism",
+        "torch-tensor-parallelism",
+        "train-fasttext",
+        "tune-mjcf",
+        "video-processing",
+        "vulnerable-secret",
+        "winning-avg-corewars",
+        "write-compressor"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b00.json",
+      "sha256": "39e9358d7e9a781a2024bd0d16d7bdff037bebe735f9b88edb8eb3e72a6eafde",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00",
+      "tasks": [
+        "adaptive-rejection-sampler",
+        "bn-fit-modify",
+        "break-filter-js-from-html",
+        "build-cython-ext",
+        "build-pmars",
+        "build-pov-ray",
+        "caffe-cifar-10",
+        "cancel-async-tasks",
+        "chess-best-move",
+        "circuit-fibsqrt"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b01.json",
+      "sha256": "57d9a64492b884603ad4a61cfc996412a0db57babcd8e9e8afee1434b9e39773",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01",
+      "tasks": [
+        "cobol-modernization",
+        "code-from-image",
+        "compile-compcert",
+        "configure-git-webserver",
+        "constraints-scheduling",
+        "count-dataset-tokens",
+        "crack-7z-hash",
+        "custom-memory-heap-crash",
+        "db-wal-recovery",
+        "distribution-search"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b02.json",
+      "sha256": "4a9b18c4b38d2e5124701bfabe6d7f045cc2b97ca09d949e1c83e62ffe739b1c",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02",
+      "tasks": [
+        "dna-assembly",
+        "dna-insert",
+        "extract-elf",
+        "extract-moves-from-video",
+        "feal-differential-cryptanalysis",
+        "feal-linear-cryptanalysis",
+        "filter-js-from-html",
+        "financial-document-processor",
+        "fix-code-vulnerability",
+        "fix-git"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b03.json",
+      "sha256": "6be6a0ccb1ebccef7ff68086a769318787abb4b2ba016fd1505bd39fdfd386e3",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03",
+      "tasks": [
+        "fix-ocaml-gc",
+        "gcode-to-text",
+        "git-leak-recovery",
+        "git-multibranch",
+        "gpt2-codegolf",
+        "headless-terminal",
+        "hf-model-inference",
+        "install-windows-3.11",
+        "kv-store-grpc",
+        "large-scale-text-editing"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b04.json",
+      "sha256": "deb17e5edacc6f18f1141dac740cd761741aa1f088b775c74e81d47bd000ea6d",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04",
+      "tasks": [
+        "largest-eigenval",
+        "llm-inference-batching-scheduler",
+        "log-summary-date-ranges",
+        "mailman",
+        "make-doom-for-mips",
+        "make-mips-interpreter",
+        "mcmc-sampling-stan",
+        "merge-diff-arc-agi-task",
+        "model-extraction-relu-logits",
+        "modernize-scientific-stack"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b05.json",
+      "sha256": "4017ad9fb00e2fe0d896d4357dcf6afba756a874251a6e4fcbd624ed7406ed1e",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05",
+      "tasks": [
+        "mteb-leaderboard",
+        "mteb-retrieve",
+        "multi-source-data-merger",
+        "nginx-request-logging",
+        "openssl-selfsigned-cert",
+        "overfull-hbox",
+        "password-recovery",
+        "path-tracing",
+        "path-tracing-reverse",
+        "polyglot-c-py"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b06.json",
+      "sha256": "d2319285df1746802dee41db3c33248d1817e3041370761d397da2a995bc7c9a",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06",
+      "tasks": [
+        "polyglot-rust-c",
+        "portfolio-optimization",
+        "protein-assembly",
+        "prove-plus-comm",
+        "pypi-server",
+        "pytorch-model-cli",
+        "pytorch-model-recovery",
+        "qemu-alpine-ssh",
+        "qemu-startup",
+        "query-optimize"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b07.json",
+      "sha256": "2e2d0397e4d159932a4a309707e297cefd6c351011a4c2f8ed2ecd8ec65fcd4d",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07",
+      "tasks": [
+        "raman-fitting",
+        "regex-chess",
+        "regex-log",
+        "reshard-c4-data",
+        "rstan-to-pystan",
+        "sam-cell-seg",
+        "sanitize-git-repo",
+        "schemelike-metacircular-eval",
+        "sparql-university",
+        "sqlite-db-truncate"
+      ]
+    },
+    {
+      "round": 2,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b08.json",
+      "sha256": "8b5060cae570550c08e641f6e5743070dbc4fed5abd71573ac86631ea4e85a01",
+      "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08",
+      "tasks": [
+        "sqlite-with-gcov",
+        "torch-pipeline-parallelism",
+        "torch-tensor-parallelism",
+        "train-fasttext",
+        "tune-mjcf",
+        "video-processing",
+        "vulnerable-secret",
+        "winning-avg-corewars",
+        "write-compressor"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b00.json",
+      "sha256": "682b25f4e9a5b8821f568fa8579c9b68b93be1350d315f8a1a6ea1afb4570939",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b00",
+      "tasks": [
+        "adaptive-rejection-sampler",
+        "bn-fit-modify",
+        "break-filter-js-from-html",
+        "build-cython-ext",
+        "build-pmars",
+        "build-pov-ray",
+        "caffe-cifar-10",
+        "cancel-async-tasks",
+        "chess-best-move",
+        "circuit-fibsqrt"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b01.json",
+      "sha256": "cff32fcdbae313eae5d7bcedc8bc78fb032470cbed9c3f55f3c2fec1cead6639",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b01",
+      "tasks": [
+        "cobol-modernization",
+        "code-from-image",
+        "compile-compcert",
+        "configure-git-webserver",
+        "constraints-scheduling",
+        "count-dataset-tokens",
+        "crack-7z-hash",
+        "custom-memory-heap-crash",
+        "db-wal-recovery",
+        "distribution-search"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b02.json",
+      "sha256": "b118ec0fb52ccae36241b9bf22c0d9dc4062b55a9c48b69cf752bbf8aa50b657",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b02",
+      "tasks": [
+        "dna-assembly",
+        "dna-insert",
+        "extract-elf",
+        "extract-moves-from-video",
+        "feal-differential-cryptanalysis",
+        "feal-linear-cryptanalysis",
+        "filter-js-from-html",
+        "financial-document-processor",
+        "fix-code-vulnerability",
+        "fix-git"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b03.json",
+      "sha256": "96b46a63486903051e344500bde51401fb1ed5d76e4cd3d1aaf6847d6c4da2bf",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b03",
+      "tasks": [
+        "fix-ocaml-gc",
+        "gcode-to-text",
+        "git-leak-recovery",
+        "git-multibranch",
+        "gpt2-codegolf",
+        "headless-terminal",
+        "hf-model-inference",
+        "install-windows-3.11",
+        "kv-store-grpc",
+        "large-scale-text-editing"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b04.json",
+      "sha256": "fa6dae300c22e298755ff292e2c85848cf60cfcd64309a6217ad9ff8c2cb780b",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b04",
+      "tasks": [
+        "largest-eigenval",
+        "llm-inference-batching-scheduler",
+        "log-summary-date-ranges",
+        "mailman",
+        "make-doom-for-mips",
+        "make-mips-interpreter",
+        "mcmc-sampling-stan",
+        "merge-diff-arc-agi-task",
+        "model-extraction-relu-logits",
+        "modernize-scientific-stack"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b05.json",
+      "sha256": "f49d5e35c22f1beac02c5322f1e57a88dcb3905590df2480b59208b9e4c17b90",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b05",
+      "tasks": [
+        "mteb-leaderboard",
+        "mteb-retrieve",
+        "multi-source-data-merger",
+        "nginx-request-logging",
+        "openssl-selfsigned-cert",
+        "overfull-hbox",
+        "password-recovery",
+        "path-tracing",
+        "path-tracing-reverse",
+        "polyglot-c-py"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b06.json",
+      "sha256": "0d32125c15bf7dce27b335f4a0f42d0238dfc056ab8a32b6e18b8351034ad746",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b06",
+      "tasks": [
+        "polyglot-rust-c",
+        "portfolio-optimization",
+        "protein-assembly",
+        "prove-plus-comm",
+        "pypi-server",
+        "pytorch-model-cli",
+        "pytorch-model-recovery",
+        "qemu-alpine-ssh",
+        "qemu-startup",
+        "query-optimize"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b07.json",
+      "sha256": "6fda3918187ebf39cffcaf10cef99b989be11ca3014546f440be7bcb229fca6b",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b07",
+      "tasks": [
+        "raman-fitting",
+        "regex-chess",
+        "regex-log",
+        "reshard-c4-data",
+        "rstan-to-pystan",
+        "sam-cell-seg",
+        "sanitize-git-repo",
+        "schemelike-metacircular-eval",
+        "sparql-university",
+        "sqlite-db-truncate"
+      ]
+    },
+    {
+      "round": 3,
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r3-completion-2866-b08.json",
+      "sha256": "5b9ec773a1155ca7bcf0658111e3276ff438b1f572d17712959dba51d6b84026",
+      "job_name": "muse-nvfp4-tb-v1-exact-r3-completion-2866-b08",
+      "tasks": [
+        "sqlite-with-gcov",
+        "torch-pipeline-parallelism",
+        "torch-tensor-parallelism",
+        "train-fasttext",
+        "tune-mjcf",
+        "video-processing",
+        "vulnerable-secret",
+        "winning-avg-corewars",
+        "write-compressor"
+      ]
+    }
+  ],
+  "qualification": "No graded task replay. Eight ungraded tasks interrupted by user BF16 node cutover receive explicitly identified infrastructure replacement attempts; their original partial responses remain archived. Remaining 70 r1 tasks were never sampled. Rounds 2 and 3 use original tasks/images and generation settings. No best-of selection."
+}
