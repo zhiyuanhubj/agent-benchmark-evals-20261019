@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T07:53:21.070193+00:00",
+  "generated_utc": "2026-10-19T08:02:19.959786+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 27,
-  "success_count": 22,
+  "graded_task_count": 29,
+  "success_count": 24,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization"
@@ -65,7 +65,6 @@
   },
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
-    "code-from-image",
     "compile-compcert",
     "constraints-scheduling",
     "count-dataset-tokens",
@@ -120,7 +119,6 @@
     "sqlite-db-truncate",
     "sqlite-with-gcov",
     "torch-pipeline-parallelism",
-    "torch-tensor-parallelism",
     "train-fasttext",
     "tune-mjcf",
     "video-processing",
@@ -129,8 +127,8 @@
     "write-compressor"
   ],
   "active_or_unfinished_trials": [
-    "code-from-image__EJoH7oT",
     "compile-compcert__w9HS5rZ",
+    "constraints-scheduling__jPjVKiL",
     "extract-moves-from-video__pA42NVn",
     "filter-js-from-html__KhugWyF",
     "gcode-to-text__iF8eaFS",
@@ -141,8 +139,8 @@
     "reshard-c4-data__pPAcemJ",
     "rstan-to-pystan__QdMvhLN",
     "torch-pipeline-parallelism__bx9BEM6",
-    "torch-tensor-parallelism__v9eKE5Q",
-    "train-fasttext__Mc2uuim"
+    "train-fasttext__Mc2uuim",
+    "tune-mjcf__cgx3dH4"
   ],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -269,6 +267,17 @@
       "finished_at": "2026-10-19T07:28:20.950017Z",
       "raw_response_count": 53,
       "responses_with_reasoning_content": 53
+    },
+    "code-from-image": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b00/code-from-image__EJoH7oT/result.json",
+      "result_sha256": "eca429f80d5f5eaca5bde1c23287c421f30b8a9945d0957c3303c18e522a97fe",
+      "finished_at": "2026-10-19T08:00:57.730627Z",
+      "raw_response_count": 36,
+      "responses_with_reasoning_content": 36
     },
     "configure-git-webserver": {
       "reward": 1.0,
@@ -445,6 +454,17 @@
       "finished_at": "2026-10-19T07:48:38.642298Z",
       "raw_response_count": 6,
       "responses_with_reasoning_content": 6
+    },
+    "torch-tensor-parallelism": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b07/torch-tensor-parallelism__v9eKE5Q/result.json",
+      "result_sha256": "eb30aa672e9bcae3f326fb025cd9e85e92a210c70e10503eea290c7928bec089",
+      "finished_at": "2026-10-19T08:01:40.251225Z",
+      "raw_response_count": 15,
+      "responses_with_reasoning_content": 15
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T07:53:52.773704+00:00",
+  "generated_utc": "2026-10-19T08:02:49.748841+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -103,9 +103,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 27,
-            "graded": 27,
-            "success": 22,
+            "terminal": 29,
+            "graded": 29,
+            "success": 24,
             "active_trial_dirs": 19,
             "archived_actual_model_responses": 503,
             "ungraded": 0,
@@ -168,42 +168,42 @@
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
-            "1": 16,
+            "1": 18,
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 1043,
+          "new_raw_model_responses": 1118,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 276,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 218,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 177,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 318,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 18,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 36
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 289,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 228,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 185,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 327,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 33,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 56
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T07:53:52+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T08:02:41+00:00",
           "active_recovery_trial_dirs": 14,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T08:00:05"
+              "scheduler_start": "2026-10-20T15:10:45"
             },
             "2924": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T08:00:05"
+              "scheduler_start": "2026-10-20T15:10:45"
             },
             "2927": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-20T08:00:05"
+              "scheduler_start": "2026-10-20T15:10:45"
             },
             "2928": {
               "state": "PENDING",
               "nodes": "",
-              "scheduler_start": "2026-10-19T19:07:00"
+              "scheduler_start": "2026-10-20T15:10:45"
             }
           },
           "qualification": "No graded task replay. Eight ungraded tasks interrupted by user BF16 node cutover receive explicitly identified infrastructure replacement attempts; their original partial responses remain archived. Remaining 70 r1 tasks were never sampled. Rounds 2 and 3 use original tasks/images and generation settings. No best-of selection."
@@ -214,17 +214,17 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 53,
-        "graded": 52,
-        "success": 34,
+        "terminal": 54,
+        "graded": 53,
+        "success": 35,
         "status": "partial_no_full_score"
       },
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 50,
-          "graded": 50,
-          "success": 12,
+          "terminal": 51,
+          "graded": 51,
+          "success": 13,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -273,7 +273,7 @@
             "graded": 42,
             "success": 31,
             "active_trial_dirs": 46,
-            "archived_actual_model_responses": 1936,
+            "archived_actual_model_responses": 1962,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 2
@@ -344,9 +344,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 567,
-        "graded": 566,
-        "success": 359,
+        "terminal": 572,
+        "graded": 571,
+        "success": 362,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -359,9 +359,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 66,
-          "graded": 66,
-          "success": 21,
+          "terminal": 69,
+          "graded": 69,
+          "success": 23,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -413,11 +413,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 42,
-            "graded": 42,
-            "success": 34,
-            "active_trial_dirs": 46,
-            "archived_actual_model_responses": 767,
+            "terminal": 43,
+            "graded": 43,
+            "success": 35,
+            "active_trial_dirs": 47,
+            "archived_actual_model_responses": 804,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],

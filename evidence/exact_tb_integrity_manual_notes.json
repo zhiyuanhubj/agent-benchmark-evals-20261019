@@ -1,6 +1,6 @@
 {
-  "reviewed_utc": "2026-10-19T07:52:00+00:00",
-  "scope": "Targeted manual review of two flagged and one newly successful Muse NVFP4 exact-image TB2.1 trajectories.",
+  "reviewed_utc": "2026-10-19T08:03:00+00:00",
+  "scope": "Targeted manual review of three flagged and one newly successful Muse NVFP4 exact-image TB2.1 trajectories.",
   "notes": [
     {
       "model": "muse_nvfp4",
@@ -26,6 +26,15 @@
       "reward": 1.0,
       "trajectory_sha256": "690afee3ad321d9a7bae32e31304cefacb438e710dbd5fcdea00291fe2f673c5",
       "observed": "All 16 agent tool calls were inspected. The agent read and edited /app/regex.txt, wrote test scripts under /tmp, and ran local regex checks. No verifier-log, reward-file, host-boundary, or execution-hook access appeared in the inspected commands; this is a targeted command review, not a full clean-trajectory certification.",
+      "training_disposition": "candidate_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "torch-tensor-parallelism",
+      "reward": 1.0,
+      "trajectory_sha256": "b60744283d5fbd4bedf01196c6e244eb86645d0f206e446e9e6bae71acc475d1",
+      "observed": "The execution_override keyword hit at step 5 is a benign interpreter check: `which python3 && ls -la /usr/bin/python* && python3 --version`, followed by running the task's local test script. The matched command does not change an execution hook or access verifier material. This is contextual review of the flagged step, not a full clean-trajectory certification.",
       "training_disposition": "candidate_pending_full_manual_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }
