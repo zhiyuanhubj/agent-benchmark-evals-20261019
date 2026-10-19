@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T14:00:24.042993+00:00",
+  "generated_utc": "2026-10-19T14:17:34.358059+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -18,7 +18,7 @@
       }
     },
     "muse_bf16": {
-      "scored_trajectories_checked": 21,
+      "scored_trajectories_checked": 23,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -41,7 +41,7 @@
       }
     },
     "beam_bf16": {
-      "scored_trajectories_checked": 66,
+      "scored_trajectories_checked": 67,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -1836,6 +1836,28 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "tune-mjcf",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/tune-mjcf__4xzBY6Q/agent/trajectory.json",
+      "trajectory_sha256": "7277801e0e00c3797166c7169a997c653cb7fd3b9b59d7ca0c65e4116730fde3",
+      "steps": 29,
+      "tool_calls": 80,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "write-compressor",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/write-compressor__BLMQZeq/agent/trajectory.json",
+      "trajectory_sha256": "46cb32ece98c78c61fb8f814237e7cc84432bc0c05024273d6647cd20e88b5fb",
+      "steps": 13,
+      "tool_calls": 29,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "opus47",
@@ -3663,6 +3685,17 @@
       "tool_calls": 69,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
+      "task": "qemu-startup",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/qemu-startup__cPZ9Q9a/agent/trajectory.json",
+      "trajectory_sha256": "816fa72216a89ec411a54882d85fc2c081941a1af16799086fc33a4e9808945a",
+      "steps": 20,
+      "tool_calls": 40,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     }
   ],
   "active_muse_nvfp4": {
@@ -3673,9 +3706,9 @@
         "model": "muse_nvfp4",
         "task": "make-doom-for-mips",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-doom-for-mips__ayw35yd",
-        "trajectory_sha256_at_screen": "f9f8f0ec8fa14ce9d1509b3c8694ef56f790dbbb76dd22c9f75c1ed17b0f2402",
-        "steps_at_screen": 117,
-        "tool_calls_at_screen": 534,
+        "trajectory_sha256_at_screen": "47c199aa49764dcfc0fd25ca414d893349caa648b87c08b9ba833d01f266dfcc",
+        "steps_at_screen": 128,
+        "tool_calls_at_screen": 583,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3683,9 +3716,9 @@
         "model": "muse_nvfp4",
         "task": "make-mips-interpreter",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-mips-interpreter__6BNKuxJ",
-        "trajectory_sha256_at_screen": "12890cf2eef3458d6dab7fbbf16f9e2dedc96205366e6196c5c2deb6a0a23249",
-        "steps_at_screen": 54,
-        "tool_calls_at_screen": 235,
+        "trajectory_sha256_at_screen": "416b94854b0baab6ce02608f82633ed1e6f53072bd8759826df2770c43039093",
+        "steps_at_screen": 58,
+        "tool_calls_at_screen": 253,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3693,9 +3726,9 @@
         "model": "muse_nvfp4",
         "task": "raman-fitting",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/raman-fitting__gccPUXq",
-        "trajectory_sha256_at_screen": "c61b90b592d6248bbad764bab50af2840df93c891051a81d4d1e1d24c84b371b",
-        "steps_at_screen": 43,
-        "tool_calls_at_screen": 107,
+        "trajectory_sha256_at_screen": "7ab8e59e0bd1d7ea656c828281887d831edf5bb18d75e5735a37556ff792c392",
+        "steps_at_screen": 53,
+        "tool_calls_at_screen": 151,
         "hits": [
           {
             "rule": "execution_override",

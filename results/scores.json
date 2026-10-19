@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T13:59:51.211868+00:00",
+  "generated_utc": "2026-10-19T14:17:01.989504+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -172,18 +172,18 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 3587,
+          "new_raw_model_responses": 3611,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 301,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 315,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 307,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 317,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T13:59:36+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T14:16:34+00:00",
           "active_recovery_trial_dirs": 3,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -240,8 +240,8 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 68,
-        "graded": 67,
+        "terminal": 69,
+        "graded": 68,
         "success": 41,
         "status": "partial_no_full_score"
       },
@@ -295,11 +295,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 66,
-            "graded": 66,
-            "success": 47,
-            "active_trial_dirs": 70,
-            "archived_actual_model_responses": 3122,
+            "terminal": 67,
+            "graded": 67,
+            "success": 48,
+            "active_trial_dirs": 71,
+            "archived_actual_model_responses": 3161,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 5
@@ -356,12 +356,12 @@
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 290,
+          "terminal": 291,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 307,
+          "terminal": 308,
           "status": "partial_no_full_rrr"
         }
       }
@@ -379,7 +379,7 @@
           "opus47-pro-eval-recovery-element-hq-20261019",
           "opus47-pro-eval-recovery-element-hq-2922-20261019"
         ],
-        "crosshost_verifier_recovery_status": "running",
+        "crosshost_verifier_recovery_status": "needs_review",
         "qualification": "Only the original 731-task run is counted. Saved-patch verifier-only retries are separate provenance and cannot add tasks or successes to the first-round score."
       },
       "deepswe": {
@@ -399,9 +399,9 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 40,
-          "graded": 40,
-          "success": 12,
+          "terminal": 46,
+          "graded": 46,
+          "success": 13,
           "status": "partial_no_full_score"
         }
       },
@@ -460,11 +460,11 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 61,
-            "graded": 61,
-            "success": 47,
-            "active_trial_dirs": 65,
-            "archived_actual_model_responses": 1247,
+            "terminal": 67,
+            "graded": 67,
+            "success": 53,
+            "active_trial_dirs": 71,
+            "archived_actual_model_responses": 1366,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -500,17 +500,17 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 54,
-        "graded": 54,
-        "success": 38,
+        "terminal": 56,
+        "graded": 56,
+        "success": 39,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
-          "terminal": 21,
-          "graded": 21,
-          "success": 17,
+          "terminal": 23,
+          "graded": 23,
+          "success": 19,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -533,9 +533,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 21,
-            "graded": 21,
-            "success": 17,
+            "terminal": 23,
+            "graded": 23,
+            "success": 19,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
@@ -551,8 +551,8 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 22,
-          "graded": 22,
+          "terminal": 23,
+          "graded": 23,
           "success": 7,
           "status": "partial_no_full_score"
         },
