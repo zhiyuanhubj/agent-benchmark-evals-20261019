@@ -117,7 +117,7 @@ def cycle():
     if not round_one_finished() and untouched_round1_batch() and early95_released():
         allocation = subprocess.run(['squeue', '-h', '-j', '2812', '-o', '%T|%N'], capture_output=True, text=True, check=True).stdout.strip()
         if allocation.startswith('RUNNING|'):
-            if gpu_released(2812):
+            if (STATE / '2812-launch-claim.json').exists() or gpu_released(2812):
                 launch(2812, allocation.split('|', 1)[1])
             else:
                 log(phase='wait_2812_gpu_cleanup')
