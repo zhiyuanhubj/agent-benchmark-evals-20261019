@@ -1,9 +1,13 @@
 {
-  "generated_utc": "2026-10-19T12:43:58.437506+00:00",
+  "generated_utc": "2026-10-19T12:56:08.478712+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 17,
-  "success_count": 14,
+  "scored_tasks": 18,
+  "success_count": 15,
   "tasks": {
+    "regex-log": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/regex-log__ynqEXWv/result.json"
+    },
     "dna-assembly": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/dna-assembly__qyhfxGD/result.json"
@@ -74,12 +78,16 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 17,
-  "covered_raw_response_sets": 17,
-  "covered_trajectories": 17,
-  "scored_raw_response_count": 433,
-  "nonempty_reasoning_response_count": 433,
+  "covered_results": 18,
+  "covered_raw_response_sets": 18,
+  "covered_trajectories": 18,
+  "scored_raw_response_count": 440,
+  "nonempty_reasoning_response_count": 440,
   "raw_reasoning_by_task": {
+    "regex-log": {
+      "raw_responses": 7,
+      "nonempty_reasoning_content": 7
+    },
     "dna-assembly": {
       "raw_responses": 22,
       "nonempty_reasoning_content": 22
@@ -174,6 +182,7 @@
     "muse_bf16_delta_20261019T120138Z.tar.zst",
     "muse_bf16_delta_20261019T121716Z.tar.zst",
     "muse_bf16_delta_20261019T124114Z.tar.zst",
+    "muse_bf16_delta_20261019T125550Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
