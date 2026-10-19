@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T17:46:37.523047+00:00",
+  "utc": "2026-10-19T17:53:22.360100+00:00",
   "model": "Muse-Spark-Open-816B-A42B-NVFP4",
   "replicas": {
     "2865": {
@@ -27,7 +27,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 479,
+      "terminal": 484,
       "raw_terminal_records": 500,
       "infrastructure_before_model": [
         {
@@ -73,12 +73,6 @@
           "sha256": "c61643b201616feeb26cefa46e35937872bfee6bcaadf1d5e45920bbc060a254"
         },
         {
-          "task": "sympy__sympy-20801",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-20801__9ChZSBQ/result.json",
-          "sha256": "33320e33ec4bd6050f9e08bc5ff5824714553d253ffb7b0253e760f7a8878ac6"
-        },
-        {
           "task": "sympy__sympy-17318",
           "classification": "docker_hub_rate_limit_before_agent",
           "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-17318__E6wV4i4/result.json",
@@ -89,18 +83,6 @@
           "classification": "docker_hub_rate_limit_before_agent",
           "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-19346__VDpdeKK/result.json",
           "sha256": "25fa2a368ab813942ea22ffc155ac059384149d5ee3d3eeef769a4ce0c97fd8d"
-        },
-        {
-          "task": "sympy__sympy-23534",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-23534__zu2V7tU/result.json",
-          "sha256": "835a9c5519d78e8b4ed278ad3c043906f21a1312648feca8cb12bca8ba85b199"
-        },
-        {
-          "task": "sympy__sympy-20438",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-20438__FoHJxmu/result.json",
-          "sha256": "cf3f224150488996ad1c3f39802e7121b2e674f815a50cc178427336d4de189c"
         },
         {
           "task": "sympy__sympy-18189",
@@ -115,12 +97,6 @@
           "sha256": "0cd74260cae4831e141ca44b4e61a58b44ffc7449d31024a739e70a5c11a2c36"
         },
         {
-          "task": "sympy__sympy-23262",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-23262__wmoA4KS/result.json",
-          "sha256": "627f62eb03a4d4c64dc15fd0a93f3e9e8af2bc9e2f9284c1fd853b9a84de542c"
-        },
-        {
           "task": "sympy__sympy-24562",
           "classification": "docker_hub_rate_limit_before_agent",
           "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24562__QbvSGvt/result.json",
@@ -131,12 +107,6 @@
           "classification": "docker_hub_rate_limit_before_agent",
           "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24539__yTkgqAg/result.json",
           "sha256": "2465563ce10915a684e6974e56d037b5e2795909ae15dd235965468f0bc0fe08"
-        },
-        {
-          "task": "sympy__sympy-24213",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/results/muse-swe-review-glm5_500-r1/sympy__sympy-24213__nhM4xuu/result.json",
-          "sha256": "40c906ac161a1449fa4d291be01ffbd2e6f7be32034d0498b2cb32c6ada574b9"
         },
         {
           "task": "sympy__sympy-23950",
@@ -157,21 +127,21 @@
           "sha256": "3f9eb2f8b68599a89a33e6871a5142887059e804be944ab4f95dae2a1fd58f81"
         }
       ],
-      "recovered_before_response_infrastructure_tasks": 342,
+      "recovered_before_response_infrastructure_tasks": 347,
       "recovery_infrastructure_exceptions": [],
       "complete": false,
       "metrics_on_terminal_subset": {
-        "DA": 75.9,
-        "DA_total_50": 73.8,
+        "DA": 76.0,
+        "DA_total_50": 73.9,
         "CR": 91.9,
-        "FAR": 64.6,
-        "FRR": 7.7,
-        "total": 479,
-        "correct": 334,
+        "FAR": 64.8,
+        "FRR": 7.6,
+        "total": 484,
+        "correct": 338,
         "model_fail": 39,
-        "produced": 440,
-        "TP": 289,
-        "FP": 82,
+        "produced": 445,
+        "TP": 293,
+        "FP": 83,
         "TN": 45,
         "FN": 24
       },
@@ -181,7 +151,7 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 439,
+      "terminal": 441,
       "raw_terminal_records": 462,
       "infrastructure_before_model": [
         {
@@ -213,12 +183,6 @@
           "classification": "docker_hub_rate_limit_before_agent",
           "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-19954__tfBWYBs/result.json",
           "sha256": "ec6961d8446b56968259ea67b5ad18a1c826e6dc8e757047f78a02ff71f9a65f"
-        },
-        {
-          "task": "sympy__sympy-18763",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-18763__Y5qVYrv/result.json",
-          "sha256": "8e088a04e90e482cb963d4a65d3a765369e0d70d2cb093589797ec160160c498"
         },
         {
           "task": "sympy__sympy-24066",
@@ -293,12 +257,6 @@
           "sha256": "db80fc19fd170980f3c274b703729fc39f2e82374f35cb1d971d6b7507c12e94"
         },
         {
-          "task": "sympy__sympy-18211",
-          "classification": "docker_hub_rate_limit_before_agent",
-          "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-18211__BfWz6bP/result.json",
-          "sha256": "2a4fcc1259a87132f553725d15398c92560f86649d4eae1149daf515f7fdf82f"
-        },
-        {
           "task": "sympy__sympy-21847",
           "classification": "docker_hub_rate_limit_before_agent",
           "path": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/results/muse-swe-review-qwen3_coder_30b_500-r1/sympy__sympy-21847__EtQ5kwS/result.json",
@@ -323,22 +281,22 @@
           "sha256": "d9faabcf15c801cd0e66dfac226de7f4bcc53fac1253accd4f3f3ada1c578699"
         }
       ],
-      "recovered_before_response_infrastructure_tasks": 328,
+      "recovered_before_response_infrastructure_tasks": 330,
       "recovery_infrastructure_exceptions": [],
       "complete": false,
       "metrics_on_terminal_subset": {
-        "DA": 82.0,
-        "DA_total_50": 79.0,
+        "DA": 81.8,
+        "DA_total_50": 78.9,
         "CR": 90.9,
-        "FAR": 14.6,
+        "FAR": 15.0,
         "FRR": 21.4,
-        "total": 439,
-        "correct": 327,
+        "total": 441,
+        "correct": 328,
         "model_fail": 40,
-        "produced": 399,
+        "produced": 401,
         "TP": 158,
-        "FP": 29,
-        "TN": 169,
+        "FP": 30,
+        "TN": 170,
         "FN": 43
       },
       "exceptions": [],
@@ -755,13 +713,13 @@
       },
       "complete": false,
       "model_generation_started": false,
-      "utc": "2026-10-19T17:46:47.113717+00:00",
+      "utc": "2026-10-19T17:52:50.133196+00:00",
       "grader_preflight_passed": true
     },
     "task_preparation_controller": "MainPID=4150849\nResult=success\nActiveState=active\n"
   },
   "revision_capacity_preparation": {
-    "utc": 1792432002.3463888,
+    "utc": 1792432423.0898013,
     "phase": "waiting_for_reserved_allocations",
     "candidate_allocations": [
       2888,
