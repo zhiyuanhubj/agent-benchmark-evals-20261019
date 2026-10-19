@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T04:11:26.848746+00:00",
+  "generated_utc": "2026-10-19T04:14:12.541599+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -154,7 +154,7 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 19,
+          "new_raw_model_responses": 25,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations_queued": [
             2923,
@@ -227,7 +227,7 @@
             "graded": 34,
             "success": 26,
             "active_trial_dirs": 38,
-            "archived_actual_model_responses": 1248,
+            "archived_actual_model_responses": 1279,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -296,9 +296,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 411,
-        "graded": 410,
-        "success": 257,
+        "terminal": 414,
+        "graded": 413,
+        "success": 258,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -311,9 +311,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 19,
-          "graded": 19,
-          "success": 10,
+          "terminal": 22,
+          "graded": 22,
+          "success": 11,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -351,11 +351,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 65,
-            "graded": 65,
-            "success": 51,
-            "active_trial_dirs": 69,
-            "archived_actual_model_responses": 1436,
+            "terminal": 71,
+            "graded": 71,
+            "success": 56,
+            "active_trial_dirs": 75,
+            "archived_actual_model_responses": 1528,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -424,7 +424,7 @@
         "success": 2,
         "status": "partial_no_full_score"
       },
-      "tb2_1": {
+      "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
           "terminal": 2,
@@ -446,6 +446,10 @@
           "success": 0,
           "status": "partial_no_full_score"
         }
+      },
+      "tb2_1_exact_supplied_images": {
+        "status": "not_started",
+        "qualification": "Legacy benchmark task images are not counted as exact supplied-image trials."
       },
       "deepswe": {
         "1": {
