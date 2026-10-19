@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T08:26:13.141115+00:00",
+  "generated_utc": "2026-10-19T08:30:57.406187+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 34,
+      "scored_trajectories_checked": 37,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -420,6 +420,28 @@
     },
     {
       "model": "muse_nvfp4",
+      "task": "headless-terminal",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b02/headless-terminal__YyAiTWj/agent/trajectory.json",
+      "trajectory_sha256": "42b7bd01bb49f29805b2ddf7835f6478270946495ac2093ebe247da809b4c97f",
+      "steps": 25,
+      "tool_calls": 81,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "hf-model-inference",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b02/hf-model-inference__pYQGzeN/agent/trajectory.json",
+      "trajectory_sha256": "feb1a677f0210c39ccff83df468ac4de37f5d5d04cc590e300af6e758b6122b3",
+      "steps": 11,
+      "tool_calls": 31,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
       "task": "mteb-retrieve",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b04/mteb-retrieve__STMxBtg/agent/trajectory.json",
@@ -549,6 +571,17 @@
       "trajectory_sha256": "72f8a074bad6a591299f54d5be01c7359200ec80e59e9cc720122081d656e97d",
       "steps": 19,
       "tool_calls": 62,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "torch-pipeline-parallelism",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b07/torch-pipeline-parallelism__bx9BEM6/agent/trajectory.json",
+      "trajectory_sha256": "7d062dc4be761764eed5d89bb90dbc7b3e83253855cd3c53892b7ef837f5e901",
+      "steps": 43,
+      "tool_calls": 102,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

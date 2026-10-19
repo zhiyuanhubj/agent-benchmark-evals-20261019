@@ -83,20 +83,36 @@ def cycle():
         fcntl.flock(lock, fcntl.LOCK_EX)
         for source in SOURCES:
             run([PYTHON, str(source)])
-        run([PYTHON, str(ROOT / 'export_snapshot.py')])
-        scores = json.loads((ROOT / 'results/scores.json').read_text())
-        run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
-        audit = json.loads((ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json').read_text())
-        reported = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['1']
-        if reported['complete']:
-            assert audit['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB first-round audit failed'
-            assert (audit['graded_task_count'], audit['success_count']) == (reported['graded'], reported['success'])
-        sync_native_archives(scores)
-        run([PYTHON, str(ROOT / 'verify_muse_exact_io.py')], timeout=180)
-        io_coverage = json.loads((ROOT / 'evidence/muse_nvfp4_exact_io_coverage.json').read_text())
-        assert not io_coverage['errors'], 'Muse NVFP4 exact TB inputs/outputs missing from verified release assets'
-        if reported['complete']:
-            assert io_coverage['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB release coverage incomplete'
+        for _ in range(3):
+            run([PYTHON, str(ROOT / 'export_snapshot.py')])
+            scores = json.loads((ROOT / 'results/scores.json').read_text())
+            run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
+            audit = json.loads((ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json').read_text())
+            reported = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['1']
+            assert not audit['errors'], 'Muse NVFP4 exact TB task audit failed'
+            if (audit['graded_task_count'], audit['success_count']) != (reported['graded'], reported['success']):
+                continue  # A trial finished between the score snapshot and task audit.
+            sync_native_archives(scores)
+            run([PYTHON, str(ROOT / 'verify_muse_exact_io.py')], timeout=180)
+            io_coverage = json.loads((ROOT / 'evidence/muse_nvfp4_exact_io_coverage.json').read_text())
+            if io_coverage['errors']:
+                continue  # A trial finished after archive creation; capture it on the next pass.
+            run([PYTHON, str(ROOT / 'export_snapshot.py')])
+            scores = json.loads((ROOT / 'results/scores.json').read_text())
+            run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
+            audit = json.loads((ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json').read_text())
+            reported = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['1']
+            assert not audit['errors'], 'Muse NVFP4 exact TB task audit failed'
+            run([PYTHON, str(ROOT / 'verify_muse_exact_io.py')], timeout=180)
+            io_coverage = json.loads((ROOT / 'evidence/muse_nvfp4_exact_io_coverage.json').read_text())
+            if (audit['graded_task_count'], audit['success_count']) != (reported['graded'], reported['success']) or io_coverage['errors']:
+                continue
+            if reported['complete']:
+                assert audit['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB first-round audit failed'
+                assert io_coverage['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB release coverage incomplete'
+            break
+        else:
+            raise RuntimeError('Muse NVFP4 exact TB result changed during three snapshot attempts; retry next cycle')
         run([PYTHON, str(ROOT / 'audit_other_exact_round1.py')], timeout=180)
         for model in ('opus47', 'beam_bf16'):
             other_audit = json.loads((ROOT / f'evidence/{model}_exact_round1_audit.json').read_text())
@@ -112,7 +128,6 @@ def cycle():
         for note in manual_notes['notes']:
             row = screened[(note['model'], note['task'])]
             assert row['trajectory_sha256'] == note['trajectory_sha256'], 'Manual trajectory review anchor changed'
-        run([PYTHON, str(ROOT / 'export_snapshot.py')])
         run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence', 'input_output/manifest.json', 'input_output/archive_manifests'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
