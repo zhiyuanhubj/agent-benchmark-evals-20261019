@@ -1,5 +1,5 @@
 {
-  "utc": 1792418975.4128566,
+  "utc": 1792419883.4254005,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,32 +345,32 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 287,
+      "terminal": 288,
       "exceptions": 7,
       "prepared_image_phases": {
-        "image_ready": 304
+        "image_ready": 320
       },
       "controller": {
-        "utc": 1792407012.8197267,
+        "utc": 1792419840.308579,
         "phase": "running",
-        "batch": 17,
+        "batch": 18,
         "tasks": [
-          "matplotlib__matplotlib-24637",
-          "matplotlib__matplotlib-24870",
-          "matplotlib__matplotlib-24970",
-          "matplotlib__matplotlib-25122",
-          "matplotlib__matplotlib-25287",
-          "matplotlib__matplotlib-25311",
-          "matplotlib__matplotlib-25332",
-          "matplotlib__matplotlib-25479",
-          "matplotlib__matplotlib-25775",
-          "matplotlib__matplotlib-25960",
-          "matplotlib__matplotlib-26113",
-          "matplotlib__matplotlib-26208",
-          "matplotlib__matplotlib-26291",
-          "matplotlib__matplotlib-26342",
-          "matplotlib__matplotlib-26466",
-          "mwaskom__seaborn-3069"
+          "mwaskom__seaborn-3187",
+          "pallets__flask-5014",
+          "psf__requests-1142",
+          "psf__requests-1724",
+          "psf__requests-1766",
+          "psf__requests-1921",
+          "psf__requests-2317",
+          "psf__requests-2931",
+          "psf__requests-5414",
+          "psf__requests-6028",
+          "pydata__xarray-2905",
+          "pydata__xarray-3095",
+          "pydata__xarray-3151",
+          "pydata__xarray-3305",
+          "pydata__xarray-3677",
+          "pydata__xarray-3993"
         ]
       },
       "full_official_rrr_complete": false
@@ -454,9 +454,9 @@
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
-    "2888|beam-review-reserve-2888|PENDING||(AssocGrpNodeLimit)",
-    "2887|beam-review-reserve-2887|PENDING||(AssocGrpNodeLimit)",
-    "2886|muse-bf16-pair-2886|PENDING||(AssocGrpNodeLimit)",
+    "2888|beam-review-reserve-2888|PENDING||(None)",
+    "2887|beam-review-reserve-2887|PENDING||(None)",
+    "2886|muse-bf16-pair-2886|PENDING||(None)",
     "2906|mix449-cpu-salvage-10-1-122-30|PENDING||(Priority)",
     "2869|mix3-eval-extra-4|RUNNING|ip-10-1-77-106|ip-10-1-77-106",
     "2867|mix3-eval-extra-2|RUNNING|ip-10-1-105-182|ip-10-1-105-182",

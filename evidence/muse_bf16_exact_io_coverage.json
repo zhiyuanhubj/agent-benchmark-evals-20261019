@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-19T14:17:15.836358+00:00",
+  "generated_utc": "2026-10-19T14:32:54.882674+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 23,
-  "success_count": 19,
+  "scored_tasks": 24,
+  "success_count": 20,
   "tasks": {
     "regex-log": {
       "reward": 1.0,
@@ -47,6 +47,10 @@
     "make-doom-for-mips": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/make-doom-for-mips__PiParDV/result.json"
+    },
+    "bn-fit-modify": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/bn-fit-modify__enY7gAz/result.json"
     },
     "chess-best-move": {
       "reward": 0.0,
@@ -98,11 +102,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 23,
-  "covered_raw_response_sets": 23,
-  "covered_trajectories": 23,
-  "scored_raw_response_count": 591,
-  "nonempty_reasoning_response_count": 591,
+  "covered_results": 24,
+  "covered_raw_response_sets": 24,
+  "covered_trajectories": 24,
+  "scored_raw_response_count": 604,
+  "nonempty_reasoning_response_count": 604,
   "raw_reasoning_by_task": {
     "regex-log": {
       "raw_responses": 7,
@@ -147,6 +151,10 @@
     "make-doom-for-mips": {
       "raw_responses": 107,
       "nonempty_reasoning_content": 107
+    },
+    "bn-fit-modify": {
+      "raw_responses": 13,
+      "nonempty_reasoning_content": 13
     },
     "chess-best-move": {
       "raw_responses": 68,
@@ -230,6 +238,8 @@
     "muse_bf16_delta_20261019T135937Z.tar.zst",
     "muse_bf16_delta_20261019T141453Z.tar.zst",
     "muse_bf16_delta_20261019T141653Z.tar.zst",
+    "muse_bf16_delta_20261019T142959Z.tar.zst",
+    "muse_bf16_delta_20261019T143217Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

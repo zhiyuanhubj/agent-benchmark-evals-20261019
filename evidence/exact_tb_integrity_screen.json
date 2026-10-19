@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T14:17:34.358059+00:00",
+  "generated_utc": "2026-10-19T14:33:09.265504+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -18,7 +18,7 @@
       }
     },
     "muse_bf16": {
-      "scored_trajectories_checked": 23,
+      "scored_trajectories_checked": 24,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -41,7 +41,7 @@
       }
     },
     "beam_bf16": {
-      "scored_trajectories_checked": 67,
+      "scored_trajectories_checked": 68,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -1442,6 +1442,17 @@
       "trajectory_sha256": "2f48403167d6e50614a5824a2d23aa6b45f489242bafaf0ce57f02cea1d8248e",
       "steps": 108,
       "tool_calls": 483,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "bn-fit-modify",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/bn-fit-modify__enY7gAz/agent/trajectory.json",
+      "trajectory_sha256": "378d997154bda79c0ea7b2c9c7b39a687af67ee0b9b6b7ba932356a337bc73bd",
+      "steps": 14,
+      "tool_calls": 32,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -3696,6 +3707,17 @@
       "tool_calls": 40,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
+      "task": "query-optimize",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/query-optimize__nhLFSfM/agent/trajectory.json",
+      "trajectory_sha256": "4015f14ce27f0d8fd94eb6c93971c7e78d99912d9116c7c772b6f65a031da5de",
+      "steps": 23,
+      "tool_calls": 33,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     }
   ],
   "active_muse_nvfp4": {
@@ -3706,9 +3728,9 @@
         "model": "muse_nvfp4",
         "task": "make-doom-for-mips",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-doom-for-mips__ayw35yd",
-        "trajectory_sha256_at_screen": "47c199aa49764dcfc0fd25ca414d893349caa648b87c08b9ba833d01f266dfcc",
-        "steps_at_screen": 128,
-        "tool_calls_at_screen": 583,
+        "trajectory_sha256_at_screen": "eff7b36711e7d2ae001d7a64b731bc6afe48ef6967c59df0a34d1949e3314866",
+        "steps_at_screen": 145,
+        "tool_calls_at_screen": 650,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3716,9 +3738,9 @@
         "model": "muse_nvfp4",
         "task": "make-mips-interpreter",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-mips-interpreter__6BNKuxJ",
-        "trajectory_sha256_at_screen": "416b94854b0baab6ce02608f82633ed1e6f53072bd8759826df2770c43039093",
-        "steps_at_screen": 58,
-        "tool_calls_at_screen": 253,
+        "trajectory_sha256_at_screen": "2cc5eab2caa17dcd201d99992c78b8dc2a91283608ba967105d6dee306d2fd7e",
+        "steps_at_screen": 60,
+        "tool_calls_at_screen": 263,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3726,9 +3748,9 @@
         "model": "muse_nvfp4",
         "task": "raman-fitting",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/raman-fitting__gccPUXq",
-        "trajectory_sha256_at_screen": "7ab8e59e0bd1d7ea656c828281887d831edf5bb18d75e5735a37556ff792c392",
-        "steps_at_screen": 53,
-        "tool_calls_at_screen": 151,
+        "trajectory_sha256_at_screen": "1a8dce82719d5ca1a9d211231ba575191fa0c57745736654dbf458e7ec97361b",
+        "steps_at_screen": 66,
+        "tool_calls_at_screen": 197,
         "hits": [
           {
             "rule": "execution_override",
