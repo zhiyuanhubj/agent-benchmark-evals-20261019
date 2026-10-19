@@ -1,14 +1,14 @@
 # Agent benchmark evaluation snapshot
 
-Snapshot: **2026-10-19T04:47:29.736258+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
+Snapshot: **2026-10-19T05:01:38.006780+00:00**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
 | Muse NVFP4 | **496/731 = 67.85%**, round 1 complete | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | 13/89 graded; 12 success, round 1 partial | 473/500 terminal, 439/462 terminal, 422/422 terminal; official RRR incomplete |
-| Beam BF16 | 42/731 graded; 31 success (partial) | 45/113 graded; 9 success (partial), round 1 | **55.6%** (1000/1000 judged) | 34/89 graded; 26 success, round 1 partial | 236/500 terminal, 238/462 terminal, 234/422 terminal; official RRR incomplete |
-| Opus 4.7 | 437/731 graded; 275 success (partial) | **51/113**, round 1 complete; round 2 partial | — | 82/89 graded; 66 success, round 1 partial | — |
+| Beam BF16 | 43/731 graded; 32 success (partial) | 45/113 graded; 9 success (partial), round 1 | **55.6%** (1000/1000 judged) | 34/89 graded; 26 success, round 1 partial | 237/500 terminal, 238/462 terminal, 236/422 terminal; official RRR incomplete |
+| Opus 4.7 | 450/731 graded; 284 success (partial) | **51/113**, round 1 complete; round 2 partial | — | 85/89 graded; 68 success, round 1 partial | — |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
-| Muse original BF16 | 5/731 graded; 5 success (partial) | 2/113 graded; 1 success (partial), round 1 | Queued after Pro round 1 | Not started; legacy cached-tag round 1: 2/89 graded; 2 success (partial) | Queued after Pro round 1 |
+| Muse original BF16 | 7/731 graded; 6 success (partial) | 3/113 graded; 1 success (partial), round 1 | Queued after Pro round 1 | Not started; legacy cached-tag round 1: 4/89 graded; 4 success (partial) | Queued after Pro round 1 |
 
 The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. Muse legacy round 1 was **68/88 graded on raw first draw** (one ungraded); its separately labeled score after declared infrastructure replacement draws is **71/89**. Muse legacy rounds 2/3 remain **63/85** and **59/76** graded. Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is 15/22 graded and partial. None of these partial counts is a full benchmark accuracy. The exact-image TB2.1 scores must not be pooled with legacy-image scores.
 

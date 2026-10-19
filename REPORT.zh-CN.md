@@ -1,14 +1,14 @@
 # 模型评测结果快照
 
-更新时间：**2026-10-19T04:47:29.736258+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot) 和 `input_output/archive_manifests/`。当前仓库为私有。
+更新时间：**2026-10-19T05:01:38.006780+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot) 和 `input_output/archive_manifests/`。当前仓库为私有。
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
 | Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）** | 精确镜像 TB2.1 首轮 **13/89 已判分、12 成功**；SWE-Review 三组尚无完整官方 RRR |
-| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）** | Pro Verified **42/731 已判分、31 成功**；DeepSWE 首轮 **45/113、9 成功**；精确镜像 TB2.1 首轮 **34/89、26 成功**；SWE-Review 未完成 |
-| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 首轮 **51/113（45.13%）** | Pro Verified **437/731 已判分、275 成功**；精确镜像 TB2.1 首轮 **82/89、66 成功** |
+| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）** | Pro Verified **43/731 已判分、32 成功**；DeepSWE 首轮 **45/113、9 成功**；精确镜像 TB2.1 首轮 **34/89、26 成功**；SWE-Review 未完成 |
+| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 首轮 **51/113（45.13%）** | Pro Verified **450/731 已判分、284 成功**；精确镜像 TB2.1 首轮 **85/89、68 成功** |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
-| Muse 原始 BF16 | 暂无完整 benchmark 分数 | Pro Verified **5/731 已判分**；**旧缓存镜像** TB2.1 首轮 **2/89 已判分**；精确镜像尚未启动，DeepSWE 运行中 |
+| Muse 原始 BF16 | 暂无完整 benchmark 分数 | Pro Verified **7/731 已判分**；**旧缓存镜像** TB2.1 首轮 **4/89 已判分**；精确镜像尚未启动，DeepSWE 运行中 |
 
 **TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **63/85**、**59/76**，尚无三轮均值。精确镜像首轮只判分 13/89，不能当成最终准确率。两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成两条互不重叠的队列并行执行。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；新增 GPU 申请状态：2923 PENDING, 2924 PENDING, 2927 PENDING, 2928 PENDING。监控器会在获配后自动启动同一 NVFP4 模型服务，题目移交仍需核对互不重叠的任务清单。
 
