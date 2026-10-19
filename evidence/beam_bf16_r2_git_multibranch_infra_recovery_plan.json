@@ -1,0 +1,35 @@
+{
+  "generated_utc": "2026-10-19T22:50:34.324651+00:00",
+  "model": "reflection/Beam-1.0-501B-A23B",
+  "precision": "BF16",
+  "benchmark": "TB2.1 exact user-supplied images",
+  "round": 2,
+  "task": "git-multibranch",
+  "original_trial_status": "finished_without_native_verifier_or_reward",
+  "original_exception": "RuntimeError: no server running on /tmp/tmux-0/default",
+  "original_model_responses": 6,
+  "original_record_retained": true,
+  "replacement_eligibility": "Terminal environment/tmux loss before any native verifier score; one predeclared infrastructure replacement, never correctness-selected.",
+  "replacement_controller": "beam_r2_git_multibranch_infra_recovery.py",
+  "replacement_controller_sha256": "51c2b3bdd32cf2b3b236228786198aa222aec3f52d1bd43336d1c199dd66d3d9",
+  "launch_condition": "Wait for all three original Beam exact-image rounds to exit successfully, then use allocation 2919 with the conformance-checked 2887 BF16 replica.",
+  "score_policy": "Raw first-draw round 2 remains 88-or-fewer graded until its complete native record is reconciled; if the separately labeled replacement finishes with a valid reward, report a recovered score separately and include no further resamples.",
+  "source_proof": {
+    "source_result_sha256": "0402b05e90ac5a360439991c3bbd3128ab5e15bb403408b7820bfb9e9607f39f",
+    "source_trajectory_sha256": "a987268892ed7fb368ec1a29f2c2e616f67b571570478667d8cbdff88db8d96d",
+    "source_raw_response_sha256": {
+      "1792445926045723898-c158c6f4487c4502921e9bb9a4665716.json": "ce3dbde5349b88f028f2b2a72c736bb881b55d5a9db02a091cd3f189df9ffd07",
+      "1792445955838998192-fb6ff3c88306469e86cb98f7a0bea9cc.json": "c525edd7aeff12ff29a01008df0dc26e62a8e04e775fb75cd5ff57c5dad8e304",
+      "1792446038488500671-b044eddda32648deaa2ae84ee15101be.json": "0b0c026a5890a6b86a8583eb0f4bcbd9194c7772fcf08debae15ee26405a572c",
+      "1792446061634991434-5536e3767da244538159ede6c3ec9127.json": "dfc4573af49a25cf5fc0d4e34605948432959f9f8b498c4d6c1c5f42c731393b",
+      "1792446089563796652-b21925852b8e46bd95e0b93508562915.json": "a27400b79ef952c5a86e91856ac9ce5c5c3990621469812def433a1fc4449f33",
+      "1792446107056378836-d27d7e65b39040269053f0218454175d.json": "54738c5e6cdff32643df02ed92ef2764c88985b61ce18bfdd50da369f4100878"
+    },
+    "source_config_sha256": "61085da070eae5b1a58e47a6d29aafc76cc41332d8438a8684a255ee6890aaf1",
+    "frozen_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
+    "image_ready_sha256": "271f49dcc607c2027a2449b528a400f31509c4fa979ef57584f7fef10b5d1c6d",
+    "task": {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/git-multibranch"
+    }
+  }
+}
