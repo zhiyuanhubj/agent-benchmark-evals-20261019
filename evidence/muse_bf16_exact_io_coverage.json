@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-19T09:32:59.287028+00:00",
+  "generated_utc": "2026-10-19T09:45:04.629718+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 10,
-  "success_count": 8,
+  "scored_tasks": 11,
+  "success_count": 9,
   "tasks": {
     "dna-assembly": {
       "reward": 0.0,
@@ -43,14 +43,18 @@
     "adaptive-rejection-sampler": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/adaptive-rejection-sampler__k7gSWxM/result.json"
+    },
+    "largest-eigenval": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/largest-eigenval__haYd3UB/result.json"
     }
   },
   "covered_inputs": 89,
-  "covered_results": 10,
-  "covered_raw_response_sets": 10,
-  "covered_trajectories": 10,
-  "scored_raw_response_count": 204,
-  "nonempty_reasoning_response_count": 204,
+  "covered_results": 11,
+  "covered_raw_response_sets": 11,
+  "covered_trajectories": 11,
+  "scored_raw_response_count": 238,
+  "nonempty_reasoning_response_count": 238,
   "raw_reasoning_by_task": {
     "dna-assembly": {
       "raw_responses": 22,
@@ -91,6 +95,10 @@
     "adaptive-rejection-sampler": {
       "raw_responses": 8,
       "nonempty_reasoning_content": 8
+    },
+    "largest-eigenval": {
+      "raw_responses": 34,
+      "nonempty_reasoning_content": 34
     }
   },
   "thinking_warnings": [],
@@ -105,6 +113,7 @@
     "muse_bf16_delta_20261019T085227Z.tar.zst",
     "muse_bf16_delta_20261019T091017Z.tar.zst",
     "muse_bf16_delta_20261019T093100Z.tar.zst",
+    "muse_bf16_delta_20261019T094448Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

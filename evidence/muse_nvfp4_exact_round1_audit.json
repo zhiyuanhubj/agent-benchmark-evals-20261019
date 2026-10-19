@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T09:32:57.846242+00:00",
+  "generated_utc": "2026-10-19T09:45:03.009747+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 50,
-  "success_count": 41,
-  "scored_raw_response_count": 1477,
-  "scored_nonempty_reasoning_response_count": 1477,
+  "graded_task_count": 51,
+  "success_count": 42,
+  "scored_raw_response_count": 1600,
+  "scored_nonempty_reasoning_response_count": 1600,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -68,7 +68,6 @@
   },
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
-    "compile-compcert",
     "count-dataset-tokens",
     "custom-memory-heap-crash",
     "db-wal-recovery",
@@ -109,8 +108,8 @@
     "write-compressor"
   ],
   "active_or_unfinished_trials": [
-    "compile-compcert__w9HS5rZ",
     "count-dataset-tokens__QuGJimY",
+    "custom-memory-heap-crash__cpHqzmQ",
     "extract-moves-from-video__pA42NVn",
     "fix-ocaml-gc__caoUspF",
     "install-windows-3.11__JZGpPLL",
@@ -258,6 +257,17 @@
       "finished_at": "2026-10-19T08:00:57.730627Z",
       "raw_response_count": 36,
       "responses_with_reasoning_content": 36
+    },
+    "compile-compcert": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b00/compile-compcert__w9HS5rZ/result.json",
+      "result_sha256": "19a931be2f35d3781e3cdd8b1f332b511e9319e4902abbdc61d18341da77afcf",
+      "finished_at": "2026-10-19T09:41:49.063475Z",
+      "raw_response_count": 123,
+      "responses_with_reasoning_content": 123
     },
     "configure-git-webserver": {
       "reward": 1.0,

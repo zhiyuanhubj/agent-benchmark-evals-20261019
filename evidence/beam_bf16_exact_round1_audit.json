@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-19T09:33:07.479374+00:00",
+  "generated_utc": "2026-10-19T09:45:13.777826+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T091955Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T094316Z.tar.zst",
   "expected": 89,
-  "terminal": 44,
-  "graded": 44,
-  "success": 32,
+  "terminal": 45,
+  "graded": 45,
+  "success": 33,
   "missing_graded_tasks": [
     "install-windows-3.11",
     "make-doom-for-mips",
     "make-mips-interpreter",
-    "merge-diff-arc-agi-task",
     "model-extraction-relu-logits",
     "modernize-scientific-stack",
     "mteb-leaderboard",
@@ -58,7 +57,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "model-extraction-relu-logits",
     "modernize-scientific-stack",
     "mteb-leaderboard",
     "mteb-retrieve",
@@ -413,6 +411,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/mcmc-sampling-stan__Y4iHrDd/result.json",
       "raw_response_count": 29,
       "responses_with_reasoning_content": 29
+    },
+    "merge-diff-arc-agi-task": {
+      "reward": 1.0,
+      "result_sha256": "49eeb2f9838b9ab105dfaa48391cf30b37b8e19addf4c5f1d10aafb78a3eed88",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/merge-diff-arc-agi-task__MG6nJcH/result.json",
+      "raw_response_count": 17,
+      "responses_with_reasoning_content": 17
     }
   }
 }
