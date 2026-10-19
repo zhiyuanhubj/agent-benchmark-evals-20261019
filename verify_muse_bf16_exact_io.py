@@ -94,6 +94,7 @@ if score['graded'] == 89 and set(scored) != expected:
 
 audit = {'generated_utc': datetime.now(timezone.utc).isoformat(), 'expected_tasks': 89,
          'scored_tasks': len(scored), 'success_count': sum(row['reward'] == 1 for row in scored.values()),
+         'tasks': scored,
          'covered_inputs': 89 - len(missing_inputs), 'covered_results': len(scored) - len(missing_results),
          'covered_raw_response_sets': len(scored) - len(missing_raw),
          'covered_trajectories': len(scored) - len(missing_trajectories),

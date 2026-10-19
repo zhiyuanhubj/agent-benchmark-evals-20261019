@@ -22,6 +22,7 @@ PATTERNS = {
 compiled = {key: re.compile(value, re.I) for key, value in PATTERNS.items()}
 profiles = {
     'muse_nvfp4': 'muse_nvfp4_exact_round1_audit.json',
+    'muse_bf16': 'muse_bf16_exact_io_coverage.json',
     'opus47': 'opus47_exact_round1_audit.json',
     'beam_bf16': 'beam_bf16_exact_round1_audit.json',
 }
@@ -77,7 +78,7 @@ for model in profiles:
     }
 report = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
-    'scope': 'Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.',
+    'scope': 'Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16.',
     'method': 'Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.',
     'summary': summary,
     'missing_trajectories': missing_trajectories,
