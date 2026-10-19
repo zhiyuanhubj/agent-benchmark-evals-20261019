@@ -66,17 +66,23 @@ def terminal_coverage(receipt):
 
 def main():
     allocation = int(sys.argv[1])
+    slot = int(sys.argv[2]) if len(sys.argv) > 2 else 0
     assert allocation in LANES and os.environ.get('SLURM_JOB_ID') == '2919'
+    assert slot == 0 or (allocation == 2812 and slot in (1, 2, 3))
     images = json.loads((ROOT / 'allocation-2919/images-ready.json').read_text())
     assert images['count'] == 89 and images['all_archive_identities_verified']
     assert json.loads((ROOT / 'allocation-2919/official-policy-preflight-ready.json').read_text())['passed']
     lane = LANES[allocation]
+    controller_name = str(allocation) if slot == 0 else f'{allocation}-slot{slot}'
+    lock_name = (f'extra-lane{lane}-2866-controller.lock' if slot == 0 else
+                 f'extra-lane{lane}-slot{slot}-2866-controller.lock')
+    status_path = ROUTES / f'{controller_name}-controller-status.json'
     ROUTES.mkdir(parents=True, exist_ok=True)
-    with (STATE / f'extra-lane{lane}-2866-controller.lock').open('a') as lock:
+    with (STATE / lock_name).open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         endpoint = endpoint_ready(allocation)
-        save(ROUTES / f'{allocation}-controller-status.json',
-             {'utc': time.time(), 'allocation': allocation, 'lane': lane,
+        save(status_path,
+             {'utc': time.time(), 'allocation': allocation, 'lane': lane, 'slot': slot,
               'endpoint': endpoint, 'phase': 'ready'})
         env = os.environ.copy()
         env.update(OPENAI_API_KEY='EMPTY', HF_HOME='/fsx/home/zhiyuan/bench/hf_home',
@@ -86,11 +92,11 @@ def main():
             source = Path(receipt['original_config'])
             effective = validate_route(source, receipt,
                                        json.loads((STATE / f'{source.stem}-extra-owner.json').read_text()))
-            save(ROUTES / f'{allocation}-controller-status.json',
-                 {'utc': time.time(), 'allocation': allocation, 'lane': lane,
+            save(status_path,
+                 {'utc': time.time(), 'allocation': allocation, 'lane': lane, 'slot': slot,
                   'endpoint': endpoint, 'phase': 'running',
                   'job_name': receipt['job_name'], 'completed_batches': completed})
-            log = ROUTES / f'{receipt["job_name"]}-{allocation}.log'
+            log = ROUTES / f'{receipt["job_name"]}-{controller_name}.log'
             with log.open('a') as stream:
                 result = subprocess.run([PYTHON, str(WORK / 'harbor_entry.py'), str(effective)],
                                         env=env, stdout=stream, stderr=subprocess.STDOUT)
@@ -103,8 +109,8 @@ def main():
                   'missing_terminal_tasks': sorted(expected - found)})
             assert code == 0, 'Handoff batch failed; preserve results and audit before resuming'
             completed.append(receipt['job_name'])
-        save(ROUTES / f'{allocation}-controller-status.json',
-             {'utc': time.time(), 'allocation': allocation, 'lane': lane,
+        save(status_path,
+             {'utc': time.time(), 'allocation': allocation, 'lane': lane, 'slot': slot,
               'endpoint': endpoint, 'phase': 'no_unclaimed_round23_batches',
               'completed_batches': completed})
 
