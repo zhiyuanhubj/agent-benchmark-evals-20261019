@@ -1,16 +1,17 @@
 {
-  "generated_utc": "2026-10-19T12:56:06.313261+00:00",
+  "generated_utc": "2026-10-19T13:03:04.113667+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 75,
-  "success_count": 61,
-  "scored_raw_response_count": 3121,
-  "scored_nonempty_reasoning_response_count": 3120,
+  "graded_task_count": 77,
+  "success_count": 62,
+  "scored_raw_response_count": 3285,
+  "scored_nonempty_reasoning_response_count": 3284,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
     "count-dataset-tokens",
+    "db-wal-recovery",
     "extract-moves-from-video",
     "gcode-to-text",
     "path-tracing-reverse"
@@ -125,7 +126,6 @@
   },
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
-    "db-wal-recovery",
     "dna-assembly",
     "make-doom-for-mips",
     "make-mips-interpreter",
@@ -135,19 +135,17 @@
     "modernize-scientific-stack",
     "mteb-leaderboard",
     "polyglot-rust-c",
-    "qemu-alpine-ssh",
     "query-optimize",
     "raman-fitting",
     "train-fasttext"
   ],
   "active_or_unfinished_trials": [
-    "db-wal-recovery__fBa7T4g",
     "dna-assembly__fLvhUtU",
     "make-doom-for-mips__ayw35yd",
     "make-mips-interpreter__6BNKuxJ",
     "polyglot-rust-c__oUpAYEa",
-    "qemu-alpine-ssh__hCE4X6g",
     "query-optimize__WQt26zo",
+    "raman-fitting__gccPUXq",
     "train-fasttext__Mc2uuim"
   ],
   "errors": [],
@@ -352,6 +350,17 @@
       "finished_at": "2026-10-19T09:57:06.548971Z",
       "raw_response_count": 13,
       "responses_with_reasoning_content": 13
+    },
+    "db-wal-recovery": {
+      "reward": 0.0,
+      "exception_type": "AgentTimeoutError",
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b00/db-wal-recovery__fBa7T4g/result.json",
+      "result_sha256": "20a989bd7f4c8ef70bf41e08af57153f5a14cff50cdaa5c0006cf79b66727116",
+      "finished_at": "2026-10-19T12:57:37.834896Z",
+      "raw_response_count": 108,
+      "responses_with_reasoning_content": 108
     },
     "distribution-search": {
       "reward": 1.0,
@@ -781,6 +790,17 @@
       "finished_at": "2026-10-19T12:19:59.652867Z",
       "raw_response_count": 23,
       "responses_with_reasoning_content": 23
+    },
+    "qemu-alpine-ssh": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.101.159:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/qemu-alpine-ssh__hCE4X6g/result.json",
+      "result_sha256": "758f530010db4d7e7edfdabbbb02db644a930f117de9d797111786de903e3403",
+      "finished_at": "2026-10-19T12:58:25.024511Z",
+      "raw_response_count": 56,
+      "responses_with_reasoning_content": 56
     },
     "qemu-startup": {
       "reward": 1.0,
