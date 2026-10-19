@@ -116,8 +116,15 @@ def tb_profile_status(rounds):
     return 'partial_no_full_score'
 
 
-bf16_tb_round1 = metric(ex['muse_bf16']['tb']['1'], '1', 'partial_no_full_score') | {
-    'complete': False, 'accuracy': None,
+bf16_io_path = ROOT / 'evidence/muse_bf16_exact_io_coverage.json'
+bf16_io = read(bf16_io_path) if bf16_io_path.exists() else {}
+bf16_source_round1 = ex['muse_bf16']['tb']['1']
+bf16_complete = (bf16_source_round1['graded'] == 89 and
+                 bf16_io.get('qualification') == 'complete_verified' and
+                 (bf16_io.get('scored_tasks'), bf16_io.get('success_count')) ==
+                 (bf16_source_round1['graded'], bf16_source_round1['success']))
+bf16_tb_round1 = metric(bf16_source_round1, '1', 'complete' if bf16_complete else 'partial_no_full_score') | {
+    'complete': bf16_complete, 'accuracy': bf16_source_round1['success'] / 89 if bf16_complete else None,
     'qualification': 'Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.',
 }
 
@@ -161,9 +168,10 @@ snapshot = {
             'status': 'in_progress',
             'swe_bench_pro_verified': metric(ex['muse_bf16']['pro'], 'pro', 'partial_no_full_score'),
             'tb2_1_legacy_cached_tag': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['muse_bf16']['tb'].items()} | {'qualification': 'Historical field name for this same BF16 run; do not add these trials to the exact-image field as independent attempts.'},
-            'tb2_1_exact_supplied_images': {'rounds': {'1': bf16_tb_round1}, 'status': 'partial_no_full_score',
+            'tb2_1_exact_supplied_images': {'rounds': {'1': bf16_tb_round1}, 'status': 'round_1_complete' if bf16_complete else 'partial_no_full_score',
                 'same_trials_as_legacy_named_bf16_tb': True,
                 'image_identity_audit': 'evidence/muse_bf16_exact_image_identity.json',
+                'released_io_audit': 'evidence/muse_bf16_exact_io_coverage.json',
                 'qualification': 'The 89 supplied archive image identities, task paths and agent settings were verified before BF16 round 1 launched and rechecked on the running node. A full-round accuracy awaits all 89 native results and task-level audit.'},
             'deepswe': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['muse_bf16']['deep'].items()},
             'qualification': 'Original BF16 native Pro, TB2.1 and DeepSWE started after real inference and tool/thinking preflight; partial counts are progress, not accuracy.',
@@ -181,6 +189,7 @@ snapshot = {
         'opus48_pro_full': str(O48 / 'completed_full_evaluation_result.json'),
         'muse_nvfp4_exact_recovery_plan': str(B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json'),
         'muse_bf16_exact_image_identity_audit': str(ROOT / 'evidence/muse_bf16_exact_image_identity.json'),
+        'muse_bf16_exact_released_io_audit': str(bf16_io_path),
     },
 }
 write('results/scores.json', snapshot)
@@ -221,6 +230,9 @@ if replica_handoff:
 bf16_audit_path = ROOT / 'evidence/muse_bf16_exact_image_identity.json'
 files[str(bf16_audit_path.relative_to(ROOT))] = {'sha256': hashlib.sha256(bf16_audit_path.read_bytes()).hexdigest(), 'size_bytes': bf16_audit_path.stat().st_size,
     'source': str(bf16_audit_path)}
+if bf16_io_path.exists():
+    files[str(bf16_io_path.relative_to(ROOT))] = {'sha256': hashlib.sha256(bf16_io_path.read_bytes()).hexdigest(),
+        'size_bytes': bf16_io_path.stat().st_size, 'source': str(bf16_io_path)}
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
 def partial(d):
@@ -260,6 +272,8 @@ beam_exact_zh_done = f'；精确镜像 TB2.1 首轮 {tb_zh(be_tb)}' if be_tb['co
 beam_exact_zh_pending = '' if be_tb['complete'] else f'；精确镜像 TB2.1 首轮 {tb_zh(be_tb)}'
 opus_exact_zh_done = f'；精确镜像 TB2.1 首轮 {tb_zh(op_tb)}' if op_tb['complete'] else ''
 opus_exact_zh_pending = '' if op_tb['complete'] else f'；精确镜像 TB2.1 首轮 {tb_zh(op_tb)}'
+bf16_exact_zh_done = f'；指定精确镜像 TB2.1 首轮 {tb_zh(bf16_tb_round1)}' if bf16_tb_round1['complete'] else ''
+bf16_exact_zh_pending = '' if bf16_tb_round1['complete'] else f'；指定精确镜像 TB2.1 首轮 {tb_zh(bf16_tb_round1)}'
 mn_exact_note_zh = f"精确镜像首轮已完成：**{mn_tb['success']}/89（{mn_tb['accuracy']:.2%}）**。" if mn_tb['complete'] else f"精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。"
 mn_timeout_count = mn_tb['exceptions'].get('AgentTimeoutError', 0)
 mn_timeout_en = f"Of the graded Muse exact-image tasks, {mn_timeout_count} received a verifier score after reaching the protocol's agent time limit. Their timeout status remains visible in the task audit; these tasks are not resampled within round 1.\n\n" if mn_timeout_count else ''
@@ -293,6 +307,8 @@ Current exact-image TB2.1 native I/O snapshots: `{latest_opus_exact_archive['arc
 
 The [Opus 4.7](evidence/opus47_exact_round1_audit.json) and [Beam](evidence/beam_bf16_exact_round1_audit.json) first-round audits reconcile each task with its reward and released input, raw response, and trajectory. A full round is reported only when all 89 task results pass this check.
 
+The [Muse BF16 exact-image I/O audit](evidence/muse_bf16_exact_io_coverage.json) checks that every scored BF16 result, raw response and trajectory is present in SHA-verified release archives, along with all 89 task inputs. It is the same BF16 trial set named by the historical cached-tag field.
+
 For actively changing Pro/legacy/Deep results, apply each timestamped delta after its base archive, replacing earlier files with the same path. Current delta assets are `{latest_legacy_deltas['opus47_legacy']['archive_name']}`, `{latest_legacy_deltas['beam_legacy']['archive_name']}`, and `{latest_legacy_deltas['muse_bf16']['archive_name']}`. Their manifests state the cutoff and source scope.
 
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
@@ -320,7 +336,7 @@ chinese_report = f'''# 模型评测结果快照
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 未完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 首轮 **51/113（45.13%）**{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_exact_zh_pending} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
-| Muse 原始 BF16 | 暂无完整 benchmark 分数 | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**；**指定精确镜像** TB2.1 首轮 **{bf16_tb_round1['graded']}/89 已判分、{bf16_tb_round1['success']} 成功**；DeepSWE 运行中 |
+| Muse 原始 BF16 | {'暂无完整 benchmark 分数' if not bf16_tb_round1['complete'] else bf16_exact_zh_done.lstrip('；')} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中 |
 
 **TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}**、**{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}**，尚无三轮均值。BF16 的历史字段虽名为 `tb2_1_legacy_cached_tag`，[镜像身份审计](evidence/muse_bf16_exact_image_identity.json)已证实启动前及运行节点上的 89 个镜像与指定归档一致，题目和推理设置也一致；它与精确镜像字段指向**同一轮测试**，不能相加。{mn_exact_note_zh}两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成四条互不重叠的队列，最多 8 题并行。本次快照中恢复任务已有 {new_raw_responses} 条原始模型响应、{active_recovery_trial_dirs} 个运行中题目目录，最新响应时间为 {new_raw_response_latest_utc}；这些是活跃度，不是分数。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；[首轮逐题核验](evidence/muse_nvfp4_exact_round1_audit.json)会检查重复、缺题、原始结果哈希、判分和 thinking 原始响应，满 89 题且核验通过后才发布首轮准确率。新增 GPU 申请状态：{extra_gpu_status}。监控器会在获配后自动启动同一 NVFP4 模型服务，题目移交仍需核对互不重叠的任务清单。
 
@@ -331,6 +347,8 @@ chinese_report = f'''# 模型评测结果快照
 逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 共 {asset_count} 个归档，优先使用 SWE-Review 的 `*_review_full_io.tar.zst`（含 OpenHands completions）。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 {release_audit_label}**，逐项核验见 `evidence/release-assets-verification.json`。
 
 Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜像身份校验在 `muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst`；[输入输出覆盖核验](evidence/muse_nvfp4_exact_io_coverage.json)逐题确认已判分结果、原始响应、轨迹和任务输入均在远端校验过的归档中。
+
+[Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖。
 
 Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 `{latest_opus_exact_archive['archive_name']}`（{latest_opus_exact_archive['terminal_result_count']} 个终态结果）和 `{latest_beam_exact_archive['archive_name']}`（{latest_beam_exact_archive['terminal_result_count']} 个终态结果）。其中运行中的轨迹不算已判分，未满 89 题的轮次不报告最终准确率。
 

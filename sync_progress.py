@@ -26,7 +26,7 @@ def run(command, timeout=180):
     return subprocess.run(command, cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, timeout=timeout, check=True)
 
 
-def sync_native_archives(scores):
+def sync_native_archives(scores, force_bf16=False):
     recovery = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']
     manifest_dir = ROOT / 'input_output/archive_manifests'
     opus_rounds = scores['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'].values()
@@ -60,7 +60,7 @@ def sync_native_archives(scores):
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16'):
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
         previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
-        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= 1800:
+        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= 900 or (group == 'muse_bf16' and force_bf16):
             run([PYTHON, str(ROOT / 'archive_delta.py'), group, '--if-changed'], timeout=600)
     live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
     delta_manifests = sorted(manifest_dir.glob('*_delta_*.json'))
@@ -83,7 +83,11 @@ def cycle():
         fcntl.flock(lock, fcntl.LOCK_EX)
         for source in SOURCES:
             run([PYTHON, str(source)])
-        for _ in range(3):
+        force_bf16 = False
+        for attempt in range(3):
+            if attempt:
+                for source in SOURCES:
+                    run([PYTHON, str(source)])
             run([PYTHON, str(ROOT / 'export_snapshot.py')])
             scores = json.loads((ROOT / 'results/scores.json').read_text())
             run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
@@ -92,11 +96,18 @@ def cycle():
             assert not audit['errors'], 'Muse NVFP4 exact TB task audit failed'
             if (audit['graded_task_count'], audit['success_count']) != (reported['graded'], reported['success']):
                 continue  # A trial finished between the score snapshot and task audit.
-            sync_native_archives(scores)
+            sync_native_archives(scores, force_bf16=force_bf16)
+            force_bf16 = False
             run([PYTHON, str(ROOT / 'verify_muse_exact_io.py')], timeout=180)
             io_coverage = json.loads((ROOT / 'evidence/muse_nvfp4_exact_io_coverage.json').read_text())
             if io_coverage['errors']:
                 continue  # A trial finished after archive creation; capture it on the next pass.
+            bf16_check = subprocess.run([PYTHON, str(ROOT / 'verify_muse_bf16_exact_io.py')], cwd=ROOT,
+                                        stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, timeout=180)
+            bf16_coverage = json.loads((ROOT / 'evidence/muse_bf16_exact_io_coverage.json').read_text())
+            if bf16_check.returncode or bf16_coverage['errors']:
+                force_bf16 = True
+                continue
             run([PYTHON, str(ROOT / 'export_snapshot.py')])
             scores = json.loads((ROOT / 'results/scores.json').read_text())
             run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
@@ -107,12 +118,18 @@ def cycle():
             io_coverage = json.loads((ROOT / 'evidence/muse_nvfp4_exact_io_coverage.json').read_text())
             if (audit['graded_task_count'], audit['success_count']) != (reported['graded'], reported['success']) or io_coverage['errors']:
                 continue
+            bf16_check = subprocess.run([PYTHON, str(ROOT / 'verify_muse_bf16_exact_io.py')], cwd=ROOT,
+                                        stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, timeout=180)
+            bf16_coverage = json.loads((ROOT / 'evidence/muse_bf16_exact_io_coverage.json').read_text())
+            if bf16_check.returncode or bf16_coverage['errors']:
+                force_bf16 = True
+                continue
             if reported['complete']:
                 assert audit['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB first-round audit failed'
                 assert io_coverage['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB release coverage incomplete'
             break
         else:
-            raise RuntimeError('Muse NVFP4 exact TB result changed during three snapshot attempts; retry next cycle')
+            raise RuntimeError('Exact TB result or released I/O changed during three snapshot attempts; retry next cycle')
         run([PYTHON, str(ROOT / 'audit_other_exact_round1.py')], timeout=180)
         for model in ('opus47', 'beam_bf16'):
             other_audit = json.loads((ROOT / f'evidence/{model}_exact_round1_audit.json').read_text())
