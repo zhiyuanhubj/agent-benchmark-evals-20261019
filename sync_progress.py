@@ -44,6 +44,11 @@ def sync_native_archives(scores, force_bf16=False):
         ('beam_bf16', sum(value['terminal'] for value in beam_rounds), sum(value['archived_actual_model_responses'] for value in beam_rounds), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'beam_bf16']),
     ]
     for name, terminal, raw_count, command in profiles:
+        if name == 'beam_bf16':
+            replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
+            if replacement.exists():
+                terminal += sum(bool(json.loads(path.read_text()).get('finished_at')) for path in replacement.glob('*/result.json'))
+                raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
         live_manifests = sorted(manifest_dir.glob(f'{name}_exact_tb_live_*.json'))
         archived_terminal = 0
         latest_archive_time = None
@@ -96,7 +101,9 @@ def sync_native_archives(scores, force_bf16=False):
             receipt_dir = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/beam/state'
             receipts = [receipt_dir / marker for marker in
                         ('r23-2887-handoff.json', 'r2-launch.json', 'r3-launch.json',
-                         'r2-exit.json', 'r3-exit.json')]
+                         'r2-exit.json', 'r3-exit.json',
+                         'r2-git-multibranch-infra-replacement-claim.json',
+                         'r2-git-multibranch-infra-replacement-exit.json')]
             receipts = [marker for marker in receipts if marker.exists()]
             handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < len(receipts)
             handoff_newer |= any(latest_archive_time is None or

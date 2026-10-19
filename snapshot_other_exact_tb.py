@@ -35,7 +35,9 @@ counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 
 terminal_results = 0
 if model == 'beam_bf16':
     for receipt_name in ('r23-2887-handoff.json', 'r2-launch.json', 'r3-launch.json',
-                         'r2-exit.json', 'r3-exit.json'):
+                         'r2-exit.json', 'r3-exit.json',
+                         'r2-git-multibranch-infra-replacement-claim.json',
+                         'r2-git-multibranch-infra-replacement-exit.json'):
         receipt = SOURCE / 'beam/state' / receipt_name
         if receipt.exists():
             payloads[receipt] = receipt.read_bytes()
@@ -43,7 +45,10 @@ if model == 'beam_bf16':
 for job in sorted(result_root.glob(profile['job_pattern'])):
     if not job.is_dir():
         continue
+    replacement = model == 'beam_bf16' and job.name == 'beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
     match = re.search(r'-r([123])$', job.name)
+    if replacement:
+        match = re.search(r'-r(2)-infra-replacement-git-multibranch$', job.name)
     assert match, f'Unexpected job name: {job.name}'
     job_config = config_root / f'r{match.group(1)}.json'
     if job_config.exists():
@@ -53,6 +58,11 @@ for job in sorted(result_root.glob(profile['job_pattern'])):
         effective_config = config_root / f'r{match.group(1)}-2887.json'
         if effective_config.exists():
             payloads[effective_config] = effective_config.read_bytes()
+            counts['job_config'] += 1
+        if replacement:
+            replacement_config = config_root / 'r2-git-multibranch-infra-replacement.json'
+            assert replacement_config.is_file()
+            payloads[replacement_config] = replacement_config.read_bytes()
             counts['job_config'] += 1
     for trial in sorted(job.iterdir()):
         if not trial.is_dir():
