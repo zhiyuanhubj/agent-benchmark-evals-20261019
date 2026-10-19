@@ -60,6 +60,8 @@ for line in queued_gpu_result.stdout.splitlines():
     job, state, nodes, start = line.split('|', 3)
     extra_gpu_allocations[job] = {'state': state, 'nodes': nodes, 'scheduler_start': start}
 extra_gpu_status = ', '.join(f'{job} {extra_gpu_allocations.get(str(job), {}).get("state", "not_in_queue")}' for job in extra_gpu_jobs)
+early_b05_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-b05-early-owner.json'
+early_b05_owner = read(early_b05_path) if early_b05_path.exists() else None
 nvfp4_rounds = json.loads(json.dumps(exact['models']['muse_nvfp4']['rounds']))
 new_terminal_by_round = {str(i): {} for i in (1, 2, 3)}
 new_raw_responses = 0
@@ -140,7 +142,7 @@ snapshot = {
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
             'swe_review': {key: metric(value, key, 'partial_no_full_rrr') for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
             'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
-            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'qualification': nvfp4_recovery['qualification']}},
+            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'b05_early_owner': early_b05_owner, 'qualification': nvfp4_recovery['qualification']}},
         },
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',
@@ -334,6 +336,8 @@ The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anch
 '''
 readme = readme.replace('Additional GPU allocation states:', replica_note_en + ' Additional GPU allocation states:', 1)
 readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
+if early_b05_owner:
+    readme = readme.replace('This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 'At this snapshot, b05 is running early on CPU allocation 2922 against GPU 2812; an ownership receipt makes sequential lane 3 verify its completed tasks and skip a duplicate draw. This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -369,5 +373,7 @@ Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 
 '''
 chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_note_zh + ' 新增 GPU 申请状态：', 1)
 chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
+if early_b05_owner:
+    chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。本次快照中 b05 已由 CPU 节点 2922 提前启动，调用 GPU 节点 2812；原顺序控制器稍后会核查同一批终态结果并跳过重复抽题。', 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))
