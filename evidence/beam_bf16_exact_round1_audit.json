@@ -1,0 +1,372 @@
+{
+  "generated_utc": "2026-10-19T06:13:13.996839+00:00",
+  "model": "beam_bf16",
+  "profile": "exact user-supplied prebuilt TB2.1 images",
+  "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T061255Z.tar.zst",
+  "expected": 89,
+  "terminal": 35,
+  "graded": 35,
+  "success": 26,
+  "missing_graded_tasks": [
+    "extract-moves-from-video",
+    "gpt2-codegolf",
+    "install-windows-3.11",
+    "kv-store-grpc",
+    "large-scale-text-editing",
+    "largest-eigenval",
+    "llm-inference-batching-scheduler",
+    "log-summary-date-ranges",
+    "mailman",
+    "make-doom-for-mips",
+    "make-mips-interpreter",
+    "mcmc-sampling-stan",
+    "merge-diff-arc-agi-task",
+    "model-extraction-relu-logits",
+    "modernize-scientific-stack",
+    "mteb-leaderboard",
+    "mteb-retrieve",
+    "multi-source-data-merger",
+    "nginx-request-logging",
+    "openssl-selfsigned-cert",
+    "overfull-hbox",
+    "password-recovery",
+    "path-tracing",
+    "path-tracing-reverse",
+    "polyglot-c-py",
+    "polyglot-rust-c",
+    "portfolio-optimization",
+    "protein-assembly",
+    "prove-plus-comm",
+    "pypi-server",
+    "pytorch-model-cli",
+    "pytorch-model-recovery",
+    "qemu-alpine-ssh",
+    "qemu-startup",
+    "query-optimize",
+    "raman-fitting",
+    "regex-chess",
+    "regex-log",
+    "reshard-c4-data",
+    "rstan-to-pystan",
+    "sam-cell-seg",
+    "sanitize-git-repo",
+    "schemelike-metacircular-eval",
+    "sparql-university",
+    "sqlite-db-truncate",
+    "sqlite-with-gcov",
+    "torch-pipeline-parallelism",
+    "torch-tensor-parallelism",
+    "train-fasttext",
+    "tune-mjcf",
+    "video-processing",
+    "vulnerable-secret",
+    "winning-avg-corewars",
+    "write-compressor"
+  ],
+  "ungraded_terminal_tasks": [],
+  "missing_task_inputs_in_archive": [
+    "large-scale-text-editing",
+    "largest-eigenval",
+    "llm-inference-batching-scheduler",
+    "log-summary-date-ranges",
+    "mailman",
+    "make-doom-for-mips",
+    "make-mips-interpreter",
+    "mcmc-sampling-stan",
+    "merge-diff-arc-agi-task",
+    "model-extraction-relu-logits",
+    "modernize-scientific-stack",
+    "mteb-leaderboard",
+    "mteb-retrieve",
+    "multi-source-data-merger",
+    "nginx-request-logging",
+    "openssl-selfsigned-cert",
+    "overfull-hbox",
+    "password-recovery",
+    "path-tracing",
+    "path-tracing-reverse",
+    "polyglot-c-py",
+    "polyglot-rust-c",
+    "portfolio-optimization",
+    "protein-assembly",
+    "prove-plus-comm",
+    "pypi-server",
+    "pytorch-model-cli",
+    "pytorch-model-recovery",
+    "qemu-alpine-ssh",
+    "qemu-startup",
+    "query-optimize",
+    "raman-fitting",
+    "regex-chess",
+    "regex-log",
+    "reshard-c4-data",
+    "rstan-to-pystan",
+    "sam-cell-seg",
+    "sanitize-git-repo",
+    "schemelike-metacircular-eval",
+    "sparql-university",
+    "sqlite-db-truncate",
+    "sqlite-with-gcov",
+    "torch-pipeline-parallelism",
+    "torch-tensor-parallelism",
+    "train-fasttext",
+    "tune-mjcf",
+    "video-processing",
+    "vulnerable-secret",
+    "winning-avg-corewars",
+    "write-compressor"
+  ],
+  "missing_scored_task_inputs_in_archive": [],
+  "errors": [],
+  "qualification": "partial_or_needs_review",
+  "accuracy": null,
+  "reasoning_note": "Nonempty reasoning_content is counted in preserved raw responses; this does not certify absence of reward hacking.",
+  "tasks": {
+    "adaptive-rejection-sampler": {
+      "reward": 1.0,
+      "result_sha256": "c0027ad9e1a8a8bf40ee9c27355c55d731f732d28845953182689341adc71fe3",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/adaptive-rejection-sampler__8h8QgHi/result.json",
+      "raw_response_count": 30,
+      "responses_with_reasoning_content": 30
+    },
+    "bn-fit-modify": {
+      "reward": 1.0,
+      "result_sha256": "4fa3a9b1dc48d2cd567e3cf8ec57eb471e53584bafc53c38c290efb05f48ce2f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/bn-fit-modify__LhtVToL/result.json",
+      "raw_response_count": 9,
+      "responses_with_reasoning_content": 9
+    },
+    "break-filter-js-from-html": {
+      "reward": 1.0,
+      "result_sha256": "d9a98935aee42b4bbbf0e7cf138f774a911cc65b974f10ecb993d99a42bc62fb",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/break-filter-js-from-html__fjHLRBH/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
+    "build-cython-ext": {
+      "reward": 1.0,
+      "result_sha256": "116399a2dde99d88f992e99e1f8b5512d6bba30519cc427e026c99e278d75174",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/build-cython-ext__qPTAoB4/result.json",
+      "raw_response_count": 42,
+      "responses_with_reasoning_content": 42
+    },
+    "build-pmars": {
+      "reward": 1.0,
+      "result_sha256": "28c229f8e5b48791b99fd7a89fee78fb78b118041d01e054ae90a81fdae533e8",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/build-pmars__s6ysXZR/result.json",
+      "raw_response_count": 29,
+      "responses_with_reasoning_content": 29
+    },
+    "build-pov-ray": {
+      "reward": 1.0,
+      "result_sha256": "f6549ec99d33d2c2c53fb9905e7e856b43ff8c0e92baa5c980657e4dc8c3fd59",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/build-pov-ray__jRtuF5z/result.json",
+      "raw_response_count": 50,
+      "responses_with_reasoning_content": 50
+    },
+    "caffe-cifar-10": {
+      "reward": 1.0,
+      "result_sha256": "3cab94f146bb9bfd6cd15211d82465fc8e547c1cd28e86c8a4507bd9bf6e99fd",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/caffe-cifar-10__4Z6qvb5/result.json",
+      "raw_response_count": 80,
+      "responses_with_reasoning_content": 80
+    },
+    "cancel-async-tasks": {
+      "reward": 1.0,
+      "result_sha256": "41e150f7d9f2f5a682bb2c41789ded1f0c69eeb7ab0ddecd79664cce36d3beb3",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/cancel-async-tasks__m2dFo8C/result.json",
+      "raw_response_count": 17,
+      "responses_with_reasoning_content": 17
+    },
+    "chess-best-move": {
+      "reward": 0.0,
+      "result_sha256": "ba7ab7c9326bc4e3b48155e1a126e8ff0cf959bd6f0191350ccd03872b5856e8",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/chess-best-move__HcjtNrf/result.json",
+      "raw_response_count": 65,
+      "responses_with_reasoning_content": 65
+    },
+    "circuit-fibsqrt": {
+      "reward": 1.0,
+      "result_sha256": "9a5660f0ecac8af8d3d53e69c7c2303a54383896739e30b7cb9f32a19f34d17b",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/circuit-fibsqrt__32gjwnx/result.json",
+      "raw_response_count": 87,
+      "responses_with_reasoning_content": 87
+    },
+    "cobol-modernization": {
+      "reward": 1.0,
+      "result_sha256": "672e9bf108aef2a45ea83a6f82e0891faf5c4dfd706bc3ee39918fb98ca4dc6a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/cobol-modernization__rS6PuSR/result.json",
+      "raw_response_count": 13,
+      "responses_with_reasoning_content": 13
+    },
+    "code-from-image": {
+      "reward": 1.0,
+      "result_sha256": "f7a49c15f5901cc4abe6e7356d5f6d9fb77f5b420f054e959c6b788b05aa1e7b",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/code-from-image__Zep79vS/result.json",
+      "raw_response_count": 102,
+      "responses_with_reasoning_content": 102
+    },
+    "compile-compcert": {
+      "reward": 1.0,
+      "result_sha256": "ecf4e4bdbe79d92200fde1d757be62a4bd9073a189e54d365c911046b8e2f93f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/compile-compcert__KHQoSgZ/result.json",
+      "raw_response_count": 68,
+      "responses_with_reasoning_content": 68
+    },
+    "configure-git-webserver": {
+      "reward": 0.0,
+      "result_sha256": "80a72a30b39417f823930ccae193cf4a30cc5f5898d9238c1aea34d1ed1d8088",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/configure-git-webserver__pcZewwF/result.json",
+      "raw_response_count": 9,
+      "responses_with_reasoning_content": 9
+    },
+    "constraints-scheduling": {
+      "reward": 0.0,
+      "result_sha256": "b0f85a897d022730846ffc18b4b88eb4285d36fb3f500a6aae23f705b6da4857",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/constraints-scheduling__8N7kdLv/result.json",
+      "raw_response_count": 5,
+      "responses_with_reasoning_content": 5
+    },
+    "count-dataset-tokens": {
+      "reward": 1.0,
+      "result_sha256": "721523dfcb933e1117a7018b528a7156b3ce0e49512e9dc58a80ee1ea840a3fa",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/count-dataset-tokens__bZDzkEu/result.json",
+      "raw_response_count": 11,
+      "responses_with_reasoning_content": 11
+    },
+    "crack-7z-hash": {
+      "reward": 1.0,
+      "result_sha256": "cfe1198a0977b9de497ac3bf6eec56e9659cdc1900329909286c32fe22a58739",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/crack-7z-hash__dSuAgne/result.json",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
+    },
+    "custom-memory-heap-crash": {
+      "reward": 1.0,
+      "result_sha256": "c523f03051cb30c1dc56fc8d6b48d59d2054d0e9dac0f6484b11b02632406b20",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/custom-memory-heap-crash__w6fecTf/result.json",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
+    },
+    "db-wal-recovery": {
+      "reward": 0.0,
+      "result_sha256": "df49f4727693a210a6865c3a9b6370cbd11a01650bddd3ca9ef3e7221ea5966c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/db-wal-recovery__XjGe3zq/result.json",
+      "raw_response_count": 103,
+      "responses_with_reasoning_content": 103
+    },
+    "distribution-search": {
+      "reward": 1.0,
+      "result_sha256": "8e29d0bdc6186e5a6c594b0eb17f6783c0e1fd0a55ca18b92a4a6806673a4db2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/distribution-search__Bmt39cC/result.json",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
+    },
+    "dna-assembly": {
+      "reward": 0.0,
+      "result_sha256": "9fa5ae571fca29b24b03df73ead035a6a9b4d6deab6fff034804540fbebd6552",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/dna-assembly__cn38bDC/result.json",
+      "raw_response_count": 27,
+      "responses_with_reasoning_content": 27
+    },
+    "dna-insert": {
+      "reward": 0.0,
+      "result_sha256": "48f7b0b6e35726ad4708d1661c323efa6b00f0bf19545be73039cef849a1fe56",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/dna-insert__UBoZVWo/result.json",
+      "raw_response_count": 17,
+      "responses_with_reasoning_content": 17
+    },
+    "extract-elf": {
+      "reward": 1.0,
+      "result_sha256": "a90c6276740cec17dde5dcf18cf5369f39e36f0bb2b5d677dee5aa0f5f60e9ee",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/extract-elf__TCHYm3V/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "feal-differential-cryptanalysis": {
+      "reward": 1.0,
+      "result_sha256": "6d164aa76f3d978da4dd95d77e2137a39d99c1e6a67066a3e6340ee08f50418a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/feal-differential-cryptanalysis__pZa58n3/result.json",
+      "raw_response_count": 17,
+      "responses_with_reasoning_content": 17
+    },
+    "feal-linear-cryptanalysis": {
+      "reward": 1.0,
+      "result_sha256": "8bd3d00c11be76ab712ab2adc7e978f484c87851058db26921bef1c34ca8e879",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/feal-linear-cryptanalysis__H9EyYWp/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "filter-js-from-html": {
+      "reward": 0.0,
+      "result_sha256": "55a9d974676221bfe31226b2db63113b40fbe0923d8a46ee2bf59a38960c9287",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/filter-js-from-html__DHiC5Qg/result.json",
+      "raw_response_count": 27,
+      "responses_with_reasoning_content": 27
+    },
+    "financial-document-processor": {
+      "reward": 0.0,
+      "result_sha256": "d27e52d100c01cf3c098bab0fac1bb43abdbbb95d00505430862fb9efdfd29b0",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/financial-document-processor__mToXvx6/result.json",
+      "raw_response_count": 21,
+      "responses_with_reasoning_content": 21
+    },
+    "fix-code-vulnerability": {
+      "reward": 1.0,
+      "result_sha256": "8087fa25ff8a415667e62395dd525a64dfe028acd78ab944ee0d6e28db3a2a70",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/fix-code-vulnerability__jUUxVbT/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
+    "fix-git": {
+      "reward": 1.0,
+      "result_sha256": "872fa1b671c7cb998847e9e0952e5758292331922edf8e5965c16abab80c0584",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/fix-git__skEyVLV/result.json",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
+    },
+    "fix-ocaml-gc": {
+      "reward": 1.0,
+      "result_sha256": "78c44d61652641cba01cf277c02aab577b6ee570f7a51b0e0ce7000e166621ab",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/fix-ocaml-gc__ARKc54j/result.json",
+      "raw_response_count": 35,
+      "responses_with_reasoning_content": 35
+    },
+    "gcode-to-text": {
+      "reward": 0.0,
+      "result_sha256": "49ae633ab352e079982b68ad92e708e51b2d145e8ceb100a121a6c73dc3118c6",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/gcode-to-text__KaDsxkr/result.json",
+      "raw_response_count": 69,
+      "responses_with_reasoning_content": 69
+    },
+    "git-leak-recovery": {
+      "reward": 1.0,
+      "result_sha256": "7f712df23711d25752a1e1aab68221bf6cc96e9c496d974b33783cda7df35588",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/git-leak-recovery__pUG8LUi/result.json",
+      "raw_response_count": 5,
+      "responses_with_reasoning_content": 5
+    },
+    "git-multibranch": {
+      "reward": 1.0,
+      "result_sha256": "6426622cb3388d33962e1df5cf7148b61951e3008779962be28dfbefcaf66053",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/git-multibranch__V4zW5Py/result.json",
+      "raw_response_count": 12,
+      "responses_with_reasoning_content": 12
+    },
+    "headless-terminal": {
+      "reward": 1.0,
+      "result_sha256": "b7e593d8a33833d20a2311e5aa3a6467f48d6ef76ed82f59dbf861d0e1724684",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/headless-terminal__e8x5Bic/result.json",
+      "raw_response_count": 50,
+      "responses_with_reasoning_content": 50
+    },
+    "hf-model-inference": {
+      "reward": 1.0,
+      "result_sha256": "844026aeda56cae3570af6ea72c0c19b63141ca68108799aa32a56eb50dcf87b",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/hf-model-inference__TEqEThr/result.json",
+      "raw_response_count": 11,
+      "responses_with_reasoning_content": 11
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T06:09:14.736725+00:00",
+  "generated_utc": "2026-10-19T06:12:44.024205+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 22,
-  "success_count": 19,
+  "graded_task_count": 23,
+  "success_count": 20,
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "chess-best-move",
@@ -41,7 +41,6 @@
     "model-extraction-relu-logits",
     "modernize-scientific-stack",
     "mteb-leaderboard",
-    "password-recovery",
     "path-tracing",
     "path-tracing-reverse",
     "polyglot-c-py",
@@ -82,7 +81,7 @@
     "feal-linear-cryptanalysis__Yab3rpa",
     "gcode-to-text__iF8eaFS",
     "gpt2-codegolf__j32jY8c",
-    "password-recovery__zsiErfu",
+    "path-tracing-reverse__4covUwV",
     "path-tracing__au39ic5"
   ],
   "errors": [],
@@ -287,6 +286,15 @@
       "finished_at": "2026-10-19T05:35:05.863968Z",
       "raw_response_count": 14,
       "responses_with_reasoning_content": 14
+    },
+    "password-recovery": {
+      "reward": 1.0,
+      "source": "infrastructure_recovery",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b04/password-recovery__zsiErfu/result.json",
+      "result_sha256": "3a1df69f82265538ed95ca95a951c0d90eaffa66ac0daa2d03d55512ececbb56",
+      "finished_at": "2026-10-19T06:10:30.390927Z",
+      "raw_response_count": 22,
+      "responses_with_reasoning_content": 22
     }
   }
 }
