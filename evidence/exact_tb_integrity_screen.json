@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T08:32:30.794882+00:00",
+  "generated_utc": "2026-10-19T08:36:20.695857+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 37,
+      "scored_trajectories_checked": 38,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -437,6 +437,17 @@
       "trajectory_sha256": "feb1a677f0210c39ccff83df468ac4de37f5d5d04cc590e300af6e758b6122b3",
       "steps": 11,
       "tool_calls": 31,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "kv-store-grpc",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b02/kv-store-grpc__Cehzj5u/agent/trajectory.json",
+      "trajectory_sha256": "09e3bbaed1a5d089ee79eea0f87464431ae05c546c6a5130eb44f17ba55c135f",
+      "steps": 8,
+      "tool_calls": 24,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T08:32:30.934104+00:00",
+  "generated_utc": "2026-10-19T08:36:05.170955+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -103,9 +103,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 37,
-            "graded": 37,
-            "success": 31,
+            "terminal": 38,
+            "graded": 38,
+            "success": 32,
             "active_trial_dirs": 19,
             "archived_actual_model_responses": 503,
             "ungraded": 0,
@@ -168,20 +168,20 @@
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
-            "1": 26,
+            "1": 27,
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 1454,
+          "new_raw_model_responses": 1494,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 343,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 267,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 243,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 364,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 102,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 135
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 352,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 269,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 253,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 369,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 109,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 142
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T08:32:29+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T08:35:47+00:00",
           "active_recovery_trial_dirs": 14,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -273,7 +273,7 @@
             "graded": 42,
             "success": 31,
             "active_trial_dirs": 46,
-            "archived_actual_model_responses": 2023,
+            "archived_actual_model_responses": 2028,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 2
@@ -344,9 +344,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 597,
-        "graded": 596,
-        "success": 373,
+        "terminal": 599,
+        "graded": 598,
+        "success": 374,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -417,7 +417,7 @@
             "graded": 55,
             "success": 44,
             "active_trial_dirs": 59,
-            "archived_actual_model_responses": 1091,
+            "archived_actual_model_responses": 1111,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
