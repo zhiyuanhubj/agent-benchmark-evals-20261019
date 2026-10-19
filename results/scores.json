@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T10:28:21.812890+00:00",
+  "generated_utc": "2026-10-19T10:38:30.584703+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -103,9 +103,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 56,
-            "graded": 56,
-            "success": 46,
+            "terminal": 57,
+            "graded": 57,
+            "success": 47,
             "active_trial_dirs": 19,
             "archived_actual_model_responses": 503,
             "ungraded": 0,
@@ -168,21 +168,21 @@
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
-            "1": 45,
+            "1": 46,
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 2538,
+          "new_raw_model_responses": 2591,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 527,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 416,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 413,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 474,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 297,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 411
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 535,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 424,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 416,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 485,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 305,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 426
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T10:28:18+00:00",
-          "active_recovery_trial_dirs": 10,
+          "latest_new_raw_model_response_utc": "2026-10-19T10:37:59+00:00",
+          "active_recovery_trial_dirs": 9,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
@@ -214,16 +214,16 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 62,
-        "graded": 61,
-        "success": 37,
+        "terminal": 64,
+        "graded": 63,
+        "success": 39,
         "status": "partial_no_full_score"
       },
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 56,
-          "graded": 56,
+          "terminal": 57,
+          "graded": 57,
           "success": 16,
           "status": "partial_no_full_score"
         },
@@ -269,11 +269,11 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 53,
-            "graded": 53,
-            "success": 38,
-            "active_trial_dirs": 57,
-            "archived_actual_model_responses": 2535,
+            "terminal": 56,
+            "graded": 56,
+            "success": 40,
+            "active_trial_dirs": 60,
+            "archived_actual_model_responses": 2625,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 4
@@ -344,9 +344,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 658,
-        "graded": 657,
-        "success": 407,
+        "terminal": 668,
+        "graded": 667,
+        "success": 413,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -359,9 +359,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 99,
-          "graded": 99,
-          "success": 34,
+          "terminal": 102,
+          "graded": 102,
+          "success": 36,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -417,7 +417,7 @@
             "graded": 87,
             "success": 69,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1630,
+            "archived_actual_model_responses": 1654,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],

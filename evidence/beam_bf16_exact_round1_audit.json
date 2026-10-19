@@ -1,18 +1,15 @@
 {
-  "generated_utc": "2026-10-19T10:28:40.356257+00:00",
+  "generated_utc": "2026-10-19T10:38:51.710213+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T102557Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T103623Z.tar.zst",
   "expected": 89,
-  "terminal": 53,
-  "graded": 53,
-  "success": 38,
+  "terminal": 56,
+  "graded": 56,
+  "success": 40,
   "missing_graded_tasks": [
     "make-mips-interpreter",
-    "nginx-request-logging",
-    "overfull-hbox",
-    "password-recovery",
     "path-tracing",
     "path-tracing-reverse",
     "polyglot-c-py",
@@ -47,14 +44,8 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "nginx-request-logging"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "password-recovery",
-    "path-tracing",
-    "path-tracing-reverse",
-    "polyglot-c-py",
     "polyglot-rust-c",
     "portfolio-optimization",
     "protein-assembly",
@@ -455,12 +446,33 @@
       "raw_response_count": 4,
       "responses_with_reasoning_content": 4
     },
+    "nginx-request-logging": {
+      "reward": 1.0,
+      "result_sha256": "aeba59c2d1eb9fb63385c8f65802221947f30c80da72d4f2edb058aee677d40f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/nginx-request-logging__ZceUgbt/result.json",
+      "raw_response_count": 6,
+      "responses_with_reasoning_content": 6
+    },
     "openssl-selfsigned-cert": {
       "reward": 1.0,
       "result_sha256": "f5e40de1971eb2b58955c943bcc9004ebb77da0521790cb7ede41dc6dd6eaf6c",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/openssl-selfsigned-cert__PxptnVz/result.json",
       "raw_response_count": 5,
       "responses_with_reasoning_content": 5
+    },
+    "overfull-hbox": {
+      "reward": 0.0,
+      "result_sha256": "76446b6bc4938817434e807ed3ec5b048fe7a9adc251c06c5e91b788dab07471",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/overfull-hbox__yTjcDiz/result.json",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
+    },
+    "password-recovery": {
+      "reward": 1.0,
+      "result_sha256": "b4801b3f21818eb1a39078013e23bab6abf542e86094294813e9eadd2412e3fc",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/password-recovery__3u8Fvrg/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
     }
   }
 }
