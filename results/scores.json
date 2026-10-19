@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T08:36:05.170955+00:00",
+  "generated_utc": "2026-10-19T08:48:34.992614+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -103,9 +103,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 38,
-            "graded": 38,
-            "success": 32,
+            "terminal": 40,
+            "graded": 40,
+            "success": 34,
             "active_trial_dirs": 19,
             "archived_actual_model_responses": 503,
             "ungraded": 0,
@@ -168,20 +168,20 @@
           "existing_graded_round_1": 11,
           "queued_round_1": 78,
           "new_terminal_by_round": {
-            "1": 27,
+            "1": 29,
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 1494,
+          "new_raw_model_responses": 1646,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 352,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 269,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 253,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 369,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 109,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 142
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 372,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 287,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 281,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 387,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 149,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 170
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T08:35:47+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T08:48:35+00:00",
           "active_recovery_trial_dirs": 14,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -214,8 +214,8 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 55,
-        "graded": 54,
+        "terminal": 56,
+        "graded": 55,
         "success": 35,
         "status": "partial_no_full_score"
       },
@@ -269,14 +269,14 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 42,
-            "graded": 42,
+            "terminal": 43,
+            "graded": 43,
             "success": 31,
-            "active_trial_dirs": 46,
-            "archived_actual_model_responses": 2028,
+            "active_trial_dirs": 47,
+            "archived_actual_model_responses": 2061,
             "ungraded": 0,
             "exceptions": {
-              "AgentTimeoutError": 2
+              "AgentTimeoutError": 3
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -325,17 +325,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 256,
+          "terminal": 258,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 247,
+          "terminal": 249,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 265,
+          "terminal": 267,
           "status": "partial_no_full_rrr"
         }
       }
@@ -344,9 +344,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 599,
-        "graded": 598,
-        "success": 374,
+        "terminal": 602,
+        "graded": 601,
+        "success": 377,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -413,11 +413,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 55,
-            "graded": 55,
-            "success": 44,
-            "active_trial_dirs": 59,
-            "archived_actual_model_responses": 1111,
+            "terminal": 57,
+            "graded": 57,
+            "success": 46,
+            "active_trial_dirs": 61,
+            "archived_actual_model_responses": 1158,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -467,9 +467,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 30,
-        "graded": 30,
-        "success": 22,
+        "terminal": 31,
+        "graded": 31,
+        "success": 23,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
@@ -493,17 +493,32 @@
           "graded": 0,
           "success": 0,
           "status": "partial_no_full_score"
-        }
+        },
+        "qualification": "Historical field name for this same BF16 run; do not add these trials to the exact-image field as independent attempts."
       },
       "tb2_1_exact_supplied_images": {
-        "status": "not_started",
-        "qualification": "Legacy benchmark task images are not counted as exact supplied-image trials."
+        "rounds": {
+          "1": {
+            "expected": 89,
+            "terminal": 10,
+            "graded": 10,
+            "success": 8,
+            "status": "partial_no_full_score",
+            "complete": false,
+            "accuracy": null,
+            "qualification": "Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only."
+          }
+        },
+        "status": "partial_no_full_score",
+        "same_trials_as_legacy_named_bf16_tb": true,
+        "image_identity_audit": "evidence/muse_bf16_exact_image_identity.json",
+        "qualification": "The 89 supplied archive image identities, task paths and agent settings were verified before BF16 round 1 launched and rechecked on the running node. A full-round accuracy awaits all 89 native results and task-level audit."
       },
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 11,
-          "graded": 11,
+          "terminal": 12,
+          "graded": 12,
           "success": 2,
           "status": "partial_no_full_score"
         },
@@ -535,6 +550,7 @@
     "tb_exact_images": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/status-current.json",
     "muse_tb_legacy": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/results/muse_tb_legacy_status.json",
     "opus48_pro_full": "/fsx/home/zhiyuan/.private/opus48_sbpv_20261004/completed_full_evaluation_result.json",
-    "muse_nvfp4_exact_recovery_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json"
+    "muse_nvfp4_exact_recovery_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json",
+    "muse_bf16_exact_image_identity_audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_exact_image_identity.json"
   }
 }

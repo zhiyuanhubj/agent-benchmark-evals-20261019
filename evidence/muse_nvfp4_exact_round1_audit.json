@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T08:36:09.782940+00:00",
+  "generated_utc": "2026-10-19T08:48:39.597599+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 38,
-  "success_count": 32,
+  "graded_task_count": 40,
+  "success_count": 34,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -72,7 +72,6 @@
     "db-wal-recovery",
     "dna-assembly",
     "extract-moves-from-video",
-    "financial-document-processor",
     "fix-code-vulnerability",
     "fix-git",
     "fix-ocaml-gc",
@@ -105,7 +104,6 @@
     "raman-fitting",
     "regex-chess",
     "reshard-c4-data",
-    "sam-cell-seg",
     "sanitize-git-repo",
     "schemelike-metacircular-eval",
     "sparql-university",
@@ -122,14 +120,14 @@
     "compile-compcert__w9HS5rZ",
     "count-dataset-tokens__QuGJimY",
     "extract-moves-from-video__pA42NVn",
-    "financial-document-processor__KsQzUGc",
+    "fix-code-vulnerability__UDb6DsZ",
     "install-windows-3.11__JZGpPLL",
     "large-scale-text-editing__byNYEsg",
     "path-tracing-reverse__4covUwV",
     "path-tracing__au39ic5",
     "regex-chess__53F7VDd",
     "reshard-c4-data__pPAcemJ",
-    "sam-cell-seg__MyUqQS2",
+    "sanitize-git-repo__dS7F3uo",
     "train-fasttext__Mc2uuim",
     "tune-mjcf__cgx3dH4",
     "video-processing__FZRHQnL"
@@ -370,6 +368,17 @@
       "raw_response_count": 18,
       "responses_with_reasoning_content": 18
     },
+    "financial-document-processor": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b01/financial-document-processor__KsQzUGc/result.json",
+      "result_sha256": "3ae844a1bc3c98fdf84976fa943621130557947d5dedec97b43ae33c031326d4",
+      "finished_at": "2026-10-19T08:44:47.690759Z",
+      "raw_response_count": 41,
+      "responses_with_reasoning_content": 41
+    },
     "gcode-to-text": {
       "reward": 0.0,
       "exception_type": "AgentTimeoutError",
@@ -534,6 +543,17 @@
       "finished_at": "2026-10-19T08:09:38.704100Z",
       "raw_response_count": 18,
       "responses_with_reasoning_content": 18
+    },
+    "sam-cell-seg": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/sam-cell-seg__MyUqQS2/result.json",
+      "result_sha256": "bf3e496c35a6cafcfa6dcabb6cf2c2506a26409852bd612d9a2345f2c80f4d3a",
+      "finished_at": "2026-10-19T08:44:02.878131Z",
+      "raw_response_count": 32,
+      "responses_with_reasoning_content": 32
     },
     "torch-pipeline-parallelism": {
       "reward": 1.0,

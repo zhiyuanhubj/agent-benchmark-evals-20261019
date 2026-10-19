@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T08:36:20.695857+00:00",
+  "generated_utc": "2026-10-19T08:48:49.710865+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 38,
+      "scored_trajectories_checked": 40,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -27,7 +27,7 @@
       }
     },
     "beam_bf16": {
-      "scored_trajectories_checked": 42,
+      "scored_trajectories_checked": 43,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -376,6 +376,17 @@
     },
     {
       "model": "muse_nvfp4",
+      "task": "financial-document-processor",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b01/financial-document-processor__KsQzUGc/agent/trajectory.json",
+      "trajectory_sha256": "6c3fccaaa86539975cfdb19ecd47c97860ba783987dcfab77833d1612f68b72b",
+      "steps": 42,
+      "tool_calls": 163,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
       "task": "gcode-to-text",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b02/gcode-to-text__iF8eaFS/agent/trajectory.json",
@@ -582,6 +593,17 @@
       "trajectory_sha256": "72f8a074bad6a591299f54d5be01c7359200ec80e59e9cc720122081d656e97d",
       "steps": 19,
       "tool_calls": 62,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "sam-cell-seg",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/sam-cell-seg__MyUqQS2/agent/trajectory.json",
+      "trajectory_sha256": "4e77edfa7bb96c8bff2994fcf649410dec941e82a54f21d77665ca014d7040a8",
+      "steps": 33,
+      "tool_calls": 137,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -1937,6 +1959,17 @@
       "trajectory_sha256": "d7dcbc48f5438867eaa74539af41a3e0163662fac1edddee0d7a02d27594f56a",
       "steps": 8,
       "tool_calls": 16,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
+      "task": "extract-moves-from-video",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/extract-moves-from-video__eo2UGKm/agent/trajectory.json",
+      "trajectory_sha256": "52b432fb5bc73ee24bc4b90355c705ded0c2fa887ca27e9f1aef85efcafa724d",
+      "steps": 277,
+      "tool_calls": 327,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
