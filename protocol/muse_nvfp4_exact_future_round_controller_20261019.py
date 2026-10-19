@@ -9,6 +9,7 @@ import time
 import urllib.request
 from pathlib import Path
 
+from route_2812 import validate_route as validate_round1_route
 from route_future_rounds import LANES, ROOT, STATE, WORK, claim_next, save, sha, valid_endpoint, validate_route
 
 PYTHON = '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python'
@@ -24,7 +25,21 @@ def endpoint_ready(allocation):
         endpoint = value['api_base']
     else:
         assert value['job'] == allocation and value['phase'] == 'ready'
-        assert value.get('claimed_round1_batches') == [], 'Round-1 handoff takes priority'
+        if allocation == 2812:
+            assert value.get('claimed_round1_batches') == ['b05']
+            route_path = STATE / 'extra_gpu/r1-b05-extra-route.json'
+            route = json.loads(route_path.read_text())
+            source = WORK / 'configs/r1-completion-2866-b05.json'
+            validate_round1_route(route, source, 'b05')
+            exit_state = json.loads((STATE / 'extra_gpu/r1-b05-early-exit.json').read_text())
+            assert exit_state['returncode'] == 0 and exit_state['missing_terminal_tasks'] == []
+            assert exit_state['terminal_tasks'] == route['tasks']
+            assert exit_state['original_sha256'] == sha(source)
+            assert exit_state['route_sha256'] == sha(route_path)
+            expected, found = terminal_coverage(route)
+            assert found == expected, 'Round-1 b05 handoff must finish before reusing 2812'
+        else:
+            assert value.get('claimed_round1_batches') == [], 'Round-1 handoff takes priority'
         endpoint = value['endpoint']
     assert valid_endpoint(allocation, endpoint)
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))

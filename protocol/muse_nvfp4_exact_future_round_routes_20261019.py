@@ -13,7 +13,7 @@ WORK = ROOT / 'muse_nvfp4'
 STATE = WORK / 'state'
 ROUTES = STATE / 'future-routes'
 RESULTS = ROOT / 'results/muse_nvfp4'
-LANES = {2923: 5, 2924: 6, 2927: 7, 2928: 8, 2867: 9}
+LANES = {2812: 4, 2923: 5, 2924: 6, 2927: 7, 2928: 8, 2867: 9}
 NAME = re.compile(r'r[23]-completion-2866-b\d{2}\.json\Z')
 
 
