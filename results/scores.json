@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T20:05:11.244224+00:00",
+  "generated_utc": "2026-10-19T20:13:58.859925+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -246,21 +246,21 @@
             "2": 19,
             "3": 0
           },
-          "new_raw_model_responses": 5166,
+          "new_raw_model_responses": 5197,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 792,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 803,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 571,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 358,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 38
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 579,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 365,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 43
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T20:04:56+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T20:14:05+00:00",
           "active_recovery_trial_dirs": 5,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -317,8 +317,8 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 96,
-        "graded": 95,
+        "terminal": 98,
+        "graded": 97,
         "success": 62,
         "status": "partial_no_full_score"
       },
@@ -376,7 +376,7 @@
             "graded": 87,
             "success": 62,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 4358,
+            "archived_actual_model_responses": 4379,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 7
@@ -392,7 +392,7 @@
             "graded": 23,
             "success": 17,
             "active_trial_dirs": 27,
-            "archived_actual_model_responses": 1112,
+            "archived_actual_model_responses": 1249,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -428,17 +428,17 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 346,
+          "terminal": 351,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 342,
+          "terminal": 345,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 378,
+          "terminal": 384,
           "status": "partial_no_full_rrr"
         }
       }
@@ -577,8 +577,8 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 84,
-        "graded": 84,
+        "terminal": 85,
+        "graded": 85,
         "success": 52,
         "status": "partial_no_full_score"
       },
@@ -628,8 +628,8 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 37,
-          "graded": 37,
+          "terminal": 38,
+          "graded": 38,
           "success": 16,
           "status": "partial_no_full_score"
         },
