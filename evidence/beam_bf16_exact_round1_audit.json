@@ -1,18 +1,16 @@
 {
-  "generated_utc": "2026-10-19T06:22:42.594379+00:00",
+  "generated_utc": "2026-10-19T06:30:33.653565+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T061255Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T063008Z.tar.zst",
   "expected": 89,
-  "terminal": 35,
-  "graded": 35,
-  "success": 26,
+  "terminal": 37,
+  "graded": 37,
+  "success": 27,
   "missing_graded_tasks": [
     "extract-moves-from-video",
-    "gpt2-codegolf",
     "install-windows-3.11",
-    "kv-store-grpc",
     "large-scale-text-editing",
     "largest-eigenval",
     "llm-inference-batching-scheduler",
@@ -66,8 +64,6 @@
   ],
   "ungraded_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "large-scale-text-editing",
-    "largest-eigenval",
     "llm-inference-batching-scheduler",
     "log-summary-date-ranges",
     "mailman",
@@ -354,6 +350,13 @@
       "raw_response_count": 12,
       "responses_with_reasoning_content": 12
     },
+    "gpt2-codegolf": {
+      "reward": 0.0,
+      "result_sha256": "f856d8524c988338ab755d99a911cbeeac823d5a669515639f50000d8ccb21be",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/gpt2-codegolf__no7M44U/result.json",
+      "raw_response_count": 123,
+      "responses_with_reasoning_content": 123
+    },
     "headless-terminal": {
       "reward": 1.0,
       "result_sha256": "b7e593d8a33833d20a2311e5aa3a6467f48d6ef76ed82f59dbf861d0e1724684",
@@ -367,6 +370,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/hf-model-inference__TEqEThr/result.json",
       "raw_response_count": 11,
       "responses_with_reasoning_content": 11
+    },
+    "kv-store-grpc": {
+      "reward": 1.0,
+      "result_sha256": "1ad6637304c737d28084309caf4135a88a45aa71d34406d877e53734fcb1f2df",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/kv-store-grpc__pUA2gtz/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
     }
   }
 }
