@@ -90,6 +90,13 @@ def cycle():
             if other_reported['complete']:
                 assert other_audit['qualification'] == 'complete_verified', f'{model} exact TB first round not verified'
                 assert (other_audit['graded'], other_audit['success']) == (other_reported['graded'], other_reported['success'])
+        run([PYTHON, str(ROOT / 'screen_exact_tb_integrity.py')], timeout=180)
+        screen = json.loads((ROOT / 'evidence/exact_tb_integrity_screen.json').read_text())
+        screened = {(row['model'], row['task']): row for row in screen['records']}
+        manual_notes = json.loads((ROOT / 'evidence/exact_tb_integrity_manual_notes.json').read_text())
+        for note in manual_notes['notes']:
+            row = screened[(note['model'], note['task'])]
+            assert row['trajectory_sha256'] == note['trajectory_sha256'], 'Manual trajectory review anchor changed'
         run([PYTHON, str(ROOT / 'export_snapshot.py')])
         run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence', 'input_output/manifest.json', 'input_output/archive_manifests'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
