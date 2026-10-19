@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parent
 STATE = ROOT / 'muse_nvfp4/state/extra_gpu'
 SOURCE = Path('/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/deployment.json')
 WEIGHTS = Path('/fsx/home/zhiyuan/.private/muse_spark_open_20261016/weights')
-ALLOWED = {2923, 2924, 2927, 2928}
+ALLOWED = {2812, 2923, 2924, 2927, 2928}
+EARLY95 = Path('/fsx/home/zhiyuan/.private/nemotron35super/runs/opus48_mix3_20261014/early95_remaining_after_muse_swr_20261018')
 
 
 def save(job, phase, **extra):
@@ -30,6 +31,16 @@ def main():
     STATE.mkdir(parents=True, exist_ok=True)
     with (STATE / f'{job}-serve.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if job == 2812:
+            previous = json.loads((EARLY95 / 'state/current.json').read_text())
+            assert previous.get('phase') == 'declared_backlog_finished' and previous.get('returncodes') == [0, 0, 0]
+            for index in range(3):
+                assert json.loads((EARLY95 / f'state/job-{index}-exit.json').read_text())['returncode'] == 0
+            last = json.loads((EARLY95 / 'results/early95-tb-r3-never-started-20261018/train-fasttext__y5h5Rq5/result.json').read_text())
+            assert last.get('finished_at'), 'Last early95 TB task has not finished'
+            pid = subprocess.check_output(['systemctl', '--user', 'show',
+                'mix3-early95-existing-rounds-after-muse-swr-20261018.service', '-p', 'MainPID', '--value'], text=True).strip()
+            assert pid in ('', '0'), 'Prior early95 controller is still running'
         assert (WEIGHTS / 'config.json').exists()
         docker_env = os.environ.copy()
         for key in ('DOCKER_HOST', 'DOCKER_CONTEXT', 'DOCKER_TLS', 'DOCKER_TLS_VERIFY', 'DOCKER_CERT_PATH'):
