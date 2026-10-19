@@ -2,6 +2,7 @@
 """Reconcile Beam and Opus exact-image TB round scores with release I/O."""
 
 import argparse
+import copy
 import hashlib
 import json
 import subprocess
@@ -46,6 +47,28 @@ for model, config_dir in PROFILES.items():
     )
     entries = set(listing.stdout.splitlines())
     errors = []
+    expected_api_base = config['agents'][0]['kwargs']['api_base']
+    if model == 'beam_bf16' and args.round in (2, 3):
+        claim_path = SOURCE / f'beam/state/r{args.round}-launch.json'
+        if claim_path.exists():
+            claim = json.loads(claim_path.read_text())
+            if claim.get('owner') == 'beam_exact_parallel_r23_2887.py':
+                effective_path = Path(claim['effective_config'])
+                handoff_path = SOURCE / 'beam/state/r23-2887-handoff.json'
+                if not effective_path.exists() or not handoff_path.exists():
+                    errors.append('Replica config or handoff receipt is missing')
+                else:
+                    effective = json.loads(effective_path.read_text())
+                    normalized = copy.deepcopy(effective)
+                    expected_api_base = effective['agents'][0]['kwargs']['api_base']
+                    normalized['agents'][0]['kwargs']['api_base'] = config['agents'][0]['kwargs']['api_base']
+                    if normalized != config:
+                        errors.append('Replica config differs from the frozen round config beyond model endpoint')
+                    if digest(config_path) != claim['source_config_sha256'] or digest(effective_path) != claim['effective_config_sha256']:
+                        errors.append('Replica config hash differs from the launch receipt')
+                    for receipt in (claim_path, handoff_path, effective_path):
+                        if str(receipt.relative_to(BASE)) not in entries:
+                            errors.append(f'Replica provenance missing from release archive: {receipt.name}')
     if manifest['archive_name'] not in verified_assets:
         errors.append('Latest archive is not SHA-256 and size verified on GitHub')
     if str(config_path.relative_to(BASE)) not in entries:
@@ -73,6 +96,8 @@ for model, config_dir in PROFILES.items():
             continue
         if value['config']['task']['path'] != expected[task]:
             errors.append(f'terminal task path differs from the declared input: {task}')
+        if model == 'beam_bf16' and value['config']['agent']['kwargs'].get('api_base') != expected_api_base:
+            errors.append(f'terminal task used a different model endpoint: {task}')
         result_key = str(result.relative_to(BASE))
         if result_key not in entries and datetime.fromtimestamp(result.stat().st_mtime, timezone.utc) >= archive_started:
             unarchived_new_terminal.append(task)

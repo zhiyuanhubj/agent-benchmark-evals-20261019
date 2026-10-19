@@ -31,8 +31,15 @@ archive.parent.mkdir(exist_ok=True)
 assert not archive.exists()
 
 payloads = {}
-counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
+counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0, 'handoff_receipt': 0}
 terminal_results = 0
+if model == 'beam_bf16':
+    for receipt_name in ('r23-2887-handoff.json', 'r2-launch.json', 'r3-launch.json',
+                         'r2-exit.json', 'r3-exit.json'):
+        receipt = SOURCE / 'beam/state' / receipt_name
+        if receipt.exists():
+            payloads[receipt] = receipt.read_bytes()
+            counts['handoff_receipt'] += 1
 for job in sorted(result_root.glob(profile['job_pattern'])):
     if not job.is_dir():
         continue
@@ -42,6 +49,11 @@ for job in sorted(result_root.glob(profile['job_pattern'])):
     if job_config.exists():
         payloads[job_config] = job_config.read_bytes()
         counts['job_config'] += 1
+    if model == 'beam_bf16':
+        effective_config = config_root / f'r{match.group(1)}-2887.json'
+        if effective_config.exists():
+            payloads[effective_config] = effective_config.read_bytes()
+            counts['job_config'] += 1
     for trial in sorted(job.iterdir()):
         if not trial.is_dir():
             continue

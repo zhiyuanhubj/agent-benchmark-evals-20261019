@@ -305,7 +305,8 @@ nvfp4_r2_excluded = sorted(n['task'] for n in manual_notes if n['model'] == 'mus
                            and n['reward'] == 1 and n['training_disposition'].startswith('exclude_'))
 nvfp4_excluded_names = ', '.join(f'`{name}`' for name in nvfp4_excluded)
 nvfp4_r2_excluded_names = ', '.join(f'`{name}`' for name in nvfp4_r2_excluded)
-be_tb = be['tb2_1_exact_supplied_images']['rounds']['1']
+beam_tb_rounds = be['tb2_1_exact_supplied_images']['rounds']
+be_tb = beam_tb_rounds['1']
 op_tb = op['tb2_1_exact_supplied_images']['rounds']['1']
 
 
@@ -321,6 +322,19 @@ muse_exact_zh_done = f'；精确镜像 TB2.1 首轮 {tb_zh(mn_tb)}' if mn_tb['co
 muse_exact_zh_pending = '' if mn_tb['complete'] else f'精确镜像 TB2.1 首轮 {tb_zh(mn_tb)}；'
 beam_exact_zh_done = f'；精确镜像 TB2.1 首轮 {tb_zh(be_tb)}' if be_tb['complete'] else ''
 beam_exact_zh_pending = '' if be_tb['complete'] else f'；精确镜像 TB2.1 首轮 {tb_zh(be_tb)}'
+beam_exact_en = '; '.join(
+    f"r{number} {row['success']}/89 complete" if row['complete']
+    else f"r{number} {row['success']}/{row['graded']} graded (partial)"
+    for number, row in beam_tb_rounds.items() if row['graded'] or row['complete']
+)
+beam_exact_zh_done += ''.join(
+    f"；精确镜像 TB2.1 第{number}轮 **{row['success']}/89**"
+    for number, row in beam_tb_rounds.items() if number != '1' and row['complete']
+)
+beam_exact_zh_pending += ''.join(
+    f"；精确镜像 TB2.1 第{number}轮 {row['graded']}/89 已判分、{row['success']} 成功，未完成"
+    for number, row in beam_tb_rounds.items() if number != '1' and not row['complete'] and row['graded']
+)
 opus_tb_rounds = op['tb2_1_exact_supplied_images']['rounds']
 opus_exact_en = '; '.join(
     f"r{number} {row['success']}/89 complete" if row['complete']
@@ -378,7 +392,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
 | Muse NVFP4 | **496/731 = 67.85%**, round 1 complete | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {tb_en(mn_tb)} | {review(mn['swe_review'])} |
-| Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {tb_en(be_tb)} | {review(be['swe_review'])} |
+| Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'])} |
 | Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | — |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | Queued after Pro round 1 | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | Queued after Pro round 1 |
@@ -392,6 +406,8 @@ Current exact-image TB2.1 native I/O snapshots: `{latest_opus_exact_archive['arc
 The [Opus 4.7](evidence/opus47_exact_round1_audit.json) and [Beam](evidence/beam_bf16_exact_round1_audit.json) first-round audits reconcile each task with its reward and released input, raw response, and trajectory. A full round is reported only when all 89 task results pass this check.
 
 The [Opus 4.7 round-2 audit](evidence/opus47_exact_round2_audit.json) and [round-3 audit](evidence/opus47_exact_round3_audit.json) apply the same task-level release checks to later rounds. All three 89-task rounds are complete and reconciled: **70/89, 71/89, 69/89**, with a three-round mean of **210/267 = 78.65%**.
+
+Beam exact-image TB round 2 runs on the verified BF16 replica at allocation 2887 while round 1 remains on its original endpoint. The [handoff proof](evidence/beam_exact_r23_2887_handoff.json) pins the model revision, Docker image, source and effective configs, and task ownership. A round-2 native result counts once; partial results are never treated as full-round accuracy.
 
 The [Muse BF16 exact-image I/O audit](evidence/muse_bf16_exact_io_coverage.json) checks that every scored BF16 result, raw response and trajectory is present in SHA-verified release archives, along with all 89 task inputs. Of its currently scored raw replies, **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)}** contain nonempty thinking. It is the same BF16 trial set named by the historical cached-tag field.
 
@@ -471,6 +487,8 @@ Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 
 [Opus 4.7 首轮核验](evidence/opus47_exact_round1_audit.json)与 [Beam 首轮核验](evidence/beam_bf16_exact_round1_audit.json)逐题核对判分、任务输入、原始响应和轨迹；满 89 题且核验通过后才报告完整准确率。
 
 [Opus 4.7 第 2 轮核验](evidence/opus47_exact_round2_audit.json)和[第 3 轮核验](evidence/opus47_exact_round3_audit.json)按相同规则逐题检查后续轮次。三轮各 89 题均已完整且核验通过：**70/89、71/89、69/89**，三轮均值 **210/267 = 78.65%**。
+
+Beam 精确镜像 TB 第 2 轮现由 2887 上核验过的 BF16 副本独立执行，第 1 轮继续使用原接口。[接管凭据](evidence/beam_exact_r23_2887_handoff.json)固定模型版本、镜像、原始及有效配置哈希和轮次归属；第 2 轮逐题只计一次，未满 89 题不报告整轮准确率。
 
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `{latest_legacy_deltas['opus47_legacy']['archive_name']}`、`{latest_legacy_deltas['beam_legacy']['archive_name']}`、`{latest_legacy_deltas['muse_bf16']['archive_name']}`；截止时间和文件范围见各自清单。
 '''

@@ -86,6 +86,16 @@ def sync_native_archives(scores, force_bf16=False):
                     handoff_newer |= latest_archive_time is None or marker_time > latest_archive_time
             handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < expected_receipts
             handoff_newer |= latest_filename_counts.get('ready_proof', 0) < len(route_allocations)
+        if name == 'beam_bf16':
+            receipt_dir = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/beam/state'
+            receipts = [receipt_dir / marker for marker in
+                        ('r23-2887-handoff.json', 'r2-launch.json', 'r3-launch.json',
+                         'r2-exit.json', 'r3-exit.json')]
+            receipts = [marker for marker in receipts if marker.exists()]
+            handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < len(receipts)
+            handoff_newer |= any(latest_archive_time is None or
+                                 datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
+                                 for marker in receipts)
         raw_snapshot_due = (latest_archive_time is not None and raw_count > latest_filename_counts.get('raw_response', 0)
                             and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS)
         if terminal > archived_terminal or handoff_newer or raw_snapshot_due:
@@ -180,6 +190,17 @@ def cycle():
             if other_reported['complete']:
                 assert other_audit['qualification'] == 'complete_verified', f'Opus exact TB round {round_number} not verified'
                 assert (other_audit['graded'], other_audit['success']) == (other_reported['graded'], other_reported['success'])
+        for round_number in ('2', '3'):
+            beam_reported = scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds'][round_number]
+            if not beam_reported['terminal']:
+                continue
+            run([PYTHON, str(ROOT / 'audit_other_exact_round1.py'), '--model', 'beam_bf16',
+                 '--round', round_number], timeout=180)
+            beam_audit = json.loads((ROOT / f'evidence/beam_bf16_exact_round{round_number}_audit.json').read_text())
+            assert not beam_audit['errors'], f'Beam exact TB round {round_number} released I/O audit failed'
+            if beam_reported['complete']:
+                assert beam_audit['qualification'] == 'complete_verified', f'Beam exact TB round {round_number} not verified'
+                assert (beam_audit['graded'], beam_audit['success']) == (beam_reported['graded'], beam_reported['success'])
         run([PYTHON, str(ROOT / 'screen_exact_tb_integrity.py')], timeout=180)
         screen = json.loads((ROOT / 'evidence/exact_tb_integrity_screen.json').read_text())
         screened = {(row['model'], row['task']): row for row in screen['records']}

@@ -111,6 +111,44 @@ for item in plan['configurations']:
                         'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
                         'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
                         'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared'})
+for round_number in (2, 3):
+    frozen = json.loads((source / 'beam/configs' / f'r{round_number}.json').read_text())
+    expected = {Path(item['path']).name for item in frozen['tasks']}
+    seen = set()
+    for result in (source / 'results/beam_bf16' / frozen['job_name']).glob('*/result.json'):
+        value = json.loads(result.read_text())
+        if not value.get('finished_at'):
+            continue
+        task = Path(value['config']['task']['path']).name
+        assert task in expected and task not in seen
+        seen.add(task)
+        reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        assert reward in (0, 1), (result, reward)
+        trajectory = result.parent / 'agent/trajectory.json'
+        model = f'beam_bf16_r{round_number}'
+        if not trajectory.is_file():
+            missing_trajectories.append({'model': model, 'task': task})
+            continue
+        payload = trajectory.read_bytes()
+        steps = json.loads(payload)['steps']
+        hits = []
+        tool_count = 0
+        for step in steps:
+            if step.get('source') != 'agent':
+                continue
+            for tool in step.get('tool_calls') or []:
+                args = tool.get('arguments') or {}
+                command = args.get('keystrokes', '') if isinstance(args, dict) else str(args)
+                tool_count += 1
+                for rule, regex in compiled.items():
+                    if regex.search(command):
+                        hits.append({'rule': rule, 'step_id': step.get('step_id'),
+                                     'command_sha256': hashlib.sha256(command.encode()).hexdigest()})
+        records.append({'model': model, 'round': round_number, 'task': task,
+                        'reward': reward, 'trajectory_path': str(trajectory.relative_to(BASE)),
+                        'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
+                        'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
+                        'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared'})
 for item in plan['configurations']:
     if item['round'] != 1:
         continue
@@ -155,7 +193,7 @@ for item in plan['configurations']:
                                'hits': hits, 'status': 'in_progress_not_scored'})
 
 summary = {}
-for model in [*profiles, 'muse_nvfp4_r2', 'muse_nvfp4_r3']:
+for model in [*profiles, 'muse_nvfp4_r2', 'muse_nvfp4_r3', 'beam_bf16_r2', 'beam_bf16_r3']:
     subset = [row for row in records if row['model'] == model]
     rules = Counter(hit['rule'] for row in subset for hit in row['hits'])
     summary[model] = {
@@ -166,7 +204,7 @@ for model in [*profiles, 'muse_nvfp4_r2', 'muse_nvfp4_r3']:
     }
 report = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
-    'scope': 'Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, plus scored Muse NVFP4 rounds 2/3.',
+    'scope': 'Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.',
     'method': 'Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.',
     'summary': summary,
     'missing_trajectories': missing_trajectories,
