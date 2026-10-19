@@ -29,6 +29,7 @@ for model, config_dir in PROFILES.items():
     assert config['retry']['max_retries'] == 0 and config['n_attempts'] == 1
     manifest_path = sorted(MANIFESTS.glob(f'{model}_exact_tb_live_*.json'))[-1]
     manifest = json.loads(manifest_path.read_text())
+    archive_started = datetime.strptime(manifest['archive_name'].rsplit('_', 1)[-1].split('.')[0], '%Y%m%dT%H%M%SZ').replace(tzinfo=timezone.utc)
     archive = ROOT / '.release_assets' / manifest['archive_name']
     listing = subprocess.run(
         ['tar', '--use-compress-program=zstd', '-tf', str(archive)],
@@ -46,6 +47,7 @@ for model, config_dir in PROFILES.items():
     )
     rows = {}
     ungraded = []
+    unarchived_new_terminal = []
     job_dir = SOURCE / 'results' / model / config['job_name']
     for trial in sorted(job_dir.iterdir()):
         if not trial.is_dir():
@@ -60,13 +62,16 @@ for model, config_dir in PROFILES.items():
         if task not in expected or task in rows:
             errors.append(f'unexpected or duplicate terminal task: {task}')
             continue
+        result_key = str(result.relative_to(BASE))
+        if result_key not in entries and datetime.fromtimestamp(result.stat().st_mtime, timezone.utc) >= archive_started:
+            unarchived_new_terminal.append(task)
+            continue
         reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
         if reward not in (0, 1):
             ungraded.append(task)
         raw_files = sorted((trial / 'agent/raw_responses').glob('*.json'))
         if not raw_files:
             errors.append(f'terminal task has no original model responses: {task}')
-        result_key = str(result.relative_to(BASE))
         trial_key = str(trial.relative_to(BASE)) + '/'
         if result_key not in entries:
             errors.append(f'result missing from release archive: {task}')
@@ -105,6 +110,7 @@ for model, config_dir in PROFILES.items():
         'success': sum(row['reward'] == 1 for row in graded.values()),
         'missing_graded_tasks': sorted(set(expected) - set(graded)),
         'ungraded_terminal_tasks': sorted(ungraded),
+        'unarchived_new_terminal_tasks': sorted(unarchived_new_terminal),
         'missing_task_inputs_in_archive': missing_inputs,
         'missing_scored_task_inputs_in_archive': missing_scored_inputs,
         'errors': errors,

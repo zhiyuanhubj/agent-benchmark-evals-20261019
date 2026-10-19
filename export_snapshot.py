@@ -44,6 +44,11 @@ nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-
 nvfp4_parallel_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-parallel-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 extra_lane_units = {str(lane): subprocess.run(['systemctl', '--user', 'is-active', f'muse-nvfp4-exact-tb-extra-lane{lane}-2866-20261019.service'], capture_output=True, text=True).stdout.strip() for lane in (2, 3)}
 extra_gpu_watcher_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-extra-gpu-watcher-20261019.service'], capture_output=True, text=True).stdout.strip()
+replica_2867_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-serve-2867-20261019.service'], capture_output=True, text=True).stdout.strip()
+replica_2919_controller = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-handoff-2867-20261019.service'], capture_output=True, text=True).stdout.strip()
+replica_state = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867'
+replica_handoff = read(replica_state / 'r1-b06-b07-handoff.json') if (replica_state / 'r1-b06-b07-handoff.json').exists() else None
+replica_ready = (replica_state / 'endpoint-ready.json').exists()
 extra_gpu_jobs = (2923, 2924, 2927, 2928)
 queued_gpu_result = subprocess.run(['squeue', '-h', '-j', ','.join(map(str, extra_gpu_jobs)), '-o', '%i|%T|%N|%S'], capture_output=True, text=True, check=True)
 extra_gpu_allocations = {}
@@ -118,7 +123,7 @@ snapshot = {
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
             'swe_review': {key: metric(value, key, 'partial_no_full_rrr') for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
             'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
-            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'qualification': nvfp4_recovery['qualification']}},
+            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'qualification': nvfp4_recovery['qualification']}},
         },
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',
@@ -194,6 +199,11 @@ for label, source in [
     dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, dest)
     files[str(dest.relative_to(ROOT))] = {'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(), 'size_bytes': dest.stat().st_size, 'source': str(source)}
+if replica_handoff:
+    source = replica_state / 'r1-b06-b07-handoff.json'
+    dest = ROOT / 'evidence/muse_nvfp4_exact_replica_handoff.json'
+    shutil.copy2(source, dest)
+    files[str(dest.relative_to(ROOT))] = {'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(), 'size_bytes': dest.stat().st_size, 'source': str(source)}
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
 def partial(d):
@@ -237,6 +247,15 @@ mn_exact_note_zh = f"精确镜像首轮已完成：**{mn_tb['success']}/89（{mn
 mn_timeout_count = mn_tb['exceptions'].get('AgentTimeoutError', 0)
 mn_timeout_en = f"Of the graded Muse exact-image tasks, {mn_timeout_count} received a verifier score after reaching the protocol's agent time limit. Their timeout status remains visible in the task audit; these tasks are not resampled within round 1.\n\n" if mn_timeout_count else ''
 mn_timeout_zh = f"**超时判分说明。** Muse 精确镜像已判分题目中有 {mn_timeout_count} 题达到协议规定的 agent 时限后仍得到 verifier 分数；逐题审计保留超时标记，首轮不重抽这些题。\n\n" if mn_timeout_count else ''
+if replica_handoff:
+    replica_note_en = 'Two untouched round-1 batches (18 tasks) are assigned to the NVFP4 replica on GPU allocation 2867 with evaluator allocation 2919. The handoff records original and effective config hashes; only the endpoint and trial concurrency change.'
+    replica_note_zh = '另有首轮 18 道尚未启动的题已按原配置哈希移交给 2867 的 NVFP4 副本和 2919 的评测器；只调整模型接口和任务并发数，保留原配置与结果。'
+elif replica_2867_unit == 'active':
+    replica_note_en = 'A second NVFP4 server is loading on GPU allocation 2867. Its evaluator on 2919 will claim two untouched batches (18 tasks) only after the model endpoint is ready.'
+    replica_note_zh = '第二个 NVFP4 服务正在 2867 加载，2919 评测器待接口就绪后才会认领 18 道未启动的题。'
+else:
+    replica_note_en = ''
+    replica_note_zh = ''
 readme = f'''# Agent benchmark evaluation snapshot
 
 Snapshot: **{now}**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
@@ -271,6 +290,7 @@ Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evid
 
 The [exact-TB command screen](evidence/exact_tb_integrity_screen.json) and [anchored manual notes](evidence/exact_tb_integrity_manual_notes.json) flag two successful Muse NVFP4 trajectories (`password-recovery`, `configure-git-webserver`) that attempted verifier-log or host-boundary access. Inspected outputs did not show successful hidden-answer retrieval. Their raw benchmark rewards are retained; both are excluded from clean training export pending full review. Keyword screening does not clear other trajectories.
 '''
+readme = readme.replace('Additional GPU allocation states:', replica_note_en + ' Additional GPU allocation states:', 1)
 readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
@@ -301,6 +321,7 @@ Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 
 
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `{latest_legacy_deltas['opus47_legacy']['archive_name']}`、`{latest_legacy_deltas['beam_legacy']['archive_name']}`、`{latest_legacy_deltas['muse_bf16']['archive_name']}`；截止时间和文件范围见各自清单。
 '''
+chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_note_zh + ' 新增 GPU 申请状态：', 1)
 chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))

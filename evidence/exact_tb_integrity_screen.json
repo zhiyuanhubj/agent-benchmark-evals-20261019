@@ -1,10 +1,10 @@
 {
-  "generated_utc": "2026-10-19T07:14:44.593923+00:00",
+  "generated_utc": "2026-10-19T07:34:27.872574+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
     "muse_nvfp4": {
-      "scored_trajectories_checked": 24,
+      "scored_trajectories_checked": 25,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -26,7 +26,7 @@
       }
     },
     "beam_bf16": {
-      "scored_trajectories_checked": 40,
+      "scored_trajectories_checked": 41,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -211,6 +211,17 @@
       "trajectory_sha256": "e8e721ee8401b1b24469052efc0521463049d08f2684798315a23ac409326eff",
       "steps": 15,
       "tool_calls": 38,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "cobol-modernization",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b00/cobol-modernization__otWUWiN/agent/trajectory.json",
+      "trajectory_sha256": "334c5495ce06980e64a1af4aaec87da295f81203f5784eef6de8ee0631633e91",
+      "steps": 54,
+      "tool_calls": 154,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -1963,6 +1974,17 @@
       "trajectory_sha256": "39ab9c8fe399fdd9bd26f41227b04ec4c311ac316e035e928670b43371980d3d",
       "steps": 6,
       "tool_calls": 9,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
+      "task": "mailman",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/mailman__zohxiFy/agent/trajectory.json",
+      "trajectory_sha256": "e3d1189dbb83cf322d85bd938999fc8fecf235e4874f58ae0bfaf666199e749f",
+      "steps": 76,
+      "tool_calls": 125,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     }
