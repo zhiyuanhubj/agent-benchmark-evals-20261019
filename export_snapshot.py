@@ -55,8 +55,12 @@ tb_legacy_remaining = read(ROOT / 'results/muse_tb_legacy_status.json')
 deep = read(M / 'remaining_deep3_2812_20261018/state/current.json')['three_round_summary']
 mr = read(M / 'review_bench_20261018/state/current.json')
 review_da = read(ROOT / 'evidence/swe_review_complete_split_da.json')
+native_review_da = read(ROOT / 'evidence/swe_review_native_complete_da.json')
 review_recovery = read(ROOT / 'evidence/swe_review_recovery_control.json')
 for split, row in review_da['reviewers'].get('muse-nvfp4', {}).items():
+    assert mr['swe_review'][split]['terminal'] == row['expected']
+    assert mr['swe_review'][split]['metrics_on_terminal_subset'] == row['metrics']
+for split, row in native_review_da['splits'].items():
     assert mr['swe_review'][split]['terminal'] == row['expected']
     assert mr['swe_review'][split]['metrics_on_terminal_subset'] == row['metrics']
 ex = read(B / 'expanded-current.json')
@@ -193,10 +197,11 @@ snapshot = {
             'swe_bench_pro_verified': {'round_1': {'status': 'complete', 'expected': 731, 'graded': 731, 'success': pro['success'], 'accuracy': pro['accuracy'], 'qualification': pro['qualification']}},
             'deepswe': {'rounds': deep['rounds'], 'mean_three_round_accuracy': deep['benchmark_recorded_mean_accuracy'], 'status': 'complete_three_rounds', 'qualification': deep['metric_scope'], 'trajectory_review_flag': deep['targeted_review']['successful_trajectory_with_verifier_log_probe']},
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
-            'swe_review': {key: metric(value, key, 'final_da_rrr_pending' if key in review_da['reviewers'].get('muse-nvfp4', {}) else 'partial_no_full_rrr') |
-                           ({'DA': review_da['reviewers']['muse-nvfp4'][key]['metrics'], 'RRR': None,
-                             'evidence': 'evidence/swe_review_complete_split_da.json'}
-                            if key in review_da['reviewers'].get('muse-nvfp4', {}) else {})
+            'swe_review': {key: metric(value, key, 'final_da_rrr_pending' if key in review_da['reviewers'].get('muse-nvfp4', {}) else 'supplementary_complete_da_rrr_pending') |
+                           {'DA': native_review_da['splits'][key]['metrics'], 'RRR': None,
+                            'evidence': ('evidence/swe_review_complete_split_da.json' if key in review_da['reviewers'].get('muse-nvfp4', {})
+                                         else 'evidence/swe_review_native_complete_da.json'),
+                            'native_verifier_complete_without_harbor_summary': len(native_review_da['splits'][key]['native_verifier_complete_without_harbor_summary'])}
                            for key, value in mr['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
             'swe_review_execution': {
                 'old_controller': review_recovery['old_controller'],
@@ -321,7 +326,8 @@ def partial(d):
     return f"{d['graded']}/{d['expected']} graded; {d['success']} success (partial)" if d.get('graded') else f"0/{d['expected']} graded"
 
 def review(d):
-    return ', '.join((f"{v['terminal']}/{v['expected']} terminal; final split DA {v['DA']['DA']}% "
+    return ', '.join((f"{v['terminal']}/{v['expected']} task outcomes; {v['DA']['produced']} parseable decisions; "
+                      f"{'final split DA' if v['status'] == 'final_da_rrr_pending' else 'audited supplementary DA'} {v['DA']['DA']}% "
                       f"(DA_total_50 {v['DA']['DA_total_50']}%)" if v.get('DA')
                       else f"{v['terminal']}/{v['expected']} terminal")
                      for v in d.values()) + '; official RRR incomplete'
@@ -339,6 +345,8 @@ mn = models['muse_nvfp4']
 be = models['beam_bf16']
 op = models['opus_4_7']
 review_instruct_da = mn['swe_review']['qwen3_30b_instruct2507_500']['DA']
+review_glm_da = mn['swe_review']['glm5_500']['DA']
+review_coder_da = mn['swe_review']['qwen3_coder_30b_500']['DA']
 mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
 mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
 manual_notes = read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
@@ -484,7 +492,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_review_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
 
-Muse NVFP4 has one **final SWE-Review decision-only split score**: Qwen3-30B-Instruct 422/422, official DA **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} parseable decisions, with {review_instruct_da['model_fail']} model failures; official DA_total_50 **{review_instruct_da['DA_total_50']}%**. The [sealed-input audit](evidence/swe_review_complete_split_da.json) verifies every canonical result hash against the official metric. This is not the combined three-split score or RRR. Original-generator revisions for rejected patches have not been graded.
+Muse NVFP4 has all expected task outcomes in three SWE-Review splits. The original pinned receipt seals Qwen3-30B-Instruct 422/422 at official DA **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} parseable decisions. An [audited supplementary calculation](evidence/swe_review_native_complete_da.json) runs the same official `compute_da.py` on GLM5 500/500 (**{review_glm_da['DA']}% DA**, {review_glm_da['produced']} parseable) and Qwen3-Coder 462/462 (**{review_coder_da['DA']}% DA**, {review_coder_da['produced']} parseable). Their 8 and 2 final native verifier reports lack Harbor summary files, so these two figures do not yet have the original pinned preparation receipt. The [sealed-input audit](evidence/swe_review_complete_split_da.json) applies to the Instruct split. Original-generator revisions for rejected patches have not been graded, so RRR remains unavailable.
 
 The [SWE-Review controller audit](evidence/swe_review_recovery_control.json) records that the old reviewer queue was killed at 03:17 UTC. Two disjoint continuations now own the 11 tasks never claimed and the 23 claimed tasks for which no native trial directory existed, using the same Muse NVFP4 model. Of the 16 interrupted trials with partial model output, 10 had already finished their agent step and native verifier report/reward; their original reports remain preserved, and no replacement draw is scheduled for them. The other 6 lacked a final report and now have a separately declared infrastructure replacement attempt. The stale old health file is not evidence of an active controller.
 
@@ -580,13 +588,13 @@ chinese_report = f'''# 模型评测结果快照
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
-| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review Qwen3-30B-Instruct 子集官方 DA **{review_instruct_da['DA']}%（422/422）**{muse_exact_zh_done} | {muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
+| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review Instruct 规范收据 DA **{review_instruct_da['DA']}%（422/422）**，GLM5 补充核验 DA **{review_glm_da['DA']}%（500/500）**，Coder 补充核验 DA **{review_coder_da['DA']}%（462/462）**{muse_exact_zh_done} | {muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 未完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | {'暂无完整 benchmark 分数' if not bf16_tb_round1['complete'] else bf16_exact_zh_done.lstrip('；')} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{bf16_review_zh} |
 
-**SWE-Review 的最终子集 DA。** Muse NVFP4 的 Qwen3-30B-Instruct 组 422 题全部有规范终态记录，官方 `compute_da.py` 得 **{review_instruct_da['DA']}%**（{review_instruct_da['produced']} 个可解析决定，{review_instruct_da['model_fail']} 个模型无有效决定）；将无有效决定按 0.5 计的 `DA_total_50` 为 **{review_instruct_da['DA_total_50']}%**。[逐题哈希与评分源码核验](evidence/swe_review_complete_split_da.json)可复查。另两组仍未完整，原始生成模型修复与判分尚未产生 RRR，因此没有可汇报的 SWE-Review 整体最终 RRR。
+**SWE-Review 的 DA。** Muse NVFP4 的 Qwen3-30B-Instruct 组 422 题均有规范收据，官方 `compute_da.py` 在 {review_instruct_da['produced']} 个可解析决定上得 **{review_instruct_da['DA']}%**。[原规范收据审计](evidence/swe_review_complete_split_da.json)可复查。GLM5 500/500、Qwen3-Coder 462/462 均有题目终态；用同一官方函数做[逐题哈希核验的补充计算](evidence/swe_review_native_complete_da.json)，分别在 {review_glm_da['produced']} 和 {review_coder_da['produced']} 个可解析决定上得到 DA **{review_glm_da['DA']}%** 和 **{review_coder_da['DA']}%**。其中 8 道和 2 道仅有完成的原生 verifier 报告而缺 Harbor 汇总文件，因此这两组尚无原任务准备协议的封存收据。原始生成模型修复与判分尚未产生 RRR，不能称为 SWE-Review 最终整体分数。
 
 [SWE-Review 控制器核验](evidence/swe_review_recovery_control.json)确认旧队列于 03:17 UTC 中断：11 题从未领取、23 题虽被领取却没有任何原生题目目录；这 34 题已拆成互不重叠的两条续跑队列，继续用同一 Muse NVFP4 模型。另有 16 题留下部分模型输出：其中 10 题的 agent 结束步骤及原生验证报告、reward 都已保存，只缺 Harbor 汇总文件，原结果保留且未重抽；其余 6 题无最终评审报告，已另列基础设施中断补测。旧状态文件中的 healthy 是停机前的记录，不能当作当前运行状态。
 

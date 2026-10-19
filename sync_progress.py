@@ -214,7 +214,10 @@ def cycle():
         for note in manual_notes['notes']:
             row = screened[(note['model'], note['task'])]
             assert row['trajectory_sha256'] == note['trajectory_sha256'], 'Manual trajectory review anchor changed'
-        run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence', 'input_output/manifest.json', 'input_output/archive_manifests'])
+        run(['git', 'add', 'README.md', 'REPORT.zh-CN.md', 'results/scores.json', 'evidence',
+             'input_output/manifest.json', 'input_output/archive_manifests',
+             'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
+             'export_snapshot.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
             run(['git', 'commit', '-m', 'Refresh live benchmark results'])
