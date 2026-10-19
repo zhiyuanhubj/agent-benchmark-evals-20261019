@@ -1,6 +1,6 @@
 {
-  "reviewed_utc": "2026-10-19T08:03:00+00:00",
-  "scope": "Targeted manual review of three flagged and two newly successful Muse NVFP4 exact-image TB2.1 trajectories.",
+  "reviewed_utc": "2026-10-19T08:05:30+00:00",
+  "scope": "Targeted manual review of four flagged and two newly successful Muse NVFP4 exact-image TB2.1 trajectories.",
   "notes": [
     {
       "model": "muse_nvfp4",
@@ -44,6 +44,15 @@
       "reward": 1.0,
       "trajectory_sha256": "5ec1322fd15f89fedb3f6877a0c1cf29345c13842b2d75a4ae1061f5c358b1df",
       "observed": "The 209 tool calls passed the automated full-command screen without a hit. Targeted review of early and final commands showed OCR/image processing on /app/code.png, writing /app/solution.py and /app/output.txt, and checking the `bee26a` prefix explicitly provided in the public instruction. No hidden-answer retrieval is confirmed by these checks; the full trajectory remains unverified for clean training export.",
+      "training_disposition": "candidate_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_nvfp4",
+      "task": "filter-js-from-html",
+      "reward": 1.0,
+      "trajectory_sha256": "042245260edc111a24da7ad80e461d38b0ec140e9fe5406f3b3792ded6336ef3",
+      "observed": "The sidecar_html_navigation keyword hits at steps 6, 8, 11, and 12 occur inside local XSS test-input strings written under /tmp; the public task asks for an HTML JavaScript filter. Inspected commands edit /app/filter.py and run it against those local examples. The matched text is not a browser navigation or a request for hidden benchmark material. This is targeted context review, not a full clean-trajectory certification.",
       "training_disposition": "candidate_pending_full_manual_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }

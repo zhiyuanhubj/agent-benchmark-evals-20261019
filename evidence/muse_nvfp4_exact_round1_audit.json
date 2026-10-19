@@ -1,13 +1,14 @@
 {
-  "generated_utc": "2026-10-19T08:02:19.959786+00:00",
+  "generated_utc": "2026-10-19T08:07:12.286696+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 29,
-  "success_count": 24,
+  "graded_task_count": 31,
+  "success_count": 25,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
-    "cobol-modernization"
+    "cobol-modernization",
+    "gcode-to-text"
   ],
   "replica_handoff": {
     "utc": 1792395252.4120455,
@@ -72,12 +73,10 @@
     "db-wal-recovery",
     "dna-assembly",
     "extract-moves-from-video",
-    "filter-js-from-html",
     "financial-document-processor",
     "fix-code-vulnerability",
     "fix-git",
     "fix-ocaml-gc",
-    "gcode-to-text",
     "gpt2-codegolf",
     "headless-terminal",
     "hf-model-inference",
@@ -130,9 +129,9 @@
     "compile-compcert__w9HS5rZ",
     "constraints-scheduling__jPjVKiL",
     "extract-moves-from-video__pA42NVn",
-    "filter-js-from-html__KhugWyF",
-    "gcode-to-text__iF8eaFS",
+    "financial-document-processor__KsQzUGc",
     "gpt2-codegolf__j32jY8c",
+    "headless-terminal__YyAiTWj",
     "path-tracing-reverse__4covUwV",
     "path-tracing__au39ic5",
     "regex-chess__53F7VDd",
@@ -355,6 +354,28 @@
       "finished_at": "2026-10-19T07:35:51.433687Z",
       "raw_response_count": 43,
       "responses_with_reasoning_content": 43
+    },
+    "filter-js-from-html": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b01/filter-js-from-html__KhugWyF/result.json",
+      "result_sha256": "061a977d9d6e95f3abdf4e0d9908fb5ba9c00879c116054e268a4fb88f5264a5",
+      "finished_at": "2026-10-19T08:04:10.792073Z",
+      "raw_response_count": 18,
+      "responses_with_reasoning_content": 18
+    },
+    "gcode-to-text": {
+      "reward": 0.0,
+      "exception_type": "AgentTimeoutError",
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b02/gcode-to-text__iF8eaFS/result.json",
+      "result_sha256": "79aedb403f8dafda4b265d7f877bdc44a2bbda0c02d43970a19243e551f84b75",
+      "finished_at": "2026-10-19T08:05:46.684651Z",
+      "raw_response_count": 95,
+      "responses_with_reasoning_content": 95
     },
     "git-leak-recovery": {
       "reward": 1.0,
