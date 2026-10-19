@@ -1,5 +1,5 @@
 {
-  "utc": 1792432552.205834,
+  "utc": 1792433439.2048743,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 325,
+      "terminal": 329,
       "exceptions": 7,
       "prepared_image_phases": {
         "image_ready": 352
@@ -377,7 +377,7 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 327,
+      "terminal": 330,
       "exceptions": 5,
       "prepared_image_phases": {
         "image_ready": 352
@@ -409,32 +409,32 @@
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "terminal": 350,
-      "exceptions": 6,
+      "terminal": 354,
+      "exceptions": 7,
       "prepared_image_phases": {
-        "image_ready": 368
+        "image_ready": 384
       },
       "controller": {
-        "utc": 1792429821.8611603,
+        "utc": 1792433088.6329846,
         "phase": "running",
-        "batch": 21,
+        "batch": 22,
         "tasks": [
-          "sphinx-doc__sphinx-8265",
-          "sphinx-doc__sphinx-8269",
-          "sphinx-doc__sphinx-8459",
-          "sphinx-doc__sphinx-8475",
-          "sphinx-doc__sphinx-8551",
-          "sphinx-doc__sphinx-8593",
-          "sphinx-doc__sphinx-8595",
-          "sphinx-doc__sphinx-8621",
-          "sphinx-doc__sphinx-8638",
-          "sphinx-doc__sphinx-8721",
-          "sphinx-doc__sphinx-9230",
-          "sphinx-doc__sphinx-9258",
-          "sphinx-doc__sphinx-9320",
-          "sphinx-doc__sphinx-9367",
-          "sphinx-doc__sphinx-9461",
-          "sphinx-doc__sphinx-9591"
+          "sphinx-doc__sphinx-9602",
+          "sphinx-doc__sphinx-9673",
+          "sphinx-doc__sphinx-9698",
+          "sphinx-doc__sphinx-9711",
+          "sympy__sympy-12096",
+          "sympy__sympy-12419",
+          "sympy__sympy-12481",
+          "sympy__sympy-12489",
+          "sympy__sympy-13031",
+          "sympy__sympy-13091",
+          "sympy__sympy-13372",
+          "sympy__sympy-13480",
+          "sympy__sympy-13551",
+          "sympy__sympy-13615",
+          "sympy__sympy-13647",
+          "sympy__sympy-13757"
         ]
       },
       "full_official_rrr_complete": false

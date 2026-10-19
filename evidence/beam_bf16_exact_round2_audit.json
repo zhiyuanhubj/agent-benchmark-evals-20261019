@@ -1,21 +1,18 @@
 {
-  "generated_utc": "2026-10-19T18:08:02.796582+00:00",
+  "generated_utc": "2026-10-19T18:22:20.913724+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T175742Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T181240Z.tar.zst",
   "expected": 89,
-  "terminal": 16,
-  "graded": 16,
-  "success": 13,
+  "terminal": 19,
+  "graded": 19,
+  "success": 14,
   "missing_graded_tasks": [
     "chess-best-move",
     "code-from-image",
-    "db-wal-recovery",
-    "distribution-search",
     "dna-assembly",
-    "dna-insert",
     "extract-elf",
     "extract-moves-from-video",
     "feal-differential-cryptanalysis",
@@ -86,14 +83,9 @@
   ],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [
-    "db-wal-recovery",
-    "distribution-search"
+    "extract-elf"
   ],
-  "missing_task_inputs_in_archive": [
-    "vulnerable-secret",
-    "winning-avg-corewars",
-    "write-compressor"
-  ],
+  "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
   "qualification": "partial_or_needs_review",
@@ -211,6 +203,27 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/custom-memory-heap-crash__EjcAJAg/result.json",
       "raw_response_count": 21,
       "responses_with_reasoning_content": 21
+    },
+    "db-wal-recovery": {
+      "reward": 0.0,
+      "result_sha256": "936ee9d934f412d132c192921c1ad1fc6a1ac9ff505fce3e56090e16b92d8cf1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/db-wal-recovery__BtM4Ui8/result.json",
+      "raw_response_count": 36,
+      "responses_with_reasoning_content": 36
+    },
+    "distribution-search": {
+      "reward": 1.0,
+      "result_sha256": "79623e89b31de40f5697b3731d7debc7fc5cbfc01403717ba1d25556b4e16c17",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/distribution-search__PgHpCa6/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "dna-insert": {
+      "reward": 0.0,
+      "result_sha256": "601dff26a6d1a173ea40498982706087a109dbebf504237828fbc850f38bf0b6",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/dna-insert__4kMpLJd/result.json",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
     }
   }
 }
