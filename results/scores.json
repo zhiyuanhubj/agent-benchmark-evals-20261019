@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T05:37:24.633455+00:00",
+  "generated_utc": "2026-10-19T05:38:20.151850+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -160,14 +160,14 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 393,
+          "new_raw_model_responses": 395,
           "new_raw_model_responses_by_batch": {
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 129,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 130,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 118,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 61,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 85
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 86
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T05:37:24+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T05:37:40+00:00",
           "active_recovery_trial_dirs": 8,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -314,7 +314,7 @@
         },
         "qwen3_coder_30b_500": {
           "expected": 462,
-          "terminal": 238,
+          "terminal": 239,
           "status": "partial_no_full_rrr"
         },
         "qwen3_30b_instruct2507_500": {
@@ -328,9 +328,9 @@
       "model": "Claude Opus 4.7",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 476,
-        "graded": 475,
-        "success": 301,
+        "terminal": 477,
+        "graded": 476,
+        "success": 302,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -387,7 +387,7 @@
             "graded": 87,
             "success": 70,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 1826,
+            "archived_actual_model_responses": 1829,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
