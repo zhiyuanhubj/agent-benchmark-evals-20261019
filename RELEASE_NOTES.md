@@ -1,0 +1,3 @@
+Benchmark snapshot begun 2026-10-19 UTC. Read the repository README and `results/scores.json` for model/precision, benchmark image profile, complete versus partial status, and audit qualifications.
+
+Each `.tar.zst` asset contains native per-task inputs (`task.json` or `config.json`), result outputs, trajectories, raw API responses and trial logs available at the archive time. Matching JSON files in `input_output/archive_manifests/` record coverage, SHA-256 and source roots. Archives omit model weights, caches and sandbox/verifier internals. Some benchmarks remain active, so this release is a dated snapshot; later results require a new snapshot.
