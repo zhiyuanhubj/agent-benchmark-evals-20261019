@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T22:00:31.844350+00:00",
+  "generated_utc": "2026-10-19T22:07:58.743832+00:00",
   "metric": "Official SWE-Review compute_da.py, complete canonical review splits only",
   "metric_source_sha256": "35fdc90b8a5a14034df40fab7d70c7f3d5be587c0e8f92b67e0155996b52b035",
   "plan_sha256": "85414c294153273b0f4a975470233afebd9dd3fb8d116c6642a337f4837eea3c",
@@ -84,7 +84,65 @@
         "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
       }
     },
-    "beam-bf16": {},
+    "beam-bf16": {
+      "qwen3_30b_instruct2507_500": {
+        "status": "final_da_for_this_split",
+        "expected": 422,
+        "metrics": {
+          "DA": 86.5,
+          "DA_total_50": 82.8,
+          "CR": 89.8,
+          "FAR": 7.5,
+          "FRR": 27.9,
+          "total": 422,
+          "correct": 328,
+          "model_fail": 43,
+          "produced": 379,
+          "TP": 80,
+          "FP": 20,
+          "TN": 248,
+          "FN": 31
+        },
+        "canonical_receipt_sha256": "72339a332b1a223146589bc8f391a5bc3efea2df2d115fb48914ede3ddcba94c",
+        "benchmark_sha256": "531d636f1ebe470b0c4b571d87874002c37c7a45cdfec49f17a0774cf929be11",
+        "verified_review_count": 422,
+        "invalid_report_count": 5,
+        "invalid_reports": [
+          {
+            "instance_id": "django__django-11490",
+            "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch2/django__django-11490__eAv4JwQ/verifier/review_report.json",
+            "sha256": "9e8d443ae1d539e9a5a51b8c3700ff1d855859863c59f20538564988cfc8cf67",
+            "parse_error": "Extra data: line 28 column 1 (char 2571)"
+          },
+          {
+            "instance_id": "django__django-11740",
+            "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch3/django__django-11740__hcUDVwe/verifier/review_report.json",
+            "sha256": "3d77646e3f7f99ef007872cc7615578a5519b98c3897e1eacfb7b5347c54a4e1",
+            "parse_error": "Extra data: line 21 column 1 (char 1877)"
+          },
+          {
+            "instance_id": "matplotlib__matplotlib-25287",
+            "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch14/matplotlib__matplotlib-25287__HPmoZBy/verifier/review_report.json",
+            "sha256": "30b241bfcd7b0526a59c0647d26d1fd49435502b388049ec07db6c48dba8e7ac",
+            "parse_error": "Extra data: line 47 column 1 (char 2675)"
+          },
+          {
+            "instance_id": "sphinx-doc__sphinx-9591",
+            "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch21/sphinx-doc__sphinx-9591__dZc2hAj/verifier/review_report.json",
+            "sha256": "5bf687a5761e3d874e3066412b9cc0a621b25fe1522d6b7cd5ee5dd233ef968f",
+            "parse_error": "Extra data: line 28 column 1 (char 2303)"
+          },
+          {
+            "instance_id": "sympy__sympy-12489",
+            "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch22/sympy__sympy-12489__Ah8tXnS/verifier/review_report.json",
+            "sha256": "9e22468c4c8bf41707f23972fcb814e9a1ec4e8f7ff1478deefe7bbf1f8e9022",
+            "parse_error": "Extra data: line 28 column 1 (char 2139)"
+          }
+        ],
+        "RRR": null,
+        "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
+      }
+    },
     "muse-bf16": {}
   }
 }

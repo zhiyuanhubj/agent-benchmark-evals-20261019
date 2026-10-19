@@ -65,6 +65,8 @@ for split, row in native_review_da['splits'].items():
     assert mr['swe_review'][split]['metrics_on_terminal_subset'] == row['metrics']
 ex = read(B / 'expanded-current.json')
 br = read(B / 'current.json')
+for split, row in review_da['reviewers'].get('beam-bf16', {}).items():
+    assert br['swe_review'][split]['terminal'] == row['expected']
 beam_malformed = read(ROOT / 'evidence/beam_swe_review_malformed_reports.json')
 beam_malformed_count = sum(row['invalid_report_count'] for row in beam_malformed['splits'].values())
 beam_prep_phase = (br.get('revision_preparation') or {}).get('phase', 'unknown')
@@ -225,7 +227,12 @@ snapshot = {
             'tb2_1_legacy_cached_tag': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['beam_bf16']['tb'].items()},
             'tb2_1_exact_supplied_images': {'rounds': exact['models']['beam_bf16']['rounds'], 'status': tb_profile_status(exact['models']['beam_bf16']['rounds'])},
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': br['swrbench']['judged'], 'accuracy': br['swrbench']['final_metrics']['overall']['accuracy'], 'f1': br['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
-            'swe_review': {key: metric(value, key, 'partial_no_full_rrr') for key, value in br['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
+            'swe_review': {key: metric(value, key, 'final_da_rrr_pending' if key in review_da['reviewers'].get('beam-bf16', {}) else 'partial_no_full_rrr') |
+                           ({'DA': review_da['reviewers']['beam-bf16'][key]['metrics'], 'RRR': None,
+                             'evidence': 'evidence/swe_review_complete_split_da.json',
+                             'invalid_report_count': review_da['reviewers']['beam-bf16'][key]['invalid_report_count']}
+                            if key in review_da['reviewers'].get('beam-bf16', {}) else {})
+                           for key, value in br['swe_review'].items() if isinstance(value, dict) and 'expected' in value},
         },
         'opus_4_7': {
             'model': 'Claude Opus 4.7',
@@ -350,6 +357,7 @@ op = models['opus_4_7']
 review_instruct_da = mn['swe_review']['qwen3_30b_instruct2507_500']['DA']
 review_glm_da = mn['swe_review']['glm5_500']['DA']
 review_coder_da = mn['swe_review']['qwen3_coder_30b_500']['DA']
+beam_review_instruct_da = be['swe_review']['qwen3_30b_instruct2507_500'].get('DA')
 mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
 mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
 manual_notes = read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
@@ -499,7 +507,9 @@ Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits]
 
 The [SWE-Review controller audit](evidence/swe_review_recovery_control.json) records that the old reviewer queue was killed at 03:17 UTC. Two disjoint continuations now own the 11 tasks never claimed and the 23 claimed tasks for which no native trial directory existed, using the same Muse NVFP4 model. Of the 16 interrupted trials with partial model output, 10 had already finished their agent step and native verifier report/reward; their original reports remain preserved, and no replacement draw is scheduled for them. The other 6 lacked a final report and now have a separately declared infrastructure replacement attempt. The stale old health file is not evidence of an active controller.
 
-Beam SWE-Review has [**{beam_malformed_count} sampled reports with invalid JSON**](evidence/beam_swe_review_malformed_reports.json). The original task-preparation controller failed while reading one. A [source-pinned v2 preparation protocol](protocol/beam_review_revision_v2/task-preparation-plan-v2.json) preserves the raw files and applies the official generator's missing-decision fallback; its current phase is `{beam_prep_phase}`. Review generation is still running, so this is not a final DA or RRR.
+Beam SWE-Review has [**{beam_malformed_count} sampled reports with invalid JSON**](evidence/beam_swe_review_malformed_reports.json). The original task-preparation controller failed while reading one. A [source-pinned v2 preparation protocol](protocol/beam_review_revision_v2/task-preparation-plan-v2.json) preserves the raw files and applies the official generator's missing-decision fallback; its current phase is `{beam_prep_phase}`. The remaining review splits are still running.
+
+Beam BF16's Qwen3-30B-Instruct SWE-Review split has a [sealed official DA](evidence/swe_review_complete_split_da.json) of **{beam_review_instruct_da['DA']}%** on {beam_review_instruct_da['produced']} parseable decisions from 422 task outcomes. Its {be['swe_review']['qwen3_30b_instruct2507_500']['invalid_report_count']} malformed reports are preserved as model failures. The GLM5 and Coder splits and all RRR revision grades remain incomplete.
 
 The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. Muse NVFP4 legacy round 1 was **68/88 graded on raw first draw** (one ungraded); its separately labeled score after declared infrastructure replacement draws is **71/89**. Muse NVFP4 legacy rounds 2/3 remain **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}** and **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}** graded. Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is {be['tb2_1_legacy_cached_tag']['1']['success']}/{be['tb2_1_legacy_cached_tag']['1']['graded']} graded and partial. The original BF16 run is an exception to the old file label: its 89 image identities and tasks match the supplied archive, so its historical `tb2_1_legacy_cached_tag` field and exact-image field refer to **the same trials**, not two samples. None of the partial counts is a full benchmark accuracy. Independent exact-image and legacy-image trials must not be pooled.
 
@@ -594,7 +604,7 @@ chinese_report = f'''# 模型评测结果快照
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
 | Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_exact_zh_done} | {muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
-| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 未完成 |
+| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review Instruct 组封存 DA **{beam_review_instruct_da['DA']}%（422 题）**{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 另两组与 RRR 未完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | {'暂无完整 benchmark 分数' if not bf16_tb_round1['complete'] else bf16_exact_zh_done.lstrip('；')} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{bf16_review_zh} |
@@ -603,7 +613,9 @@ chinese_report = f'''# 模型评测结果快照
 
 [SWE-Review 控制器核验](evidence/swe_review_recovery_control.json)确认旧队列于 03:17 UTC 中断：11 题从未领取、23 题虽被领取却没有任何原生题目目录；这 34 题已拆成互不重叠的两条续跑队列，继续用同一 Muse NVFP4 模型。另有 16 题留下部分模型输出：其中 10 题的 agent 结束步骤及原生验证报告、reward 都已保存，只缺 Harbor 汇总文件，原结果保留且未重抽；其余 6 题无最终评审报告，已另列基础设施中断补测。旧状态文件中的 healthy 是停机前的记录，不能当作当前运行状态。
 
-Beam SWE-Review 有[**{beam_malformed_count} 份已抽样但 JSON 无法解析的报告**](evidence/beam_swe_review_malformed_reports.json)，旧任务准备控制器因此失败。[带源码哈希的新版本准备协议](protocol/beam_review_revision_v2/task-preparation-plan-v2.json)保留原始文件，并按官方生成器的缺失决定回退处理；当前阶段为 `{beam_prep_phase}`。评审尚在继续，不能据此报告最终 DA 或 RRR。
+Beam SWE-Review 有[**{beam_malformed_count} 份已抽样但 JSON 无法解析的报告**](evidence/beam_swe_review_malformed_reports.json)，旧任务准备控制器因此失败。[带源码哈希的新版本准备协议](protocol/beam_review_revision_v2/task-preparation-plan-v2.json)保留原始文件，并按官方生成器的缺失决定回退处理；当前阶段为 `{beam_prep_phase}`。另两组评审仍在继续。
+
+Beam BF16 的 SWE-Review Instruct 组已有[封存的官方 DA](evidence/swe_review_complete_split_da.json)：422 题终态中 {beam_review_instruct_da['produced']} 个决定可解析，**DA {beam_review_instruct_da['DA']}%**。其中 {be['swe_review']['qwen3_30b_instruct2507_500']['invalid_report_count']} 份格式错误的原始报告保留，按模型无有效决定处理。GLM5/Coder 两组和全部 RRR 修复判分仍未完成。
 
 **TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}**、**{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}**，尚无三轮均值。BF16 的历史字段虽名为 `tb2_1_legacy_cached_tag`，[镜像身份审计](evidence/muse_bf16_exact_image_identity.json)已证实启动前及运行节点上的 89 个镜像与指定归档一致，题目和推理设置也一致；它与精确镜像字段指向**同一轮测试**，不能相加。{mn_exact_note_zh}{mteb_timeout_note_zh}两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成四条互不重叠的队列，最多 8 题并行。本次快照中恢复任务已有 {new_raw_responses} 条原始模型响应、{active_recovery_trial_dirs} 个运行中题目目录，最新响应时间为 {new_raw_response_latest_utc}；这些是活跃度，不是分数。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；[首轮逐题核验](evidence/muse_nvfp4_exact_round1_audit.json)会检查重复、缺题、原始结果哈希、判分和 thinking 原始响应，满 89 题且核验通过后才发布首轮准确率。新增 GPU 申请状态：{extra_gpu_status}。排队节点获配后监控器会启动同一 NVFP4 模型服务，并逐批加锁领取 b03、b05 中尚未启动的一批；early95 结束后腾出的 2812 最多可领取两批。原 CPU 评测器继续使用原题目和镜像，仅模型端点变化；若本地批次先启动，不会在其他节点重复抽题。
 
