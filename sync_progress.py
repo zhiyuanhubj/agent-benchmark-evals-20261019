@@ -29,12 +29,14 @@ def run(command, timeout=180):
 def sync_native_archives(scores):
     recovery = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']
     manifest_dir = ROOT / 'input_output/archive_manifests'
+    opus_rounds = scores['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'].values()
+    beam_rounds = scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds'].values()
     profiles = [
-        ('muse_nvfp4', sum(recovery['new_terminal_by_round'].values()), [PYTHON, str(ROOT / 'snapshot_live_tb.py')]),
-        ('opus47', sum(value['terminal'] for value in scores['models']['opus_4_7']['tb2_1_exact_supplied_images']['rounds'].values()), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'opus47']),
-        ('beam_bf16', sum(value['terminal'] for value in scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds'].values()), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'beam_bf16']),
+        ('muse_nvfp4', sum(recovery['new_terminal_by_round'].values()), recovery['new_raw_model_responses'], [PYTHON, str(ROOT / 'snapshot_live_tb.py')]),
+        ('opus47', sum(value['terminal'] for value in opus_rounds), sum(value['archived_actual_model_responses'] for value in opus_rounds), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'opus47']),
+        ('beam_bf16', sum(value['terminal'] for value in beam_rounds), sum(value['archived_actual_model_responses'] for value in beam_rounds), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'beam_bf16']),
     ]
-    for name, terminal, command in profiles:
+    for name, terminal, raw_count, command in profiles:
         live_manifests = sorted(manifest_dir.glob(f'{name}_exact_tb_live_*.json'))
         archived_terminal = 0
         latest_archive_time = None
@@ -51,7 +53,9 @@ def sync_native_archives(scores):
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
                 handoff_newer = (latest_archive_time is None or handoff_time > latest_archive_time
                                  or latest_filename_counts.get('handoff_receipt', 0) != 1)
-        if terminal > archived_terminal or handoff_newer:
+        raw_snapshot_due = (latest_archive_time is not None and raw_count > latest_filename_counts.get('raw_response', 0)
+                            and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= 900)
+        if terminal > archived_terminal or handoff_newer or raw_snapshot_due:
             run(command, timeout=300)
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16'):
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
