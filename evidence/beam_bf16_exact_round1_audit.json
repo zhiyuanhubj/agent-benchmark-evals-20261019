@@ -1,18 +1,16 @@
 {
-  "generated_utc": "2026-10-19T13:44:45.181269+00:00",
+  "generated_utc": "2026-10-19T13:55:12.797513+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T134348Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T135410Z.tar.zst",
   "expected": 89,
-  "terminal": 64,
-  "graded": 64,
-  "success": 46,
+  "terminal": 66,
+  "graded": 66,
+  "success": 47,
   "missing_graded_tasks": [
-    "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "qemu-alpine-ssh",
     "qemu-startup",
     "query-optimize",
     "raman-fitting",
@@ -38,8 +36,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "qemu-startup",
-    "query-optimize",
     "raman-fitting",
     "regex-chess",
     "regex-log",
@@ -381,6 +377,13 @@
       "raw_response_count": 331,
       "responses_with_reasoning_content": 331
     },
+    "make-mips-interpreter": {
+      "reward": 0.0,
+      "result_sha256": "3205322316a42eefc3a4519ab32ba41bd0059ca4447fb78f444793c4abda71f7",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/make-mips-interpreter__kysoRDx/result.json",
+      "raw_response_count": 312,
+      "responses_with_reasoning_content": 312
+    },
     "mcmc-sampling-stan": {
       "reward": 1.0,
       "result_sha256": "b49a3656dbd3201418d7153ffd0cc69d05f508a3daaed1d0f8a2b85f8e73065b",
@@ -513,6 +516,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/pytorch-model-recovery__NAsY6zH/result.json",
       "raw_response_count": 18,
       "responses_with_reasoning_content": 18
+    },
+    "qemu-alpine-ssh": {
+      "reward": 1.0,
+      "result_sha256": "541d8bf06362235d1ae8df8d3be2ed51b47f481cfe5095d2bc4fafc4867763cb",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/qemu-alpine-ssh__o2EfpXk/result.json",
+      "raw_response_count": 32,
+      "responses_with_reasoning_content": 32
     }
   }
 }

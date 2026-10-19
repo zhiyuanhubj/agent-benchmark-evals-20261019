@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T13:44:50.233420+00:00",
+  "generated_utc": "2026-10-19T13:55:18.258484+00:00",
   "scope": "Currently scored first-round exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -41,7 +41,7 @@
       }
     },
     "beam_bf16": {
-      "scored_trajectories_checked": 64,
+      "scored_trajectories_checked": 66,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -3429,6 +3429,17 @@
     },
     {
       "model": "beam_bf16",
+      "task": "make-mips-interpreter",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/make-mips-interpreter__kysoRDx/agent/trajectory.json",
+      "trajectory_sha256": "6d114386225ec99304a42f6ce2cd5a206d812e837ca3128763fe4cfa04a606a3",
+      "steps": 310,
+      "tool_calls": 681,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
       "task": "mcmc-sampling-stan",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/mcmc-sampling-stan__Y4iHrDd/agent/trajectory.json",
@@ -3641,19 +3652,30 @@
       "tool_calls": 24,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16",
+      "task": "qemu-alpine-ssh",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/qemu-alpine-ssh__o2EfpXk/agent/trajectory.json",
+      "trajectory_sha256": "807ef7eacb6c122581c9fed7c2c5840083e340c41c12137d669155feda1050ac",
+      "steps": 33,
+      "tool_calls": 69,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     }
   ],
   "active_muse_nvfp4": {
     "unscored_trajectories_checked": 3,
-    "pattern_hit_trajectories": 0,
+    "pattern_hit_trajectories": 1,
     "records": [
       {
         "model": "muse_nvfp4",
         "task": "make-doom-for-mips",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-doom-for-mips__ayw35yd",
-        "trajectory_sha256_at_screen": "59249a749fbb2a94e59bcecea10f8832a7df47cb4351e57307f0facdfae6f1d2",
-        "steps_at_screen": 109,
-        "tool_calls_at_screen": 495,
+        "trajectory_sha256_at_screen": "0636cc9206cef0b3ac8e245f0363e014bd1918219e6627a5f2c85ea462d809ef",
+        "steps_at_screen": 114,
+        "tool_calls_at_screen": 519,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3661,9 +3683,9 @@
         "model": "muse_nvfp4",
         "task": "make-mips-interpreter",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/make-mips-interpreter__6BNKuxJ",
-        "trajectory_sha256_at_screen": "e703c16003dc81d21f239ea367ad6305ab2f9670587747443f74f916b6a9a053",
-        "steps_at_screen": 48,
-        "tool_calls_at_screen": 208,
+        "trajectory_sha256_at_screen": "2f6061c7b9600348a48e0b0af4d06dae27a853dd82395435b3a8874694696d6c",
+        "steps_at_screen": 51,
+        "tool_calls_at_screen": 222,
         "hits": [],
         "status": "in_progress_not_scored"
       },
@@ -3671,10 +3693,16 @@
         "model": "muse_nvfp4",
         "task": "raman-fitting",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b05/raman-fitting__gccPUXq",
-        "trajectory_sha256_at_screen": "6c03ea7fc545298007c9fdef3248dcb64be47b0d348501c397bc6234c9a0cc62",
-        "steps_at_screen": 33,
-        "tool_calls_at_screen": 82,
-        "hits": [],
+        "trajectory_sha256_at_screen": "ba3314864d27f8dec59fe66b05332bffb61d7e72af7fb59920caaaaa38fe989b",
+        "steps_at_screen": 41,
+        "tool_calls_at_screen": 98,
+        "hits": [
+          {
+            "rule": "execution_override",
+            "step_id": 39,
+            "command_sha256": "63eaafde44c2b0b7a8e5e8b4325499fe0e204471f5942072128f4ddd214d720d"
+          }
+        ],
         "status": "in_progress_not_scored"
       }
     ],
