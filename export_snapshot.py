@@ -388,6 +388,18 @@ opus_deep_zh_pending = ''.join(
 )
 bf16_exact_zh_done = f'；指定精确镜像 TB2.1 首轮 {tb_zh(bf16_tb_round1)}' if bf16_tb_round1['complete'] else ''
 bf16_exact_zh_pending = '' if bf16_tb_round1['complete'] else f'；指定精确镜像 TB2.1 首轮 {tb_zh(bf16_tb_round1)}'
+bf16_review_state_path = BF / 'review_bench/state/current.json'
+bf16_review_state = read(bf16_review_state_path) if bf16_review_state_path.exists() else {}
+bf16_review_phase = bf16_review_state.get('phase')
+if bf16_review_phase == 'queued_for_verified_2886_bf16_endpoint':
+    bf16_review_en = 'Queued on verified BF16 pair 2886; awaiting model load and tool/thinking preflight'
+    bf16_review_zh = '；SWRBench 与 SWE-Review 已排到 2886 双节点，等待模型加载及工具调用/thinking 预检'
+elif bf16_review_phase == 'verified_2886_swr_generation_judging_and_review_pipeline_started':
+    bf16_review_en = 'Running on verified BF16 pair 2886; final score pending'
+    bf16_review_zh = '；SWRBench 与 SWE-Review 已在 2886 双节点启动，最终分数待完成'
+else:
+    bf16_review_en = 'Incomplete; current launch state needs review'
+    bf16_review_zh = '；SWRBench 与 SWE-Review 尚未完成，启动状态待核查'
 mn_exact_note_zh = f"精确镜像首轮已完成：**{mn_tb['success']}/89（{mn_tb['accuracy']:.2%}）**。" if mn_tb['complete'] else f"精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。"
 if not mn_tb['complete'] and mn_tb['graded'] == 88 and mn_audit['missing_graded_tasks'] == ['mteb-leaderboard']:
     lower = mn_tb['success'] / 89
@@ -434,7 +446,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'])} |
 | Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | — |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
-| Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | Queued after Pro round 1 | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | Queued after Pro round 1 |
+| Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_review_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
 
 Muse NVFP4 has one **final SWE-Review decision-only split score**: Qwen3-30B-Instruct 422/422, official DA **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} parseable decisions, with {review_instruct_da['model_fail']} model failures; official DA_total_50 **{review_instruct_da['DA_total_50']}%**. The [sealed-input audit](evidence/swe_review_complete_split_da.json) verifies every canonical result hash against the official metric. This is not the combined three-split score or RRR. Original-generator revisions for rejected patches have not been graded.
 
@@ -509,7 +521,7 @@ chinese_report = f'''# 模型评测结果快照
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 未完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
-| Muse 原始 BF16 | {'暂无完整 benchmark 分数' if not bf16_tb_round1['complete'] else bf16_exact_zh_done.lstrip('；')} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中 |
+| Muse 原始 BF16 | {'暂无完整 benchmark 分数' if not bf16_tb_round1['complete'] else bf16_exact_zh_done.lstrip('；')} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{bf16_review_zh} |
 
 **SWE-Review 的最终子集 DA。** Muse NVFP4 的 Qwen3-30B-Instruct 组 422 题全部有规范终态记录，官方 `compute_da.py` 得 **{review_instruct_da['DA']}%**（{review_instruct_da['produced']} 个可解析决定，{review_instruct_da['model_fail']} 个模型无有效决定）；将无有效决定按 0.5 计的 `DA_total_50` 为 **{review_instruct_da['DA_total_50']}%**。[逐题哈希与评分源码核验](evidence/swe_review_complete_split_da.json)可复查。另两组仍未完整，原始生成模型修复与判分尚未产生 RRR，因此没有可汇报的 SWE-Review 整体最终 RRR。
 
