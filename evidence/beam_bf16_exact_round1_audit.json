@@ -1,22 +1,16 @@
 {
-  "generated_utc": "2026-10-19T10:16:01.969343+00:00",
+  "generated_utc": "2026-10-19T10:26:36.045371+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T101333Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T102557Z.tar.zst",
   "expected": 89,
-  "terminal": 47,
-  "graded": 47,
-  "success": 34,
+  "terminal": 53,
+  "graded": 53,
+  "success": 38,
   "missing_graded_tasks": [
-    "make-doom-for-mips",
     "make-mips-interpreter",
-    "model-extraction-relu-logits",
-    "mteb-leaderboard",
-    "mteb-retrieve",
-    "multi-source-data-merger",
     "nginx-request-logging",
-    "openssl-selfsigned-cert",
     "overfull-hbox",
     "password-recovery",
     "path-tracing",
@@ -55,11 +49,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "mteb-retrieve",
-    "multi-source-data-merger",
-    "nginx-request-logging",
-    "openssl-selfsigned-cert",
-    "overfull-hbox",
     "password-recovery",
     "path-tracing",
     "path-tracing-reverse",
@@ -408,6 +397,13 @@
       "raw_response_count": 75,
       "responses_with_reasoning_content": 75
     },
+    "make-doom-for-mips": {
+      "reward": 0.0,
+      "result_sha256": "d97dd44b70e18816eb09e5d027b9182ded3b8203dbc0c56245a877fd6b3170f2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/make-doom-for-mips__dS2tgbR/result.json",
+      "raw_response_count": 331,
+      "responses_with_reasoning_content": 331
+    },
     "mcmc-sampling-stan": {
       "reward": 1.0,
       "result_sha256": "b49a3656dbd3201418d7153ffd0cc69d05f508a3daaed1d0f8a2b85f8e73065b",
@@ -422,12 +418,47 @@
       "raw_response_count": 17,
       "responses_with_reasoning_content": 17
     },
+    "model-extraction-relu-logits": {
+      "reward": 0.0,
+      "result_sha256": "b15baab591e0396cb1dc7be3fb0b85c07d5b69548ad6d40d81dc5d912118325c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/model-extraction-relu-logits__HP2Psa2/result.json",
+      "raw_response_count": 22,
+      "responses_with_reasoning_content": 22
+    },
     "modernize-scientific-stack": {
       "reward": 1.0,
       "result_sha256": "2c13298b7b619d5a0c2147bc38d5e307fb426dc761a83b13f3d6d3f3ae08d3ee",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/modernize-scientific-stack__8hKRnk8/result.json",
       "raw_response_count": 6,
       "responses_with_reasoning_content": 6
+    },
+    "mteb-leaderboard": {
+      "reward": 1.0,
+      "result_sha256": "94fbfe98353f4216db402a49c306a9ffedf45a03282245ddc393c57eb5a25ecf",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/mteb-leaderboard__SzfPzqE/result.json",
+      "raw_response_count": 46,
+      "responses_with_reasoning_content": 46
+    },
+    "mteb-retrieve": {
+      "reward": 1.0,
+      "result_sha256": "167108241f74d3653e6096b070759f7ed8c9426fdfdb8bf1fa55311d3e132b88",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/mteb-retrieve__KEiAjsK/result.json",
+      "raw_response_count": 18,
+      "responses_with_reasoning_content": 18
+    },
+    "multi-source-data-merger": {
+      "reward": 1.0,
+      "result_sha256": "0c13d8318dcd70f26c2e662a2bddc1a1c66fead102daba90985bf673246a89ca",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/multi-source-data-merger__KuMDwqE/result.json",
+      "raw_response_count": 4,
+      "responses_with_reasoning_content": 4
+    },
+    "openssl-selfsigned-cert": {
+      "reward": 1.0,
+      "result_sha256": "f5e40de1971eb2b58955c943bcc9004ebb77da0521790cb7ede41dc6dd6eaf6c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/openssl-selfsigned-cert__PxptnVz/result.json",
+      "raw_response_count": 5,
+      "responses_with_reasoning_content": 5
     }
   }
 }
