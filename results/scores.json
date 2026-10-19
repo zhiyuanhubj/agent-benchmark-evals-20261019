@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T13:54:44.387049+00:00",
+  "generated_utc": "2026-10-19T13:59:51.211868+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -172,18 +172,18 @@
             "2": 0,
             "3": 0
           },
-          "new_raw_model_responses": 3578,
+          "new_raw_model_responses": 3587,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 295,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 301,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 304,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 307,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542
           },
-          "latest_new_raw_model_response_utc": "2026-10-19T13:53:55+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-19T13:59:36+00:00",
           "active_recovery_trial_dirs": 3,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -299,7 +299,7 @@
             "graded": 66,
             "success": 47,
             "active_trial_dirs": 70,
-            "archived_actual_model_responses": 3112,
+            "archived_actual_model_responses": 3122,
             "ungraded": 0,
             "exceptions": {
               "AgentTimeoutError": 5
@@ -361,7 +361,7 @@
         },
         "qwen3_30b_instruct2507_500": {
           "expected": 422,
-          "terminal": 306,
+          "terminal": 307,
           "status": "partial_no_full_rrr"
         }
       }
@@ -399,9 +399,9 @@
         },
         "3": {
           "expected": 113,
-          "terminal": 39,
-          "graded": 39,
-          "success": 11,
+          "terminal": 40,
+          "graded": 40,
+          "success": 12,
           "status": "partial_no_full_score"
         }
       },
@@ -460,11 +460,11 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 59,
-            "graded": 59,
-            "success": 45,
-            "active_trial_dirs": 63,
-            "archived_actual_model_responses": 1227,
+            "terminal": 61,
+            "graded": 61,
+            "success": 47,
+            "active_trial_dirs": 65,
+            "archived_actual_model_responses": 1247,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],

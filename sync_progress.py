@@ -20,6 +20,7 @@ SOURCES = [
 ]
 LOG = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/github-sync-20261019.jsonl'
 LOCK = LOG.with_suffix('.lock')
+RAW_ARCHIVE_INTERVAL_SECONDS = 600  # Keep live I/O snapshots within each 15-minute sync cycle.
 
 
 def run(command, timeout=180):
@@ -86,13 +87,13 @@ def sync_native_archives(scores, force_bf16=False):
             handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < expected_receipts
             handoff_newer |= latest_filename_counts.get('ready_proof', 0) < len(route_allocations)
         raw_snapshot_due = (latest_archive_time is not None and raw_count > latest_filename_counts.get('raw_response', 0)
-                            and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= 900)
+                            and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS)
         if terminal > archived_terminal or handoff_newer or raw_snapshot_due:
             run(command, timeout=300)
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16'):
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
         previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
-        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= 900 or (group == 'muse_bf16' and force_bf16):
+        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS or (group == 'muse_bf16' and force_bf16):
             run([PYTHON, str(ROOT / 'archive_delta.py'), group, '--if-changed'], timeout=600)
     live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
     delta_manifests = sorted(manifest_dir.glob('*_delta_*.json'))
