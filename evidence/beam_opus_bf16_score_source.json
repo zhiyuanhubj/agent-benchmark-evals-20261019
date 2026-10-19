@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-19T08:57:59.639458+00:00",
+  "utc": "2026-10-19T09:02:05.631115+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
@@ -197,17 +197,17 @@
   "opus47": {
     "pro": {
       "expected": 731,
-      "terminal": 606,
-      "unique_tasks": 606,
-      "graded": 605,
+      "terminal": 607,
+      "unique_tasks": 607,
+      "graded": 606,
       "success": 381,
       "missing_native_grader_completion": 1,
       "native_status_counts": {
-        "completed": 605,
+        "completed": 606,
         "eval_error": 1
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 125,
+      "missing_result_task_count": 124,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -264,14 +264,14 @@
       },
       "2": {
         "expected": 113,
-        "terminal": 78,
-        "unique_tasks": 78,
-        "graded": 78,
+        "terminal": 79,
+        "unique_tasks": 79,
+        "graded": 79,
         "success": 24,
         "exceptions": {},
         "duplicate_task_ids": [],
         "excluded_invalid_protocol_originals": [],
-        "missing_result_task_count": 35,
+        "missing_result_task_count": 34,
         "task_id_source": "Original trial config task path; finished native trial and binary reward required"
       },
       "3": {
@@ -474,13 +474,13 @@
       }
     },
     "review_pipeline": {
-      "utc": 1792400294.0355551,
+      "utc": 1792400534.1129403,
       "phase": "queued_after_bf16_pro_first_round",
       "model_sampling_started": false
     }
   },
   "reserved_capacity": {
-    "utc": 1792400295.8525026,
+    "utc": 1792400536.2837539,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2901": {
@@ -512,7 +512,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792400289.3297167,
+    "utc": 1792400529.4055893,
     "allocations": {
       "2887": {
         "phase": "waiting_for_allocation"
@@ -532,7 +532,7 @@
       "ready_splits": [],
       "complete": false,
       "benchmark_revision_sampling_started": false,
-      "utc": 1792400295.8616927
+      "utc": 1792400536.2916183
     },
     "revision_queues": {
       "reviewers": {
@@ -589,7 +589,7 @@
         }
       },
       "qualification": "Canonical full review splits only, exact original generators, one declared revision attempt per rejected PR. Final DA/RRR awaits separate native grading audit.",
-      "utc": 1792400278.0195205
+      "utc": 1792400548.2330818
     },
     "native_da_rrr": {
       "reviewers": {
@@ -656,7 +656,7 @@
           }
         }
       },
-      "utc": 1792400245.7804518
+      "utc": 1792400502.4177449
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -4103,7 +4103,7 @@
       "qualification": "Original449 and469 have real observed weight differences. This does not establish a stronger checkpoint, full449 availability, full-model nonfinite clearance, or training-update magnitude over all parameters. No model sampling, data edits or GPU interruption."
     },
     "mix449_original_file_recovery": {
-      "utc": 1792400301.8714726,
+      "utc": 1792400542.6890733,
       "sources": {
         "2812": {
           "phase": "ready",
@@ -4848,13 +4848,13 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792400291.9328828
+      "utc": 1792400500.8665285
     },
     "queue_states": {
       "mix449": {
         "phase": "waiting_for_complete_original_artifact",
         "candidate": "mix449",
-        "utc": 1792400303.591582
+        "utc": 1792400543.6842477
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
@@ -4874,7 +4874,7 @@
       "phase": "waiting_for_complete_original449_artifact",
       "model_generation_started": false,
       "frozen_top_two_unchanged": true,
-      "utc": 1792400285.6173768
+      "utc": 1792400555.7479799
     },
     "original449_export_controller": null,
     "original449_inference_ready": null,
