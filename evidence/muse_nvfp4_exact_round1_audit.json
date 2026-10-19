@@ -1,9 +1,9 @@
 {
-  "generated_utc": "2026-10-19T09:14:05.135387+00:00",
+  "generated_utc": "2026-10-19T09:20:16.683684+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 43,
+  "graded_task_count": 44,
   "success_count": 36,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
@@ -101,7 +101,6 @@
     "qemu-startup",
     "query-optimize",
     "raman-fitting",
-    "regex-chess",
     "schemelike-metacircular-eval",
     "sparql-university",
     "sqlite-db-truncate",
@@ -122,9 +121,9 @@
     "large-scale-text-editing__byNYEsg",
     "path-tracing-reverse__4covUwV",
     "path-tracing__au39ic5",
-    "regex-chess__53F7VDd",
     "schemelike-metacircular-eval__nBsnCj5",
     "sparql-university__b2KdJnu",
+    "sqlite-db-truncate__p89aycw",
     "train-fasttext__Mc2uuim",
     "tune-mjcf__cgx3dH4",
     "video-processing__FZRHQnL"
@@ -529,6 +528,17 @@
       "finished_at": "2026-10-19T06:10:30.390927Z",
       "raw_response_count": 22,
       "responses_with_reasoning_content": 22
+    },
+    "regex-chess": {
+      "reward": 0.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.105.182:31321/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b06/regex-chess__53F7VDd/result.json",
+      "result_sha256": "6dbd133dd0d88a17fb6918e31821d23455a449734639f080064f1763a7a8da59",
+      "finished_at": "2026-10-19T09:16:45.623990Z",
+      "raw_response_count": 31,
+      "responses_with_reasoning_content": 31
     },
     "regex-log": {
       "reward": 1.0,

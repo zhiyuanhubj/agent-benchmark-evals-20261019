@@ -1,6 +1,6 @@
 {
-  "reviewed_utc": "2026-10-19T09:06:26+00:00",
-  "scope": "Targeted manual review of selected Muse NVFP4 exact-image TB2.1 trajectories, including all six currently pattern-flagged successes.",
+  "reviewed_utc": "2026-10-19T09:17:00+00:00",
+  "scope": "Targeted manual review of selected Muse NVFP4 and BF16 exact-image TB2.1 trajectories, including all currently pattern-flagged Muse successes.",
   "notes": [
     {
       "model": "muse_nvfp4",
@@ -80,6 +80,15 @@
       "reward": 1.0,
       "trajectory_sha256": "011b982eb155edadc42ad6070138704e61ed26abc85b4bc216025e39ed29c91c",
       "observed": "At step 13 the agent read its own /logs/agent/raw_responses and trajectory, then tried to list and read /logs/verifier/*. The inspected terminal output showed an empty verifier directory and a missing glob, so it did not confirm hidden-answer retrieval. The verifier-log probe is inappropriate for a clean training trajectory; preserve the raw benchmark reward and exclude this sample pending full review.",
+      "training_disposition": "exclude_pending_full_manual_review",
+      "benchmark_score_disposition": "retain_raw_recorded_reward"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "hf-model-inference",
+      "reward": 1.0,
+      "trajectory_sha256": "ec806e12c9c9da88fd2df84c050a91f6bb764358b3fa3dbb8c544ac7d7132c1d",
+      "observed": "At step 7 the agent listed /logs/verifier and attempted to read its files before running local HTTP tests. The inspected output showed an empty verifier directory and a missing glob, with no confirmed hidden-answer retrieval. The raw reward stays recorded, but the verifier-log probe excludes this trajectory from clean training export pending full review.",
       "training_disposition": "exclude_pending_full_manual_review",
       "benchmark_score_disposition": "retain_raw_recorded_reward"
     }
