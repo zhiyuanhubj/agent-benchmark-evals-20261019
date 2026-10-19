@@ -291,6 +291,8 @@ op = models['opus_4_7']
 mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
 mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
 manual_notes = read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
+opus_thinking_path = ROOT / 'evidence/opus47_r3_thinking_transport_audit.json'
+opus_thinking_audit = read(opus_thinking_path) if opus_thinking_path.exists() else None
 nvfp4_excluded = sorted(n['task'] for n in manual_notes if n['model'] == 'muse_nvfp4'
                         and n['reward'] == 1 and n['training_disposition'].startswith('exclude_'))
 bf16_excluded = sorted(n['task'] for n in manual_notes if n['model'] == 'muse_bf16'
@@ -383,6 +385,10 @@ readme = readme.replace('Scores are benchmark-recorded values.', f'Opus 4.7 Pro 
 if nvfp4_r2_excluded:
     readme = readme.replace('Scores are benchmark-recorded values.',
                             f'Muse NVFP4 round-2 successful trajectories flagged for training exclusion pending full review: {nvfp4_r2_excluded_names}. A targeted review found a verifier-directory listing with no hidden output in the observed response; raw benchmark rewards are unchanged. See [the anchored notes](evidence/exact_tb_integrity_manual_notes.json) and [command screen](evidence/exact_tb_integrity_screen.json).\n\nScores are benchmark-recorded values.', 1)
+if opus_thinking_audit:
+    oc = opus_thinking_audit['counts']
+    readme = readme.replace('Scores are benchmark-recorded values.',
+        f'The [Opus 4.7 round-3 thinking transport audit](evidence/opus47_r3_thinking_transport_audit.json), generated {opus_thinking_audit["generated_utc"]}, covers {oc["scored_tasks"]} terminal tasks: {oc["with_thinking_text"]}/{oc["raw_responses"]} archived replies contain thinking text, {oc["without_text_zero_reasoning_tokens"]} report zero reasoning tokens, and {oc["without_text_positive_reasoning_tokens"]} report positive reasoning tokens but have no thinking text even in saved upstream SSE. Those upstream events contain signed empty thinking blocks. Do not use the latter replies as full-thinking training examples.\n\nScores are benchmark-recorded values.', 1)
 readme = readme.replace('Scores are benchmark-recorded values.', mn_timeout_en + 'Scores are benchmark-recorded values.', 1)
 if early_b05_owner:
     readme = readme.replace('This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 'At this snapshot, b05 is running early on CPU allocation 2922 against GPU 2812; an ownership receipt makes sequential lane 3 verify its completed tasks and skip a duplicate draw. This continuation is separate from both the legacy-image scores and the BF16 evaluation.', 1)
@@ -431,6 +437,10 @@ chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_no
 if nvfp4_r2_excluded:
     chinese_report = chinese_report.replace('仍在增长的 Pro/旧镜像/DeepSWE 结果，',
         f'第 2 轮 Muse NVFP4 的成功轨迹 {nvfp4_r2_excluded_names} 曾探查 verifier 目录；已检查的返回为空，未证实获得隐藏答案。原始 reward 保留，轨迹暂不进入干净训练数据，见[哈希锚定核查](evidence/exact_tb_integrity_manual_notes.json)和[命令筛查](evidence/exact_tb_integrity_screen.json)。\n\n仍在增长的 Pro/旧镜像/DeepSWE 结果，', 1)
+if opus_thinking_audit:
+    oc = opus_thinking_audit['counts']
+    chinese_report = chinese_report.replace('仍在增长的 Pro/旧镜像/DeepSWE 结果，',
+        f'[Opus 4.7 第 3 轮 thinking 传输核查](evidence/opus47_r3_thinking_transport_audit.json)生成于 {opus_thinking_audit["generated_utc"]}，覆盖 {oc["scored_tasks"]} 道终态题：{oc["raw_responses"]} 条归档回复中 {oc["with_thinking_text"]} 条有可读 thinking，{oc["without_text_zero_reasoning_tokens"]} 条用量显示 reasoning token 为零，另 {oc["without_text_positive_reasoning_tokens"]} 条虽计入 reasoning token，但上游原始流也没有可读 thinking，仅有签名。后者不能作为带完整 thinking 的训练样本。\n\n仍在增长的 Pro/旧镜像/DeepSWE 结果，', 1)
 chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。另有四个排队 GPU 节点获配后只领取第 2/3 轮尚未启动的批次；逐批文件锁和接管凭据阻止原控制器重复抽题，实际配置仅修改模型端点。', 1)
 chinese_report = chinese_report.replace('**审计限制。**', f'Opus 4.7 Pro 只统计原始运行的 731 道题；同一补丁的纯验证重试单独留证，不能增加首轮题数或成功数。原始运行仍有 1 题在两次 3600 秒验证超时后缺少有效评分。{opus_crosshost_zh}\n\n**审计限制。**', 1)
 chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
