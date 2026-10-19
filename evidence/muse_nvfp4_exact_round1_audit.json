@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-19T15:14:41.876349+00:00",
+  "generated_utc": "2026-10-19T15:29:04.929052+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 83,
-  "success_count": 66,
-  "scored_raw_response_count": 3828,
-  "scored_nonempty_reasoning_response_count": 3827,
+  "graded_task_count": 84,
+  "success_count": 67,
+  "scored_raw_response_count": 3847,
+  "scored_nonempty_reasoning_response_count": 3846,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -128,7 +128,6 @@
   "ungraded_terminal_tasks": [],
   "missing_graded_tasks": [
     "make-mips-interpreter",
-    "merge-diff-arc-agi-task",
     "model-extraction-relu-logits",
     "modernize-scientific-stack",
     "mteb-leaderboard",
@@ -136,7 +135,7 @@
   ],
   "active_or_unfinished_trials": [
     "make-mips-interpreter__6BNKuxJ",
-    "merge-diff-arc-agi-task__TdC9omC",
+    "model-extraction-relu-logits__Pp3LAYE",
     "raman-fitting__gccPUXq"
   ],
   "errors": [],
@@ -649,6 +648,17 @@
       "finished_at": "2026-10-19T15:04:17.938161Z",
       "raw_response_count": 29,
       "responses_with_reasoning_content": 29
+    },
+    "merge-diff-arc-agi-task": {
+      "reward": 1.0,
+      "exception_type": null,
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/merge-diff-arc-agi-task__TdC9omC/result.json",
+      "result_sha256": "d492811fc62b8afabb3d6cfc18071e1a4d214ea2bffc0e6b4719e412c68ac82a",
+      "finished_at": "2026-10-19T15:24:59.450704Z",
+      "raw_response_count": 19,
+      "responses_with_reasoning_content": 19
     },
     "mteb-retrieve": {
       "reward": 0.0,

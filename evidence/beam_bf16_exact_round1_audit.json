@@ -1,17 +1,16 @@
 {
-  "generated_utc": "2026-10-19T15:14:59.532250+00:00",
+  "generated_utc": "2026-10-19T15:29:19.045969+00:00",
   "model": "beam_bf16",
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "18233f6971a204b5fef953f4d091f545d94fd2ad8e9f9cf273067ac8bd0c597b",
-  "archive_name": "beam_bf16_exact_tb_live_20261019T151223Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261019T152830Z.tar.zst",
   "expected": 89,
-  "terminal": 68,
-  "graded": 68,
+  "terminal": 69,
+  "graded": 69,
   "success": 49,
   "missing_graded_tasks": [
     "path-tracing",
     "path-tracing-reverse",
-    "raman-fitting",
     "regex-chess",
     "regex-log",
     "reshard-c4-data",
@@ -34,7 +33,6 @@
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [
-    "regex-log",
     "reshard-c4-data",
     "rstan-to-pystan",
     "sam-cell-seg",
@@ -533,6 +531,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/query-optimize__nhLFSfM/result.json",
       "raw_response_count": 22,
       "responses_with_reasoning_content": 22
+    },
+    "raman-fitting": {
+      "reward": 0.0,
+      "result_sha256": "4f73c673fbf610d2a52d3456986046e7e9e52fb7f75ba7737a36003c60ee4a15",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/raman-fitting__ot4928W/result.json",
+      "raw_response_count": 41,
+      "responses_with_reasoning_content": 41
     }
   }
 }
