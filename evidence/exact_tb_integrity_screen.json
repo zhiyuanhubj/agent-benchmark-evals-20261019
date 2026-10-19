@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T19:48:52.157442+00:00",
+  "generated_utc": "2026-10-19T19:54:26.611103+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -69,7 +69,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 22,
+      "scored_trajectories_checked": 23,
       "pattern_hit_trajectories": 2,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -4908,6 +4908,18 @@
       "tool_calls": 94,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "chess-best-move",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/chess-best-move__3aRMQx4/agent/trajectory.json",
+      "trajectory_sha256": "651fcdb2840466c3b88a15402ae6512de741154f4064716707bfea2707ae487d",
+      "steps": 36,
+      "tool_calls": 41,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     }
   ],
   "active_muse_nvfp4": {
@@ -4918,9 +4930,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "a5cc1088a1752d7744a9a963c618eac4d58233a56112ede242b2830e2be612f4",
-        "steps_at_screen": 290,
-        "tool_calls_at_screen": 969,
+        "trajectory_sha256_at_screen": "08be28a745acba04c451819a6811c092d2ff261655096635d82e8b29e4d79317",
+        "steps_at_screen": 295,
+        "tool_calls_at_screen": 972,
         "hits": [],
         "status": "in_progress_not_scored"
       }
