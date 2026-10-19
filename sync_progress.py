@@ -130,6 +130,7 @@ def cycle():
         for source in SOURCES:
             run([PYTHON, str(source)])
         run([PYTHON, str(ROOT / 'audit_swe_review_da.py')], timeout=180)
+        run([PYTHON, str(ROOT / 'audit_muse_review_revision_v2.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_swe_review_recovery.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_beam_malformed_reviews.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
@@ -219,7 +220,9 @@ def cycle():
              'input_output/manifest.json', 'input_output/archive_manifests',
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
-             'protocol/beam_review_revision_v2', 'export_snapshot.py', 'sync_progress.py'])
+             'audit_muse_review_revision_v2.py',
+             'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
+             'export_snapshot.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
             run(['git', 'commit', '-m', 'Refresh live benchmark results'])

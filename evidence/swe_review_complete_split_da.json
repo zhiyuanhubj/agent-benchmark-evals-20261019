@@ -1,10 +1,62 @@
 {
-  "generated_utc": "2026-10-19T21:26:47.421375+00:00",
+  "generated_utc": "2026-10-19T22:00:31.844350+00:00",
   "metric": "Official SWE-Review compute_da.py, complete canonical review splits only",
   "metric_source_sha256": "35fdc90b8a5a14034df40fab7d70c7f3d5be587c0e8f92b67e0155996b52b035",
   "plan_sha256": "85414c294153273b0f4a975470233afebd9dd3fb8d116c6642a337f4837eea3c",
   "reviewers": {
     "muse-nvfp4": {
+      "glm5_500": {
+        "status": "final_da_for_this_split",
+        "expected": 500,
+        "metrics": {
+          "DA": 75.7,
+          "DA_total_50": 73.6,
+          "CR": 92.0,
+          "FAR": 64.9,
+          "FRR": 8.2,
+          "total": 500,
+          "correct": 348,
+          "model_fail": 40,
+          "produced": 460,
+          "TP": 302,
+          "FP": 85,
+          "TN": 46,
+          "FN": 27
+        },
+        "canonical_receipt_sha256": "b9927129a9119e4287d52f600106375ed7e557ca57745446d67b1643b4019969",
+        "benchmark_sha256": "396b3cdcabca99bb22af24372e2200bf927a77df3c83b6701085f21d2258c7ec",
+        "verified_review_count": 500,
+        "invalid_report_count": 0,
+        "invalid_reports": [],
+        "RRR": null,
+        "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
+      },
+      "qwen3_coder_30b_500": {
+        "status": "final_da_for_this_split",
+        "expected": 462,
+        "metrics": {
+          "DA": 81.2,
+          "DA_total_50": 78.4,
+          "CR": 90.9,
+          "FAR": 15.5,
+          "FRR": 22.1,
+          "total": 462,
+          "correct": 341,
+          "model_fail": 42,
+          "produced": 420,
+          "TP": 166,
+          "FP": 32,
+          "TN": 175,
+          "FN": 47
+        },
+        "canonical_receipt_sha256": "2a7613fe3bd8b108d7e60a3483c6e28e75242dc921ad07e6421810be32c0c44b",
+        "benchmark_sha256": "680e49366fdf5e95d3aedb337f88433e245d66eb58b4293aa2db17b826c22bfa",
+        "verified_review_count": 462,
+        "invalid_report_count": 0,
+        "invalid_reports": [],
+        "RRR": null,
+        "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
+      },
       "qwen3_30b_instruct2507_500": {
         "status": "final_da_for_this_split",
         "expected": 422,
@@ -26,6 +78,8 @@
         "canonical_receipt_sha256": "b1e9ece8d4656bfe337b6c1c88fe6fc7293c9c155d3ca3497c450427e5c4a29b",
         "benchmark_sha256": "531d636f1ebe470b0c4b571d87874002c37c7a45cdfec49f17a0774cf929be11",
         "verified_review_count": 422,
+        "invalid_report_count": 0,
+        "invalid_reports": [],
         "RRR": null,
         "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
       }
