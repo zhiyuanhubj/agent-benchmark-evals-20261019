@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-19T19:31:37.131131+00:00",
+  "generated_utc": "2026-10-19T19:48:52.157442+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -41,7 +41,7 @@
       }
     },
     "beam_bf16": {
-      "scored_trajectories_checked": 86,
+      "scored_trajectories_checked": 87,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 2,
       "rule_hit_counts": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 18,
+      "scored_trajectories_checked": 19,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -4177,6 +4177,17 @@
       "review_status": "no_pattern_hit_not_cleared"
     },
     {
+      "model": "beam_bf16",
+      "task": "write-compressor",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r1/write-compressor__youPvHv/agent/trajectory.json",
+      "trajectory_sha256": "44a9b47504f82a95416b52f8b6c1b28b7f1d3866d83fd2bf3d255a709b03c356",
+      "steps": 42,
+      "tool_calls": 57,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
       "model": "muse_nvfp4_r2",
       "round": 2,
       "task": "caffe-cifar-10",
@@ -4527,6 +4538,18 @@
       "trajectory_sha256": "c0ecdde1de117f5fe92758e3a3476aa8deb5d956d6b9eae65398791337a10365",
       "steps": 40,
       "tool_calls": 137,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "dna-insert",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/dna-insert__oGPv4nX/agent/trajectory.json",
+      "trajectory_sha256": "327e78fcf7362e9a35a2b43223b8993faa77092cf08b0a8a802f2f34fe4083aa",
+      "steps": 12,
+      "tool_calls": 29,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -4895,9 +4918,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "3fc959bf1336911649396f89a09617a545b6f800c9a845b9cbb60a92ec79a5eb",
-        "steps_at_screen": 271,
-        "tool_calls_at_screen": 957,
+        "trajectory_sha256_at_screen": "a5cc1088a1752d7744a9a963c618eac4d58233a56112ede242b2830e2be612f4",
+        "steps_at_screen": 290,
+        "tool_calls_at_screen": 969,
         "hits": [],
         "status": "in_progress_not_scored"
       }
