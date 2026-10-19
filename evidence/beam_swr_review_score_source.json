@@ -1,5 +1,5 @@
 {
-  "utc": 1792449713.8307433,
+  "utc": 1792450617.805201,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,8 +345,8 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 378,
-      "exceptions": 7,
+      "terminal": 383,
+      "exceptions": 8,
       "prepared_image_phases": {
         "image_ready": 400
       },
@@ -377,32 +377,32 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 396,
+      "terminal": 402,
       "exceptions": 6,
       "prepared_image_phases": {
-        "image_ready": 416
+        "image_ready": 432
       },
       "controller": {
-        "utc": 1792448303.196122,
+        "utc": 1792450205.757985,
         "phase": "running",
-        "batch": 24,
+        "batch": 25,
         "tasks": [
-          "sphinx-doc__sphinx-9229",
-          "sphinx-doc__sphinx-9230",
-          "sphinx-doc__sphinx-9258",
-          "sphinx-doc__sphinx-9281",
-          "sphinx-doc__sphinx-9320",
-          "sphinx-doc__sphinx-9367",
-          "sphinx-doc__sphinx-9461",
-          "sphinx-doc__sphinx-9591",
-          "sphinx-doc__sphinx-9602",
-          "sphinx-doc__sphinx-9658",
-          "sphinx-doc__sphinx-9673",
-          "sphinx-doc__sphinx-9698",
-          "sphinx-doc__sphinx-9711",
-          "sympy__sympy-12096",
-          "sympy__sympy-12419",
-          "sympy__sympy-12481"
+          "sympy__sympy-12489",
+          "sympy__sympy-13031",
+          "sympy__sympy-13091",
+          "sympy__sympy-13372",
+          "sympy__sympy-13480",
+          "sympy__sympy-13551",
+          "sympy__sympy-13615",
+          "sympy__sympy-13647",
+          "sympy__sympy-13757",
+          "sympy__sympy-13798",
+          "sympy__sympy-13877",
+          "sympy__sympy-13878",
+          "sympy__sympy-13974",
+          "sympy__sympy-14248",
+          "sympy__sympy-14531",
+          "sympy__sympy-14711"
         ]
       },
       "full_official_rrr_complete": false
@@ -460,7 +460,7 @@
     },
     "complete": false,
     "model_generation_started": false,
-    "utc": "2026-10-19T22:41:08.546944+00:00",
+    "utc": "2026-10-19T22:56:48.355539+00:00",
     "grader_preflight_passed": true
   },
   "revision_preparation_controller": "MainPID=3430427\nResult=success\nActiveState=active\n",
