@@ -2,7 +2,7 @@ from pathlib import Path
 import asyncio,json,sys,time
 E=Path(__file__).resolve().parent
 sys.path.insert(0,'/fsx/home/zhiyuan/bench/tb21_v1_four_models_20261012')
-import os, hashlib
+import os, hashlib, fcntl
 config_path = Path(sys.argv[1]).resolve() if len(sys.argv) == 2 else None
 if config_path and config_path.name.startswith('r1-completion-2866-b') and os.environ.get('MUSE_TB_PARALLEL_OWNER') != '1':
     state = E / 'state'
@@ -12,9 +12,14 @@ if config_path and config_path.name.startswith('r1-completion-2866-b') and os.en
         owner = json.loads(marker.read_text())
         assert owner['config_sha256'] == hashlib.sha256(config_path.read_bytes()).hexdigest()
         exit_file = state / (config_path.stem + '-parallel-exit.json')
-        heartbeat = state / (config_path.stem + '-parallel-heartbeat')
         while not exit_file.exists():
-            assert heartbeat.exists() and time.time() - heartbeat.stat().st_mtime < 600, 'Parallel owner stopped; preserve outputs and audit'
+            with (state / 'parallel-2866-controller.lock').open('a') as owner_lock:
+                try:
+                    fcntl.flock(owner_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                except BlockingIOError:
+                    pass
+                else:
+                    raise AssertionError('Parallel owner stopped; preserve outputs and audit')
             time.sleep(15)
         status = json.loads(exit_file.read_text())
         assert status['returncode'] == 0 and status['config_sha256'] == owner['config_sha256']
