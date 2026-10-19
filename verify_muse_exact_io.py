@@ -49,9 +49,11 @@ required_handoff_files = []
 if audit.get('replica_handoff'):
     required_handoff_files.append(str((BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json').relative_to(BASE)))
     required_handoff_files.extend(str(Path(row['effective_config']).relative_to(BASE)) for row in audit['replica_handoff']['batches'])
-for route in audit.get('opportunistic_routes_2812', []):
+for route in audit.get('opportunistic_routes_extra_gpu', []):
     required_handoff_files.append(str(Path(route['receipt_path']).relative_to(BASE)))
     required_handoff_files.append(str(Path(route['effective_config']).relative_to(BASE)))
+    ready_path = BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/{route["allocation"]}-ready.json'
+    required_handoff_files.append(str(ready_path.relative_to(BASE)))
 missing_handoff_files = sorted(set(required_handoff_files) - entries)
 
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())

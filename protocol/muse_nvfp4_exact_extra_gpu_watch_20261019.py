@@ -55,7 +55,8 @@ def untouched_round1_batch():
     for batch in ('b03', 'b05'):
         job = f'muse-nvfp4-tb-v1-exact-r1-completion-2866-{batch}'
         if ((ROOT / 'results/muse_nvfp4' / job).exists()
-                or (STATE / f'r1-{batch}-local-started.json').exists()):
+                or (STATE / f'r1-{batch}-local-started.json').exists()
+                or (STATE / f'r1-{batch}-extra-route.json').exists()):
             continue
         return True
     return False

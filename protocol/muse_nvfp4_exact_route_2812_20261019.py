@@ -1,4 +1,4 @@
-"""Route untouched first-round batches to a released NVFP4 GPU without replay."""
+"""Route untouched first-round batches to an eligible NVFP4 GPU without replay."""
 
 import fcntl
 import hashlib
@@ -15,6 +15,7 @@ ROUTE_STATE = STATE / 'extra_gpu'
 RESULTS = ROOT / 'results/muse_nvfp4'
 LANES = {'b03': 2, 'b05': 3}
 JOB_PREFIX = 'muse-nvfp4-tb-v1-exact-r1-completion-2866-'
+ALLOWED_ALLOCATIONS = {2812, 2923, 2924, 2927, 2928}
 
 
 def digest(path):
@@ -29,17 +30,18 @@ def save(path, value):
 
 
 def paths(batch):
-    return (ROUTE_STATE / f'r1-{batch}-2812-route.lock',
-            ROUTE_STATE / f'r1-{batch}-2812-route.json',
+    return (ROUTE_STATE / f'r1-{batch}-extra-route.lock',
+            ROUTE_STATE / f'r1-{batch}-extra-route.json',
             ROUTE_STATE / f'r1-{batch}-local-started.json',
-            WORK / 'configs' / f'r1-route-2812-{batch}.json')
+            WORK / 'configs' / f'r1-route-extra-{batch}.json')
 
 
 def validate_route(receipt, config_path, batch):
     original = json.loads(config_path.read_text())
     effective = Path(receipt['effective_config'])
     assert receipt['batch'] == batch and receipt['lane'] == LANES[batch]
-    assert receipt['allocation'] == 2812 and receipt['job_name'] == original['job_name']
+    assert receipt['allocation'] in ALLOWED_ALLOCATIONS and receipt['job_name'] == original['job_name']
+    assert receipt['endpoint'].startswith('http://10.') and receipt['endpoint'].endswith(':31320/v1')
     assert receipt['original_config'] == str(config_path)
     assert receipt['original_sha256'] == digest(config_path)
     assert receipt['tasks'] == [Path(t['path']).name for t in original['tasks']]
@@ -70,8 +72,9 @@ def route_for_extra_lane(config_path, lane):
         return config_path
 
 
-def prepare_routes(endpoint):
+def prepare_routes(endpoint, allocation, max_batches=1):
     """Claim only batches that have not begun when the new model is ready."""
+    assert allocation in ALLOWED_ALLOCATIONS and max_batches in (1, 2)
     assert endpoint.startswith('http://10.') and endpoint.endswith(':31320/v1')
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     with opener.open(endpoint + '/models', timeout=10) as response:
@@ -93,13 +96,12 @@ def prepare_routes(endpoint):
                 continue
             if receipt_path.exists():
                 validate_route(json.loads(receipt_path.read_text()), source, batch)
-                claimed.append(batch)
                 continue
             value = json.loads(source.read_text())
             value['agents'][0]['kwargs']['api_base'] = endpoint
             save(effective, value)
             receipt = {'utc': time.time(), 'batch': batch, 'lane': lane,
-                       'allocation': 2812, 'job_name': item['job_name'],
+                       'allocation': allocation, 'job_name': item['job_name'],
                        'tasks': item['tasks'], 'original_config': str(source),
                        'original_sha256': item['sha256'], 'effective_config': str(effective),
                        'effective_sha256': digest(effective), 'endpoint': endpoint,
@@ -107,4 +109,6 @@ def prepare_routes(endpoint):
             validate_route(receipt, source, batch)
             save(receipt_path, receipt)
             claimed.append(batch)
+            if len(claimed) >= max_batches:
+                break
     return claimed

@@ -21,7 +21,7 @@ archive.parent.mkdir(exist_ok=True)
 assert not archive.exists()
 
 payloads = {}
-counts = {'job_config': 0, 'handoff_receipt': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
+counts = {'job_config': 0, 'handoff_receipt': 0, 'ready_proof': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
 terminal_results = 0
 for job in sorted(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*')):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
@@ -71,14 +71,20 @@ if handoff.exists():
             payloads[effective] = effective.read_bytes()
             counts['job_config'] += 1
 for batch in ('b03', 'b05'):
-    receipt_path = SOURCE / f'muse_nvfp4/state/extra_gpu/r1-{batch}-2812-route.json'
+    receipt_path = SOURCE / f'muse_nvfp4/state/extra_gpu/r1-{batch}-extra-route.json'
     if not receipt_path.exists():
         continue
     receipt_bytes = receipt_path.read_bytes()
     receipt = json.loads(receipt_bytes)
-    assert receipt['batch'] == batch and receipt['allocation'] == 2812
+    assert receipt['batch'] == batch and receipt['allocation'] in (2812, 2923, 2924, 2927, 2928)
+    ready_path = SOURCE / f'muse_nvfp4/state/extra_gpu/{receipt["allocation"]}-ready.json'
+    ready = json.loads(ready_path.read_text())
+    assert ready['phase'] == 'ready' and ready['endpoint'] == receipt['endpoint']
     payloads[receipt_path] = receipt_bytes
     counts['handoff_receipt'] += 1
+    if ready_path not in payloads:
+        payloads[ready_path] = ready_path.read_bytes()
+        counts['ready_proof'] += 1
     for config_path in (Path(receipt['original_config']), Path(receipt['effective_config'])):
         assert config_path.is_file()
         if config_path not in payloads:

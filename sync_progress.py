@@ -55,13 +55,17 @@ def sync_native_archives(scores, force_bf16=False):
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
                 handoff_newer = (latest_archive_time is None or handoff_time > latest_archive_time
                                  or latest_filename_counts.get('handoff_receipt', 0) < expected_receipts)
+            route_allocations = set()
             for batch in ('b03', 'b05'):
-                route = BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-{batch}-2812-route.json'
+                route = BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-{batch}-extra-route.json'
                 if route.exists():
                     expected_receipts += 1
-                    route_time = datetime.fromtimestamp(json.loads(route.read_text())['utc'], timezone.utc)
+                    route_value = json.loads(route.read_text())
+                    route_allocations.add(route_value['allocation'])
+                    route_time = datetime.fromtimestamp(route_value['utc'], timezone.utc)
                     handoff_newer |= latest_archive_time is None or route_time > latest_archive_time
             handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < expected_receipts
+            handoff_newer |= latest_filename_counts.get('ready_proof', 0) < len(route_allocations)
         raw_snapshot_due = (latest_archive_time is not None and raw_count > latest_filename_counts.get('raw_response', 0)
                             and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= 900)
         if terminal > archived_terminal or handoff_newer or raw_snapshot_due:

@@ -23,6 +23,11 @@ def save(job, phase, **extra):
     value = {'utc': time.time(), 'job': job, 'host': socket.gethostname(), 'phase': phase, **extra}
     temp.write_text(json.dumps(value, indent=2) + '\n')
     os.replace(temp, path)
+    if phase == 'ready':
+        ready = STATE / f'{job}-ready.json'
+        ready_temp = ready.with_suffix('.tmp')
+        ready_temp.write_text(json.dumps(value, indent=2) + '\n')
+        os.replace(ready_temp, ready)
 
 
 def main():
@@ -72,15 +77,14 @@ def main():
         assert ip.startswith('10.'), f'Unexpected node IP: {ip}'
         endpoint = f'http://{ip}:31320/v1'
         save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4', pid=process.pid)
-        if job == 2812:
-            from muse_nvfp4.route_2812 import prepare_routes
-            try:
-                routes = prepare_routes(endpoint)
-                save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4',
-                     pid=process.pid, claimed_round1_batches=routes)
-            except Exception as exc:
-                save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4',
-                     pid=process.pid, route_error=repr(exc))
+        from muse_nvfp4.route_2812 import prepare_routes
+        try:
+            routes = prepare_routes(endpoint, job, max_batches=2 if job == 2812 else 1)
+            save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4',
+                 pid=process.pid, claimed_round1_batches=routes)
+        except Exception as exc:
+            save(job, 'ready', endpoint=endpoint, model='muse-spark-open-nvfp4',
+                 pid=process.pid, route_error=repr(exc))
         result = process.wait()
         save(job, 'exited', returncode=result)
         raise SystemExit(result)
