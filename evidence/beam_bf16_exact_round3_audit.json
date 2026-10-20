@@ -1,30 +1,20 @@
 {
-  "generated_utc": "2026-10-20T15:50:49.247421+00:00",
+  "generated_utc": "2026-10-20T16:57:04.527447+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T154251Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T164206Z.tar.zst",
   "expected": 89,
-  "terminal": 44,
-  "graded": 42,
-  "success": 30,
+  "terminal": 67,
+  "graded": 53,
+  "success": 34,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "git-multibranch",
     "headless-terminal",
     "make-mips-interpreter",
-    "mcmc-sampling-stan",
-    "merge-diff-arc-agi-task",
-    "model-extraction-relu-logits",
-    "modernize-scientific-stack",
-    "mteb-leaderboard",
-    "mteb-retrieve",
-    "multi-source-data-merger",
-    "nginx-request-logging",
     "openssl-selfsigned-cert",
-    "overfull-hbox",
-    "password-recovery",
     "path-tracing",
     "path-tracing-reverse",
     "polyglot-c-py",
@@ -36,7 +26,6 @@
     "pytorch-model-cli",
     "pytorch-model-recovery",
     "qemu-alpine-ssh",
-    "qemu-startup",
     "query-optimize",
     "raman-fitting",
     "regex-chess",
@@ -60,11 +49,83 @@
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch",
-    "headless-terminal"
+    "headless-terminal",
+    "openssl-selfsigned-cert",
+    "path-tracing",
+    "path-tracing-reverse",
+    "polyglot-c-py",
+    "polyglot-rust-c",
+    "portfolio-optimization",
+    "protein-assembly",
+    "prove-plus-comm",
+    "pypi-server",
+    "pytorch-model-cli",
+    "pytorch-model-recovery",
+    "qemu-alpine-ssh"
   ],
-  "unarchived_new_terminal_tasks": [
-    "merge-diff-arc-agi-task"
-  ],
+  "ungraded_without_model_response": {
+    "openssl-selfsigned-cert": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/openssl-selfsigned-cert__jvHDeZd/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "path-tracing-reverse": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/path-tracing-reverse__8QZvkaf/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "path-tracing": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/path-tracing__HyxqYay/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "polyglot-c-py": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/polyglot-c-py__wGxvyp2/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "polyglot-rust-c": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/polyglot-rust-c__95pEyri/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "portfolio-optimization": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/portfolio-optimization__WKnyzgz/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "protein-assembly": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/protein-assembly__wec7wQs/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "prove-plus-comm": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/prove-plus-comm__74TJ7Wg/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "pypi-server": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/pypi-server__f8cjXSi/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "pytorch-model-cli": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/pytorch-model-cli__aZwX4wv/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "pytorch-model-recovery": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/pytorch-model-recovery__HPnNez6/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    },
+    "qemu-alpine-ssh": {
+      "exception_type": "RuntimeError",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/qemu-alpine-ssh__YYzW8p6/result.json",
+      "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
+    }
+  },
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -379,6 +440,167 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/make-doom-for-mips__W7hdJdF/result.json",
       "raw_response_count": 152,
       "responses_with_reasoning_content": 152
+    },
+    "mcmc-sampling-stan": {
+      "reward": 1.0,
+      "result_sha256": "433e88abdf2499e510db54a1ed14080101849af7927f3a82f7e38e9c8b85546c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/mcmc-sampling-stan__rHZNmGH/result.json",
+      "raw_response_count": 20,
+      "responses_with_reasoning_content": 20
+    },
+    "merge-diff-arc-agi-task": {
+      "reward": 1.0,
+      "result_sha256": "2a6d7c08d9c06d377233ea3fd24b747652402d97f5c50ed389c704780b3ff1d0",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/merge-diff-arc-agi-task__r3qkvkp/result.json",
+      "raw_response_count": 13,
+      "responses_with_reasoning_content": 13
+    },
+    "model-extraction-relu-logits": {
+      "reward": 0.0,
+      "result_sha256": "06a8a0456a656e6dad4ca899f3c55cb6644978cd0ecd016c51f4c641b89c62d6",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/model-extraction-relu-logits__JAyooGA/result.json",
+      "raw_response_count": 12,
+      "responses_with_reasoning_content": 12
+    },
+    "modernize-scientific-stack": {
+      "reward": 1.0,
+      "result_sha256": "55e4f4639bff9e361f027ed81f7f3411e8840d4028d8331ba656c552cba2f6e7",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/modernize-scientific-stack__Q3agasR/result.json",
+      "raw_response_count": 5,
+      "responses_with_reasoning_content": 5
+    },
+    "mteb-leaderboard": {
+      "reward": 0.0,
+      "result_sha256": "4f12780d02aa09267f1f071fb16c8d8dd680393efa3e1cd7c128c5484bccd63a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/mteb-leaderboard__aceVP2E/result.json",
+      "raw_response_count": 22,
+      "responses_with_reasoning_content": 22
+    },
+    "mteb-retrieve": {
+      "reward": 0.0,
+      "result_sha256": "323814ee709159e99b057310cd709c13b48fab9f4fe1e2da1482477e5faf2d89",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/mteb-retrieve__LprChpF/result.json",
+      "raw_response_count": 19,
+      "responses_with_reasoning_content": 19
+    },
+    "multi-source-data-merger": {
+      "reward": 0.0,
+      "result_sha256": "7bd27d35da5cb8815d297d3e017cc11340f5d59f090f76a16f35a0ca61f35597",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/multi-source-data-merger__tc8Retg/result.json",
+      "raw_response_count": 4,
+      "responses_with_reasoning_content": 4
+    },
+    "nginx-request-logging": {
+      "reward": 0.0,
+      "result_sha256": "709f9bf8013e206daa6147c1e5b06e1dff7d1a31085812f7ee7397f7a590eb92",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/nginx-request-logging__SDgCuSg/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "openssl-selfsigned-cert": {
+      "reward": null,
+      "result_sha256": "b0c6aa258abf14533c5d7ab7d73957245be11b2ca3ea984f62c662fda0c24a8e",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/openssl-selfsigned-cert__jvHDeZd/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "overfull-hbox": {
+      "reward": 0.0,
+      "result_sha256": "d4a7d0b54de376dadbc1325d212e2787025eb261689ccd39c383fadbd4b260fe",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/overfull-hbox__mGbJ2x8/result.json",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
+    },
+    "password-recovery": {
+      "reward": 0.0,
+      "result_sha256": "95f54ec3ce5aacec5c7621d13865013d9749a4af86dd03777d09dd954dbf75fc",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/password-recovery__PsufR88/result.json",
+      "raw_response_count": 12,
+      "responses_with_reasoning_content": 12
+    },
+    "path-tracing": {
+      "reward": null,
+      "result_sha256": "e69a57d12a88916c5da7e98ffed9e9614c4fdc687b80a31f5c1830e680ca26ff",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/path-tracing__HyxqYay/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "path-tracing-reverse": {
+      "reward": null,
+      "result_sha256": "47b03261020fada5c42827fad7e236c21e26232310dab483852aece63b8605b3",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/path-tracing-reverse__8QZvkaf/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "polyglot-c-py": {
+      "reward": null,
+      "result_sha256": "4e790b434ecb46a718a76afee454b65b4e57a5acba27844d3c998a23a6df4667",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/polyglot-c-py__wGxvyp2/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "polyglot-rust-c": {
+      "reward": null,
+      "result_sha256": "8e629f93236b0a28f9790dd0128cadc8976b423fa67fa4386d6c54d04609c965",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/polyglot-rust-c__95pEyri/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "portfolio-optimization": {
+      "reward": null,
+      "result_sha256": "ce98537c96bdba215af6cd3ec2a9f4317e4b5fb9557e69fc59020cd124bfc674",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/portfolio-optimization__WKnyzgz/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "protein-assembly": {
+      "reward": null,
+      "result_sha256": "bb7b67aa112bbab4eab14af3fc043e2ac86b9c3d576be71e020e6e59c5da30d8",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/protein-assembly__wec7wQs/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "prove-plus-comm": {
+      "reward": null,
+      "result_sha256": "c8f38920a7baa6ae8877ff478fc409a3509809e4f3d5e7f0c5e94154f3b0f1ba",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/prove-plus-comm__74TJ7Wg/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "pypi-server": {
+      "reward": null,
+      "result_sha256": "4255ca59dbe058d5c7c701cce94203b5e9f7fe09d26c4125bfdc4458ad73bc91",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/pypi-server__f8cjXSi/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "pytorch-model-cli": {
+      "reward": null,
+      "result_sha256": "c49e149e1bbd99d189eafb3b2edb5d8fd8b4b3f1289fb26b80890bea883792aa",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/pytorch-model-cli__aZwX4wv/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "pytorch-model-recovery": {
+      "reward": null,
+      "result_sha256": "996e669b2d1dc91b342195724d0e74d7d2c016951895a824ddd0472354018ae4",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/pytorch-model-recovery__HPnNez6/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "qemu-alpine-ssh": {
+      "reward": null,
+      "result_sha256": "8ac0d1cddcd1069f8069885a5d8ebf2e54051ef1091c6ab09d4167c01a4e051b",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/qemu-alpine-ssh__YYzW8p6/result.json",
+      "raw_response_count": 0,
+      "responses_with_reasoning_content": 0
+    },
+    "qemu-startup": {
+      "reward": 1.0,
+      "result_sha256": "b90389d7170e61ccaa2c2cf30bbb89fec28fe2447f428c081856d76317afcd6e",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/qemu-startup__9iRcWhK/result.json",
+      "raw_response_count": 13,
+      "responses_with_reasoning_content": 13
     }
   }
 }

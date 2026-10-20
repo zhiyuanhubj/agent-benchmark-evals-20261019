@@ -119,6 +119,46 @@ if expiry_claim_path.exists():
         if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
             missing_expiry_trajectories.append(trial.name)
 
+missing_fasttext_files = []
+missing_fasttext_results = []
+missing_fasttext_raw = []
+missing_fasttext_trajectories = []
+for label in ('fasttext-expiry', 'fasttext-tmux'):
+    claim_path = BASE / ('.private/beam_20261018/tb_v1_exact_images_20261019/'
+                         f'muse_nvfp4/state/r2-{label}-2902-20261020-claim.json')
+    if not claim_path.exists():
+        continue
+    claim = json.loads(claim_path.read_text())
+    required = [claim_path, Path(claim['config']), Path(claim['source_result']),
+                ROOT / f'protocol/prepare_muse_nvfp4_r2_{label.replace("-", "_")}_20261020.py',
+                ROOT / f'protocol/run_muse_nvfp4_r2_{label.replace("-", "_")}_20261020.py']
+    if label == 'fasttext-tmux':
+        required.extend((Path(claim['preflight']), Path(claim['harness_tool_class']),
+                         ROOT / 'protocol/preinstalled_tmux_isolated_docker.py',
+                         ROOT / 'protocol/probe_muse_nvfp4_fasttext_tmux_20261020.py'))
+    for suffix in ('start', 'exit'):
+        marker = claim_path.with_name(f'r2-{label}-2902-20261020-{suffix}.json')
+        if marker.exists():
+            required.append(marker)
+    missing_fasttext_files.extend(str(path.relative_to(BASE)) for path in required
+                                  if str(path.relative_to(BASE)) not in entries)
+    job = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / claim['job_name']
+    for trial in job.glob('*'):
+        if not trial.is_dir():
+            continue
+        result = trial / 'result.json'
+        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+            continue
+        if str(result.relative_to(BASE)) not in entries:
+            missing_fasttext_results.append(trial.name)
+        raw_dir = trial / 'agent/raw_responses'
+        if any(raw_dir.glob('*.json')) and not any(
+                path.startswith(str(raw_dir.relative_to(BASE)) + '/') for path in entries):
+            missing_fasttext_raw.append(trial.name)
+        trajectory = trial / 'agent/trajectory.json'
+        if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
+            missing_fasttext_trajectories.append(trial.name)
+
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())
 verified_names = {item['asset'] for item in remote_audit['items'] if item.get('sha256_matches') and item.get('bytes_match')}
 unverified = sorted(manifest['archive_name'] for manifest in manifests if manifest['archive_name'] not in verified_names)
@@ -149,6 +189,14 @@ if missing_expiry_raw:
     errors.append(f'{len(missing_expiry_raw)} allocation-expiry correction raw-response sets missing')
 if missing_expiry_trajectories:
     errors.append(f'{len(missing_expiry_trajectories)} allocation-expiry correction trajectories missing')
+if missing_fasttext_files:
+    errors.append(f'{len(missing_fasttext_files)} fasttext correction inputs/proofs missing')
+if missing_fasttext_results:
+    errors.append(f'{len(missing_fasttext_results)} fasttext correction results missing')
+if missing_fasttext_raw:
+    errors.append(f'{len(missing_fasttext_raw)} fasttext correction raw-response sets missing')
+if missing_fasttext_trajectories:
+    errors.append(f'{len(missing_fasttext_trajectories)} fasttext correction trajectories missing')
 if unverified:
     errors.append(f'{len(unverified)} release assets not SHA/size verified')
 
@@ -174,6 +222,10 @@ record = {
     'missing_expiry_results': missing_expiry_results,
     'missing_expiry_raw_responses': missing_expiry_raw,
     'missing_expiry_trajectories': missing_expiry_trajectories,
+    'missing_fasttext_files': missing_fasttext_files,
+    'missing_fasttext_results': missing_fasttext_results,
+    'missing_fasttext_raw_responses': missing_fasttext_raw,
+    'missing_fasttext_trajectories': missing_fasttext_trajectories,
     'unverified_assets': unverified,
     'errors': errors,
     'qualification': 'complete_verified' if not errors and audit['qualification'] == 'complete_verified' else 'partial_or_needs_review',

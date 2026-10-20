@@ -85,6 +85,7 @@ for model, config_dir in PROFILES.items():
     )
     rows = {}
     ungraded = []
+    ungraded_without_model_response = {}
     unarchived_new_terminal = []
     job_dir = SOURCE / 'results' / model / config['job_name']
     for trial in sorted(job_dir.iterdir()):
@@ -112,11 +113,26 @@ for model, config_dir in PROFILES.items():
         if reward not in (0, 1):
             ungraded.append(task)
         raw_files = sorted((trial / 'agent/raw_responses').glob('*.json'))
-        if not raw_files:
-            errors.append(f'terminal task has no original model responses: {task}')
         trial_key = str(trial.relative_to(BASE)) + '/'
         if result_key not in entries:
             errors.append(f'result missing from release archive: {task}')
+        if not raw_files:
+            exception = (value.get('exception_info') or {}).get('exception_type')
+            if reward is None and exception:
+                ungraded_without_model_response[task] = {
+                    'exception_type': exception,
+                    'result_path': result_key,
+                    'qualification': 'No native verifier reward or model response; original result is preserved but this task is excluded from scored counts.',
+                }
+                rows[task] = {
+                    'reward': None,
+                    'result_sha256': digest(result),
+                    'result_path': result_key,
+                    'raw_response_count': 0,
+                    'responses_with_reasoning_content': 0,
+                }
+                continue
+            errors.append(f'terminal task has no original model responses: {task}')
         if not any(entry.startswith(trial_key + 'agent/raw_responses/') for entry in entries):
             errors.append(f'raw responses missing from release archive: {task}')
         missing_raw = [raw.name for raw in raw_files if str(raw.relative_to(BASE)) not in entries]
@@ -156,6 +172,7 @@ for model, config_dir in PROFILES.items():
         'success': sum(row['reward'] == 1 for row in graded.values()),
         'missing_graded_tasks': sorted(set(expected) - set(graded)),
         'ungraded_terminal_tasks': sorted(ungraded),
+        'ungraded_without_model_response': ungraded_without_model_response,
         'unarchived_new_terminal_tasks': sorted(unarchived_new_terminal),
         'missing_task_inputs_in_archive': missing_inputs,
         'missing_scored_task_inputs_in_archive': missing_scored_inputs,

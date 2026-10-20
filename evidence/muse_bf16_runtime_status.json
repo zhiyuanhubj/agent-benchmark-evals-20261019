@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-20T15:45:59.958328+00:00",
+  "utc": "2026-10-20T16:46:27.336028+00:00",
   "precision": "BF16",
   "model_repo": "meta-models/Muse-Spark-Open-816B-A42B",
   "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
@@ -54,16 +54,33 @@
   },
   "allocation_expiry_recovery": {
     "verified": true,
-    "bridge_active": true,
+    "bridge_active": false,
     "replacement_controllers_active": {
-      "pro": true,
-      "tb": true,
-      "deep": true
+      "pro": false,
+      "tb": false,
+      "deep": false
     },
     "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/bridge-and-resume-claim.json",
     "original_allocation_2865_expired": true
   },
+  "bridge_2869_expiry_recovery": {
+    "phase": "direct_endpoint_partial_resume_running",
+    "verified": true,
+    "old_allocation_state": "TIMEOUT",
+    "stop_plan": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/bridge-2869-expiry-stop-plan.json",
+    "previous_controllers_active": {
+      "pro": false,
+      "tb": false,
+      "deep": false
+    },
+    "direct_controllers_active": {
+      "pro": true,
+      "tb": true,
+      "deep": true
+    },
+    "live_model_endpoint": "http://10.1.13.41:31324/v1"
+  },
   "model_sampling_started": true,
   "problems": [],
-  "qualification": "BF16 results remain separate from NVFP4; source staging and pending jobs are not model samples."
+  "qualification": "BF16 native Pro/TB/Deep disjoint unfinished tasks are running on the verified direct 2886 endpoint after bridge allocation 2869 expired; earlier samples are preserved. BF16 remains separate from NVFP4."
 }

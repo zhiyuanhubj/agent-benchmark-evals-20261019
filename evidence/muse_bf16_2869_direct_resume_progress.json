@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-10-20T16:56:11.516156+00:00",
+  "old_allocation": 2869,
+  "model_allocation": 2886,
+  "precision": "BF16",
+  "jobs": {
+    "tb": {
+      "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/tb-r1-direct-2886-20261020-claim.json",
+      "claim_sha256": "4df5ef4d957dc1168126265dbc4fd940521ffea5c32797a32ffa211482c0a7d1",
+      "job_name": "muse-bf16-tb-r1-direct-2886-20261020",
+      "declared_tasks": 16,
+      "native_terminal": 1,
+      "native_graded": 1,
+      "native_success": 1,
+      "original_terminal_preserved": 73,
+      "qualification": "Disjoint first-round infrastructure continuation. Separately tracked until task-level native score reconciliation."
+    },
+    "deep": {
+      "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/deep-r1-direct-2886-20261020-claim.json",
+      "claim_sha256": "f8e28916765ad418b995f8ec2f0fd1c7a3205979f5df460dfdc726a456a91805",
+      "job_name": "muse-bf16-deep-r1-direct-2886-20261020",
+      "declared_tasks": 11,
+      "native_terminal": 2,
+      "native_graded": 2,
+      "native_success": 1,
+      "original_terminal_preserved": 102,
+      "qualification": "Disjoint first-round infrastructure continuation. Separately tracked until task-level native score reconciliation."
+    },
+    "pro": {
+      "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/pro-direct-2886-claim.json",
+      "claim_sha256": "1ad4c06dce4a498ec46a83e47c90ff2d2d7baed3611bc75e5793d554153b1c7a",
+      "run_id": "muse-bf16-pro-r1-direct-2886-20261020",
+      "declared_tasks": 560,
+      "native_terminal": 1,
+      "original_native_results_preserved": 171,
+      "qualification": "Disjoint first-round infrastructure continuation. Separately tracked until task-level native score reconciliation."
+    }
+  }
+}

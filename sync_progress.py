@@ -59,6 +59,10 @@ def sync_native_archives(scores, force_bf16=False):
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli')
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020')
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-expiry-correction-2902-20261020')
+            replacement_names.extend((
+                'muse-nvfp4-tb-v1-exact-r2-fasttext-expiry-2902-20261020',
+                'muse-nvfp4-tb-v1-exact-r2-fasttext-tmux-2902-20261020',
+            ))
             for job_name in replacement_names:
                 replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / job_name
                 if replacement.exists():
@@ -143,6 +147,13 @@ def sync_native_archives(scores, force_bf16=False):
                     if path.exists():
                         handoff_newer |= (latest_archive_time is None or
                                          datetime.fromtimestamp(path.stat().st_mtime, timezone.utc) > latest_archive_time)
+            for label in ('fasttext-expiry', 'fasttext-tmux'):
+                claim = BASE / ('.private/beam_20261018/tb_v1_exact_images_20261019/'
+                                f'muse_nvfp4/state/r2-{label}-2902-20261020-claim.json')
+                if claim.exists():
+                    expected_receipts += 1
+                    handoff_newer |= (latest_archive_time is None or
+                                     datetime.fromtimestamp(claim.stat().st_mtime, timezone.utc) > latest_archive_time)
             if handoff_path.exists():
                 expected_receipts += 1
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
@@ -354,6 +365,11 @@ def cycle():
              'audit_other_exact_round1.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',
+             'protocol/muse_bf16_status_20261020.py',
+             'protocol/prepare_muse_bf16_direct_resume_20261020.py',
+             'protocol/run_muse_bf16_pro_direct_resume_20261020.py',
+             'protocol/prune_2919_completed_beam_pro_images_20261020.py',
+             'protocol/prune_2922_completed_muse_pro_images_20261020.py',
              'protocol/run_beam_pro_r2_2888_20261020.py',
              'beam_exact_round3_2901.py',
              'audit_muse_nvfp4_r2_ungraded.py',
@@ -361,6 +377,12 @@ def cycle():
              'prepare_muse_nvfp4_r2_connection_recovery.py',
              'protocol/prepare_muse_nvfp4_r2_expiry_correction_20261020.py',
              'protocol/run_muse_nvfp4_r2_expiry_correction_20261020.py',
+             'protocol/prepare_muse_nvfp4_r2_fasttext_expiry_20261020.py',
+             'protocol/run_muse_nvfp4_r2_fasttext_expiry_20261020.py',
+             'protocol/preinstalled_tmux_isolated_docker.py',
+             'protocol/probe_muse_nvfp4_fasttext_tmux_20261020.py',
+             'protocol/prepare_muse_nvfp4_r2_fasttext_tmux_20261020.py',
+             'protocol/run_muse_nvfp4_r2_fasttext_tmux_20261020.py',
              'audit_muse_nvfp4_r2_prove_ungraded.py',
              'prepare_muse_nvfp4_r2_prove_replacement.py',
              'audit_muse_nvfp4_r2_prove_transport.py',
@@ -383,6 +405,7 @@ def cycle():
              'export_snapshot.py', 'snapshot_live_tb.py', 'snapshot_other_exact_tb.py',
              'screen_exact_tb_integrity.py',
              'verify_muse_exact_io.py',
+             'verify_muse_bf16_exact_io.py',
              'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)

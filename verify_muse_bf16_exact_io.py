@@ -24,6 +24,7 @@ expected = {Path(row['path']).name for row in config['tasks']}
 assert len(expected) == 89 and not identity['errors']
 
 scored = {}
+ungraded_native = {}
 errors = []
 raw_reasoning_by_task = {}
 thinking_warnings = []
@@ -33,11 +34,17 @@ for result_path in (BF / 'tb-results/muse-bf16-tb-r1').glob('*/result.json'):
         continue
     task = Path(row['config']['task']['path']).name
     reward = ((row.get('verifier_result') or {}).get('rewards') or {}).get('reward')
-    if task not in expected or task in scored:
+    if task not in expected or task in scored or task in ungraded_native:
         errors.append(f'unexpected or duplicate BF16 task: {task}')
         continue
     if reward not in (0, 1):
-        errors.append(f'ungraded BF16 terminal task: {task}')
+        exception = (row.get('exception_info') or {}).get('exception_type')
+        ungraded_native[task] = {
+            'result_path': str(result_path.relative_to(BASE)),
+            'exception_type': exception,
+            'raw_response_count': len(list((result_path.parent / 'agent/raw_responses').glob('*.json'))),
+            'qualification': 'No native verifier reward; excluded from scored counts pending task-level audit.',
+        }
         continue
     scored[task] = {'reward': reward, 'result_path': str(result_path.relative_to(BASE))}
     raw_files = sorted((result_path.parent / 'agent/raw_responses').glob('*.json'))
@@ -95,6 +102,7 @@ if score['graded'] == 89 and set(scored) != expected:
 audit = {'generated_utc': datetime.now(timezone.utc).isoformat(), 'expected_tasks': 89,
          'scored_tasks': len(scored), 'success_count': sum(row['reward'] == 1 for row in scored.values()),
          'tasks': scored,
+         'ungraded_native_terminal_tasks': ungraded_native,
          'covered_inputs': 89 - len(missing_inputs), 'covered_results': len(scored) - len(missing_results),
          'covered_raw_response_sets': len(scored) - len(missing_raw),
          'covered_trajectories': len(scored) - len(missing_trajectories),

@@ -93,6 +93,69 @@ write('evidence/beam_pro_handoff_progress.json', {
 bf16_expiry_recovery = read(ROOT / 'evidence/muse_bf16_2865_expiry_recovery.json')
 assert bf16_expiry_recovery['pro_scoring_run_id'] == ex['muse_bf16']['pro']['scoring_run_id']
 assert bf16_expiry_recovery['original_completed_pro_tasks_reused_once'] == ex['muse_bf16']['pro']['reused_original_completed_tasks']
+bf16_direct_progress = {'generated_utc': now, 'old_allocation': 2869,
+                        'model_allocation': 2886, 'precision': 'BF16', 'jobs': {}}
+for kind in ('tb', 'deep'):
+    direct_claim_path = BF / 'recovery_20261020' / f'{kind}-r1-direct-2886-20261020-claim.json'
+    if not direct_claim_path.exists():
+        continue
+    direct_claim = read(direct_claim_path)
+    assert direct_claim['kind'] == kind and direct_claim['round'] == 1
+    assert direct_claim['old_endpoint'] == 'http://10.1.77.106:31324/v1'
+    assert direct_claim['verified_direct_endpoint'] == 'http://10.1.13.41:31324/v1'
+    assert hashlib.sha256(Path(direct_claim['source_config']).read_bytes()).hexdigest() == direct_claim['source_config_sha256']
+    assert hashlib.sha256(Path(direct_claim['config']).read_bytes()).hexdigest() == direct_claim['config_sha256']
+    assert set(direct_claim['tasks']).isdisjoint(direct_claim['terminal_original_trials'])
+    assert set(direct_claim['pending_original_trials_without_model_response']) <= set(direct_claim['tasks'])
+    assert all(hashlib.sha256(Path(row['path']).read_bytes()).hexdigest() == row['sha256']
+               for row in direct_claim['terminal_original_trials'].values())
+    write(f'evidence/muse_bf16_2869_direct_{kind}_claim.json', direct_claim)
+    config = read(Path(direct_claim['config']))
+    config = config.get('config', config)
+    job_dir = Path(config['jobs_dir']) / direct_claim['job_name']
+    found, graded, success = set(), 0, 0
+    for trial in job_dir.glob('*/result.json'):
+        result = read(trial)
+        task = Path(result['config']['task']['path']).name
+        assert task in direct_claim['tasks'] and task not in found
+        assert 'http://10.1.13.41:31324/v1' in json.dumps(result['config']['agent'])
+        found.add(task)
+        reward = ((result.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        if reward in (0, 1):
+            graded += 1
+            success += int(reward)
+    bf16_direct_progress['jobs'][kind] = {
+        'claim': str(direct_claim_path), 'claim_sha256': hashlib.sha256(direct_claim_path.read_bytes()).hexdigest(),
+        'job_name': direct_claim['job_name'], 'declared_tasks': len(direct_claim['tasks']),
+        'native_terminal': len(found), 'native_graded': graded, 'native_success': success,
+        'original_terminal_preserved': len(direct_claim['terminal_original_trials']),
+        'qualification': 'Disjoint first-round infrastructure continuation. Separately tracked until task-level native score reconciliation.',
+    }
+pro_direct_claim_path = BF / 'recovery_20261020/pro-direct-2886-claim.json'
+if pro_direct_claim_path.exists():
+    pro_direct_claim = read(pro_direct_claim_path)
+    assert pro_direct_claim['old_endpoint'] == 'http://10.1.77.106:31324/v1'
+    assert pro_direct_claim['verified_direct_endpoint'] == 'http://10.1.13.41:31324/v1'
+    assert pro_direct_claim['direct_task_count'] == len(pro_direct_claim['direct_task_ids'])
+    assert pro_direct_claim['previous_native_result_count'] == len(pro_direct_claim['previous_native_results'])
+    assert pro_direct_claim['direct_task_count'] + pro_direct_claim['previous_native_result_count'] == 731
+    assert not (set(pro_direct_claim['direct_task_ids']) & set(pro_direct_claim['previous_native_results']))
+    pro_direct_run = (BF / 'legacy_bench/pro-results/muse_bf16_full/'
+                      'muse-spark-open-bf16_swebench_pro_verified_mini_swe_agent' /
+                      pro_direct_claim['direct_run_id'])
+    pro_results = list((pro_direct_run / 'details').glob('*/attempt-1/result.json'))
+    assert len(pro_results) <= pro_direct_claim['direct_task_count']
+    write('evidence/muse_bf16_2869_direct_pro_claim.json', pro_direct_claim)
+    bf16_direct_progress['jobs']['pro'] = {
+        'claim': str(pro_direct_claim_path),
+        'claim_sha256': hashlib.sha256(pro_direct_claim_path.read_bytes()).hexdigest(),
+        'run_id': pro_direct_claim['direct_run_id'],
+        'declared_tasks': pro_direct_claim['direct_task_count'],
+        'native_terminal': len(pro_results),
+        'original_native_results_preserved': pro_direct_claim['previous_native_result_count'],
+        'qualification': 'Disjoint first-round infrastructure continuation. Separately tracked until task-level native score reconciliation.',
+    }
+write('evidence/muse_bf16_2869_direct_resume_progress.json', bf16_direct_progress)
 br = read(B / 'current.json')
 for split, row in review_da['reviewers'].get('beam-bf16', {}).items():
     assert br['swe_review'][split]['terminal'] == row['expected']
@@ -198,6 +261,39 @@ if expiry_correction_claim_path.exists():
             assert hashlib.sha256(Path(row['previous_recovery_result']).read_bytes()).hexdigest() == row['previous_recovery_result_sha256']
         assert hashlib.sha256(Path(row['source_original_result']).read_bytes()).hexdigest() == row['source_original_result_sha256']
     (ROOT / 'evidence/muse_nvfp4_r2_expiry_correction_claim.json').write_bytes(expiry_correction_claim_path.read_bytes())
+fasttext_expiry_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r2-fasttext-expiry-2902-20261020-claim.json'
+fasttext_tmux_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r2-fasttext-tmux-2902-20261020-claim.json'
+fasttext_expiry_claim = read(fasttext_expiry_path) if fasttext_expiry_path.exists() else None
+fasttext_tmux_claim = read(fasttext_tmux_path) if fasttext_tmux_path.exists() else None
+if fasttext_expiry_claim:
+    assert fasttext_expiry_claim['task'] == 'train-fasttext' and fasttext_expiry_claim['round'] == 2
+    assert fasttext_expiry_claim['no_model_retry'] and fasttext_expiry_claim['no_best_of_selection']
+    assert fasttext_expiry_claim['source_raw_response_count'] == 325
+    for key in ('config', 'source_config', 'route', 'source_result',
+                'new_endpoint_ready', 'new_reasoning_preflight', 'image_proof'):
+        assert hashlib.sha256(Path(fasttext_expiry_claim[key]).read_bytes()).hexdigest() == fasttext_expiry_claim[key + '_sha256']
+    source_result = read(Path(fasttext_expiry_claim['source_result']))
+    assert source_result['exception_info']['exception_type'] == 'ContextAccountingError'
+    assert 'Connection refused' in source_result['exception_info']['exception_traceback']
+    assert ((source_result.get('verifier_result') or {}).get('rewards') or {}).get('reward') is None
+    (ROOT / 'evidence/muse_nvfp4_r2_fasttext_expiry_claim.json').write_bytes(fasttext_expiry_path.read_bytes())
+if fasttext_tmux_claim:
+    assert fasttext_expiry_claim
+    assert fasttext_tmux_claim['task'] == 'train-fasttext' and fasttext_tmux_claim['round'] == 2
+    assert fasttext_tmux_claim['source_claim_sha256'] == hashlib.sha256(fasttext_expiry_path.read_bytes()).hexdigest()
+    assert fasttext_tmux_claim['no_model_retry'] and fasttext_tmux_claim['no_best_of_selection']
+    for key in ('config', 'source_config', 'source_result', 'preflight', 'harness_tool_class'):
+        assert hashlib.sha256(Path(fasttext_tmux_claim[key]).read_bytes()).hexdigest() == fasttext_tmux_claim[key + '_sha256']
+    assert fasttext_tmux_claim['harness_tool_class_sha256'] == hashlib.sha256(
+        (ROOT / 'protocol/preinstalled_tmux_isolated_docker.py').read_bytes()).hexdigest()
+    pre_model = read(Path(fasttext_tmux_claim['source_result']))
+    assert pre_model['exception_info']['exception_type'] == 'RuntimeError'
+    assert ((pre_model.get('verifier_result') or {}).get('rewards') or {}).get('reward') is None
+    preflight = read(Path(fasttext_tmux_claim['preflight']))
+    assert preflight['task_image_id'] == fasttext_tmux_claim['task_image_id']
+    assert preflight['model_requests'] == 0 and preflight['returncode'] == 0
+    (ROOT / 'evidence/muse_nvfp4_r2_fasttext_tmux_claim.json').write_bytes(fasttext_tmux_path.read_bytes())
+    (ROOT / 'evidence/muse_nvfp4_r2_fasttext_tmux_preflight.json').write_bytes(Path(fasttext_tmux_claim['preflight']).read_bytes())
 nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-completion-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 nvfp4_parallel_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-parallel-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 extra_lane_units = {str(lane): subprocess.run(['systemctl', '--user', 'is-active', f'muse-nvfp4-exact-tb-extra-lane{lane}-2866-20261019.service'], capture_output=True, text=True).stdout.strip() for lane in (2, 3)}
@@ -447,6 +543,43 @@ if expiry_correction_claim:
             assert task not in connection_results or connection_results[task]['reward'] is None
             original['reward'] = value
             original['replacement'] = expiry_results[task]
+fasttext_pre_model_result = None
+if fasttext_expiry_claim:
+    preliminary = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / fasttext_expiry_claim['job_name']
+    preliminary_results = list(preliminary.glob('train-fasttext__*/result.json'))
+    assert len(preliminary_results) <= 1
+    if preliminary_results:
+        path = preliminary_results[0]
+        result = read(path)
+        if result.get('finished_at'):
+            assert result['exception_info']['exception_type'] == 'RuntimeError'
+            assert ((result.get('verifier_result') or {}).get('rewards') or {}).get('reward') is None
+            fasttext_pre_model_result = {'path': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                                         'exception': 'RuntimeError', 'reward': None}
+fasttext_tmux_result = None
+fasttext_tmux_active = 0
+if fasttext_tmux_claim:
+    correction = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / fasttext_tmux_claim['job_name']
+    trials = [path for path in correction.glob('train-fasttext__*') if path.is_dir()]
+    assert len(trials) <= 1
+    for trial in trials:
+        path = trial / 'result.json'
+        if not path.exists() or not read(path).get('finished_at'):
+            fasttext_tmux_active += 1
+            continue
+        result = read(path)
+        assert Path(result['config']['task']['path']).name == 'train-fasttext'
+        assert result['config']['agent']['kwargs']['api_base'] == read(Path(fasttext_tmux_claim['config']))['agents'][0]['kwargs']['api_base']
+        value = ((result.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        fasttext_tmux_result = {'path': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                                'reward': value, 'exception': (result.get('exception_info') or {}).get('exception_type')}
+        if value in (0, 1):
+            original = new_terminal_by_round['2']['train-fasttext']
+            assert original['reward'] is None and original['source'] == fasttext_expiry_claim['source_result']
+            assert original['exception'] == 'ContextAccountingError'
+            assert fasttext_pre_model_result and fasttext_pre_model_result['reward'] is None
+            original['reward'] = value
+            original['replacement'] = fasttext_tmux_result
 for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['terminal'] += len(rows)
     nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
@@ -809,6 +942,21 @@ if expiry_correction_claim:
         'active_trial_dirs': expiry_active,
         'no_best_of_selection': True,
         'qualification': 'Only one hash-declared correction result per task may fill an ungraded infrastructure failure; prior attempts remain preserved.',
+    }
+if fasttext_tmux_claim:
+    snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_fasttext_expiry_correction'] = {
+        'original_expiry_claim': 'evidence/muse_nvfp4_r2_fasttext_expiry_claim.json',
+        'tmux_correction_claim': 'evidence/muse_nvfp4_r2_fasttext_tmux_claim.json',
+        'tmux_preflight': 'evidence/muse_nvfp4_r2_fasttext_tmux_preflight.json',
+        'original_partial_model_responses': fasttext_expiry_claim['source_raw_response_count'],
+        'pre_model_attempt': fasttext_pre_model_result,
+        'corrected_attempt': fasttext_tmux_result,
+        'active_trial_dirs': fasttext_tmux_active,
+        'controller': subprocess.run(['systemctl', '--user', 'is-active',
+                                      'muse-nvfp4-r2-fasttext-tmux-2902-20261020.service'],
+                                     capture_output=True, text=True).stdout.strip(),
+        'same_pinned_task_image': True, 'no_best_of_selection': True,
+        'qualification': 'The original model draw ended after allocation expiry; a later attempt failed before model sampling because tmux was unavailable. Only a native grade from the declared single correction fills this task.',
     }
 snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_pytorch_model_cli_storage_replacement'] = {
     'claim': 'evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json',
@@ -1193,6 +1341,8 @@ Opus 4.7 SWE-Review uses the unchanged official task cards and one review attemp
 
 Muse BF16's original GPU allocation expired during Pro, TB2.1 and DeepSWE runs. The [recovery audit](evidence/muse_bf16_2865_expiry_recovery.json) identifies the original and derived Pro run IDs: **137 completed original tasks are reused once**, while 10 failed and four active original attempts are preserved separately. Its live Pro score reads only the derived native run, so partial counts may temporarily fall as interrupted tasks are resumed. The two interrupted original TB trials and two DeepSWE trials are available as separate SHA-verified [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) and [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) I/O assets; they remain ungraded infrastructure interruptions.
 
+After bridge allocation 2869 expired, the [direct-endpoint continuation](evidence/muse_bf16_2869_direct_resume_progress.json) separately declared 560 Pro, 16 TB2.1 and 11 DeepSWE tasks without an original native result. Their new trials and prior artifacts remain separate until task-level score reconciliation; ungraded originals are never counted as model failures.
+
 Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits](evidence/swe_review_complete_split_da.json): GLM5 **{review_glm_da['DA']}%** on {review_glm_da['produced']} parseable decisions (500 task outcomes), Qwen3-Coder **{review_coder_da['DA']}%** on {review_coder_da['produced']} (462 outcomes), and Qwen3-30B-Instruct **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} (422 outcomes). [The v2 receipt audit](evidence/muse_swe_review_revision_v2_receipts.json) verifies 8 GLM5 and 2 Coder task-generation-only adapters for finished native verifier reports lacking Harbor summaries; no adapter is a model result. {muse_rrr_en_note}
 
 The [revision infrastructure audit](evidence/swe_review_revision_queue_recovery_20261020.json) records two task input formats, preparation failures, and a sandbox-to-model connection timeout before any model response. Those native failures remain excluded from model scores. Two synthetic Harbor trials then completed model generation, terminal tool use, and native verification through the Docker host bridge; they do not enter benchmark metrics. Four declared original-generator recovery queues have run or are running with the [bridge agent](protocol/muse_review_revision_v2/revision_agents_bridge_v4.py) and the original task inputs. The [live native-grade audit](evidence/swe_review_revision_gateway_progress.json) has Muse Coder **{review_revision_muse_coder['native_graded_revisions']}/{review_revision_muse_coder['expected_revisions']}**, Muse Instruct **{review_revision_muse_instruct['native_graded_revisions']}/{review_revision_muse_instruct['expected_revisions']}**, Beam Coder **{review_revision_beam_coder['native_graded_revisions']}/{review_revision_beam_coder['expected_revisions']}**, and Beam Instruct **{review_revision_beam_instruct['native_graded_revisions']}/{review_revision_beam_instruct['expected_revisions']}** revisions graded; split RRR is reported only after every required native grade and released evidence is verified. The [v3 scorer](protocol/muse_review_revision_v2/revision_score_v3.py) reads only the corrected gateway results, preserves five malformed Beam review reports as model failures, and exactly reproduces all four sealed DA split metrics.
@@ -1359,6 +1509,8 @@ chinese_report = f'''# 模型评测结果快照
 Opus 4.7 SWE-Review 使用未改动的官方题卡，每题仅一次评审抽样。[模型可见输入](input_output/archive_manifests/opus47_review_inputs.json)及[原生输出、逐次回复和轨迹](input_output/archive_manifests/opus47_review_full_io.json)已作为带 SHA 校验的 Release 资产保存。输出归档是运行中的局部快照，后续增量归档会续传；仅凭评审阶段结果不能报告 DA 或 RRR。
 
 Muse BF16 原节点在 Pro、TB2.1、DeepSWE 运行中到期。[恢复审计](evidence/muse_bf16_2865_expiry_recovery.json)记录了原始及续跑 ID：**137 道已完成的 Pro 题仅复用一次**，原运行的 10 道失败题和 4 道中断题单独保留。当前 Pro 进度只统计续跑的原生结果，故恢复初期局部已判分数可能暂时下降。另有两道 TB 和两道 DeepSWE 的中断原始输入输出及轨迹，分别保存在已做 SHA 校验的 [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) 与 [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) 归档中；这些原记录尚未判分，不计为模型失败。
+
+2869 转发节点到期后，[直连续跑清单](evidence/muse_bf16_2869_direct_resume_progress.json)另外声明了原轮次中没有原生结果的 Pro 560 题、TB2.1 16 题、DeepSWE 11 题。新试验与旧轨迹分开保留，待逐题核对后再合并计分；原始未判分记录不算模型失败。
 
 **SWE-Review 三组 DA 均已有封存收据。** 官方 `compute_da.py` 在 GLM5 {review_glm_da['produced']} 个可解析决定上得 **{review_glm_da['DA']}%**（500 题终态），Qwen3-Coder {review_coder_da['produced']} 个得 **{review_coder_da['DA']}%**（462 题），Qwen3-30B-Instruct {review_instruct_da['produced']} 个得 **{review_instruct_da['DA']}%**（422 题）。[逐题哈希和官方评分核验](evidence/swe_review_complete_split_da.json)覆盖全部三组。[新版任务准备收据审计](evidence/muse_swe_review_revision_v2_receipts.json)确认 GLM5 的 8 道、Coder 的 2 道只缺 Harbor 汇总：它们的真实原生报告参与 DA，标明用途的适配文件仅供官方修复任务生成，绝非模型结果。{muse_rrr_zh_note}
 

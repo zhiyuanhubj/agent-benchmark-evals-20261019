@@ -29,6 +29,8 @@ transport_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-
 storage_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli'
 connection_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020'
 expiry_correction_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-expiry-correction-2902-20261020'
+fasttext_expiry_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-fasttext-expiry-2902-20261020'
+fasttext_tmux_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-fasttext-tmux-2902-20261020'
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
 jobs.extend(RESULTS.glob('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b*'))
 jobs.extend(job for job in replacement_jobs if job.exists())
@@ -40,6 +42,9 @@ if connection_job.exists():
     jobs.append(connection_job)
 if expiry_correction_job.exists():
     jobs.append(expiry_correction_job)
+for job in (fasttext_expiry_job, fasttext_tmux_job):
+    if job.exists():
+        jobs.append(job)
 for job in sorted(jobs):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
     if config.exists():
@@ -314,6 +319,47 @@ if expiry_claim.exists():
     counts['controller_source'] += 1
     for suffix in ('start', 'exit'):
         marker = expiry_claim.with_name(f'r2-expiry-correction-2902-20261020-{suffix}.json')
+        if marker.exists():
+            payloads[marker] = marker.read_bytes()
+            counts['handoff_receipt'] += 1
+for label, job in (('fasttext-expiry', fasttext_expiry_job),
+                   ('fasttext-tmux', fasttext_tmux_job)):
+    claim_path = SOURCE / f'muse_nvfp4/state/r2-{label}-2902-20261020-claim.json'
+    if not claim_path.exists():
+        continue
+    claim = json.loads(claim_path.read_text())
+    assert claim['job_name'] == job.name and claim['task'] == 'train-fasttext'
+    assert claim['no_model_retry'] and claim['no_best_of_selection']
+    for key in ('config', 'source_config', 'source_result'):
+        source = Path(claim[key])
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == claim[key + '_sha256']
+        if source not in payloads:
+            payloads[source] = source.read_bytes()
+            counts['job_config' if key.endswith('config') else 'result'] += 1
+    for key in (('route', 'new_endpoint_ready', 'new_reasoning_preflight', 'image_proof')
+                if label == 'fasttext-expiry' else
+                ('source_claim', 'preflight', 'harness_tool_class')):
+        source = Path(claim[key])
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == claim[key + '_sha256']
+        if source not in payloads:
+            payloads[source] = source.read_bytes()
+            counts['ready_proof' if key in ('new_endpoint_ready', 'new_reasoning_preflight', 'preflight')
+                   else 'controller_source' if key == 'harness_tool_class' else 'handoff_receipt'] += 1
+    payloads[claim_path] = claim_path.read_bytes()
+    counts['handoff_receipt'] += 1
+    for source in ((ROOT / f'protocol/prepare_muse_nvfp4_r2_{label.replace("-", "_")}_20261020.py'),
+                   (ROOT / f'protocol/run_muse_nvfp4_r2_{label.replace("-", "_")}_20261020.py')):
+        assert source.is_file()
+        payloads[source] = source.read_bytes()
+        counts['controller_source'] += 1
+    if label == 'fasttext-tmux':
+        for source in (ROOT / 'protocol/preinstalled_tmux_isolated_docker.py',
+                       ROOT / 'protocol/probe_muse_nvfp4_fasttext_tmux_20261020.py'):
+            assert source.is_file()
+            payloads[source] = source.read_bytes()
+            counts['controller_source'] += 1
+    for suffix in ('start', 'exit'):
+        marker = claim_path.with_name(f'r2-{label}-2902-20261020-{suffix}.json')
         if marker.exists():
             payloads[marker] = marker.read_bytes()
             counts['handoff_receipt'] += 1

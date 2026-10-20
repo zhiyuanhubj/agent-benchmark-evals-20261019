@@ -1,0 +1,654 @@
+{
+  "utc": "2026-10-20T16:20:03.304144+00:00",
+  "reason": "2869 bridge expired while original one-draw first-round trials ran; resume only tasks without a native result",
+  "kind": "deep",
+  "round": 1,
+  "precision": "BF16",
+  "model_allocation": 2886,
+  "old_endpoint": "http://10.1.77.106:31324/v1",
+  "verified_direct_endpoint": "http://10.1.13.41:31324/v1",
+  "job_name": "muse-bf16-deep-r1-direct-2886-20261020",
+  "source_job_name": "muse-bf16-deep-r1",
+  "source_config": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/configs/deep-r1.json",
+  "source_config_sha256": "4560a14204bfb88be0a0e92acd28f33c2164f6ba723be8a641cdaadc9d31a3f4",
+  "config": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/configs/deep-r1-direct-2886-20261020.json",
+  "config_sha256": "f1b0e3d25351538101d734f060ffc90f3f584cf15b0a35507ae5247007021f20",
+  "tasks": [
+    "opa-rego-rule-profiling",
+    "participle-grammar-conflict-analysis",
+    "prometheus-typed-label-sorting",
+    "query-persist-restored-query-state",
+    "scriggo-method-declarations",
+    "sqlite-utils-safe-import-checkpoints",
+    "tengo-destructuring-bindings",
+    "textual-kitty-key-phases",
+    "ts-pattern-match-each",
+    "vulture-persistent-analysis-cache",
+    "yjs-map-conflict-detection"
+  ],
+  "pending_original_trials_without_model_response": {
+    "opa-rego-rule-profiling": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/opa-rego-rule-profiling__hPq4Sgm",
+      "raw_responses": 0
+    },
+    "participle-grammar-conflict-analysis": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/participle-grammar-conflict-anal__TwpaY7G",
+      "raw_responses": 0
+    }
+  },
+  "terminal_original_trials": {
+    "katex-multicolumn-array-spans": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/katex-multicolumn-array-spans__HqT2DWa/result.json",
+      "sha256": "acb4c9da34f29e55278fead4271f2335ecaec3d95945cf8659233bed35a6bb39",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "superjson-error-stack-serialization": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/superjson-error-stack-serializat__kLQHBqd/result.json",
+      "sha256": "982bc70b1868f2ce6c87f71afde0911220d0295abc87e8c9d5e75abe33c5482c",
+      "reward": 0,
+      "exception": null
+    },
+    "kcp-go-multiplexed-kcp-streams": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kcp-go-multiplexed-kcp-streams__6aucPdT/result.json",
+      "sha256": "4475efbaf7a313e6895610b9412a22eb706f034acb5c3954cfdf9f719b850211",
+      "reward": 1,
+      "exception": null
+    },
+    "obsidian-linter-auto-table-of-contents": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/obsidian-linter-auto-table-of-co__VSe2Ch5/result.json",
+      "sha256": "9f5621ca0e3037e0168287b996b61a76156e100b7402bf6354f485180234c7dd",
+      "reward": 0,
+      "exception": null
+    },
+    "testem-per-launcher-reports": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/testem-per-launcher-reports__2GiQf7Z/result.json",
+      "sha256": "4313873d116fafe1579a2a754b00894abf1416995b22a332798e53170992a5b1",
+      "reward": 1,
+      "exception": null
+    },
+    "koota-pair-relation-tracking": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/koota-pair-relation-tracking__TSrxRxc/result.json",
+      "sha256": "718c9283d336d82f353e7b7ba54c2bd7dd0480cd6ff447ce03ce3d5f886d5b38",
+      "reward": 0,
+      "exception": null
+    },
+    "aiomonitor-task-snapshots-diff": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/aiomonitor-task-snapshots-diff__s3DzqVu/result.json",
+      "sha256": "931a01bc09e7f212bf3761c1ec3f7da89b0312a4e2944061fd8e3661830f9cdc",
+      "reward": 1,
+      "exception": null
+    },
+    "eicrud-keyset-pagination-cursor": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/eicrud-keyset-pagination-cursor__9UeEzYf/result.json",
+      "sha256": "98c014ff363f9429e4c51d4b8cf1fc4f7abb55381bda472c1313bf6453499c6f",
+      "reward": 1,
+      "exception": null
+    },
+    "fastapi-deprecation-response-headers": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/fastapi-deprecation-response-hea__DQ6NSrJ/result.json",
+      "sha256": "bf510a4857467984f28a1b6e880881b0560c94111b008960ddd0d1f9ce39ae9d",
+      "reward": 0,
+      "exception": null
+    },
+    "dasel-html-document-format": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dasel-html-document-format__NpYXNey/result.json",
+      "sha256": "e0a004208bd7ee914e1491725c5059a4982f53f74a4622b98b104a368d0bfbf4",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "go-critic-doc-link-checker": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/go-critic-doc-link-checker__EPvFEHB/result.json",
+      "sha256": "eb0648ba1c178a7f0ca8291f7bc7c1a821ada195b4dad6df84880825e4abff3c",
+      "reward": 0,
+      "exception": null
+    },
+    "vitest-duration-sharding": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/vitest-duration-sharding__9fLt9xz/result.json",
+      "sha256": "1920a57ac94153c460dff6585c9661f51e3d43302c1f4d8e9f54342c06ccb7bb",
+      "reward": 0,
+      "exception": "NetworkConnectionError"
+    },
+    "wasmi-trap-coredumps": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/wasmi-trap-coredumps__k4VTCFz/result.json",
+      "sha256": "49e231ace6c363ff1dd844ea679ad5414d8cc6b2851085406ff8c3c72f3177b7",
+      "reward": 1,
+      "exception": null
+    },
+    "dateutil-rfc5545-timezone-interop": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dateutil-rfc5545-timezone-intero__w7KF4eo/result.json",
+      "sha256": "795d8d80df954bdee7fa46e6b43813622d1b1c7d08ebcc0d9d58ed9e3d1b9160",
+      "reward": 0,
+      "exception": null
+    },
+    "valibot-recursive-schema-composition": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/valibot-recursive-schema-composi__YdLwudD/result.json",
+      "sha256": "e662296bfede53d7dbf22627c49d58892c1ab6ab0347b6bab51c82211cdb8cfd",
+      "reward": 1,
+      "exception": null
+    },
+    "bandit-structured-nosec-directives": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/bandit-structured-nosec-directiv__bLUsLgw/result.json",
+      "sha256": "ba93dfaac1358b4a6faa51bf1c059071153b4b51aecbf135bac541f921c19f4c",
+      "reward": 0,
+      "exception": null
+    },
+    "pebble-durability-wait-apis": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/pebble-durability-wait-apis__3NU9s84/result.json",
+      "sha256": "61fd328e462799e1db2136a44e07cf0e66451930f7c18e3a3ff771b6b48159ff",
+      "reward": 0,
+      "exception": null
+    },
+    "tomlkit-toml-table-converters": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/tomlkit-toml-table-converters__BZchRnS/result.json",
+      "sha256": "bda08729ffc94893d6dfea79e5b682f6ea3a77dff4d174920dbd0f0e10310eba",
+      "reward": 0,
+      "exception": null
+    },
+    "pwntools-tube-multiplexing": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/pwntools-tube-multiplexing__hkmYZuU/result.json",
+      "sha256": "c4f768e4f9d272dc200039fe157e3301d426bcb53f25ffd651f903b7efc93693",
+      "reward": 0,
+      "exception": null
+    },
+    "fastapi-implicit-head-options": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/fastapi-implicit-head-options__ERh8ni7/result.json",
+      "sha256": "8d968adfcc5775809e20298681a8b7fe9782ee536b047c7d7c37a2d76cc3a280",
+      "reward": 0,
+      "exception": null
+    },
+    "kombu-single-active-consumer-priority": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kombu-single-active-consumer-pri__5BfDQmQ/result.json",
+      "sha256": "cad9e5eda761ce932e9979ff6899ba6473c3baa8dc070747fb793aaa5f0205e5",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "mnamer-daemon-watch-lifecycle": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/mnamer-daemon-watch-lifecycle__NFJeqmQ/result.json",
+      "sha256": "21c62bb4a70442e4474863a7374b6bd1b3f886c4a45dcb6d6cf73e969e4c932e",
+      "reward": 1,
+      "exception": null
+    },
+    "scc-bounded-memory-spilling": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/scc-bounded-memory-spilling__SZbqyff/result.json",
+      "sha256": "d56fcf04731545bb0da8afc1bfb5802da9c8ccf856006ba2da9796022c62461b",
+      "reward": 1,
+      "exception": null
+    },
+    "narwhals-rolling-window-suite": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/narwhals-rolling-window-suite__7nmuFQN/result.json",
+      "sha256": "569da1065fc031715e54d7ef74ea3e646ffcde922a10e833104faf85de3c710a",
+      "reward": 1,
+      "exception": null
+    },
+    "task-task-graph-export": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/task-task-graph-export__FFDYGDd/result.json",
+      "sha256": "a740198ed03fb1bfd493cf3f0412ac42b136761d953a1d0724b56d02eb51334b",
+      "reward": 1,
+      "exception": null
+    },
+    "csstree-shorthand-expansion-compression": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/csstree-shorthand-expansion-comp__KLCbnGV/result.json",
+      "sha256": "ebaa217cf33cbfc84453bddbb9e52813f58631b06cf570024179175250e546d4",
+      "reward": 1,
+      "exception": null
+    },
+    "helm-array-merge-strategies": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/helm-array-merge-strategies__QNENKFx/result.json",
+      "sha256": "b730c924933933207a267a60dd0a447cae540a01732db915d3e5733b9421178e",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "cattrs-partial-structuring-recovery": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/cattrs-partial-structuring-recov__28Y7Ftn/result.json",
+      "sha256": "9846476362aa2e559fde89f21d5c2a2c80e68caa8e9947da4af3c04b2e389e9f",
+      "reward": 1,
+      "exception": null
+    },
+    "true-myth-iterable-collection-combinators": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/true-myth-iterable-collection-co__FJtSMg6/result.json",
+      "sha256": "39ad56243ea01ab14c63c6e9fe05fd7735ba6568d71b68e263c99defa2a90705",
+      "reward": 1,
+      "exception": null
+    },
+    "igel-persist-feature-schema": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/igel-persist-feature-schema__ecq9MQq/result.json",
+      "sha256": "933cb11634a242c45b829f1ea422eae1ce0b563beab4e83e02f925f6653f333d",
+      "reward": 0,
+      "exception": null
+    },
+    "prometheus-transactional-reload-status": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/prometheus-transactional-reload__BpwitFP/result.json",
+      "sha256": "502afa7486f9741651838826eb20bf763f66fafc09f3e7c6c6624b499938ec88",
+      "reward": 1,
+      "exception": null
+    },
+    "etree-xml-diff-patch": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/etree-xml-diff-patch__j2Mi6ow/result.json",
+      "sha256": "09669a2aa39fe91eb8037e42d0adf4e4ad1a0a90bae251140313a2c42f62e1b6",
+      "reward": 0,
+      "exception": null
+    },
+    "kea-atomic-signal-selectors": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kea-atomic-signal-selectors__Fh6gebL/result.json",
+      "sha256": "854c21a06a883187115f2f2c6f02aa6eb8c7e66c24cc2896d360fe2c8b97dd1c",
+      "reward": 0,
+      "exception": null
+    },
+    "expr-try-catch-errors": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/expr-try-catch-errors__hFKGRxW/result.json",
+      "sha256": "7f7289363009d6ef899e53aba77da9026631151781bcbd926020a343229eaf76",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "koota-deferred-mutation-buffer": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/koota-deferred-mutation-buffer__zF7zDYN/result.json",
+      "sha256": "5a36cefb6a23dc6fc46f963f5467c2d603fb307b2f089bd2e2c691f114f5ff0e",
+      "reward": 0,
+      "exception": null
+    },
+    "opa-template-string-reconstruction": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/opa-template-string-reconstructi__37i5Wbj/result.json",
+      "sha256": "28a074878d91822012ba74d9d66e6299b5fad5b052bab2adb470222e913c150b",
+      "reward": 1,
+      "exception": null
+    },
+    "ofetch-per-origin-circuit-breaker": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/ofetch-per-origin-circuit-breake__TqdYQex/result.json",
+      "sha256": "70831b88bdf24c2c21e9ff355882ce695982c66d7a31021f0099cb35e92d1c96",
+      "reward": 1,
+      "exception": null
+    },
+    "obsidian-linter-scoped-ignore-markers": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/obsidian-linter-scoped-ignore-ma__4qkzAxr/result.json",
+      "sha256": "6c081b8158fb28192e6698920c59234830ed0327f73f0a8cade7b1f144656273",
+      "reward": 1,
+      "exception": null
+    },
+    "koota-query-predicates": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/koota-query-predicates__oCKxyva/result.json",
+      "sha256": "0e39579015a13585247ffc78b732447cd0ce1c1372776295eef1a47a1fd06f9f",
+      "reward": 0,
+      "exception": null
+    },
+    "awilix-async-container-initialization": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/awilix-async-container-initializ__t8KTH82/result.json",
+      "sha256": "ce65111b5550caafc5869144170522b939a5204ff07f5092a02e9ecdebb7c7b2",
+      "reward": 0,
+      "exception": null
+    },
+    "go-genai-streamed-function-args": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/go-genai-streamed-function-args__sdo9uDg/result.json",
+      "sha256": "0f6c74b9f6322dee0bea1d8e1f5c8db26af1cd90e6d4c780a37159c19a7e4c6b",
+      "reward": 1,
+      "exception": null
+    },
+    "python-statemachine-state-data-scoping": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/python-statemachine-state-data-s__9qdzUGv/result.json",
+      "sha256": "12787ffadd660cd3f767339999d3bf1dbc1f5f95894ff2a6b291275329cd151b",
+      "reward": 1,
+      "exception": null
+    },
+    "numba-stencil-boundary-modes": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/numba-stencil-boundary-modes__47wZguV/result.json",
+      "sha256": "52c3d53ad284135a910c7852b615f95cad552c88bc1d1b9ef684f9bf789115eb",
+      "reward": 1,
+      "exception": null
+    },
+    "bandit-interprocedural-taint-checks": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/bandit-interprocedural-taint-che__yYMV6mT/result.json",
+      "sha256": "bab43a3941693265cc4062b8039e46a5c3313e05f1e27f2352a59d11167ec437",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "mobly-grouped-test-barriers": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/mobly-grouped-test-barriers__C5eQoQE/result.json",
+      "sha256": "6a49646f161659ce1ec2772bb8f7070522adda58e981bc4314078050b2aef72f",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "onedump-dump-encryption-pipeline": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/onedump-dump-encryption-pipeline__x3pkAeb/result.json",
+      "sha256": "bab45265f48c80a901ad2663ce1b6e2359386a15fb0613d2888df8fb05716636",
+      "reward": 1,
+      "exception": null
+    },
+    "pest-character-class-coalescing": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/pest-character-class-coalescing__P84kAyT/result.json",
+      "sha256": "12e0d0bd112987bd7451fe5ec24aef1cd811085b73e5d94fe8c266f4a2794b36",
+      "reward": 0,
+      "exception": null
+    },
+    "termenv-preserve-ansi-resets": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/termenv-preserve-ansi-resets__b7p5F6S/result.json",
+      "sha256": "a0a1262fb44bf404638608c3dc7c90d94b9c2dda9d2219c68faeb3de31176833",
+      "reward": 0,
+      "exception": null
+    },
+    "sql-formatter-bigquery-pipe-formatting": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/sql-formatter-bigquery-pipe-form__QJ3PPqH/result.json",
+      "sha256": "8b72cff008a29e31de9ad3504aabf6b516518dd171b6ec2cffe990146eaa39f8",
+      "reward": 1,
+      "exception": null
+    },
+    "anko-default-function-arguments": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/anko-default-function-arguments__Qw6P8Fd/result.json",
+      "sha256": "0a092b626e9e9c303ae692069f9eeff424043bd001598f66d30fc1f5f3708294",
+      "reward": 1,
+      "exception": null
+    },
+    "happy-dom-deterministic-intersectionobserver": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/happy-dom-deterministic-intersec__7x9rkrM/result.json",
+      "sha256": "95f98034cb5013045aa3f3715b989abbe2c144d7f82ff02483df4957c69f053b",
+      "reward": 0,
+      "exception": null
+    },
+    "effect-sse-httpapi-streaming": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/effect-sse-httpapi-streaming__2yAPSER/result.json",
+      "sha256": "4b2ce20c34af24db4bddc8631b2fd16cf091f99659f519f81ea7b74d79534e3f",
+      "reward": 0,
+      "exception": null
+    },
+    "actionlint-action-pinning-lint": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/actionlint-action-pinning-lint__N6rvWhF/result.json",
+      "sha256": "c395def2389de2ea49303403c8718a6ab86f26338e248ef508ee91778a33db5e",
+      "reward": 1,
+      "exception": null
+    },
+    "httpx-streaming-json-iteration": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/httpx-streaming-json-iteration__jteJZNV/result.json",
+      "sha256": "6476583267af3e7c0000399e8c494c97a7f83ffcdd84045af5c7bd2c1b20eb8e",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "boa-hierarchical-evaluation-cancellation": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/boa-hierarchical-evaluation-canc__hxDH2kR/result.json",
+      "sha256": "9f10a90f9dbf4af10820a077b978aeef2620981c5808393a06f1026a34b2619c",
+      "reward": 1,
+      "exception": null
+    },
+    "httpx-deterministic-cookie-store": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/httpx-deterministic-cookie-store__qTgUa6c/result.json",
+      "sha256": "cc01f7b3dd0e274a0f99cd186f8212006b8b0ee0e05c88e3a92165329944154c",
+      "reward": 1,
+      "exception": null
+    },
+    "kgateway-consistent-hash-policy": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kgateway-consistent-hash-policy__e8ZssMa/result.json",
+      "sha256": "8d0b74896f28a6404ee55ea32ddcfb52337b4866730851f9229c7622f4d7c9cf",
+      "reward": 0,
+      "exception": null
+    },
+    "arcane-drift-detection-baselines": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/arcane-drift-detection-baselines__yYJFsLs/result.json",
+      "sha256": "44d766dee62dba564d50f18335b07687815b0de3bc16917bb7d168bdca90df74",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "ytt-jsonpath-query-api": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/ytt-jsonpath-query-api__wYcBnmB/result.json",
+      "sha256": "5af4540e4bada3a5d21e8a480c9b9c60380ff9e983cd8eea00b5cb5696e37945",
+      "reward": 1,
+      "exception": null
+    },
+    "drizzle-orm-window-function-builders": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/drizzle-orm-window-function-buil__fdFFUv8/result.json",
+      "sha256": "fd50d0235fd4b3a48a2536761d579f91591d830d16f36b30a903e5d1828cea97",
+      "reward": 1,
+      "exception": null
+    },
+    "cliffy-config-file-parsing": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/cliffy-config-file-parsing__VS92qms/result.json",
+      "sha256": "4275976e96e062cb9c6fde9fe10c3636bdd422476e4f38e8a4f69ff72ed27140",
+      "reward": 0,
+      "exception": null
+    },
+    "go-git-worktree-merge-conflicts": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/go-git-worktree-merge-conflicts__qPVNqSk/result.json",
+      "sha256": "17fb22b0a57076b4c7ae04c439b707d9015d4c2b4650002098375286e2f891b8",
+      "reward": 1,
+      "exception": null
+    },
+    "happy-dom-abort-pending-body-reads": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/happy-dom-abort-pending-body-rea__6mWb6LN/result.json",
+      "sha256": "cf76463f5ad63fe7c764ff5a984566eea683c55c90b8d8773fa9ce71225bd575",
+      "reward": 0,
+      "exception": null
+    },
+    "geo-shapeindex-serialization": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/geo-shapeindex-serialization__J3LjZW6/result.json",
+      "sha256": "fe1e8c6bbc1295378cb10f8f89d584807d08a008b570ee5a42a768a23a707ffb",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "httpx-multipart-response-parsing": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/httpx-multipart-response-parsing__JPy4YJk/result.json",
+      "sha256": "3d6df739099489bef41100de3cabf5982130a8549e390355ceabbb4816b1c5c3",
+      "reward": 1,
+      "exception": null
+    },
+    "yaegi-go-embed-directives": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/yaegi-go-embed-directives__rsgH5Pm/result.json",
+      "sha256": "5708f6250fe59f18fba645b49bb21c8192f782ea0048ac5bb09508930d08ecf7",
+      "reward": 0,
+      "exception": "NetworkConnectionError"
+    },
+    "arktype-json-schema-refs-dependencies": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/arktype-json-schema-refs-depende__amuqJBV/result.json",
+      "sha256": "19d0a075effb783d697b3892d7027e40d62bf8d49abb84320ce4298023e1ddfb",
+      "reward": 0,
+      "exception": null
+    },
+    "wazero-multi-module-snapshots": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/wazero-multi-module-snapshots__gSpsMnB/result.json",
+      "sha256": "baae57e8fa22b9bf936798bc5e3c5089da3ca3a195ed0553ff0e1b9ba491056f",
+      "reward": 1,
+      "exception": null
+    },
+    "meriyah-explicit-resource-declarations": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/meriyah-explicit-resource-declar__5J2z7oW/result.json",
+      "sha256": "e8acd24ecebb9b7ab25f1d11bfb301e5ca31e17f26b20d012ca6863ffe701106",
+      "reward": 1,
+      "exception": null
+    },
+    "textual-richlog-follow-state": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/textual-richlog-follow-state__a2n5VZo/result.json",
+      "sha256": "6c613fea3ceca8bf6e55d72eb625dcddc4720f8ffcfd6d7526d99c70ae7359c0",
+      "reward": 1,
+      "exception": null
+    },
+    "returns-validated-error-accumulation": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/returns-validated-error-accumula__cUZAh8N/result.json",
+      "sha256": "447a45216cbb91e331729945f489edf635b4939ffe86949ff731ffd7314eb29d",
+      "reward": 1,
+      "exception": null
+    },
+    "goreleaser-retry-publish-auditing": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/goreleaser-retry-publish-auditin__vGw3o77/result.json",
+      "sha256": "779068c61f04a7594ff7a50a01b5bf1056a0f26c48dd5bbc854ac7a6f65dc6dd",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "bandit-incremental-cache-control": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/bandit-incremental-cache-control__LzmCXY6/result.json",
+      "sha256": "e9c4935eb31521914ca84953b43599b806c79ea9e6bbd099e220ed4b088f46f6",
+      "reward": 1,
+      "exception": null
+    },
+    "gql-incremental-graphql-delivery": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/gql-incremental-graphql-delivery__xrKvsN4/result.json",
+      "sha256": "e8b77b814319265457acd4794f25085eea913729346615c35ddce86ab16579e3",
+      "reward": 0,
+      "exception": null
+    },
+    "ink-grid-box-layout": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/ink-grid-box-layout__HzrxanZ/result.json",
+      "sha256": "b9a5522994f3ddff1168893afc34f15f983c272bea4e643cdb9e390ee5e4c758",
+      "reward": 0,
+      "exception": null
+    },
+    "adaptix-name-mapping-aliases": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/adaptix-name-mapping-aliases__LQAkqnG/result.json",
+      "sha256": "76944d9222f0ed36a4a5e5da6d840c42bbaeddf85b741b0752c30ac887f0c87a",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "helm-unified-manifest-stream": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/helm-unified-manifest-stream__ecvn7xb/result.json",
+      "sha256": "5593cbd8f94088188846ff4f2921b7cc066f82a5b9729507718ea422d9889d1d",
+      "reward": 0,
+      "exception": null
+    },
+    "tengo-callable-instance-isolation": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/tengo-callable-instance-isolatio__gfAXFhS/result.json",
+      "sha256": "f8d55569886cdf47d4471c061e35e9e4f29472efa7659297ca1a1d810e61b84f",
+      "reward": 1,
+      "exception": null
+    },
+    "clack-async-autocomplete-options": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/clack-async-autocomplete-options__or3UB4k/result.json",
+      "sha256": "365b58ac3a7392ecd60c574a88a7ab6cc0be86dca2b4dda82b8b77d5302e57e4",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "ipython-session-bundle-replay": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/ipython-session-bundle-replay__NAJL2Am/result.json",
+      "sha256": "a6c034a8d9ce4fcfd83e4c7e910457dc2677deea9c57300a47ac3f324e4b548c",
+      "reward": 1,
+      "exception": null
+    },
+    "koota-entity-snapshot-rollback": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/koota-entity-snapshot-rollback__yUBpHS2/result.json",
+      "sha256": "465548f6c0de5d92502401b7132ad1663ef2e1fc3dd7697d9718281f6b7eda18",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "oxvg-structural-selector-preservation": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/oxvg-structural-selector-preserv__Fwk9AqD/result.json",
+      "sha256": "5379e1ac024b083eca70a316a75033f78c7e58af3cf6a3bd5c21355ec37b10f9",
+      "reward": 0,
+      "exception": null
+    },
+    "psd-tools-blend-range-api": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/psd-tools-blend-range-api__BrV3ggk/result.json",
+      "sha256": "e45e9b84ab9829322eeaeee59632b634b6ddcd83439f7bc5e34fa9d798179134",
+      "reward": 1,
+      "exception": null
+    },
+    "anko-typed-variable-bindings": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/anko-typed-variable-bindings__sWpEYwW/result.json",
+      "sha256": "b75f28d22f4e1d6d5b41ddd35891ea92177911fbf8479473ec82234274e659e9",
+      "reward": 1,
+      "exception": null
+    },
+    "kysely-window-grouping-helpers": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kysely-window-grouping-helpers__945oHxC/result.json",
+      "sha256": "0fd726d8d92c48bfa75241a838076aac7f4eaaf38486c68ce7a905a537b5f188",
+      "reward": 0,
+      "exception": null
+    },
+    "abs-module-cache-flags": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/abs-module-cache-flags__o7oWVEc/result.json",
+      "sha256": "0f335bf7518d768364a9bbae79c14ebb6fac18fe4ef4f9e805dfa14788594ec6",
+      "reward": 0,
+      "exception": null
+    },
+    "mashumaro-flattened-dataclass-fields": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/mashumaro-flattened-dataclass-fi__Fk8De6H/result.json",
+      "sha256": "1ed38bd5fd5c84f81f3bdfe95386122f5cdd1c93e1c2492a604eb03c1eb862ad",
+      "reward": 0,
+      "exception": null
+    },
+    "optique-conditional-option-dependencies": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/optique-conditional-option-depen__Qw938YH/result.json",
+      "sha256": "8e9d00fe30329ccd848c3fe7546e2af241c260333ce63121be2bce856af14f94",
+      "reward": 1,
+      "exception": null
+    },
+    "obsidian-linter-link-format-conversion": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/obsidian-linter-link-format-conv__aRyZCYW/result.json",
+      "sha256": "57852cf0bec6fc6a7184137b1813da17a49d5aa7d89479ff4ae4aef19f84c0da",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "fd-deterministic-multi-key-sorting": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/fd-deterministic-multi-key-sorti__F4WXGkM/result.json",
+      "sha256": "94aeb602e016bcc311e8565652341622d5f0160c4a048191603a916b46cd2114",
+      "reward": 1,
+      "exception": null
+    },
+    "updo-policy-alerting": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/updo-policy-alerting__7m2c7fF/result.json",
+      "sha256": "e02058ed055429074bcbd7bd29c30037a4afea496470e98bcb4f86284ddcd4de",
+      "reward": 0,
+      "exception": null
+    },
+    "claude-code-by-agents-recursive-delegation": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/claude-code-by-agents-recursive__rYa5sY2/result.json",
+      "sha256": "1b6ad2a88822c962e272a32e7d2cec368df3f2a4ad7f875251a48cdd6573728c",
+      "reward": 1,
+      "exception": null
+    },
+    "abs-stepped-slices": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/abs-stepped-slices__CY8rpWh/result.json",
+      "sha256": "57b29393fa7b86505cd6725192b523e0003207792dd1e49f7bbadc7ea0e7f3a0",
+      "reward": 1,
+      "exception": null
+    },
+    "dynamodb-toolbox-lazy-recursive-schemas": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dynamodb-toolbox-lazy-recursive__CnDDryW/result.json",
+      "sha256": "a5e564cab76d30b9f3c2822753a7f99e6568be90b137ddccbc0ae2cb2b9189b8",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "dynamodb-toolbox-conditional-attribute-requirements": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dynamodb-toolbox-conditional-att__m86guS2/result.json",
+      "sha256": "ad50cef54d31dd8613e73f0c90edeae6ffb93c843604ee08c0be1be235424ccb",
+      "reward": 1,
+      "exception": null
+    },
+    "testem-bail-on-test-failure": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/testem-bail-on-test-failure__k98Cx2T/result.json",
+      "sha256": "6877903edfa4712af427df81e94c4ec5d58cd80cf68d84f8d1b2aaeda6d4bc93",
+      "reward": 0,
+      "exception": null
+    },
+    "quill-shared-toolbar-focus": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/quill-shared-toolbar-focus__2xGWa7x/result.json",
+      "sha256": "79a803f45a5eda4adb7c12b20d029d3100c2e8afa7647b3e7fe28015ba1239d1",
+      "reward": 0,
+      "exception": null
+    },
+    "skrub-duration-encoding": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/skrub-duration-encoding__MTVeTvr/result.json",
+      "sha256": "7b518d8eadb8a75c2848d8bfb7b0ccac29e4b3c4573f967d28df450c7a87428b",
+      "reward": 0,
+      "exception": null
+    },
+    "sqlfmt-create-table-ddl-formatting": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/sqlfmt-create-table-ddl-formatti__gyydGZa/result.json",
+      "sha256": "fd37bc762f1f03ccfa8341bc71220f4b6c6ef1998fe2e71ad01c4cdd31380a4e",
+      "reward": 0,
+      "exception": null
+    },
+    "kombu-virtual-queue-dead-lettering": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kombu-virtual-queue-dead-letteri__9kAxKZk/result.json",
+      "sha256": "0d6f5791e0cab09914e9d9fa6261ce4fbb4ce4132ab257e7c8a574197899d201",
+      "reward": 0,
+      "exception": null
+    },
+    "langchain-request-coalescing": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/langchain-request-coalescing__BFzS8Gm/result.json",
+      "sha256": "39003879bd2935e947a4cb4994d50baaf68d02e3aca997f6d4a3ecb8a00db708",
+      "reward": null,
+      "exception": "AssertionError"
+    },
+    "koota-composite-trait-aspects": {
+      "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/koota-composite-trait-aspects__cCNiq3E/result.json",
+      "sha256": "7210318f7cc5d9ad3acd40be0c6ff10da9bbb40eacebdf8f9c10b5ca0ade6f65",
+      "reward": 1,
+      "exception": null
+    }
+  },
+  "policy": "Do not duplicate or replace an existing native result. Keep prior failed and partial artifacts separately; score each task at most once after task-level audit."
+}
