@@ -83,6 +83,13 @@ bf16_identity = read(ROOT / 'evidence/muse_bf16_exact_image_identity.json')
 assert not bf16_identity['errors'] and bf16_identity['live_node_check']['checked'] == 89
 opus48 = read(O48 / 'completed_full_evaluation_result.json')
 nvfp4_recovery = read(B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json')
+r2_ungraded_evidence = read(ROOT / 'evidence/muse_nvfp4_r2_password_recovery_ungraded.json')
+assert r2_ungraded_evidence['native_verifier_reward'] is None
+r2_replacement_claim_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r2-password-recovery-infra-replacement-claim.json'
+r2_replacement_claim = read(r2_replacement_claim_path)
+assert hashlib.sha256(Path(r2_replacement_claim['original_result_path']).read_bytes()).hexdigest() == r2_replacement_claim['original_result_sha256']
+assert hashlib.sha256(Path(r2_replacement_claim['replacement_job_config']).read_bytes()).hexdigest() == r2_replacement_claim['replacement_job_config_sha256']
+(ROOT / 'evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json').write_bytes(r2_replacement_claim_path.read_bytes())
 nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-completion-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 nvfp4_parallel_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-parallel-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 extra_lane_units = {str(lane): subprocess.run(['systemctl', '--user', 'is-active', f'muse-nvfp4-exact-tb-extra-lane{lane}-2866-20261019.service'], capture_output=True, text=True).stdout.strip() for lane in (2, 3)}
@@ -144,10 +151,40 @@ for item in nvfp4_recovery['configurations']:
     if batch_raw_count:
         new_raw_response_by_batch[item['job_name']] = batch_raw_count
 new_raw_response_latest_utc = datetime.fromtimestamp(new_raw_response_latest_mtime, timezone.utc).isoformat() if new_raw_response_latest_mtime is not None else None
+r2_replacement_result = None
+replacement_job = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / r2_replacement_claim['replacement_job_name']
+assert len([path for path in replacement_job.glob('password-recovery__*') if path.is_dir()]) <= 1, \
+    'Multiple infrastructure replacement trial directories'
+replacement_trials = [path for path in replacement_job.glob('*/result.json') if read(path).get('task_name')]
+assert len(replacement_trials) <= 1, 'Multiple infrastructure replacement draws'
+if replacement_trials:
+    path = replacement_trials[0]
+    value = read(path)
+    assert Path(value['task_name']).name == 'password-recovery'
+    assert Path(value['config']['task']['path']).name == 'password-recovery'
+    assert value['config']['agent']['kwargs']['api_base'] == r2_replacement_claim['model_endpoint']
+    if value.get('finished_at'):
+        reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        r2_replacement_result = {'result_path': str(path), 'reward': reward,
+                                 'result_sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        if reward in (0, 1):
+            original = new_terminal_by_round['2']['password-recovery']
+            assert original['reward'] is None
+            assert original['source'] == str(Path('/fsx/home/zhiyuan') / r2_ungraded_evidence['result_path'])
+            original['reward'] = reward
+            original['replacement'] = r2_replacement_result
+r2_replacement_reward_en = ('running/pending' if r2_replacement_result is None else
+                            'ungraded after native exception' if r2_replacement_result['reward'] not in (0, 1)
+                            else str(r2_replacement_result['reward']))
+r2_replacement_reward_zh = ('运行中/待判分' if r2_replacement_result is None else
+                            '原生异常后仍未判分' if r2_replacement_result['reward'] not in (0, 1)
+                            else str(r2_replacement_result['reward']))
 for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['terminal'] += len(rows)
     nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
     nvfp4_rounds[rnd]['success'] += sum(row['reward'] == 1 for row in rows.values())
+    nvfp4_rounds[rnd]['ungraded'] = nvfp4_rounds[rnd]['terminal'] - nvfp4_rounds[rnd]['graded']
+    assert nvfp4_rounds[rnd]['ungraded'] >= 0
     for row in rows.values():
         if row['exception']:
             kind = row['exception']
@@ -317,6 +354,13 @@ snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['rep
     'round23_controller': replica_2867_r23_unit,
     'round23_status': replica_r23_status,
 })
+snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_password_recovery_replacement'] = {
+    'claim': 'evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json',
+    'original_native_reward': None,
+    'replacement_result': r2_replacement_result,
+    'counted_as_one_task': True,
+    'no_best_of_selection': True,
+}
 for reviewer, model_key in (('muse-nvfp4', 'muse_nvfp4'), ('beam-bf16', 'beam_bf16'),
                             ('muse-bf16', 'muse_bf16')):
     for split, value in snapshot['models'][model_key].get('swe_review', {}).items():
@@ -389,6 +433,8 @@ files[str(shared_timeout_path.relative_to(ROOT))] = {
 for evidence_name in ('swe_review_revision_queue_recovery_20261020.json',
                       'swe_review_revision_gateway_progress.json',
                       'beam_coder_pre_model_port_mismatch.json',
+                      'muse_nvfp4_r2_password_recovery_ungraded.json',
+                      'muse_nvfp4_r2_password_recovery_replacement_claim.json',
                       'swe_review_official_rrr.json'):
     path = ROOT / 'evidence' / evidence_name
     assert path.is_file()
@@ -689,6 +735,8 @@ Muse NVFP4 round-one inputs are in `muse_nvfp4_exact_tb_round1_inputs_20261019.t
 
 The [round-one task audit](evidence/muse_nvfp4_exact_round1_audit.json) currently finds nonempty returned thinking in **{mn_audit.get('scored_nonempty_reasoning_response_count', 0)}/{mn_audit.get('scored_raw_response_count', 0)}** raw responses of scored Muse NVFP4 tasks. This is a field-preservation check, not a clean-trajectory verdict.
 
+Round 2 currently has **{nvfp4_rounds['2']['terminal']} terminal tasks, {nvfp4_rounds['2']['graded']} native grades, and {nvfp4_rounds['2']['success']} successes**. Its original `password-recovery` attempt lost the tmux session before verification; [the anchored record](evidence/muse_nvfp4_r2_password_recovery_ungraded.json) preserves the native exception, trajectory and {r2_ungraded_evidence['model_raw_response_count']} raw model responses. That original attempt remains ungraded. A [separately declared one-task infrastructure replacement](evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json) uses the same task, image and sampling settings on an equivalent pinned NVFP4 replica; its native reward is **{r2_replacement_reward_en}**. The round counts at most one grade for this task, with no best-of selection.
+
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. At this snapshot, the continuation has {new_raw_responses} raw model responses, {active_recovery_trial_dirs} active trial directories, and the latest response at {new_raw_response_latest_utc}; these are activity indicators, not scores. The original controller verifies delegated batches before advancing, preventing duplicate scoring. The [first-round task audit](evidence/muse_nvfp4_exact_round1_audit.json) checks task coverage, duplicate draws, frozen original results, endpoint settings, rewards, and preserved raw reasoning; the final score is published only after all 89 tasks pass reconciliation. Additional GPU allocation states: {extra_gpu_status}. A watcher starts the pinned Muse service when a queued allocation is granted. A ready extra GPU atomically claims one untouched round-one batch from b03 or b05; the released 2812 allocation can claim up to two. The existing CPU evaluators retain their original tasks and images, and only the model endpoint changes. A batch that starts locally first cannot be redrawn on another node. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
 Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json) found returned reasoning in every raw response of the five completed successful recovery tasks checked. One agent created `/tests/filter.py` by copying the exposed, unchanged `/app/filter.py` to run the task's permitted local test; no filter/verifier rewrite was observed in its commands. This is not a full reward-hacking clearance. The Muse DeepSWE successful trajectory `ipython-session-bundle-replay` attempted to inspect verifier logs, but the returned directory was empty; it remains flagged for training-data review. One successful Muse Pro task lacks a trajectory and is unsuitable for thinking-data export. Source paths and hashes are in `results/scores.json` and `input_output/manifest.json`; raw API credentials and model weights are excluded.
@@ -787,6 +835,8 @@ SWE-Review 原始生成模型的修订输入见 [Muse](input_output/archive_mani
 Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜像身份校验在 `muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst`；[输入输出覆盖核验](evidence/muse_nvfp4_exact_io_coverage.json)逐题确认已判分结果、原始响应、轨迹和任务输入均在远端校验过的归档中。
 
 [Muse NVFP4 首轮逐题审计](evidence/muse_nvfp4_exact_round1_audit.json)目前确认已判分题的原始回复中 **{mn_audit.get('scored_nonempty_reasoning_response_count', 0)}/{mn_audit.get('scored_raw_response_count', 0)} 条含非空 thinking**。这只核验字段留存，不表示轨迹可直接作为干净训练数据。
+
+第 2 轮目前 **{nvfp4_rounds['2']['terminal']} 题终态、{nvfp4_rounds['2']['graded']} 题有原生判分、{nvfp4_rounds['2']['success']} 题成功**。原始 `password-recovery` 尝试在验证前失去 tmux 会话；[哈希锚定记录](evidence/muse_nvfp4_r2_password_recovery_ungraded.json)保留了原生异常、轨迹和 {r2_ungraded_evidence['model_raw_response_count']} 条模型原始回复，原尝试仍未判分。[单题基础设施补测声明](evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json)固定原题、镜像和采样设置，使用已核验的等价 NVFP4 副本；补测原生 reward 当前为 **{r2_replacement_reward_zh}**。本轮该题最多计一个有效判分，不择优取样。
 
 [Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)} 条含非空 thinking**。
 

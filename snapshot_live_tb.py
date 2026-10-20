@@ -23,7 +23,11 @@ assert not archive.exists()
 payloads = {}
 counts = {'job_config': 0, 'handoff_receipt': 0, 'ready_proof': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
 terminal_results = 0
-for job in sorted(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*')):
+replacement_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-replacement-password-recovery'
+jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
+if replacement_job.exists():
+    jobs.append(replacement_job)
+for job in sorted(jobs):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
     if config.exists():
         payloads[config] = config.read_bytes()
@@ -132,6 +136,18 @@ for marker_name in ('r1-b05-early-owner.json', 'r1-b05-early-exit.json', 'r1-b05
     if marker.exists():
         payloads[marker] = marker.read_bytes()
         counts['handoff_receipt'] += 1
+replacement_claim = SOURCE / 'muse_nvfp4/state/r2-password-recovery-infra-replacement-claim.json'
+if replacement_claim.exists():
+    claim = json.loads(replacement_claim.read_text())
+    assert claim['replacement_job_name'] == replacement_job.name
+    config = Path(claim['replacement_job_config'])
+    assert hashlib.sha256(config.read_bytes()).hexdigest() == claim['replacement_job_config_sha256']
+    assert hashlib.sha256(Path(claim['original_result_path']).read_bytes()).hexdigest() == claim['original_result_sha256']
+    payloads[replacement_claim] = replacement_claim.read_bytes()
+    counts['handoff_receipt'] += 1
+    if config not in payloads:
+        payloads[config] = config.read_bytes()
+        counts['job_config'] += 1
 assert counts['raw_response'] > 0 and counts['task_input'] > 0
 proc = subprocess.Popen(['zstd', '-q', '-T2', '-3', '-o', str(temp)], stdin=subprocess.PIPE)
 try:

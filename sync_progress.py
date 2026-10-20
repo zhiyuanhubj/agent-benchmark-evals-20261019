@@ -175,6 +175,7 @@ def cycle():
         run([PYTHON, str(ROOT / 'audit_beam_malformed_reviews.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_review_progress.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_ungraded.py')], timeout=60)
         force_bf16 = False
         for attempt in range(3):
             if attempt:
@@ -263,10 +264,12 @@ def cycle():
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
              'audit_muse_bf16_review_progress.py',
+             'audit_muse_nvfp4_r2_ungraded.py',
+             'prepare_muse_nvfp4_r2_password_replacement.py',
              'audit_swe_review_official_rrr.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
-             'export_snapshot.py', 'archive_trials.py', 'archive_delta.py',
+             'export_snapshot.py', 'snapshot_live_tb.py', 'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:

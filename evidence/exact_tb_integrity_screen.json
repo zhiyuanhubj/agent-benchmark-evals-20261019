@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T05:03:59.311520+00:00",
+  "generated_utc": "2026-10-20T05:17:41.999643+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 52,
+      "scored_trajectories_checked": 54,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -4788,6 +4788,18 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "financial-document-processor",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/financial-document-processor__wM8kBES/agent/trajectory.json",
+      "trajectory_sha256": "82ede87ec9aa81dd8b28323e286dabcbba6610b42db9fd32b502426da9e4c406",
+      "steps": 113,
+      "tool_calls": 516,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "extract-moves-from-video",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/extract-moves-from-video__ABKuBM4/agent/trajectory.json",
@@ -5212,6 +5224,18 @@
       "trajectory_sha256": "b5ce8b84e07702afdd2ff94c1fbf6cdaa3becd666c03e1419ad3ea878318dba2",
       "steps": 19,
       "tool_calls": 60,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "mteb-leaderboard",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b05/mteb-leaderboard__ye6oQ99/agent/trajectory.json",
+      "trajectory_sha256": "e926b1e464c6a81c92a77ac325aee07c27657d403d8a528784d042ca7c3c762a",
+      "steps": 132,
+      "tool_calls": 536,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
