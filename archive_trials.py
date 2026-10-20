@@ -31,17 +31,19 @@ GROUPS = {
     'beam_review': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'beam_review_full_io': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'beam_review_verifier': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
-    'muse_review_revision_inputs': [M / 'review_bench_20261018/revision/prepared/qwen3_coder_30b_500',
-                                    M / 'review_bench_20261018/revision/prepared/qwen3_30b_instruct2507_500',
+    'muse_review_revision_inputs': [*(M / 'review_bench_20261018/revision/prepared' / split
+                                      for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
                                     M / 'review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue',
                                     M / 'review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue'],
-    'beam_review_revision_inputs': [B / 'review_bench/revision/prepared/qwen3_30b_instruct2507_500',
+    'beam_review_revision_inputs': [*(B / 'review_bench/revision/prepared' / split
+                                      for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
                                     B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue'],
-    'muse_revision_review_full_io': [M / 'review_bench_20261018/revision/generation/qwen3_coder_30b_500/queue/results',
-                                     M / 'review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/queue/results',
+    'muse_revision_review_full_io': [*(M / 'review_bench_20261018/revision/generation' / split / 'queue/results'
+                                       for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
                                      M / 'review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results',
                                      M / 'review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results'],
-    'beam_revision_review_full_io': [B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/queue/results',
+    'beam_revision_review_full_io': [*(B / 'review_bench/revision/generation' / split / 'queue/results'
+                                       for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
                                      B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results'],
     'beam_swr_raw': [B / 'review_bench/swrbench/raw_responses', B / 'review_bench/swrbench/judge_raw_responses'],
     'opus47_legacy': [O],
