@@ -119,6 +119,56 @@ for item in plan['configurations']:
                         'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
                         'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
                         'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared'})
+
+# The original round-three endpoint failed before yielding model responses.
+# Its one-draw infrastructure replacements have distinct job names and must
+# be screened separately from the original terminal transport failures.
+replacement_plan = json.loads((source / 'muse_nvfp4/state/r3-infra-replacement-2900/plan.json').read_text())
+assert replacement_plan['expected_tasks'] == 89
+replacement_seen = set()
+for batch in replacement_plan['batches']:
+    expected = {item['task'] for item in batch['tasks']}
+    for result in (source / 'results/muse_nvfp4' / batch['job_name']).glob('*/result.json'):
+        value = json.loads(result.read_text())
+        if not value.get('finished_at'):
+            continue
+        task = Path(value['config']['task']['path']).name
+        assert task in expected and task not in replacement_seen
+        replacement_seen.add(task)
+        reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        if reward not in (0, 1):
+            assert reward is None and value.get('exception_info'), (result, reward)
+            ungraded_terminal_trials.append({'model': 'muse_nvfp4_r3',
+                'task': task, 'result_path': str(result.relative_to(BASE)),
+                'result_sha256': hashlib.sha256(result.read_bytes()).hexdigest(),
+                'exception_type': value['exception_info'].get('exception_type'),
+                'qualification': 'Infrastructure replacement ended without a verifier reward; excluded from scored trajectory counts.'})
+            continue
+        trajectory = result.parent / 'agent/trajectory.json'
+        if not trajectory.is_file():
+            missing_trajectories.append({'model': 'muse_nvfp4_r3', 'task': task})
+            continue
+        payload = trajectory.read_bytes()
+        steps = json.loads(payload)['steps']
+        hits = []
+        tool_count = 0
+        for step in steps:
+            if step.get('source') != 'agent':
+                continue
+            for tool in step.get('tool_calls') or []:
+                args = tool.get('arguments') or {}
+                command = args.get('keystrokes', '') if isinstance(args, dict) else str(args)
+                tool_count += 1
+                for rule, regex in compiled.items():
+                    if regex.search(command):
+                        hits.append({'rule': rule, 'step_id': step.get('step_id'),
+                                     'command_sha256': hashlib.sha256(command.encode()).hexdigest()})
+        records.append({'model': 'muse_nvfp4_r3', 'round': 3, 'task': task,
+                        'reward': reward, 'trajectory_path': str(trajectory.relative_to(BASE)),
+                        'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
+                        'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
+                        'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared',
+                        'attempt_kind': 'infrastructure_replacement'})
 for round_number in (2, 3):
     frozen = json.loads((source / 'beam/configs' / f'r{round_number}.json').read_text())
     expected = {Path(item['path']).name for item in frozen['tasks']}

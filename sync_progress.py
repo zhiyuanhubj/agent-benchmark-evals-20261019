@@ -366,6 +366,7 @@ def cycle():
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
              'export_snapshot.py', 'snapshot_live_tb.py', 'snapshot_other_exact_tb.py',
+             'screen_exact_tb_integrity.py',
              'verify_muse_exact_io.py',
              'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'sync_progress.py'])
