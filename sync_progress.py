@@ -298,6 +298,8 @@ def sync_native_archives(scores, force_bf16=False):
             assets.append({'name': archive_name})
             remote.add(archive_name)
     run([PYTHON, str(ROOT / 'verify_release.py')], timeout=120)
+    if (ROOT / 'evidence/opus47_review_instruct_recovery_da.json').is_file():
+        run([PYTHON, str(ROOT / 'verify_opus47_review_instruct_recovery_release.py')], timeout=180)
     if (manifest_dir / 'muse_review_revision_inputs.json').exists():
         run([PYTHON, str(ROOT / 'verify_review_revision_archives.py')], timeout=120)
 
@@ -424,6 +426,8 @@ def cycle():
              'audit_muse_bf16_review_progress.py',
              'audit_muse_bf16_tb_ungraded.py',
              'audit_opus47_review_progress.py',
+             'audit_opus47_review_instruct_recovery_da.py',
+             'verify_opus47_review_instruct_recovery_release.py',
              'audit_opus47_provider_thinking.py',
              'audit_other_exact_round1.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
@@ -439,6 +443,7 @@ def cycle():
              'protocol/prune_2922_completed_muse_pro_images_20261020.py',
              'protocol/run_beam_pro_r2_2888_20261020.py',
              'protocol/prepare_opus47_review_resume_20261020.py',
+             'protocol/prepare_opus47_review_cancelled_recovery_20261020.py',
              'beam_exact_round3_2901.py',
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',

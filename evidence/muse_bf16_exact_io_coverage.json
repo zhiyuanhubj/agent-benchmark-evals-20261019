@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T23:34:49.461351+00:00",
+  "generated_utc": "2026-10-20T23:56:47.531053+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 54,
-  "success_count": 41,
+  "scored_tasks": 55,
+  "success_count": 42,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -212,6 +212,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/break-filter-js-from-html__WqN7m7x/result.json"
     },
+    "caffe-cifar-10": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/caffe-cifar-10__VAciJUM/result.json"
+    },
     "video-processing": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/video-processing__ZQPMSmr/result.json"
@@ -285,12 +289,6 @@
     "distribution-search": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/distribution-search__vLkVhW6/result.json",
       "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
-    "caffe-cifar-10": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json",
-      "exception_type": "InternalServerError",
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
@@ -398,11 +396,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 54,
-  "covered_raw_response_sets": 54,
-  "covered_trajectories": 54,
-  "scored_raw_response_count": 2183,
-  "nonempty_reasoning_response_count": 2182,
+  "covered_results": 55,
+  "covered_raw_response_sets": 55,
+  "covered_trajectories": 55,
+  "scored_raw_response_count": 2241,
+  "nonempty_reasoning_response_count": 2240,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -612,6 +610,10 @@
       "raw_responses": 25,
       "nonempty_reasoning_content": 25
     },
+    "caffe-cifar-10": {
+      "raw_responses": 58,
+      "nonempty_reasoning_content": 58
+    },
     "video-processing": {
       "raw_responses": 43,
       "nonempty_reasoning_content": 43
@@ -628,10 +630,13 @@
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
-  "deferred_post_score_results": [],
+  "deferred_post_score_results": [
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/qemu-alpine-ssh__N8dpJrf/result.json"
+  ],
   "archives": [
     "muse_bf16.tar.zst",
     "muse_bf16_delta_20261019T053146Z.tar.zst",
@@ -789,6 +794,7 @@
     "muse_bf16_delta_20261020T224923Z.tar.zst",
     "muse_bf16_delta_20261020T230511Z.tar.zst",
     "muse_bf16_delta_20261020T232727Z.tar.zst",
+    "muse_bf16_delta_20261020T234915Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T23:36:23.910698+00:00",
+  "generated_utc": "2026-10-20T23:58:27.758934+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -18,7 +18,7 @@
       }
     },
     "muse_bf16": {
-      "scored_trajectories_checked": 54,
+      "scored_trajectories_checked": 55,
       "pattern_hit_trajectories": 12,
       "pattern_hit_successes": 8,
       "rule_hit_counts": {
@@ -3569,6 +3569,17 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "caffe-cifar-10",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/caffe-cifar-10__VAciJUM/agent/trajectory.json",
+      "trajectory_sha256": "8981477a764b5b98041041c8fb5d406d38aadbbd44116eb71a9674e238e4fe34",
+      "steps": 59,
+      "tool_calls": 266,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "muse_bf16",

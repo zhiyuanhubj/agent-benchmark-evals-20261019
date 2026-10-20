@@ -60,6 +60,25 @@ review_recovery = read(ROOT / 'evidence/swe_review_recovery_control.json')
 review_revision_progress = read(ROOT / 'evidence/swe_review_revision_gateway_progress.json')
 review_rrr = read(ROOT / 'evidence/swe_review_official_rrr.json') if (ROOT / 'evidence/swe_review_official_rrr.json').exists() else {'complete_splits': {}}
 opus_review_progress = read(ROOT / 'evidence/opus47_swe_review_progress.json')
+opus_instruct_da_path = ROOT / 'evidence/opus47_review_instruct_recovery_da.json'
+opus_instruct_release_path = ROOT / 'evidence/opus47_review_instruct_recovery_da_release.json'
+if opus_instruct_da_path.is_file() and opus_instruct_release_path.is_file():
+    opus_instruct_da_evidence = read(opus_instruct_da_path)
+    opus_instruct_release = read(opus_instruct_release_path)
+    opus_instruct_row = opus_review_progress['splits']['qwen3_30b_instruct2507_500']
+    if (opus_instruct_release.get('qualification') == 'complete_verified_official_da_with_declared_interruption_replacement'
+            and opus_instruct_release.get('score_evidence_sha256') == hashlib.sha256(opus_instruct_da_path.read_bytes()).hexdigest()
+            and opus_instruct_release.get('DA') == opus_instruct_da_evidence.get('DA')
+            and opus_instruct_row.get('completed_trials') == opus_instruct_row['expected'] == 422
+            and opus_instruct_row.get('finished_at')):
+        opus_instruct_row.update(
+            status='final_split_da_with_declared_interruption_replacement_rrr_pending',
+            DA=opus_instruct_da_evidence['DA'],
+            RRR=None,
+            recovery_task_count=1,
+            evidence='evidence/opus47_review_instruct_recovery_da_release.json',
+            qualification='Official DA on 421 original reviews plus one predeclared infrastructure interruption replacement; all selected native result and report files are release verified. RRR remains pending.',
+        )
 review_revision_rows = {(row['reviewer'], row['split']): row for row in review_revision_progress['groups']}
 review_revision_muse_coder = review_revision_rows['muse-nvfp4', 'qwen3_coder_30b_500']
 review_revision_muse_instruct = review_revision_rows['muse-nvfp4', 'qwen3_30b_instruct2507_500']
@@ -1290,11 +1309,15 @@ op = models['opus_4_7']
 opus_review_en = ', '.join(
     f"{split}: {row.get('completed_trials', 0)}/{row['expected']} task outcomes"
     for split, row in op['swe_review'].items()
-) + '; DA/RRR pending'
+) + (f"; Instruct official DA {op['swe_review']['qwen3_30b_instruct2507_500']['DA']['DA']}% "
+     f"with one declared interruption replacement; RRR pending"
+     if op['swe_review']['qwen3_30b_instruct2507_500'].get('DA') else '; DA/RRR pending')
 opus_review_zh = '、'.join(
     f"{split} {row.get('completed_trials', 0)}/{row['expected']} 题终态"
     for split, row in op['swe_review'].items()
-) + '；DA/RRR 待官方判分'
+) + (f"；Instruct 组官方 DA {op['swe_review']['qwen3_30b_instruct2507_500']['DA']['DA']}%，"
+     f"含 1 道事先声明的中断续测；RRR 未完成"
+     if op['swe_review']['qwen3_30b_instruct2507_500'].get('DA') else '；DA/RRR 待官方判分')
 review_instruct_da = mn['swe_review']['qwen3_30b_instruct2507_500']['DA']
 review_glm_da = mn['swe_review']['glm5_500']['DA']
 review_coder_da = mn['swe_review']['qwen3_coder_30b_500']['DA']
@@ -1519,7 +1542,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_swr_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
 
-Opus 4.7 SWE-Review uses the unchanged official task cards and one review attempt per task. Its [model-visible inputs](input_output/archive_manifests/opus47_review_inputs.json) and [native outputs, completions and trajectories](input_output/archive_manifests/opus47_review_full_io.json) are SHA-verified Release assets. The output archive is a partial snapshot; later deltas preserve ongoing trials. Review-stage outcomes alone do not establish DA or RRR.
+Opus 4.7 SWE-Review uses the unchanged official task cards and one review attempt per task. Its [model-visible inputs](input_output/archive_manifests/opus47_review_inputs.json) and [native outputs, completions and trajectories](input_output/archive_manifests/opus47_review_full_io.json) are SHA-verified Release assets. The output archive is a partial snapshot; later deltas preserve ongoing trials. Review-stage outcomes alone do not establish DA or RRR; any qualified Instruct DA above includes one separately declared infrastructure interruption replacement.
 
 Muse BF16's original GPU allocation expired during Pro, TB2.1 and DeepSWE runs. The [recovery audit](evidence/muse_bf16_2865_expiry_recovery.json) identifies the original and derived Pro run IDs: **137 completed original tasks are reused once**, while 10 failed and four active original attempts are preserved separately. Its live Pro score combines the derived native run with disjoint direct-endpoint continuation results by original task ID. The two interrupted original TB trials and two DeepSWE trials are available as separate SHA-verified [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) and [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) I/O assets; they remain ungraded infrastructure interruptions.
 
