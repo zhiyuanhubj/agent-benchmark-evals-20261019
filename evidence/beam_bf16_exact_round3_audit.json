@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-10-20T22:06:47.741222+00:00",
+  "generated_utc": "2026-10-20T23:14:30.395354+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T215314Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T230201Z.tar.zst",
   "expected": 89,
-  "terminal": 80,
-  "graded": 66,
-  "success": 42,
+  "terminal": 86,
+  "graded": 72,
+  "success": 47,
   "missing_graded_tasks": [
     "git-multibranch",
     "headless-terminal",
@@ -26,13 +26,7 @@
     "qemu-alpine-ssh",
     "regex-chess",
     "schemelike-metacircular-eval",
-    "torch-tensor-parallelism",
-    "train-fasttext",
-    "tune-mjcf",
-    "video-processing",
-    "vulnerable-secret",
-    "winning-avg-corewars",
-    "write-compressor"
+    "winning-avg-corewars"
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch",
@@ -112,9 +106,7 @@
       "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
     }
   },
-  "unarchived_new_terminal_tasks": [
-    "torch-tensor-parallelism"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -681,6 +673,48 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/torch-pipeline-parallelism__vFsDaDF/result.json",
       "raw_response_count": 87,
       "responses_with_reasoning_content": 87
+    },
+    "torch-tensor-parallelism": {
+      "reward": 1.0,
+      "result_sha256": "aee59a6a6dc5700aeab7951ec2877a3a5d4447787905a5f4994b7c3a87fe0394",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/torch-tensor-parallelism__RMh3Yu7/result.json",
+      "raw_response_count": 44,
+      "responses_with_reasoning_content": 44
+    },
+    "train-fasttext": {
+      "reward": 1.0,
+      "result_sha256": "a662eb5368319930de6c01e50cd7ebf2227d7e9b607196785761c04fe0398472",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/train-fasttext__Xs92uRH/result.json",
+      "raw_response_count": 88,
+      "responses_with_reasoning_content": 88
+    },
+    "tune-mjcf": {
+      "reward": 1.0,
+      "result_sha256": "28943599d8d2dc81d969db93c5ac40c86c3912c88ebbe29bfbc62aeff0aed68e",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/tune-mjcf__RoxowMv/result.json",
+      "raw_response_count": 32,
+      "responses_with_reasoning_content": 32
+    },
+    "video-processing": {
+      "reward": 0.0,
+      "result_sha256": "9f1e86b25cde430d4a5f51373a39f11774b00d1bf0393d5c08a111e4c28b5704",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/video-processing__gtThc7t/result.json",
+      "raw_response_count": 46,
+      "responses_with_reasoning_content": 46
+    },
+    "vulnerable-secret": {
+      "reward": 1.0,
+      "result_sha256": "889338ace2b6015ec6e9d6028d38a997cb64e2c10e46346231fc956b70b1ad28",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/vulnerable-secret__BrfuJGu/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
+    "write-compressor": {
+      "reward": 1.0,
+      "result_sha256": "c970b693ca3843891eb1a4a710e713bef29f284521d72dc998b35c4ba9291d04",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/write-compressor__Se8MkKt/result.json",
+      "raw_response_count": 51,
+      "responses_with_reasoning_content": 51
     }
   }
 }

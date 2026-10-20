@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T22:05:19.099294+00:00",
+  "generated_utc": "2026-10-20T23:12:58.629975+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 49,
-  "success_count": 38,
+  "scored_tasks": 53,
+  "success_count": 41,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -176,6 +176,10 @@
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/gcode-to-text__CD9osqm/result.json"
     },
+    "polyglot-c-py": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/polyglot-c-py__47bxXJf/result.json"
+    },
     "headless-terminal": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/headless-terminal__SZu68Bd/result.json"
@@ -183,6 +187,10 @@
     "financial-document-processor": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/financial-document-processor__wWCikMb/result.json"
+    },
+    "mteb-retrieve": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/mteb-retrieve__BJH96VD/result.json"
     },
     "merge-diff-arc-agi-task": {
       "reward": 1.0,
@@ -192,9 +200,17 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/large-scale-text-editing__NrdB5Fy/result.json"
     },
+    "prove-plus-comm": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/prove-plus-comm__CezPZCd/result.json"
+    },
     "overfull-hbox": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/overfull-hbox__yu2X2Kk/result.json"
+    },
+    "break-filter-js-from-html": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/break-filter-js-from-html__WqN7m7x/result.json"
     },
     "torch-pipeline-parallelism": {
       "reward": 0.0,
@@ -298,12 +314,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "break-filter-js-from-html": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "pytorch-model-recovery": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/pytorch-model-recovery__8rbR3bf/result.json",
       "exception_type": "RuntimeError",
@@ -390,11 +400,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 49,
-  "covered_raw_response_sets": 49,
-  "covered_trajectories": 49,
-  "scored_raw_response_count": 1962,
-  "nonempty_reasoning_response_count": 1961,
+  "covered_results": 53,
+  "covered_raw_response_sets": 53,
+  "covered_trajectories": 53,
+  "scored_raw_response_count": 2140,
+  "nonempty_reasoning_response_count": 2139,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -568,6 +578,10 @@
       "raw_responses": 83,
       "nonempty_reasoning_content": 83
     },
+    "polyglot-c-py": {
+      "raw_responses": 9,
+      "nonempty_reasoning_content": 9
+    },
     "headless-terminal": {
       "raw_responses": 15,
       "nonempty_reasoning_content": 15
@@ -575,6 +589,10 @@
     "financial-document-processor": {
       "raw_responses": 19,
       "nonempty_reasoning_content": 19
+    },
+    "mteb-retrieve": {
+      "raw_responses": 139,
+      "nonempty_reasoning_content": 139
     },
     "merge-diff-arc-agi-task": {
       "raw_responses": 14,
@@ -584,9 +602,17 @@
       "raw_responses": 24,
       "nonempty_reasoning_content": 24
     },
+    "prove-plus-comm": {
+      "raw_responses": 5,
+      "nonempty_reasoning_content": 5
+    },
     "overfull-hbox": {
       "raw_responses": 10,
       "nonempty_reasoning_content": 10
+    },
+    "break-filter-js-from-html": {
+      "raw_responses": 25,
+      "nonempty_reasoning_content": 25
     },
     "torch-pipeline-parallelism": {
       "raw_responses": 10,
@@ -599,6 +625,7 @@
   "direct_run_id": "muse-bf16-tb-r1-direct-2886-20261020",
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
   "deferred_post_score_results": [],
@@ -754,6 +781,10 @@
     "muse_bf16_delta_20261020T213149Z.tar.zst",
     "muse_bf16_delta_20261020T213653Z.tar.zst",
     "muse_bf16_delta_20261020T215640Z.tar.zst",
+    "muse_bf16_delta_20261020T221623Z.tar.zst",
+    "muse_bf16_delta_20261020T223332Z.tar.zst",
+    "muse_bf16_delta_20261020T224923Z.tar.zst",
+    "muse_bf16_delta_20261020T230511Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

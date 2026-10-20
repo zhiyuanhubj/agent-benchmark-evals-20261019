@@ -1,0 +1,54 @@
+{
+  "generated_utc": "2026-10-20T22:18:35.789390+00:00",
+  "scope": "Opus 4.7 SWE-Review first-round infrastructure continuation; native one-attempt jobs preserved",
+  "original_failed_on_node": "2900",
+  "replacement_client_allocation": 2887,
+  "reason": "2900 Docker NVMe full; original provider gateway killed by login-node OOM",
+  "original_endpoint_forwarded_to_2887_gateway": true,
+  "gateway_health": {
+    "ready": true,
+    "provider_streaming": true,
+    "max_upstream_concurrency": 12
+  },
+  "units": {
+    "gateway_on_2887": "opus47-stream-gateway-2887-20261020.service",
+    "forwarding_original_endpoint": "opus47-stream-gateway-relay-20261020.service",
+    "glm5_500": "opus47-swe-review-glm-r1-2887-retry1-20261020.service",
+    "qwen3_coder_30b_500": "opus47-swe-review-coder-r1-2887-retry1-20261020.service",
+    "qwen3_30b_instruct2507_500": "opus47-swe-review-instruct-r1-2887-retry1-20261020.service"
+  },
+  "unit_status": {
+    "gateway_on_2887": "active",
+    "forwarding_original_endpoint": "active",
+    "glm5_500": "active",
+    "qwen3_coder_30b_500": "active",
+    "qwen3_30b_instruct2507_500": "active"
+  },
+  "frozen_claim_sha256": "f516a1c929cd1cc30a6e3a70583322655a79ee25820388b2558a4f1b61f8063a",
+  "preservation_receipt_sha256": "86b77546a74c51c48c9ce3c641215bef920d369ea89fd17cce1fe1e3b9fc2b24",
+  "original_terminal_counts": {
+    "glm5_500": 354,
+    "qwen3_coder_30b_500": 349,
+    "qwen3_30b_instruct2507_500": 386
+  },
+  "original_expected_counts": {
+    "glm5_500": 500,
+    "qwen3_coder_30b_500": 462,
+    "qwen3_30b_instruct2507_500": 422
+  },
+  "blank_attempts_archived_before_resume": {
+    "glm5_500": 2,
+    "qwen3_coder_30b_500": 2,
+    "qwen3_30b_instruct2507_500": 2
+  },
+  "score_policy": "Existing native result per task retained; no correctness-based retries. First recovery host-env errors were moved out after exact archive and no-model-response verification. Current attempts resume the original one-attempt jobs.",
+  "first_recovery_stopped_attempts_preserved": {
+    "glm5_500": 2,
+    "qwen3_coder_30b_500": 2,
+    "qwen3_30b_instruct2507_500": 4
+  },
+  "pre_model_keyerror_results_preserved": 2,
+  "first_recovery_model_responses": 0,
+  "provider_stream_archive_group": "opus47_legacy",
+  "provider_stream_source": "bench/opus47_full_20261018/api_archive/claude"
+}

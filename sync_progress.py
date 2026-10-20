@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Refresh qualified benchmark scores and publish a private GitHub snapshot."""
 import fcntl
+import hashlib
 import json
 import subprocess
 import sys
@@ -236,7 +237,29 @@ def sync_native_archives(scores, force_bf16=False):
             continue  # A new archive group joins only after its base asset is created.
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
         previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
-        static = group in STATIC_ARCHIVE_GROUPS
+        # The Opus provider archive shares the legacy root. While the resumed
+        # SWE-Review job is generating new requests, publish its raw streamed
+        # replies on the live cadence instead of the completed-run cadence.
+        opus_review_live = group == 'opus47_legacy' and any(
+            subprocess.run(['systemctl', '--user', 'is-active', '--quiet', unit]).returncode == 0
+            for unit in ('opus47-swe-review-glm-r1-2887-retry1-20261020.service',
+                         'opus47-swe-review-coder-r1-2887-retry1-20261020.service',
+                         'opus47-swe-review-instruct-r1-2887-retry1-20261020.service'))
+        static = group in STATIC_ARCHIVE_GROUPS and not opus_review_live
+        if static and '--live-only' in sys.argv:
+            # Publish fresh live results first; the normal daemon keeps the
+            # completed benchmark roots on their independent periodic scan.
+            continue
+        if group == 'opus47_legacy' and '--live-only' in sys.argv:
+            # A verified provider-stream snapshot was prepared just before
+            # this fast publish. The normal daemon will capture later events.
+            assert previous_time >= datetime.fromisoformat('2026-10-20T22:13:07+00:00')
+            snapshot = json.loads(previous.read_text())
+            asset = ROOT / '.release_assets' / snapshot['archive_name']
+            assert asset.is_file() and asset.stat().st_size == snapshot['archive_size_bytes']
+            with asset.open('rb') as stream:
+                assert hashlib.file_digest(stream, 'sha256').hexdigest() == snapshot['archive_sha256']
+            continue
         if static and group in static_scans:
             previous_time = max(previous_time, datetime.fromisoformat(static_scans[group]))
         interval = STATIC_ARCHIVE_INTERVAL_SECONDS if static else RAW_ARCHIVE_INTERVAL_SECONDS
@@ -414,6 +437,7 @@ def cycle():
              'protocol/prune_2919_completed_beam_pro_images_20261020.py',
              'protocol/prune_2922_completed_muse_pro_images_20261020.py',
              'protocol/run_beam_pro_r2_2888_20261020.py',
+             'protocol/prepare_opus47_review_resume_20261020.py',
              'beam_exact_round3_2901.py',
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',
@@ -463,6 +487,7 @@ def cycle():
         return {
             'utc': datetime.now(timezone.utc).isoformat(),
             'git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+            'live_only': '--live-only' in sys.argv,
             'muse_nvfp4_exact_tb_round1': status['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['1'],
         }
 

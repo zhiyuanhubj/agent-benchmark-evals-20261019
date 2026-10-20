@@ -42,12 +42,20 @@ previous_roots = {Path(root) for root in previous_manifest['source_roots']}
 new_roots = [root for root in archive_trials.GROUPS[group] if root not in previous_roots]
 # A newly added source root may contain input cards prepared before the last
 # archive. Include the whole root once; mtime alone would silently omit them.
-files = sorted(path for path in archive_trials.iter_files(group)
-               if path.stat().st_mtime > cutoff.timestamp()
-               or any(path.is_relative_to(root) for root in new_roots)
-               or (thinking_backfill_due and path.name == 'mini-swe-agent.trajectory.json')
-               or (patch_backfill_due and path.name == 'model.patch'))
-activated_new_roots = [root for root in new_roots if any(path.is_relative_to(root) for path in files)]
+def should_archive(path):
+    # Active Harbor jobs can replace an unresulted trial directory while the
+    # iterator walks it. The next delta will capture any surviving new files.
+    try:
+        modified = path.stat().st_mtime
+    except FileNotFoundError:
+        return False
+    return (modified > cutoff.timestamp()
+            or any(path.is_relative_to(root) for root in new_roots)
+            or (thinking_backfill_due and path.name == 'mini-swe-agent.trajectory.json')
+            or (patch_backfill_due and path.name == 'model.patch'))
+
+
+files = sorted(path for path in archive_trials.iter_files(group) if should_archive(path))
 if not files and args.if_changed:
     print(json.dumps({'group': group, 'skipped': 'no_changed_files'}))
     raise SystemExit(0)
@@ -61,15 +69,23 @@ assert not archive.exists()
 proc = subprocess.Popen(['zstd', '-q', '-T2', '-3', '-o', str(temp)], stdin=subprocess.PIPE)
 counts = {}
 source_bytes = 0
+included = []
+skipped_disappeared = 0
 try:
     with tarfile.open(fileobj=proc.stdin, mode='w|') as tar:
         for path in files:
             assert path.is_relative_to(BASE)
-            data = path.read_bytes()  # Stable snapshot even if an active trial appends later.
+            try:
+                modified = path.stat().st_mtime
+                data = path.read_bytes()  # Stable snapshot if an active trial appends later.
+            except FileNotFoundError:
+                skipped_disappeared += 1
+                continue
             info = tarfile.TarInfo(str(path.relative_to(BASE)))
             info.size = len(data)
-            info.mtime = int(path.stat().st_mtime)
+            info.mtime = int(modified)
             tar.addfile(info, io.BytesIO(data))
+            included.append(path)
             source_bytes += len(data)
             category = ('api_archive.json' if 'api_archive' in path.parts else
                         'raw_response.json' if 'raw_responses' in path.parts else
@@ -77,11 +93,17 @@ try:
             counts[category] = counts.get(category, 0) + 1
     proc.stdin.close()
     assert proc.wait() == 0
+    if not included and args.if_changed:
+        temp.unlink()
+        print(json.dumps({'group': group, 'skipped': 'source_files_disappeared_during_snapshot',
+                          'count': skipped_disappeared}))
+        raise SystemExit(0)
     temp.rename(archive)
 except BaseException:
     proc.kill()
     temp.unlink(missing_ok=True)
     raise
+activated_new_roots = [root for root in new_roots if any(path.is_relative_to(root) for path in included)]
 with archive.open('rb') as stream:
     digest = hashlib.file_digest(stream, 'sha256').hexdigest()
 manifest = {
@@ -102,6 +124,7 @@ manifest = {
     'archive_sha256': digest,
     'file_count': len(files),
     'source_bytes': source_bytes,
+    'skipped_disappeared_during_snapshot': skipped_disappeared,
     'filename_counts': counts,
     'source_roots': sorted({str(root) for root in previous_roots | set(activated_new_roots)}),
 }

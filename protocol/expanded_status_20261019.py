@@ -16,13 +16,15 @@ def load(path):
     return json.loads(path.read_text()) if path.exists() else None
 
 
-def pro(roots, expected_ids, excluded_run_names=()):
+def pro(roots, expected_ids, excluded_run_names=(), excluded_result_paths=()):
     expected_set = set(expected_ids)
     assert len(expected_set) == len(expected_ids) == 731
     records = []
     for root in roots:
         for path in root.glob('**/attempt-1/result.json'):
             if any(name in path.parts for name in excluded_run_names):
+                continue
+            if str(path) in excluded_result_paths:
                 continue
             data = load(path)
             # AgentCompass shortens detail directory names. Only task.json
@@ -132,11 +134,42 @@ beam_pro_round2_name = 'beam_pro_full731_round2_2888_20261020'
 beam_pro_round2_root = (legacy / 'remaining_pro/pro-results' / beam_pro_round2_name /
                         'Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent' /
                         'beam-pro-full731-r2-2888-20261020')
+late_overlap_path = Path('/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_pro_r1_late_orphan_overlap_20261020.json')
+late_overlap = load(late_overlap_path)
+unstarted_claim_path = Path(late_overlap['claim'])
+unstarted_claim = load(unstarted_claim_path)
+assert hashlib.sha256(unstarted_claim_path.read_bytes()).hexdigest() == late_overlap['claim_sha256']
+assert late_overlap['claim_prepared_utc'] == unstarted_claim['prepared_utc']
+assert late_overlap['orphan_absent_verified'] and late_overlap['orphan_run_id'] == 'beam-pro-r1-handoff-unattempted'
+selected_unstarted = set(unstarted_claim['selected_never_started_tasks'])
+late_source = Path(unstarted_claim['source_handoff_root'])
+observed_late = {}
+for task_file in late_source.glob('details/*/task.json'):
+    task = load(task_file)['task_id']
+    if task in selected_unstarted:
+        assert task not in observed_late
+        observed_late[task] = task_file
+assert set(observed_late) == {row['task'] for row in late_overlap['late_selected_task_dirs']}
+excluded_late_results = set()
+for row in late_overlap['late_selected_task_dirs']:
+    task_file = observed_late[row['task']]
+    assert str(task_file) == row['source_task_file']
+    assert hashlib.sha256(task_file.read_bytes()).hexdigest() == row['source_task_sha256']
+    result = task_file.parent / 'attempt-1/result.json'
+    if row['source_result']:
+        assert str(result) == row['source_result'] and result.exists()
+        assert hashlib.sha256(result.read_bytes()).hexdigest() == row['source_result_sha256']
+        excluded_late_results.add(str(result))
+    else:
+        assert not result.exists()
+assert len(excluded_late_results) == late_overlap['late_selected_native_result_count']
 record['beam_bf16'] = dict(
     pro=pro([legacy / 'pro-results', legacy / 'remaining_pro/pro-results'], beam_pro_ids,
-            excluded_run_names=(beam_pro_round2_name,)),
+            excluded_run_names=(beam_pro_round2_name,), excluded_result_paths=excluded_late_results),
     pro_round2=pro([beam_pro_round2_root], beam_pro_ids),
 )
+record['beam_bf16']['pro']['late_orphan_source_results_excluded'] = len(excluded_late_results)
+record['beam_bf16']['pro']['late_orphan_overlap_evidence'] = str(late_overlap_path)
 beam_disk_audit_path = Path('/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_pro_r1_pre_model_disk_failures.json')
 beam_disk_claim_path = legacy / 'remaining_pro/disk_correction_2968_20261020/claim.json'
 if beam_disk_claim_path.exists():

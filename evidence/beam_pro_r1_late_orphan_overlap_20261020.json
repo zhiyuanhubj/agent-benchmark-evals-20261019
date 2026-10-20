@@ -1,0 +1,77 @@
+{
+  "generated_utc": "2026-10-20T22:26:12.894415+00:00",
+  "cause": "Original Beam Pro handoff Slurm process survived a failed systemd wrapper and kept starting tasks after the disjoint 2733/2887 continuation claim was frozen.",
+  "orphan_cpu_allocation": 2919,
+  "orphan_pid_stopped": 1642566,
+  "orphan_absent_verified": true,
+  "orphan_run_id": "beam-pro-r1-handoff-unattempted",
+  "claim": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_pro_r1_unstarted_20261020/claim.json",
+  "claim_sha256": "7266fc67379384847b055fe2787289282bafd3f3261dfe86d17168b6f7b3887b",
+  "claim_prepared_utc": "2026-10-20T21:41:44.345005+00:00",
+  "source_task_dirs_at_claim": 297,
+  "source_results_at_claim": 291,
+  "late_selected_task_dirs": [
+    {
+      "task": "instance_qutebrowser__qutebrowser-36ade4bba504eb96f05d32ceab9972df7eb17bcc-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+      "source_task_file": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_qutebrowser__qutebrowser-36ade4bba504eb96f05d32ceab9972df7eb17bcc-v2ef3--25981ad4200e7de37a4cfa7a635817d1ea68ac9b7dfc69e327b9959e3b0d52e1/task.json",
+      "source_task_sha256": "399a61e8ce466566dcc33f4d444bc9cc258e2e655b965b5f8f61bb70e1e6ad3b",
+      "source_task_mtime_utc": "2026-10-20T22:10:17+00:00",
+      "source_result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_qutebrowser__qutebrowser-36ade4bba504eb96f05d32ceab9972df7eb17bcc-v2ef3--25981ad4200e7de37a4cfa7a635817d1ea68ac9b7dfc69e327b9959e3b0d52e1/attempt-1/result.json",
+      "source_result_sha256": "e54bbfe5a4469a03ee73e1e812e258720711dde290b24e578673c3de6e910a77",
+      "source_result_mtime_utc": "2026-10-20T22:10:17+00:00",
+      "source_result_status": "completed",
+      "source_result_correct": false
+    },
+    {
+      "task": "instance_flipt-io__flipt-db1c3b100e231c62f0c90c2ab037614f20a2a63b",
+      "source_task_file": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_flipt-io__flipt-db1c3b100e231c62f0c90c2ab037614f20a2a63b--5053fdefbfc995bd482c23c2c0d0c948cf1aca5da077c5321f8c1c73a48c0433/task.json",
+      "source_task_sha256": "8f205a5134a81e7ba1ca949240e8bac6fe40a5b4f6e9a7be17ab5217c37e229f",
+      "source_task_mtime_utc": "2026-10-20T22:17:40+00:00",
+      "source_result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_flipt-io__flipt-db1c3b100e231c62f0c90c2ab037614f20a2a63b--5053fdefbfc995bd482c23c2c0d0c948cf1aca5da077c5321f8c1c73a48c0433/attempt-1/result.json",
+      "source_result_sha256": "9577227f8f46687787dccd5614dd9a35936cc6c0dcf65673ff112298e79e2ec2",
+      "source_result_mtime_utc": "2026-10-20T22:17:40+00:00",
+      "source_result_status": "completed",
+      "source_result_correct": true
+    },
+    {
+      "task": "instance_flipt-io__flipt-96820c3ad10b0b2305e8877b6b303f7fafdf815f",
+      "source_task_file": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_flipt-io__flipt-96820c3ad10b0b2305e8877b6b303f7fafdf815f--e1491875a684d1fd277159e253254181e05733a758659acff9dca89a7a8d0135/task.json",
+      "source_task_sha256": "0ea8b5e372d6ca50ee698978a188b06ff6354c686679b6f7180240ed803e37e3",
+      "source_task_mtime_utc": "2026-10-20T22:10:17+00:00",
+      "source_result": null,
+      "source_result_sha256": null,
+      "source_result_mtime_utc": null
+    },
+    {
+      "task": "instance_navidrome__navidrome-677d9947f302c9f7bba8c08c788c3dc99f235f39",
+      "source_task_file": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_navidrome__navidrome-677d9947f302c9f7bba8c08c788c3dc99f235f39--62a454bf2c651003d5351f2df058344136823aa42dde8333dbd5476b4656c14f/task.json",
+      "source_task_sha256": "355d87591bf90d59f7f023181beead60c644a7736c8b5d07da32034744a1872c",
+      "source_task_mtime_utc": "2026-10-20T22:03:09+00:00",
+      "source_result": null,
+      "source_result_sha256": null,
+      "source_result_mtime_utc": null
+    },
+    {
+      "task": "instance_ansible__ansible-d9f1866249756efc264b00ff7497e92c11a9885f-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "source_task_file": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_ansible__ansible-d9f1866249756efc264b00ff7497e92c11a9885f-v0f01c69f1e25--9bf332cce8ac3e8adff2522a306b8191710df1f37d1cdbaf419bfb3b5972b45e/task.json",
+      "source_task_sha256": "80ba255460348a04a89eed7ed0b6566c7b711a165ea9577bf970bba4ac1412ea",
+      "source_task_mtime_utc": "2026-10-20T22:17:40+00:00",
+      "source_result": null,
+      "source_result_sha256": null,
+      "source_result_mtime_utc": null
+    },
+    {
+      "task": "instance_flipt-io__flipt-6fd0f9e2587f14ac1fdd1c229f0bcae0468c8daa",
+      "source_task_file": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/beam_full_remaining603_handoff_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-handoff-unattempted/details/instance_flipt-io__flipt-6fd0f9e2587f14ac1fdd1c229f0bcae0468c8daa--99922f42a7947fb3e469d107dab32bdc764d86d9e397e6f66efe28dc421ed6fd/task.json",
+      "source_task_sha256": "6da7c9ba6ccf74f441e34b26eacd19ff52bcba76a1e7749cfa587dd7508b8cc0",
+      "source_task_mtime_utc": "2026-10-20T22:19:23+00:00",
+      "source_result": null,
+      "source_result_sha256": null,
+      "source_result_mtime_utc": null
+    }
+  ],
+  "late_selected_task_dir_count": 6,
+  "late_selected_native_result_count": 2,
+  "policy": "The frozen continuation owns these six IDs before any late source task directory existed. Exclude late original source results from first-round aggregation regardless of correctness; preserve all source files and score only a native continuation result for each ID, once.",
+  "no_correctness_based_selection": true
+}
