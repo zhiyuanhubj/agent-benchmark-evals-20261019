@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T17:14:40.148901+00:00",
+  "generated_utc": "2026-10-20T17:33:08.785314+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -268,13 +268,13 @@
           "3": {
             "expected": 89,
             "terminal": 89,
-            "graded": 51,
-            "success": 43,
+            "graded": 53,
+            "success": 45,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 2640,
-            "ungraded": 38,
+            "archived_actual_model_responses": 2732,
+            "ungraded": 36,
             "exceptions": {
-              "InternalServerError": 38
+              "InternalServerError": 36
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -512,24 +512,24 @@
             "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
             "original_ungraded_infra_failures": 89,
             "original_model_responses": 0,
-            "replacement_terminal": 51,
-            "replacement_graded": 51,
-            "replacement_success": 43,
-            "replacement_raw_responses": 2640,
+            "replacement_terminal": 53,
+            "replacement_graded": 53,
+            "replacement_success": 45,
+            "replacement_raw_responses": 2732,
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
               "largest-eigenval"
             ],
-            "active_trial_dirs": 12,
+            "active_trial_dirs": 11,
             "all_tasks_single_replacement_draw": false,
             "infrastructure_interruption_continuation": {
               "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/expired2869-continuation-2900-claim.json",
               "claim_sha256": "d7048a207875858453e57f410ff1437cc217b364cff8382b3538cc0abd1b8307",
               "expected": 11,
-              "terminal": 0,
-              "graded": 0,
-              "success": 0,
-              "raw_responses": 26,
+              "terminal": 1,
+              "graded": 1,
+              "success": 1,
+              "raw_responses": 63,
               "source_partial_model_response_tasks": 4,
               "source_partial_model_responses": 150,
               "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
@@ -590,16 +590,16 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 400,
-        "graded": 261,
-        "success": 157,
+        "terminal": 407,
+        "graded": 268,
+        "success": 161,
         "status": "partial_no_full_score"
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 16,
-        "graded": 16,
-        "success": 10,
+        "terminal": 20,
+        "graded": 20,
+        "success": 13,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -616,9 +616,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 66,
-          "graded": 65,
-          "success": 26,
+          "terminal": 71,
+          "graded": 70,
+          "success": 29,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -676,7 +676,7 @@
             "graded": 85,
             "success": 62,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 6177,
+            "archived_actual_model_responses": 6251,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 8,
@@ -693,7 +693,7 @@
             "graded": 53,
             "success": 34,
             "active_trial_dirs": 71,
-            "archived_actual_model_responses": 2860,
+            "archived_actual_model_responses": 2873,
             "ungraded": 14,
             "exceptions": {
               "RuntimeError": 13,
@@ -933,10 +933,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 258,
+          "completed_trials": 269,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 240,
+          "pending_trials": 229,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:18.993248",
           "finished_at": null
@@ -948,10 +948,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 243,
+          "completed_trials": 250,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 217,
+          "pending_trials": 210,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:10.468330",
           "finished_at": null
@@ -963,10 +963,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 289,
+          "completed_trials": 299,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 131,
+          "pending_trials": 121,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:16.640783",
           "finished_at": null
@@ -1087,24 +1087,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 348,
-        "native_graded": 348,
+        "native_terminal": 358,
+        "native_graded": 358,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 117,
-            "native_graded": 117
+            "native_terminal": 121,
+            "native_graded": 121
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 115,
-            "native_graded": 115
+            "native_terminal": 118,
+            "native_graded": 118
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 116,
-            "native_graded": 116
+            "native_terminal": 119,
+            "native_graded": 119
           }
         },
         "DA": null,

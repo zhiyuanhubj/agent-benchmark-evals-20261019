@@ -120,15 +120,87 @@ for item in plan['configurations']:
                         'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
                         'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared'})
 
+# Round-two infrastructure corrections retain the original ungraded attempts,
+# but their graded trajectories must receive the same integrity screen.
+r2_replacement_jobs = [
+    'muse-nvfp4-tb-v1-exact-r2-infra-replacement-password-recovery',
+    'muse-nvfp4-tb-v1-exact-r2-infra-replacement-prove-plus-comm',
+    'muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm',
+    'muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli',
+    'muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020',
+    'muse-nvfp4-tb-v1-exact-r2-expiry-correction-2902-20261020',
+    'muse-nvfp4-tb-v1-exact-r2-fasttext-expiry-2902-20261020',
+    'muse-nvfp4-tb-v1-exact-r2-fasttext-tmux-2902-20261020',
+]
+r2_scored = {row['task'] for row in records if row['model'] == 'muse_nvfp4_r2'}
+for job_name in r2_replacement_jobs:
+    for result in (source / 'results/muse_nvfp4' / job_name).glob('*/result.json'):
+        value = json.loads(result.read_text())
+        if not value.get('finished_at'):
+            continue
+        task = Path(value['config']['task']['path']).name
+        assert task in future_seen[2]
+        reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        if reward not in (0, 1):
+            assert reward is None and value.get('exception_info'), (result, reward)
+            ungraded_terminal_trials.append({
+                'model': 'muse_nvfp4_r2', 'task': task,
+                'result_path': str(result.relative_to(BASE)),
+                'result_sha256': hashlib.sha256(result.read_bytes()).hexdigest(),
+                'exception_type': value['exception_info'].get('exception_type'),
+                'attempt_kind': 'infrastructure_correction',
+                'qualification': 'Ungraded infrastructure correction; excluded from scored trajectory counts.',
+            })
+            continue
+        assert task not in r2_scored, 'Multiple graded round-two trajectories for one task'
+        r2_scored.add(task)
+        trajectory = result.parent / 'agent/trajectory.json'
+        if not trajectory.is_file():
+            missing_trajectories.append({'model': 'muse_nvfp4_r2', 'task': task})
+            continue
+        payload = trajectory.read_bytes()
+        steps = json.loads(payload)['steps']
+        hits = []
+        tool_count = 0
+        for step in steps:
+            if step.get('source') != 'agent':
+                continue
+            for tool in step.get('tool_calls') or []:
+                args = tool.get('arguments') or {}
+                command = args.get('keystrokes', '') if isinstance(args, dict) else str(args)
+                tool_count += 1
+                for rule, regex in compiled.items():
+                    if regex.search(command):
+                        hits.append({'rule': rule, 'step_id': step.get('step_id'),
+                                     'command_sha256': hashlib.sha256(command.encode()).hexdigest()})
+        records.append({
+            'model': 'muse_nvfp4_r2', 'round': 2, 'task': task,
+            'reward': reward, 'trajectory_path': str(trajectory.relative_to(BASE)),
+            'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
+            'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
+            'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared',
+            'attempt_kind': 'infrastructure_correction',
+        })
+
 # The original round-three endpoint failed before yielding model responses.
 # Its one-draw infrastructure replacements have distinct job names and must
 # be screened separately from the original terminal transport failures.
 replacement_plan = json.loads((source / 'muse_nvfp4/state/r3-infra-replacement-2900/plan.json').read_text())
 assert replacement_plan['expected_tasks'] == 89
 replacement_seen = set()
-for batch in replacement_plan['batches']:
-    expected = {item['task'] for item in batch['tasks']}
-    for result in (source / 'results/muse_nvfp4' / batch['job_name']).glob('*/result.json'):
+r3_jobs = [(batch['job_name'], {item['task'] for item in batch['tasks']},
+            'infrastructure_replacement') for batch in replacement_plan['batches']]
+continuation_claim_path = source / 'muse_nvfp4/state/r3-infra-replacement-2900/expired2869-continuation-2900-claim.json'
+if continuation_claim_path.exists():
+    continuation_claim = json.loads(continuation_claim_path.read_text())
+    assert continuation_claim['original_allocation_sacct'][1] == 'TIMEOUT'
+    assert continuation_claim['source_partial_model_response_tasks'] == 4
+    assert len(continuation_claim['tasks']) == 11
+    r3_jobs.append((continuation_claim['job_name'],
+                    {item['task'] for item in continuation_claim['tasks']},
+                    'expired_allocation_continuation'))
+for job_name, expected, attempt_kind in r3_jobs:
+    for result in (source / 'results/muse_nvfp4' / job_name).glob('*/result.json'):
         value = json.loads(result.read_text())
         if not value.get('finished_at'):
             continue
@@ -142,7 +214,8 @@ for batch in replacement_plan['batches']:
                 'task': task, 'result_path': str(result.relative_to(BASE)),
                 'result_sha256': hashlib.sha256(result.read_bytes()).hexdigest(),
                 'exception_type': value['exception_info'].get('exception_type'),
-                'qualification': 'Infrastructure replacement ended without a verifier reward; excluded from scored trajectory counts.'})
+                'attempt_kind': attempt_kind,
+                'qualification': 'Infrastructure replacement or continuation ended without a verifier reward; excluded from scored trajectory counts.'})
             continue
         trajectory = result.parent / 'agent/trajectory.json'
         if not trajectory.is_file():
@@ -168,7 +241,7 @@ for batch in replacement_plan['batches']:
                         'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
                         'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
                         'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared',
-                        'attempt_kind': 'infrastructure_replacement'})
+                        'attempt_kind': attempt_kind})
 for round_number in (2, 3):
     frozen = json.loads((source / 'beam/configs' / f'r{round_number}.json').read_text())
     expected = {Path(item['path']).name for item in frozen['tasks']}

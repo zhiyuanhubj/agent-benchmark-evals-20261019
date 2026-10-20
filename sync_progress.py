@@ -354,6 +354,16 @@ def cycle():
                 assert (beam_audit['graded'], beam_audit['success']) == (beam_reported['graded'], beam_reported['success'])
         run([PYTHON, str(ROOT / 'screen_exact_tb_integrity.py')], timeout=180)
         screen = json.loads((ROOT / 'evidence/exact_tb_integrity_screen.json').read_text())
+        scored_rounds = (
+            ('muse_nvfp4_r2', scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['2']['graded']),
+            ('muse_nvfp4_r3', scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['3']['graded']),
+            ('beam_bf16_r2', scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds']['2']['graded']),
+            ('beam_bf16_r3', scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds']['3']['graded']),
+        )
+        for model, graded in scored_rounds:
+            screened = sum(row['model'] == model for row in screen['records'])
+            missing = sum(row['model'] == model for row in screen['missing_trajectories'])
+            assert screened + missing >= graded, f'{model} integrity screen missed graded trajectories'
         screened = {(row['model'], row['task']): row for row in screen['records']}
         manual_notes = json.loads((ROOT / 'evidence/exact_tb_integrity_manual_notes.json').read_text())
         for note in manual_notes['notes']:
