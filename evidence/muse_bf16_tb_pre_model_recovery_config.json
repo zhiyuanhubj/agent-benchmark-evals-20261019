@@ -1,0 +1,142 @@
+{
+  "job_name": "muse-bf16-tb-r1-pre-model-recovery-20261020",
+  "jobs_dir": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results",
+  "n_attempts": 1,
+  "n_concurrent_trials": 2,
+  "quiet": true,
+  "timeout_multiplier": 1.0,
+  "agent_timeout_multiplier": 12,
+  "environment": {
+    "import_path": "isolated_docker:IsolatedDocker",
+    "delete": true,
+    "override_cpus": 24,
+    "override_memory_mb": 49152
+  },
+  "agents": [
+    {
+      "import_path": "archived_terminus:ArchivedTerminus",
+      "model_name": "openai/muse-spark-open-bf16",
+      "kwargs": {
+        "api_base": "http://10.1.13.41:31324/v1",
+        "parser_name": "json",
+        "model_info": {
+          "max_input_tokens": 966656,
+          "max_output_tokens": 81920,
+          "input_cost_per_token": 0,
+          "output_cost_per_token": 0
+        },
+        "llm_call_kwargs": {
+          "timeout": 3600,
+          "max_tokens": 81920,
+          "top_p": 1.0,
+          "extra_body": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "xhigh"
+            },
+            "top_k": -1
+          },
+          "reasoning_effort": "xhigh"
+        },
+        "temperature": 1.0
+      },
+      "env": {
+        "OPENAI_API_KEY": "EMPTY"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/torch-pipeline-parallelism"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/video-processing"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/break-filter-js-from-html"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/caffe-cifar-10"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/cobol-modernization"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/constraints-scheduling"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/db-wal-recovery"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/extract-elf"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/filter-js-from-html"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/fix-ocaml-gc"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/gpt2-codegolf"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/kv-store-grpc"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/log-summary-date-ranges"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/mcmc-sampling-stan"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/mteb-leaderboard"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/openssl-selfsigned-cert"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/path-tracing-reverse"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/protein-assembly"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/pytorch-model-recovery"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/raman-fitting"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/rstan-to-pystan"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/sparql-university"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/torch-tensor-parallelism"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/vulnerable-secret"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/build-cython-ext"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/cancel-async-tasks"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/code-from-image"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/count-dataset-tokens"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/distribution-search"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/extract-moves-from-video"
+    }
+  ],
+  "retry": {
+    "max_retries": 0
+  }
+}

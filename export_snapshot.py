@@ -171,6 +171,16 @@ if pro_direct_claim_path.exists():
         'qualification': 'Disjoint first-round infrastructure continuation. Native results are merged by original task ID into the round 1 score at snapshot time.',
     }
 write('evidence/muse_bf16_2869_direct_resume_progress.json', bf16_direct_progress)
+bf16_tb_pre_model_claim_path = BF / 'recovery_20261020/muse-bf16-tb-r1-pre-model-recovery-20261020-claim.json'
+if bf16_tb_pre_model_claim_path.exists():
+    bf16_tb_pre_model_claim = read(bf16_tb_pre_model_claim_path)
+    tb_pre_model_progress = ex['muse_bf16']['tb']['1']['pre_model_infrastructure_recovery']
+    assert tb_pre_model_progress['declared_tasks'] == len(bf16_tb_pre_model_claim['tasks']) == 30
+    assert tb_pre_model_progress['claim_sha256'] == hashlib.sha256(bf16_tb_pre_model_claim_path.read_bytes()).hexdigest()
+    assert bf16_tb_pre_model_claim['audit_sha256'] == hashlib.sha256(Path(bf16_tb_pre_model_claim['audit']).read_bytes()).hexdigest()
+    assert bf16_tb_pre_model_claim['config_sha256'] == hashlib.sha256(Path(bf16_tb_pre_model_claim['config']).read_bytes()).hexdigest()
+    write('evidence/muse_bf16_tb_pre_model_recovery_claim.json', bf16_tb_pre_model_claim)
+    write('evidence/muse_bf16_tb_pre_model_recovery_config.json', read(Path(bf16_tb_pre_model_claim['config'])))
 bf16_deep_initial_claim_path = BF / 'recovery_20261020/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020-claim.json'
 bf16_deep_client_retry_claim_path = BF / 'recovery_20261020/muse-bf16-deep-r1-pre-model-client-recovery-20261020-claim.json'
 bf16_deep_endpoint_claim_path = (bf16_deep_client_retry_claim_path if bf16_deep_client_retry_claim_path.exists()
@@ -883,6 +893,17 @@ bf16_tb_round1 = metric(bf16_source_round1, '1', 'complete' if bf16_complete els
     'native_score_snapshot_utc': ex['utc'],
     'qualification': 'Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.',
 }
+if 'pre_model_infrastructure_recovery' in bf16_source_round1:
+    bf16_tb_recovery = bf16_source_round1['pre_model_infrastructure_recovery']
+    bf16_tb_round1['pre_model_infrastructure_recovery'] = {
+        'declared_tasks': bf16_tb_recovery['declared_tasks'],
+        'native_terminal': bf16_tb_recovery['native_terminal'],
+        'replaced_unscored_originals': bf16_tb_recovery['replaced_unscored_originals'],
+        'excluded_partial_model_output_tasks': bf16_tb_recovery['excluded_partial_model_output_tasks'],
+        'claim': 'evidence/muse_bf16_tb_pre_model_recovery_claim.json',
+        'config': 'evidence/muse_bf16_tb_pre_model_recovery_config.json',
+        'qualification': bf16_tb_recovery['qualification'],
+    }
 
 
 opus_pro_source = ex['opus47']['pro']
@@ -1506,6 +1527,8 @@ After bridge allocation 2869 expired, the [direct-endpoint continuation](evidenc
 
 A separate [DeepSWE endpoint-failure claim](evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json) freezes 17 original trials that stopped at the expired endpoint healthcheck with zero raw model responses, no trajectory and an empty patch. The first correction reached two client-dependency assertions before model access; its [frozen claim](evidence/muse_bf16_deep_initial_endpoint_recovery_claim.json) and artifacts are preserved. The current correction accepts the task image's pinned LiteLLM version while preserving all installed package versions. A correction replaces its matching unscored original only after a native terminal result; original files stay preserved.
 
+The [BF16 TB2.1 failure audit](evidence/muse_bf16_tb_ungraded_audit.json) identifies 30 original trials with no model reply or agent step and two interrupted trials with actual model output. The [predeclared 30-task correction](evidence/muse_bf16_tb_pre_model_recovery_claim.json) uses the same supplied task images and generation settings on the verified direct BF16 endpoint. The two model-sampled interruptions are excluded. Original files remain available, and each corrected task enters the first-round score only once after a native terminal result.
+
 Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits](evidence/swe_review_complete_split_da.json): GLM5 **{review_glm_da['DA']}%** on {review_glm_da['produced']} parseable decisions (500 task outcomes), Qwen3-Coder **{review_coder_da['DA']}%** on {review_coder_da['produced']} (462 outcomes), and Qwen3-30B-Instruct **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} (422 outcomes). [The v2 receipt audit](evidence/muse_swe_review_revision_v2_receipts.json) verifies 8 GLM5 and 2 Coder task-generation-only adapters for finished native verifier reports lacking Harbor summaries; no adapter is a model result. {muse_rrr_en_note}
 
 The [revision infrastructure audit](evidence/swe_review_revision_queue_recovery_20261020.json) records two task input formats, preparation failures, and a sandbox-to-model connection timeout before any model response. Those native failures remain excluded from model scores. Two synthetic Harbor trials then completed model generation, terminal tool use, and native verification through the Docker host bridge; they do not enter benchmark metrics. Four declared original-generator recovery queues have run or are running with the [bridge agent](protocol/muse_review_revision_v2/revision_agents_bridge_v4.py) and the original task inputs. The [live native-grade audit](evidence/swe_review_revision_gateway_progress.json) has Muse Coder **{review_revision_muse_coder['native_graded_revisions']}/{review_revision_muse_coder['expected_revisions']}**, Muse Instruct **{review_revision_muse_instruct['native_graded_revisions']}/{review_revision_muse_instruct['expected_revisions']}**, Beam Coder **{review_revision_beam_coder['native_graded_revisions']}/{review_revision_beam_coder['expected_revisions']}**, and Beam Instruct **{review_revision_beam_instruct['native_graded_revisions']}/{review_revision_beam_instruct['expected_revisions']}** revisions graded; split RRR is reported only after every required native grade and released evidence is verified. The [v3 scorer](protocol/muse_review_revision_v2/revision_score_v3.py) reads only the corrected gateway results, preserves five malformed Beam review reports as model failures, and exactly reproduces all four sealed DA split metrics.
@@ -1676,6 +1699,8 @@ Muse BF16 原节点在 Pro、TB2.1、DeepSWE 运行中到期。[恢复审计](ev
 2869 转发节点到期后，[直连续跑清单](evidence/muse_bf16_2869_direct_resume_progress.json)另外声明了原轮次中没有原生结果的 Pro 560 题、TB2.1 16 题、DeepSWE 11 题。已完成的原生结果按原始题目 ID 合并进首轮分数，运行目录和旧轨迹仍分别保留；原始未判分记录不算模型失败。
 
 [DeepSWE 端点故障清单](evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json)另冻结了 17 条旧端点健康检查失败的原始记录：没有模型原始回复和轨迹，补丁为空。首个补跑中两题在模型调用前又被客户端依赖检查挡住，[原清单](evidence/muse_bf16_deep_initial_endpoint_recovery_claim.json)及轨迹均保留；现在的补跑接受任务镜像中已锁定的 LiteLLM 版本，仍保持所有已安装包版本。只有新补跑产生原生终态后，才逐题替换对应的未判分原记录。
+
+[BF16 TB2.1 失败审计](evidence/muse_bf16_tb_ungraded_audit.json)逐题确认 30 条原记录没有模型回复或 agent 步骤，另两条中断记录已有真实模型输出。[预先声明的 30 题补跑清单](evidence/muse_bf16_tb_pre_model_recovery_claim.json)沿用指定任务镜像和生成参数，在已验证的 BF16 直连端点进行第一次真实抽样；两条已有输出的中断题不参与此次重采样。原文件继续保留，新结果产生原生终态后才按题目 ID 唯一计入首轮。
 
 **SWE-Review 三组 DA 均已有封存收据。** 官方 `compute_da.py` 在 GLM5 {review_glm_da['produced']} 个可解析决定上得 **{review_glm_da['DA']}%**（500 题终态），Qwen3-Coder {review_coder_da['produced']} 个得 **{review_coder_da['DA']}%**（462 题），Qwen3-30B-Instruct {review_instruct_da['produced']} 个得 **{review_instruct_da['DA']}%**（422 题）。[逐题哈希和官方评分核验](evidence/swe_review_complete_split_da.json)覆盖全部三组。[新版任务准备收据审计](evidence/muse_swe_review_revision_v2_receipts.json)确认 GLM5 的 8 道、Coder 的 2 道只缺 Harbor 汇总：它们的真实原生报告参与 DA，标明用途的适配文件仅供官方修复任务生成，绝非模型结果。{muse_rrr_zh_note}
 

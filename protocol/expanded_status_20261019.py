@@ -77,6 +77,17 @@ def harbor(roots, expected_ids, excluded_originals=None):
                     empty_patch = Path(frozen['empty_patch'])
                     assert empty_patch.stat().st_size == 0
                     assert hashlib.sha256(empty_patch.read_bytes()).hexdigest() == frozen['empty_patch_sha256']
+                elif frozen.get('reason') == 'pre_model_infrastructure_failure':
+                    assert score is None
+                    assert (data.get('exception_info') or {}).get('exception_type') == frozen['exception_type']
+                    assert not list((path.parent / 'agent/raw_responses').glob('*.json'))
+                    trajectory = path.parent / 'agent/trajectory.json'
+                    if frozen['trajectory_sha256']:
+                        assert hashlib.sha256(trajectory.read_bytes()).hexdigest() == frozen['trajectory_sha256']
+                        assert not any(step.get('source') == 'agent' for step in load(trajectory).get('steps', []))
+                    else:
+                        assert not trajectory.exists()
+                    assert not any(p.stat().st_size for p in path.parent.rglob('model.patch'))
                 else:
                     assert score is None and (data.get('exception_info') or {}).get('exception_type') == 'BadRequestError'
                     assert 'missing its reasoning' in data['exception_info']['exception_message']
@@ -91,8 +102,9 @@ def harbor(roots, expected_ids, excluded_originals=None):
                 success=sum(row['reward'] == 1 for row in records),
                 exceptions=dict(Counter(row['exception'] for row in records if row['exception'])),
                 duplicate_task_ids=[key for key, value in ids.items() if value > 1],
-                excluded_invalid_protocol_originals=[row for row in excluded if row.get('reason') != 'pre_model_endpoint_failure'],
+                excluded_invalid_protocol_originals=[row for row in excluded if row.get('reason') not in ('pre_model_endpoint_failure', 'pre_model_infrastructure_failure')],
                 excluded_pre_model_endpoint_originals=[row for row in excluded if row.get('reason') == 'pre_model_endpoint_failure'],
+                excluded_pre_model_infrastructure_originals=[row for row in excluded if row.get('reason') == 'pre_model_infrastructure_failure'],
                 missing_result_task_count=len(expected_set - set(ids)),
                 task_id_source='Original trial config task path; finished native trial and binary reward required')
 
@@ -263,6 +275,31 @@ for kind, count in [('tb', 89), ('deep', 113)]:
                 assert len(direct_tasks) == len(set(direct_tasks))
                 assert set(direct_tasks) <= set(direct_claim['tasks'])
                 roots.append(direct_root)
+        tb_pre_model_claim_path = MUSE / 'recovery_20261020/muse-bf16-tb-r1-pre-model-recovery-20261020-claim.json'
+        if kind == 'tb' and number == 1 and tb_pre_model_claim_path.exists():
+            tb_claim = load(tb_pre_model_claim_path)
+            assert tb_claim['config_sha256'] == hashlib.sha256(Path(tb_claim['config']).read_bytes()).hexdigest()
+            assert tb_claim['source_config_sha256'] == hashlib.sha256(Path(tb_claim['source_config']).read_bytes()).hexdigest()
+            assert tb_claim['direct_config_sha256'] == hashlib.sha256(Path(tb_claim['direct_config']).read_bytes()).hexdigest()
+            assert tb_claim['audit_sha256'] == hashlib.sha256(Path(tb_claim['audit']).read_bytes()).hexdigest()
+            assert len(tb_claim['tasks']) == 30 and not (set(tb_claim['tasks']) & set(direct_claim['tasks']))
+            correction_root = MUSE / 'legacy_bench/tb-results' / tb_claim['job_name']
+            tb_corrected = {}
+            for result_path in correction_root.glob('*/result.json'):
+                result = load(result_path)
+                if not result.get('finished_at'):
+                    continue
+                task = Path(result['config']['task']['path']).name
+                assert task in tb_claim['tasks'] and task not in tb_corrected
+                assert tb_claim['verified_direct_endpoint'] in json.dumps(result['config']['agent'])
+                tb_corrected[task] = result_path
+            excluded = {tb_claim['tasks'][task]['source_result']: {
+                'sha256': tb_claim['tasks'][task]['source_result_sha256'],
+                'reason': 'pre_model_infrastructure_failure',
+                'exception_type': tb_claim['tasks'][task]['exception_type'],
+                'trajectory_sha256': tb_claim['tasks'][task]['trajectory_sha256']}
+                for task in tb_corrected}
+            roots.append(correction_root)
         initial_endpoint_claim_path = MUSE / 'recovery_20261020/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020-claim.json'
         client_retry_claim_path = MUSE / 'recovery_20261020/muse-bf16-deep-r1-pre-model-client-recovery-20261020-claim.json'
         endpoint_claim_path = client_retry_claim_path if client_retry_claim_path.exists() else initial_endpoint_claim_path
@@ -310,6 +347,15 @@ for kind, count in [('tb', 89), ('deep', 113)]:
         assert not rounds[str(number)]['duplicate_task_ids']
         if number == 1 and len(roots) > 1:
             rounds[str(number)]['supplemental_run_id'] = roots[1].name
+        if kind == 'tb' and number == 1 and tb_pre_model_claim_path.exists():
+            rounds[str(number)]['pre_model_infrastructure_recovery'] = {
+                'claim': str(tb_pre_model_claim_path),
+                'claim_sha256': hashlib.sha256(tb_pre_model_claim_path.read_bytes()).hexdigest(),
+                'declared_tasks': len(tb_claim['tasks']),
+                'native_terminal': len(tb_corrected),
+                'replaced_unscored_originals': len(excluded),
+                'excluded_partial_model_output_tasks': tb_claim['excluded_partial_model_output_tasks'],
+                'qualification': 'Only frozen zero-model-response infrastructure failures are replaced after a new native terminal result; no correctness-based selection.'}
         if kind == 'deep' and number == 1 and endpoint_claim_path.exists():
             rounds[str(number)]['pre_model_endpoint_recovery'] = {
                 'claim': str(endpoint_claim_path), 'claim_sha256': hashlib.sha256(endpoint_claim_path.read_bytes()).hexdigest(),

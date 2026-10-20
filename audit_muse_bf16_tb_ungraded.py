@@ -84,5 +84,10 @@ report = {
     'ungraded_tasks': rows,
 }
 target = ROOT / 'evidence/muse_bf16_tb_ungraded_audit.json'
-target.write_text(json.dumps(report, indent=2) + '\n')
+if target.exists():
+    previous = json.loads(target.read_text())
+    report['generated_utc'] = previous['generated_utc']
+    assert report == previous, 'Frozen BF16 TB2.1 failure audit changed'
+else:
+    target.write_text(json.dumps(report, indent=2) + '\n')
 print(target)
