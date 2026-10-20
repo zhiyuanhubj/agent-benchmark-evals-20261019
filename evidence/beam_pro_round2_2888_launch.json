@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-20T15:57:07.755349+00:00",
+  "purpose": "Independent second model draw on all 731 official Pro Verified task IDs",
+  "precision": "BF16",
+  "model_allocation": 2888,
+  "cpu_allocation": 2922,
+  "endpoint": "http://10.1.108.251:31328/v1",
+  "run_name": "beam_pro_full731_round2_2888_20261020",
+  "run_id": "beam-pro-full731-r2-2888-20261020",
+  "task_count": 731,
+  "task_inventory_sha256": "9eeac2c01fcbf25fd8db4254a23b9e0d306eb659e9c14dd1308b9fda10faf6d8",
+  "source_command_sha256": "c16a321cfc94f1bf30bf0e4cc1b5dece2d635883722e60e76239ed902006440c",
+  "initial_params_sha256": "1507be6afa16ab7a8406c9c6542c30514ca231f4bc3b57b7de8ebd2a0e6e6d2e",
+  "replica_ready_sha256": "1209096306aed50069918008e3dad1cadb0bf2273ea163060605612149b43bfc",
+  "same_protocol_except": [
+    "independent round id",
+    "all 731 task IDs",
+    "verified 2888 model endpoint",
+    "task concurrency 2 to 6"
+  ],
+  "scoring_policy": "Score native round-2 rewards separately; do not mix with round 1 or reuse trajectories."
+}
