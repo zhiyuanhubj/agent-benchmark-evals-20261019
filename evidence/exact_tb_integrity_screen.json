@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T11:21:11.505561+00:00",
+  "generated_utc": "2026-10-20T11:34:43.474629+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 72,
+      "scored_trajectories_checked": 73,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 2,
       "rule_hit_counts": {
@@ -6997,6 +6997,18 @@
       "trajectory_sha256": "b0e94d1c61bda125dfc6adea968dc6d394198c575f1927765774f4da05ec12b3",
       "steps": 21,
       "tool_calls": 55,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "sanitize-git-repo",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/sanitize-git-repo__Sg2zkat/agent/trajectory.json",
+      "trajectory_sha256": "18e33c48f229dd3ff3387e25f4175ba76f5a402b5ef619342ab3a8e4635a5348",
+      "steps": 13,
+      "tool_calls": 37,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

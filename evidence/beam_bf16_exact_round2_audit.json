@@ -1,21 +1,19 @@
 {
-  "generated_utc": "2026-10-20T11:20:57.944542+00:00",
+  "generated_utc": "2026-10-20T11:34:27.236537+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T111251Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T112628Z.tar.zst",
   "expected": 89,
-  "terminal": 72,
-  "graded": 71,
-  "success": 51,
+  "terminal": 74,
+  "graded": 73,
+  "success": 53,
   "missing_graded_tasks": [
     "git-multibranch",
     "protein-assembly",
     "raman-fitting",
     "regex-chess",
-    "sam-cell-seg",
-    "sanitize-git-repo",
     "schemelike-metacircular-eval",
     "sparql-university",
     "sqlite-db-truncate",
@@ -32,9 +30,7 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [
-    "sam-cell-seg"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -545,6 +541,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/rstan-to-pystan__xTe85yQ/result.json",
       "raw_response_count": 37,
       "responses_with_reasoning_content": 37
+    },
+    "sam-cell-seg": {
+      "reward": 1.0,
+      "result_sha256": "2cd0c147b31d8d28431f1ca6b831b11f267c402da103c9eb337006852007e113",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/sam-cell-seg__Nyynyim/result.json",
+      "raw_response_count": 21,
+      "responses_with_reasoning_content": 21
+    },
+    "sanitize-git-repo": {
+      "reward": 1.0,
+      "result_sha256": "ebf2311de9d974fbc958aea0da21906e017aae409c441017c24a6d8f1391ed60",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/sanitize-git-repo__Sg2zkat/result.json",
+      "raw_response_count": 12,
+      "responses_with_reasoning_content": 12
     }
   }
 }

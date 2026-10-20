@@ -1122,6 +1122,19 @@ if slot1_route_path.exists():
     assert readme.count('an additional controller slot claimed untouched') == 1
 if bf16_swr_alignment:
     assert readme.count('[BF16 SWRBench generation/judge alignment audit]') == 1
+if mn_tb['complete']:
+    readme, replaced = re.subn(
+        r'Muse NVFP4 exact-image TB2\.1 stopped when two model nodes were reassigned to original BF16\..*?This continuation is separate from both the legacy-image scores and the BF16 evaluation\.',
+        (f'Muse NVFP4 exact-image TB2.1 round 1 is complete and task-audited at '
+         f'**{mn_tb["success"]}/89 ({mn_tb["accuracy"]:.2%})**. The reassignment to BF16 preserved '
+         'interrupted original attempts separately; locked, disjoint batches completed the remaining '
+         'first-round tasks without duplicate scoring. Round-2/3 completion, current batches and '
+         'ownership receipts for the verified NVFP4 endpoints are recorded in the '
+         '[live score and recovery record](results/scores.json). '
+         f'Additional GPU allocation states: {extra_gpu_status}. The exact-image rounds remain '
+         'separate from both the old cached-image scores and BF16.'),
+        readme, count=1, flags=re.S)
+    assert replaced == 1
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -1241,5 +1254,16 @@ if slot1_route_path.exists():
     assert chinese_report.count('GPU 2812 的第二个控制器槽') == 1
 if bf16_swr_alignment:
     assert chinese_report.count('[BF16 SWRBench 生成与裁判对齐核验]') == 1
+if mn_tb['complete']:
+    chinese_report, replaced = re.subn(
+        r'两节点切给原始 BF16 后，该评测中断；.*?实际配置仅修改模型端点。',
+        (f'指定镜像的 Muse NVFP4 TB2.1 首轮已完成且逐题审计通过：'
+         f'**{mn_tb["success"]}/89（{mn_tb["accuracy"]:.2%}）**。'
+         '切换节点前中断、未判分的原始尝试单独留存；余下首轮题目由互不重叠、'
+         '逐批加锁的队列完成，没有重复计分。第 2/3 轮在已核验 NVFP4 端点上的'
+         '完成状态、批次及归属凭据见[实时结果与恢复记录](results/scores.json)。'
+         f'额外 GPU 申请状态：{extra_gpu_status}。指定镜像、旧缓存镜像和 BF16 的成绩分别统计。'),
+        chinese_report, count=1, flags=re.S)
+    assert replaced == 1
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))

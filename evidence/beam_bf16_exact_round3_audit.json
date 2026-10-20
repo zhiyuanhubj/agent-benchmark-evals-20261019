@@ -1,19 +1,17 @@
 {
-  "generated_utc": "2026-10-20T11:20:59.165833+00:00",
+  "generated_utc": "2026-10-20T11:34:28.666113+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T111251Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T112628Z.tar.zst",
   "expected": 89,
-  "terminal": 7,
-  "graded": 7,
-  "success": 7,
+  "terminal": 9,
+  "graded": 9,
+  "success": 9,
   "missing_graded_tasks": [
     "caffe-cifar-10",
     "chess-best-move",
-    "circuit-fibsqrt",
-    "cobol-modernization",
     "code-from-image",
     "compile-compcert",
     "configure-git-webserver",
@@ -94,10 +92,7 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [
-    "circuit-fibsqrt",
-    "cobol-modernization"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -153,6 +148,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/cancel-async-tasks__JTRLxTL/result.json",
       "raw_response_count": 39,
       "responses_with_reasoning_content": 39
+    },
+    "circuit-fibsqrt": {
+      "reward": 1.0,
+      "result_sha256": "344ae35ac6ddf75e89412c6adcc53c4e67bca5666cc7bed8df7957406b20eb45",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/circuit-fibsqrt__wwR2fRY/result.json",
+      "raw_response_count": 16,
+      "responses_with_reasoning_content": 16
+    },
+    "cobol-modernization": {
+      "reward": 1.0,
+      "result_sha256": "a9c2f16e337d07f9ca50c0a7baa2bf09229fed70e7933da9655e42205830f255",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/cobol-modernization__i3B9bep/result.json",
+      "raw_response_count": 17,
+      "responses_with_reasoning_content": 17
     }
   }
 }
