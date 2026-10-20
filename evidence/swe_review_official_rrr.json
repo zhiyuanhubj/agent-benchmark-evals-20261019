@@ -1,0 +1,42 @@
+{
+  "complete_splits": {
+    "beam-bf16/qwen3_30b_instruct2507_500": {
+      "DA": {
+        "CR": 89.8,
+        "DA": 86.5,
+        "DA_total_50": 82.8,
+        "FAR": 7.5,
+        "FN": 31,
+        "FP": 20,
+        "FRR": 27.9,
+        "TN": 248,
+        "TP": 80,
+        "correct": 328,
+        "model_fail": 43,
+        "produced": 379,
+        "total": 422
+      },
+      "RRR": {
+        "RRR": 42.7,
+        "approved": 100,
+        "approved_resolved": 80,
+        "baseline_RR": 27.5,
+        "delta": 15.2,
+        "fallback": 43,
+        "fallback_resolved": 5,
+        "revised": 279,
+        "revised_resolved": 95,
+        "total": 422,
+        "total_resolved": 180
+      },
+      "expected_revisions": 279,
+      "native_evidence": "evidence/beam_bf16_qwen3_30b_instruct2507_500_rrr_native_evidence.json",
+      "qualification": "complete_verified_official_split_rrr",
+      "release_tag": "2026-10-19-snapshot",
+      "scorer_sha256": "a3f727a973f02b0fb2c08301ef0c64e97900c4a8adbe4794bc6ad1a7d0b3eae1",
+      "summary": "evidence/beam_bf16_qwen3_30b_instruct2507_500_rrr_summary.json",
+      "verified_native_result_and_verifier_files": 558
+    }
+  },
+  "scope": "Only complete SWE-Review split RRR with unchanged official metric functions, native first attempts and SHA-verified released result/verifier files."
+}

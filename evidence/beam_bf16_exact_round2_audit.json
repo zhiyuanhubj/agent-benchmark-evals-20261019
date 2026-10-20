@@ -1,19 +1,18 @@
 {
-  "generated_utc": "2026-10-20T03:13:50.434742+00:00",
+  "generated_utc": "2026-10-20T03:33:18.204101+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T030556Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T032108Z.tar.zst",
   "expected": 89,
-  "terminal": 54,
-  "graded": 53,
-  "success": 37,
+  "terminal": 55,
+  "graded": 54,
+  "success": 38,
   "missing_graded_tasks": [
     "fix-ocaml-gc",
     "git-multibranch",
     "make-mips-interpreter",
-    "overfull-hbox",
     "path-tracing",
     "path-tracing-reverse",
     "polyglot-c-py",
@@ -50,9 +49,7 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [
-    "overfull-hbox"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -430,6 +427,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/openssl-selfsigned-cert__8ieXgb7/result.json",
       "raw_response_count": 4,
       "responses_with_reasoning_content": 4
+    },
+    "overfull-hbox": {
+      "reward": 1.0,
+      "result_sha256": "5b9c6517331b13619da2fa3d3658d53f7be70777bb9a496c6a41d714624538e6",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/overfull-hbox__i9FzcZt/result.json",
+      "raw_response_count": 38,
+      "responses_with_reasoning_content": 38
     },
     "password-recovery": {
       "reward": 1.0,

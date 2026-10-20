@@ -1,0 +1,29 @@
+{
+  "generated_utc": "2026-10-20T03:25:09.776494+00:00",
+  "group": "beam_review_full_io",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/beam_review_full_io_delta_20261020T030919Z.json",
+  "cutoff_utc": "2026-10-20T03:04:20.803998+00:00",
+  "new_source_roots": [],
+  "archive_name": "beam_review_full_io_delta_20261020T032507Z.tar.zst",
+  "archive_size_bytes": 984972,
+  "archive_sha256": "76f8d65c675f1cfd90fd75658ef293af72dc6aa909796a7e4c5e21fcfcabc1c2",
+  "file_count": 556,
+  "source_bytes": 62483374,
+  "filename_counts": {
+    "result.json": 10,
+    "config.json": 10,
+    "completion.json": 483,
+    "openhands_sdk.txt": 9,
+    "trajectory.json": 7,
+    "trial.log": 9,
+    "report.json": 7,
+    "review_report.json": 7,
+    "reward.txt": 7,
+    "test-stdout.txt": 7
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/swe_review"
+  ]
+}

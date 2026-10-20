@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T03:13:06.545151+00:00",
+  "generated_utc": "2026-10-20T03:32:31.062923+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 32,
-  "success_count": 27,
+  "scored_tasks": 33,
+  "success_count": 28,
   "tasks": {
     "circuit-fibsqrt": {
       "reward": 1.0,
@@ -76,6 +76,10 @@
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/make-doom-for-mips__PiParDV/result.json"
     },
+    "llm-inference-batching-scheduler": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/llm-inference-batching-scheduler__kdviJyt/result.json"
+    },
     "bn-fit-modify": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/bn-fit-modify__enY7gAz/result.json"
@@ -134,11 +138,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 32,
-  "covered_raw_response_sets": 32,
-  "covered_trajectories": 32,
-  "scored_raw_response_count": 895,
-  "nonempty_reasoning_response_count": 894,
+  "covered_results": 33,
+  "covered_raw_response_sets": 33,
+  "covered_trajectories": 33,
+  "scored_raw_response_count": 1057,
+  "nonempty_reasoning_response_count": 1056,
   "raw_reasoning_by_task": {
     "circuit-fibsqrt": {
       "raw_responses": 12,
@@ -211,6 +215,10 @@
     "make-doom-for-mips": {
       "raw_responses": 107,
       "nonempty_reasoning_content": 107
+    },
+    "llm-inference-batching-scheduler": {
+      "raw_responses": 162,
+      "nonempty_reasoning_content": 162
     },
     "bn-fit-modify": {
       "raw_responses": 13,
@@ -356,6 +364,8 @@
     "muse_bf16_delta_20261020T023513Z.tar.zst",
     "muse_bf16_delta_20261020T025139Z.tar.zst",
     "muse_bf16_delta_20261020T030645Z.tar.zst",
+    "muse_bf16_delta_20261020T032205Z.tar.zst",
+    "muse_bf16_delta_20261020T033110Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

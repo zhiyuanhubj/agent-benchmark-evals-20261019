@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-20T03:05:08.672927+00:00",
+  "generated_utc": "2026-10-20T03:20:20.116308+00:00",
   "scope": "Original Muse BF16 SWE-Review native task outcomes; progress only, not official DA or RRR.",
   "queue_plan_sha256": "d758f7f0b01b85e923ebf9ad2e5c5c358fb620aa377fc2e54a23bc432bf7a977",
   "model_id": "muse-spark-open-bf16",
   "splits": {
     "glm5_500": {
       "expected": 500,
-      "native_terminal": 13,
-      "native_graded": 13,
+      "native_terminal": 14,
+      "native_graded": 14,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch0/astropy__astropy-12907__tLSFDZR/result.json",
@@ -86,13 +86,19 @@
           "sha256": "fc0b12e1ece3214ee3c92f96ba32815d4ec67035acabac6a04d1921eb7c4fc32",
           "native_graded": true,
           "exception_type": null
+        },
+        "astropy__astropy-14539": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch0/astropy__astropy-14539__Kp8aVCi/result.json",
+          "sha256": "a0ed739ee44fada2c262e9771ecf47a130bb8cef0318e9a3f6dfb6e7c348e395",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "native_terminal": 14,
-      "native_graded": 14,
+      "native_terminal": 17,
+      "native_graded": 17,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch0/astropy__astropy-12907__FgxbXC9/result.json",
@@ -177,13 +183,31 @@
           "sha256": "1934aa3fbf00003b913d79cc5e52ba26c9b489bd2b6c6a100512b84dc02a9199",
           "native_graded": true,
           "exception_type": null
+        },
+        "astropy__astropy-14995": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch0/astropy__astropy-14995__7nqemYi/result.json",
+          "sha256": "7427c60456916ab8e1bf805197b8103a2c7b5ff44e041f7ecb836f9ebe694982",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "astropy__astropy-7166": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch0/astropy__astropy-7166__vhxgAod/result.json",
+          "sha256": "3275a8080dcd72307778643210820eed64eb7834e9eaff69ea262af01f1bbb84",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "astropy__astropy-7336": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch1/astropy__astropy-7336__2RSifFY/result.json",
+          "sha256": "a0b17f45856cc2a2f11d0191fc64895c84e2cabfa9a988d03eb4e941dc7acbe4",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "native_terminal": 13,
-      "native_graded": 13,
+      "native_terminal": 14,
+      "native_graded": 14,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch0/astropy__astropy-12907__nGRk5dr/result.json",
@@ -262,12 +286,18 @@
           "sha256": "c75c923228ec3fc729f8127f47807b6cf40e1a2326e8639858f81da1578c1aca",
           "native_graded": true,
           "exception_type": null
+        },
+        "astropy__astropy-14598": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch0/astropy__astropy-14598__yknFGon/result.json",
+          "sha256": "e521384d6aa490863f728a6fcdd6b695b940830679ac88d9c33b121c95dc9c0c",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     }
   },
   "errors": [],
   "total_expected": 1384,
-  "total_native_terminal": 40,
-  "total_native_graded": 40
+  "total_native_terminal": 45,
+  "total_native_graded": 45
 }

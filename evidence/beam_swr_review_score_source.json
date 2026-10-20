@@ -1,5 +1,5 @@
 {
-  "utc": 1792465928.7743251,
+  "utc": 1792466960.2874086,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 482,
+      "terminal": 490,
       "exceptions": 9,
       "prepared_image_phases": {
         "image_ready": 500
@@ -415,10 +415,10 @@
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
-    "2902|beam-review-extra-4|PENDING||(None)",
-    "2901|beam-review-extra-3|PENDING||(None)",
-    "2900|beam-review-extra-2|PENDING||(None)",
-    "2899|beam-review-extra-1|PENDING||(None)",
+    "2902|beam-review-extra-4|PENDING||(AssocGrpNodeLimit)",
+    "2901|beam-review-extra-3|PENDING||(AssocGrpNodeLimit)",
+    "2900|beam-review-extra-2|PENDING||(AssocGrpNodeLimit)",
+    "2899|beam-review-extra-1|PENDING||(AssocGrpNodeLimit)",
     "2888|beam-review-reserve-2888|RUNNING|ip-10-1-108-251|ip-10-1-108-251",
     "2886|muse-bf16-pair-2886|RUNNING|ip-10-1-13-41,ip-10-1-122-30|ip-10-1-13-41,ip-10-1-122-30",
     "2887|beam-review-reserve-2887|RUNNING|ip-10-1-69-108|ip-10-1-69-108",
@@ -448,7 +448,7 @@
     },
     "complete": false,
     "model_generation_started": false,
-    "utc": "2026-10-20T03:11:10.685456+00:00",
+    "utc": "2026-10-20T03:29:12.745690+00:00",
     "grader_preflight_passed": true
   },
   "revision_preparation_controller": "MainPID=3430427\nResult=success\nActiveState=active\n",

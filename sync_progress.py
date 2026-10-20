@@ -190,6 +190,7 @@ def cycle():
                 continue  # A trial finished between the score snapshot and task audit.
             sync_native_archives(scores, force_bf16=force_bf16)
             force_bf16 = False
+            run([PYTHON, str(ROOT / 'audit_swe_review_official_rrr.py')], timeout=180)
             run([PYTHON, str(ROOT / 'verify_muse_exact_io.py')], timeout=180)
             io_coverage = json.loads((ROOT / 'evidence/muse_nvfp4_exact_io_coverage.json').read_text())
             if io_coverage['errors']:
@@ -262,6 +263,7 @@ def cycle():
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
              'audit_muse_bf16_review_progress.py',
+             'audit_swe_review_official_rrr.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
              'export_snapshot.py', 'archive_trials.py', 'archive_delta.py',
