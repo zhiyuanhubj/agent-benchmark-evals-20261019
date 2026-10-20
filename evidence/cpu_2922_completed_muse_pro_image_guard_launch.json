@@ -1,0 +1,22 @@
+{
+  "audited_utc": "2026-10-20T17:54:40.568512+00:00",
+  "cpu_allocation": 2922,
+  "unit": "muse-bf16-cpu2922-image-guard-20261020.service",
+  "unit_properties": {
+    "MainPID": "1334436",
+    "ActiveState": "active",
+    "SubState": "running"
+  },
+  "script": "protocol/guard_2922_completed_muse_pro_images_20261020.py",
+  "script_sha256": "3074245508701f1b9c1e18ef0e5b69a390a2993410432a795b84d96a6ef7b41f",
+  "private_event_log": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/cpu-2922-image-guard.jsonl",
+  "first_healthy_event": {
+    "utc": "2026-10-20T17:54:29.292970+00:00",
+    "event": "healthy",
+    "free_gib": 63.83
+  },
+  "trigger_free_gib": 50,
+  "target_free_gib": 80,
+  "check_interval_seconds": 180,
+  "policy": "On low Docker disk space, remove only Docker image tags mapped to native-graded Muse BF16 Pro results; verify result and image identities before each unforced removal. Docker refuses any image still referenced by a container."
+}
