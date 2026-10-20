@@ -143,6 +143,8 @@ def sync_native_archives(scores, force_bf16=False):
             assert archive.is_file(), f'Missing local archive for GitHub upload: {archive_name}'
             run(['gh', 'release', 'upload', '2026-10-19-snapshot', str(archive), '--repo', 'zhiyuanhubj/agent-benchmark-evals-20261019'], timeout=300)
     run([PYTHON, str(ROOT / 'verify_release.py')], timeout=120)
+    if (manifest_dir / 'muse_review_revision_inputs.json').exists():
+        run([PYTHON, str(ROOT / 'verify_review_revision_archives.py')], timeout=120)
 
 
 def cycle():
@@ -244,7 +246,8 @@ def cycle():
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
-             'export_snapshot.py', 'archive_trials.py', 'archive_delta.py', 'sync_progress.py'])
+             'export_snapshot.py', 'archive_trials.py', 'archive_delta.py',
+             'verify_review_revision_archives.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
             run(['git', 'commit', '-m', 'Refresh live benchmark results'])

@@ -1,0 +1,50 @@
+{
+  "generated_utc": "2026-10-20T00:43:36.846851+00:00",
+  "group": "muse_review_revision_inputs",
+  "scope": "Model-visible SWE-Review revision inputs and queue receipts changed since the previous archive. Hidden solution and tests are excluded. Apply after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_review_revision_inputs.json",
+  "cutoff_utc": "2026-10-20T00:32:31.878897+00:00",
+  "new_source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/glm5_500"
+  ],
+  "archive_name": "muse_review_revision_inputs_delta_20261020T004335Z.tar.zst",
+  "archive_size_bytes": 895797,
+  "archive_sha256": "9bcb73a72822df2de069007c1d514cd4269ec8657e439728f8d1da0eaceca2e1",
+  "file_count": 477,
+  "source_bytes": 4928871,
+  "filename_counts": {
+    "qwen3_30b_instruct2507_500-1.json": 2,
+    "qwen3_30b_instruct2507_500-2.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-11815.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-11885.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-11964.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-11999.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12039.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12125.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12193.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12209.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12273.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12276.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12308.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12325.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12406.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12663.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12708.json": 2,
+    "qwen3_30b_instruct2507_500--django__django-12741.json": 2,
+    "qwen3_coder_30b_500-1.json": 2,
+    "receipt.json": 1,
+    "Dockerfile": 73,
+    "predicted.json": 73,
+    "problem_statement.txt": 73,
+    "summary.json": 73,
+    "instruction.md": 73,
+    "task.toml": 73
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/glm5_500",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/qwen3_coder_30b_500",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/qwen3_30b_instruct2507_500",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue"
+  ]
+}

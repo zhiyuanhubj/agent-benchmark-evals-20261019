@@ -96,7 +96,9 @@ out = dict(generated_utc=datetime.now(timezone.utc).isoformat(),
            model_attempt_policy='One scored gateway-recovery result per canonically rejected PR; native verifier reward and report are required for a grade.',
            groups=rows)
 target = ROOT / 'evidence/swe_review_revision_gateway_progress.json'
-target.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+temp = target.with_suffix('.tmp')
+temp.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+temp.replace(target)
 print(json.dumps({f"{r['reviewer']}/{r['split']}":
                   dict(graded=r['native_graded_revisions'], expected=r['expected_revisions'],
                        errors=r['errors']) for r in rows}))

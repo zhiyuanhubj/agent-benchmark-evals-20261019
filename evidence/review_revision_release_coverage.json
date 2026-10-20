@@ -1,0 +1,54 @@
+{
+  "generated_utc": "2026-10-20T00:52:09.971214+00:00",
+  "scope": "Released base and delta archive coverage of prepared revision task cards. Live native output files added or changed afterward require later timestamped delta archives; this is not a claim of current complete revision output coverage.",
+  "groups": [
+    {
+      "reviewer": "muse",
+      "expected_task_card_files": 1122,
+      "expected_task_cards": 561,
+      "active_gateway_recovery_task_cards": 488,
+      "released_task_card_files": 1122,
+      "released_input_file_count": 3541,
+      "released_original_host_ip_output_files": 170,
+      "released_gateway_recovery_output_files": 751,
+      "input_manifests": [
+        "input_output/archive_manifests/muse_review_revision_inputs.json",
+        "input_output/archive_manifests/muse_review_revision_inputs_delta_20261020T004335Z.json"
+      ],
+      "output_manifests": [
+        "input_output/archive_manifests/muse_revision_review_full_io.json"
+      ],
+      "input_archive_sha256": [
+        "b08901cc3947128d25ce31c852e74ec8687cec08b31ff963f04b46af654122ea",
+        "9bcb73a72822df2de069007c1d514cd4269ec8657e439728f8d1da0eaceca2e1"
+      ],
+      "output_archive_sha256": [
+        "5e48c30f5701f157988e01ffc9d7fb3ae1e4e82a8e4f8f3a60d8b5771bf84937"
+      ],
+      "remote_sha256_and_size_verified": true
+    },
+    {
+      "reviewer": "beam",
+      "expected_task_card_files": 558,
+      "expected_task_cards": 279,
+      "active_gateway_recovery_task_cards": 279,
+      "released_task_card_files": 558,
+      "released_input_file_count": 1742,
+      "released_original_host_ip_output_files": 100,
+      "released_gateway_recovery_output_files": 335,
+      "input_manifests": [
+        "input_output/archive_manifests/beam_review_revision_inputs.json"
+      ],
+      "output_manifests": [
+        "input_output/archive_manifests/beam_revision_review_full_io.json"
+      ],
+      "input_archive_sha256": [
+        "f2508af0b707e5ca47767be554587f856f6eb0a7bca816482c9aa2a92fbba74a"
+      ],
+      "output_archive_sha256": [
+        "e006da3c138a3e145512e163c2be06de6dc211a1e852b1aa659cc8ad9b0547c7"
+      ],
+      "remote_sha256_and_size_verified": true
+    }
+  ]
+}

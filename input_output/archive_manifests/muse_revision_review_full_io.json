@@ -1,0 +1,31 @@
+{
+  "group": "muse_revision_review_full_io",
+  "generated_utc": "2026-10-20T00:37:41.857169+00:00",
+  "archive_name": "muse_revision_review_full_io.tar.zst",
+  "archive_size_bytes": 1464894,
+  "archive_sha256": "5e48c30f5701f157988e01ffc9d7fb3ae1e4e82a8e4f8f3a60d8b5771bf84937",
+  "file_count": 921,
+  "input_file_count": 71,
+  "output_file_count": 151,
+  "raw_response_count": 498,
+  "filename_counts": {
+    "completion.json": 498,
+    "model-connectivity.json": 61,
+    "openhands_sdk.txt": 29,
+    "trajectory.json": 27,
+    "config.json": 71,
+    "result.json": 58,
+    "trial.log": 66,
+    "report.json": 26,
+    "reward.txt": 26,
+    "test-stdout.txt": 27,
+    "exception.txt": 32
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results"
+  ],
+  "scope": "Original-generator revision native I/O. Original host-IP trials that failed before any model response are preserved under the old queue path as infrastructure evidence; only the separate gateway-recovery queue path is eligible for RRR scoring. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files."
+}

@@ -1,0 +1,29 @@
+{
+  "group": "beam_revision_review_full_io",
+  "generated_utc": "2026-10-20T00:37:39.319709+00:00",
+  "archive_name": "beam_revision_review_full_io.tar.zst",
+  "archive_size_bytes": 511323,
+  "archive_sha256": "e006da3c138a3e145512e163c2be06de6dc211a1e852b1aa659cc8ad9b0547c7",
+  "file_count": 435,
+  "input_file_count": 39,
+  "output_file_count": 81,
+  "raw_response_count": 204,
+  "filename_counts": {
+    "completion.json": 204,
+    "model-connectivity.json": 36,
+    "openhands_sdk.txt": 16,
+    "trajectory.json": 13,
+    "config.json": 39,
+    "result.json": 32,
+    "trial.log": 36,
+    "report.json": 13,
+    "reward.txt": 13,
+    "test-stdout.txt": 13,
+    "exception.txt": 20
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500/queue/results",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results"
+  ],
+  "scope": "Original-generator revision native I/O. Original host-IP trials that failed before any model response are preserved under the old queue path as infrastructure evidence; only the separate gateway-recovery queue path is eligible for RRR scoring. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files."
+}

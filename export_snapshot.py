@@ -342,6 +342,15 @@ files[str(shared_timeout_path.relative_to(ROOT))] = {
     'size_bytes': shared_timeout_path.stat().st_size,
     'source': str(shared_timeout_path),
 }
+for evidence_name in ('swe_review_revision_queue_recovery_20261020.json',
+                      'swe_review_revision_gateway_progress.json'):
+    path = ROOT / 'evidence' / evidence_name
+    assert path.is_file()
+    files[str(path.relative_to(ROOT))] = {
+        'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+        'size_bytes': path.stat().st_size,
+        'source': str(path),
+    }
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
 def partial(d):
@@ -529,6 +538,8 @@ The TB2.1 **legacy cached-tag image profile is separate** from the exact user-su
 
 `input_output/swrbench/*/generation.jsonl` holds each exact input prompt and generated review; the adjacent judge JSON holds per-item GPT-5.5 scoring details. `evidence/muse_pro_identity.json` maps all 731 Pro tasks to native result files and hashes. `evidence/muse_deep_canonical_results.json` maps all 339 graded DeepSWE trials to their exact native results. Native per-task I/O, tool traces and returned thinking are too large for ordinary Git objects; use the release archives and `input_output/archive_manifests/` to check coverage and SHA-256. For SWE-Review, use the `*_review_full_io` assets, which include OpenHands completion JSON in addition to trajectories. The `*_review_verifier.tar.zst` assets preserve the original verifier review reports, grade reports and rewards, including ten interrupted Muse trials with complete native verification but missing Harbor summary files.
 
+SWE-Review original-generator revision inputs are in the [Muse](input_output/archive_manifests/muse_review_revision_inputs.json) and [Beam](input_output/archive_manifests/beam_review_revision_inputs.json) base archives and timestamped deltas. Their native outputs, completions, trajectories and verifier records are in the separate [Muse](input_output/archive_manifests/muse_revision_review_full_io.json) and [Beam](input_output/archive_manifests/beam_revision_review_full_io.json) archive chains. The [release coverage audit](evidence/review_revision_release_coverage.json) confirms all 561 prepared Muse task cards (including 73 GLM cards), 279 prepared Beam cards, and the preserved old failure files in SHA-verified assets. Of these, 488 Muse and 279 Beam cards are in active gateway-recovery queues. The old host-IP failures and scored gateway-recovery trials have distinct paths; apply later deltas in timestamp order as live trials finish.
+
 Current exact-image TB2.1 native I/O snapshots: `{latest_opus_exact_archive['archive_name']}` contains {latest_opus_exact_archive['terminal_result_count']} terminal Opus 4.7 trials; `{latest_beam_exact_archive['archive_name']}` contains {latest_beam_exact_archive['terminal_result_count']} terminal Beam trials. These snapshots include in-progress trajectories but do not convert partial rounds into final benchmark scores.
 
 The [Opus 4.7](evidence/opus47_exact_round1_audit.json) and [Beam](evidence/beam_bf16_exact_round1_audit.json) first-round audits reconcile each task with its reward and released input, raw response, and trajectory. A full round is reported only when all 89 task results pass this check.
@@ -640,6 +651,8 @@ Beam BF16 的 SWE-Review Instruct 组已有[封存的官方 DA](evidence/swe_rev
 [精确镜像 TB 命令筛查](evidence/exact_tb_integrity_screen.json)及[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)目前将 Muse NVFP4 的 {len(nvfp4_excluded)} 条、Muse BF16 的 {len(bf16_excluded)} 条成功轨迹排除出“干净训练轨迹”候选。排除的 NVFP4 题目是 {nvfp4_excluded_names}；逐题核查记录了 verifier 日志探查、向 `/tests/filter.py` 复制公开文件或计时篡改；已检查的 verifier 探查输出没有确认获得隐藏答案。BF16 和 NVFP4 的 `largest-eigenval` 都通过修改计时函数、拖慢参考特征值求解器拿到原始 reward 1；原始分数保留，NVFP4 的[最终轨迹审计](evidence/muse_nvfp4_largest_eigenval_live_integrity_alert.json)有哈希锚定，但这两条高分不能当作未经篡改的加速证据。另一份判分前预警记录了 NVFP4 [`db-wal-recovery` 对宿主边界的探查](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)，它不证明边界探查成功，也不是最终分数。关键词未命中也不代表轨迹已获干净认证。
 
 逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 共 {asset_count} 个归档，SWE-Review 的 `*_review_full_io.tar.zst` 含 OpenHands completions；`*_review_verifier.tar.zst` 含原生验证器的评审报告、判分报告和 reward，其中包括 10 道缺 Harbor 汇总文件但已完成原生验证的 Muse 题。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 {release_audit_label}**，逐项核验见 `evidence/release-assets-verification.json`。
+
+SWE-Review 原始生成模型的修订输入见 [Muse](input_output/archive_manifests/muse_review_revision_inputs.json) 和 [Beam](input_output/archive_manifests/beam_review_revision_inputs.json) 基础归档及按时间命名的增量归档；原生输出、completions、轨迹及 verifier 记录见独立的 [Muse](input_output/archive_manifests/muse_revision_review_full_io.json) 和 [Beam](input_output/archive_manifests/beam_revision_review_full_io.json) 归档链。[Release 覆盖审计](evidence/review_revision_release_coverage.json)确认 SHA 校验的归档覆盖 Muse 已准备的 561 题任务卡（含 GLM 73 题）、Beam 279 题任务卡，以及旧故障文件。其中 Muse 488 题、Beam 279 题在当前桥接补测队列中。旧节点地址导致的首回复前失败与可判分的桥接补测分属不同路径；后续增量归档按时间覆盖仍在增长的文件。
 
 Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜像身份校验在 `muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst`；[输入输出覆盖核验](evidence/muse_nvfp4_exact_io_coverage.json)逐题确认已判分结果、原始响应、轨迹和任务输入均在远端校验过的归档中。
 
