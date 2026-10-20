@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T10:23:37.926915+00:00",
+  "generated_utc": "2026-10-20T10:36:48.390165+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -267,13 +267,13 @@
           "3": {
             "expected": 89,
             "terminal": 89,
-            "graded": 5,
+            "graded": 6,
             "success": 4.0,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 163,
-            "ungraded": 84,
+            "archived_actual_model_responses": 218,
+            "ungraded": 83,
             "exceptions": {
-              "InternalServerError": 84
+              "InternalServerError": 83
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -330,7 +330,7 @@
             "2": 85,
             "3": 89
           },
-          "new_raw_model_responses": 9816,
+          "new_raw_model_responses": 9849,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
@@ -343,14 +343,14 @@
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 839,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1464,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1474,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 643,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 480,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 216,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 233,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 430
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 453
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T10:23:13+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-20T10:36:31+00:00",
           "active_recovery_trial_dirs": 3,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -462,10 +462,10 @@
             "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
             "original_ungraded_infra_failures": 89,
             "original_model_responses": 0,
-            "replacement_terminal": 5,
-            "replacement_graded": 5,
+            "replacement_terminal": 6,
+            "replacement_graded": 6,
             "replacement_success": 4.0,
-            "replacement_raw_responses": 163,
+            "replacement_raw_responses": 218,
             "active_trial_dirs": 6,
             "all_tasks_single_replacement_draw": true,
             "endpoint_ready": true,
@@ -494,16 +494,16 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 28,
-          "graded": 28,
+          "terminal": 29,
+          "graded": 29,
           "success": 10,
           "status": "partial_no_full_score"
         },
         "3": {
           "expected": 113,
-          "terminal": 7,
-          "graded": 7,
-          "success": 5,
+          "terminal": 12,
+          "graded": 12,
+          "success": 7,
           "status": "partial_no_full_score"
         }
       },
@@ -554,7 +554,7 @@
             "graded": 69,
             "success": 49,
             "active_trial_dirs": 74,
-            "archived_actual_model_responses": 4639,
+            "archived_actual_model_responses": 4669,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 6,
@@ -807,10 +807,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 60,
+          "completed_trials": 67,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 438,
+          "pending_trials": 431,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:18.993248",
           "finished_at": null
@@ -822,10 +822,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 54,
+          "completed_trials": 63,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 406,
+          "pending_trials": 397,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:10.468330",
           "finished_at": null
@@ -837,10 +837,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 71,
+          "completed_trials": 83,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 349,
+          "pending_trials": 337,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:16.640783",
           "finished_at": null
@@ -961,24 +961,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 213,
-        "native_graded": 213,
+        "native_terminal": 217,
+        "native_graded": 217,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 69,
-            "native_graded": 69
+            "native_terminal": 71,
+            "native_graded": 71
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 74,
-            "native_graded": 74
+            "native_terminal": 75,
+            "native_graded": 75
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 70,
-            "native_graded": 70
+            "native_terminal": 71,
+            "native_graded": 71
           }
         },
         "DA": null,
