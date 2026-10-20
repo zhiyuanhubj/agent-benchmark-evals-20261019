@@ -19,6 +19,7 @@ import time
 import tomllib
 
 PLAN = Path(sys.argv[1])
+AUDIT_ONLY = '--audit-resume' in sys.argv[2:]
 spec = json.loads(PLAN.read_text())
 ROOT = Path(spec['queue_root'])
 ROOT.mkdir(exist_ok=True)
@@ -85,7 +86,8 @@ def _prepared_task(split, task):
     config = target / 'task.toml'
     source_config = tomllib.loads((source / 'task.toml').read_text())
     old_tag = source_config['environment'].get('docker_image')
-    assert old_tag is None or old_tag.startswith('zhiyuan-review-frozen:')
+    assert old_tag is None or old_tag.startswith(('zhiyuan-review-frozen:',
+                                                  'zhiyuan-review-parallel-frozen:'))
     text = config.read_text()
     existing_tag = tomllib.loads(text)['environment'].get('docker_image')
     assert existing_tag in (old_tag, tag), (task, existing_tag, old_tag, tag)
@@ -131,6 +133,30 @@ def wait_for_gate():
             time.sleep(15)
     assert subprocess.check_output(['squeue','-h','-j',str(spec['model_allocation']),'-o','%T'],text=True).strip() == 'RUNNING'
 
+def completed_batch(split, index, batch):
+    config_path = ROOT / 'configs' / (split + '-' + str(index) + '.json')
+    claim = ROOT / 'claims' / (split + '-' + str(index) + '.json')
+    exit_path = ROOT / 'exits' / (split + '-' + str(index) + '.json')
+    if not any(path.exists() for path in (config_path, claim, exit_path)):
+        return False
+    assert all(path.exists() for path in (config_path, claim, exit_path)), \
+        'Partial prior batch requires manual review; never replay claimed tasks'
+    recorded = json.loads(claim.read_text())
+    config = json.loads(config_path.read_text())['config']
+    assert recorded['tasks'] == batch
+    assert recorded['config_sha256'] == sha(config_path)
+    assert recorded['model_id'] == spec['model_id']
+    assert config['job_name'] == spec['job_prefix'] + '-' + split + '-batch' + str(index)
+    assert [Path(row['path']).name for row in config['tasks']] == batch
+    assert json.loads(exit_path.read_text())['returncode'] == 0
+    results = list((Path(config['jobs_dir']) / config['job_name']).glob('*/result.json'))
+    assert len(results) == len(batch), 'Finished batch lacks a native result for every task'
+    completed = [json.loads(path.read_text()) for path in results]
+    assert all(row.get('finished_at') for row in completed)
+    recorded_tasks = [Path(row['config']['task']['path']).name for row in completed]
+    assert sorted(recorded_tasks) == sorted(batch)
+    return True
+
 def split_queue(split):
     source_config = Path(spec['splits'][split]['source_config'])
     assert sha(source_config) == spec['splits'][split]['source_config_sha256']
@@ -138,9 +164,35 @@ def split_queue(split):
     tasks = spec['splits'][split]['tasks']
     assert len(tasks) == len(set(tasks))
     batches = [tasks[i:i+16] for i in range(0, len(tasks), 16)]
+    start = 0
+    while start < len(batches) and completed_batch(split, start, batches[start]):
+        start += 1
+    for index in range(start + 1, len(batches)):
+        assert not any((ROOT / folder / (split + '-' + str(index) + '.json')).exists()
+                       for folder in ('configs', 'claims', 'exits')), \
+            'Noncontiguous prior batch requires manual review'
+    if AUDIT_ONLY:
+        return dict(split=split, completed_batches=start, total_batches=len(batches),
+                    remaining_tasks=len(tasks) - sum(len(batch) for batch in batches[:start]))
+    old_exit = ROOT / 'queue-exit.json'
+    old_exit_snapshot = (ROOT / ('queue-exit-pre-resume-' + sha(old_exit)[:16] + '.json')
+                         if old_exit.exists() else None)
+    if old_exit.exists():
+        if old_exit_snapshot.exists():
+            assert sha(old_exit_snapshot) == sha(old_exit), 'Earlier queue exit changed after preservation'
+        else:
+            shutil.copy2(old_exit, old_exit_snapshot)
+        assert sha(old_exit_snapshot) == sha(old_exit)
+    save(ROOT / 'resume-audit.json', dict(split=split, completed_batches=start,
+        completed_task_count=sum(len(batch) for batch in batches[:start]),
+        remaining_task_count=len(tasks) - sum(len(batch) for batch in batches[:start]),
+        prior_queue_exit_sha256=sha(old_exit_snapshot) if old_exit_snapshot else None,
+        prior_queue_exit_snapshot=str(old_exit_snapshot) if old_exit_snapshot else None,
+        policy='Verified exit-zero batches and their exact native task results are skipped; only never-claimed batches run'))
     with ThreadPoolExecutor(1) as preparation:
-        pending = preparation.submit(prepare_batch, split, batches[0]) if batches else None
-        for index, batch in enumerate(batches):
+        pending = preparation.submit(prepare_batch, split, batches[start]) if start < len(batches) else None
+        for index in range(start, len(batches)):
+            batch = batches[index]
             ready = pending.result()
             pending = preparation.submit(prepare_batch, split, batches[index+1]) if index+1 < len(batches) else None
             wait_for_gate()
@@ -183,9 +235,13 @@ with ThreadPoolExecutor(3) as pool:
     errors = {}
     for split, future in futures.items():
         try:
-            future.result()
+            result = future.result()
+            if AUDIT_ONLY:
+                print(json.dumps(result), flush=True)
         except Exception as error:
             errors[split] = repr(error)
-            save(ROOT / 'state' / (split + '.json'), dict(phase='stopped_requires_review', error=repr(error)))
-save(ROOT / 'queue-exit.json', dict(errors=errors, scheduled_attempts_finished=not errors))
+            if not AUDIT_ONLY:
+                save(ROOT / 'state' / (split + '.json'), dict(phase='stopped_requires_review', error=repr(error)))
+if not AUDIT_ONLY:
+    save(ROOT / 'queue-exit.json', dict(errors=errors, scheduled_attempts_finished=not errors))
 assert not errors, errors

@@ -59,7 +59,9 @@ def include(path, root, group):
     if group.endswith('review_revision_inputs'):
         parts = rel.parts
         if root.name == 'queue':
-            return (path.name == 'queue-plan.json' and len(parts) == 1) or (
+            return ((path.name in ('queue-plan.json', 'queue-exit.json', 'resume-audit.json')
+                     or path.name.startswith('queue-exit-pre-resume-'))
+                    and path.suffix == '.json' and len(parts) == 1) or (
                 parts[0] in ('task-receipts', 'images', 'configs', 'claims')
                 and path.suffix == '.json')
         if path.name == 'receipt.json' and len(parts) == 1:
