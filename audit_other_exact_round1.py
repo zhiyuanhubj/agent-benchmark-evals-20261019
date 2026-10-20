@@ -52,9 +52,11 @@ for model, config_dir in PROFILES.items():
         claim_path = SOURCE / f'beam/state/r{args.round}-launch.json'
         if claim_path.exists():
             claim = json.loads(claim_path.read_text())
-            if claim.get('owner') == 'beam_exact_parallel_r23_2887.py':
+            if claim.get('owner') in ('beam_exact_parallel_r23_2887.py', 'beam_exact_round3_2901.py'):
                 effective_path = Path(claim['effective_config'])
-                handoff_path = SOURCE / 'beam/state/r23-2887-handoff.json'
+                is_2901 = claim['owner'] == 'beam_exact_round3_2901.py'
+                handoff_path = (ROOT / 'evidence/beam_tb_r3_2901/replica_serving_ready.json' if is_2901
+                                else SOURCE / 'beam/state/r23-2887-handoff.json')
                 if not effective_path.exists() or not handoff_path.exists():
                     errors.append('Replica config or handoff receipt is missing')
                 else:
@@ -66,7 +68,11 @@ for model, config_dir in PROFILES.items():
                         errors.append('Replica config differs from the frozen round config beyond model endpoint')
                     if digest(config_path) != claim['source_config_sha256'] or digest(effective_path) != claim['effective_config_sha256']:
                         errors.append('Replica config hash differs from the launch receipt')
-                    for receipt in (claim_path, handoff_path, effective_path):
+                    if is_2901 and (digest(handoff_path) != claim['replica_ready_sha256'] or
+                                    json.loads(handoff_path.read_text()).get('revision') != claim['replica_revision']):
+                        errors.append('2901 replica readiness evidence differs from the launch receipt')
+                    archive_receipts = (claim_path, effective_path) if is_2901 else (claim_path, handoff_path, effective_path)
+                    for receipt in archive_receipts:
                         if str(receipt.relative_to(BASE)) not in entries:
                             errors.append(f'Replica provenance missing from release archive: {receipt.name}')
     if manifest['archive_name'] not in verified_assets:

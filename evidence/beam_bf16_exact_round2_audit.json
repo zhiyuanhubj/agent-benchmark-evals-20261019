@@ -1,21 +1,19 @@
 {
-  "generated_utc": "2026-10-20T10:38:17.095815+00:00",
+  "generated_utc": "2026-10-20T11:20:57.944542+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T103018Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T111251Z.tar.zst",
   "expected": 89,
-  "terminal": 70,
-  "graded": 69,
-  "success": 49,
+  "terminal": 72,
+  "graded": 71,
+  "success": 51,
   "missing_graded_tasks": [
     "git-multibranch",
     "protein-assembly",
     "raman-fitting",
     "regex-chess",
-    "reshard-c4-data",
-    "rstan-to-pystan",
     "sam-cell-seg",
     "sanitize-git-repo",
     "schemelike-metacircular-eval",
@@ -35,7 +33,7 @@
     "git-multibranch"
   ],
   "unarchived_new_terminal_tasks": [
-    "reshard-c4-data"
+    "sam-cell-seg"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -533,6 +531,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/regex-log__TK2Cz67/result.json",
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
+    },
+    "reshard-c4-data": {
+      "reward": 1.0,
+      "result_sha256": "60f541e27f862a6a9820544c87b87dc83ef46c3d1793897d50b20a2cb4f54b5b",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/reshard-c4-data__9HRNB9A/result.json",
+      "raw_response_count": 24,
+      "responses_with_reasoning_content": 24
+    },
+    "rstan-to-pystan": {
+      "reward": 1.0,
+      "result_sha256": "47b3bdd8375121358aa8c7d437fb322ad98cbe759f76e0cae449e01b5824399c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/rstan-to-pystan__xTe85yQ/result.json",
+      "raw_response_count": 37,
+      "responses_with_reasoning_content": 37
     }
   }
 }

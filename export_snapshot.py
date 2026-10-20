@@ -737,15 +737,16 @@ for row in review_rrr['complete_splits'].values():
             'size_bytes': path.stat().st_size,
             'source': str(path),
         }
-beam_deep_recovery = ROOT / 'evidence/beam_deep_recovery_20261020'
-if beam_deep_recovery.is_dir():
-    for path in sorted(beam_deep_recovery.iterdir()):
-        if path.is_file():
-            files[str(path.relative_to(ROOT))] = {
-                'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
-                'size_bytes': path.stat().st_size,
-                'source': str(path),
-            }
+for evidence_folder in ('beam_deep_recovery_20261020', 'beam_tb_r3_2901'):
+    directory = ROOT / 'evidence' / evidence_folder
+    if directory.is_dir():
+        for path in sorted(directory.iterdir()):
+            if path.is_file():
+                files[str(path.relative_to(ROOT))] = {
+                    'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                    'size_bytes': path.stat().st_size,
+                    'source': str(path),
+                }
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
 def partial(d):
@@ -1033,6 +1034,8 @@ The [Opus 4.7 round-2 audit](evidence/opus47_exact_round2_audit.json) and [round
 
 Beam exact-image TB round 2 runs on the verified BF16 replica at allocation 2887 while round 1 remains on its original endpoint. The [handoff proof](evidence/beam_exact_r23_2887_handoff.json) pins the model revision, Docker image, source and effective configs, and task ownership. A round-2 native result counts once; partial results are never treated as full-round accuracy.
 
+Beam exact-image TB round 3 runs on allocation 2901 after the same pinned BF16 weights passed all 198 file checksums and the full 133/133 serving-conformance suite. Its [round-3 handoff evidence](evidence/beam_tb_r3_2901/manifest.json) freezes the original 89-task config, supplied-image receipts, endpoint-only change, and exclusive round ownership. Round 2 continues separately on 2887; round 3 remains partial until all 89 native results are graded.
+
 The [Muse BF16 exact-image I/O audit](evidence/muse_bf16_exact_io_coverage.json) checks that every scored BF16 result, raw response and trajectory is present in SHA-verified release archives, along with all 89 task inputs. Of its currently scored raw replies, **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)}** contain nonempty thinking. It is the same BF16 trial set named by the historical cached-tag field.
 
 The [job-2886 BF16 deployment audit](evidence/muse_bf16_2886_deployment_audit.json) verifies both hosts' 78 pinned weight files, the fixed SGLang image, 16-GPU NCCL/EFA preflight, BF16 endpoint, nonbenchmark tool/thinking roundtrip and the separate review sandbox route. It does not certify a benchmark score.
@@ -1185,6 +1188,8 @@ Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照分别是 
 [Opus 4.7 第 2 轮核验](evidence/opus47_exact_round2_audit.json)和[第 3 轮核验](evidence/opus47_exact_round3_audit.json)按相同规则逐题检查后续轮次。三轮各 89 题均已完整且核验通过：**70/89、71/89、69/89**，三轮均值 **210/267 = 78.65%**。
 
 Beam 精确镜像 TB 第 2 轮现由 2887 上核验过的 BF16 副本独立执行，第 1 轮继续使用原接口。[接管凭据](evidence/beam_exact_r23_2887_handoff.json)固定模型版本、镜像、原始及有效配置哈希和轮次归属；第 2 轮逐题只计一次，未满 89 题不报告整轮准确率。
+
+Beam 精确镜像 TB 第 3 轮交由 2901 独立执行：固定版本的 BF16 权重 198 个文件全部通过校验，服务通过完整的 133/133 项协议测试。[第 3 轮交接证据](evidence/beam_tb_r3_2901/manifest.json)保存原始 89 题配置、镜像凭据、仅变更模型端点的有效配置及独占轮次记录；2887 继续执行第 2 轮。第 3 轮未满 89 题前不报告完整准确率。
 
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `{latest_legacy_deltas['opus47_legacy']['archive_name']}`、`{latest_legacy_deltas['beam_legacy']['archive_name']}`、`{latest_legacy_deltas['muse_bf16']['archive_name']}`；截止时间和文件范围见各自清单。
 '''

@@ -56,6 +56,13 @@ for job in sorted(result_root.glob(profile['job_pattern'])):
         counts['job_config'] += 1
     if model == 'beam_bf16':
         effective_config = config_root / f'r{match.group(1)}-2887.json'
+        if match.group(1) == '3':
+            r3_claim = SOURCE / 'beam/state/r3-launch.json'
+            if r3_claim.exists():
+                receipt = json.loads(r3_claim.read_text())
+                assert receipt['round'] == 3
+                effective_config = Path(receipt['effective_config'])
+                assert hashlib.sha256(effective_config.read_bytes()).hexdigest() == receipt['effective_config_sha256']
         if effective_config.exists():
             payloads[effective_config] = effective_config.read_bytes()
             counts['job_config'] += 1

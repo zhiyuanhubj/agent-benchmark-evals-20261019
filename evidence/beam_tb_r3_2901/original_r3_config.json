@@ -1,0 +1,319 @@
+{
+  "job_name": "beam-tb-v1-exact-r3",
+  "jobs_dir": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16",
+  "n_attempts": 1,
+  "n_concurrent_trials": 4,
+  "quiet": true,
+  "timeout_multiplier": 1.0,
+  "agent_timeout_multiplier": 12,
+  "environment": {
+    "import_path": "isolated_docker:IsolatedDocker",
+    "delete": true,
+    "override_cpus": 24,
+    "override_memory_mb": 49152
+  },
+  "agents": [
+    {
+      "import_path": "archived_terminus:ArchivedTerminus",
+      "model_name": "openai/Beam-1.0-501B-A23B",
+      "kwargs": {
+        "api_base": "http://10.1.25.253:31328/v1",
+        "parser_name": "json",
+        "model_info": {
+          "max_input_tokens": 966656,
+          "max_output_tokens": 81920,
+          "input_cost_per_token": 0,
+          "output_cost_per_token": 0
+        },
+        "llm_call_kwargs": {
+          "timeout": 3600,
+          "max_tokens": 81920,
+          "extra_body": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "max"
+            },
+            "top_k": -1,
+            "top_p": 0.99
+          }
+        },
+        "temperature": 0.7,
+        "interleaved_thinking": true
+      },
+      "env": {
+        "OPENAI_API_KEY": "EMPTY"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/adaptive-rejection-sampler"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/bn-fit-modify"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/break-filter-js-from-html"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/build-cython-ext"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/build-pmars"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/build-pov-ray"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/caffe-cifar-10"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/cancel-async-tasks"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/chess-best-move"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/circuit-fibsqrt"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/cobol-modernization"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/code-from-image"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/compile-compcert"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/configure-git-webserver"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/constraints-scheduling"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/count-dataset-tokens"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/crack-7z-hash"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/custom-memory-heap-crash"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/db-wal-recovery"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/distribution-search"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/dna-assembly"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/dna-insert"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/extract-elf"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/extract-moves-from-video"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/feal-differential-cryptanalysis"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/feal-linear-cryptanalysis"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/filter-js-from-html"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/financial-document-processor"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/fix-code-vulnerability"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/fix-git"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/fix-ocaml-gc"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/gcode-to-text"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/git-leak-recovery"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/git-multibranch"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/gpt2-codegolf"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/headless-terminal"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/hf-model-inference"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/install-windows-3.11"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/kv-store-grpc"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/large-scale-text-editing"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/largest-eigenval"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/llm-inference-batching-scheduler"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/log-summary-date-ranges"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/mailman"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/make-doom-for-mips"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/make-mips-interpreter"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/mcmc-sampling-stan"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/merge-diff-arc-agi-task"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/model-extraction-relu-logits"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/modernize-scientific-stack"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/mteb-leaderboard"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/mteb-retrieve"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/multi-source-data-merger"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/nginx-request-logging"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/openssl-selfsigned-cert"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/overfull-hbox"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/password-recovery"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/path-tracing"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/path-tracing-reverse"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/polyglot-c-py"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/polyglot-rust-c"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/portfolio-optimization"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/protein-assembly"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/prove-plus-comm"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/pypi-server"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/pytorch-model-cli"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/pytorch-model-recovery"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/qemu-alpine-ssh"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/qemu-startup"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/query-optimize"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/raman-fitting"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/regex-chess"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/regex-log"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/reshard-c4-data"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/rstan-to-pystan"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/sam-cell-seg"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/sanitize-git-repo"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/schemelike-metacircular-eval"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/sparql-university"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/sqlite-db-truncate"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/sqlite-with-gcov"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/torch-pipeline-parallelism"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/torch-tensor-parallelism"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/train-fasttext"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/tune-mjcf"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/video-processing"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/vulnerable-secret"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/winning-avg-corewars"
+    },
+    {
+      "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/terminal-bench-2-1/write-compressor"
+    }
+  ],
+  "retry": {
+    "max_retries": 0
+  }
+}

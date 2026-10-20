@@ -214,7 +214,7 @@ def cycle():
     with LOCK.open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         for source in SOURCES:
-            run([PYTHON, str(source)])
+            run([PYTHON, str(source)], timeout=600)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_expiry_recovery.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_swe_review_da.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_muse_review_revision_v2.py')], timeout=180)
@@ -235,7 +235,7 @@ def cycle():
         for attempt in range(3):
             if attempt:
                 for source in SOURCES:
-                    run([PYTHON, str(source)])
+                    run([PYTHON, str(source)], timeout=600)
                 run([PYTHON, str(ROOT / 'audit_muse_bf16_expiry_recovery.py')], timeout=60)
             run([PYTHON, str(ROOT / 'export_snapshot.py')])
             scores = json.loads((ROOT / 'results/scores.json').read_text())
@@ -321,8 +321,10 @@ def cycle():
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
              'audit_muse_bf16_review_progress.py',
              'audit_opus47_review_progress.py',
+             'audit_other_exact_round1.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',
+             'beam_exact_round3_2901.py',
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',
              'audit_muse_nvfp4_r2_prove_ungraded.py',
@@ -340,7 +342,8 @@ def cycle():
              'audit_swe_review_official_rrr.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
-             'export_snapshot.py', 'snapshot_live_tb.py', 'archive_trials.py', 'archive_delta.py',
+             'export_snapshot.py', 'snapshot_live_tb.py', 'snapshot_other_exact_tb.py',
+             'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
