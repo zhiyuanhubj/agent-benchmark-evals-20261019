@@ -1,20 +1,18 @@
 {
-  "generated_utc": "2026-10-20T09:04:02.736323+00:00",
+  "generated_utc": "2026-10-20T09:18:19.044105+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T085013Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T090950Z.tar.zst",
   "expected": 89,
-  "terminal": 65,
-  "graded": 64,
-  "success": 46,
+  "terminal": 67,
+  "graded": 66,
+  "success": 47,
   "missing_graded_tasks": [
     "git-multibranch",
-    "path-tracing",
     "path-tracing-reverse",
     "protein-assembly",
-    "qemu-startup",
     "query-optimize",
     "raman-fitting",
     "regex-chess",
@@ -40,7 +38,7 @@
     "git-multibranch"
   ],
   "unarchived_new_terminal_tasks": [
-    "qemu-startup"
+    "path-tracing-reverse"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -448,6 +446,13 @@
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
     },
+    "path-tracing": {
+      "reward": 0.0,
+      "result_sha256": "9f20505862cde92f5cb7d74793ca2c82b405dfef614ad84fc181b58c1d83df3d",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/path-tracing__KZqxstv/result.json",
+      "raw_response_count": 156,
+      "responses_with_reasoning_content": 156
+    },
     "polyglot-c-py": {
       "reward": 1.0,
       "result_sha256": "68f3cb2018b979b4102b6075c431a7e2027d22759ad6a41029bb1246dd7b175f",
@@ -503,6 +508,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/qemu-alpine-ssh__RBAMJjr/result.json",
       "raw_response_count": 31,
       "responses_with_reasoning_content": 31
+    },
+    "qemu-startup": {
+      "reward": 1.0,
+      "result_sha256": "97bfd3ac46b19d06fbbfbfbb6f3d8cc9444678d72efdb2c8fff927b7825b0011",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/qemu-startup__pCTmPdP/result.json",
+      "raw_response_count": 49,
+      "responses_with_reasoning_content": 49
     }
   }
 }

@@ -72,6 +72,24 @@ for split, row in native_review_da['splits'].items():
     assert mr['swe_review'][split]['terminal'] == row['expected']
     assert mr['swe_review'][split]['metrics_on_terminal_subset'] == row['metrics']
 ex = read(B / 'expanded-current.json')
+beam_pro = ex['beam_bf16']['pro']
+assert beam_pro['expected'] == 731
+assert not beam_pro['duplicate_task_ids'], 'Beam Pro task IDs overlap across original and handoff runs'
+handoff_evidence = read(ROOT / 'evidence/beam_pro_disjoint_handoff_20261020.json')
+assert handoff_evidence['declared_count'] == 603
+assert handoff_evidence['terminal_count'] + handoff_evidence['pending_count'] == 603
+assert not (set(handoff_evidence['terminal_ids']) & set(handoff_evidence['pending_ids']))
+write('evidence/beam_pro_handoff_progress.json', {
+    'generated_utc': now,
+    'handoff_plan_evidence': 'evidence/beam_pro_disjoint_handoff_20261020.json',
+    'expected': beam_pro['expected'],
+    'terminal': beam_pro['terminal'],
+    'graded': beam_pro['graded'],
+    'success': beam_pro['success'],
+    'missing_result_task_count': beam_pro['missing_result_task_count'],
+    'duplicate_task_ids': beam_pro['duplicate_task_ids'],
+    'qualification': 'Partial native first-round progress; all original and disjoint handoff task IDs are counted at most once. Not a full-set accuracy.',
+})
 bf16_expiry_recovery = read(ROOT / 'evidence/muse_bf16_2865_expiry_recovery.json')
 assert bf16_expiry_recovery['pro_scoring_run_id'] == ex['muse_bf16']['pro']['scoring_run_id']
 assert bf16_expiry_recovery['original_completed_pro_tasks_reused_once'] == ex['muse_bf16']['pro']['reused_original_completed_tasks']

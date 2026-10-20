@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T09:04:16.295358+00:00",
+  "generated_utc": "2026-10-20T09:18:35.382314+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 65,
+      "scored_trajectories_checked": 67,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -6545,6 +6545,30 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "path-tracing",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/path-tracing__KZqxstv/agent/trajectory.json",
+      "trajectory_sha256": "25ace8bb9603ea9f62260f670f387014d4d6a7d37afbc6d026a3ce3a12f9eca1",
+      "steps": 145,
+      "tool_calls": 269,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "path-tracing-reverse",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/path-tracing-reverse__BxTL3Yh/agent/trajectory.json",
+      "trajectory_sha256": "8294c2b4e23bada7f30b34ddade44813601e7135566bdbb9fb9a597cf8126d49",
+      "steps": 173,
+      "tool_calls": 344,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "beam_bf16_r2",
