@@ -411,6 +411,7 @@ if r3_replacement_plan:
     assert nvfp4_rounds['3']['terminal'] == 89 and nvfp4_rounds['3']['graded'] == 0
     assert nvfp4_rounds['3']['exceptions'].get('InternalServerError') == 89
     seen = set()
+    graded_task_names = set()
     terminal = graded = success = raw_responses = active = 0
     extra_routes = []
     for batch in r3_replacement_plan['batches']:
@@ -481,14 +482,23 @@ if r3_replacement_plan:
             if reward in (0, 1):
                 graded += 1
                 success += int(reward)
+                graded_task_names.add(name)
                 nvfp4_rounds['3']['exceptions']['InternalServerError'] -= 1
             elif value.get('exception_info'):
                 kind = value['exception_info']['exception_type']
                 nvfp4_rounds['3']['exceptions'][f'replacement_{kind}'] = \
                     nvfp4_rounds['3']['exceptions'].get(f'replacement_{kind}', 0) + 1
     assert len(seen) == 89
+    confirmed_hacks = sorted(note['task'] for note in
+        read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
+        if note['model'] == 'muse_nvfp4_r3' and note['reward'] == 1
+        and note['training_disposition'] == 'exclude_confirmed_reward_hacking')
+    assert len(confirmed_hacks) == len(set(confirmed_hacks))
+    assert set(confirmed_hacks) <= graded_task_names
     nvfp4_rounds['3']['graded'] = graded
     nvfp4_rounds['3']['success'] = success
+    nvfp4_rounds['3']['confirmed_compromised_successes'] = len(confirmed_hacks)
+    nvfp4_rounds['3']['known_compromised_tasks'] = confirmed_hacks
     nvfp4_rounds['3']['ungraded'] = 89 - graded
     nvfp4_rounds['3']['complete'] = graded == 89
     nvfp4_rounds['3']['accuracy'] = success / 89 if graded == 89 else None
@@ -501,6 +511,8 @@ if r3_replacement_plan:
         'original_ungraded_infra_failures': 89, 'original_model_responses': 0,
         'replacement_terminal': terminal, 'replacement_graded': graded,
         'replacement_success': success, 'replacement_raw_responses': raw_responses,
+        'confirmed_compromised_successes': len(confirmed_hacks),
+        'known_compromised_tasks': confirmed_hacks,
         'active_trial_dirs': active, 'all_tasks_single_replacement_draw': len(seen) == 89,
         'extra_routes': extra_routes,
         'endpoint_ready': (r3_replacement_root.parent / 'replica-2900/endpoint-ready.json').exists(),
