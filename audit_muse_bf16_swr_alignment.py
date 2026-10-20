@@ -123,6 +123,7 @@ def main():
             'judged': len(judged),
             'accuracy': overall.get('accuracy'),
             'f1': overall.get('f1'),
+            'point_f1': overall.get('f1_point'),
             'official_result_sha256': summary.get('official_result_sha256'),
             'completion_summary_sha256': hashlib.sha256(summary_path.read_bytes()).hexdigest(),
         }
