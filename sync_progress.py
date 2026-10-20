@@ -424,6 +424,7 @@ def cycle():
              'audit_muse_bf16_review_progress.py',
              'audit_muse_bf16_tb_ungraded.py',
              'audit_opus47_review_progress.py',
+             'audit_opus47_provider_thinking.py',
              'audit_other_exact_round1.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',

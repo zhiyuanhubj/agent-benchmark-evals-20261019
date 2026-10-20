@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-10-20T23:12:58.629975+00:00",
+  "generated_utc": "2026-10-20T23:34:49.461351+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 53,
+  "scored_tasks": 54,
   "success_count": 41,
   "tasks": {
     "pytorch-model-cli": {
@@ -212,6 +212,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/break-filter-js-from-html__WqN7m7x/result.json"
     },
+    "video-processing": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/video-processing__ZQPMSmr/result.json"
+    },
     "torch-pipeline-parallelism": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/torch-pipeline-parallelism__pFNFkx3/result.json"
@@ -350,12 +354,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "video-processing": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "constraints-scheduling": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json",
       "exception_type": "RuntimeError",
@@ -400,11 +398,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 53,
-  "covered_raw_response_sets": 53,
-  "covered_trajectories": 53,
-  "scored_raw_response_count": 2140,
-  "nonempty_reasoning_response_count": 2139,
+  "covered_results": 54,
+  "covered_raw_response_sets": 54,
+  "covered_trajectories": 54,
+  "scored_raw_response_count": 2183,
+  "nonempty_reasoning_response_count": 2182,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -614,6 +612,10 @@
       "raw_responses": 25,
       "nonempty_reasoning_content": 25
     },
+    "video-processing": {
+      "raw_responses": 43,
+      "nonempty_reasoning_content": 43
+    },
     "torch-pipeline-parallelism": {
       "raw_responses": 10,
       "nonempty_reasoning_content": 10
@@ -626,6 +628,7 @@
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
   "deferred_post_score_results": [],
@@ -785,6 +788,7 @@
     "muse_bf16_delta_20261020T223332Z.tar.zst",
     "muse_bf16_delta_20261020T224923Z.tar.zst",
     "muse_bf16_delta_20261020T230511Z.tar.zst",
+    "muse_bf16_delta_20261020T232727Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
