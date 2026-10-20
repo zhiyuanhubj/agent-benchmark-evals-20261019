@@ -188,6 +188,9 @@ if expiry_correction_claim_path.exists():
     assert effective_expiry == connection_spec, 'Expiry correction changed tasks or generation settings'
     for key in ('new_endpoint_ready', 'new_reasoning_preflight', 'image_proof'):
         assert hashlib.sha256(Path(expiry_correction_claim[key]).read_bytes()).hexdigest() == expiry_correction_claim[key + '_sha256']
+    for key, name in (('new_endpoint_ready', 'muse_nvfp4_replica_2902_ready.json'),
+                      ('new_reasoning_preflight', 'muse_nvfp4_replica_2902_reasoning_preflight.json')):
+        (ROOT / 'evidence' / name).write_bytes(Path(expiry_correction_claim[key]).read_bytes())
     assert len(expiry_correction_claim['tasks']) == 10
     assert {row['task'] for row in expiry_correction_claim['tasks']} == {row['task'] for row in connection_claim['origins']}
     for row in expiry_correction_claim['tasks']:
@@ -1326,7 +1329,8 @@ if expiry_correction_claim:
          f'connection errors, two interrupted tasks without model replies, and four unstarted tasks '
          f'remain archived. The [allocation-2902 correction claim]'
          f'(evidence/muse_nvfp4_r2_expiry_correction_claim.json) preserves those attempts and '
-         f'declares one unchanged-setting draw per task on the new allocation, after a nonempty-thinking '
+         f'declares one unchanged-setting draw per task on the new allocation, after a '
+         f'[nonempty-thinking preflight](evidence/muse_nvfp4_replica_2902_reasoning_preflight.json) '
          f'preflight. It currently has {len(expiry_results)} terminal, '
          f'{sum(row["reward"] in (0, 1) for row in expiry_results.values())} native grades and '
          f'{sum(row["reward"] == 1 for row in expiry_results.values())} successes; no best-of selection.\n\n'
@@ -1477,7 +1481,8 @@ if expiry_correction_claim:
         (f'GPU allocation 2867 到期时，第 2 轮连接补跑留下 4 题无分连接错误、'
          f'2 题无模型回复的中断目录、4 题尚未启动；原始记录全部保留。'
          f'[2902 新 allocation 的纠错声明](evidence/muse_nvfp4_r2_expiry_correction_claim.json)'
-         f'在非空 thinking 预检后逐题仅抽一次，题目、镜像和采样设置不变。'
+         f'在[非空 thinking 预检](evidence/muse_nvfp4_replica_2902_reasoning_preflight.json)后'
+         f'逐题仅抽一次，题目、镜像和采样设置不变。'
          f'当前纠错有 {len(expiry_results)} 题终态、'
          f'{sum(row["reward"] in (0, 1) for row in expiry_results.values())} 题原生判分、'
          f'{sum(row["reward"] == 1 for row in expiry_results.values())} 题成功；不择优取样。\n\n'
