@@ -22,6 +22,11 @@ SOURCES = [
 LOG = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/github-sync-20261019.jsonl'
 LOCK = LOG.with_suffix('.lock')
 RAW_ARCHIVE_INTERVAL_SECONDS = 600  # Keep live I/O snapshots within each 15-minute sync cycle.
+# These original runs have finished and their controllers are stopped. Scan
+# their large legacy trees hourly; the active review-revision trees below keep
+# the ten-minute cadence so new trajectories reach the release promptly.
+STATIC_ARCHIVE_INTERVAL_SECONDS = 3600
+STATIC_ARCHIVE_GROUPS = {'opus47_legacy', 'muse_review_full_io', 'muse_review_verifier'}
 
 
 def run(command, timeout=180):
@@ -123,7 +128,9 @@ def sync_native_archives(scores, force_bf16=False):
             continue  # A new archive group joins only after its base asset is created.
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
         previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
-        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS or (group == 'muse_bf16' and force_bf16):
+        interval = (STATIC_ARCHIVE_INTERVAL_SECONDS if group in STATIC_ARCHIVE_GROUPS
+                    else RAW_ARCHIVE_INTERVAL_SECONDS)
+        if (datetime.now(timezone.utc) - previous_time).total_seconds() >= interval or (group == 'muse_bf16' and force_bf16):
             run([PYTHON, str(ROOT / 'archive_delta.py'), group, '--if-changed'], timeout=600)
     live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
     delta_manifests = sorted(manifest_dir.glob('*_delta_*.json'))
