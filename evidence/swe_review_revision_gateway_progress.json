@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-10-20T04:20:08.857045+00:00",
+  "generated_utc": "2026-10-20T04:30:50.924671+00:00",
   "scope": "Live native SWE-Review original-generator revision results. Partial graded counts are progress, not RRR or a benchmark accuracy. Synthetic preflights and old pre-model connection failures are excluded.",
-  "model_attempt_policy": "One scored gateway-recovery result per canonically rejected PR; native verifier reward and report are required for a grade.",
+  "model_attempt_policy": "One scored result from the corrected gateway queue per canonically rejected PR; native verifier reward and report are required for a grade.",
   "groups": [
     {
       "reviewer": "muse-nvfp4",
@@ -13,13 +13,13 @@
       "preserved_pre_model_infrastructure_results": 0,
       "preserved_pre_model_infrastructure_connectivity": 0,
       "old_host_ip_saved_model_responses": 0,
-      "gateway_model_attempt_result_files": 220,
-      "native_graded_revisions": 220,
-      "native_successful_revisions": 87,
-      "gateway_trajectories": 220,
+      "gateway_model_attempt_result_files": 222,
+      "native_graded_revisions": 222,
+      "native_successful_revisions": 88,
+      "gateway_trajectories": 222,
       "pre_model_connection_failures": 0,
-      "queue_scheduled_attempts_finished": false,
-      "complete": false,
+      "queue_scheduled_attempts_finished": true,
+      "complete": true,
       "errors": [],
       "records": {
         "astropy__astropy-13033": {
@@ -1030,6 +1030,28 @@
           "native_graded": true,
           "reward": 1.0,
           "verifier_report_sha256": "4e709a8f0cf34a30ac421595147a8629c58846993306893aaa86bffc1daf3b18",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "sympy__sympy-24562": {
+          "result": ".private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results/qwen3_coder_30b_500/muse-nvfp4-original-revision-20261018-gw-v4-qwen3_coder_30b_500-batch13/sympy__sympy-24562__JrKhWha/result.json",
+          "result_sha256": "99bcd864c6f13d1f8fc324c8dc8de5fc6a1287c3316d16441fbfce29754f6e3a",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "647f3e3b07141eae91f380c1c1d45c927cbf06264d750fa22f4816b6bf792bf8",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "sympy__sympy-24661": {
+          "result": ".private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results/qwen3_coder_30b_500/muse-nvfp4-original-revision-20261018-gw-v4-qwen3_coder_30b_500-batch13/sympy__sympy-24661__fmn7LaU/result.json",
+          "result_sha256": "af6a80a72105faa22638e9215e9192c7c1ddad5d38f728137734cb0b7ce5618c",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "b7af6760a4922b8d751effac42564105dfa708bf41e99552726a950f96f614b7",
           "trajectory_saved": true,
           "exception_type": null,
           "exception_message": null
@@ -5395,21 +5417,110 @@
       "reviewer": "beam-bf16",
       "split": "qwen3_coder_30b_500",
       "expected_revisions": 224,
-      "queue_plan_sha256": "c5e8179d39b8e730abeeaadcd0aca5b34b719a8b890838c8e7ce4f51b867e45b",
-      "synthetic_preflight_sha256": "12b723136bc2570ee6d8190f81b2e16d5e1f37e841f8699b184945df0fb77b17",
+      "queue_plan_sha256": "c937d9b5154df0e27ef5d17f6f6036bbba7720fad15e37b956f94c14e4b1e348",
+      "synthetic_preflight_sha256": "928f728322aa0f979bf106b3c9402cc9699fcd9d5b7aac850341b97a9a24fa23",
       "old_host_ip_native_results": 0,
       "preserved_pre_model_infrastructure_results": 12,
       "preserved_pre_model_infrastructure_connectivity": 16,
       "old_host_ip_saved_model_responses": 0,
-      "gateway_model_attempt_result_files": 0,
-      "native_graded_revisions": 0,
-      "native_successful_revisions": 0,
-      "gateway_trajectories": 0,
+      "gateway_model_attempt_result_files": 8,
+      "native_graded_revisions": 8,
+      "native_successful_revisions": 5,
+      "gateway_trajectories": 8,
       "pre_model_connection_failures": 0,
       "queue_scheduled_attempts_finished": false,
       "complete": false,
       "errors": [],
-      "records": {}
+      "records": {
+        "astropy__astropy-14096": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/astropy__astropy-14096__ssRVWPf/result.json",
+          "result_sha256": "089210c6b33505a59c56b6db57e387e3bdf07fa9236544da39a1ade028d4be2a",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "e06bd36c619377247b189566b2ec45d64c36a3f4d4106775e0ad79ecd4003b02",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "astropy__astropy-7166": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/astropy__astropy-7166__GQFKWuE/result.json",
+          "result_sha256": "a2c0c32501cc84a1572d902b0c6b8183b189e6a50fffe9f6a6443aee24722302",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "1aaf712d4e92ba0402bf7be03b34a99be46dd54b15f1e99addf43bd5a5bf7b33",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "astropy__astropy-8872": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/astropy__astropy-8872__5qRVygE/result.json",
+          "result_sha256": "7cad2a103f51c865765937d66b0e334a298023e16067c5b088e4fe12b6b71a11",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "48782bf914dd3cdb46c7fbe4dbafd0fcee6fa304ec82fd1325cff8afde922b95",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-10097": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-10097__DDikskQ/result.json",
+          "result_sha256": "2911d233ceec40c89bac87547a81ddec77ff04e822f3ac196bc660cc6c444913",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "f0bfb5ea4f641b635872cb3003682e2b0b0cb851a6b6d9a784968e9c2fcddde6",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11138": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11138__QxPiYUp/result.json",
+          "result_sha256": "1101af83acce8a8569747f941972ef5b063547a959bf9dbb747bf8725c37abf7",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "3d6007dee8c3a191974ac63ea43fccca2df991708066992793698cc7481a3cb8",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11149": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11149__E2AUhN2/result.json",
+          "result_sha256": "0c6d6ef330e4d396663a73b468bebbd4505bc045762afe05297eb824567f3e0d",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "65d87db880bf7c34f81626f35ec64caf322a059d7baba6df11928ba02915e524",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11211": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11211__rQgHEq2/result.json",
+          "result_sha256": "d9dbe4853bea14c04422e731db2c2967c2cc2a1f62b1e0b1ae5872fe4b40d388",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "6ea682128918dbf0ab904bf54ede42479d1dbf8600dfcf1bfdb2bcd77f1b1fe7",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11265": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11265__abVnbZC/result.json",
+          "result_sha256": "9ba6b944570283e1c6360223c809fc410ea146db44f7a07b35e911e0cddc7752",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "3fd1536c0693a3a713754bccec4773ee8aa6f2f8946b08916dc75a59d2ef3b3f",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        }
+      }
     },
     {
       "reviewer": "beam-bf16",

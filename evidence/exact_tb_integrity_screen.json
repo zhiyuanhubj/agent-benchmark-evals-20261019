@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T04:25:46.129679+00:00",
+  "generated_utc": "2026-10-20T04:44:33.786568+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 50,
+      "scored_trajectories_checked": 52,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -89,6 +89,14 @@
   },
   "missing_trajectories": [],
   "ungraded_terminal_trials": [
+    {
+      "model": "muse_nvfp4_r2",
+      "task": "password-recovery",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b05/password-recovery__mCY6tLR/result.json",
+      "result_sha256": "3d33926c061c613c94f8eb113fbcea97a01e948ebcdec8ea80be24000c1cd930",
+      "exception_type": "RuntimeError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
     {
       "model": "beam_bf16_r2",
       "task": "git-multibranch",
@@ -4905,6 +4913,30 @@
       "trajectory_sha256": "7729fecc603bbc50262e9a766fd666839d3dc2e117bdcb07b626be1bc213717b",
       "steps": 12,
       "tool_calls": 28,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "fix-git",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/fix-git__TtNAajK/agent/trajectory.json",
+      "trajectory_sha256": "9cd0623963ef5ed4ec2c9983a331ac676d4935149b320f3854c4128950e0d643",
+      "steps": 12,
+      "tool_calls": 54,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "fix-code-vulnerability",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b02/fix-code-vulnerability__YiStuEL/agent/trajectory.json",
+      "trajectory_sha256": "dd61de631e403f749e0804e3390407f673009317c3b69529b5855a94a3d5a186",
+      "steps": 23,
+      "tool_calls": 87,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

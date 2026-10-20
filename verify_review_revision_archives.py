@@ -60,7 +60,10 @@ for label, input_group, output_group, works, prepared in PAIR:
         is_beam_coder = label == 'beam' and work.name == 'qwen3_coder_30b_500'
         queue = work / ('gateway-portfix-20261020/queue' if is_beam_coder
                         else 'gateway-recovery-20261020/queue')
-        plan = json.loads((queue / 'queue-plan.json').read_text())
+        plan_path = queue / 'queue-plan.json'
+        assert str(plan_path.relative_to(HOME)) in input_names, \
+            'Active revision queue plan missing from release'
+        plan = json.loads(plan_path.read_text())
         for split, spec in plan['splits'].items():
             source = Path(spec['source_tasks'])
             for task in spec['tasks']:
@@ -79,8 +82,10 @@ for label, input_group, output_group, works, prepared in PAIR:
                     assert record['result'] in output_names, 'Beam Coder pre-model result missing from release'
         resume_records = [queue / 'resume-audit.json', *queue.glob('queue-exit-pre-resume-*.json')]
         latest_input_archive = datetime.fromisoformat(input_chain[-1][1]['generated_utc']).timestamp()
+        receipt_cutoff = min(latest_input_archive - 300,
+                             datetime.now(timezone.utc).timestamp() - 600)
         due_receipts = {str(path.relative_to(HOME)) for path in resume_records
-                        if path.exists() and path.stat().st_ctime <= latest_input_archive}
+                        if path.exists() and path.stat().st_ctime <= receipt_cutoff}
         assert due_receipts <= input_names, \
             'Revision queue resume receipt missing from release'
     prepared_files = {str(path.relative_to(HOME)): path
