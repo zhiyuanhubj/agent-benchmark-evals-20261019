@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T10:08:11.124319+00:00",
+  "generated_utc": "2026-10-20T10:25:39.906173+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 70,
+      "scored_trajectories_checked": 72,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -6297,6 +6297,18 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "video-processing",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/video-processing__Tjd52Uj/agent/trajectory.json",
+      "trajectory_sha256": "5e96e623527c72fcb9be9b37fca9db85b91a145c0ad303ddbf3663871df5f779",
+      "steps": 66,
+      "tool_calls": 149,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "tune-mjcf",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/tune-mjcf__JX8Xfs7/agent/trajectory.json",
@@ -6315,6 +6327,18 @@
       "trajectory_sha256": "d997cada1d21fad2cdd47a2b37c05799b9f1b5af3364690833a36b090add612e",
       "steps": 12,
       "tool_calls": 28,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "vulnerable-secret",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/vulnerable-secret__XHgK28X/agent/trajectory.json",
+      "trajectory_sha256": "0155b0584abe39c6b61d97f82c26ed073bc44319a759e9a9840f289a55871fbf",
+      "steps": 10,
+      "tool_calls": 31,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
