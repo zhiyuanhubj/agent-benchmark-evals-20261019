@@ -1,21 +1,19 @@
 {
-  "generated_utc": "2026-10-20T14:59:17.993241+00:00",
+  "generated_utc": "2026-10-20T15:26:25.489037+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T144949Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T151703Z.tar.zst",
   "expected": 89,
-  "terminal": 40,
-  "graded": 38,
-  "success": 27,
+  "terminal": 42,
+  "graded": 40,
+  "success": 29,
   "missing_graded_tasks": [
     "extract-moves-from-video",
-    "feal-linear-cryptanalysis",
     "git-multibranch",
     "gpt2-codegolf",
     "headless-terminal",
-    "mailman",
     "make-doom-for-mips",
     "make-mips-interpreter",
     "mcmc-sampling-stan",
@@ -66,9 +64,7 @@
     "git-multibranch",
     "headless-terminal"
   ],
-  "unarchived_new_terminal_tasks": [
-    "mailman"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -244,6 +240,13 @@
       "raw_response_count": 8,
       "responses_with_reasoning_content": 8
     },
+    "feal-linear-cryptanalysis": {
+      "reward": 1.0,
+      "result_sha256": "467a904f936ce351ddf0a05e5beb8dec8e5b23cb48f0ee5c91a498d74df93896",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/feal-linear-cryptanalysis__6e3mTrd/result.json",
+      "raw_response_count": 214,
+      "responses_with_reasoning_content": 214
+    },
     "filter-js-from-html": {
       "reward": 0.0,
       "result_sha256": "232245abf35804064b7f236ea1fdef4d9d67f4e8233b54583d2840cf428d82d8",
@@ -355,6 +358,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/log-summary-date-ranges__Bt9XL6H/result.json",
       "raw_response_count": 4,
       "responses_with_reasoning_content": 4
+    },
+    "mailman": {
+      "reward": 1.0,
+      "result_sha256": "0eb1889b5d8869eb2571a593bccda9af8ebb888c84260915857e29c8754d6a89",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/mailman__ZfVgrjj/result.json",
+      "raw_response_count": 107,
+      "responses_with_reasoning_content": 107
     }
   }
 }

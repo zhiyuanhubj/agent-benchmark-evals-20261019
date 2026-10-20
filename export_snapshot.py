@@ -171,6 +171,30 @@ for origin in connection_claim['origins']:
     assert original['config']['agent']['kwargs']['api_base'] == origin['original_endpoint']
     assert hashlib.sha256((Path(original['config']['task']['path']) / 'task.toml').read_bytes()).hexdigest() == origin['task_toml_sha256']
 (ROOT / 'evidence/muse_nvfp4_r2_connection_recovery_claim.json').write_bytes(connection_claim_path.read_bytes())
+expiry_correction_claim_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r2-expiry-correction-2902-20261020-claim.json'
+expiry_correction_claim = None
+if expiry_correction_claim_path.exists():
+    expiry_correction_claim = read(expiry_correction_claim_path)
+    assert expiry_correction_claim['old_allocation'] == 2867
+    assert expiry_correction_claim['new_allocation'] == 2902
+    assert expiry_correction_claim['source_claim_sha256'] == hashlib.sha256(connection_claim_path.read_bytes()).hexdigest()
+    assert expiry_correction_claim['source_config_sha256'] == hashlib.sha256(connection_config.read_bytes()).hexdigest()
+    assert expiry_correction_claim['same_tasks_and_sampling_settings']
+    assert expiry_correction_claim['no_model_retry'] and expiry_correction_claim['no_best_of_selection']
+    expiry_config = Path(expiry_correction_claim['config'])
+    assert expiry_correction_claim['config_sha256'] == hashlib.sha256(expiry_config.read_bytes()).hexdigest()
+    effective_expiry = read(expiry_config)
+    effective_expiry['job_name'] = connection_spec['job_name']
+    assert effective_expiry == connection_spec, 'Expiry correction changed tasks or generation settings'
+    for key in ('new_endpoint_ready', 'new_reasoning_preflight', 'image_proof'):
+        assert hashlib.sha256(Path(expiry_correction_claim[key]).read_bytes()).hexdigest() == expiry_correction_claim[key + '_sha256']
+    assert len(expiry_correction_claim['tasks']) == 10
+    assert {row['task'] for row in expiry_correction_claim['tasks']} == {row['task'] for row in connection_claim['origins']}
+    for row in expiry_correction_claim['tasks']:
+        if row.get('previous_recovery_result'):
+            assert hashlib.sha256(Path(row['previous_recovery_result']).read_bytes()).hexdigest() == row['previous_recovery_result_sha256']
+        assert hashlib.sha256(Path(row['source_original_result']).read_bytes()).hexdigest() == row['source_original_result_sha256']
+    (ROOT / 'evidence/muse_nvfp4_r2_expiry_correction_claim.json').write_bytes(expiry_correction_claim_path.read_bytes())
 nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-completion-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 nvfp4_parallel_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-parallel-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 extra_lane_units = {str(lane): subprocess.run(['systemctl', '--user', 'is-active', f'muse-nvfp4-exact-tb-extra-lane{lane}-2866-20261019.service'], capture_output=True, text=True).stdout.strip() for lane in (2, 3)}
@@ -387,6 +411,39 @@ for trial in connection_job.glob('*'):
         assert original['exception'] == 'InternalServerError'
         original['reward'] = reward
         original['replacement'] = connection_results[task]
+expiry_results = {}
+expiry_active = 0
+if expiry_correction_claim:
+    correction_job = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / expiry_correction_claim['job_name']
+    expiry_expected = {row['task']: row for row in expiry_correction_claim['tasks']}
+    expiry_seen = set()
+    for trial in correction_job.glob('*'):
+        if not trial.is_dir():
+            continue
+        task = trial.name.split('__', 1)[0]
+        assert task in expiry_expected and task not in expiry_seen
+        expiry_seen.add(task)
+        result_path = trial / 'result.json'
+        if not result_path.exists():
+            expiry_active += 1
+            continue
+        result = read(result_path)
+        assert Path(result['config']['task']['path']).name == task
+        assert result['config']['agent']['kwargs']['api_base'] == connection_claim['model_endpoint']
+        if not result.get('finished_at'):
+            expiry_active += 1
+            continue
+        value = ((result.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        expiry_results[task] = {'result_path': str(result_path),
+                                'result_sha256': hashlib.sha256(result_path.read_bytes()).hexdigest(),
+                                'reward': value}
+        if value in (0, 1):
+            original = new_terminal_by_round['2'][task]
+            assert original['reward'] is None and original['source'] == expiry_expected[task]['source_original_result']
+            assert original['exception'] == 'InternalServerError'
+            assert task not in connection_results or connection_results[task]['reward'] is None
+            original['reward'] = value
+            original['replacement'] = expiry_results[task]
 for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['terminal'] += len(rows)
     nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
@@ -729,6 +786,19 @@ snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['rou
     'no_best_of_selection': True,
     'qualification': 'Original endpoint connection failures remain archived and ungraded; only the single declared replacement reward can fill each missing grade.',
 }
+if expiry_correction_claim:
+    snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_expiry_correction'] = {
+        'claim': 'evidence/muse_nvfp4_r2_expiry_correction_claim.json',
+        'old_allocation': 2867, 'new_allocation': 2902,
+        'controller': subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-r2-expiry-correction-2902-20261020.service'], capture_output=True, text=True).stdout.strip(),
+        'tasks': len(expiry_correction_claim['tasks']),
+        'terminal': len(expiry_results),
+        'graded': sum(row['reward'] in (0, 1) for row in expiry_results.values()),
+        'success': sum(row['reward'] == 1 for row in expiry_results.values()),
+        'active_trial_dirs': expiry_active,
+        'no_best_of_selection': True,
+        'qualification': 'Only one hash-declared correction result per task may fill an ungraded infrastructure failure; prior attempts remain preserved.',
+    }
 snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_pytorch_model_cli_storage_replacement'] = {
     'claim': 'evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json',
     'original_native_reward': None,
@@ -1249,6 +1319,18 @@ if mn_tb['complete']:
          'separate from both the old cached-image scores and BF16.'),
         readme, count=1, flags=re.S)
     assert replaced == 1
+if expiry_correction_claim:
+    readme = readme.replace(
+        'The 89 original round-3 trials reached a refused endpoint before any model response.',
+        (f'GPU allocation 2867 timed out while the round-2 connection recovery ran. Its four terminal '
+         f'connection errors, two interrupted tasks without model replies, and four unstarted tasks '
+         f'remain archived. The [allocation-2902 correction claim]'
+         f'(evidence/muse_nvfp4_r2_expiry_correction_claim.json) preserves those attempts and '
+         f'declares one unchanged-setting draw per task on the new allocation, after a nonempty-thinking '
+         f'preflight. It currently has {len(expiry_results)} terminal, '
+         f'{sum(row["reward"] in (0, 1) for row in expiry_results.values())} native grades and '
+         f'{sum(row["reward"] == 1 for row in expiry_results.values())} successes; no best-of selection.\n\n'
+         'The 89 original round-3 trials reached a refused endpoint before any model response.'), 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -1389,5 +1471,16 @@ if mn_tb['complete']:
          f'额外 GPU 申请状态：{extra_gpu_status}。指定镜像、旧缓存镜像和 BF16 的成绩分别统计。'),
         chinese_report, count=1, flags=re.S)
     assert replaced == 1
+if expiry_correction_claim:
+    chinese_report = chinese_report.replace(
+        '第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。',
+        (f'GPU allocation 2867 到期时，第 2 轮连接补跑留下 4 题无分连接错误、'
+         f'2 题无模型回复的中断目录、4 题尚未启动；原始记录全部保留。'
+         f'[2902 新 allocation 的纠错声明](evidence/muse_nvfp4_r2_expiry_correction_claim.json)'
+         f'在非空 thinking 预检后逐题仅抽一次，题目、镜像和采样设置不变。'
+         f'当前纠错有 {len(expiry_results)} 题终态、'
+         f'{sum(row["reward"] in (0, 1) for row in expiry_results.values())} 题原生判分、'
+         f'{sum(row["reward"] == 1 for row in expiry_results.values())} 题成功；不择优取样。\n\n'
+         '第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。'), 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))

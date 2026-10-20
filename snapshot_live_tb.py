@@ -28,6 +28,7 @@ replacement_jobs = [RESULTS / f'muse-nvfp4-tb-v1-exact-r2-infra-replacement-{tas
 transport_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm'
 storage_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli'
 connection_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020'
+expiry_correction_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-expiry-correction-2902-20261020'
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
 jobs.extend(RESULTS.glob('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b*'))
 jobs.extend(job for job in replacement_jobs if job.exists())
@@ -37,6 +38,8 @@ if storage_job.exists():
     jobs.append(storage_job)
 if connection_job.exists():
     jobs.append(connection_job)
+if expiry_correction_job.exists():
+    jobs.append(expiry_correction_job)
 for job in sorted(jobs):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
     if config.exists():
@@ -279,6 +282,41 @@ if connection_claim.exists():
     source_script = ROOT / 'prepare_muse_nvfp4_r2_connection_recovery.py'
     payloads[source_script] = source_script.read_bytes()
     counts['controller_source'] += 1
+expiry_claim = SOURCE / 'muse_nvfp4/state/r2-expiry-correction-2902-20261020-claim.json'
+if expiry_claim.exists():
+    claim = json.loads(expiry_claim.read_text())
+    assert claim['job_name'] == expiry_correction_job.name
+    assert claim['new_allocation'] == 2902 and claim['old_allocation'] == 2867
+    assert claim['no_best_of_selection'] and claim['no_model_retry']
+    for key in ('config', 'source_config', 'source_claim', 'new_endpoint_ready',
+                'new_reasoning_preflight', 'image_proof'):
+        source = Path(claim[key])
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == claim[key + '_sha256']
+        if source not in payloads:
+            payloads[source] = source.read_bytes()
+            counts['job_config' if key.endswith('config') else 'ready_proof' if key in ('new_endpoint_ready', 'new_reasoning_preflight') else 'handoff_receipt'] += 1
+    for row in claim['tasks']:
+        for key in ('source_original_result', 'previous_recovery_result'):
+            if row.get(key):
+                source = Path(row[key])
+                assert hashlib.sha256(source.read_bytes()).hexdigest() == row[key + '_sha256']
+    payloads[expiry_claim] = expiry_claim.read_bytes()
+    counts['handoff_receipt'] += 1
+    handoff = SOURCE / 'muse_nvfp4/state/replicas-extra-20261020/2902/handoff-from-expired-2867.json'
+    if handoff.exists():
+        payloads[handoff] = handoff.read_bytes()
+        counts['handoff_receipt'] += 1
+    source_script = ROOT / 'protocol/prepare_muse_nvfp4_r2_expiry_correction_20261020.py'
+    payloads[source_script] = source_script.read_bytes()
+    counts['controller_source'] += 1
+    controller_script = ROOT / 'protocol/run_muse_nvfp4_r2_expiry_correction_20261020.py'
+    payloads[controller_script] = controller_script.read_bytes()
+    counts['controller_source'] += 1
+    for suffix in ('start', 'exit'):
+        marker = expiry_claim.with_name(f'r2-expiry-correction-2902-20261020-{suffix}.json')
+        if marker.exists():
+            payloads[marker] = marker.read_bytes()
+            counts['handoff_receipt'] += 1
 assert counts['raw_response'] > 0 and counts['task_input'] > 0
 proc = subprocess.Popen(['zstd', '-q', '-T2', '-3', '-o', str(temp)], stdin=subprocess.PIPE)
 try:

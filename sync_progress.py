@@ -58,6 +58,7 @@ def sync_native_archives(scores, force_bf16=False):
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm')
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli')
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020')
+            replacement_names.append('muse-nvfp4-tb-v1-exact-r2-expiry-correction-2902-20261020')
             for job_name in replacement_names:
                 replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / job_name
                 if replacement.exists():
@@ -131,6 +132,17 @@ def sync_native_archives(scores, force_bf16=False):
                 expected_receipts += 1
                 handoff_newer |= (latest_archive_time is None or
                                  datetime.fromtimestamp(connection_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
+            expiry_claim = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-expiry-correction-2902-20261020-claim.json'
+            if expiry_claim.exists():
+                expected_receipts += 1
+                handoff_newer |= (latest_archive_time is None or
+                                 datetime.fromtimestamp(expiry_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
+                replica_2902 = expiry_claim.parent / 'replicas-extra-20261020/2902'
+                for marker in ('handoff-from-expired-2867.json', 'endpoint-ready.json', 'reasoning-preflight.json'):
+                    path = replica_2902 / marker
+                    if path.exists():
+                        handoff_newer |= (latest_archive_time is None or
+                                         datetime.fromtimestamp(path.stat().st_mtime, timezone.utc) > latest_archive_time)
             if handoff_path.exists():
                 expected_receipts += 1
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
@@ -346,6 +358,8 @@ def cycle():
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',
              'prepare_muse_nvfp4_r2_connection_recovery.py',
+             'protocol/prepare_muse_nvfp4_r2_expiry_correction_20261020.py',
+             'protocol/run_muse_nvfp4_r2_expiry_correction_20261020.py',
              'audit_muse_nvfp4_r2_prove_ungraded.py',
              'prepare_muse_nvfp4_r2_prove_replacement.py',
              'audit_muse_nvfp4_r2_prove_transport.py',

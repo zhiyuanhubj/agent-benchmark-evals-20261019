@@ -14,7 +14,7 @@ MODEL = 'muse-spark-open-nvfp4'
 
 
 def main():
-    assert len(sys.argv) == 2 and sys.argv[1] in ('2869', '2899')
+    assert len(sys.argv) == 2 and sys.argv[1] in ('2869', '2899', '2902')
     directory = STATE / sys.argv[1]
     for _ in range(720):
         if (directory / 'endpoint-ready.json').exists():

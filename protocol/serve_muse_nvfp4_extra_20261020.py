@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Serve the pinned Muse NVFP4 weights on completed GLM revision allocations."""
+"""Serve the pinned Muse NVFP4 weights on verified single-node allocations."""
 
 import fcntl
 import hashlib
@@ -18,7 +18,8 @@ STATE = SOURCE / 'muse_nvfp4/state/replicas-extra-20261020'
 DEPLOYMENT = Path('/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/deployment.json')
 WEIGHTS = Path('/fsx/home/zhiyuan/.private/muse_spark_open_20261016/weights')
 IMAGE = 'lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a'
-HOSTS = {2869: 'ip-10-1-77-106', 2899: 'ip-10-1-114-210'}
+HOSTS = {2869: 'ip-10-1-77-106', 2899: 'ip-10-1-114-210',
+         2902: 'ip-10-1-105-182'}
 PORT = 31321
 MODEL = 'muse-spark-open-nvfp4'
 

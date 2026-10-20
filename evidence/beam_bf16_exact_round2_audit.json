@@ -1,32 +1,25 @@
 {
-  "generated_utc": "2026-10-20T14:59:12.835890+00:00",
+  "generated_utc": "2026-10-20T15:26:19.123453+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T144949Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T151703Z.tar.zst",
   "expected": 89,
-  "terminal": 82,
-  "graded": 81,
-  "success": 59,
+  "terminal": 85,
+  "graded": 84,
+  "success": 61,
   "missing_graded_tasks": [
     "git-multibranch",
     "regex-chess",
     "schemelike-metacircular-eval",
     "train-fasttext",
-    "video-processing",
-    "vulnerable-secret",
-    "winning-avg-corewars",
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [
-    "video-processing",
-    "vulnerable-secret",
-    "winning-avg-corewars"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -605,6 +598,27 @@
       "reward": 1.0,
       "result_sha256": "ee9697057d6e4b2f0e088c3b045dec863a445006dc9357da445c2b12edb16b98",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/tune-mjcf__2JFiB8J/result.json",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
+    },
+    "video-processing": {
+      "reward": 0.0,
+      "result_sha256": "e953be3ab310de5c331aaa1bc3e6b35b71bce2602431f8b2885635b51b2b6cce",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/video-processing__S9ufXVz/result.json",
+      "raw_response_count": 139,
+      "responses_with_reasoning_content": 139
+    },
+    "vulnerable-secret": {
+      "reward": 1.0,
+      "result_sha256": "ba5ac17853697106e4aa1137f9846f98f8e82e8efe76bed5240f1e2b395db99a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/vulnerable-secret__RRuBbCR/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "winning-avg-corewars": {
+      "reward": 1.0,
+      "result_sha256": "1adc8ef7dab8e56c2ae8075e628df5ab9eb88599e1124e0295c0c21eae116579",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/winning-avg-corewars__SneQybe/result.json",
       "raw_response_count": 14,
       "responses_with_reasoning_content": 14
     }

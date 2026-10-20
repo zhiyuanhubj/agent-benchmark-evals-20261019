@@ -1,0 +1,34 @@
+{
+  "generated_utc": "2026-10-20T15:07:31.039811+00:00",
+  "group": "muse_bf16",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_delta_20261020T145147Z.json",
+  "cutoff_utc": "2026-10-20T14:46:51.595861+00:00",
+  "new_source_roots": [],
+  "one_time_native_thinking_backfill": false,
+  "one_time_model_patch_backfill": false,
+  "archive_name": "muse_bf16_delta_20261020T150730Z.tar.zst",
+  "archive_size_bytes": 1624538,
+  "archive_sha256": "cc0833f5c1ed49826b14fcd5429e5ad8d212de29d171c755ee27c860c5c7cb3d",
+  "file_count": 263,
+  "source_bytes": 38187122,
+  "filename_counts": {
+    "result.json": 13,
+    "mini-swe-agent.trajectory.json": 1,
+    "trajectory.json": 9,
+    "model.patch": 1,
+    "trial.log": 13,
+    "config.json": 7,
+    "task.json": 4,
+    "raw_response.json": 13,
+    "completion.json": 194,
+    "openhands_sdk.txt": 8
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/pro-results",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/swe_review"
+  ]
+}

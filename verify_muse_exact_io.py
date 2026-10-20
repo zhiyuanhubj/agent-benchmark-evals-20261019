@@ -89,6 +89,36 @@ if connection_claim.exists():
         if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
             missing_connection_trajectories.append(trial.name)
 
+expiry_claim_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-expiry-correction-2902-20261020-claim.json'
+missing_expiry_files = []
+missing_expiry_results = []
+missing_expiry_raw = []
+missing_expiry_trajectories = []
+if expiry_claim_path.exists():
+    expiry_claim = json.loads(expiry_claim_path.read_text())
+    for path in (expiry_claim_path, Path(expiry_claim['config']),
+                 Path(expiry_claim['new_endpoint_ready']), Path(expiry_claim['new_reasoning_preflight']),
+                 ROOT / 'protocol/prepare_muse_nvfp4_r2_expiry_correction_20261020.py',
+                 ROOT / 'protocol/run_muse_nvfp4_r2_expiry_correction_20261020.py'):
+        if str(path.relative_to(BASE)) not in entries:
+            missing_expiry_files.append(str(path.relative_to(BASE)))
+    expiry_job = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / expiry_claim['job_name']
+    for trial in expiry_job.glob('*'):
+        if not trial.is_dir():
+            continue
+        result = trial / 'result.json'
+        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+            continue
+        if str(result.relative_to(BASE)) not in entries:
+            missing_expiry_results.append(trial.name)
+        raw_dir = trial / 'agent/raw_responses'
+        if any(raw_dir.glob('*.json')) and not any(
+                path.startswith(str(raw_dir.relative_to(BASE)) + '/') for path in entries):
+            missing_expiry_raw.append(trial.name)
+        trajectory = trial / 'agent/trajectory.json'
+        if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
+            missing_expiry_trajectories.append(trial.name)
+
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())
 verified_names = {item['asset'] for item in remote_audit['items'] if item.get('sha256_matches') and item.get('bytes_match')}
 unverified = sorted(manifest['archive_name'] for manifest in manifests if manifest['archive_name'] not in verified_names)
@@ -111,6 +141,14 @@ if missing_connection_raw:
     errors.append(f'{len(missing_connection_raw)} round-2 connection recovery raw-response sets missing')
 if missing_connection_trajectories:
     errors.append(f'{len(missing_connection_trajectories)} round-2 connection recovery trajectories missing')
+if missing_expiry_files:
+    errors.append(f'{len(missing_expiry_files)} allocation-expiry correction inputs/proofs missing')
+if missing_expiry_results:
+    errors.append(f'{len(missing_expiry_results)} allocation-expiry correction results missing')
+if missing_expiry_raw:
+    errors.append(f'{len(missing_expiry_raw)} allocation-expiry correction raw-response sets missing')
+if missing_expiry_trajectories:
+    errors.append(f'{len(missing_expiry_trajectories)} allocation-expiry correction trajectories missing')
 if unverified:
     errors.append(f'{len(unverified)} release assets not SHA/size verified')
 
@@ -132,6 +170,10 @@ record = {
     'missing_connection_results': missing_connection_results,
     'missing_connection_raw_responses': missing_connection_raw,
     'missing_connection_trajectories': missing_connection_trajectories,
+    'missing_expiry_files': missing_expiry_files,
+    'missing_expiry_results': missing_expiry_results,
+    'missing_expiry_raw_responses': missing_expiry_raw,
+    'missing_expiry_trajectories': missing_expiry_trajectories,
     'unverified_assets': unverified,
     'errors': errors,
     'qualification': 'complete_verified' if not errors and audit['qualification'] == 'complete_verified' else 'partial_or_needs_review',
