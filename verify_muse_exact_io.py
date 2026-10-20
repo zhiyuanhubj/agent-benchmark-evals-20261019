@@ -19,7 +19,9 @@ names = [
 manifests = [json.loads((MANIFESTS / name).read_text()) for name in names]
 live_stamp = names[-1].removesuffix('.json').rsplit('_live_', 1)[1]
 live_archive_started = datetime.strptime(live_stamp, '%Y%m%dT%H%M%SZ').replace(tzinfo=timezone.utc)
-score_generated = datetime.fromisoformat(json.loads((ROOT / 'results/scores.json').read_text())['generated_utc'])
+published = json.loads((ROOT / 'results/scores.json').read_text())
+exact_profile = published['models']['muse_nvfp4']['tb2_1_exact_supplied_images']
+score_generated = datetime.fromisoformat(exact_profile.get('native_score_snapshot_utc', published['generated_utc']))
 deferred_post_score_results = []
 
 

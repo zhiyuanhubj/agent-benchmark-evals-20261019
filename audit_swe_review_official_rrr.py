@@ -123,6 +123,7 @@ def main():
                 'native_evidence': f'evidence/{label}_rrr_native_evidence.json',
                 'scorer_sha256': sha(public_scorer),
                 'release_tag': release['release_tag'],
+                'release_tags': release.get('release_tags', [release['release_tag']]),
                 'qualification': 'complete_verified_official_split_rrr',
             }
     output = {'scope': 'Only complete SWE-Review split RRR with unchanged official metric functions, '

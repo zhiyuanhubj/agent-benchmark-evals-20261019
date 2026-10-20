@@ -214,17 +214,47 @@ if muse_pro_resume_progress:
     muse_pro_scoring_run = muse_pro_resumed
 else:
     muse_pro_scoring_run = muse_pro_original
-record['muse_bf16']['pro'] = pro([muse_pro_scoring_run], muse_pro_ids)
+muse_pro_direct_claim_path = MUSE / 'recovery_20261020/pro-direct-2886-claim.json'
+muse_pro_roots = [muse_pro_scoring_run]
+muse_pro_direct_run = None
+if muse_pro_direct_claim_path.exists():
+    muse_pro_direct_claim = load(muse_pro_direct_claim_path)
+    muse_pro_direct_run = muse_pro_parent / muse_pro_direct_claim['direct_run_id']
+    direct_tasks = [load(path.parent.parent / 'task.json')['task_id']
+                    for path in muse_pro_direct_run.glob('details/*/attempt-1/result.json')]
+    assert len(direct_tasks) == len(set(direct_tasks))
+    assert set(direct_tasks) <= set(muse_pro_direct_claim['direct_task_ids'])
+    muse_pro_roots.append(muse_pro_direct_run)
+record['muse_bf16']['pro'] = pro(muse_pro_roots, muse_pro_ids)
+assert not record['muse_bf16']['pro']['duplicate_task_ids']
 record['muse_bf16']['pro'].update(
     scoring_run_id=muse_pro_scoring_run.name,
     source_run_id=muse_pro_original.name,
+    supplemental_run_id=muse_pro_direct_run.name if muse_pro_direct_run else None,
     reused_original_completed_tasks=(muse_pro_resume_progress or {}).get('reused_tasks', 0),
     original_unreused_failed_tasks=(muse_pro_source_progress or {}).get('failed_tasks', 0),
     recovery_qualification=('Original completed tasks are counted once; failed source attempts and '
-        'interrupted source tasks remain separately preserved. The resumed run is scored on its '
-        'own native results, without pooling duplicate task records.'))
+        'interrupted source tasks remain separately preserved. The resumed run and disjoint '
+        'direct-endpoint continuation are scored together by original task ID, once each.'))
 for kind, count in [('tb', 89), ('deep', 113)]:
-    record['muse_bf16'][kind] = {str(number): harbor([MUSE / ('legacy_bench/' + kind + '-results') / ('muse-bf16-' + kind + '-r' + str(number))], expected_harbor[kind]) for number in [1, 2, 3]}
+    rounds = {}
+    for number in [1, 2, 3]:
+        roots = [MUSE / ('legacy_bench/' + kind + '-results') / ('muse-bf16-' + kind + '-r' + str(number))]
+        if number == 1:
+            direct_claim_path = MUSE / 'recovery_20261020' / (kind + '-r1-direct-2886-20261020-claim.json')
+            if direct_claim_path.exists():
+                direct_claim = load(direct_claim_path)
+                direct_root = MUSE / ('legacy_bench/' + kind + '-results') / direct_claim['job_name']
+                direct_tasks = [Path(load(path)['config']['task']['path']).name
+                                for path in direct_root.glob('*/result.json')]
+                assert len(direct_tasks) == len(set(direct_tasks))
+                assert set(direct_tasks) <= set(direct_claim['tasks'])
+                roots.append(direct_root)
+        rounds[str(number)] = harbor(roots, expected_harbor[kind])
+        assert not rounds[str(number)]['duplicate_task_ids']
+        if number == 1 and len(roots) > 1:
+            rounds[str(number)]['supplemental_run_id'] = roots[1].name
+    record['muse_bf16'][kind] = rounds
 record['reserved_capacity'] = load(BEAM / 'expanded_capacity_20261018/current.json')
 record['reserved_beam_servers'] = load(BEAM / 'expanded_capacity_20261018/serving-current.json')
 revision_runtime = Path('/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision_capacity_20261018')
@@ -315,6 +345,7 @@ for name in [
         '-p', 'ActiveState', '-p', 'Result'], capture_output=True, text=True, timeout=10)
     record['controller_states'][name] = dict(line.split('=', 1) for line in result.stdout.splitlines() if '=' in line)
 record['qualification'] = 'Muse BF16 and NVFP4 are separate original checkpoints and result sets. Raw returned reasoning retained. Pending nodes are not counted as active GPUs. TB and Deep stop at three valid rounds; Pro is one full first round.'
+record['utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
 p = BEAM / 'expanded-current.json'
 temp = p.with_name(p.name + '.' + str(os.getpid()) + '.tmp')
 temp.write_text(json.dumps(record, indent=2) + '\n')

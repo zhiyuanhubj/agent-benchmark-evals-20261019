@@ -17,7 +17,9 @@ def load(path):
     return json.loads(path.read_text())
 
 
-score = load(ROOT / 'results/scores.json')['models']['muse_bf16']['tb2_1_exact_supplied_images']['rounds']['1']
+published = load(ROOT / 'results/scores.json')
+score = published['models']['muse_bf16']['tb2_1_exact_supplied_images']['rounds']['1']
+score_generated = datetime.fromisoformat(score.get('native_score_snapshot_utc', published['generated_utc']))
 identity = load(EVIDENCE / 'muse_bf16_exact_image_identity.json')
 config = load(BF / 'configs/tb-r1.json')
 expected = {Path(row['path']).name for row in config['tasks']}
@@ -28,11 +30,25 @@ ungraded_native = {}
 errors = []
 raw_reasoning_by_task = {}
 thinking_warnings = []
-for result_path in (BF / 'tb-results/muse-bf16-tb-r1').glob('*/result.json'):
+deferred_post_score_results = []
+direct_claim_path = BASE / '.private/muse_bf16_20261018/recovery_20261020/tb-r1-direct-2886-20261020-claim.json'
+roots = [BF / 'tb-results/muse-bf16-tb-r1']
+direct_tasks = set()
+if direct_claim_path.exists():
+    direct_claim = load(direct_claim_path)
+    direct_tasks = set(direct_claim['tasks'])
+    roots.append(BF / 'tb-results' / direct_claim['job_name'])
+for result_path in (path for root in roots for path in root.glob('*/result.json')):
     row = load(result_path)
     if not row.get('finished_at'):
         continue
+    if datetime.fromisoformat(row['finished_at'].replace('Z', '+00:00')) > score_generated:
+        deferred_post_score_results.append(str(result_path.relative_to(BASE)))
+        continue
     task = Path(row['config']['task']['path']).name
+    if result_path.parent.parent == roots[-1] and len(roots) > 1 and task not in direct_tasks:
+        errors.append(f'BF16 direct result is outside the frozen task claim: {task}')
+        continue
     reward = ((row.get('verifier_result') or {}).get('rewards') or {}).get('reward')
     if task not in expected or task in scored or task in ungraded_native:
         errors.append(f'unexpected or duplicate BF16 task: {task}')
@@ -109,6 +125,8 @@ audit = {'generated_utc': datetime.now(timezone.utc).isoformat(), 'expected_task
          'scored_raw_response_count': sum(row['raw_responses'] for row in raw_reasoning_by_task.values()),
          'nonempty_reasoning_response_count': sum(row['nonempty_reasoning_content'] for row in raw_reasoning_by_task.values()),
          'raw_reasoning_by_task': raw_reasoning_by_task, 'thinking_warnings': thinking_warnings,
+         'direct_run_id': roots[1].name if len(roots) > 1 else None,
+         'deferred_post_score_results': deferred_post_score_results,
          'archives': [row['archive_name'] for row in manifests],
          'missing_inputs': missing_inputs, 'missing_results': missing_results,
          'missing_raw_responses': missing_raw, 'missing_trajectories': missing_trajectories,

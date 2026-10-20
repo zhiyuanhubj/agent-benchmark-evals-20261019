@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-20T18:14:32.808628+00:00",
+  "generated_utc": "2026-10-20T19:46:17.212290+00:00",
   "scope": "Original Muse BF16 SWE-Review native task outcomes; progress only, not official DA or RRR.",
   "queue_plan_sha256": "d758f7f0b01b85e923ebf9ad2e5c5c358fb620aa377fc2e54a23bc432bf7a977",
   "model_id": "muse-spark-open-bf16",
   "splits": {
     "glm5_500": {
       "expected": 500,
-      "native_terminal": 128,
-      "native_graded": 128,
+      "native_terminal": 140,
+      "native_graded": 140,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch0/astropy__astropy-12907__tLSFDZR/result.json",
@@ -776,13 +776,85 @@
           "sha256": "ec7cf50ff484c203e3a4870386996c65fcbe4bd4c9a04937d7e69613a0d07609",
           "native_graded": true,
           "exception_type": null
+        },
+        "django__django-13807": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13807__fRwM8Nt/result.json",
+          "sha256": "aed02d1159edd578cabb7247bbb0fa9034eeb76ccf8d497c178a77da469e8c8f",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13809": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13809__JLkTqLJ/result.json",
+          "sha256": "144aed00db32c6503d2185447b16d4075add1e8921e99ee8a1db92dd5fbf85c2",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13810": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13810__6qimygk/result.json",
+          "sha256": "716d56b25925b8380a81346d8540d52d1c80336acf7d303d4fc32d15dda9897e",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13820": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13820__m96SUWF/result.json",
+          "sha256": "eafd9a548e35534ade852a43613e553d1ad988585349fbfd54f8e8dbd2b82d75",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13821": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13821__bekYnvB/result.json",
+          "sha256": "21a1c17a5cd64de3b57ab07157c3c169f178d871625da0973c306ba25d33e14d",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13837": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13837__ZDxvFY3/result.json",
+          "sha256": "3939f0dbd3d293d189c607994014fa846e75b4589e9491eab7e0f4e85674a43e",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13925": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13925__mQvWA3c/result.json",
+          "sha256": "a5f879d593d45330239fc7d99568ecff2dca81e9f5f5c74d72b097416c86753e",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13933": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13933__tYUtwAt/result.json",
+          "sha256": "cd610dae61719f3da5ca20f08f3f5e5849b13a65db15d63072f6cf7525eb8382",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13964": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-13964__3XsDkk5/result.json",
+          "sha256": "fcd8b7cca8bbef9a68597dfa59ac125156ca5750334b3cfe5467f625ce00cfb2",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14007": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-14007__EJhfcvp/result.json",
+          "sha256": "f8ed5a4cfaa39bfcec6c0a4ee7049a476b65e696b3b4842334402c58859b8530",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14011": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-14011__mSffBaW/result.json",
+          "sha256": "88c516016f6e6acb4ff46c0fd99f93713bb01635513b3f4145ca4524b32ac5d7",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14017": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch8/django__django-14017__UmbgU95/result.json",
+          "sha256": "fd662266c32b02fa862f5c287867f0bdeaa03eeac586afecd464ffd1c9220ea1",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "native_terminal": 125,
-      "native_graded": 125,
+      "native_terminal": 136,
+      "native_graded": 136,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch0/astropy__astropy-12907__FgxbXC9/result.json",
@@ -1533,13 +1605,79 @@
           "sha256": "d4543e5cd2a33890f4588b7505b760a732985606bd7b8a042767f42ec5c3b801",
           "native_graded": true,
           "exception_type": null
+        },
+        "django__django-13925": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch7/django__django-13925__hsetY9A/result.json",
+          "sha256": "1f408f08b1d11f0a70cb977bc2fe75e20148e099d3f230dfe9f8920f893d4b46",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13933": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch7/django__django-13933__NFQwbNN/result.json",
+          "sha256": "9deebd3dc9e3d06a88a834a3b542681946cb3527ba3bcbfcd3aae47051629381",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-13964": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch7/django__django-13964__rS3Tz9G/result.json",
+          "sha256": "c8cfdc981e1502187a497d63e95b7c1d36c50a763903e8de7ed3600e442a94ba",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14007": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14007__Kc3yyrG/result.json",
+          "sha256": "3a6b171e0f9a033c1b719c688e1af069c5eac97c5c52d2d8dc94ff2df007b874",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14017": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14017__QG77zcC/result.json",
+          "sha256": "5d6dab50abfa497a1a53dae5667cfa9d9e33d757d4f9fae0286e4eaaf076aa19",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14034": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14034__rpFg765/result.json",
+          "sha256": "415374ae0688c1e22402999429f60cf0eec23173d9385bcf8d2a16fe90f674b9",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14053": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14053__QsJpKEn/result.json",
+          "sha256": "84aebe96dc9024563457c2d958a1758b5fe85db4017a9f6b82e646fe4be5af1c",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14089": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14089__3L7p3tS/result.json",
+          "sha256": "2bc4c39911512f6ab085396f888f7f7689acaee8444da45898b0d90d7906e860",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14122": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14122__fhcQFoE/result.json",
+          "sha256": "c88a7e11a7ed4ba2b9652374b2716b04999c886baeea431649f7411876352aa0",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14155": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14155__NofFPCz/result.json",
+          "sha256": "eb92128757979cbd8ee38aaa0bd16520e41664ce080909f2acfcfd07c155ded4",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14170": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch8/django__django-14170__si5YdU9/result.json",
+          "sha256": "7370e7ebe300ae9d6c1fbf213ffe4f4f649b8260662a43ca90326e2eaf3690ae",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "native_terminal": 126,
-      "native_graded": 126,
+      "native_terminal": 139,
+      "native_graded": 139,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch0/astropy__astropy-12907__nGRk5dr/result.json",
@@ -2296,12 +2434,90 @@
           "sha256": "67f9a63135fa5ff6b14b29fdf7a12d9db321a9373b14a49edd339ebfb22991a2",
           "native_graded": true,
           "exception_type": null
+        },
+        "django__django-14238": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch7/django__django-14238__EdGV4FD/result.json",
+          "sha256": "b26a5b521e9848c61b600122191e5d7b0f2c8b05d32a3994721a89f918232e25",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14311": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch7/django__django-14311__Q6Z7kL5/result.json",
+          "sha256": "52065c9098f7171faba29133f106aab6569782ac89bd35bed0066ab360d9e1be",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14349": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14349__bcPNPdN/result.json",
+          "sha256": "19187a617cca93fe22c3a3ee084fa1999773ccd945105845467bdce413add24f",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14351": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14351__LN8vKpY/result.json",
+          "sha256": "beaa79a651ed3ef030135b54932ee84225f62f9983a691d81fed963fd1a71c8d",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14373": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14373__FohLnDK/result.json",
+          "sha256": "79fa5f9fd2e4844e85d3aef9d107f7332f48ce50d9dbf1e127ae4cacb78acbad",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14376": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14376__KhucLe2/result.json",
+          "sha256": "0f3505241fd3fe36d7132a05fc7102f229d81c0f73e3991b8dcbad4543707ac3",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14404": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14404__2Zfb7TZ/result.json",
+          "sha256": "02b6ae720f97a1ab3fa8e36e03e2e59feadc0ec6d739572b7a42601f179483a5",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14434": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14434__2p9JNPT/result.json",
+          "sha256": "1ab59d7b73769c90505b299035f2d510a661170178b07658579958b6939d561d",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14500": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14500__kKCBUu2/result.json",
+          "sha256": "95976ab90e2786780b7d8d2693492cf90546d11a2bd6610201a176e2816df9a9",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14534": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14534__xZ7pqEM/result.json",
+          "sha256": "04141836eb5a59754a0727197b45b1381fb62a59f9caac2be1812d09d88b2563",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14539": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14539__BsRGbPg/result.json",
+          "sha256": "59f0ab120200999a06d1219ea44400b1198648694b80b1ff515ef9845bfa678f",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14559": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14559__nRy9yZL/result.json",
+          "sha256": "c3530975858fc1d0114a1da95d8a0dd16bee68741f69a380de7eee662441f057",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-14580": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch8/django__django-14580__73RNCFS/result.json",
+          "sha256": "f0040c2dbd453d8d278a9f83f8d9cc82c8ed846a9b0ef4ebf038764ae1fe3df8",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     }
   },
   "errors": [],
   "total_expected": 1384,
-  "total_native_terminal": 379,
-  "total_native_graded": 379
+  "total_native_terminal": 415,
+  "total_native_graded": 415
 }

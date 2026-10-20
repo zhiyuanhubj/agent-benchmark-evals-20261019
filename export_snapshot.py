@@ -144,7 +144,7 @@ for kind in ('tb', 'deep'):
         'job_name': direct_claim['job_name'], 'declared_tasks': len(direct_claim['tasks']),
         'native_terminal': len(found), 'native_graded': graded, 'native_success': success,
         'original_terminal_preserved': len(direct_claim['terminal_original_trials']),
-        'qualification': 'Disjoint first-round infrastructure continuation. Separately tracked until task-level native score reconciliation.',
+        'qualification': 'Disjoint first-round infrastructure continuation. Native results are merged by original task ID into the round 1 score at snapshot time.',
     }
 pro_direct_claim_path = BF / 'recovery_20261020/pro-direct-2886-claim.json'
 if pro_direct_claim_path.exists():
@@ -168,7 +168,7 @@ if pro_direct_claim_path.exists():
         'declared_tasks': pro_direct_claim['direct_task_count'],
         'native_terminal': len(pro_results),
         'original_native_results_preserved': pro_direct_claim['previous_native_result_count'],
-        'qualification': 'Disjoint first-round infrastructure continuation. Separately tracked until task-level native score reconciliation.',
+        'qualification': 'Disjoint first-round infrastructure continuation. Native results are merged by original task ID into the round 1 score at snapshot time.',
     }
 write('evidence/muse_bf16_2869_direct_resume_progress.json', bf16_direct_progress)
 br = read(B / 'current.json')
@@ -862,6 +862,7 @@ bf16_complete = (bf16_source_round1['graded'] == 89 and
                  (bf16_source_round1['graded'], bf16_source_round1['success']))
 bf16_tb_round1 = metric(bf16_source_round1, '1', 'complete' if bf16_complete else 'partial_no_full_score') | {
     'complete': bf16_complete, 'accuracy': bf16_source_round1['success'] / 89 if bf16_complete else None,
+    'native_score_snapshot_utc': ex['utc'],
     'qualification': 'Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.',
 }
 
@@ -912,7 +913,7 @@ snapshot = {
                 'evidence': 'evidence/swe_review_recovery_control.json',
             },
             'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
-            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'b05_early_owner': early_b05_owner, 'qualification': nvfp4_recovery['qualification']}},
+            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'native_score_snapshot_utc': exact['utc'], 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'b05_early_owner': early_b05_owner, 'qualification': nvfp4_recovery['qualification']}},
         },
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',
@@ -965,16 +966,17 @@ snapshot = {
             'status': 'in_progress',
             'swe_bench_pro_verified': metric(ex['muse_bf16']['pro'], 'pro', 'partial_no_full_score') | {
                 key: ex['muse_bf16']['pro'][key] for key in
-                ('scoring_run_id', 'source_run_id', 'reused_original_completed_tasks',
+                ('scoring_run_id', 'source_run_id', 'supplemental_run_id', 'reused_original_completed_tasks',
                  'original_unreused_failed_tasks', 'recovery_qualification')
+                if key in ex['muse_bf16']['pro']
             } | {'recovery_evidence': 'evidence/muse_bf16_2865_expiry_recovery.json'},
-            'tb2_1_legacy_cached_tag': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['muse_bf16']['tb'].items()} | {'qualification': 'Historical field name for this same BF16 run; do not add these trials to the exact-image field as independent attempts.'},
+            'tb2_1_legacy_cached_tag': {k: metric(v, k, 'partial_no_full_score') | ({'supplemental_run_id': v['supplemental_run_id']} if 'supplemental_run_id' in v else {}) for k, v in ex['muse_bf16']['tb'].items()} | {'qualification': 'Historical field name for this same BF16 run; do not add these trials to the exact-image field as independent attempts.'},
             'tb2_1_exact_supplied_images': {'rounds': {'1': bf16_tb_round1}, 'status': 'round_1_complete' if bf16_complete else 'partial_no_full_score',
                 'same_trials_as_legacy_named_bf16_tb': True,
                 'image_identity_audit': 'evidence/muse_bf16_exact_image_identity.json',
                 'released_io_audit': 'evidence/muse_bf16_exact_io_coverage.json',
                 'qualification': 'The 89 supplied archive image identities, task paths and agent settings were verified before BF16 round 1 launched and rechecked on the running node. A full-round accuracy awaits all 89 native results and task-level audit.'},
-            'deepswe': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['muse_bf16']['deep'].items()},
+            'deepswe': {k: metric(v, k, 'partial_no_full_score') | ({'supplemental_run_id': v['supplemental_run_id']} if 'supplemental_run_id' in v else {}) for k, v in ex['muse_bf16']['deep'].items()},
             'swrbench': {
                 'status': 'complete' if bf16_swr_complete else 'partial_no_full_score',
                 'expected': 1000,
@@ -1457,7 +1459,7 @@ if replica_2867_slot1_status:
                         "使用同一已核验 NVFP4 端点。")
 readme = f'''# Agent benchmark evaluation snapshot
 
-Snapshot: **{now}**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot); each archive has a SHA-256 manifest.
+Snapshot: **{now}**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases); each archive has a SHA-256 manifest.
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
@@ -1469,9 +1471,9 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 
 Opus 4.7 SWE-Review uses the unchanged official task cards and one review attempt per task. Its [model-visible inputs](input_output/archive_manifests/opus47_review_inputs.json) and [native outputs, completions and trajectories](input_output/archive_manifests/opus47_review_full_io.json) are SHA-verified Release assets. The output archive is a partial snapshot; later deltas preserve ongoing trials. Review-stage outcomes alone do not establish DA or RRR.
 
-Muse BF16's original GPU allocation expired during Pro, TB2.1 and DeepSWE runs. The [recovery audit](evidence/muse_bf16_2865_expiry_recovery.json) identifies the original and derived Pro run IDs: **137 completed original tasks are reused once**, while 10 failed and four active original attempts are preserved separately. Its live Pro score reads only the derived native run, so partial counts may temporarily fall as interrupted tasks are resumed. The two interrupted original TB trials and two DeepSWE trials are available as separate SHA-verified [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) and [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) I/O assets; they remain ungraded infrastructure interruptions.
+Muse BF16's original GPU allocation expired during Pro, TB2.1 and DeepSWE runs. The [recovery audit](evidence/muse_bf16_2865_expiry_recovery.json) identifies the original and derived Pro run IDs: **137 completed original tasks are reused once**, while 10 failed and four active original attempts are preserved separately. Its live Pro score combines the derived native run with disjoint direct-endpoint continuation results by original task ID. The two interrupted original TB trials and two DeepSWE trials are available as separate SHA-verified [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) and [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) I/O assets; they remain ungraded infrastructure interruptions.
 
-After bridge allocation 2869 expired, the [direct-endpoint continuation](evidence/muse_bf16_2869_direct_resume_progress.json) separately declared 560 Pro, 16 TB2.1 and 11 DeepSWE tasks without an original native result. Their new trials and prior artifacts remain separate until task-level score reconciliation; ungraded originals are never counted as model failures.
+After bridge allocation 2869 expired, the [direct-endpoint continuation](evidence/muse_bf16_2869_direct_resume_progress.json) separately declared 560 Pro, 16 TB2.1 and 11 DeepSWE tasks without an original native result. Completed native results are reconciled by original task ID into the first-round scores. Their run directories and prior artifacts remain separate; ungraded originals are never counted as model failures.
 
 Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits](evidence/swe_review_complete_split_da.json): GLM5 **{review_glm_da['DA']}%** on {review_glm_da['produced']} parseable decisions (500 task outcomes), Qwen3-Coder **{review_coder_da['DA']}%** on {review_coder_da['produced']} (462 outcomes), and Qwen3-30B-Instruct **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} (422 outcomes). [The v2 receipt audit](evidence/muse_swe_review_revision_v2_receipts.json) verifies 8 GLM5 and 2 Coder task-generation-only adapters for finished native verifier reports lacking Harbor summaries; no adapter is a model result. {muse_rrr_en_note}
 
@@ -1515,7 +1517,7 @@ Beam DeepSWE round 1 has one ungraded task, `koota-composite-trait-aspects`: the
 
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
-The release has {asset_count} archive manifests; **{release_audit_label} assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
+The release chain has {asset_count} archive manifests; **{release_audit_label} assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
 
 Muse NVFP4 round-one inputs are in `muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst` (all 89 public `task.toml` files, original job configs, and image identity checks). The [I/O coverage audit](evidence/muse_nvfp4_exact_io_coverage.json) verifies that the released archives contain every scored result, its raw response and trajectory, and all task inputs.
 
@@ -1626,7 +1628,7 @@ if expiry_correction_claim:
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
-更新时间：**{now}**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Release](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tag/2026-10-19-snapshot) 和 `input_output/archive_manifests/`。当前仓库为私有。
+更新时间：**{now}**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases) 和 `input_output/archive_manifests/`。当前仓库为私有。
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
@@ -1638,9 +1640,9 @@ chinese_report = f'''# 模型评测结果快照
 
 Opus 4.7 SWE-Review 使用未改动的官方题卡，每题仅一次评审抽样。[模型可见输入](input_output/archive_manifests/opus47_review_inputs.json)及[原生输出、逐次回复和轨迹](input_output/archive_manifests/opus47_review_full_io.json)已作为带 SHA 校验的 Release 资产保存。输出归档是运行中的局部快照，后续增量归档会续传；仅凭评审阶段结果不能报告 DA 或 RRR。
 
-Muse BF16 原节点在 Pro、TB2.1、DeepSWE 运行中到期。[恢复审计](evidence/muse_bf16_2865_expiry_recovery.json)记录了原始及续跑 ID：**137 道已完成的 Pro 题仅复用一次**，原运行的 10 道失败题和 4 道中断题单独保留。当前 Pro 进度只统计续跑的原生结果，故恢复初期局部已判分数可能暂时下降。另有两道 TB 和两道 DeepSWE 的中断原始输入输出及轨迹，分别保存在已做 SHA 校验的 [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) 与 [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) 归档中；这些原记录尚未判分，不计为模型失败。
+Muse BF16 原节点在 Pro、TB2.1、DeepSWE 运行中到期。[恢复审计](evidence/muse_bf16_2865_expiry_recovery.json)记录了原始及续跑 ID：**137 道已完成的 Pro 题仅复用一次**，原运行的 10 道失败题和 4 道中断题单独保留。当前 Pro 分数按原始题目 ID 合并续跑结果与互不重叠的直连结果。另有两道 TB 和两道 DeepSWE 的中断原始输入输出及轨迹，分别保存在已做 SHA 校验的 [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) 与 [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) 归档中；这些原记录尚未判分，不计为模型失败。
 
-2869 转发节点到期后，[直连续跑清单](evidence/muse_bf16_2869_direct_resume_progress.json)另外声明了原轮次中没有原生结果的 Pro 560 题、TB2.1 16 题、DeepSWE 11 题。新试验与旧轨迹分开保留，待逐题核对后再合并计分；原始未判分记录不算模型失败。
+2869 转发节点到期后，[直连续跑清单](evidence/muse_bf16_2869_direct_resume_progress.json)另外声明了原轮次中没有原生结果的 Pro 560 题、TB2.1 16 题、DeepSWE 11 题。已完成的原生结果按原始题目 ID 合并进首轮分数，运行目录和旧轨迹仍分别保留；原始未判分记录不算模型失败。
 
 **SWE-Review 三组 DA 均已有封存收据。** 官方 `compute_da.py` 在 GLM5 {review_glm_da['produced']} 个可解析决定上得 **{review_glm_da['DA']}%**（500 题终态），Qwen3-Coder {review_coder_da['produced']} 个得 **{review_coder_da['DA']}%**（462 题），Qwen3-30B-Instruct {review_instruct_da['produced']} 个得 **{review_instruct_da['DA']}%**（422 题）。[逐题哈希和官方评分核验](evidence/swe_review_complete_split_da.json)覆盖全部三组。[新版任务准备收据审计](evidence/muse_swe_review_revision_v2_receipts.json)确认 GLM5 的 8 道、Coder 的 2 道只缺 Harbor 汇总：它们的真实原生报告参与 DA，标明用途的适配文件仅供官方修复任务生成，绝非模型结果。{muse_rrr_zh_note}
 
@@ -1660,7 +1662,7 @@ Beam BF16 的 SWE-Review Instruct 组已有[封存的官方 DA](evidence/swe_rev
 
 [精确镜像 TB 命令筛查](evidence/exact_tb_integrity_screen.json)及[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)目前将 Muse NVFP4 的 {len(nvfp4_excluded)} 条、Muse BF16 的 {len(bf16_excluded)} 条成功轨迹排除出“干净训练轨迹”候选。排除的 NVFP4 题目是 {nvfp4_excluded_names}；逐题核查记录了 verifier 日志探查、向 `/tests/filter.py` 复制公开文件或计时篡改；已检查的 verifier 探查输出没有确认获得隐藏答案。BF16 和 NVFP4 的 `largest-eigenval` 都通过修改计时函数、拖慢参考特征值求解器拿到原始 reward 1；原始分数保留，NVFP4 的[最终轨迹审计](evidence/muse_nvfp4_largest_eigenval_live_integrity_alert.json)有哈希锚定，但这两条高分不能当作未经篡改的加速证据。另一份判分前预警记录了 NVFP4 [`db-wal-recovery` 对宿主边界的探查](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)，它不证明边界探查成功，也不是最终分数。关键词未命中也不代表轨迹已获干净认证。
 
-逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 共 {asset_count} 个归档，SWE-Review 的 `*_review_full_io.tar.zst` 含 OpenHands completions；`*_review_verifier.tar.zst` 含原生验证器的评审报告、判分报告和 reward，其中包括 10 道缺 Harbor 汇总文件但已完成原生验证的 Muse 题。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 {release_audit_label}**，逐项核验见 `evidence/release-assets-verification.json`。
+逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 归档链共 {asset_count} 个归档，SWE-Review 的 `*_review_full_io.tar.zst` 含 OpenHands completions；`*_review_verifier.tar.zst` 含原生验证器的评审报告、判分报告和 reward，其中包括 10 道缺 Harbor 汇总文件但已完成原生验证的 Muse 题。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 {release_audit_label}**，逐项核验见 `evidence/release-assets-verification.json`。
 
 SWE-Review 原始生成模型的修订输入见 [Muse](input_output/archive_manifests/muse_review_revision_inputs.json) 和 [Beam](input_output/archive_manifests/beam_review_revision_inputs.json) 基础归档及按时间命名的增量归档；原生输出、completions、轨迹及 verifier 记录见独立的 [Muse](input_output/archive_manifests/muse_revision_review_full_io.json) 和 [Beam](input_output/archive_manifests/beam_revision_review_full_io.json) 归档链。[Release 覆盖审计](evidence/review_revision_release_coverage.json)给出当前各模型已准备及已进入桥接补测队列的任务卡数量，并确认这些输入与旧故障文件都在 SHA 校验通过的归档中。旧节点地址导致的首回复前失败与可判分的桥接补测分属不同路径；后续增量归档按时间覆盖仍在增长的文件。
 

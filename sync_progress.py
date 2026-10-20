@@ -8,6 +8,7 @@ import time
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
+from release_shards import MAX_ASSETS_PER_RELEASE, REPO, release_assets, tag_for_part
 
 ROOT = Path(__file__).resolve().parent
 BASE = Path('/fsx/home/zhiyuan')
@@ -90,7 +91,22 @@ def sync_native_archives(scores, force_bf16=False):
             latest_archive_time = datetime.fromisoformat(latest['generated_utc'])
             latest_filename_counts = latest['filename_counts']
         handoff_newer = False
+        scored_result_newer = False
         if name == 'muse_nvfp4':
+            # A result can land after snapshot_live_tb collected its file list
+            # but before it wrote the manifest. Compare with the archive's
+            # start stamp, and only require results in this score snapshot.
+            archive_started = None
+            if live_manifests:
+                stamp = live_manifests[-1].stem.rsplit('_live_', 1)[1]
+                archive_started = datetime.strptime(stamp, '%Y%m%dT%H%M%SZ').replace(tzinfo=timezone.utc)
+            scored_cutoff = datetime.fromisoformat(
+                scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images'].get(
+                    'native_score_snapshot_utc', scores['generated_utc']))
+            result_root = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4'
+            scored_result_newer = any(
+                archive_started is None or archive_started.timestamp() < path.stat().st_mtime <= scored_cutoff.timestamp()
+                for path in result_root.glob('*/*/result.json'))
             r3_state = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900'
             if (r3_state / 'plan.json').exists():
                 markers = [r3_state / 'plan.json', *r3_state.glob('b*-started.json'),
@@ -206,7 +222,7 @@ def sync_native_archives(scores, force_bf16=False):
                                  for marker in receipts)
         raw_snapshot_due = (latest_archive_time is not None and raw_count > latest_filename_counts.get('raw_response', 0)
                             and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS)
-        if terminal > archived_terminal or handoff_newer or raw_snapshot_due:
+        if terminal > archived_terminal or handoff_newer or raw_snapshot_due or scored_result_newer:
             run(command, timeout=300)
     static_scans = json.loads(ARCHIVE_SCAN_STATE.read_text()) if ARCHIVE_SCAN_STATE.exists() else {}
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
@@ -233,10 +249,9 @@ def sync_native_archives(scores, force_bf16=False):
                 temp.replace(ARCHIVE_SCAN_STATE)
     live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
     delta_manifests = sorted(manifest_dir.glob('*_delta_*.json'))
-    release = json.loads(subprocess.check_output([
-        'gh', 'api', 'repos/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tags/2026-10-19-snapshot'
-    ], cwd=ROOT, text=True, timeout=60))
-    remote = {asset['name'] for asset in release['assets']}
+    releases = release_assets()
+    remote = {asset['name'] for _, assets in releases for asset in assets}
+    assert len(remote) == sum(len(assets) for _, assets in releases), 'Duplicate archive name across releases'
     revision_base_manifests = [manifest_dir / f'{group}.json' for group in
         ('opus47_review_inputs', 'opus47_review_full_io',
          'muse_review_revision_inputs', 'beam_review_revision_inputs',
@@ -248,7 +263,17 @@ def sync_native_archives(scores, force_bf16=False):
         if archive_name not in remote:
             archive = ROOT / '.release_assets' / archive_name
             assert archive.is_file(), f'Missing local archive for GitHub upload: {archive_name}'
-            run(['gh', 'release', 'upload', '2026-10-19-snapshot', str(archive), '--repo', 'zhiyuanhubj/agent-benchmark-evals-20261019'], timeout=300)
+            if len(releases[-1][1]) >= MAX_ASSETS_PER_RELEASE:
+                next_tag = tag_for_part(len(releases) + 1)
+                run(['gh', 'release', 'create', next_tag, '--repo', REPO, '--target', 'main',
+                     '--title', f'Benchmark native I/O archives, part {len(releases) + 1}',
+                     '--notes', 'Continuation of the private benchmark input/output archive. '
+                     'Match each asset to its SHA-256 manifest in the repository.'], timeout=120)
+                releases.append((next_tag, []))
+            tag, assets = releases[-1]
+            run(['gh', 'release', 'upload', tag, str(archive), '--repo', REPO], timeout=300)
+            assets.append({'name': archive_name})
+            remote.add(archive_name)
     run([PYTHON, str(ROOT / 'verify_release.py')], timeout=120)
     if (manifest_dir / 'muse_review_revision_inputs.json').exists():
         run([PYTHON, str(ROOT / 'verify_review_revision_archives.py')], timeout=120)
@@ -422,7 +447,7 @@ def cycle():
              'verify_muse_exact_io.py',
              'verify_muse_bf16_exact_io.py',
              'archive_trials.py', 'archive_delta.py',
-             'verify_review_revision_archives.py', 'sync_progress.py'])
+             'verify_review_revision_archives.py', 'release_shards.py', 'verify_release.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
             run(['git', 'commit', '-m', 'Refresh live benchmark results'])

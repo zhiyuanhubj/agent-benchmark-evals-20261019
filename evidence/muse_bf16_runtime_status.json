@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-20T19:01:58.425137+00:00",
+  "utc": "2026-10-20T20:02:09.863975+00:00",
   "precision": "BF16",
   "model_repo": "meta-models/Muse-Spark-Open-816B-A42B",
   "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
@@ -76,11 +76,11 @@
     "direct_controllers_active": {
       "pro": true,
       "tb": true,
-      "deep": true
+      "deep": false
     },
     "live_model_endpoint": "http://10.1.13.41:31324/v1"
   },
   "model_sampling_started": true,
   "problems": [],
-  "qualification": "BF16 native Pro/TB/Deep disjoint unfinished tasks are running on the verified direct 2886 endpoint after bridge allocation 2869 expired; earlier samples are preserved. BF16 remains separate from NVFP4."
+  "qualification": "BF16 bridge 2869 expired; direct endpoint recovery is partial or paused. Earlier samples are preserved and BF16 remains separate from NVFP4."
 }
