@@ -16,12 +16,14 @@ def load(path):
     return json.loads(path.read_text()) if path.exists() else None
 
 
-def pro(roots, expected_ids):
+def pro(roots, expected_ids, excluded_run_names=()):
     expected_set = set(expected_ids)
     assert len(expected_set) == len(expected_ids) == 731
     records = []
     for root in roots:
         for path in root.glob('**/attempt-1/result.json'):
+            if any(name in path.parts for name in excluded_run_names):
+                continue
             data = load(path)
             # AgentCompass shortens detail directory names. Only task.json
             # preserves the full task ID (including the complete variant).
@@ -102,7 +104,15 @@ for kind in ['tb', 'deep']:
     assert set(ids) == {Path(task['path']).name for task in opus_tasks} == {Path(task['path']).name for task in muse_tasks}
     assert len(set(ids)) == len(ids) == {'tb': 89, 'deep': 113}[kind]
     expected_harbor[kind] = ids
-record['beam_bf16'] = dict(pro=pro([legacy / 'pro-results', legacy / 'remaining_pro/pro-results'], beam_pro_ids))
+beam_pro_round2_name = 'beam_pro_full731_round2_2888_20261020'
+beam_pro_round2_root = (legacy / 'remaining_pro/pro-results' / beam_pro_round2_name /
+                        'Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent' /
+                        'beam-pro-full731-r2-2888-20261020')
+record['beam_bf16'] = dict(
+    pro=pro([legacy / 'pro-results', legacy / 'remaining_pro/pro-results'], beam_pro_ids,
+            excluded_run_names=(beam_pro_round2_name,)),
+    pro_round2=pro([beam_pro_round2_root], beam_pro_ids),
+)
 record['beam_bf16']['tb_initial_client_protocol_issue'] = load(legacy / 'state/tb-initial-output-length-client-issue.json')
 record['beam_bf16']['future_tb_output_length_thinking_validation'] = load(legacy / 'remaining_tb/state/output-length-thinking-validation.json')
 beam_tb_recovery = legacy / 'tb_protocol_recovery_20261018'

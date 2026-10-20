@@ -660,6 +660,14 @@ snapshot = {
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',
             'swe_bench_pro_verified': metric(ex['beam_bf16']['pro'], 'pro', 'partial_no_full_score'),
+            'swe_bench_pro_verified_round_2': metric(
+                ex['beam_bf16'].get('pro_round2', {'expected': 731, 'terminal': 0,
+                                                   'graded': 0, 'success': 0}),
+                'pro_round2', 'partial_no_full_score') | {
+                    'scoring_run_id': 'beam-pro-full731-r2-2888-20261020',
+                    'model_allocation': 2888,
+                    'launch_claim': '/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/round2_2888_20261020/launch-claim.json',
+                    'qualification': 'Independent second 731-task draw; native grades remain separate from round 1.'},
             'deepswe': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['beam_bf16']['deep'].items()},
             'tb2_1_legacy_cached_tag': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['beam_bf16']['tb'].items()},
             'tb2_1_exact_supplied_images': {'rounds': exact['models']['beam_bf16']['rounds'], 'status': tb_profile_status(exact['models']['beam_bf16']['rounds'])},

@@ -354,6 +354,7 @@ def cycle():
              'audit_other_exact_round1.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',
+             'protocol/run_beam_pro_r2_2888_20261020.py',
              'beam_exact_round3_2901.py',
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',
