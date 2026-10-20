@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T07:48:03.220651+00:00",
+  "generated_utc": "2026-10-20T08:07:27.031289+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 56,
+      "scored_trajectories_checked": 60,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -159,6 +159,38 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/prove-plus-comm__UbAqwmS/result.json",
       "result_sha256": "01b7f1b190562f4f23ac378c7e2bbe3ad729fd95be3377364c33b990c952e2f1",
       "exception_type": "RuntimeError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "task": "schemelike-metacircular-eval",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/schemelike-metacircular-eval__bvaqZa3/result.json",
+      "result_sha256": "2ceb673b5ab8d6b7aea11d196731b61e8a80dc75d60d69ac23cef19ec76ea092",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "task": "sparql-university",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/sparql-university__BWDxwH9/result.json",
+      "result_sha256": "35941e961e29b19649f7b4143f172bf5f09e82cc49e039cc563c0d977703166c",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "task": "sqlite-db-truncate",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/sqlite-db-truncate__7x5DdvW/result.json",
+      "result_sha256": "63bfe1f272a4f42f098580568ba187dd6ab5b1880974979cbba5b088432a77ad",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "task": "sanitize-git-repo",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/sanitize-git-repo__WnCZZDo/result.json",
+      "result_sha256": "4e8dfab76b08de5bc4d3663ef562689cfab44b3c3c157b7802bec753091f21f1",
+      "exception_type": "InternalServerError",
       "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
     },
     {
@@ -563,6 +595,14 @@
     },
     {
       "model": "muse_nvfp4_r3",
+      "task": "path-tracing-reverse",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b05/path-tracing-reverse__rEQSbYF/result.json",
+      "result_sha256": "a078158b2cb8492b29058cd478d409e39122d8ce10ef91bee1e22eb5256bbaf7",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
       "task": "openssl-selfsigned-cert",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b05/openssl-selfsigned-cert__GKK37As/result.json",
       "result_sha256": "e4fe84b921a8deb259f39a3a6371bec74a5671bbc7554527b9b96e2570599efd",
@@ -611,6 +651,14 @@
     },
     {
       "model": "muse_nvfp4_r3",
+      "task": "polyglot-c-py",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b05/polyglot-c-py__Hk8fwkn/result.json",
+      "result_sha256": "c879fde4ac75c6319e446397b61616655da1c859f5bf3af6f7c6f852781c391c",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
       "task": "multi-source-data-merger",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b05/multi-source-data-merger__o8UwvNz/result.json",
       "result_sha256": "96fc8314e36f464cf76c8e586e0ff7bf15ae97ccf2451929703ed19974e581d3",
@@ -627,6 +675,30 @@
     },
     {
       "model": "muse_nvfp4_r3",
+      "task": "pypi-server",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/pypi-server__jQ2rrq8/result.json",
+      "result_sha256": "1fa5627b58a178f47d2439c50d8f10833d8ea8daa046856e7982599766d96155",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "pytorch-model-recovery",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/pytorch-model-recovery__QXzMkXq/result.json",
+      "result_sha256": "d4f5639c01edd12a73fec5bbb1b7b3262f90c9510ceb6affb94e75cfca678ede",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "qemu-startup",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/qemu-startup__Zg4XAcP/result.json",
+      "result_sha256": "e015db450391801f1e314714fd60ed2acaacb273e26f1a4b957ef942c8238621",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
       "task": "portfolio-optimization",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/portfolio-optimization__NiGir7R/result.json",
       "result_sha256": "274caad6126517b486dc1d87f80dfa7db1b28ffd92ca749dca975ea8072b0e6d",
@@ -635,9 +707,201 @@
     },
     {
       "model": "muse_nvfp4_r3",
+      "task": "prove-plus-comm",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/prove-plus-comm__xjywcac/result.json",
+      "result_sha256": "941dc861ae1214eb6833db0e278430c7a4856f0235e329c11735f99df0be00ba",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
       "task": "polyglot-rust-c",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/polyglot-rust-c__VSnFzAY/result.json",
       "result_sha256": "88404df7bc7ae0d1be7e09b0cddf97b6c8d01780aa3e97d2964734084b9d31fa",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "pytorch-model-cli",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/pytorch-model-cli__EucTfR6/result.json",
+      "result_sha256": "1dd8318ab620d2333159575f356cb996682feae3ae5cb102666663eb3c43579b",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "query-optimize",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/query-optimize__tqaQ556/result.json",
+      "result_sha256": "66107deb7abaa034d0c865a51d79ba95ec6f1c2ef6ec2e516189b910afdfa6e3",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "protein-assembly",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/protein-assembly__Uq6jRdG/result.json",
+      "result_sha256": "e44ccfee65306f2be50ec87a60669a284c069f54804f296c79887823fb797c56",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "qemu-alpine-ssh",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b06/qemu-alpine-ssh__Ds3gS89/result.json",
+      "result_sha256": "03a6a850eb7d84b76cbfd7ecfcd6e1bb712512476d5df0241168325777b5cba4",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "sanitize-git-repo",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/sanitize-git-repo__Yy7RH4n/result.json",
+      "result_sha256": "10437f74460c1afe645f47bad9c1248efd6098f608cb6142dacada36cb19aaff",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "sqlite-db-truncate",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/sqlite-db-truncate__GXFt4mt/result.json",
+      "result_sha256": "12582ba2afbd63207b7a242585b9ea0cd58b2740f51d2bd878191f812030d4a4",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "regex-log",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/regex-log__2jdBVru/result.json",
+      "result_sha256": "1435ca71e7e24b33caf870b0243fe7f2ea89dd3bb52ae8b5fd5a93b3b0f4cade",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "reshard-c4-data",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/reshard-c4-data__gXhus9f/result.json",
+      "result_sha256": "4149110461d4324bd64380cab3d21cbc400b606ca5ff5a0bd71c9e9699aab4cd",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "regex-chess",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/regex-chess__AgUjX8p/result.json",
+      "result_sha256": "3f62d02251f5209efad4e324dd757294dc11964aab021fff9446f3bf1e70a8e1",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "schemelike-metacircular-eval",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/schemelike-metacircular-eval__Dmt8Bdm/result.json",
+      "result_sha256": "d26166edbde528d413158002f1d512c76f63d2d95980ad9a284e490f0083bd18",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "sam-cell-seg",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/sam-cell-seg__3fkNDWT/result.json",
+      "result_sha256": "f9abd557eaf99ef7ab6ea731fa6c5c0fecfb5c93e54254e5d7fb9b528f241d9a",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "sparql-university",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/sparql-university__dkfxWhs/result.json",
+      "result_sha256": "42d1bca3b1e5785b32f1450a5b434a49cb76aec5c6b8cf118e2a8c978b4eec1a",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "rstan-to-pystan",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/rstan-to-pystan__5A3oPcS/result.json",
+      "result_sha256": "9e58ee5acd2e955fea07b40c8bef42dcd50ba853445f79056719a15e7e7dde2f",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "raman-fitting",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b07/raman-fitting__kEJETz9/result.json",
+      "result_sha256": "d25292b3eab59d3777009f529cc1a3ef298a458360743759a6d2a23bfeda2d45",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "tune-mjcf",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/tune-mjcf__HvNEjkU/result.json",
+      "result_sha256": "b5f54d83689f5df50d96710b4eda91bbb373c13fb9b0f11ed518b3f977d620d0",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "train-fasttext",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/train-fasttext__oLGAzvo/result.json",
+      "result_sha256": "9093fc7598ea599f220195b43f58e7053be40dc433df8fc0f786630a976a0577",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "torch-pipeline-parallelism",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/torch-pipeline-parallelism__8oeXNRb/result.json",
+      "result_sha256": "d677c39dad9af3af69c094ffdc7d344902c8bc2bb878e93e4357dbd6274a6712",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "video-processing",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/video-processing__bH2xRpw/result.json",
+      "result_sha256": "e84f8618e71eabe435daf77ed5dcbf08a1a4ee29881360ba571b93d5b42d9302",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "torch-tensor-parallelism",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/torch-tensor-parallelism__ec6etph/result.json",
+      "result_sha256": "d8b0d0cbb0f4684ecfd7038bfc4a75c17252bfdcdd1c2e055357cea8ddb5a8e2",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "winning-avg-corewars",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/winning-avg-corewars__pnu9tY8/result.json",
+      "result_sha256": "a747f1582685c61ed70235cc2661221515e6563738a4147fa697b94ed625ffa6",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "write-compressor",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/write-compressor__BAN3Qj9/result.json",
+      "result_sha256": "9d2f696e1d4081f5ea857a3b3a1b02860661d9c8f9565ec87398381cb9a4176b",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "vulnerable-secret",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/vulnerable-secret__HPxsnE6/result.json",
+      "result_sha256": "66b7a5f1739d2b5e413b1e2f6817f6312ef1272f3b9bf7406b45828a78226527",
+      "exception_type": "InternalServerError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "task": "sqlite-with-gcov",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-completion-2866-b08/sqlite-with-gcov__x3oeqEz/result.json",
+      "result_sha256": "b31040684b49137356c47eb1edc81b01c01b214bdd1208f38c32fffd8da97992",
       "exception_type": "InternalServerError",
       "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
     },
@@ -6297,6 +6561,30 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "make-mips-interpreter",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/make-mips-interpreter__qP4ugxj/agent/trajectory.json",
+      "trajectory_sha256": "1e29c46cfe1beb8fc6d09d5f99800ab3d4175e464390e1ff6b80557cfdc751f6",
+      "steps": 210,
+      "tool_calls": 419,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "prove-plus-comm",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/prove-plus-comm__AcNUiV8/agent/trajectory.json",
+      "trajectory_sha256": "cb5dff89a755a3f67dfe0cc9b2a4560b42a0b65ceabeb983ff0adf8b35253a3e",
+      "steps": 7,
+      "tool_calls": 14,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "extract-moves-from-video",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/extract-moves-from-video__E5uwxYg/agent/trajectory.json",
@@ -6393,6 +6681,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "polyglot-rust-c",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/polyglot-rust-c__9irMKYR/agent/trajectory.json",
+      "trajectory_sha256": "c9f81afb7489209a91336d84bd9cbe67a5b5945ba763298de187c60cdbe423ee",
+      "steps": 11,
+      "tool_calls": 24,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "code-from-image",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/code-from-image__tJboqxD/agent/trajectory.json",
@@ -6483,6 +6783,18 @@
       "trajectory_sha256": "c34a7537dc13155ad49eec67675c573a00c09251daef286216df29cf9c13b87e",
       "steps": 6,
       "tool_calls": 7,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "portfolio-optimization",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/portfolio-optimization__SSYJHUB/agent/trajectory.json",
+      "trajectory_sha256": "35f4355e90c68e1c0e4c068b3792de766278ea5b428407c2d7176d759020895e",
+      "steps": 11,
+      "tool_calls": 19,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

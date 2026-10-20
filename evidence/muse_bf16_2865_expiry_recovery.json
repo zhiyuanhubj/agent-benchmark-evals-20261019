@@ -1,0 +1,57 @@
+{
+  "generated_utc": "2026-10-20T07:52:41.153086+00:00",
+  "cause": "Slurm allocation 2865 expired at 2026-10-20 07:07:08 UTC; original trial directories preserved before Harbor resume",
+  "old_allocation": 2865,
+  "original_model_endpoint": "http://10.1.77.106:31324/v1",
+  "bridge_to_verified_endpoint": "http://10.1.13.41:31324/v1",
+  "model_revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
+  "model_deployment_audit": "evidence/muse_bf16_2886_deployment_audit.json",
+  "original_completed_pro_tasks_reused_once": 137,
+  "original_pro_failed_tasks_not_reused": 10,
+  "original_pro_active_when_allocation_expired": 4,
+  "pro_source_run_id": "muse-bf16-pro-full-r1",
+  "pro_scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
+  "resumed_pro_current": {
+    "status": "running",
+    "finished_tasks": 137,
+    "completed_tasks": 137,
+    "failed_tasks": 0,
+    "running_tasks": 4,
+    "pending_tasks": 590
+  },
+  "resume_policy": "Completed original results are reused once. Original failed and interrupted attempts remain preserved separately. Only native graded results in the derived run enter its live score; no correctness-selected reruns.",
+  "interrupted_original_harbor_archives": {
+    "tb": {
+      "job_name": "muse-bf16-tb-r1",
+      "native_terminal_before_resume": 36,
+      "interrupted_original_trial_names": [
+        "make-mips-interpreter__TKRR7Dj",
+        "path-tracing__utNkWga"
+      ],
+      "original_config_sha256": "1e013f72e34907e7056a1bc19119e831e9ed5677e6ca74239ab4491ba53f1126",
+      "archive_name": "tb-r1-interrupted-original-dirs.tar.gz",
+      "archive_sha256": "e6ee27d55b74bd8c76e85a8970222a71e3c845595d5f56e51ecb3d90790516d2",
+      "archive_bytes": 2431094,
+      "archive_members": 150,
+      "resultless_originals_are_ungraded": true
+    },
+    "deep": {
+      "job_name": "muse-bf16-deep-r1",
+      "native_terminal_before_resume": 64,
+      "interrupted_original_trial_names": [
+        "fd-deterministic-multi-key-sorti__bMTNzZh",
+        "go-git-worktree-merge-conflicts__cPcW2vX"
+      ],
+      "original_config_sha256": "4560a14204bfb88be0a0e92acd28f33c2164f6ba723be8a641cdaadc9d31a3f4",
+      "archive_name": "deep-r1-interrupted-original-dirs.tar.gz",
+      "archive_sha256": "c8e3b8688aaa984da560520dec7b99442251f4d749a4128eeeb7406b5d067f0b",
+      "archive_bytes": 618364,
+      "archive_members": 24,
+      "resultless_originals_are_ungraded": true
+    }
+  },
+  "backup_manifest_sha256": "83077e2a013cca73972409e91299f382e381494542dc556dacba7a683f84b8a8",
+  "bridge_preflight_sha256": "2a3c43cd2ad96b3e7b7c6573a1e63d3023263da5638db59255ff267e8cee6524",
+  "pro_resume_claim_sha256": "172281ca10421ca6efb162609f6acb30ec43a893b01c8380b9c4e8619c2cd72c",
+  "qualification": "Infrastructure interruption; resultless original trials are not model failures. Native scores remain partial until their full benchmark denominators are graded."
+}

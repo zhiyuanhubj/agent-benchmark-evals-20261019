@@ -195,6 +195,7 @@ def cycle():
         fcntl.flock(lock, fcntl.LOCK_EX)
         for source in SOURCES:
             run([PYTHON, str(source)])
+        run([PYTHON, str(ROOT / 'audit_muse_bf16_expiry_recovery.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_swe_review_da.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_muse_review_revision_v2.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_review_revision_gateway.py')], timeout=180)
@@ -214,6 +215,7 @@ def cycle():
             if attempt:
                 for source in SOURCES:
                     run([PYTHON, str(source)])
+                run([PYTHON, str(ROOT / 'audit_muse_bf16_expiry_recovery.py')], timeout=60)
             run([PYTHON, str(ROOT / 'export_snapshot.py')])
             scores = json.loads((ROOT / 'results/scores.json').read_text())
             run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
@@ -297,6 +299,8 @@ def cycle():
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
              'audit_muse_bf16_review_progress.py',
+             'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
+             'protocol/expanded_status_20261019.py',
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',
              'audit_muse_nvfp4_r2_prove_ungraded.py',

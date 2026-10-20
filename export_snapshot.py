@@ -71,6 +71,9 @@ for split, row in native_review_da['splits'].items():
     assert mr['swe_review'][split]['terminal'] == row['expected']
     assert mr['swe_review'][split]['metrics_on_terminal_subset'] == row['metrics']
 ex = read(B / 'expanded-current.json')
+bf16_expiry_recovery = read(ROOT / 'evidence/muse_bf16_2865_expiry_recovery.json')
+assert bf16_expiry_recovery['pro_scoring_run_id'] == ex['muse_bf16']['pro']['scoring_run_id']
+assert bf16_expiry_recovery['original_completed_pro_tasks_reused_once'] == ex['muse_bf16']['pro']['reused_original_completed_tasks']
 br = read(B / 'current.json')
 for split, row in review_da['reviewers'].get('beam-bf16', {}).items():
     assert br['swe_review'][split]['terminal'] == row['expected']
@@ -435,7 +438,11 @@ snapshot = {
             'model': 'meta-models/Muse-Spark-Open-816B-A42B',
             'revision': '0fb02478b02565b2ce7fc57e6051c91172774ac9',
             'status': 'in_progress',
-            'swe_bench_pro_verified': metric(ex['muse_bf16']['pro'], 'pro', 'partial_no_full_score'),
+            'swe_bench_pro_verified': metric(ex['muse_bf16']['pro'], 'pro', 'partial_no_full_score') | {
+                key: ex['muse_bf16']['pro'][key] for key in
+                ('scoring_run_id', 'source_run_id', 'reused_original_completed_tasks',
+                 'original_unreused_failed_tasks', 'recovery_qualification')
+            } | {'recovery_evidence': 'evidence/muse_bf16_2865_expiry_recovery.json'},
             'tb2_1_legacy_cached_tag': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['muse_bf16']['tb'].items()} | {'qualification': 'Historical field name for this same BF16 run; do not add these trials to the exact-image field as independent attempts.'},
             'tb2_1_exact_supplied_images': {'rounds': {'1': bf16_tb_round1}, 'status': 'round_1_complete' if bf16_complete else 'partial_no_full_score',
                 'same_trials_as_legacy_named_bf16_tb': True,
@@ -873,6 +880,8 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_swr_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
 
+Muse BF16's original GPU allocation expired during Pro, TB2.1 and DeepSWE runs. The [recovery audit](evidence/muse_bf16_2865_expiry_recovery.json) identifies the original and derived Pro run IDs: **137 completed original tasks are reused once**, while 10 failed and four active original attempts are preserved separately. Its live Pro score reads only the derived native run, so partial counts may temporarily fall as interrupted tasks are resumed. The two interrupted original TB trials and two DeepSWE trials are available as separate SHA-verified [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) and [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) I/O assets; they remain ungraded infrastructure interruptions.
+
 Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits](evidence/swe_review_complete_split_da.json): GLM5 **{review_glm_da['DA']}%** on {review_glm_da['produced']} parseable decisions (500 task outcomes), Qwen3-Coder **{review_coder_da['DA']}%** on {review_coder_da['produced']} (462 outcomes), and Qwen3-30B-Instruct **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} (422 outcomes). [The v2 receipt audit](evidence/muse_swe_review_revision_v2_receipts.json) verifies 8 GLM5 and 2 Coder task-generation-only adapters for finished native verifier reports lacking Harbor summaries; no adapter is a model result. {muse_rrr_en_note}
 
 The [revision infrastructure audit](evidence/swe_review_revision_queue_recovery_20261020.json) records two task input formats, preparation failures, and a sandbox-to-model connection timeout before any model response. Those native failures remain excluded from model scores. Two synthetic Harbor trials then completed model generation, terminal tool use, and native verification through the Docker host bridge; they do not enter benchmark metrics. Four declared original-generator recovery queues have run or are running with the [bridge agent](protocol/muse_review_revision_v2/revision_agents_bridge_v4.py) and the original task inputs. The [live native-grade audit](evidence/swe_review_revision_gateway_progress.json) has Muse Coder **{review_revision_muse_coder['native_graded_revisions']}/{review_revision_muse_coder['expected_revisions']}**, Muse Instruct **{review_revision_muse_instruct['native_graded_revisions']}/{review_revision_muse_instruct['expected_revisions']}**, Beam Coder **{review_revision_beam_coder['native_graded_revisions']}/{review_revision_beam_coder['expected_revisions']}**, and Beam Instruct **{review_revision_beam_instruct['native_graded_revisions']}/{review_revision_beam_instruct['expected_revisions']}** revisions graded; split RRR is reported only after every required native grade and released evidence is verified. The [v3 scorer](protocol/muse_review_revision_v2/revision_score_v3.py) reads only the corrected gateway results, preserves five malformed Beam review reports as model failures, and exactly reproduces all four sealed DA split metrics.
@@ -997,6 +1006,8 @@ chinese_report = f'''# 模型评测结果快照
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | {'；'.join(part for part in (bf16_swr_zh, bf16_exact_zh_done.lstrip('；')) if part) or '暂无完整 benchmark 分数'} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{'; SWRBench ' + bf16_swr_en if not bf16_swr_complete else ''}{bf16_review_zh} |
+
+Muse BF16 原节点在 Pro、TB2.1、DeepSWE 运行中到期。[恢复审计](evidence/muse_bf16_2865_expiry_recovery.json)记录了原始及续跑 ID：**137 道已完成的 Pro 题仅复用一次**，原运行的 10 道失败题和 4 道中断题单独保留。当前 Pro 进度只统计续跑的原生结果，故恢复初期局部已判分数可能暂时下降。另有两道 TB 和两道 DeepSWE 的中断原始输入输出及轨迹，分别保存在已做 SHA 校验的 [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) 与 [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) 归档中；这些原记录尚未判分，不计为模型失败。
 
 **SWE-Review 三组 DA 均已有封存收据。** 官方 `compute_da.py` 在 GLM5 {review_glm_da['produced']} 个可解析决定上得 **{review_glm_da['DA']}%**（500 题终态），Qwen3-Coder {review_coder_da['produced']} 个得 **{review_coder_da['DA']}%**（462 题），Qwen3-30B-Instruct {review_instruct_da['produced']} 个得 **{review_instruct_da['DA']}%**（422 题）。[逐题哈希和官方评分核验](evidence/swe_review_complete_split_da.json)覆盖全部三组。[新版任务准备收据审计](evidence/muse_swe_review_revision_v2_receipts.json)确认 GLM5 的 8 道、Coder 的 2 道只缺 Harbor 汇总：它们的真实原生报告参与 DA，标明用途的适配文件仅供官方修复任务生成，绝非模型结果。{muse_rrr_zh_note}
 

@@ -1,21 +1,19 @@
 {
-  "generated_utc": "2026-10-20T07:47:50.887279+00:00",
+  "generated_utc": "2026-10-20T08:07:13.688596+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T073505Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T075352Z.tar.zst",
   "expected": 89,
-  "terminal": 56,
-  "graded": 55,
-  "success": 39,
+  "terminal": 58,
+  "graded": 57,
+  "success": 41,
   "missing_graded_tasks": [
     "git-multibranch",
     "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "polyglot-c-py",
-    "polyglot-rust-c",
     "portfolio-optimization",
     "protein-assembly",
     "prove-plus-comm",
@@ -49,7 +47,9 @@
     "git-multibranch"
   ],
   "unarchived_new_terminal_tasks": [
-    "polyglot-c-py"
+    "make-mips-interpreter",
+    "portfolio-optimization",
+    "prove-plus-comm"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -447,6 +447,20 @@
       "reward": 1.0,
       "result_sha256": "aca2a32ebdc97f248ebc000b006dd09b83eedee293ae51e432da7e993aedde02",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/password-recovery__2AFkAFu/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
+    "polyglot-c-py": {
+      "reward": 1.0,
+      "result_sha256": "68f3cb2018b979b4102b6075c431a7e2027d22759ad6a41029bb1246dd7b175f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/polyglot-c-py__9mNiHd7/result.json",
+      "raw_response_count": 4,
+      "responses_with_reasoning_content": 4
+    },
+    "polyglot-rust-c": {
+      "reward": 1.0,
+      "result_sha256": "6fc1a764a5f520cf23dab80d730d67bd38475c5163c9af44b9bd2ea9c62fb2fc",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/polyglot-rust-c__9irMKYR/result.json",
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
     }
