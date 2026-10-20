@@ -276,6 +276,7 @@ snapshot = {
                 'judged': bf16_swr_alignment.get('judged', 0),
                 'accuracy': bf16_swr_final.get('accuracy') if bf16_swr_complete else None,
                 'f1': bf16_swr_final.get('f1') if bf16_swr_complete else None,
+                'point_f1': bf16_swr_final.get('point_f1') if bf16_swr_complete else None,
                 'judge': 'gpt-5.5',
                 'evidence': 'evidence/muse_bf16_swr_alignment.json',
             },
@@ -485,15 +486,16 @@ else:
     bf16_review_en = 'Incomplete; current launch state needs review'
     bf16_review_zh = '；SWE-Review 尚未完成，启动状态待核查'
 bf16_swr_en = (f"**{bf16_swr_final['accuracy']:.1%}** ({bf16_swr_final['judged']}/1000 judged), "
-                f"F1 **{bf16_swr_final['f1']:.4f}**") if bf16_swr_complete else (
+                f"PR F1 **{bf16_swr_final['f1']:.4f}**") if bf16_swr_complete else (
                 f'{len(bf16_swr_generated)}/1000 generated, {len(bf16_swr_judged)}/1000 judged; score pending')
 bf16_swr_zh = (f"SWRBench GPT-5.5 裁判 **{bf16_swr_final['accuracy']:.1%}（1000/1000）**，"
-                f"F1 **{bf16_swr_final['f1']:.4f}**") if bf16_swr_complete else ''
+                f"PR 分类 F1 **{bf16_swr_final['f1']:.4f}**") if bf16_swr_complete else ''
 bf16_swr_note_en = ('The final 1000-task official score is reconciled with the generation, judge, '
-                    'result and metric receipts; accuracy classifies PRs, while F1 scores issue detection.'
+                    f"result and metric receipts. Accuracy and F1 are PR-level metrics; the issue-point F1 is {bf16_swr_final['point_f1']:.4f}."
                     if bf16_swr_complete else 'These are live I/O checks, not a final accuracy.')
 bf16_swr_note_zh = ('1000 题官方结果已与生成、裁判、结果文件及指标收据核对；准确率统计 PR 分类，'
-                    'F1 统计问题识别。' if bf16_swr_complete else '这仅是进行中输入输出核验，不是最终准确率。')
+                    f"PR 分类 F1 为 {bf16_swr_final['f1']:.4f}，逐问题点 F1 为 {bf16_swr_final['point_f1']:.4f}。"
+                    if bf16_swr_complete else '这仅是进行中输入输出核验，不是最终准确率。')
 mn_exact_note_zh = f"精确镜像首轮已完成：**{mn_tb['success']}/89（{mn_tb['accuracy']:.2%}）**。" if mn_tb['complete'] else f"精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。"
 if not mn_tb['complete'] and mn_tb['graded'] == 88 and mn_audit['missing_graded_tasks'] == ['mteb-leaderboard']:
     lower = mn_tb['success'] / 89

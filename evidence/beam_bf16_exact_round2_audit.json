@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-20T02:03:46.489236+00:00",
+  "generated_utc": "2026-10-20T02:23:36.342116+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T020050Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T021548Z.tar.zst",
   "expected": 89,
-  "terminal": 41,
-  "graded": 40,
+  "terminal": 42,
+  "graded": 41,
   "success": 27,
   "missing_graded_tasks": [
     "fix-ocaml-gc",
     "git-multibranch",
-    "llm-inference-batching-scheduler",
     "mailman",
     "make-doom-for-mips",
     "make-mips-interpreter",
@@ -350,6 +349,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/largest-eigenval__TYCejs4/result.json",
       "raw_response_count": 37,
       "responses_with_reasoning_content": 37
+    },
+    "llm-inference-batching-scheduler": {
+      "reward": 0.0,
+      "result_sha256": "2b55de6ab11b787ec62f5957b4c113c1463b3a19ac7888500d669b2133a00f49",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/llm-inference-batching-scheduler__fo3ghjQ/result.json",
+      "raw_response_count": 118,
+      "responses_with_reasoning_content": 118
     },
     "log-summary-date-ranges": {
       "reward": 1.0,
