@@ -26,7 +26,9 @@ RAW_ARCHIVE_INTERVAL_SECONDS = 600  # Keep live I/O snapshots within each 15-min
 # their large legacy trees every six hours; the active review-revision trees
 # below keep the ten-minute cadence so new trajectories reach the release promptly.
 STATIC_ARCHIVE_INTERVAL_SECONDS = 21600
-STATIC_ARCHIVE_GROUPS = {'opus47_legacy', 'opus47_review_inputs', 'muse_review_full_io', 'muse_review_verifier'}
+STATIC_ARCHIVE_GROUPS = {'opus47_legacy', 'opus47_review_inputs',
+                         'muse_review_full_io', 'muse_review_verifier',
+                         'beam_review_full_io', 'beam_review_verifier'}
 ARCHIVE_SCAN_STATE = LOG.with_name('github-archive-scan-state.json')
 
 

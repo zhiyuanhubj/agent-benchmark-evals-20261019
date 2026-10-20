@@ -1,0 +1,29 @@
+{
+  "group": "opus47_review_inputs",
+  "generated_utc": "2026-10-20T08:28:48.000163+00:00",
+  "archive_name": "opus47_review_inputs.tar.zst",
+  "archive_size_bytes": 2761542,
+  "archive_sha256": "a3d797badcafb7186e155ebd8443cb1e270a8dd7aaf24680921083c3f3765eb6",
+  "file_count": 8307,
+  "input_file_count": 8307,
+  "output_file_count": 0,
+  "raw_response_count": 0,
+  "filename_counts": {
+    "Dockerfile": 1384,
+    "predicted.json": 1384,
+    "problem_statement.txt": 1384,
+    "summary.json": 1384,
+    "instruction.md": 1384,
+    "task.toml": 1384,
+    "glm5_500.json": 1,
+    "qwen3_30b_instruct2507_500.json": 1,
+    "qwen3_coder_30b_500.json": 1
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/opus47_review_20261020/configs",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/glm5_500/tasks",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_coder_30b_500/tasks",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/swe_review/qwen3_30b_instruct2507_500/tasks"
+  ],
+  "scope": "Exact official SWE-Review model-visible task cards and frozen Opus 4.7 review configs. Hidden solution and tests, credentials, model weights and outputs are excluded; outputs are archived separately."
+}

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T08:26:08.018876+00:00",
+  "generated_utc": "2026-10-20T08:44:27.695677+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 63,
+      "scored_trajectories_checked": 64,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -6969,6 +6969,18 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "qemu-alpine-ssh",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/qemu-alpine-ssh__RBAMJjr/agent/trajectory.json",
+      "trajectory_sha256": "c4da77ce914040e00496714c28c64bfccbd066216a299e7a696378c0cdc71052",
+      "steps": 32,
+      "tool_calls": 43,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "beam_bf16_r2",

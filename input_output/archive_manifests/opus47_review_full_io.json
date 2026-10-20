@@ -1,0 +1,29 @@
+{
+  "group": "opus47_review_full_io",
+  "generated_utc": "2026-10-20T08:29:01.909807+00:00",
+  "archive_name": "opus47_review_full_io.tar.zst",
+  "archive_size_bytes": 613288,
+  "archive_sha256": "a26cf7e491e0ff3a9baefba4a78f07d2d37fcdef86cd98b34df5daaa4e9e7b80",
+  "file_count": 476,
+  "input_file_count": 23,
+  "output_file_count": 51,
+  "raw_response_count": 326,
+  "filename_counts": {
+    "config.json": 23,
+    "completion.json": 326,
+    "openhands_sdk.txt": 20,
+    "trajectory.json": 14,
+    "result.json": 17,
+    "trial.log": 20,
+    "report.json": 14,
+    "review_report.json": 14,
+    "reward.txt": 14,
+    "test-stdout.txt": 14
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/opus47_review_20261020/swe_review/glm5_500/results",
+    "/fsx/home/zhiyuan/.private/opus47_review_20261020/swe_review/qwen3_coder_30b_500/results",
+    "/fsx/home/zhiyuan/.private/opus47_review_20261020/swe_review/qwen3_30b_instruct2507_500/results"
+  ],
+  "scope": "Native task/config inputs, result outputs, trajectories, raw API responses and trial logs present at snapshot time. Excludes model weights, Docker images, caches, artifacts, sandbox and verifier internals."
+}

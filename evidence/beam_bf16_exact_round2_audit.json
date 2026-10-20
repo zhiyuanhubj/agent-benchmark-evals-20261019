@@ -1,21 +1,19 @@
 {
-  "generated_utc": "2026-10-20T08:25:55.731808+00:00",
+  "generated_utc": "2026-10-20T08:44:15.319204+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T081300Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T083153Z.tar.zst",
   "expected": 89,
-  "terminal": 63,
-  "graded": 62,
-  "success": 44,
+  "terminal": 65,
+  "graded": 64,
+  "success": 46,
   "missing_graded_tasks": [
     "git-multibranch",
     "path-tracing",
     "path-tracing-reverse",
     "protein-assembly",
-    "pytorch-model-recovery",
-    "qemu-alpine-ssh",
     "qemu-startup",
     "query-optimize",
     "raman-fitting",
@@ -41,9 +39,7 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [
-    "pytorch-model-recovery"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -491,6 +487,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/pytorch-model-cli__bH4FYBA/result.json",
       "raw_response_count": 14,
       "responses_with_reasoning_content": 14
+    },
+    "pytorch-model-recovery": {
+      "reward": 1.0,
+      "result_sha256": "1d63df6c526908d84e36cccf3a08187a3199c140998bd5e58c462df5ad82e82f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/pytorch-model-recovery__FTkhwqj/result.json",
+      "raw_response_count": 21,
+      "responses_with_reasoning_content": 21
+    },
+    "qemu-alpine-ssh": {
+      "reward": 1.0,
+      "result_sha256": "93d70f81f22ef7316d5c64d7f0f1d97301f1233064c3410652e72d4f758a15f5",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/qemu-alpine-ssh__RBAMJjr/result.json",
+      "raw_response_count": 31,
+      "responses_with_reasoning_content": 31
     }
   }
 }

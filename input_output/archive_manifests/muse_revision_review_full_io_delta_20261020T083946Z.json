@@ -1,0 +1,34 @@
+{
+  "generated_utc": "2026-10-20T08:39:47.020167+00:00",
+  "group": "muse_revision_review_full_io",
+  "scope": "SWE-Review original-generator revision I/O changed since the previous archive, including old pre-model infrastructure failures and separate gateway-recovery trials. Only gateway-recovery native grades enter RRR. Apply after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_revision_review_full_io_delta_20261020T044102Z.json",
+  "cutoff_utc": "2026-10-20T04:36:03.011118+00:00",
+  "new_source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/glm5_500/queue/results"
+  ],
+  "archive_name": "muse_revision_review_full_io_delta_20261020T083946Z.tar.zst",
+  "archive_size_bytes": 316840,
+  "archive_sha256": "2b2a9b61c6c9e6b99bbb0225c51b8d554cba3c684b5586cbcd6f355962fa8b4b",
+  "file_count": 201,
+  "source_bytes": 19324495,
+  "filename_counts": {
+    "completion.json": 174,
+    "model-connectivity.json": 5,
+    "openhands_sdk.txt": 5,
+    "config.json": 6,
+    "trial.log": 5,
+    "trajectory.json": 1,
+    "result.json": 2,
+    "report.json": 1,
+    "reward.txt": 1,
+    "test-stdout.txt": 1
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/glm5_500/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/queue/results"
+  ]
+}
