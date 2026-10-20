@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-20T21:32:44.197784+00:00",
+  "utc": "2026-10-20T22:03:26.168986+00:00",
   "source_image_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/image-identity-plan.json",
   "source_image_plan_sha256": "e8ce45c5101dd43938bea69810d1dd1098895d5d64520370e23e252c2d57b22b",
   "models": {
@@ -40,11 +40,11 @@
         },
         "3": {
           "expected": 89,
-          "terminal": 80,
-          "graded": 66,
-          "success": 42,
-          "active_trial_dirs": 84,
-          "archived_actual_model_responses": 3737,
+          "terminal": 81,
+          "graded": 67,
+          "success": 43,
+          "active_trial_dirs": 85,
+          "archived_actual_model_responses": 3988,
           "ungraded": 14,
           "exceptions": {
             "RuntimeError": 13,
@@ -68,6 +68,18 @@
         "ActiveState": "failed"
       },
       "exact_supplied_images_ready": true,
+      "continuation_units": {
+        "beam-exact-r3-2901-20261020": {
+          "MainPID": "556992",
+          "Result": "success",
+          "ActiveState": "active"
+        },
+        "beam-r2-git-multibranch-infra-recovery-20261019": {
+          "MainPID": "3563440",
+          "Result": "success",
+          "ActiveState": "active"
+        }
+      },
       "cpu_allocation": 2919,
       "all_three_complete": false,
       "three_round_mean": null,
@@ -125,6 +137,7 @@
       },
       "replica_unit": null,
       "exact_supplied_images_ready": true,
+      "continuation_units": {},
       "cpu_allocation": 2919,
       "all_three_complete": true,
       "three_round_mean": 0.7865168539325843,
@@ -182,6 +195,7 @@
       },
       "replica_unit": null,
       "exact_supplied_images_ready": true,
+      "continuation_units": {},
       "cpu_allocation": 2922,
       "all_three_complete": false,
       "three_round_mean": null,

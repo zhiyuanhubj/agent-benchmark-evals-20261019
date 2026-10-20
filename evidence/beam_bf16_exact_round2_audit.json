@@ -1,27 +1,22 @@
 {
-  "generated_utc": "2026-10-20T21:29:23.901881+00:00",
+  "generated_utc": "2026-10-20T22:06:34.160419+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T211612Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T215314Z.tar.zst",
   "expected": 89,
-  "terminal": 87,
-  "graded": 86,
+  "terminal": 89,
+  "graded": 88,
   "success": 62,
   "missing_graded_tasks": [
-    "git-multibranch",
-    "regex-chess",
-    "train-fasttext"
+    "git-multibranch"
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
   "ungraded_without_model_response": {},
-  "unarchived_new_terminal_tasks": [
-    "regex-chess",
-    "train-fasttext"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -526,6 +521,13 @@
       "raw_response_count": 121,
       "responses_with_reasoning_content": 121
     },
+    "regex-chess": {
+      "reward": 0.0,
+      "result_sha256": "50988d491e6f93e4c51b88f2e44a23352a12d4c170770ace97f1ce28435c6356",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/regex-chess__sNCjLa8/result.json",
+      "raw_response_count": 805,
+      "responses_with_reasoning_content": 805
+    },
     "regex-log": {
       "reward": 1.0,
       "result_sha256": "e8c10a03768338fa33c54cf18ed4d39f04bdfc0987c0c0c310941d495616ce41",
@@ -602,6 +604,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/torch-tensor-parallelism__9CQrVfm/result.json",
       "raw_response_count": 63,
       "responses_with_reasoning_content": 63
+    },
+    "train-fasttext": {
+      "reward": 0.0,
+      "result_sha256": "fca6730b5d9e8699a4043df4b2d37f68d3e299b7f625f40114342bb57363fc5f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/train-fasttext__KuN5eUc/result.json",
+      "raw_response_count": 457,
+      "responses_with_reasoning_content": 457
     },
     "tune-mjcf": {
       "reward": 1.0,
