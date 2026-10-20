@@ -1,5 +1,5 @@
 {
-  "utc": 1792466960.2874086,
+  "utc": 1792468643.8037019,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,33 +345,15 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 490,
+      "terminal": 500,
       "exceptions": 9,
       "prepared_image_phases": {
         "image_ready": 500
       },
       "controller": {
-        "utc": 1792465478.3004332,
-        "phase": "running",
-        "batch": 30,
-        "tasks": [
-          "sympy__sympy-21379",
-          "sympy__sympy-21596",
-          "sympy__sympy-21612",
-          "sympy__sympy-21847",
-          "sympy__sympy-21930",
-          "sympy__sympy-22080",
-          "sympy__sympy-22456",
-          "sympy__sympy-22714",
-          "sympy__sympy-22914",
-          "sympy__sympy-23262",
-          "sympy__sympy-23413",
-          "sympy__sympy-23534",
-          "sympy__sympy-23824",
-          "sympy__sympy-23950",
-          "sympy__sympy-24066",
-          "sympy__sympy-24213"
-        ]
+        "utc": 1792468163.7563434,
+        "phase": "scheduled_attempts_finished",
+        "expected": 500
       },
       "full_official_rrr_complete": false
     },
@@ -431,7 +413,7 @@
   ],
   "revision_preparation": {
     "plan_sha256": "10fd107b75565aa5deceb28641eae22935b87fa051e31324426d3e9fdf078053",
-    "phase": "waiting_for_completed_review_splits",
+    "phase": "all_revision_tasks_prepared",
     "splits": {
       "qwen3_30b_instruct2507_500": {
         "status": "tasks_prepared",
@@ -444,14 +426,20 @@
         "count": 224,
         "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_coder_30b_500/receipt.json",
         "sha256": "99da7257d1eb8831c22059f7e0f87ce5a84769215eb60acc9da4d4410ca2c678"
+      },
+      "glm5_500": {
+        "status": "tasks_prepared",
+        "count": 91,
+        "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/glm5_500/receipt.json",
+        "sha256": "b91abec1ef8ad023a2f7385f3aba7992221d389f9e7cbd19dc9c5bc5a5655382"
       }
     },
-    "complete": false,
+    "complete": true,
     "model_generation_started": false,
-    "utc": "2026-10-20T03:29:12.745690+00:00",
+    "utc": "2026-10-20T03:49:58.438205+00:00",
     "grader_preflight_passed": true
   },
-  "revision_preparation_controller": "MainPID=3430427\nResult=success\nActiveState=active\n",
+  "revision_preparation_controller": "MainPID=0\nResult=success\nActiveState=inactive\n",
   "revision_preparation_superseded_controller": "MainPID=0\nResult=exit-code\nActiveState=failed\n",
   "shared_original_generator_prefetch": {
     "started_utc": "2026-10-18T16:48:42.317096+00:00",

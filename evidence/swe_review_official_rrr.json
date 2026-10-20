@@ -36,6 +36,43 @@
       "scorer_sha256": "a3f727a973f02b0fb2c08301ef0c64e97900c4a8adbe4794bc6ad1a7d0b3eae1",
       "summary": "evidence/beam_bf16_qwen3_30b_instruct2507_500_rrr_summary.json",
       "verified_native_result_and_verifier_files": 558
+    },
+    "muse-nvfp4/qwen3_30b_instruct2507_500": {
+      "DA": {
+        "CR": 87.2,
+        "DA": 87.2,
+        "DA_total_50": 82.5,
+        "FAR": 9.0,
+        "FN": 23,
+        "FP": 24,
+        "FRR": 22.8,
+        "TN": 243,
+        "TP": 78,
+        "correct": 321,
+        "model_fail": 54,
+        "produced": 368,
+        "total": 422
+      },
+      "RRR": {
+        "RRR": 45.5,
+        "approved": 102,
+        "approved_resolved": 78,
+        "baseline_RR": 27.5,
+        "delta": 18.0,
+        "fallback": 54,
+        "fallback_resolved": 15,
+        "revised": 266,
+        "revised_resolved": 99,
+        "total": 422,
+        "total_resolved": 192
+      },
+      "expected_revisions": 266,
+      "native_evidence": "evidence/muse_nvfp4_qwen3_30b_instruct2507_500_rrr_native_evidence.json",
+      "qualification": "complete_verified_official_split_rrr",
+      "release_tag": "2026-10-19-snapshot",
+      "scorer_sha256": "a3f727a973f02b0fb2c08301ef0c64e97900c4a8adbe4794bc6ad1a7d0b3eae1",
+      "summary": "evidence/muse_nvfp4_qwen3_30b_instruct2507_500_rrr_summary.json",
+      "verified_native_result_and_verifier_files": 532
     }
   },
   "scope": "Only complete SWE-Review split RRR with unchanged official metric functions, native first attempts and SHA-verified released result/verifier files."

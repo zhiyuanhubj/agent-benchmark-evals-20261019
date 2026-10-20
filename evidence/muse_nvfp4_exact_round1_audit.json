@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-10-20T03:32:25.240097+00:00",
+  "generated_utc": "2026-10-20T03:59:09.988958+00:00",
   "profile": "user-supplied exact prebuilt TB2.1 images",
   "model": "Muse NVFP4",
   "expected_task_count": 89,
-  "graded_task_count": 88,
+  "graded_task_count": 89,
   "success_count": 68,
-  "scored_raw_response_count": 4167,
-  "scored_nonempty_reasoning_response_count": 4166,
+  "scored_raw_response_count": 4822,
+  "scored_nonempty_reasoning_response_count": 4819,
   "graded_agent_timeout_tasks": [
     "chess-best-move",
     "cobol-modernization",
@@ -15,6 +15,7 @@
     "extract-moves-from-video",
     "gcode-to-text",
     "make-doom-for-mips",
+    "mteb-leaderboard",
     "path-tracing-reverse"
   ],
   "replica_handoff": {
@@ -126,15 +127,11 @@
     "endpoint": "http://10.1.101.159:31320/v1"
   },
   "ungraded_terminal_tasks": [],
-  "missing_graded_tasks": [
-    "mteb-leaderboard"
-  ],
-  "active_or_unfinished_trials": [
-    "mteb-leaderboard__EAhfXHh"
-  ],
+  "missing_graded_tasks": [],
+  "active_or_unfinished_trials": [],
   "errors": [],
-  "qualification": "partial_or_needs_review",
-  "score": null,
+  "qualification": "complete_verified",
+  "score": 0.7640449438202247,
   "reasoning_note": "Counts nonempty reasoning_content in preserved raw API responses; this does not certify that a trajectory is free of reward hacking.",
   "tasks": {
     "adaptive-rejection-sampler": {
@@ -686,6 +683,17 @@
       "finished_at": "2026-10-19T15:47:34.336541Z",
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
+    },
+    "mteb-leaderboard": {
+      "reward": 0.0,
+      "exception_type": "AgentTimeoutError",
+      "source": "infrastructure_recovery",
+      "api_base": "http://10.1.95.27:31320/v1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh/result.json",
+      "result_sha256": "a9143441fccda090efb5c5b042d342780284e0306c7c803b147bd8ecac89a227",
+      "finished_at": "2026-10-20T03:48:01.339366Z",
+      "raw_response_count": 655,
+      "responses_with_reasoning_content": 653
     },
     "mteb-retrieve": {
       "reward": 0.0,

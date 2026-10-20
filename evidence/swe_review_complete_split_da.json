@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T03:19:00.604909+00:00",
+  "generated_utc": "2026-10-20T03:53:15.699274+00:00",
   "metric": "Official SWE-Review compute_da.py, complete canonical review splits only",
   "metric_source_sha256": "35fdc90b8a5a14034df40fab7d70c7f3d5be587c0e8f92b67e0155996b52b035",
   "plan_sha256": "85414c294153273b0f4a975470233afebd9dd3fb8d116c6642a337f4837eea3c",
@@ -85,6 +85,39 @@
       }
     },
     "beam-bf16": {
+      "glm5_500": {
+        "status": "final_da_for_this_split",
+        "expected": 500,
+        "metrics": {
+          "DA": 73.0,
+          "DA_total_50": 71.0,
+          "CR": 91.2,
+          "FAR": 62.9,
+          "FRR": 13.6,
+          "total": 500,
+          "correct": 333,
+          "model_fail": 44,
+          "produced": 456,
+          "TP": 287,
+          "FP": 78,
+          "TN": 46,
+          "FN": 45
+        },
+        "canonical_receipt_sha256": "b91abec1ef8ad023a2f7385f3aba7992221d389f9e7cbd19dc9c5bc5a5655382",
+        "benchmark_sha256": "396b3cdcabca99bb22af24372e2200bf927a77df3c83b6701085f21d2258c7ec",
+        "verified_review_count": 500,
+        "invalid_report_count": 1,
+        "invalid_reports": [
+          {
+            "instance_id": "sphinx-doc__sphinx-8638",
+            "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/glm5_500/beam-review-20261018-glm5_500-batch25/sphinx-doc__sphinx-8638__HDyN3j9/verifier/review_report.json",
+            "sha256": "a5b04b6179d44b9cb84981ae33e08966c0064188236765a52bd56da7e64fc131",
+            "parse_error": "Extra data: line 35 column 1 (char 2799)"
+          }
+        ],
+        "RRR": null,
+        "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
+      },
       "qwen3_coder_30b_500": {
         "status": "final_da_for_this_split",
         "expected": 462,
