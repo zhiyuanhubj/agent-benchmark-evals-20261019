@@ -1,6 +1,6 @@
 {
   "created_utc": "2026-10-20T11:39:21.207917+00:00",
-  "status": "verifier_only_regrade_running",
+  "status": "verifier_only_regrade_terminal_ungraded",
   "purpose": "Single verifier-only diagnostic for the original Beam DeepSWE r1 ungraded native timeout; no new model draw and no change to original score",
   "model": "reflection/Beam-1.0-501B-A23B",
   "task": "koota-composite-trait-aspects",
@@ -16,7 +16,7 @@
   "cpu_allocation": 2922,
   "output_dir": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/regrades/beam-deep-r1-koota-20261020",
   "trial_name": "beam-deep-r1-koota-verifier-only-20261020",
-  "official_first_round_disposition": "Original VerifierTimeoutError remains ungraded until a separate policy review; regrade is never silently pooled with the first draw",
+  "official_first_round_disposition": "The original 113-task round remains 112 native grades / 47 successes, with this task ungraded. Regrade reused the original patch and trajectory, made no model call, and produced no valid reward. Do not pool this diagnostic with the first round or count it as a model failure.",
   "started_utc": "2026-10-20T11:39:40.377239+00:00",
   "service": "beam-deep-r1-koota-regrade-20261020.service",
   "first_attempt": {
@@ -88,10 +88,10 @@
       }
     ]
   },
-  "updated_utc": "2026-10-20T11:52:47.830608+00:00",
+  "updated_utc": "2026-10-20T12:11:47.027059+00:00",
   "second_attempt": {
     "service": "beam-deep-r1-koota-artifactfix-20261020.service",
-    "status": "running",
+    "status": "terminal_verifier_timeout_no_grade",
     "started_utc": "2026-10-20T11:40:44.369219+00:00",
     "result_dir": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/regrades/beam-deep-r1-koota-20261020/beam-deep-r1-koota-verifier-only-artifactfix-20261020",
     "same_verifier_timeout_seconds": 1800,
@@ -114,6 +114,24 @@
       "source_patch_changed_paths_count": 13,
       "source_patch_path_scope": "packages/core/src only; no tests, verifier, or package runner files modified",
       "qualification": "Read-only process and patch-path inspection. A single CPU-bound Vitest worker has not produced new.xml; this does not establish the root cause or a native grade."
-    }
+    },
+    "finished_utc": "2026-10-20T12:11:04.369559Z",
+    "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/regrades/beam-deep-r1-koota-20261020/beam-deep-r1-koota-verifier-only-artifactfix-20261020/result.json",
+    "result_sha256": "9528317e8f1d007f31557702364e1dea899694f0d50a3e4c418232d862bcc9b6",
+    "exception_type": "VerifierTimeoutError",
+    "exception_message": "Verifier execution timed out after 1800.0 seconds",
+    "native_reward": null,
+    "source_result_sha256_unchanged": true,
+    "source_trajectory_sha256_matches_regrade": true,
+    "source_patch_sha256_matches_regrade": true,
+    "verifier_test_stdout_sha256": "ac8e3ec795f730943490eb710430fd0ab4d5a2c0c681aa6f36a562335b18c875",
+    "verifier_new_xml_bytes": 0,
+    "outcome": "Same 1800-second verifier timeout as original on the same saved model patch. No valid binary grade; root cause not proven."
+  },
+  "first_round_score_snapshot": {
+    "expected": 113,
+    "terminal": 113,
+    "graded": 112,
+    "success": 47
   }
 }
