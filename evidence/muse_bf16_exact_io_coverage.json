@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T14:30:14.424574+00:00",
+  "generated_utc": "2026-10-20T14:58:09.699206+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 40,
-  "success_count": 32,
+  "scored_tasks": 41,
+  "success_count": 33,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -140,6 +140,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/git-leak-recovery__tWy3cZm/result.json"
     },
+    "reshard-c4-data": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/reshard-c4-data__nftFwuF/result.json"
+    },
     "password-recovery": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/password-recovery__voqitCL/result.json"
@@ -166,11 +170,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 40,
-  "covered_raw_response_sets": 40,
-  "covered_trajectories": 40,
-  "scored_raw_response_count": 1651,
-  "nonempty_reasoning_response_count": 1650,
+  "covered_results": 41,
+  "covered_raw_response_sets": 41,
+  "covered_trajectories": 41,
+  "scored_raw_response_count": 1667,
+  "nonempty_reasoning_response_count": 1666,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -307,6 +311,10 @@
     "git-leak-recovery": {
       "raw_responses": 13,
       "nonempty_reasoning_content": 13
+    },
+    "reshard-c4-data": {
+      "raw_responses": 16,
+      "nonempty_reasoning_content": 16
     },
     "password-recovery": {
       "raw_responses": 28,
@@ -462,6 +470,8 @@
     "muse_bf16_delta_20261020T135001Z.tar.zst",
     "muse_bf16_delta_20261020T140819Z.tar.zst",
     "muse_bf16_delta_20261020T142350Z.tar.zst",
+    "muse_bf16_delta_20261020T143942Z.tar.zst",
+    "muse_bf16_delta_20261020T145147Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

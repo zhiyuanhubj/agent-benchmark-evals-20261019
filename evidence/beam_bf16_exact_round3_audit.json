@@ -1,23 +1,20 @@
 {
-  "generated_utc": "2026-10-20T14:31:18.760496+00:00",
+  "generated_utc": "2026-10-20T14:59:17.993241+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T142156Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T144949Z.tar.zst",
   "expected": 89,
-  "terminal": 37,
-  "graded": 35,
-  "success": 24,
+  "terminal": 40,
+  "graded": 38,
+  "success": 27,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "feal-linear-cryptanalysis",
     "git-multibranch",
     "gpt2-codegolf",
     "headless-terminal",
-    "largest-eigenval",
-    "llm-inference-batching-scheduler",
-    "log-summary-date-ranges",
     "mailman",
     "make-doom-for-mips",
     "make-mips-interpreter",
@@ -70,7 +67,7 @@
     "headless-terminal"
   ],
   "unarchived_new_terminal_tasks": [
-    "largest-eigenval"
+    "mailman"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -337,6 +334,27 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/large-scale-text-editing__wTwWJfp/result.json",
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
+    },
+    "largest-eigenval": {
+      "reward": 1.0,
+      "result_sha256": "f110c25059a1c9363de4ac03e002a306cf4728fde972b749e2a0f0642537ad60",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/largest-eigenval__9CbaiNH/result.json",
+      "raw_response_count": 39,
+      "responses_with_reasoning_content": 39
+    },
+    "llm-inference-batching-scheduler": {
+      "reward": 1.0,
+      "result_sha256": "853fe5fbf43f191527345b3e9e621f4b42bb6ccd72c2a4125b2a5bc2ad467303",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/llm-inference-batching-scheduler__CJMBVfu/result.json",
+      "raw_response_count": 20,
+      "responses_with_reasoning_content": 20
+    },
+    "log-summary-date-ranges": {
+      "reward": 1.0,
+      "result_sha256": "0b756354a5457db3a03dd0669ae64f88d88c189454bb05db3601e70f1580714a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/log-summary-date-ranges__Bt9XL6H/result.json",
+      "raw_response_count": 4,
+      "responses_with_reasoning_content": 4
     }
   }
 }
