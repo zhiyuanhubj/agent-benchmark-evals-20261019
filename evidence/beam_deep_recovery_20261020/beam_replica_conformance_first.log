@@ -1,0 +1,209 @@
+─────────────────────────────── Functional tests ───────────────────────────────
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.7.0 -- /fsx/home/zhiyuan/.private/beam_20261018/verifier-venv/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.13', 'Platform': 'Linux-6.8.0-1053-aws-x86_64-with-glibc2.35', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.7.0'}, 'Plugins': {'json-report': '1.5.0', 'platformdirs': '4.13.4', 'anyio': '4.15.1', 'metadata': '3.1.1'}}
+rootdir: /fsx/home/zhiyuan/.private/beam_20261018
+plugins: json-report-1.5.0, platformdirs-4.13.4, anyio-4.15.1, metadata-3.1.1
+collecting ... collected 133 items
+
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_minimal_request_accepted PASSED [  0%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[temperature-0.6] PASSED [  1%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[top_p-0.95] PASSED [  2%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[presence_penalty-0] PASSED [  3%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[frequency_penalty-0] PASSED [  3%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[reasoning_effort-low] PASSED [  4%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[reasoning_effort-medium] PASSED [  5%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[reasoning_effort-high] PASSED [  6%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[reasoning_effort-xhigh] PASSED [  6%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_accepted[reasoning_effort-max] PASSED [  7%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_rejected[temperature--300] PASSED [  8%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_rejected[temperature-hot] PASSED [  9%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_rejected[top_p-42] PASSED [  9%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_rejected[presence_penalty--100] PASSED [ 10%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_rejected[frequency_penalty-100] PASSED [ 11%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_rejected[reasoning_effort-ultra] PASSED [ 12%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_param_value_rejected[reasoning_effort-32] PASSED [ 12%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_prior_turn_thinking_is_replayed[non_streaming-prior_turn_reasoning_is_available] FAILED [ 13%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_prior_turn_thinking_is_replayed[streaming-prior_turn_reasoning_is_available] PASSED [ 14%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[non_streaming-messages_missing] PASSED [ 15%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[non_streaming-messages_role_invalid] PASSED [ 15%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[non_streaming-tool_choice_invalid] PASSED [ 16%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[non_streaming-tool_choice_no_tools] PASSED [ 17%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[non_streaming-tools_type_invalid] PASSED [ 18%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[streaming-messages_missing] PASSED [ 18%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[streaming-messages_role_invalid] PASSED [ 19%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[streaming-tool_choice_invalid] PASSED [ 20%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[streaming-tool_choice_no_tools] PASSED [ 21%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_malformed_request_rejected[streaming-tools_type_invalid] PASSED [ 21%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_response_contract.py::test_chat_structured_output[non_streaming-extract] PASSED [ 22%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_response_contract.py::test_chat_structured_output[non_streaming-extract_typed_fields] PASSED [ 23%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_response_contract.py::test_chat_structured_output[non_streaming-extract_enum_and_list] PASSED [ 24%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_response_contract.py::test_chat_structured_output[streaming-extract] PASSED [ 24%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_response_contract.py::test_chat_structured_output[streaming-extract_typed_fields] PASSED [ 25%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_response_contract.py::test_chat_structured_output[streaming-extract_enum_and_list] PASSED [ 26%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_call_shape[non_streaming-basic] PASSED [ 27%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_call_shape[non_streaming-user_provided_system_prompt] PASSED [ 27%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_call_shape[non_streaming-array_param] PASSED [ 28%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_call_shape[streaming-basic] PASSED [ 29%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_call_shape[streaming-user_provided_system_prompt] PASSED [ 30%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_call_shape[streaming-array_param] PASSED [ 30%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_parallel_tool_calls[non_streaming-same_tool] PASSED [ 31%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_parallel_tool_calls[non_streaming-distinct_tools] PASSED [ 32%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_parallel_tool_calls[streaming-same_tool] PASSED [ 33%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_parallel_tool_calls[streaming-distinct_tools] PASSED [ 33%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_required[non_streaming-basic] PASSED [ 34%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_required[streaming-basic] PASSED [ 35%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_none[non_streaming-basic] PASSED [ 36%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_none[streaming-basic] PASSED [ 36%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_named[non_streaming-selected_function_called_for_unrelated_prompt] PASSED [ 37%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_named[streaming-selected_function_called_for_unrelated_prompt] PASSED [ 38%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-text_or_tool_call] PASSED [ 39%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_glob_each_dir] PASSED [ 39%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_edit_py_cache] PASSED [ 40%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_edit_ts_api] PASSED [ 41%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_edit_yaml_deploy] PASSED [ 42%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_edit_go_retry] PASSED [ 42%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_write_py_lru] PASSED [ 43%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_write_readme] PASSED [ 44%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_write_json_config] PASSED [ 45%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-opencode_write_sh_setup] PASSED [ 45%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_edit_py_cache] PASSED [ 46%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_edit_ts_api] PASSED [ 47%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_edit_yaml_deploy] PASSED [ 48%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_edit_go_retry] PASSED [ 48%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_write_py_lru] PASSED [ 49%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_write_readme] PASSED [ 50%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_write_json_config] PASSED [ 51%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-hermes_write_sh_setup] PASSED [ 51%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_edit_py_cache] PASSED [ 52%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_edit_ts_api] PASSED [ 53%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_edit_yaml_deploy] PASSED [ 54%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_edit_go_retry] PASSED [ 54%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_write_py_lru] PASSED [ 55%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_write_readme] PASSED [ 56%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_write_json_config] PASSED [ 57%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-pi_write_sh_setup] PASSED [ 57%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-python_repl_sqrt] PASSED [ 58%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-python_repl_primes] PASSED [ 59%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-python_repl_stats] PASSED [ 60%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-python_repl_dates] PASSED [ 60%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-python_repl_fib] PASSED [ 61%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_edit_py_cache] PASSED [ 62%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_edit_ts_api] PASSED [ 63%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_edit_yaml_deploy] PASSED [ 63%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_edit_go_retry] PASSED [ 64%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_write_py_lru] PASSED [ 65%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_write_readme] PASSED [ 66%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_write_json_config] PASSED [ 66%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[non_streaming-write_edit_write_sh_setup] PASSED [ 67%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-text_or_tool_call] PASSED [ 68%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_glob_each_dir] PASSED [ 69%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_edit_py_cache] PASSED [ 69%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_edit_ts_api] PASSED [ 70%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_edit_yaml_deploy] PASSED [ 71%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_edit_go_retry] PASSED [ 72%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_write_py_lru] PASSED [ 72%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_write_readme] PASSED [ 73%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_write_json_config] PASSED [ 74%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-opencode_write_sh_setup] PASSED [ 75%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_edit_py_cache] PASSED [ 75%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_edit_ts_api] PASSED [ 76%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_edit_yaml_deploy] PASSED [ 77%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_edit_go_retry] PASSED [ 78%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_write_py_lru] PASSED [ 78%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_write_readme] PASSED [ 79%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_write_json_config] PASSED [ 80%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-hermes_write_sh_setup] PASSED [ 81%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_edit_py_cache] PASSED [ 81%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_edit_ts_api] PASSED [ 82%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_edit_yaml_deploy] PASSED [ 83%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_edit_go_retry] PASSED [ 84%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_write_py_lru] PASSED [ 84%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_write_readme] PASSED [ 85%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_write_json_config] PASSED [ 86%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-pi_write_sh_setup] PASSED [ 87%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-python_repl_sqrt] PASSED [ 87%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-python_repl_primes] PASSED [ 88%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-python_repl_stats] PASSED [ 89%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-python_repl_dates] PASSED [ 90%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-python_repl_fib] PASSED [ 90%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_edit_py_cache] PASSED [ 91%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_edit_ts_api] PASSED [ 92%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_edit_yaml_deploy] PASSED [ 93%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_edit_go_retry] PASSED [ 93%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_write_py_lru] PASSED [ 94%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_write_readme] PASSED [ 95%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_write_json_config] PASSED [ 96%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_choice_auto[streaming-write_edit_write_sh_setup] PASSED [ 96%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_roundtrip[non_streaming-generated_call_result_followup] PASSED [ 97%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_roundtrip[streaming-generated_call_result_followup] PASSED [ 98%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_result_grounding[non_streaming-single_result] PASSED [ 99%]
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_tool_protocol.py::test_tool_result_grounding[streaming-single_result] PASSED [100%]
+
+=================================== FAILURES ===================================
+_ test_prior_turn_thinking_is_replayed[non_streaming-prior_turn_reasoning_is_available] _
+
+http_client = <openai.OpenAI object at 0x7845b11e7d70>
+model = 'Beam-1.0-501B-A23B', stream = False
+case = {'case_id': 'prior_turn_reasoning_is_available', 'input': {'messages': [{'role': 'user', 'content': 'Pick a codeword f...le': 'user', 'content': 'What codeword did you pick? Reply with the word only.'}]}, 'expected': {'answer': 'marigold'}}
+
+    @pytest.mark.parametrize("case", prior_turn_reasoning_cases, ids=load.case_id_generator)
+    def test_prior_turn_thinking_is_replayed(http_client, model, stream, case):
+        """A value stated only in a prior turn's reasoning_content is available to the next turn."""
+        completion = completions.generate_completion(
+            http_client,
+            model,
+            case["input"]["messages"],
+            stream=stream,
+        )
+        answer = case["expected"]["answer"]
+>       assert answer.lower() in completion.content.lower(), (
+            f"Expected {answer!r}, stated only in the prior turn's reasoning_content, got {completion.content!r}"
+        )
+E       AssertionError: Expected 'marigold', stated only in the prior turn's reasoning_content, got 'Nebula'
+E       assert 'marigold' in 'nebula'
+E        +  where 'marigold' = <built-in method lower of str object at 0x7845b1f9b130>()
+E        +    where <built-in method lower of str object at 0x7845b1f9b130> = 'marigold'.lower
+E        +  and   'nebula' = <built-in method lower of str object at 0x7845b122f540>()
+E        +    where <built-in method lower of str object at 0x7845b122f540> = 'Nebula'.lower
+E        +      where 'Nebula' = Completion(content='Nebula', tool_calls=[], reasoning_content='The user is asking for the codeword I picked. I need to recall it. In the first turn, I said "Ready" but I didn\'t actually state the codeword. Wait, let me re-read.\n\nThe instruction was: "Pick a codeword for this session and remember it. Reply with the single word Ready when you have picked it."\n\nSo I need to have picked a codeword internally and replied "Ready". I didn\'t state what it is. Now the user asks "What codeword did you pick? Reply with the word only."\n\nI need to recall the codeword I picked. But in my previous response, I only said "Ready" and didn\'t mention the codeword. However, I should have picked one internally. Since I didn\'t actually commit to one in text, I need to decide now? The instruction says remember it. \n\nI should pick one now and remember it. Let\'s pick "Nebula". But wait, the user might expect consistency. Since I didn\'t state it before, any word I give now becomes the codeword. I\'ll pick "Nebula".\n\nReply with word only.', finish_reason='stop').content
+
+verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py:71: AssertionError
+--------------------------------- JSON report ----------------------------------
+report saved to: /fsx/home/zhiyuan/.private/beam_20261018/.runs/20261020-094738-Beam-1.0-501B-A23B-verify/verify_report.json
+=========================== short test summary info ============================
+FAILED verifier-venv/lib/python3.12/site-packages/beam_verifier/functional_tests/e2e/test_request_contract.py::test_prior_turn_thinking_is_replayed[non_streaming-prior_turn_reasoning_is_available]
+================== 1 failed, 132 passed in 173.06s (0:02:53) ===================
+──────────────────────────────────── Result ────────────────────────────────────
+                           Functional tests                            
+┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ suite                  ┃ status ┃ cases   ┃ evidence                ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ API                    │ FAIL   │ 132/133 │ required                │
+│ Parser (non-streaming) │ SKIP   │ —       │ optional — not selected │
+│ Formatter              │ SKIP   │ —       │ optional — not selected │
+│ Raw completions        │ SKIP   │ —       │ optional — not selected │
+└────────────────────────┴────────┴─────────┴─────────────────────────┘
+                            API · failing cases (1)                             
+┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ category                ┃ rule                     ┃ failed test id          ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Request contract        │ A value stated only in a │ verifier-venv/lib/pytho │
+│ conformance             │ prior turn's             │ n3.12/site-packages/bea │
+│                         │ reasoning_content is     │ m_verifier/functional_t │
+│                         │ available to the next    │ ests/e2e/test_request_c │
+│                         │ turn.                    │ ontract.py::test_prior_ │
+│                         │                          │ turn_thinking_is_replay │
+│                         │                          │ ed[non_streaming-prior_ │
+│                         │                          │ turn_reasoning_is_avail │
+│                         │                          │ able]                   │
+└─────────────────────────┴──────────────────────────┴─────────────────────────┘
+✗ verify failed
+
+Run saved to 
+/fsx/home/zhiyuan/.private/beam_20261018/.runs/20261020-094738-Beam-1.0-501B-A23
+B-verify
+  view: beam-verifier view 
+/fsx/home/zhiyuan/.private/beam_20261018/.runs/20261020-094738-Beam-1.0-501B-A23
+B-verify

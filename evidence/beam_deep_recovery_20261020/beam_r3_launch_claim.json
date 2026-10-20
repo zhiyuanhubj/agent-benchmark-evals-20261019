@@ -1,0 +1,14 @@
+{
+  "utc": 1792490084.5020092,
+  "round": 3,
+  "expected_tasks": 113,
+  "original_template": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/configs/deep-r3.template.json",
+  "original_template_sha256": "31660dc8cd9d21e30651334cbc5f179980e6d93339422879828ea0d9607c2647",
+  "effective_config": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/configs/deep-r3.json",
+  "effective_config_sha256": "2e054c1bf29b422c2f5c96a14fa46ef73c602cc3b6025bd2e81662f24a8d8967",
+  "model_allocation": 2888,
+  "cpu_allocation": 2922,
+  "endpoint": "http://10.1.108.251:31328/v1",
+  "orchestration_change": "n_concurrent_trials 1 -> 4; task/image/generation settings unchanged",
+  "purpose": "Original controller stopped after CPU allocation 2812 expired during round 2. Round 3 was never launched."
+}

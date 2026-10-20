@@ -31,13 +31,18 @@ manifest_dir = ROOT / 'input_output/archive_manifests'
 previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
 previous_manifest = json.loads(previous.read_text())
 cutoff = datetime.fromisoformat(previous_manifest['generated_utc']) - timedelta(minutes=5)
+history = [manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')]
+thinking_backfill_due = (group in ('beam_legacy', 'muse_bf16') and not any(
+    json.loads(path.read_text()).get('filename_counts', {}).get('mini-swe-agent.trajectory.json', 0)
+    for path in history))
 previous_roots = {Path(root) for root in previous_manifest['source_roots']}
 new_roots = [root for root in archive_trials.GROUPS[group] if root not in previous_roots]
 # A newly added source root may contain input cards prepared before the last
 # archive. Include the whole root once; mtime alone would silently omit them.
 files = sorted(path for path in archive_trials.iter_files(group)
                if path.stat().st_mtime > cutoff.timestamp()
-               or any(path.is_relative_to(root) for root in new_roots))
+               or any(path.is_relative_to(root) for root in new_roots)
+               or (thinking_backfill_due and path.name == 'mini-swe-agent.trajectory.json'))
 activated_new_roots = [root for root in new_roots if any(path.is_relative_to(root) for path in files)]
 if not files and args.if_changed:
     print(json.dumps({'group': group, 'skipped': 'no_changed_files'}))
@@ -86,6 +91,7 @@ manifest = {
     'previous_manifest': str(previous.relative_to(ROOT)),
     'cutoff_utc': cutoff.isoformat(),
     'new_source_roots': [str(root) for root in activated_new_roots],
+    'one_time_native_thinking_backfill': thinking_backfill_due,
     'archive_name': archive.name,
     'archive_size_bytes': archive.stat().st_size,
     'archive_sha256': digest,

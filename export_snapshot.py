@@ -737,6 +737,15 @@ for row in review_rrr['complete_splits'].values():
             'size_bytes': path.stat().st_size,
             'source': str(path),
         }
+beam_deep_recovery = ROOT / 'evidence/beam_deep_recovery_20261020'
+if beam_deep_recovery.is_dir():
+    for path in sorted(beam_deep_recovery.iterdir()):
+        if path.is_file():
+            files[str(path.relative_to(ROOT))] = {
+                'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                'size_bytes': path.stat().st_size,
+                'source': str(path),
+            }
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
 def partial(d):

@@ -1,0 +1,100 @@
+{
+  "generated_utc": "2026-10-20T10:00:28.782355+00:00",
+  "model": "reflection/Beam-1.0-501B-A23B",
+  "revision": "78f8f654d40a40919b8e9954b40dd879ecb9a692",
+  "precision": "BF16",
+  "round_2": "Original CPU allocation 2812 ended at 25 terminal tasks; its unfinished trial is preserved and only missing tasks resume on CPU 2922 against Beam 2733.",
+  "round_3": "Previously unstarted 113 tasks use the unchanged source task, image and sampling settings against the pinned 2888 Beam replica; orchestration concurrency is 4.",
+  "conformance": "Initial full test 132/133 with one prior-thinking recall miss; unchanged full repeat 133/133 before launching round 3.",
+  "thinking_release_assets": [
+    "beam_legacy_delta_20261020T095850Z.tar.zst",
+    "muse_bf16_delta_20261020T095921Z.tar.zst"
+  ],
+  "files": {
+    "beam_r2_config.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/configs/deep-r2.json",
+      "sha256": "b12f672c82ceb2f3b4c66b332211bf5cf5b8f9d3fa092d5f037a91c2be8c40d1",
+      "bytes": 17812
+    },
+    "beam_r3_template.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/configs/deep-r3.template.json",
+      "sha256": "31660dc8cd9d21e30651334cbc5f179980e6d93339422879828ea0d9607c2647",
+      "bytes": 17812
+    },
+    "beam_r3_effective.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/configs/deep-r3.json",
+      "sha256": "2e054c1bf29b422c2f5c96a14fa46ef73c602cc3b6025bd2e81662f24a8d8967",
+      "bytes": 17815
+    },
+    "beam_r2_resume_claim.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/state/r2-2922-resume-claim.json",
+      "sha256": "8cf66841ba74eb915f49c732385602de047e1d7f5c19251d0101830c2a742a35",
+      "bytes": 557
+    },
+    "beam_r2_interrupted_manifest.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/state/r2-2812-interrupted-original/manifest.json",
+      "sha256": "f3885d4324d8089240d0ded7e6b6c157a1e4bc55bef8745ef945072ff102571c",
+      "bytes": 549
+    },
+    "beam_r3_launch_claim.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/state/r3-2888-launch.json",
+      "sha256": "3cd12606ee6a535054c396e3a01d21ad59437a41a95fcb441cd0982c44ff2a36",
+      "bytes": 844
+    },
+    "beam_r2_resume_controller.py": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/resume_r2_on_2922.py",
+      "sha256": "f5f08a41d28f387d7929bb542ebb9cf109d14781e2ab61b730e171c247060659",
+      "bytes": 3963
+    },
+    "beam_r3_controller.py": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/run_r3_on_2888.py",
+      "sha256": "e91f65f2f9c0341ed491c883442746a60a56690e02cf5b647f0b7ac2c27850a0",
+      "bytes": 4831
+    },
+    "beam_replica_reverification_controller.py": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/reverify_2888.py",
+      "sha256": "c15d21ecc49ea8b66fa754041ebc36020ef4148b413d69731dec52628f660b71",
+      "bytes": 4384
+    },
+    "beam_replica_weights_verification.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/beam-verification.json",
+      "sha256": "e4142bc7d80745fb3e106ef6ab3cce7149f1d17e0ef3a6c174b3e7031cc6d888",
+      "bytes": 56531
+    },
+    "beam_replica_launch.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/serve-launch.json",
+      "sha256": "a5d483fc335ad1cc7ff6320abc5135edbb8fecb15984f1e934d4aadd8433b3bb",
+      "bytes": 1413
+    },
+    "beam_replica_conformance_first.log": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/conformance.log",
+      "sha256": "6aada789dd425f9a01c3cb6ab021d1bc0782c13c6c7902db65e61977f455db50",
+      "bytes": 30458
+    },
+    "beam_replica_conformance_first_exit.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/conformance-exit.json",
+      "sha256": "59a8b1fadc2463fdb9eb64f9c3a3cbda2f1abe1d882db2bd30e9df3efd245d83",
+      "bytes": 45
+    },
+    "beam_replica_conformance_retry_claim.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/conformance-retry1-claim.json",
+      "sha256": "285476f6af34601eaadf12def4095ba747fe6114f37bc739e4e351b655275649",
+      "bytes": 739
+    },
+    "beam_replica_conformance_retry.log": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/conformance-retry1.log",
+      "sha256": "4f7a6a6ea0f7ec48bbd6fa369e20203d59ad3e052e5d2ce83770d3b43a9a1025",
+      "bytes": 25543
+    },
+    "beam_replica_conformance_retry_exit.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/conformance-retry1-exit.json",
+      "sha256": "8656409c69e73583dcd3355a190e61686acb5cb25c746f7c43d0dceba1b4179d",
+      "bytes": 135
+    },
+    "beam_replica_ready.json": {
+      "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/serving-conformance-ready.json",
+      "sha256": "1209096306aed50069918008e3dad1cadb0bf2273ea163060605612149b43bfc",
+      "bytes": 700
+    }
+  }
+}

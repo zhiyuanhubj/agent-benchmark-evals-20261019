@@ -130,6 +130,17 @@ def include(path, root, group):
     parts = rel.parts
     if path.name in ('result.json', 'task.json', 'config.json', 'trajectory.json', 'exception.txt', 'trial.log', 'openhands_sdk.txt'):
         return True
+    if group in ('beam_legacy', 'muse_bf16') and path.name == 'mini-swe-agent.trajectory.json':
+        # Harbor's generic trajectory omits reasoning_content for DeepSWE;
+        # the native mini-swe-agent trajectory contains the returned thinking.
+        # Active files can be rewritten; archive the stable terminal copy.
+        result = path.parent.parent / 'result.json'
+        if not result.is_file():
+            return False
+        try:
+            return bool(json.loads(result.read_text()).get('finished_at'))
+        except json.JSONDecodeError:
+            return False
     if 'raw_responses' in parts and path.suffix == '.json':
         return True
     if 'completions' in parts and path.suffix == '.json':
