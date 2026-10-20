@@ -1,23 +1,18 @@
 {
-  "generated_utc": "2026-10-20T12:27:16.777350+00:00",
+  "generated_utc": "2026-10-20T12:42:18.187756+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T120815Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T123235Z.tar.zst",
   "expected": 89,
-  "terminal": 22,
-  "graded": 22,
-  "success": 16,
+  "terminal": 27,
+  "graded": 27,
+  "success": 20,
   "missing_graded_tasks": [
-    "caffe-cifar-10",
-    "dna-assembly",
     "extract-moves-from-video",
     "feal-linear-cryptanalysis",
     "filter-js-from-html",
-    "financial-document-processor",
-    "fix-code-vulnerability",
-    "fix-git",
     "fix-ocaml-gc",
     "gcode-to-text",
     "git-leak-recovery",
@@ -80,11 +75,10 @@
   ],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [
-    "caffe-cifar-10",
-    "dna-assembly",
-    "financial-document-processor",
-    "fix-code-vulnerability",
-    "fix-git"
+    "filter-js-from-html",
+    "fix-ocaml-gc",
+    "git-leak-recovery",
+    "git-multibranch"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -134,6 +128,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/build-pov-ray__WjHJ8gK/result.json",
       "raw_response_count": 38,
       "responses_with_reasoning_content": 38
+    },
+    "caffe-cifar-10": {
+      "reward": 1.0,
+      "result_sha256": "6566b8944d417d6679a09ce16c092727f031772ac1a67690d3d6affdd940e288",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/caffe-cifar-10__gA8uJqS/result.json",
+      "raw_response_count": 99,
+      "responses_with_reasoning_content": 99
     },
     "cancel-async-tasks": {
       "reward": 1.0,
@@ -226,6 +227,13 @@
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
     },
+    "dna-assembly": {
+      "reward": 0.0,
+      "result_sha256": "8eab88dd0a7e56db0dd8caa75895a572c9efb4ffe88ccdc57174deadeb1952f2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/dna-assembly__exsZciX/result.json",
+      "raw_response_count": 54,
+      "responses_with_reasoning_content": 54
+    },
     "dna-insert": {
       "reward": 0.0,
       "result_sha256": "2311cb2f1b37f30dc06b75087004ef1a9a4e8181aa699adb4b9193316d7cb5d4",
@@ -244,6 +252,27 @@
       "reward": 1.0,
       "result_sha256": "5bfa43e48c3657f044ab1c1a07b84a9cb62b6b1959595f67073cf64cb05e08d2",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/feal-differential-cryptanalysis__rd6b87C/result.json",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
+    },
+    "financial-document-processor": {
+      "reward": 1.0,
+      "result_sha256": "c0aaf5a32b6ee19a3501831e00e75f8d7c3042037c4b753e7e895ab44365efd8",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/financial-document-processor__yHucL43/result.json",
+      "raw_response_count": 21,
+      "responses_with_reasoning_content": 21
+    },
+    "fix-code-vulnerability": {
+      "reward": 1.0,
+      "result_sha256": "bb5587b33b8e15400d91c5a6cffeecf491c23111e63a5262585346eec454f84c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/fix-code-vulnerability__pesutwi/result.json",
+      "raw_response_count": 13,
+      "responses_with_reasoning_content": 13
+    },
+    "fix-git": {
+      "reward": 1.0,
+      "result_sha256": "79e2fc2b07147c6db0dd12c7650a5ec7a4b703b4b84aa40fd1905c3c6dafa949",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/fix-git__zpjyBha/result.json",
       "raw_response_count": 8,
       "responses_with_reasoning_content": 8
     }
