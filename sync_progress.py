@@ -208,6 +208,7 @@ def cycle():
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_password_replacement_integrity.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_local2866.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_pytorch_ungraded.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_pytorch_replacement.py')], timeout=60)
         force_bf16 = False
         for attempt in range(3):
             if attempt:
@@ -306,7 +307,9 @@ def cycle():
              'audit_muse_nvfp4_local2866.py',
              'prepare_muse_nvfp4_local2866.py',
              'protocol/muse_nvfp4_local2866',
+             'protocol/muse_nvfp4_exact_future_round_controller_20261019.py',
              'audit_muse_nvfp4_r2_pytorch_ungraded.py',
+             'audit_muse_nvfp4_r2_pytorch_replacement.py',
              'prepare_muse_nvfp4_r2_pytorch_replacement.py',
              'audit_swe_review_official_rrr.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',

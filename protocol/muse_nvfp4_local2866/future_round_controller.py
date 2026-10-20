@@ -68,7 +68,7 @@ def main():
     allocation = int(sys.argv[1])
     slot = int(sys.argv[2]) if len(sys.argv) > 2 else 0
     assert allocation in LANES and os.environ.get('SLURM_JOB_ID') == '2919'
-    assert slot == 0 or (allocation == 2812 and slot in (1, 2, 3))
+    assert slot == 0 or (allocation == 2812 and slot in (1, 2, 3)) or (allocation == 2867 and slot == 1)
     images = json.loads((ROOT / 'allocation-2919/images-ready.json').read_text())
     assert images['count'] == 89 and images['all_archive_identities_verified']
     assert json.loads((ROOT / 'allocation-2919/official-policy-preflight-ready.json').read_text())['passed']
