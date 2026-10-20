@@ -1,5 +1,5 @@
 {
-  "utc": 1792454216.803145,
+  "utc": 1792455120.973075,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,7 +345,7 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 402,
+      "terminal": 407,
       "exceptions": 8,
       "prepared_image_phases": {
         "image_ready": 432
@@ -377,7 +377,7 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 432,
+      "terminal": 437,
       "exceptions": 6,
       "prepared_image_phases": {
         "image_ready": 462
@@ -425,19 +425,19 @@
   "allocations": [
     "2922|muse-tb-native-eval-cpu-2|RUNNING|ip-10-1-69-250|ip-10-1-69-250",
     "2919|beam-native-eval-cpu-1|RUNNING|ip-10-1-30-147|ip-10-1-30-147",
-    "2906|mix449-cpu-salvage-10-1-122-30|PENDING||(Priority)",
-    "2904|mix449-cpu-salvage-10-1-119-14|PENDING||(Priority)",
-    "2905|mix449-cpu-salvage-10-1-31-190|PENDING||(Priority)",
-    "2903|mix449-cpu-salvage-10-1-113-136|PENDING||(Priority)",
-    "2899|beam-review-extra-1|PENDING||(Resources)",
-    "2900|beam-review-extra-2|PENDING||(Priority)",
-    "2901|beam-review-extra-3|PENDING||(Priority)",
-    "2902|beam-review-extra-4|PENDING||(Priority)",
+    "2906|mix449-cpu-salvage-10-1-122-30|PENDING||(Resources)",
+    "2904|mix449-cpu-salvage-10-1-119-14|PENDING||(Resources)",
+    "2905|mix449-cpu-salvage-10-1-31-190|PENDING||(Resources)",
+    "2903|mix449-cpu-salvage-10-1-113-136|PENDING||(Resources)",
     "2923|muse-nvfp4-tb-exact-extra-2|PENDING||(Priority)",
     "2924|muse-nvfp4-tb-exact-extra-1|PENDING||(Priority)",
     "2927|muse-nvfp4-tb-exact-backfill-12h|PENDING||(Priority)",
     "2928|muse-nvfp4-tb-exact-backfill-6h|PENDING||(Priority)",
-    "2888|beam-review-reserve-2888|PENDING||(None)",
+    "2902|beam-review-extra-4|PENDING||(None)",
+    "2901|beam-review-extra-3|PENDING||(None)",
+    "2900|beam-review-extra-2|PENDING||(None)",
+    "2899|beam-review-extra-1|PENDING||(None)",
+    "2888|beam-review-reserve-2888|RUNNING|ip-10-1-108-251|ip-10-1-108-251",
     "2886|muse-bf16-pair-2886|RUNNING|ip-10-1-13-41,ip-10-1-122-30|ip-10-1-13-41,ip-10-1-122-30",
     "2887|beam-review-reserve-2887|RUNNING|ip-10-1-69-108|ip-10-1-69-108",
     "2869|mix3-eval-extra-4|RUNNING|ip-10-1-77-106|ip-10-1-77-106",
@@ -460,7 +460,7 @@
     },
     "complete": false,
     "model_generation_started": false,
-    "utc": "2026-10-19T23:55:57.630898+00:00",
+    "utc": "2026-10-20T00:11:50.199505+00:00",
     "grader_preflight_passed": true
   },
   "revision_preparation_controller": "MainPID=3430427\nResult=success\nActiveState=active\n",

@@ -1,0 +1,135 @@
+{
+  "generated_utc": "2026-10-20T00:19:27.809260+00:00",
+  "scope": "SWE-Review original-generator task preparation and connectivity incident. This is an infrastructure audit, not a scored revision result.",
+  "model_attempt_policy": "One original-generator response per canonically rejected PR. The recorded task-preparation failures had zero model claims. Subsequent native trial directories were created, but their completed attempts failed to reach the model before any response; they are excluded from model scores and require explicitly labeled infrastructure replacements.",
+  "queues": [
+    {
+      "reviewer": "muse-nvfp4",
+      "split": "qwen3_coder_30b_500",
+      "expected_original_generator_attempts": 222,
+      "source_task_config_formats": {
+        "pinned": 165,
+        "not_pinned": 57
+      },
+      "queue_plan_sha256": "9e9c38e92407c53bba68da39733d5138425d359c7e1e4add7f2f97687ad5b7ed",
+      "v1_preflight_error": "AssertionError()",
+      "v1_exit_sha256": "bb9922f15fefacf873ee1e241f486b4ab13602c342e1a1850ada9acfab7c5e1e",
+      "v1_model_attempt_claims": 0,
+      "current_unit": "swe-review-revision-muse-coder-v3-20261020",
+      "current_claims": 1,
+      "current_task_receipts": 32,
+      "native_queue_terminal": false,
+      "source_task_dir": ".private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/qwen3_coder_30b_500/tasks",
+      "v2_preflight_error": "KeyError('docker_image')",
+      "v2_exit_sha256": "e574f56e5ae8966d7c7bb1fd61a13b41d0e471281b1524dc48f6ad4749293852",
+      "v2_model_attempt_claims": 0,
+      "current_queue_phase": "paused_for_sandbox_to_model_connectivity_recovery",
+      "saved_finished_trial_results": 12,
+      "saved_pre_model_connection_failures": 12,
+      "saved_connectivity_checks": 16,
+      "saved_connectivity_curl_return_codes": [
+        28
+      ],
+      "saved_model_raw_responses": 0,
+      "saved_trajectories": 0,
+      "failed_native_trial_outputs_preserved": true
+    },
+    {
+      "reviewer": "muse-nvfp4",
+      "split": "qwen3_30b_instruct2507_500",
+      "expected_original_generator_attempts": 266,
+      "source_task_config_formats": {
+        "pinned": 193,
+        "not_pinned": 73
+      },
+      "queue_plan_sha256": "41bc7521710530d8423abd5429c6f538cff05e6799bbc92c556da0cb2779b852",
+      "v1_preflight_error": "AssertionError()",
+      "v1_exit_sha256": "afef4569acbb88c60ba82618f02e86c2576cfb4a2abdbb0471639aeeb4fbb912",
+      "v1_model_attempt_claims": 0,
+      "current_unit": "swe-review-revision-muse-instruct-v3-20261020",
+      "current_claims": 2,
+      "current_task_receipts": 34,
+      "native_queue_terminal": false,
+      "source_task_dir": ".private/muse_spark_open_20261016/review_bench_20261018/revision/prepared/qwen3_30b_instruct2507_500/tasks",
+      "v2_stopped_before_model_attempt": true,
+      "v2_model_attempt_claims": 0,
+      "current_queue_phase": "paused_for_sandbox_to_model_connectivity_recovery",
+      "saved_finished_trial_results": 16,
+      "saved_pre_model_connection_failures": 16,
+      "saved_connectivity_checks": 16,
+      "saved_connectivity_curl_return_codes": [
+        28
+      ],
+      "saved_model_raw_responses": 0,
+      "saved_trajectories": 0,
+      "failed_native_trial_outputs_preserved": true
+    },
+    {
+      "reviewer": "beam-bf16",
+      "split": "qwen3_30b_instruct2507_500",
+      "expected_original_generator_attempts": 279,
+      "source_task_config_formats": {
+        "pinned": 279
+      },
+      "queue_plan_sha256": "b7384d9a954741e5c3a8501632906dbac541eb1f590699b742e6b04b24d0ebe8",
+      "v1_preflight_error": "AssertionError()",
+      "v1_exit_sha256": "00ae566ca6cc0be5436d55e818b8773c8c2bdd58654326044af0e02baa8fc905",
+      "v1_model_attempt_claims": 0,
+      "current_unit": "swe-review-revision-beam-instruct-v2-20261020",
+      "current_claims": 2,
+      "current_task_receipts": 34,
+      "native_queue_terminal": false,
+      "source_task_dir": ".private/beam_20261018/review_bench/revision/prepared/qwen3_30b_instruct2507_500/tasks",
+      "current_queue_phase": "paused_for_sandbox_to_model_connectivity_recovery",
+      "saved_finished_trial_results": 16,
+      "saved_pre_model_connection_failures": 16,
+      "saved_connectivity_checks": 20,
+      "saved_connectivity_curl_return_codes": [
+        28
+      ],
+      "saved_model_raw_responses": 0,
+      "saved_trajectories": 0,
+      "failed_native_trial_outputs_preserved": true
+    }
+  ],
+  "published_protocol_sha256": {
+    "protocol/muse_review_revision_v2/revision_queue_v3.py": "60c2ec00ec4c45fb8fe335b3df620ad114d6f44d38ec587feaddd0f8b8fec839",
+    "protocol/muse_review_revision_v2/revision_score_v2.py": "b16ff2549a6a0bf95d4dbaa1a7cc9ccb5998e127f42f32deff55135c4ae99add",
+    "protocol/beam_review_revision_v2/revision_queue_v2.py": "e26f7a9b37f615ba668fa9ed9c79fa06620db28d53e07a0def59cf8583a95616"
+  },
+  "scoring": {
+    "v1_failure": "Five Beam Instruct review reports have malformed JSON; v1 stopped while decoding them. The official decision fallback already classifies them as model failures.",
+    "v1_source_sha256": "0f32676c5a2a5bf2095782019a0162ee5f70351c18967f55195dba568f6a519e",
+    "v2_source_sha256": "b16ff2549a6a0bf95d4dbaa1a7cc9ccb5998e127f42f32deff55135c4ae99add",
+    "v2_change": "Catch JSONDecodeError for preserved malformed reports, apply the official missing-decision fallback, and retain original report hashes; official DA/RRR formulas are unchanged.",
+    "preflight_sha256": "741e2d30b7a3c705b3ad48c41e34b107deb6d03f589f4f6d342564e6cacff7be",
+    "sealed_da_exact_match": true,
+    "invalid_beam_instruct_report_count": 5,
+    "sealed_da_checked_splits": [
+      [
+        "muse-nvfp4",
+        "glm5_500"
+      ],
+      [
+        "muse-nvfp4",
+        "qwen3_coder_30b_500"
+      ],
+      [
+        "muse-nvfp4",
+        "qwen3_30b_instruct2507_500"
+      ],
+      [
+        "beam-bf16",
+        "qwen3_30b_instruct2507_500"
+      ]
+    ]
+  },
+  "network_diagnosis": {
+    "model_service_host_port": "10.1.108.251:31410 and :31411",
+    "host_local_model_list_with_dummy_key_http_status": 200,
+    "isolated_container_to_host_primary_ip": "connection timeout before HTTP response, including explicit no-proxy test",
+    "isolated_container_to_own_bridge_gateway_model_port_http_status": 200,
+    "conclusion": "Original endpoint points to the host primary IP, which these isolated Docker networks cannot reach. Replacement must use each trial network gateway while keeping the original model and all task inputs unchanged.",
+    "scores_from_failed_native_trials": "none"
+  }
+}
