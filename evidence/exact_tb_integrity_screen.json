@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T00:52:10.227454+00:00",
+  "generated_utc": "2026-10-20T01:11:36.643727+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 34,
+      "scored_trajectories_checked": 35,
       "pattern_hit_trajectories": 5,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 39,
+      "scored_trajectories_checked": 40,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -4878,6 +4878,18 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "make-doom-for-mips",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b04/make-doom-for-mips__iDk7pvo/agent/trajectory.json",
+      "trajectory_sha256": "fef9754060e56d629f56a855dd88d54eb469392b64661f6ab1a796cb358ab59a",
+      "steps": 140,
+      "tool_calls": 892,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "largest-eigenval",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b04/largest-eigenval__jq62DKD/agent/trajectory.json",
@@ -5274,6 +5286,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "largest-eigenval",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/largest-eigenval__TYCejs4/agent/trajectory.json",
+      "trajectory_sha256": "b71947da122ec145674e8de082ba093cf281ee9e9539377770f6780d3fcd6342",
+      "steps": 38,
+      "tool_calls": 81,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "install-windows-3.11",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/install-windows-3.11__edEG2vF/agent/trajectory.json",
@@ -5548,9 +5572,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "de8096b24a2ea913bc6e0985d0cfa1113e71d7d1c79579a10b02f56b46c31eed",
-        "steps_at_screen": 534,
-        "tool_calls_at_screen": 1215,
+        "trajectory_sha256_at_screen": "3ed72a88131a9f21aae9cdf02dbf1fe7a94c902ae63fdd6411558670b4c45f17",
+        "steps_at_screen": 550,
+        "tool_calls_at_screen": 1222,
         "hits": [],
         "status": "in_progress_not_scored"
       }
