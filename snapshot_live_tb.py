@@ -31,8 +31,11 @@ connection_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-connection-recovery-202610
 expiry_correction_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-expiry-correction-2902-20261020'
 fasttext_expiry_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-fasttext-expiry-2902-20261020'
 fasttext_tmux_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-fasttext-tmux-2902-20261020'
+expired2869_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r3-expired2869-continuation-2900-20261020'
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
 jobs.extend(RESULTS.glob('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b*'))
+if expired2869_job.exists():
+    jobs.append(expired2869_job)
 jobs.extend(job for job in replacement_jobs if job.exists())
 if transport_job.exists():
     jobs.append(transport_job)
@@ -159,6 +162,58 @@ if r3_plan.exists():
                 assert check['response']['choices'][0]['message']['reasoning_content'].strip()
                 payloads[preflight] = preflight.read_bytes()
                 counts['ready_proof'] += 1
+    continuation_path = r3_state / 'b07-2900-continuation.json'
+    if continuation_path.exists():
+        continuation = json.loads(continuation_path.read_text())
+        assert continuation['batch'] == 7 and continuation['allocation'] == 2900
+        assert continuation['old_allocation'] == 2869 and continuation['old_route_started'] is False
+        assert hashlib.sha256(Path(continuation['preserved_old_route']).read_bytes()).hexdigest() == continuation['preserved_old_route_sha256']
+        config = Path(continuation['effective_config'])
+        assert hashlib.sha256(config.read_bytes()).hexdigest() == continuation['effective_config_sha256']
+        assert json.loads(config.read_text()) == json.loads(Path(plan['batches'][7]['effective_config']).read_text())
+        payloads[continuation_path] = continuation_path.read_bytes()
+        payloads[config] = config.read_bytes()
+        counts['handoff_receipt'] += 1
+        counts['job_config'] += 1
+        for suffix in ('started', 'exit'):
+            marker = r3_state / f'b07-2900-{suffix}.json'
+            if marker.exists():
+                payloads[marker] = marker.read_bytes()
+                counts['handoff_receipt'] += 1
+        script = ROOT / 'protocol/continue_muse_nvfp4_r3_b07_2900_20261020.py'
+        payloads[script] = script.read_bytes()
+        counts['controller_source'] += 1
+    expired_claim_path = r3_state / 'expired2869-continuation-2900-claim.json'
+    if expired_claim_path.exists():
+        expired_claim = json.loads(expired_claim_path.read_text())
+        assert expired_claim['original_allocation_sacct'][1] == 'TIMEOUT'
+        assert expired_claim['model_allocation'] == 2900
+        assert len(expired_claim['tasks']) == 11
+        assert sum(bool(row['source_partial_raw']) for row in expired_claim['tasks']) == 4
+        config = Path(expired_claim['config'])
+        assert hashlib.sha256(config.read_bytes()).hexdigest() == expired_claim['config_sha256']
+        assert hashlib.sha256(Path(expired_claim['source_plan']).read_bytes()).hexdigest() == expired_claim['source_plan_sha256']
+        payloads[expired_claim_path] = expired_claim_path.read_bytes()
+        counts['handoff_receipt'] += 1
+        if config not in payloads:
+            payloads[config] = config.read_bytes()
+            counts['job_config'] += 1
+        for row in expired_claim['tasks']:
+            assert hashlib.sha256(Path(row['original_failure_result']).read_bytes()).hexdigest() == row['original_failure_result_sha256']
+            for raw in row['source_partial_raw']:
+                path = Path(raw['path'])
+                assert hashlib.sha256(path.read_bytes()).hexdigest() == raw['sha256']
+            if row['source_partial_trajectory']:
+                path = Path(row['source_partial_trajectory'])
+                assert hashlib.sha256(path.read_bytes()).hexdigest() == row['source_partial_trajectory_sha256']
+        for suffix in ('start', 'exit'):
+            marker = r3_state / f'expired2869-continuation-2900-{suffix}.json'
+            if marker.exists():
+                payloads[marker] = marker.read_bytes()
+                counts['handoff_receipt'] += 1
+        script = ROOT / 'protocol/continue_muse_nvfp4_r3_expired2869_2900_20261020.py'
+        payloads[script] = script.read_bytes()
+        counts['controller_source'] += 1
 handoff = SOURCE / 'muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
 if handoff.exists():
     payloads[handoff] = handoff.read_bytes()

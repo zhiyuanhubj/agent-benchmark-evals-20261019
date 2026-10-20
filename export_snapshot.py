@@ -642,6 +642,32 @@ if r3_replacement_plan:
                 'Original lane also claimed extra-routed batch'
             extra_routes.append({'batch': batch['index'], 'allocation': receipt['allocation'],
                                  'endpoint': endpoint, 'receipt': str(route)})
+        continuation_path = r3_replacement_root / f'b{batch["index"]:02}-2900-continuation.json'
+        if continuation_path.exists():
+            continuation = read(continuation_path)
+            assert batch['index'] == continuation['batch'] == 7
+            assert continuation['job_name'] == batch['job_name']
+            assert continuation['old_allocation'] == 2869 and continuation['allocation'] == 2900
+            assert continuation['old_route_started'] is False
+            assert continuation['preserved_old_route'] == str(route)
+            assert hashlib.sha256(route.read_bytes()).hexdigest() == continuation['preserved_old_route_sha256']
+            assert not (r3_replacement_root / 'extra-routes-20261020/b07-started.json').exists()
+            assert not (r3_replacement_root / 'b07-started.json').exists()
+            assert continuation['source_plan_sha256'] == hashlib.sha256(
+                Path(continuation['source_plan']).read_bytes()).hexdigest()
+            assert continuation['endpoint_ready_sha256'] == hashlib.sha256(
+                (r3_replacement_root.parent / 'replica-2900/endpoint-ready.json').read_bytes()).hexdigest()
+            continued_config = Path(continuation['effective_config'])
+            assert hashlib.sha256(continued_config.read_bytes()).hexdigest() == continuation['effective_config_sha256']
+            continued = read(continued_config)
+            expected_continued = read(effective_config)
+            assert continued == expected_continued, 'Continuation changed task or generation settings'
+            assert continuation['tasks'] == [row['task'] for row in batch['tasks']]
+            endpoint = continuation['endpoint']
+            assert endpoint == r3_replacement_plan['endpoint']
+            extra_routes.append({'batch': 7, 'allocation': 2900,
+                                 'endpoint': endpoint, 'receipt': str(continuation_path),
+                                 'policy': 'Rerouted before first model response on expired allocation 2869'})
         expected = {item['task'] for item in batch['tasks']}
         assert len(expected) == len(batch['tasks'])
         for item in batch['tasks']:
@@ -682,6 +708,87 @@ if r3_replacement_plan:
                 nvfp4_rounds['3']['exceptions'][f'replacement_{kind}'] = \
                     nvfp4_rounds['3']['exceptions'].get(f'replacement_{kind}', 0) + 1
     assert len(seen) == 89
+    continuation_claim_path = r3_replacement_root / 'expired2869-continuation-2900-claim.json'
+    continuation_summary = None
+    if continuation_claim_path.exists():
+        continuation_claim = read(continuation_claim_path)
+        continuation_config = Path(continuation_claim['config'])
+        assert continuation_claim['source_plan_sha256'] == hashlib.sha256(
+            Path(continuation_claim['source_plan']).read_bytes()).hexdigest()
+        assert continuation_claim['config_sha256'] == hashlib.sha256(continuation_config.read_bytes()).hexdigest()
+        assert continuation_claim['model_ready_sha256'] == hashlib.sha256(
+            Path(continuation_claim['model_ready']).read_bytes()).hexdigest()
+        assert continuation_claim['original_allocation_sacct'][1] == 'TIMEOUT'
+        assert continuation_claim['model_allocation'] == 2900
+        assert continuation_claim['endpoint'] == r3_replacement_plan['endpoint']
+        assert len(continuation_claim['tasks']) == 11
+        assert continuation_claim['source_partial_model_response_tasks'] == 4
+        correction_config = read(continuation_config)
+        assert correction_config['job_name'] == continuation_claim['job_name']
+        assert correction_config['n_attempts'] == 1 and correction_config['retry']['max_retries'] == 0
+        assert correction_config['agents'][0]['kwargs']['api_base'] == continuation_claim['endpoint']
+        assert [Path(row['path']).name for row in correction_config['tasks']] == [
+            row['task'] for row in continuation_claim['tasks']]
+        expected_correction = set()
+        for row in continuation_claim['tasks']:
+            name = row['task']
+            assert row['batch'] in (3, 5) and name in seen and name not in expected_correction
+            expected_correction.add(name)
+            source_root = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / row['source_job']
+            assert not list(source_root.glob(name + '__*/result.json')), 'Source completed after continuation claim'
+            assert hashlib.sha256(Path(row['original_failure_result']).read_bytes()).hexdigest() == \
+                row['original_failure_result_sha256']
+            for raw in row['source_partial_raw']:
+                assert hashlib.sha256(Path(raw['path']).read_bytes()).hexdigest() == raw['sha256']
+            if row['source_partial_trajectory']:
+                assert hashlib.sha256(Path(row['source_partial_trajectory']).read_bytes()).hexdigest() == \
+                    row['source_partial_trajectory_sha256']
+        correction_root = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / continuation_claim['job_name']
+        correction_terminal = correction_graded = correction_success = correction_raw = correction_active = 0
+        correction_found = set()
+        for trial in correction_root.glob('*'):
+            if not trial.is_dir():
+                continue
+            name = trial.name.split('__', 1)[0]
+            assert name in expected_correction and name not in correction_found
+            correction_found.add(name)
+            raws = list((trial / 'agent/raw_responses').glob('*.json'))
+            correction_raw += len(raws)
+            result_path = trial / 'result.json'
+            if not result_path.exists():
+                correction_active += 1
+                continue
+            value = read(result_path)
+            if not value.get('finished_at'):
+                correction_active += 1
+                continue
+            assert Path(value['config']['task']['path']).name == name
+            assert value['config']['agent']['kwargs']['api_base'] == continuation_claim['endpoint']
+            correction_terminal += 1
+            reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+            if reward in (0, 1):
+                correction_graded += 1
+                correction_success += int(reward)
+                graded_task_names.add(name)
+                nvfp4_rounds['3']['exceptions']['InternalServerError'] -= 1
+            elif value.get('exception_info'):
+                kind = value['exception_info']['exception_type']
+                key = f'continuation_{kind}'
+                nvfp4_rounds['3']['exceptions'][key] = nvfp4_rounds['3']['exceptions'].get(key, 0) + 1
+        terminal += correction_terminal
+        graded += correction_graded
+        success += correction_success
+        raw_responses += correction_raw
+        active += correction_active
+        continuation_summary = {
+            'claim': str(continuation_claim_path), 'claim_sha256': hashlib.sha256(
+                continuation_claim_path.read_bytes()).hexdigest(),
+            'expected': 11, 'terminal': correction_terminal, 'graded': correction_graded,
+            'success': correction_success, 'raw_responses': correction_raw,
+            'source_partial_model_response_tasks': 4,
+            'source_partial_model_responses': sum(len(row['source_partial_raw']) for row in continuation_claim['tasks']),
+            'qualification': 'Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved.',
+        }
     confirmed_hacks = sorted(note['task'] for note in
         read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
         if note['model'] == 'muse_nvfp4_r3' and note['reward'] == 1
@@ -706,10 +813,12 @@ if r3_replacement_plan:
         'replacement_success': success, 'replacement_raw_responses': raw_responses,
         'confirmed_compromised_successes': len(confirmed_hacks),
         'known_compromised_tasks': confirmed_hacks,
-        'active_trial_dirs': active, 'all_tasks_single_replacement_draw': len(seen) == 89,
+        'active_trial_dirs': active,
+        'all_tasks_single_replacement_draw': len(seen) == 89 and continuation_summary is None,
+        'infrastructure_interruption_continuation': continuation_summary,
         'extra_routes': extra_routes,
         'endpoint_ready': (r3_replacement_root.parent / 'replica-2900/endpoint-ready.json').exists(),
-        'qualification': 'Original 89 connection-refused trials remain preserved and ungraded. Each task gets one separately declared infrastructure replacement with unchanged task/image/generation settings.',
+        'qualification': 'Original 89 connection-refused trials remain preserved and ungraded. Native graded results are counted once per task. Allocation-expiry partial trajectories and their separate continuation are explicitly preserved without correctness-based selection.',
     }
     write('evidence/muse_nvfp4_r3_infra_replacement_progress.json', r3_replacement_progress)
 
@@ -1403,7 +1512,7 @@ The round-2 **original first draws** currently have {round2_first_draw['terminal
 
 Ten more original round-2 trials lost their model endpoint with `InternalServerError: Connection error`. Their {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} original raw responses remain preserved. The [hash-anchored recovery claim](evidence/muse_nvfp4_r2_connection_recovery_claim.json) declares one separate replacement draw per task with unchanged tasks, images and sampling settings. So far it has {len(connection_results)} terminal tasks, {sum(row['reward'] in (0, 1) for row in connection_results.values())} native grades, and {sum(row['reward'] == 1 for row in connection_results.values())} successes; only a native grade can fill an original missing grade, with no best-of selection.
 
-The 89 original round-3 trials reached a refused endpoint before any model response. The [replacement audit](evidence/muse_nvfp4_r3_infra_replacement_progress.json) currently counts **{r3_replacement_progress['replacement_graded']}/89 native grades and {r3_replacement_progress['replacement_success']} successes**, so this is still a partial round. Allocation 2900 keeps its first three active batches. After the GLM-5 review revision queues completed, allocations 2869 and 2899 took exclusive ownership of the six untouched later batches (59 tasks) with the same pinned NVFP4 weights, image, task settings and generation parameters. Their [routed controller](protocol/run_muse_nvfp4_r3_extra_routes_20261020.py) changes only the model endpoint and waits for a nonempty-thinking preflight. Original lane reservations prevent duplicate draws; the released live archive preserves route receipts, raw responses and trajectories.
+The 89 original round-3 trials reached a refused endpoint before any model response. The [replacement audit](evidence/muse_nvfp4_r3_infra_replacement_progress.json) currently counts **{r3_replacement_progress['replacement_graded']}/89 native grades and {r3_replacement_progress['replacement_success']} successes**; a full-round score requires all 89 native grades. Allocation 2869 then timed out during its routed replacement batches. Its terminal results remain counted once, while 11 tasks without a terminal result have a separately documented infrastructure continuation on live allocation 2900. Four of those 11 retain interrupted source trajectories with 150 actual model replies; those originals are preserved and cannot be counted as independent scores. Batch b07 had not sampled on 2869 and was rerouted to 2900 before its first draw. Allocation 2899 continues its assigned batches. The same pinned NVFP4 weights, task images and generation settings are used; [routed controller](protocol/run_muse_nvfp4_r3_extra_routes_20261020.py) receipts, inputs, raw replies and trajectories are kept in the release archives. No result is selected by correctness.
 
 The round-3 native success count includes `largest-eigenval`, whose [hash-anchored trajectory review](evidence/exact_tb_integrity_manual_notes.json) confirms that the agent slowed the NumPy reference solver through Python startup hooks. Its recorded reward is preserved, but this success is compromised as evidence of an unmodified speedup and the trajectory is excluded from clean training data.
 
@@ -1550,7 +1659,7 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 
 另有 10 题原始第 2 轮尝试因旧模型端点连接中断而报 `InternalServerError: Connection error`，原有 {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} 条模型回复均保留。[哈希锚定补跑声明](evidence/muse_nvfp4_r2_connection_recovery_claim.json)逐题只安排一次独立基础设施补跑，题目、镜像和采样参数不变。目前补跑有 {len(connection_results)} 题终态、{sum(row['reward'] in (0, 1) for row in connection_results.values())} 题获原生判分、{sum(row['reward'] == 1 for row in connection_results.values())} 题成功；只有有效判分才填补原题的缺失值，不择优取样。
 
-第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。[补跑审计](evidence/muse_nvfp4_r3_infra_replacement_progress.json)现计 **{r3_replacement_progress['replacement_graded']}/89 题获原生判分、{r3_replacement_progress['replacement_success']} 题成功**，仍属未完成轮次。2900 保留正在跑的前三批；GLM-5 的 SWE-Review 修订队列完成后，2869、2899 独占接管尚未启动的后六批共 59 题。两个新副本使用同一固定 NVFP4 权重和镜像，任务与采样参数不变，仅改模型端点；[路由控制器](protocol/run_muse_nvfp4_r3_extra_routes_20261020.py)须先通过非空 thinking 预检才发题。原车道通过预留结果目录避免重复抽样，Release 实时归档保留路由凭据、原始回复和轨迹。
+第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。[补跑审计](evidence/muse_nvfp4_r3_infra_replacement_progress.json)现计 **{r3_replacement_progress['replacement_graded']}/89 题获原生判分、{r3_replacement_progress['replacement_success']} 题成功**；全部 89 题获原生判分前不报告整轮准确率。2869 后来在接手的批次运行中到期：已完成的原生结果只计一次，尚无终态结果的 11 题另有明确标记的基础设施续跑，转到仍在线的 2900。其中 4 题在中断前已有共 150 条模型回复，原始不完整轨迹保留但不当作独立分数。b07 在 2869 尚未采样，已在首次采样前转到 2900；2899 继续负责原定批次。使用同一固定 NVFP4 权重、题目镜像和采样参数；Release 归档保存路由凭据、输入、原始回复和轨迹，不按对错择优。
 
 第 3 轮原生成功数包含 `largest-eigenval`。[哈希锚定轨迹核查](evidence/exact_tb_integrity_manual_notes.json)确认 agent 通过 Python 启动钩子拖慢 NumPy 参考求解器；原始 reward 保留，但这一题不能证明未受干预的加速，轨迹已排除出干净训练数据。
 

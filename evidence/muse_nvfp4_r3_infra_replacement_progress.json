@@ -3,16 +3,28 @@
   "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
   "original_ungraded_infra_failures": 89,
   "original_model_responses": 0,
-  "replacement_terminal": 50,
-  "replacement_graded": 50,
-  "replacement_success": 42,
-  "replacement_raw_responses": 2516,
+  "replacement_terminal": 51,
+  "replacement_graded": 51,
+  "replacement_success": 43,
+  "replacement_raw_responses": 2640,
   "confirmed_compromised_successes": 1,
   "known_compromised_tasks": [
     "largest-eigenval"
   ],
-  "active_trial_dirs": 8,
-  "all_tasks_single_replacement_draw": true,
+  "active_trial_dirs": 12,
+  "all_tasks_single_replacement_draw": false,
+  "infrastructure_interruption_continuation": {
+    "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/expired2869-continuation-2900-claim.json",
+    "claim_sha256": "d7048a207875858453e57f410ff1437cc217b364cff8382b3538cc0abd1b8307",
+    "expected": 11,
+    "terminal": 0,
+    "graded": 0,
+    "success": 0,
+    "raw_responses": 26,
+    "source_partial_model_response_tasks": 4,
+    "source_partial_model_responses": 150,
+    "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
+  },
   "extra_routes": [
     {
       "batch": 3,
@@ -45,6 +57,13 @@
       "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/extra-routes-20261020/b07.json"
     },
     {
+      "batch": 7,
+      "allocation": 2900,
+      "endpoint": "http://10.1.101.159:31321/v1",
+      "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/b07-2900-continuation.json",
+      "policy": "Rerouted before first model response on expired allocation 2869"
+    },
+    {
       "batch": 8,
       "allocation": 2899,
       "endpoint": "http://10.1.114.210:31321/v1",
@@ -52,5 +71,5 @@
     }
   ],
   "endpoint_ready": true,
-  "qualification": "Original 89 connection-refused trials remain preserved and ungraded. Each task gets one separately declared infrastructure replacement with unchanged task/image/generation settings."
+  "qualification": "Original 89 connection-refused trials remain preserved and ungraded. Native graded results are counted once per task. Allocation-expiry partial trajectories and their separate continuation are explicitly preserved without correctness-based selection."
 }

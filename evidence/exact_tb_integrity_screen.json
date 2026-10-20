@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T16:56:52.224071+00:00",
+  "generated_utc": "2026-10-20T17:17:14.229963+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -64,7 +64,7 @@
       }
     },
     "muse_nvfp4_r3": {
-      "scored_trajectories_checked": 50,
+      "scored_trajectories_checked": 51,
       "pattern_hit_trajectories": 9,
       "pattern_hit_successes": 8,
       "rule_hit_counts": {
@@ -7507,6 +7507,19 @@
       "trajectory_sha256": "0fd63ba6eb36a05d73fed264222f0d48dfdcd5deee3e46bf87810b71adc13fb1",
       "steps": 115,
       "tool_calls": 535,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared",
+      "attempt_kind": "infrastructure_replacement"
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "round": 3,
+      "task": "mailman",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b04/mailman__ZXDZz3i/agent/trajectory.json",
+      "trajectory_sha256": "0a9b4d884963c13c124a5e143f258c91a7e96584b09117bc20f209c1631ecae8",
+      "steps": 125,
+      "tool_calls": 511,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared",
       "attempt_kind": "infrastructure_replacement"

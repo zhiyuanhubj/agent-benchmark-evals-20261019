@@ -62,6 +62,7 @@ def sync_native_archives(scores, force_bf16=False):
             replacement_names.extend((
                 'muse-nvfp4-tb-v1-exact-r2-fasttext-expiry-2902-20261020',
                 'muse-nvfp4-tb-v1-exact-r2-fasttext-tmux-2902-20261020',
+                'muse-nvfp4-tb-v1-exact-r3-expired2869-continuation-2900-20261020',
             ))
             for job_name in replacement_names:
                 replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / job_name
@@ -93,7 +94,9 @@ def sync_native_archives(scores, force_bf16=False):
             r3_state = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900'
             if (r3_state / 'plan.json').exists():
                 markers = [r3_state / 'plan.json', *r3_state.glob('b*-started.json'),
-                           *r3_state.glob('b*-exit.json')]
+                           *r3_state.glob('b*-exit.json'),
+                           *r3_state.glob('b*-continuation.json'),
+                           *r3_state.glob('expired2869-continuation-2900-*.json')]
                 ready_2900 = r3_state.parent / 'replica-2900/endpoint-ready.json'
                 if ready_2900.exists():
                     markers.append(ready_2900)
@@ -395,6 +398,8 @@ def cycle():
              'protocol/prepare_muse_nvfp4_r3_extra_routes_20261020.py',
              'protocol/preflight_muse_nvfp4_extra_20261020.py',
              'protocol/run_muse_nvfp4_r3_extra_routes_20261020.py',
+             'protocol/continue_muse_nvfp4_r3_b07_2900_20261020.py',
+             'protocol/continue_muse_nvfp4_r3_expired2869_2900_20261020.py',
              'protocol/muse_nvfp4_exact_future_round_controller_20261019.py',
              'audit_muse_nvfp4_r2_pytorch_ungraded.py',
              'audit_muse_nvfp4_r2_pytorch_replacement.py',

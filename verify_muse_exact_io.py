@@ -159,6 +159,55 @@ for label in ('fasttext-expiry', 'fasttext-tmux'):
         if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
             missing_fasttext_trajectories.append(trial.name)
 
+r3_state = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900'
+missing_r3_continuation_files = []
+missing_r3_continuation_results = []
+missing_r3_continuation_raw = []
+missing_r3_continuation_trajectories = []
+b07_path = r3_state / 'b07-2900-continuation.json'
+if b07_path.exists():
+    b07 = json.loads(b07_path.read_text())
+    required = [b07_path, Path(b07['effective_config']),
+                ROOT / 'protocol/continue_muse_nvfp4_r3_b07_2900_20261020.py']
+    for suffix in ('started', 'exit'):
+        marker = r3_state / f'b07-2900-{suffix}.json'
+        if marker.exists():
+            required.append(marker)
+    missing_r3_continuation_files.extend(str(path.relative_to(BASE)) for path in required
+                                         if str(path.relative_to(BASE)) not in entries)
+expired_path = r3_state / 'expired2869-continuation-2900-claim.json'
+if expired_path.exists():
+    expired = json.loads(expired_path.read_text())
+    required = [expired_path, Path(expired['config']), Path(expired['model_ready']),
+                ROOT / 'protocol/continue_muse_nvfp4_r3_expired2869_2900_20261020.py']
+    for suffix in ('start', 'exit'):
+        marker = r3_state / f'expired2869-continuation-2900-{suffix}.json'
+        if marker.exists():
+            required.append(marker)
+    for row in expired['tasks']:
+        for raw in row['source_partial_raw']:
+            required.append(Path(raw['path']))
+    missing_r3_continuation_files.extend(str(path.relative_to(BASE)) for path in required
+                                         if str(path.relative_to(BASE)) not in entries)
+for job_name in ('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b07',
+                 'muse-nvfp4-tb-v1-exact-r3-expired2869-continuation-2900-20261020'):
+    job = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / job_name
+    for trial in job.glob('*'):
+        if not trial.is_dir():
+            continue
+        result = trial / 'result.json'
+        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+            continue
+        if str(result.relative_to(BASE)) not in entries:
+            missing_r3_continuation_results.append(trial.name)
+        raw_dir = trial / 'agent/raw_responses'
+        if any(raw_dir.glob('*.json')) and not any(
+                path.startswith(str(raw_dir.relative_to(BASE)) + '/') for path in entries):
+            missing_r3_continuation_raw.append(trial.name)
+        trajectory = trial / 'agent/trajectory.json'
+        if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
+            missing_r3_continuation_trajectories.append(trial.name)
+
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())
 verified_names = {item['asset'] for item in remote_audit['items'] if item.get('sha256_matches') and item.get('bytes_match')}
 unverified = sorted(manifest['archive_name'] for manifest in manifests if manifest['archive_name'] not in verified_names)
@@ -197,6 +246,14 @@ if missing_fasttext_raw:
     errors.append(f'{len(missing_fasttext_raw)} fasttext correction raw-response sets missing')
 if missing_fasttext_trajectories:
     errors.append(f'{len(missing_fasttext_trajectories)} fasttext correction trajectories missing')
+if missing_r3_continuation_files:
+    errors.append(f'{len(missing_r3_continuation_files)} round-3 continuation inputs/proofs missing')
+if missing_r3_continuation_results:
+    errors.append(f'{len(missing_r3_continuation_results)} round-3 continuation results missing')
+if missing_r3_continuation_raw:
+    errors.append(f'{len(missing_r3_continuation_raw)} round-3 continuation raw-response sets missing')
+if missing_r3_continuation_trajectories:
+    errors.append(f'{len(missing_r3_continuation_trajectories)} round-3 continuation trajectories missing')
 if unverified:
     errors.append(f'{len(unverified)} release assets not SHA/size verified')
 
@@ -226,6 +283,10 @@ record = {
     'missing_fasttext_results': missing_fasttext_results,
     'missing_fasttext_raw_responses': missing_fasttext_raw,
     'missing_fasttext_trajectories': missing_fasttext_trajectories,
+    'missing_r3_continuation_files': missing_r3_continuation_files,
+    'missing_r3_continuation_results': missing_r3_continuation_results,
+    'missing_r3_continuation_raw_responses': missing_r3_continuation_raw,
+    'missing_r3_continuation_trajectories': missing_r3_continuation_trajectories,
     'unverified_assets': unverified,
     'errors': errors,
     'qualification': 'complete_verified' if not errors and audit['qualification'] == 'complete_verified' else 'partial_or_needs_review',
