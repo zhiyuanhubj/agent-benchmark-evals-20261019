@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T08:07:27.031289+00:00",
+  "generated_utc": "2026-10-20T08:26:08.018876+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 60,
+      "scored_trajectories_checked": 63,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -6693,6 +6693,30 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "pytorch-model-recovery",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/pytorch-model-recovery__FTkhwqj/agent/trajectory.json",
+      "trajectory_sha256": "42115f497fd3ae337dc2c7a4aa1686d5170b72e9f0f02a3a413fd59c0a85338a",
+      "steps": 22,
+      "tool_calls": 22,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "pytorch-model-cli",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/pytorch-model-cli__bH4FYBA/agent/trajectory.json",
+      "trajectory_sha256": "a18085a96fcc9b7cc83f2d545a055d902ed9fe6dc06a7b2a0b631ea2df9af530",
+      "steps": 15,
+      "tool_calls": 28,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "code-from-image",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/code-from-image__tJboqxD/agent/trajectory.json",
@@ -6867,6 +6891,18 @@
       "trajectory_sha256": "6906efb0036271961e5844cb1d2db3ad5d7dc5433f4ce762ee3daf60e5196386",
       "steps": 14,
       "tool_calls": 21,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "pypi-server",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/pypi-server__QhkvjjH/agent/trajectory.json",
+      "trajectory_sha256": "9449be50b7301ac712ef4f98cf1ad989c066d78e818e0a44e9492d2884e57ae1",
+      "steps": 9,
+      "tool_calls": 15,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

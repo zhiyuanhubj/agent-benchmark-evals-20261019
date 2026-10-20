@@ -26,7 +26,7 @@ RAW_ARCHIVE_INTERVAL_SECONDS = 600  # Keep live I/O snapshots within each 15-min
 # their large legacy trees every six hours; the active review-revision trees
 # below keep the ten-minute cadence so new trajectories reach the release promptly.
 STATIC_ARCHIVE_INTERVAL_SECONDS = 21600
-STATIC_ARCHIVE_GROUPS = {'opus47_legacy', 'muse_review_full_io', 'muse_review_verifier'}
+STATIC_ARCHIVE_GROUPS = {'opus47_legacy', 'opus47_review_inputs', 'muse_review_full_io', 'muse_review_verifier'}
 ARCHIVE_SCAN_STATE = LOG.with_name('github-archive-scan-state.json')
 
 
@@ -148,6 +148,7 @@ def sync_native_archives(scores, force_bf16=False):
             run(command, timeout=300)
     static_scans = json.loads(ARCHIVE_SCAN_STATE.read_text()) if ARCHIVE_SCAN_STATE.exists() else {}
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
+                  'opus47_review_inputs', 'opus47_review_full_io',
                   'muse_bf16_review_inputs',
                   'muse_review_full_io', 'beam_review_full_io',
                   'muse_review_verifier', 'beam_review_verifier',
@@ -175,7 +176,8 @@ def sync_native_archives(scores, force_bf16=False):
     ], cwd=ROOT, text=True, timeout=60))
     remote = {asset['name'] for asset in release['assets']}
     revision_base_manifests = [manifest_dir / f'{group}.json' for group in
-        ('muse_review_revision_inputs', 'beam_review_revision_inputs',
+        ('opus47_review_inputs', 'opus47_review_full_io',
+         'muse_review_revision_inputs', 'beam_review_revision_inputs',
          'muse_revision_review_full_io', 'beam_revision_review_full_io')]
     revision_base_manifests = [path for path in revision_base_manifests if path.exists()]
     for manifest_path in [*revision_base_manifests, *live_manifests, *delta_manifests]:
@@ -203,6 +205,7 @@ def cycle():
         run([PYTHON, str(ROOT / 'audit_beam_malformed_reviews.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_review_progress.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_opus47_review_progress.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_ungraded.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_prove_ungraded.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_prove_transport.py')], timeout=60)
@@ -299,6 +302,7 @@ def cycle():
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
              'audit_muse_bf16_review_progress.py',
+             'audit_opus47_review_progress.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',
              'audit_muse_nvfp4_r2_ungraded.py',

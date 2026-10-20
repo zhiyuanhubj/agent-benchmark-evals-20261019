@@ -1,24 +1,19 @@
 {
-  "generated_utc": "2026-10-20T08:07:13.688596+00:00",
+  "generated_utc": "2026-10-20T08:25:55.731808+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T075352Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T081300Z.tar.zst",
   "expected": 89,
-  "terminal": 58,
-  "graded": 57,
-  "success": 41,
+  "terminal": 63,
+  "graded": 62,
+  "success": 44,
   "missing_graded_tasks": [
     "git-multibranch",
-    "make-mips-interpreter",
     "path-tracing",
     "path-tracing-reverse",
-    "portfolio-optimization",
     "protein-assembly",
-    "prove-plus-comm",
-    "pypi-server",
-    "pytorch-model-cli",
     "pytorch-model-recovery",
     "qemu-alpine-ssh",
     "qemu-startup",
@@ -47,9 +42,7 @@
     "git-multibranch"
   ],
   "unarchived_new_terminal_tasks": [
-    "make-mips-interpreter",
-    "portfolio-optimization",
-    "prove-plus-comm"
+    "pytorch-model-recovery"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -373,6 +366,13 @@
       "raw_response_count": 179,
       "responses_with_reasoning_content": 179
     },
+    "make-mips-interpreter": {
+      "reward": 0.0,
+      "result_sha256": "343161dc107dc2fcc72108ccd7c9a16d5db016454de8b915d1cbcf6536ab0ec1",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/make-mips-interpreter__qP4ugxj/result.json",
+      "raw_response_count": 221,
+      "responses_with_reasoning_content": 221
+    },
     "mcmc-sampling-stan": {
       "reward": 1.0,
       "result_sha256": "53bf08454220c5182186fa49a132f9ac45d3990470c50d172c250cabcdf00278",
@@ -463,6 +463,34 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/polyglot-rust-c__9irMKYR/result.json",
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
+    },
+    "portfolio-optimization": {
+      "reward": 1.0,
+      "result_sha256": "2743535056f823c36977dd1378411c9b50020ac08f0b3a404768df0c2bb40282",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/portfolio-optimization__SSYJHUB/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
+    "prove-plus-comm": {
+      "reward": 1.0,
+      "result_sha256": "ec34b114eaae1c2fd8730dc4fc07d225c44927eff8713d6ee145f3e9bd1c4e76",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/prove-plus-comm__AcNUiV8/result.json",
+      "raw_response_count": 6,
+      "responses_with_reasoning_content": 6
+    },
+    "pypi-server": {
+      "reward": 1.0,
+      "result_sha256": "c15e240388d99ec9f47106e30fcc5583e6ab3765f6b8bffb57d581534f2d5083",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/pypi-server__QhkvjjH/result.json",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
+    },
+    "pytorch-model-cli": {
+      "reward": 0.0,
+      "result_sha256": "c685ab7d9772162d9b1c3d8b7e1d2a11a5476302fe2f4f9925c0f28455ad3b8c",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/pytorch-model-cli__bH4FYBA/result.json",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
     }
   }
 }

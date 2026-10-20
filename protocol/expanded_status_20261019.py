@@ -145,8 +145,29 @@ record['opus47']['tb_invalid_harness_run'] = dict(
 record['muse_bf16'] = dict(weight_staging=load(MUSE / 'stage_2869/prefetch-current.json'),
     paired_runtime=load(MUSE / 'pair-current.json'), endpoint_ready=load(MUSE / 'endpoint-ready.json'),
     native_tool_thinking_preflight=load(MUSE / 'native-preflight-ready.json'),
-    future_cpu_placement=load(MUSE / 'cpu_placement_repair_20261018/waiting-controllers-reloaded.json'),
-    pro=pro([MUSE / 'legacy_bench/pro-results'], muse_pro_ids))
+    future_cpu_placement=load(MUSE / 'cpu_placement_repair_20261018/waiting-controllers-reloaded.json'))
+muse_pro_parent = (MUSE / 'legacy_bench/pro-results/muse_bf16_full'
+    / 'muse-spark-open-bf16_swebench_pro_verified_mini_swe_agent')
+muse_pro_original = muse_pro_parent / 'muse-bf16-pro-full-r1'
+muse_pro_resumed = muse_pro_parent / 'muse-bf16-pro-full-r1-resume-20261020'
+muse_pro_source_progress = load(muse_pro_original / 'progress.json')
+muse_pro_resume_progress = load(muse_pro_resumed / 'progress.json')
+if muse_pro_resume_progress:
+    assert muse_pro_source_progress and muse_pro_resume_progress['total_tasks'] == 731
+    assert muse_pro_resume_progress['reused_tasks'] == muse_pro_source_progress['completed_tasks'], (
+        'The resumed Pro run did not reuse every completed original task')
+    muse_pro_scoring_run = muse_pro_resumed
+else:
+    muse_pro_scoring_run = muse_pro_original
+record['muse_bf16']['pro'] = pro([muse_pro_scoring_run], muse_pro_ids)
+record['muse_bf16']['pro'].update(
+    scoring_run_id=muse_pro_scoring_run.name,
+    source_run_id=muse_pro_original.name,
+    reused_original_completed_tasks=(muse_pro_resume_progress or {}).get('reused_tasks', 0),
+    original_unreused_failed_tasks=(muse_pro_source_progress or {}).get('failed_tasks', 0),
+    recovery_qualification=('Original completed tasks are counted once; failed source attempts and '
+        'interrupted source tasks remain separately preserved. The resumed run is scored on its '
+        'own native results, without pooling duplicate task records.'))
 for kind, count in [('tb', 89), ('deep', 113)]:
     record['muse_bf16'][kind] = {str(number): harbor([MUSE / ('legacy_bench/' + kind + '-results') / ('muse-bf16-' + kind + '-r' + str(number))], expected_harbor[kind]) for number in [1, 2, 3]}
 record['reserved_capacity'] = load(BEAM / 'expanded_capacity_20261018/current.json')

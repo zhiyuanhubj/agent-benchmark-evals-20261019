@@ -1,0 +1,54 @@
+{
+  "generated_utc": "2026-10-20T08:20:26.983536+00:00",
+  "model": "claude-opus-4-7",
+  "precision": "provider API, adaptive summarized thinking with high output effort",
+  "protocol": "Official SWE-Review review phase, one attempt per task",
+  "qualification": "Review-stage progress is not a DA or RRR score. Native downstream scoring and original-revision generation are separate.",
+  "splits": {
+    "glm5_500": {
+      "expected": 500,
+      "job_name": "opus47-swe-review-glm5_500-r1",
+      "frozen_config_sha256": "82af6458023b978341384679422bacb33e14bc155d30b1d6fd8178773307bc73",
+      "status": "review_stage_running",
+      "DA": null,
+      "RRR": null,
+      "completed_trials": 1,
+      "errored_trials": 0,
+      "running_trials": 2,
+      "pending_trials": 497,
+      "cancelled_trials": 0,
+      "started_at": "2026-10-20T08:16:18.993248",
+      "finished_at": null
+    },
+    "qwen3_coder_30b_500": {
+      "expected": 462,
+      "job_name": "opus47-swe-review-qwen3_coder_30b_500-r1",
+      "frozen_config_sha256": "41309ec029baec0cafd09bd1029341f268c959140a45708e5e40a28c5d809c3f",
+      "status": "review_stage_running",
+      "DA": null,
+      "RRR": null,
+      "completed_trials": 2,
+      "errored_trials": 0,
+      "running_trials": 2,
+      "pending_trials": 458,
+      "cancelled_trials": 0,
+      "started_at": "2026-10-20T08:16:10.468330",
+      "finished_at": null
+    },
+    "qwen3_30b_instruct2507_500": {
+      "expected": 422,
+      "job_name": "opus47-swe-review-qwen3_30b_instruct2507_500-r1",
+      "frozen_config_sha256": "15d07f0a345553a062576efe2d20ce90180603ddccdc3b877d7518c93e5ac568",
+      "status": "review_stage_running",
+      "DA": null,
+      "RRR": null,
+      "completed_trials": 1,
+      "errored_trials": 0,
+      "running_trials": 2,
+      "pending_trials": 419,
+      "cancelled_trials": 0,
+      "started_at": "2026-10-20T08:16:16.640783",
+      "finished_at": null
+    }
+  }
+}

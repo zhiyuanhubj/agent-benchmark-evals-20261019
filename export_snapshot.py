@@ -59,6 +59,7 @@ native_review_da = read(ROOT / 'evidence/swe_review_native_complete_da.json')
 review_recovery = read(ROOT / 'evidence/swe_review_recovery_control.json')
 review_revision_progress = read(ROOT / 'evidence/swe_review_revision_gateway_progress.json')
 review_rrr = read(ROOT / 'evidence/swe_review_official_rrr.json') if (ROOT / 'evidence/swe_review_official_rrr.json').exists() else {'complete_splits': {}}
+opus_review_progress = read(ROOT / 'evidence/opus47_swe_review_progress.json')
 review_revision_rows = {(row['reviewer'], row['split']): row for row in review_revision_progress['groups']}
 review_revision_muse_coder = review_revision_rows['muse-nvfp4', 'qwen3_coder_30b_500']
 review_revision_muse_instruct = review_revision_rows['muse-nvfp4', 'qwen3_30b_instruct2507_500']
@@ -429,6 +430,7 @@ snapshot = {
             'deepswe': {k: metric(v, k, 'complete' if v['graded'] == v['expected'] else 'partial_no_full_score') for k, v in ex['opus47']['deep'].items()},
             'tb2_1_legacy_cached_tag': {k: metric(v, k, 'complete' if v['graded'] == v['expected'] else 'partial_no_full_score') for k, v in ex['opus47']['tb'].items()},
             'tb2_1_exact_supplied_images': {'rounds': exact['models']['opus47']['rounds'], 'status': tb_profile_status(exact['models']['opus47']['rounds'])},
+            'swe_review': opus_review_progress['splits'],
         },
         'opus_4_8_historical': {
             'model': 'Claude Opus 4.8',
@@ -656,6 +658,14 @@ latest_legacy_deltas = {group: read(sorted((ROOT / 'input_output/archive_manifes
 mn = models['muse_nvfp4']
 be = models['beam_bf16']
 op = models['opus_4_7']
+opus_review_en = ', '.join(
+    f"{split}: {row.get('completed_trials', 0)}/{row['expected']} task outcomes"
+    for split, row in op['swe_review'].items()
+) + '; DA/RRR pending'
+opus_review_zh = '、'.join(
+    f"{split} {row.get('completed_trials', 0)}/{row['expected']} 题终态"
+    for split, row in op['swe_review'].items()
+) + '；DA/RRR 待官方判分'
 review_instruct_da = mn['swe_review']['qwen3_30b_instruct2507_500']['DA']
 review_glm_da = mn['swe_review']['glm5_500']['DA']
 review_coder_da = mn['swe_review']['qwen3_coder_30b_500']['DA']
@@ -876,7 +886,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 |---|---|---|---|---|---|
 | Muse NVFP4 | **496/731 = 67.85%**, round 1 complete | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {tb_en(mn_tb)} | {review(mn['swe_review'])} |
 | Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'])} |
-| Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | — |
+| Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | {opus_review_en} |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_swr_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
 
@@ -1003,7 +1013,7 @@ chinese_report = f'''# 模型评测结果快照
 |---|---|---|
 | Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | {muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review Instruct 组封存 DA **{beam_review_instruct_da['DA']}%（422 题）**{beam_rrr_zh_table}{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 另两组与整体 RRR 未完成 |
-| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending} |
+| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending}；SWE-Review {opus_review_zh} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | {'；'.join(part for part in (bf16_swr_zh, bf16_exact_zh_done.lstrip('；')) if part) or '暂无完整 benchmark 分数'} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{'; SWRBench ' + bf16_swr_en if not bf16_swr_complete else ''}{bf16_review_zh} |
 

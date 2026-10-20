@@ -15,6 +15,7 @@ M = BASE / '.private/muse_spark_open_20261016'
 B = BASE / '.private/beam_20261018'
 O = BASE / 'bench/opus47_full_20261018'
 BF = BASE / '.private/muse_bf16_20261018'
+OPUS_REVIEW = BASE / '.private/opus47_review_20261020'
 
 GROUPS = {
     **{f'muse_pro_shard{i}': [M / f'shard{i}/results/muse-pro'] for i in range(4)},
@@ -52,6 +53,13 @@ GROUPS = {
     'beam_swr_raw': [B / 'review_bench/swrbench/raw_responses', B / 'review_bench/swrbench/judge_raw_responses'],
     'opus47_legacy': [O],
     'opus47_exact_tb': [B / 'tb_v1_exact_images_20261019/results/opus47'],
+    'opus47_review_inputs': [OPUS_REVIEW / 'configs',
+                             *(M / 'review_bench_20261018/swe_review' / split / 'tasks'
+                               for split in ('glm5_500', 'qwen3_coder_30b_500',
+                                             'qwen3_30b_instruct2507_500'))],
+    'opus47_review_full_io': [*(OPUS_REVIEW / 'swe_review' / split / 'results'
+                                for split in ('glm5_500', 'qwen3_coder_30b_500',
+                                              'qwen3_30b_instruct2507_500'))],
     'muse_exact_tb': [B / 'tb_v1_exact_images_20261019/results/muse_nvfp4'],
     'muse_bf16': [BF / 'legacy_bench/pro-results', BF / 'legacy_bench/tb-results', BF / 'legacy_bench/deep-results', BF / 'review_bench/swe_review', BF / 'review_bench/queue/results'],
     'muse_bf16_swr': [BF / 'review_bench/swrbench', BASE / 'bench/code-review-eval/data/repos/swrbench/data'],
@@ -60,6 +68,13 @@ GROUPS = {
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    if group == 'opus47_review_inputs':
+        if root.name == 'configs':
+            return len(rel.parts) == 1 and path.suffix == '.json'
+        visible = {'task.toml', 'instruction.md', 'environment/Dockerfile',
+                   'environment/data/problem_statement.txt',
+                   'environment/data/summary.json', 'environment/data/predicted.json'}
+        return len(rel.parts) >= 2 and '/'.join(rel.parts[1:]) in visible
     if group.endswith('review_revision_inputs'):
         parts = rel.parts
         if root.name == 'queue':
@@ -145,7 +160,7 @@ def iter_files(group):
             continue
         for directory, dirs, names in os.walk(root):
             excluded = {'.git', '__pycache__', '.venv', 'node_modules', 'sandbox', 'artifacts'}
-            if group == 'muse_bf16_review_inputs':
+            if group in ('muse_bf16_review_inputs', 'opus47_review_inputs'):
                 excluded.update({'solution', 'tests', 'results'})
             if group.endswith('review_revision_inputs'):
                 excluded.update({'solution', 'tests', 'results', 'verifier', 'agent'})
@@ -187,7 +202,7 @@ def main():
                 tar.add(str(path), arcname=arcname, recursive=False)
                 category = 'judge_raw_response.json' if 'judge_raw_responses' in path.parts else ('raw_response.json' if 'raw_responses' in path.parts else ('completion.json' if 'completions' in path.parts else ('api_archive.json' if 'api_archive' in path.parts else path.name)))
                 counts[category] = counts.get(category, 0) + 1
-                if group == 'muse_bf16_review_inputs' or group.endswith('review_revision_inputs'):
+                if group in ('muse_bf16_review_inputs', 'opus47_review_inputs') or group.endswith('review_revision_inputs'):
                     input_count += 1
                 elif group == 'muse_bf16_swr':
                     input_count += path.name in ('swr_datasets_d5c5.jsonl', 'launch.json')
@@ -220,7 +235,9 @@ def main():
         'raw_response_count': raw_count,
         'filename_counts': counts,
         'source_roots': [str(x) for x in GROUPS[group]],
-        'scope': ('Original-generator SWE-Review revision task instructions, task cards, Dockerfiles and public model-visible task data, plus canonical preparation and isolated gateway recovery queue receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
+        'scope': ('Exact official SWE-Review model-visible task cards and frozen Opus 4.7 review configs. Hidden solution and tests, credentials, model weights and outputs are excluded; outputs are archived separately.'
+                  if group == 'opus47_review_inputs' else
+                  'Original-generator SWE-Review revision task instructions, task cards, Dockerfiles and public model-visible task data, plus canonical preparation and isolated gateway recovery queue receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
                   if group.endswith('review_revision_inputs') else
                   'Original-generator revision native I/O. Original host-IP and Beam Coder wrong-port trials that failed before any model response are preserved as infrastructure evidence; only the separate corrected gateway queue paths are eligible for RRR scoring. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files.'
                   if group.endswith('revision_review_full_io') else

@@ -13,6 +13,7 @@ from pathlib import Path
 BASE = Path('/fsx/home/zhiyuan')
 ROOT = Path(__file__).resolve().parent
 ALLOWED = ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
+           'opus47_review_inputs', 'opus47_review_full_io',
            'muse_bf16_review_inputs',
            'muse_review_full_io', 'beam_review_full_io',
            'muse_review_verifier', 'beam_review_verifier',
