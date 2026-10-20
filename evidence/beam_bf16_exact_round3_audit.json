@@ -1,21 +1,20 @@
 {
-  "generated_utc": "2026-10-20T14:16:21.569829+00:00",
+  "generated_utc": "2026-10-20T14:31:18.760496+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T140544Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T142156Z.tar.zst",
   "expected": 89,
-  "terminal": 36,
-  "graded": 34,
-  "success": 23,
+  "terminal": 37,
+  "graded": 35,
+  "success": 24,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "feal-linear-cryptanalysis",
     "git-multibranch",
     "gpt2-codegolf",
     "headless-terminal",
-    "large-scale-text-editing",
     "largest-eigenval",
     "llm-inference-batching-scheduler",
     "log-summary-date-ranges",
@@ -71,7 +70,7 @@
     "headless-terminal"
   ],
   "unarchived_new_terminal_tasks": [
-    "large-scale-text-editing"
+    "largest-eigenval"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -331,6 +330,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/kv-store-grpc__rH9yk3p/result.json",
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
+    },
+    "large-scale-text-editing": {
+      "reward": 1.0,
+      "result_sha256": "90a364873dc82a4a3248bf444d959f1e92019e090ba56ac217ff82ec36071682",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/large-scale-text-editing__wTwWJfp/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
     }
   }
 }

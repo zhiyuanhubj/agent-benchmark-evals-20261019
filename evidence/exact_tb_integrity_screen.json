@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T14:16:35.699884+00:00",
+  "generated_utc": "2026-10-20T14:31:32.199048+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 73,
+      "scored_trajectories_checked": 74,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -82,7 +82,7 @@
       }
     },
     "beam_bf16_r3": {
-      "scored_trajectories_checked": 35,
+      "scored_trajectories_checked": 36,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -6504,6 +6504,18 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "winning-avg-corewars",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/winning-avg-corewars__NLSapiQ/agent/trajectory.json",
+      "trajectory_sha256": "8ebb42de0dbb4e0468cae55dace1b27e2a6aaa6aca2a7323fe77a34f1d3549d1",
+      "steps": 240,
+      "tool_calls": 486,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "tune-mjcf",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/tune-mjcf__JX8Xfs7/agent/trajectory.json",
@@ -7834,6 +7846,18 @@
       "trajectory_sha256": "313b6c7aebc1a099af2b3e21e5fee64e515634a02e4b3c5a3964f8bc902c16a1",
       "steps": 100,
       "tool_calls": 151,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
+      "task": "largest-eigenval",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/largest-eigenval__9CbaiNH/agent/trajectory.json",
+      "trajectory_sha256": "099fb188369aed12d13c75374603d52b8a943279887c8c4062beadddca192641",
+      "steps": 40,
+      "tool_calls": 61,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
