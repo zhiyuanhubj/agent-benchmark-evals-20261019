@@ -73,6 +73,11 @@ def main():
     units = dict(beam_bf16='beam-tb-supplied-images-three-rounds-20261019',
                  opus47='opus47-tb-supplied-images-three-rounds-20261019',
                  muse_nvfp4='muse-nvfp4-tb-supplied-images-three-rounds-recovered-20261019')
+    continuation_names = {
+        'beam_bf16': ('beam-exact-r3-2901-20261020',
+                      'beam-r2-git-multibranch-infra-recovery-20261019'),
+        'opus47': (), 'muse_nvfp4': (),
+    }
     for name, allocation in [('beam_bf16', 2919), ('opus47', 2919), ('muse_nvfp4', 2922)]:
         ready = read(ROOT / f'allocation-{allocation}/images-ready.json')
         rounds = {str(n): summarize(name, n) for n in [1, 2, 3]}
@@ -83,7 +88,15 @@ def main():
             replica_rows = subprocess.check_output(['systemctl', '--user', 'show',
                 'beam-exact-r23-replica-2887-20261019', '-p', 'MainPID', '-p', 'ActiveState', '-p', 'Result'], text=True).splitlines()
             replica_unit = {key: value for key, value in (line.split('=', 1) for line in replica_rows)}
+        continuation_units = {}
+        for continuation in continuation_names[name]:
+            rows = subprocess.check_output(['systemctl', '--user', 'show', continuation,
+                                            '-p', 'MainPID', '-p', 'ActiveState', '-p', 'Result'],
+                                           text=True).splitlines()
+            continuation_units[continuation] = {
+                key: value for key, value in (line.split('=', 1) for line in rows)}
         models[name] = dict(rounds=rounds, unit=unit, replica_unit=replica_unit, exact_supplied_images_ready=bool(ready and ready['count']==89 and ready['all_archive_identities_verified']),
+                            continuation_units=continuation_units,
                             cpu_allocation=allocation, all_three_complete=all(x['complete'] for x in rounds.values()),
                             three_round_mean=sum(x['accuracy'] for x in rounds.values())/3 if all(x['complete'] for x in rounds.values()) else None,
                             user_authorized_bf16_reassignment=bool(name == 'muse_nvfp4' and (MUSE_BF16_CUTOVER / 'cutover-intent.json').exists()))
@@ -97,6 +110,7 @@ def main():
     print(json.dumps({model: {'images_ready': value['exact_supplied_images_ready'], 'rounds': {n:{k:v[k] for k in ['terminal','graded','success','archived_actual_model_responses']} for n,v in value['rounds'].items()}} for model,value in models.items()}))
     assert all(x['all_three_complete'] or x['unit']['ActiveState'] == 'active' or
                (x['replica_unit'] and x['replica_unit']['ActiveState'] == 'active') or
+               any(unit['ActiveState'] == 'active' for unit in x['continuation_units'].values()) or
                x['user_authorized_bf16_reassignment'] for x in models.values()), 'Unfinished supplied-image profile has no active controller'
 
 if __name__ == '__main__':
