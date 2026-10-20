@@ -79,6 +79,56 @@ def main():
     if len(generated_rows) > EXPECTED or len(judged_rows) > EXPECTED:
         errors.append('SWRBench row count exceeds the 1000-task source')
 
+    final_score = None
+    summary_path = OUT / 'full-completion-summary.json'
+    result_path = OUT / 'evaluation-gpt-5.5.json'
+    completion_path = OUT / 'completion-audit-current.json'
+    if all(path.is_file() for path in (summary_path, result_path, completion_path)):
+        summary = json.loads(summary_path.read_text())
+        result = json.loads(result_path.read_text())
+        completion = json.loads(completion_path.read_text())
+        details = result.get('details', [])
+        detail_ids = [row.get('instance_id') for row in details]
+        overall = result.get('analysis_results', {}).get('overall', {})
+        expected_metrics = {
+            'overall_accuracy': 'accuracy',
+            'overall_f1': 'f1',
+            'overall_precision_point': 'precision_point',
+            'overall_recall_point': 'recall_point',
+            'overall_f1_point': 'f1_point',
+        }
+        checks = {
+            'completion_receipt': completion.get('completed') is True and completion.get('phase') == 'complete_and_audited',
+            'summary_identity': summary.get('benchmark') == 'SWRBench' and summary.get('precision') == 'BF16'
+                                and summary.get('judge_model') == binding['model'],
+            'source_generation_hash': summary.get('source_generation_sha256') == generated_sha,
+            'official_result_hash': summary.get('official_result_sha256') == hashlib.sha256(result_path.read_bytes()).hexdigest(),
+            'official_evaluator_hash': summary.get('official_evaluator_sha256') == official_sha,
+            'all_source_rows': len(generated) == len(judged) == len(details) == EXPECTED,
+            'one_detail_per_task': len(set(detail_ids)) == EXPECTED and set(detail_ids) == set(generated) == set(judged),
+            'official_counts': result.get('analysis_results', {}).get('submit') == EXPECTED
+                               and result.get('analysis_results', {}).get('valid') == EXPECTED
+                               and result.get('analysis_results', {}).get('error') == 0
+                               and sum(overall.get(key, -EXPECTED) for key in ('tp', 'fp', 'fn', 'tn')) == EXPECTED,
+            'metric_match': all(summary.get('official_script_output', {}).get(source) == overall.get(target)
+                                for source, target in expected_metrics.items()),
+            'accuracy_recomputed': overall.get('accuracy') == (
+                (overall.get('tp', 0) + overall.get('tn', 0)) / EXPECTED),
+            'no_alignment_errors': not errors,
+        }
+        final_score = {
+            'qualification': 'complete_verified' if all(checks.values()) else 'needs_review',
+            'checks': checks,
+            'expected': EXPECTED,
+            'judged': len(judged),
+            'accuracy': overall.get('accuracy'),
+            'f1': overall.get('f1'),
+            'official_result_sha256': summary.get('official_result_sha256'),
+            'completion_summary_sha256': hashlib.sha256(summary_path.read_bytes()).hexdigest(),
+        }
+        if not all(checks.values()):
+            errors.append('SWRBench final score failed source/result/metric reconciliation')
+
     evidence = {
         'generated_utc': datetime.now(timezone.utc).isoformat(),
         'benchmark': 'SWRBench',
@@ -100,7 +150,10 @@ def main():
         'judged_trailing_partial_line_ignored': judged_partial_line,
         'official_evaluator_sha256': official_sha,
         'errors': errors,
-        'qualification': 'Live provenance and text-alignment check only; counts are progress, not final SWRBench accuracy.',
+        'final_score': final_score,
+        'qualification': 'Final official score verified against complete source, judge, result and metric receipts.'
+                         if final_score and final_score['qualification'] == 'complete_verified'
+                         else 'Live provenance and text-alignment check only; counts are progress, not final SWRBench accuracy.',
     }
     EVIDENCE.parent.mkdir(parents=True, exist_ok=True)
     temporary = EVIDENCE.with_name(EVIDENCE.name + f'.{os.getpid()}.tmp')

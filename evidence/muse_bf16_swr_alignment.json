@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T01:59:58.619698+00:00",
+  "generated_utc": "2026-10-20T02:08:05.857023+00:00",
   "benchmark": "SWRBench",
   "model": "meta-models/Muse-Spark-Open-816B-A42B",
   "precision": "BF16",
@@ -19,5 +19,27 @@
   "judged_trailing_partial_line_ignored": false,
   "official_evaluator_sha256": "917505d1265fb3783e765c965960f24205a1d8778e7004f51226321553a5711f",
   "errors": [],
-  "qualification": "Live provenance and text-alignment check only; counts are progress, not final SWRBench accuracy."
+  "final_score": {
+    "qualification": "complete_verified",
+    "checks": {
+      "completion_receipt": true,
+      "summary_identity": true,
+      "source_generation_hash": true,
+      "official_result_hash": true,
+      "official_evaluator_hash": true,
+      "all_source_rows": true,
+      "one_detail_per_task": true,
+      "official_counts": true,
+      "metric_match": true,
+      "accuracy_recomputed": true,
+      "no_alignment_errors": true
+    },
+    "expected": 1000,
+    "judged": 1000,
+    "accuracy": 0.542,
+    "f1": 0.4967,
+    "official_result_sha256": "66d839d1e712edb39f0f258a92b3a49ba8b8b0a902ab39718793423fa0e2bf2b",
+    "completion_summary_sha256": "5750435c356e55d08b63c1de7e0ece8aa0e8182590b123a89e9643e31d7c0c17"
+  },
+  "qualification": "Final official score verified against complete source, judge, result and metric receipts."
 }

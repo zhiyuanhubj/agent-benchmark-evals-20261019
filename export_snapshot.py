@@ -166,6 +166,8 @@ bf16_io_path = ROOT / 'evidence/muse_bf16_exact_io_coverage.json'
 bf16_io = read(bf16_io_path) if bf16_io_path.exists() else {}
 bf16_swr_alignment_path = ROOT / 'evidence/muse_bf16_swr_alignment.json'
 bf16_swr_alignment = read(bf16_swr_alignment_path) if bf16_swr_alignment_path.exists() else {}
+bf16_swr_final = bf16_swr_alignment.get('final_score') or {}
+bf16_swr_complete = bf16_swr_final.get('qualification') == 'complete_verified'
 bf16_source_round1 = ex['muse_bf16']['tb']['1']
 bf16_complete = (bf16_source_round1['graded'] == 89 and
                  bf16_io.get('qualification') == 'complete_verified' and
@@ -267,6 +269,16 @@ snapshot = {
                 'released_io_audit': 'evidence/muse_bf16_exact_io_coverage.json',
                 'qualification': 'The 89 supplied archive image identities, task paths and agent settings were verified before BF16 round 1 launched and rechecked on the running node. A full-round accuracy awaits all 89 native results and task-level audit.'},
             'deepswe': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['muse_bf16']['deep'].items()},
+            'swrbench': {
+                'status': 'complete' if bf16_swr_complete else 'partial_no_full_score',
+                'expected': 1000,
+                'generated': bf16_swr_alignment.get('generated', 0),
+                'judged': bf16_swr_alignment.get('judged', 0),
+                'accuracy': bf16_swr_final.get('accuracy') if bf16_swr_complete else None,
+                'f1': bf16_swr_final.get('f1') if bf16_swr_complete else None,
+                'judge': 'gpt-5.5',
+                'evidence': 'evidence/muse_bf16_swr_alignment.json',
+            },
             'qualification': 'Original BF16 native Pro, TB2.1 and DeepSWE started after real inference and tool/thinking preflight; partial counts are progress, not accuracy.',
         },
     },
@@ -464,18 +476,24 @@ bf16_review_ready_images = sum(
     read(path).get('phase') == 'image_ready'
     for path in (BF / 'review_bench/queue/images').glob('*.json'))
 if bf16_review_phase == 'queued_for_verified_2886_bf16_endpoint':
-    bf16_review_en = 'Queued on verified BF16 pair 2886; awaiting model load and tool/thinking preflight'
-    bf16_review_zh = '；SWRBench 与 SWE-Review 已排到 2886 双节点，等待模型加载及工具调用/thinking 预检'
+    bf16_review_en = 'Queued on verified BF16 pair 2886'
+    bf16_review_zh = '；SWE-Review 已排到 2886 双节点'
 elif bf16_review_phase == 'verified_2886_swr_generation_judging_and_review_pipeline_started':
-    bf16_review_en = (f'Running on verified BF16 pair 2886; SWRBench '
-                      f'{len(bf16_swr_generated)}/1000 generated, '
-                      f'{len(bf16_swr_judged)}/1000 judged; final score pending')
-    bf16_review_zh = (f'；SWRBench 已在 2886 双节点生成 {len(bf16_swr_generated)}/1000、'
-                      f'裁判 {len(bf16_swr_judged)}/1000；SWE-Review 已预建 '
-                      f'{bf16_review_ready_images} 个任务镜像，最终分数待完成')
+    bf16_review_en = f'{bf16_review_ready_images} SWE-Review task images prepared; revision score pending'
+    bf16_review_zh = f'；SWE-Review 已预建 {bf16_review_ready_images} 个任务镜像，最终分数待完成'
 else:
     bf16_review_en = 'Incomplete; current launch state needs review'
-    bf16_review_zh = '；SWRBench 与 SWE-Review 尚未完成，启动状态待核查'
+    bf16_review_zh = '；SWE-Review 尚未完成，启动状态待核查'
+bf16_swr_en = (f"**{bf16_swr_final['accuracy']:.1%}** ({bf16_swr_final['judged']}/1000 judged), "
+                f"F1 **{bf16_swr_final['f1']:.4f}**") if bf16_swr_complete else (
+                f'{len(bf16_swr_generated)}/1000 generated, {len(bf16_swr_judged)}/1000 judged; score pending')
+bf16_swr_zh = (f"SWRBench GPT-5.5 裁判 **{bf16_swr_final['accuracy']:.1%}（1000/1000）**，"
+                f"F1 **{bf16_swr_final['f1']:.4f}**") if bf16_swr_complete else ''
+bf16_swr_note_en = ('The final 1000-task official score is reconciled with the generation, judge, '
+                    'result and metric receipts; accuracy classifies PRs, while F1 scores issue detection.'
+                    if bf16_swr_complete else 'These are live I/O checks, not a final accuracy.')
+bf16_swr_note_zh = ('1000 题官方结果已与生成、裁判、结果文件及指标收据核对；准确率统计 PR 分类，'
+                    'F1 统计问题识别。' if bf16_swr_complete else '这仅是进行中输入输出核验，不是最终准确率。')
 mn_exact_note_zh = f"精确镜像首轮已完成：**{mn_tb['success']}/89（{mn_tb['accuracy']:.2%}）**。" if mn_tb['complete'] else f"精确镜像首轮只判分 {mn_tb['graded']}/89，不能当成最终准确率。"
 if not mn_tb['complete'] and mn_tb['graded'] == 88 and mn_audit['missing_graded_tasks'] == ['mteb-leaderboard']:
     lower = mn_tb['success'] / 89
@@ -522,7 +540,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'])} |
 | Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | — |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
-| Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_review_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
+| Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_swr_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
 
 Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits](evidence/swe_review_complete_split_da.json): GLM5 **{review_glm_da['DA']}%** on {review_glm_da['produced']} parseable decisions (500 task outcomes), Qwen3-Coder **{review_coder_da['DA']}%** on {review_coder_da['produced']} (462 outcomes), and Qwen3-30B-Instruct **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} (422 outcomes). [The v2 receipt audit](evidence/muse_swe_review_revision_v2_receipts.json) verifies 8 GLM5 and 2 Coder task-generation-only adapters for finished native verifier reports lacking Harbor summaries; no adapter is a model result. Original-generator revisions for rejected patches have not been graded, so RRR remains unavailable.
 
@@ -581,7 +599,7 @@ if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists
 if bf16_swr_alignment:
     assert not bf16_swr_alignment['errors']
     readme = readme.replace('For actively changing Pro/legacy/Deep results,',
-        f"The [BF16 SWRBench generation/judge alignment audit](evidence/muse_bf16_swr_alignment.json) at {bf16_swr_alignment['generated_utc']} matches {bf16_swr_alignment['judged']} judged IDs to {bf16_swr_alignment['generated']} generated reviews, with no mismatched review after the pinned official evaluator's apostrophe normalization ({bf16_swr_alignment['official_apostrophe_normalization_count']} affected rows). These are live I/O checks, not a final accuracy.\n\nFor actively changing Pro/legacy/Deep results,", 1)
+        f"The [BF16 SWRBench generation/judge alignment audit](evidence/muse_bf16_swr_alignment.json) at {bf16_swr_alignment['generated_utc']} matches {bf16_swr_alignment['judged']} judged IDs to {bf16_swr_alignment['generated']} generated reviews, with no mismatched review after the pinned official evaluator's apostrophe normalization ({bf16_swr_alignment['official_apostrophe_normalization_count']} affected rows). {bf16_swr_note_en}\n\nFor actively changing Pro/legacy/Deep results,", 1)
 slot1_route_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/r2-completion-2866-b02-route.json'
 if slot1_route_path.exists():
     slot1_route = read(slot1_route_path)
@@ -632,7 +650,7 @@ chinese_report = f'''# 模型评测结果快照
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review Instruct 组封存 DA **{beam_review_instruct_da['DA']}%（422 题）**{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 另两组与 RRR 未完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
-| Muse 原始 BF16 | {'暂无完整 benchmark 分数' if not bf16_tb_round1['complete'] else bf16_exact_zh_done.lstrip('；')} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{bf16_review_zh} |
+| Muse 原始 BF16 | {'；'.join(part for part in (bf16_swr_zh, bf16_exact_zh_done.lstrip('；')) if part) or '暂无完整 benchmark 分数'} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{'; SWRBench ' + bf16_swr_en if not bf16_swr_complete else ''}{bf16_review_zh} |
 
 **SWE-Review 三组 DA 均已有封存收据。** 官方 `compute_da.py` 在 GLM5 {review_glm_da['produced']} 个可解析决定上得 **{review_glm_da['DA']}%**（500 题终态），Qwen3-Coder {review_coder_da['produced']} 个得 **{review_coder_da['DA']}%**（462 题），Qwen3-30B-Instruct {review_instruct_da['produced']} 个得 **{review_instruct_da['DA']}%**（422 题）。[逐题哈希和官方评分核验](evidence/swe_review_complete_split_da.json)覆盖全部三组。[新版任务准备收据审计](evidence/muse_swe_review_revision_v2_receipts.json)确认 GLM5 的 8 道、Coder 的 2 道只缺 Harbor 汇总：它们的真实原生报告参与 DA，标明用途的适配文件仅供官方修复任务生成，绝非模型结果。原始生成模型修复与判分尚未产生 RRR，不能称为 SWE-Review 最终整体分数。
 
@@ -704,7 +722,7 @@ if (ROOT / 'input_output/archive_manifests/muse_bf16_review_inputs.json').exists
 if bf16_swr_alignment:
     assert not bf16_swr_alignment['errors']
     chinese_report = chinese_report.replace('Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照',
-        f"[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 {bf16_swr_alignment['generated_utc']} 将 {bf16_swr_alignment['judged']} 条裁判记录逐题对到 {bf16_swr_alignment['generated']} 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 {bf16_swr_alignment['official_apostrophe_normalization_count']} 条）。这仅是进行中输入输出核验，不是最终准确率。\n\nOpus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照", 1)
+        f"[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 {bf16_swr_alignment['generated_utc']} 将 {bf16_swr_alignment['judged']} 条裁判记录逐题对到 {bf16_swr_alignment['generated']} 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 {bf16_swr_alignment['official_apostrophe_normalization_count']} 条）。{bf16_swr_note_zh}\n\nOpus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照", 1)
 if slot1_route_path.exists():
     chinese_report = chinese_report.replace('Opus 4.7 Pro 只统计原始运行的 731 道题',
         'GPU 2812 的第二个控制器槽在 b01 最后一题仍运行时领取了未抽样的精确镜像第 2 轮 b02 批次；两条控制器共用已固定的 NVFP4 服务，各批次并发 2 题，服务上限为 8 个请求。[控制器源码](protocol/muse_nvfp4_exact_future_round_controller_20261019.py)使用独立槽锁和原有逐批原子领取；b02 接管凭据及原始/实际配置哈希收录于原始输入输出快照。首轮题目及已抽样的第 2 轮题目均未重抽。\n\nOpus 4.7 Pro 只统计原始运行的 731 道题', 1)

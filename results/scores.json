@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T02:02:43.973179+00:00",
+  "generated_utc": "2026-10-20T02:09:24.960639+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -287,23 +287,23 @@
             "2": 39,
             "3": 0
           },
-          "new_raw_model_responses": 7326,
+          "new_raw_model_responses": 7361,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 1069,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 1073,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 517,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 784,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 587
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 525,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 800,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 594
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T02:02:42+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-20T02:09:26+00:00",
           "active_recovery_trial_dirs": 7,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -729,6 +729,16 @@
           "success": 0,
           "status": "partial_no_full_score"
         }
+      },
+      "swrbench": {
+        "status": "complete",
+        "expected": 1000,
+        "generated": 1000,
+        "judged": 1000,
+        "accuracy": 0.542,
+        "f1": 0.4967,
+        "judge": "gpt-5.5",
+        "evidence": "evidence/muse_bf16_swr_alignment.json"
       },
       "qualification": "Original BF16 native Pro, TB2.1 and DeepSWE started after real inference and tool/thinking preflight; partial counts are progress, not accuracy."
     }
