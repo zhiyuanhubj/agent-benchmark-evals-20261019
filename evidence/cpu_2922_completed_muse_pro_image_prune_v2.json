@@ -1,0 +1,19 @@
+{
+  "audited_utc": "2026-10-20T17:38:48.379157+00:00",
+  "cpu_allocation": 2922,
+  "source_script": "protocol/prune_2922_completed_muse_pro_images_v2_20261020.py",
+  "private_plan": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/cpu-2922-image-prune-v2-plan.json",
+  "private_plan_sha256": "1b0fc3ed458a5f178f0c80d7426576ee3f492bfc2530a02bab9f10c46a960091",
+  "private_log": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/cpu-2922-image-prune-v2.jsonl",
+  "private_log_sha256": "5a7b71b0f751410ac399001cfaad4720cd7bfc8dbc6383794fe966b99ed49450",
+  "graded_candidate_count": 35,
+  "candidate_result_files_sha256_preserved": 35,
+  "image_tags_removed": 23,
+  "image_tags_refused_due_to_container_reference": 3,
+  "free_gib_before": 29.98,
+  "free_gib_after": 82.24,
+  "recovered_gib": 52.26,
+  "target_reached": true,
+  "muse_bf16_pro_controller_active_after": true,
+  "policy": "Only per-task Docker image tags for already-native-graded Muse BF16 Pro tasks were passed to docker image rm without --force; no container or result delete command was used."
+}
