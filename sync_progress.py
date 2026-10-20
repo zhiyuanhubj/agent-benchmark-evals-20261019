@@ -116,7 +116,11 @@ def sync_native_archives(scores, force_bf16=False):
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
                   'muse_bf16_review_inputs',
                   'muse_review_full_io', 'beam_review_full_io',
-                  'muse_review_verifier', 'beam_review_verifier'):
+                  'muse_review_verifier', 'beam_review_verifier',
+                  'muse_review_revision_inputs', 'beam_review_revision_inputs',
+                  'muse_revision_review_full_io', 'beam_revision_review_full_io'):
+        if not (manifest_dir / f'{group}.json').exists():
+            continue  # A new archive group joins only after its base asset is created.
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
         previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
         if (datetime.now(timezone.utc) - previous_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS or (group == 'muse_bf16' and force_bf16):
@@ -127,7 +131,11 @@ def sync_native_archives(scores, force_bf16=False):
         'gh', 'api', 'repos/zhiyuanhubj/agent-benchmark-evals-20261019/releases/tags/2026-10-19-snapshot'
     ], cwd=ROOT, text=True, timeout=60))
     remote = {asset['name'] for asset in release['assets']}
-    for manifest_path in [*live_manifests, *delta_manifests]:
+    revision_base_manifests = [manifest_dir / f'{group}.json' for group in
+        ('muse_review_revision_inputs', 'beam_review_revision_inputs',
+         'muse_revision_review_full_io', 'beam_revision_review_full_io')]
+    revision_base_manifests = [path for path in revision_base_manifests if path.exists()]
+    for manifest_path in [*revision_base_manifests, *live_manifests, *delta_manifests]:
         manifest = json.loads(manifest_path.read_text())
         archive_name = manifest['archive_name']
         if archive_name not in remote:
@@ -144,6 +152,7 @@ def cycle():
             run([PYTHON, str(source)])
         run([PYTHON, str(ROOT / 'audit_swe_review_da.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_muse_review_revision_v2.py')], timeout=180)
+        run([PYTHON, str(ROOT / 'audit_review_revision_gateway.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_swe_review_recovery.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_beam_malformed_reviews.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
@@ -233,9 +242,9 @@ def cycle():
              'input_output/manifest.json', 'input_output/archive_manifests',
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
-             'audit_muse_review_revision_v2.py',
+             'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
-             'export_snapshot.py', 'sync_progress.py'])
+             'export_snapshot.py', 'archive_trials.py', 'archive_delta.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)
         if changed.returncode == 1:
             run(['git', 'commit', '-m', 'Refresh live benchmark results'])

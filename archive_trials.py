@@ -31,6 +31,18 @@ GROUPS = {
     'beam_review': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'beam_review_full_io': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'beam_review_verifier': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
+    'muse_review_revision_inputs': [M / 'review_bench_20261018/revision/prepared/qwen3_coder_30b_500',
+                                    M / 'review_bench_20261018/revision/prepared/qwen3_30b_instruct2507_500',
+                                    M / 'review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue',
+                                    M / 'review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue'],
+    'beam_review_revision_inputs': [B / 'review_bench/revision/prepared/qwen3_30b_instruct2507_500',
+                                    B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue'],
+    'muse_revision_review_full_io': [M / 'review_bench_20261018/revision/generation/qwen3_coder_30b_500/queue/results',
+                                     M / 'review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/queue/results',
+                                     M / 'review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results',
+                                     M / 'review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results'],
+    'beam_revision_review_full_io': [B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/queue/results',
+                                     B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results'],
     'beam_swr_raw': [B / 'review_bench/swrbench/raw_responses', B / 'review_bench/swrbench/judge_raw_responses'],
     'opus47_legacy': [O],
     'opus47_exact_tb': [B / 'tb_v1_exact_images_20261019/results/opus47'],
@@ -42,6 +54,22 @@ GROUPS = {
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    if group.endswith('review_revision_inputs'):
+        parts = rel.parts
+        if root.name == 'queue':
+            return (path.name == 'queue-plan.json' and len(parts) == 1) or (
+                parts[0] in ('task-receipts', 'images', 'configs', 'claims')
+                and path.suffix == '.json')
+        if path.name == 'receipt.json' and len(parts) == 1:
+            return True
+        visible = {'task.toml', 'instruction.md', 'environment/Dockerfile',
+                   'environment/data/problem_statement.txt',
+                   'environment/data/summary.json', 'environment/data/predicted.json'}
+        return len(parts) >= 3 and parts[0] == 'tasks' and '/'.join(parts[2:]) in visible
+    if group.endswith('revision_review_full_io') and path.name == 'model-connectivity.json':
+        return True
+    if group.endswith('revision_review_full_io') and path.name == 'model.patch' and 'agent' in rel.parts:
+        return True
     if group == 'muse_bf16_review_inputs':
         parts = rel.parts
         if path.name == 'queue-plan.json' and len(parts) == 1:
@@ -111,6 +139,8 @@ def iter_files(group):
             excluded = {'.git', '__pycache__', '.venv', 'node_modules', 'sandbox', 'artifacts'}
             if group == 'muse_bf16_review_inputs':
                 excluded.update({'solution', 'tests', 'results'})
+            if group.endswith('review_revision_inputs'):
+                excluded.update({'solution', 'tests', 'results', 'verifier', 'agent'})
             if not (group.endswith('review_verifier') or group.endswith('review_full_io')):
                 excluded.add('verifier')
             if group.endswith('review_verifier'):
@@ -149,7 +179,7 @@ def main():
                 tar.add(str(path), arcname=arcname, recursive=False)
                 category = 'judge_raw_response.json' if 'judge_raw_responses' in path.parts else ('raw_response.json' if 'raw_responses' in path.parts else ('completion.json' if 'completions' in path.parts else ('api_archive.json' if 'api_archive' in path.parts else path.name)))
                 counts[category] = counts.get(category, 0) + 1
-                if group == 'muse_bf16_review_inputs':
+                if group == 'muse_bf16_review_inputs' or group.endswith('review_revision_inputs'):
                     input_count += 1
                 elif group == 'muse_bf16_swr':
                     input_count += path.name in ('swr_datasets_d5c5.jsonl', 'launch.json')
@@ -182,7 +212,11 @@ def main():
         'raw_response_count': raw_count,
         'filename_counts': counts,
         'source_roots': [str(x) for x in GROUPS[group]],
-        'scope': ('Model-visible BF16 SWE-Review task instructions, task cards, Dockerfiles and public task data, plus queue/config/claim/image receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
+        'scope': ('Original-generator SWE-Review revision task instructions, task cards, Dockerfiles and public model-visible task data, plus canonical preparation and isolated gateway recovery queue receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
+                  if group.endswith('review_revision_inputs') else
+                  'Original-generator revision native I/O. Original host-IP trials that failed before any model response are preserved under the old queue path as infrastructure evidence; only the separate gateway-recovery queue path is eligible for RRR scoring. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files.'
+                  if group.endswith('revision_review_full_io') else
+                  'Model-visible BF16 SWE-Review task instructions, task cards, Dockerfiles and public task data, plus queue/config/claim/image receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
                   if group == 'muse_bf16_review_inputs' else
                   'The exact 1000-item SWRBench source dataset, launch config, live generated reviews, GPT-5.5 judge records and raw responses present at snapshot time; later deltas replace growing JSONL files. Excludes credentials and model weights.'
                   if group == 'muse_bf16_swr' else

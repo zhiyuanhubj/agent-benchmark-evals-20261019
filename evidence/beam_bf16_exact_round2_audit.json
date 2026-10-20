@@ -1,18 +1,16 @@
 {
-  "generated_utc": "2026-10-20T00:20:24.812171+00:00",
+  "generated_utc": "2026-10-20T00:36:43.699426+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T000858Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T002450Z.tar.zst",
   "expected": 89,
-  "terminal": 31,
-  "graded": 30,
-  "success": 20,
+  "terminal": 33,
+  "graded": 32,
+  "success": 21,
   "missing_graded_tasks": [
-    "feal-linear-cryptanalysis",
     "fix-ocaml-gc",
-    "gcode-to-text",
     "git-multibranch",
     "gpt2-codegolf",
     "headless-terminal",
@@ -73,7 +71,13 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "headless-terminal",
+    "hf-model-inference",
+    "install-windows-3.11",
+    "kv-store-grpc",
+    "large-scale-text-editing"
+  ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -256,6 +260,13 @@
       "raw_response_count": 29,
       "responses_with_reasoning_content": 29
     },
+    "feal-linear-cryptanalysis": {
+      "reward": 1.0,
+      "result_sha256": "394c543b6a9a33426ca0cb1704b4c8fe0829e467a5409fe87d8dbc1dff02a144",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/feal-linear-cryptanalysis__RNxV7aF/result.json",
+      "raw_response_count": 166,
+      "responses_with_reasoning_content": 166
+    },
     "filter-js-from-html": {
       "reward": 0.0,
       "result_sha256": "d19428fd63a32285824fb976ba65052146890802537b164d124aeb8aaa9d91da",
@@ -283,6 +294,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/fix-git__Md9e6JA/result.json",
       "raw_response_count": 9,
       "responses_with_reasoning_content": 9
+    },
+    "gcode-to-text": {
+      "reward": 0.0,
+      "result_sha256": "84635c37c8f6fc0955cd65fa316334720bd9375d0632302f6bbe71f6bde5b232",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/gcode-to-text__g2fkkTF/result.json",
+      "raw_response_count": 81,
+      "responses_with_reasoning_content": 81
     },
     "git-leak-recovery": {
       "reward": 1.0,

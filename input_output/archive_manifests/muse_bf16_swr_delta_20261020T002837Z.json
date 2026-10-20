@@ -1,0 +1,29 @@
+{
+  "generated_utc": "2026-10-20T00:28:38.179669+00:00",
+  "group": "muse_bf16_swr",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_swr_delta_20261020T001205Z.json",
+  "cutoff_utc": "2026-10-20T00:07:06.319818+00:00",
+  "archive_name": "muse_bf16_swr_delta_20261020T002837Z.tar.zst",
+  "archive_size_bytes": 7283114,
+  "archive_sha256": "f5e5f18531e3c84ba1dabbf4cefa95a2270399b6008b8a09b250f9f668b3366b",
+  "file_count": 13,
+  "source_bytes": 66787010,
+  "filename_counts": {
+    "completion-audit-current.json": 1,
+    "controller-complete.json": 1,
+    "evaluation-gpt-5.5.json": 1,
+    "evaluation-gpt-5.5.json.tmp.jsonl": 1,
+    "failures.json": 1,
+    "generation.jsonl": 1,
+    "judge-state.json": 1,
+    "1792454843327496300-d170cc4e8f994f2a828c6b27cfeb5834.json": 1,
+    "1792454855660649985-b449bd7513294b62bd99d4149c5d4ea3.json": 1,
+    "1792454881367163272-4c23e98107444751a126b36fc9aa0860.json": 1,
+    "raw_response.json": 3
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/swrbench",
+    "/fsx/home/zhiyuan/bench/code-review-eval/data/repos/swrbench/data"
+  ]
+}

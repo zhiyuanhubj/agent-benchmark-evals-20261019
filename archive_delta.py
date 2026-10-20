@@ -15,7 +15,9 @@ ROOT = Path(__file__).resolve().parent
 ALLOWED = ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
            'muse_bf16_review_inputs',
            'muse_review_full_io', 'beam_review_full_io',
-           'muse_review_verifier', 'beam_review_verifier')
+           'muse_review_verifier', 'beam_review_verifier',
+           'muse_review_revision_inputs', 'beam_review_revision_inputs',
+           'muse_revision_review_full_io', 'beam_revision_review_full_io')
 parser = argparse.ArgumentParser()
 parser.add_argument('group', choices=ALLOWED)
 parser.add_argument('--if-changed', action='store_true', help='Succeed without an archive if no source file changed')
@@ -68,7 +70,11 @@ with archive.open('rb') as stream:
 manifest = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
     'group': group,
-    'scope': 'Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.',
+    'scope': ('SWE-Review original-generator revision I/O changed since the previous archive, including old pre-model infrastructure failures and separate gateway-recovery trials. Only gateway-recovery native grades enter RRR. Apply after the named previous archive; later paths replace earlier paths.'
+              if group.endswith('revision_review_full_io') else
+              'Model-visible SWE-Review revision inputs and queue receipts changed since the previous archive. Hidden solution and tests are excluded. Apply after the named previous archive; later paths replace earlier paths.'
+              if group.endswith('review_revision_inputs') else
+              'Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.'),
     'previous_manifest': str(previous.relative_to(ROOT)),
     'cutoff_utc': cutoff.isoformat(),
     'archive_name': archive.name,

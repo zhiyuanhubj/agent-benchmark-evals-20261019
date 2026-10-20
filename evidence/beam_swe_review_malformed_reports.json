@@ -1,17 +1,30 @@
 {
-  "generated_utc": "2026-10-20T00:08:08.043143+00:00",
+  "generated_utc": "2026-10-20T00:24:05.489645+00:00",
   "plan_sha256": "10fd107b75565aa5deceb28641eae22935b87fa051e31324426d3e9fdf078053",
   "selector_sha256": "66ec86bdf0bbeee4863ad07e8f0829a91251bb8c5a9aef6e3351a32de902f657",
   "preparation_controller_sha256": "06d5b166ae9b5bb1217541c6b345207f52102c25aeefda337718784882233cf0",
   "official_generator_sha256": "2d7e957b928033abc68dfa93fe2ebf6b56ced22bdab9dc5a2d08dbc3f703859c",
   "splits": {
     "glm5_500": {
-      "terminal_results_seen": 406,
-      "invalid_report_count": 0,
-      "invalid_reports": []
+      "terminal_results_seen": 411,
+      "invalid_report_count": 1,
+      "invalid_reports": [
+        {
+          "task": "sphinx-doc__sphinx-8638",
+          "trial": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/glm5_500/beam-review-20261018-glm5_500-batch25/sphinx-doc__sphinx-8638__HDyN3j9",
+          "parse_error": "Extra data: line 35 column 1 (char 2799)",
+          "result_sha256": "5ab896b7879a0fbdcc9c09ce137b020454e47e6866b02092d396c597df461fe2",
+          "invalid_report_sha256": "a5b04b6179d44b9cb84981ae33e08966c0064188236765a52bd56da7e64fc131",
+          "raw_model_response_count": 86,
+          "raw_model_responses_sha256": "9d3d7f6820c84a5b29ccc11f2bad1b9d475326f23fafbaae2b9d5fd525042f9a",
+          "verifier_report_exists": false,
+          "verifier_reward_exists": false,
+          "selection_policy": "decision=None; no resampling; raw report bytes preserved"
+        }
+      ]
     },
     "qwen3_coder_30b_500": {
-      "terminal_results_seen": 434,
+      "terminal_results_seen": 442,
       "invalid_report_count": 1,
       "invalid_reports": [
         {

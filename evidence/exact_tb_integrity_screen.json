@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T00:20:34.000491+00:00",
+  "generated_utc": "2026-10-20T00:36:52.419834+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 30,
+      "scored_trajectories_checked": 37,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -4938,6 +4938,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "kv-store-grpc",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/kv-store-grpc__BDnPmhq/agent/trajectory.json",
+      "trajectory_sha256": "ba46a03157058f8fe31b58098c70e80fd975f9ed8bc66f59e5f716edf5841a10",
+      "steps": 7,
+      "tool_calls": 11,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "build-cython-ext",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/build-cython-ext__Lzf6Yxg/agent/trajectory.json",
@@ -5106,6 +5118,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "headless-terminal",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/headless-terminal__eo4mRpY/agent/trajectory.json",
+      "trajectory_sha256": "3ad83a229c4859dba2412e423db8667fca06dfe7d98dc4e51c4c48666fab6e50",
+      "steps": 25,
+      "tool_calls": 48,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "build-pmars",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/build-pmars__iyvUmbC/agent/trajectory.json",
@@ -5202,6 +5226,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "large-scale-text-editing",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/large-scale-text-editing__oaAnxrc/agent/trajectory.json",
+      "trajectory_sha256": "1410ca64db3446d7433115871bedf2f92cb68b87299d3466eb61bd9f47e1036d",
+      "steps": 13,
+      "tool_calls": 15,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "configure-git-webserver",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/configure-git-webserver__cEWZs76/agent/trajectory.json",
@@ -5220,6 +5256,30 @@
       "trajectory_sha256": "89059022b6e006fb6b18e4f3c7189373afd26df055f1b27aaf37aa61b5381b67",
       "steps": 13,
       "tool_calls": 27,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "install-windows-3.11",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/install-windows-3.11__edEG2vF/agent/trajectory.json",
+      "trajectory_sha256": "b0e94d1c61bda125dfc6adea968dc6d394198c575f1927765774f4da05ec12b3",
+      "steps": 21,
+      "tool_calls": 55,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "hf-model-inference",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/hf-model-inference__q7fynSF/agent/trajectory.json",
+      "trajectory_sha256": "6906efb0036271961e5844cb1d2db3ad5d7dc5433f4ce762ee3daf60e5196386",
+      "steps": 14,
+      "tool_calls": 21,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -5274,6 +5334,18 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "feal-linear-cryptanalysis",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/feal-linear-cryptanalysis__RNxV7aF/agent/trajectory.json",
+      "trajectory_sha256": "2c6c4614e64177c5c83917e7c356d6f9b6c451aafe02455c03ce02e2be7e22de",
+      "steps": 169,
+      "tool_calls": 195,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "beam_bf16_r2",
@@ -5344,6 +5416,18 @@
       "trajectory_sha256": "935a7b37fc5a95e46c0e286fc868307dc84aee589cec7a7a8881774585479583",
       "steps": 20,
       "tool_calls": 23,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "gcode-to-text",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/gcode-to-text__g2fkkTF/agent/trajectory.json",
+      "trajectory_sha256": "d934bca06da25e980d99c697c82a5852dd0fac64d215f8e9e566b69f7f2f59d9",
+      "steps": 75,
+      "tool_calls": 107,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -5440,9 +5524,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "296bf9f660b16a43e329e553ec060ec5e6f4fede4f5a967c1ec76cfb743e5c15",
-        "steps_at_screen": 509,
-        "tool_calls_at_screen": 1193,
+        "trajectory_sha256_at_screen": "61bbc9d519dedd3b309e4738b3369a4fe75e5f9aff775f68b1cc5a258b51bd77",
+        "steps_at_screen": 525,
+        "tool_calls_at_screen": 1206,
         "hits": [],
         "status": "in_progress_not_scored"
       }
