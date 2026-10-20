@@ -1,17 +1,16 @@
 {
-  "generated_utc": "2026-10-20T09:18:19.044105+00:00",
+  "generated_utc": "2026-10-20T09:33:02.522544+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T090950Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T092435Z.tar.zst",
   "expected": 89,
-  "terminal": 67,
-  "graded": 66,
+  "terminal": 68,
+  "graded": 67,
   "success": 47,
   "missing_graded_tasks": [
     "git-multibranch",
-    "path-tracing-reverse",
     "protein-assembly",
     "query-optimize",
     "raman-fitting",
@@ -37,9 +36,7 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [
-    "path-tracing-reverse"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -452,6 +449,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/path-tracing__KZqxstv/result.json",
       "raw_response_count": 156,
       "responses_with_reasoning_content": 156
+    },
+    "path-tracing-reverse": {
+      "reward": 0.0,
+      "result_sha256": "11a0d0c22f8bca79e071f3dffd58ed76280590ad451b127bac2b76fffe54f106",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/path-tracing-reverse__BxTL3Yh/result.json",
+      "raw_response_count": 181,
+      "responses_with_reasoning_content": 181
     },
     "polyglot-c-py": {
       "reward": 1.0,
