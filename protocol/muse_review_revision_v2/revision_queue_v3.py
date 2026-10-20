@@ -181,7 +181,7 @@ def split_queue(split):
         if old_exit_snapshot.exists():
             assert sha(old_exit_snapshot) == sha(old_exit), 'Earlier queue exit changed after preservation'
         else:
-            shutil.copy2(old_exit, old_exit_snapshot)
+            shutil.copyfile(old_exit, old_exit_snapshot)
         assert sha(old_exit_snapshot) == sha(old_exit)
     save(ROOT / 'resume-audit.json', dict(split=split, completed_batches=start,
         completed_task_count=sum(len(batch) for batch in batches[:start]),

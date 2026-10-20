@@ -56,7 +56,8 @@ for label, input_group, output_group, works, prepared in PAIR:
     assert all(manifest['archive_name'] in verified for _, manifest in input_chain + output_chain)
     active = set()
     for work in works:
-        plan = json.loads((work / 'gateway-recovery-20261020/queue/queue-plan.json').read_text())
+        queue = work / 'gateway-recovery-20261020/queue'
+        plan = json.loads((queue / 'queue-plan.json').read_text())
         for split, spec in plan['splits'].items():
             source = Path(spec['source_tasks'])
             for task in spec['tasks']:
@@ -65,6 +66,9 @@ for label, input_group, output_group, works, prepared in PAIR:
         old = work / 'queue/results'
         old_files = [str(path.relative_to(HOME)) for path in old.rglob('result.json')]
         assert set(old_files) <= output_names, 'Original pre-model failure file missing from release'
+        resume_records = [queue / 'resume-audit.json', *queue.glob('queue-exit-pre-resume-*.json')]
+        assert {str(path.relative_to(HOME)) for path in resume_records if path.exists()} <= input_names, \
+            'Revision queue resume receipt missing from release'
     expected = {str(path.relative_to(HOME)) for path in prepared.rglob('task.toml')}
     expected |= {str(path.relative_to(HOME)) for path in prepared.rglob('instruction.md')}
     assert len(expected) % 2 == 0 and active <= expected
