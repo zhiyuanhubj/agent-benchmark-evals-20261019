@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-20T12:01:51.453050+00:00",
+  "generated_utc": "2026-10-20T12:27:13.536889+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T115408Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T120815Z.tar.zst",
   "expected": 89,
-  "terminal": 74,
-  "graded": 73,
+  "terminal": 75,
+  "graded": 74,
   "success": 53,
   "missing_graded_tasks": [
     "git-multibranch",
     "protein-assembly",
-    "raman-fitting",
     "regex-chess",
     "schemelike-metacircular-eval",
     "sparql-university",
@@ -30,7 +29,11 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "sparql-university",
+    "sqlite-db-truncate",
+    "sqlite-with-gcov"
+  ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -520,6 +523,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/query-optimize__sqWoayT/result.json",
       "raw_response_count": 23,
       "responses_with_reasoning_content": 23
+    },
+    "raman-fitting": {
+      "reward": 0.0,
+      "result_sha256": "0d4193a6a31673ac2d3987a26b59658b5855031d69804269ec2d1d0e4cb43c12",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/raman-fitting__XbHGTeo/result.json",
+      "raw_response_count": 121,
+      "responses_with_reasoning_content": 121
     },
     "regex-log": {
       "reward": 1.0,

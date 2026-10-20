@@ -1,20 +1,18 @@
 {
-  "generated_utc": "2026-10-20T12:01:54.211720+00:00",
+  "generated_utc": "2026-10-20T12:27:16.777350+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T115408Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T120815Z.tar.zst",
   "expected": 89,
-  "terminal": 20,
-  "graded": 20,
-  "success": 15,
+  "terminal": 22,
+  "graded": 22,
+  "success": 16,
   "missing_graded_tasks": [
     "caffe-cifar-10",
     "dna-assembly",
-    "dna-insert",
     "extract-moves-from-video",
-    "feal-differential-cryptanalysis",
     "feal-linear-cryptanalysis",
     "filter-js-from-html",
     "financial-document-processor",
@@ -82,8 +80,11 @@
   ],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [
-    "dna-insert",
-    "feal-differential-cryptanalysis"
+    "caffe-cifar-10",
+    "dna-assembly",
+    "financial-document-processor",
+    "fix-code-vulnerability",
+    "fix-git"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -225,12 +226,26 @@
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
     },
+    "dna-insert": {
+      "reward": 0.0,
+      "result_sha256": "2311cb2f1b37f30dc06b75087004ef1a9a4e8181aa699adb4b9193316d7cb5d4",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/dna-insert__uAq9wZC/result.json",
+      "raw_response_count": 10,
+      "responses_with_reasoning_content": 10
+    },
     "extract-elf": {
       "reward": 1.0,
       "result_sha256": "32e64c489d4389825ee7fb5e5c82d4e046a7d97eaadfdbdc96750c9df5eb7d84",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/extract-elf__jzhhBmB/result.json",
       "raw_response_count": 9,
       "responses_with_reasoning_content": 9
+    },
+    "feal-differential-cryptanalysis": {
+      "reward": 1.0,
+      "result_sha256": "5bfa43e48c3657f044ab1c1a07b84a9cb62b6b1959595f67073cf64cb05e08d2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/feal-differential-cryptanalysis__rd6b87C/result.json",
+      "raw_response_count": 8,
+      "responses_with_reasoning_content": 8
     }
   }
 }

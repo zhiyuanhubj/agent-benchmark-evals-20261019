@@ -1046,6 +1046,8 @@ For actively changing Pro/legacy/Deep results, apply each timestamped delta afte
 
 The native `model.patch` files used by the DeepSWE verifier are included in the Beam and Muse BF16 delta chains. One-time backfills preserved [387 Beam patches](input_output/archive_manifests/beam_legacy_delta_20261020T114916Z.json) and [74 Muse BF16 patches](input_output/archive_manifests/muse_bf16_delta_20261020T114927Z.json); later deltas capture new patches as trials finish. These are model outputs, not extra attempts or scores.
 
+Beam DeepSWE round 1 has one ungraded task, `koota-composite-trait-aspects`: the original verifier and a [verifier-only diagnostic on the identical saved patch](evidence/beam_deep_r1_koota_regrade_plan.json) both timed out after 1800 seconds. The [diagnostic I/O archive](input_output/archive_manifests/beam_deep_r1_koota_diagnostic_delta_20261020T121244Z.json) preserves both results, trajectories, patch, and verifier output. The first-round count remains 112/113 graded with 47 successes; the diagnostic made no new model draw and supplies no binary reward.
+
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
 The release has {asset_count} archive manifests; **{release_audit_label} assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
@@ -1209,6 +1211,8 @@ Beam 精确镜像 TB 第 3 轮交由 2901 独立执行：固定版本的 BF16 �
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `{latest_legacy_deltas['opus47_legacy']['archive_name']}`、`{latest_legacy_deltas['beam_legacy']['archive_name']}`、`{latest_legacy_deltas['muse_bf16']['archive_name']}`；截止时间和文件范围见各自清单。
 
 DeepSWE verifier 使用的原生 `model.patch` 已纳入 Beam 和 Muse BF16 增量链。[Beam 一次性回填](input_output/archive_manifests/beam_legacy_delta_20261020T114916Z.json)保存 387 份补丁，[Muse BF16 一次性回填](input_output/archive_manifests/muse_bf16_delta_20261020T114927Z.json)保存 74 份；后续新补丁随增量继续归档。补丁是模型输出，不增加抽样或得分。
+
+Beam DeepSWE 首轮的 `koota-composite-trait-aspects` 缺失判分：原 verifier 与[复用同一补丁的纯验证补验](evidence/beam_deep_r1_koota_regrade_plan.json)均在 1800 秒后超时。[诊断输入输出归档](input_output/archive_manifests/beam_deep_r1_koota_diagnostic_delta_20261020T121244Z.json)保存两次结果、轨迹、补丁及 verifier 输出。首轮仍为 112/113 已判分、47 成功；补验没有新模型抽样，也没有二元 reward。
 '''
 chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_note_zh + ' 新增 GPU 申请状态：', 1)
 if bf16_excluded:
