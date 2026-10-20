@@ -3,12 +3,50 @@
   "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
   "original_ungraded_infra_failures": 89,
   "original_model_responses": 0,
-  "replacement_terminal": 21,
-  "replacement_graded": 21,
-  "replacement_success": 18.0,
-  "replacement_raw_responses": 977,
-  "active_trial_dirs": 5,
+  "replacement_terminal": 26,
+  "replacement_graded": 26,
+  "replacement_success": 22.0,
+  "replacement_raw_responses": 1274,
+  "active_trial_dirs": 12,
   "all_tasks_single_replacement_draw": true,
+  "extra_routes": [
+    {
+      "batch": 3,
+      "allocation": 2869,
+      "endpoint": "http://10.1.77.106:31321/v1",
+      "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/extra-routes-20261020/b03.json"
+    },
+    {
+      "batch": 4,
+      "allocation": 2899,
+      "endpoint": "http://10.1.114.210:31321/v1",
+      "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/extra-routes-20261020/b04.json"
+    },
+    {
+      "batch": 5,
+      "allocation": 2869,
+      "endpoint": "http://10.1.77.106:31321/v1",
+      "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/extra-routes-20261020/b05.json"
+    },
+    {
+      "batch": 6,
+      "allocation": 2899,
+      "endpoint": "http://10.1.114.210:31321/v1",
+      "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/extra-routes-20261020/b06.json"
+    },
+    {
+      "batch": 7,
+      "allocation": 2869,
+      "endpoint": "http://10.1.77.106:31321/v1",
+      "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/extra-routes-20261020/b07.json"
+    },
+    {
+      "batch": 8,
+      "allocation": 2899,
+      "endpoint": "http://10.1.114.210:31321/v1",
+      "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/extra-routes-20261020/b08.json"
+    }
+  ],
   "endpoint_ready": true,
   "qualification": "Original 89 connection-refused trials remain preserved and ungraded. Each task gets one separately declared infrastructure replacement with unchanged task/image/generation settings."
 }

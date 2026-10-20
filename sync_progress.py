@@ -96,6 +96,18 @@ def sync_native_archives(scores, force_bf16=False):
                 handoff_newer |= any(latest_archive_time is None or
                                      datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
                                      for marker in markers)
+                extra_routes = r3_state / 'extra-routes-20261020'
+                route_markers = [*extra_routes.glob('b*.json')]
+                replica_root = r3_state.parent / 'replicas-extra-20261020'
+                for allocation in (2869, 2899):
+                    route_markers.extend(path for path in
+                                         (replica_root / str(allocation) / 'serve-launch.json',
+                                          replica_root / str(allocation) / 'endpoint-ready.json',
+                                          replica_root / str(allocation) / 'reasoning-preflight.json')
+                                         if path.exists())
+                handoff_newer |= any(latest_archive_time is None or
+                                     datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
+                                     for marker in route_markers)
             handoff_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
             expected_receipts = 0
             for task in ('password-recovery', 'prove-plus-comm'):
@@ -342,6 +354,10 @@ def cycle():
              'audit_muse_nvfp4_local2866.py',
              'prepare_muse_nvfp4_local2866.py',
              'protocol/muse_nvfp4_local2866',
+             'protocol/serve_muse_nvfp4_extra_20261020.py',
+             'protocol/prepare_muse_nvfp4_r3_extra_routes_20261020.py',
+             'protocol/preflight_muse_nvfp4_extra_20261020.py',
+             'protocol/run_muse_nvfp4_r3_extra_routes_20261020.py',
              'protocol/muse_nvfp4_exact_future_round_controller_20261019.py',
              'audit_muse_nvfp4_r2_pytorch_ungraded.py',
              'audit_muse_nvfp4_r2_pytorch_replacement.py',

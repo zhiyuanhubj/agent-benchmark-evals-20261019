@@ -1,17 +1,16 @@
 {
-  "generated_utc": "2026-10-20T13:41:25.415607+00:00",
+  "generated_utc": "2026-10-20T14:16:16.695931+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T133200Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T140544Z.tar.zst",
   "expected": 89,
-  "terminal": 80,
-  "graded": 79,
+  "terminal": 81,
+  "graded": 80,
   "success": 58,
   "missing_graded_tasks": [
     "git-multibranch",
-    "protein-assembly",
     "regex-chess",
     "schemelike-metacircular-eval",
     "train-fasttext",
@@ -24,7 +23,9 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "tune-mjcf"
+  ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -465,6 +466,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/portfolio-optimization__SSYJHUB/result.json",
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
+    },
+    "protein-assembly": {
+      "reward": 0.0,
+      "result_sha256": "7495f432c3ae152b86bb5634956d9dd53c7b1cdce488a5c1b184144f489e3d2f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/protein-assembly__Th45fBY/result.json",
+      "raw_response_count": 256,
+      "responses_with_reasoning_content": 256
     },
     "prove-plus-comm": {
       "reward": 1.0,

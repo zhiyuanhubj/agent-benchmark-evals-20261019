@@ -1,0 +1,21 @@
+{
+  "review_utc": "2026-10-20T14:15:35.704618+00:00",
+  "scope": "Targeted manual review of one successful extra-routed Muse NVFP4 TB2.1 round-3 trajectory; not a full clean-data certification",
+  "task": "portfolio-optimization",
+  "batch": "b06",
+  "allocation": 2899,
+  "native_reward": 1.0,
+  "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b06/portfolio-optimization__hiF8QjT/result.json",
+  "result_sha256": "33de802894e48b8dee43659674cd24ef80e1f6cdc2075443e8bea1dc2ad7db19",
+  "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b06/portfolio-optimization__hiF8QjT/agent/trajectory.json",
+  "trajectory_sha256": "a2abe6c5ababbd6651d3234e664f4f4e51597588e8a37aee4be06a0bbee3fe3d",
+  "bash_command_count": 41,
+  "raw_response_count": 15,
+  "raw_responses_with_nonempty_thinking": 15,
+  "forbidden_command_matches": [],
+  "observations": [
+    "The inspected bash calls wrote portfolio_optimized.c, portfolio_optimized.py, and temporary profiling/check scripts; they read or ran the public benchmark but did not write benchmark.py.",
+    "No inspected bash call accessed /tests, verifier or hidden paths, reward files, host mounts, or Docker socket.",
+    "This narrow check does not establish that every successful trajectory is clean."
+  ]
+}

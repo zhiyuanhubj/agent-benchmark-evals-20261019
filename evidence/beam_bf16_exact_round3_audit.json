@@ -1,24 +1,20 @@
 {
-  "generated_utc": "2026-10-20T13:41:29.196926+00:00",
+  "generated_utc": "2026-10-20T14:16:21.569829+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T133200Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T140544Z.tar.zst",
   "expected": 89,
-  "terminal": 31,
-  "graded": 30,
-  "success": 22,
+  "terminal": 36,
+  "graded": 34,
+  "success": 23,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "feal-linear-cryptanalysis",
-    "gcode-to-text",
     "git-multibranch",
     "gpt2-codegolf",
     "headless-terminal",
-    "hf-model-inference",
-    "install-windows-3.11",
-    "kv-store-grpc",
     "large-scale-text-editing",
     "largest-eigenval",
     "llm-inference-batching-scheduler",
@@ -71,10 +67,11 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [
-    "git-multibranch"
+    "git-multibranch",
+    "headless-terminal"
   ],
   "unarchived_new_terminal_tasks": [
-    "gcode-to-text"
+    "large-scale-text-editing"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -286,6 +283,13 @@
       "raw_response_count": 68,
       "responses_with_reasoning_content": 68
     },
+    "gcode-to-text": {
+      "reward": 0.0,
+      "result_sha256": "d4b1c9c7dc5acd8721f1932cfaa03cca7d9c9538786d70dc046ec88cfe7b4680",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/gcode-to-text__YB2eqAV/result.json",
+      "raw_response_count": 104,
+      "responses_with_reasoning_content": 104
+    },
     "git-leak-recovery": {
       "reward": 1.0,
       "result_sha256": "a7f20776330ed9d205cb6476d04b5edf9b05beb41c45f0ab433d8d78411cef3a",
@@ -297,6 +301,34 @@
       "reward": null,
       "result_sha256": "8b853499e261eb4e83f42993b6145eefe8615bc9c9907d281cff790acaa02773",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/git-multibranch__zX8BCbk/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "headless-terminal": {
+      "reward": null,
+      "result_sha256": "7cb5b1c5741143650fa0883b156d23ce6752273235eccc451df2dcb9ae0195b3",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/headless-terminal__hqj3zok/result.json",
+      "raw_response_count": 12,
+      "responses_with_reasoning_content": 12
+    },
+    "hf-model-inference": {
+      "reward": 1.0,
+      "result_sha256": "3f9675a2f44088e825efb2c084e4886f1b0041e3dc9a275c72d96c1caec43360",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/hf-model-inference__DC7KMke/result.json",
+      "raw_response_count": 9,
+      "responses_with_reasoning_content": 9
+    },
+    "install-windows-3.11": {
+      "reward": 0.0,
+      "result_sha256": "f02a8e7685d2f1231564fcca2c9992cb86d7bb14dc902b0daf9f7dc5d3248346",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/install-windows-3.11__UwYipH7/result.json",
+      "raw_response_count": 40,
+      "responses_with_reasoning_content": 40
+    },
+    "kv-store-grpc": {
+      "reward": 0.0,
+      "result_sha256": "325f16ae0e3e8753df7a894fee2841ef00690c943ebcd97748101ae778f2452a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/kv-store-grpc__rH9yk3p/result.json",
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
     }

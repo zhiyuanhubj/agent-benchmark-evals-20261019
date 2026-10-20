@@ -412,6 +412,7 @@ if r3_replacement_plan:
     assert nvfp4_rounds['3']['exceptions'].get('InternalServerError') == 89
     seen = set()
     terminal = graded = success = raw_responses = active = 0
+    extra_routes = []
     for batch in r3_replacement_plan['batches']:
         original_config = Path(batch['source_config'])
         effective_config = Path(batch['effective_config'])
@@ -424,6 +425,29 @@ if r3_replacement_plan:
         assert effective['agents'][0]['kwargs']['api_base'] == r3_replacement_plan['endpoint']
         effective['agents'][0]['kwargs']['api_base'] = original['agents'][0]['kwargs']['api_base']
         assert effective == original, 'Round-3 replacement changed task or generation settings'
+        endpoint = r3_replacement_plan['endpoint']
+        route = r3_replacement_root / 'extra-routes-20261020' / f'b{batch["index"]:02}.json'
+        if route.exists():
+            receipt = read(route)
+            assert batch['index'] in range(3, 9)
+            assert receipt['batch'] == batch['index'] and receipt['job_name'] == batch['job_name']
+            assert receipt['allocation'] in (2869, 2899)
+            assert receipt['original_effective_config'] == str(effective_config)
+            assert receipt['original_effective_config_sha256'] == batch['effective_config_sha256']
+            assert hashlib.sha256(Path(receipt['original_plan']).read_bytes()).hexdigest() == receipt['original_plan_sha256']
+            routed_config = Path(receipt['routed_config'])
+            assert hashlib.sha256(routed_config.read_bytes()).hexdigest() == receipt['routed_config_sha256']
+            routed = read(routed_config)
+            endpoint = receipt['endpoint']
+            assert endpoint == {2869: 'http://10.1.77.106:31321/v1',
+                                2899: 'http://10.1.114.210:31321/v1'}[receipt['allocation']]
+            expected_route = read(effective_config)
+            expected_route['agents'][0]['kwargs']['api_base'] = endpoint
+            assert routed == expected_route, 'Extra route changed task or generation settings'
+            assert not (r3_replacement_root / f'b{batch["index"]:02}-started.json').exists(), \
+                'Original lane also claimed extra-routed batch'
+            extra_routes.append({'batch': batch['index'], 'allocation': receipt['allocation'],
+                                 'endpoint': endpoint, 'receipt': str(route)})
         expected = {item['task'] for item in batch['tasks']}
         assert len(expected) == len(batch['tasks'])
         for item in batch['tasks']:
@@ -451,12 +475,12 @@ if r3_replacement_plan:
                 active += 1
                 continue
             assert Path(value['config']['task']['path']).name == name
-            assert value['config']['agent']['kwargs']['api_base'] == r3_replacement_plan['endpoint']
+            assert value['config']['agent']['kwargs']['api_base'] == endpoint
             terminal += 1
             reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
             if reward in (0, 1):
                 graded += 1
-                success += reward
+                success += int(reward)
                 nvfp4_rounds['3']['exceptions']['InternalServerError'] -= 1
             elif value.get('exception_info'):
                 kind = value['exception_info']['exception_type']
@@ -478,6 +502,7 @@ if r3_replacement_plan:
         'replacement_terminal': terminal, 'replacement_graded': graded,
         'replacement_success': success, 'replacement_raw_responses': raw_responses,
         'active_trial_dirs': active, 'all_tasks_single_replacement_draw': len(seen) == 89,
+        'extra_routes': extra_routes,
         'endpoint_ready': (r3_replacement_root.parent / 'replica-2900/endpoint-ready.json').exists(),
         'qualification': 'Original 89 connection-refused trials remain preserved and ungraded. Each task gets one separately declared infrastructure replacement with unchanged task/image/generation settings.',
     }
@@ -1135,6 +1160,8 @@ The round-2 **original first draws** currently have {round2_first_draw['terminal
 
 Ten more original round-2 trials lost their model endpoint with `InternalServerError: Connection error`. Their {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} original raw responses remain preserved. The [hash-anchored recovery claim](evidence/muse_nvfp4_r2_connection_recovery_claim.json) declares one separate replacement draw per task with unchanged tasks, images and sampling settings. So far it has {len(connection_results)} terminal tasks, {sum(row['reward'] in (0, 1) for row in connection_results.values())} native grades, and {sum(row['reward'] == 1 for row in connection_results.values())} successes; only a native grade can fill an original missing grade, with no best-of selection.
 
+The 89 original round-3 trials reached a refused endpoint before any model response. The [replacement audit](evidence/muse_nvfp4_r3_infra_replacement_progress.json) currently counts **{r3_replacement_progress['replacement_graded']}/89 native grades and {r3_replacement_progress['replacement_success']} successes**, so this is still a partial round. Allocation 2900 keeps its first three active batches. After the GLM-5 review revision queues completed, allocations 2869 and 2899 took exclusive ownership of the six untouched later batches (59 tasks) with the same pinned NVFP4 weights, image, task settings and generation parameters. Their [routed controller](protocol/run_muse_nvfp4_r3_extra_routes_20261020.py) changes only the model endpoint and waits for a nonempty-thinking preflight. Original lane reservations prevent duplicate draws; the released live archive preserves route receipts, raw responses and trajectories.
+
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. At this snapshot, the continuation has {new_raw_responses} raw model responses, {active_recovery_trial_dirs} active trial directories, and the latest response at {new_raw_response_latest_utc}; these are activity indicators, not scores. The original controller verifies delegated batches before advancing, preventing duplicate scoring. The [first-round task audit](evidence/muse_nvfp4_exact_round1_audit.json) checks task coverage, duplicate draws, frozen original results, endpoint settings, rewards, and preserved raw reasoning; the final score is published only after all 89 tasks pass reconciliation. Additional GPU allocation states: {extra_gpu_status}. A watcher starts the pinned Muse service when a queued allocation is granted. A ready extra GPU atomically claims one untouched round-one batch from b03 or b05; the released 2812 allocation can claim up to two. The existing CPU evaluators retain their original tasks and images, and only the model endpoint changes. A batch that starts locally first cannot be redrawn on another node. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
 Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json) found returned reasoning in every raw response of the five completed successful recovery tasks checked. One agent created `/tests/filter.py` by copying the exposed, unchanged `/app/filter.py` to run the task's permitted local test; no filter/verifier rewrite was observed in its commands. This is not a full reward-hacking clearance. The Muse DeepSWE successful trajectory `ipython-session-bundle-replay` attempted to inspect verifier logs, but the returned directory was empty; it remains flagged for training-data review. One successful Muse Pro task lacks a trajectory and is unsuitable for thinking-data export. Source paths and hashes are in `results/scores.json` and `input_output/manifest.json`; raw API credentials and model weights are excluded.
@@ -1262,6 +1289,8 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 第 2 轮**原始首抽**目前有 {round2_first_draw['terminal']} 题终态、{round2_first_draw['graded']} 题有效原生判分、{round2_first_draw['success']} 题成功；上面的修复后统计只补入已单独声明的有效补跑判分。`pytorch-model-cli` 的[原尝试](evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json)在共用 500 GB Docker 底盘占满时失去 tmux 通道，原始 reward 未知。[单次隔离存储补跑](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json)改用 CPU 节点 2922，当前原生 reward 为 **{pytorch_replacement_reward_zh}**。[局部命令与 thinking 核验](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_integrity.json)显示原始回复 13/13 条含推理，40 条 bash 命令中未见访问裁判、隐藏测试或 reward 的迹象；这不等于完整排除 reward hacking。原始首抽仍未判分，两次轨迹都保留；磁盘占满本身不能证明由哪个进程消耗了空间。
 
 另有 10 题原始第 2 轮尝试因旧模型端点连接中断而报 `InternalServerError: Connection error`，原有 {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} 条模型回复均保留。[哈希锚定补跑声明](evidence/muse_nvfp4_r2_connection_recovery_claim.json)逐题只安排一次独立基础设施补跑，题目、镜像和采样参数不变。目前补跑有 {len(connection_results)} 题终态、{sum(row['reward'] in (0, 1) for row in connection_results.values())} 题获原生判分、{sum(row['reward'] == 1 for row in connection_results.values())} 题成功；只有有效判分才填补原题的缺失值，不择优取样。
+
+第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。[补跑审计](evidence/muse_nvfp4_r3_infra_replacement_progress.json)现计 **{r3_replacement_progress['replacement_graded']}/89 题获原生判分、{r3_replacement_progress['replacement_success']} 题成功**，仍属未完成轮次。2900 保留正在跑的前三批；GLM-5 的 SWE-Review 修订队列完成后，2869、2899 独占接管尚未启动的后六批共 59 题。两个新副本使用同一固定 NVFP4 权重和镜像，任务与采样参数不变，仅改模型端点；[路由控制器](protocol/run_muse_nvfp4_r3_extra_routes_20261020.py)须先通过非空 thinking 预检才发题。原车道通过预留结果目录避免重复抽样，Release 实时归档保留路由凭据、原始回复和轨迹。
 
 [Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)} 条含非空 thinking**。
 

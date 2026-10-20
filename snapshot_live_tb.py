@@ -103,6 +103,54 @@ if r3_plan.exists():
     if ready.exists():
         payloads[ready] = ready.read_bytes()
         counts['ready_proof'] += 1
+    routes = r3_state / 'extra-routes-20261020'
+    for receipt_path in sorted(routes.glob('b[0-9][0-9].json')):
+        receipt = json.loads(receipt_path.read_text())
+        batch = plan['batches'][receipt['batch']]
+        assert receipt['job_name'] == batch['job_name']
+        assert receipt['original_effective_config_sha256'] == batch['effective_config_sha256']
+        assert hashlib.sha256(Path(receipt['original_plan']).read_bytes()).hexdigest() == receipt['original_plan_sha256']
+        routed = Path(receipt['routed_config'])
+        assert hashlib.sha256(routed.read_bytes()).hexdigest() == receipt['routed_config_sha256']
+        effective = json.loads(Path(batch['effective_config']).read_text())
+        effective['agents'][0]['kwargs']['api_base'] = receipt['endpoint']
+        assert json.loads(routed.read_text()) == effective
+        assert not (r3_state / f'b{receipt["batch"]:02}-started.json').exists()
+        payloads[receipt_path] = receipt_path.read_bytes()
+        payloads[routed] = routed.read_bytes()
+        counts['handoff_receipt'] += 1
+        counts['job_config'] += 1
+        for suffix in ('started', 'exit'):
+            marker = routes / f'b{receipt["batch"]:02}-{suffix}.json'
+            if marker.exists():
+                payloads[marker] = marker.read_bytes()
+                counts['handoff_receipt'] += 1
+    if routes.exists():
+        for script_name in ('serve_muse_nvfp4_extra_20261020.py',
+                            'prepare_muse_nvfp4_r3_extra_routes_20261020.py',
+                            'preflight_muse_nvfp4_extra_20261020.py',
+                            'run_muse_nvfp4_r3_extra_routes_20261020.py'):
+            script_path = ROOT / 'protocol' / script_name
+            if script_path.exists():
+                payloads[script_path] = script_path.read_bytes()
+                counts['controller_source'] += 1
+        replica_root = SOURCE / 'muse_nvfp4/state/replicas-extra-20261020'
+        for allocation in (2869, 2899):
+            proof = replica_root / str(allocation) / 'endpoint-ready.json'
+            if proof.exists():
+                payloads[proof] = proof.read_bytes()
+                counts['ready_proof'] += 1
+            launch = replica_root / str(allocation) / 'serve-launch.json'
+            if launch.exists():
+                payloads[launch] = launch.read_bytes()
+                counts['handoff_receipt'] += 1
+            preflight = replica_root / str(allocation) / 'reasoning-preflight.json'
+            if preflight.exists():
+                check = json.loads(preflight.read_text())
+                assert check['allocation'] == allocation and check['nonempty_reasoning_content']
+                assert check['response']['choices'][0]['message']['reasoning_content'].strip()
+                payloads[preflight] = preflight.read_bytes()
+                counts['ready_proof'] += 1
 handoff = SOURCE / 'muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
 if handoff.exists():
     payloads[handoff] = handoff.read_bytes()
