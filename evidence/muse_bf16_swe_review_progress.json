@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-20T04:03:27.769206+00:00",
+  "generated_utc": "2026-10-20T04:15:37.330446+00:00",
   "scope": "Original Muse BF16 SWE-Review native task outcomes; progress only, not official DA or RRR.",
   "queue_plan_sha256": "d758f7f0b01b85e923ebf9ad2e5c5c358fb620aa377fc2e54a23bc432bf7a977",
   "model_id": "muse-spark-open-bf16",
   "splits": {
     "glm5_500": {
       "expected": 500,
-      "native_terminal": 19,
-      "native_graded": 19,
+      "native_terminal": 20,
+      "native_graded": 20,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch0/astropy__astropy-12907__tLSFDZR/result.json",
@@ -122,13 +122,19 @@
           "sha256": "89ba0ad7efebf0358e5353e44fce89e635565b1d124978ad8889357cde01d233",
           "native_graded": true,
           "exception_type": null
+        },
+        "astropy__astropy-7671": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch1/astropy__astropy-7671__KPwFCyv/result.json",
+          "sha256": "163a8a4726d3297a1ef018fab7b1821c33194e8a969153a3b63776ab0936698a",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "native_terminal": 22,
-      "native_graded": 22,
+      "native_terminal": 24,
+      "native_graded": 24,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch0/astropy__astropy-12907__FgxbXC9/result.json",
@@ -261,13 +267,25 @@
           "sha256": "bc35f85afc953cf0ecca12d31e7173ee5206b90fd540d5fc9468e35ada5fdc49",
           "native_graded": true,
           "exception_type": null
+        },
+        "django__django-10554": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch1/django__django-10554__2cwBMJp/result.json",
+          "sha256": "e915453200e93f6c58335da3d542febc984cca896ec988365a1440c0b496301f",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-10880": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch1/django__django-10880__jqEd9Xo/result.json",
+          "sha256": "f179d9f268386484bb8ae57b49e8b1741dae697d1a2a23ba71926ee423cac61a",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "native_terminal": 20,
-      "native_graded": 20,
+      "native_terminal": 21,
+      "native_graded": 21,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch0/astropy__astropy-12907__nGRk5dr/result.json",
@@ -388,12 +406,18 @@
           "sha256": "816521ef34c4a627d9c4f01f459ea8432a8ae663f0bfab2e3f8314ddad75ebff",
           "native_graded": true,
           "exception_type": null
+        },
+        "astropy__astropy-8872": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch1/astropy__astropy-8872__X4Et6EB/result.json",
+          "sha256": "9bb67f3b72a6485f5a80a2125c09b1b4f366364da123930cf601c057ecab5f70",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     }
   },
   "errors": [],
   "total_expected": 1384,
-  "total_native_terminal": 61,
-  "total_native_graded": 61
+  "total_native_terminal": 65,
+  "total_native_graded": 65
 }

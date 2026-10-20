@@ -1,0 +1,37 @@
+{
+  "config": {
+    "job_name": "beam-bf16-revision-qwen3_coder_30b_500",
+    "jobs_dir": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/results/qwen3_coder_30b_500",
+    "n_attempts": 1,
+    "n_concurrent_trials": 4,
+    "quiet": true,
+    "timeout_multiplier": 3.0,
+    "environment": {
+      "import_path": "strict_docker:StrictDocker",
+      "delete": true,
+      "override_cpus": 2,
+      "override_memory_mb": 8192
+    },
+    "agents": [
+      {
+        "import_path": "revision_agents:RevisionOpenHands",
+        "model_name": "hosted_vllm/Qwen3-Coder-30B-A3B-Instruct",
+        "kwargs": {
+          "version": "1.16.1",
+          "max_iterations": 100
+        },
+        "env": {
+          "LLM_API_KEY": "dummy-key",
+          "LLM_BASE_URL": "http://172.17.0.1:31410/v1",
+          "LLM_LOG_COMPLETIONS": "1",
+          "OPENHANDS_LLM_NATIVE_TOOL_CALLING": "true"
+        }
+      }
+    ],
+    "tasks": [],
+    "retry": {
+      "max_retries": 0
+    }
+  },
+  "regrade": false
+}

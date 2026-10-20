@@ -38,6 +38,7 @@ GROUPS = {
     'beam_review_revision_inputs': [*(B / 'review_bench/revision/prepared' / split
                                       for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
                                     B / 'review_bench/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue',
+                                    B / 'review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue',
                                     B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue'],
     'muse_revision_review_full_io': [*(M / 'review_bench_20261018/revision/generation' / split / 'queue/results'
                                        for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
@@ -46,6 +47,7 @@ GROUPS = {
     'beam_revision_review_full_io': [*(B / 'review_bench/revision/generation' / split / 'queue/results'
                                        for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
                                      B / 'review_bench/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results',
+                                     B / 'review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results',
                                      B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results'],
     'beam_swr_raw': [B / 'review_bench/swrbench/raw_responses', B / 'review_bench/swrbench/judge_raw_responses'],
     'opus47_legacy': [O],
@@ -220,7 +222,7 @@ def main():
         'source_roots': [str(x) for x in GROUPS[group]],
         'scope': ('Original-generator SWE-Review revision task instructions, task cards, Dockerfiles and public model-visible task data, plus canonical preparation and isolated gateway recovery queue receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
                   if group.endswith('review_revision_inputs') else
-                  'Original-generator revision native I/O. Original host-IP trials that failed before any model response are preserved under the old queue path as infrastructure evidence; only the separate gateway-recovery queue path is eligible for RRR scoring. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files.'
+                  'Original-generator revision native I/O. Original host-IP and Beam Coder wrong-port trials that failed before any model response are preserved as infrastructure evidence; only the separate corrected gateway queue paths are eligible for RRR scoring. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files.'
                   if group.endswith('revision_review_full_io') else
                   'Model-visible BF16 SWE-Review task instructions, task cards, Dockerfiles and public task data, plus queue/config/claim/image receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
                   if group == 'muse_bf16_review_inputs' else

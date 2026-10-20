@@ -33,7 +33,7 @@
       "native_evidence": "evidence/beam_bf16_qwen3_30b_instruct2507_500_rrr_native_evidence.json",
       "qualification": "complete_verified_official_split_rrr",
       "release_tag": "2026-10-19-snapshot",
-      "scorer_sha256": "a3f727a973f02b0fb2c08301ef0c64e97900c4a8adbe4794bc6ad1a7d0b3eae1",
+      "scorer_sha256": "b28a02aa5dac4d55f3e1d994ca935f6ef5b2a146b86312079378b5bdb74e37aa",
       "summary": "evidence/beam_bf16_qwen3_30b_instruct2507_500_rrr_summary.json",
       "verified_native_result_and_verifier_files": 558
     },
@@ -70,9 +70,46 @@
       "native_evidence": "evidence/muse_nvfp4_qwen3_30b_instruct2507_500_rrr_native_evidence.json",
       "qualification": "complete_verified_official_split_rrr",
       "release_tag": "2026-10-19-snapshot",
-      "scorer_sha256": "a3f727a973f02b0fb2c08301ef0c64e97900c4a8adbe4794bc6ad1a7d0b3eae1",
+      "scorer_sha256": "b28a02aa5dac4d55f3e1d994ca935f6ef5b2a146b86312079378b5bdb74e37aa",
       "summary": "evidence/muse_nvfp4_qwen3_30b_instruct2507_500_rrr_summary.json",
       "verified_native_result_and_verifier_files": 532
+    },
+    "muse-nvfp4/qwen3_coder_30b_500": {
+      "DA": {
+        "CR": 90.9,
+        "DA": 81.2,
+        "DA_total_50": 78.4,
+        "FAR": 15.5,
+        "FN": 47,
+        "FP": 32,
+        "FRR": 22.1,
+        "TN": 175,
+        "TP": 166,
+        "correct": 341,
+        "model_fail": 42,
+        "produced": 420,
+        "total": 462
+      },
+      "RRR": {
+        "RRR": 59.7,
+        "approved": 198,
+        "approved_resolved": 166,
+        "baseline_RR": 50.9,
+        "delta": 8.9,
+        "fallback": 42,
+        "fallback_resolved": 22,
+        "revised": 222,
+        "revised_resolved": 88,
+        "total": 462,
+        "total_resolved": 276
+      },
+      "expected_revisions": 222,
+      "native_evidence": "evidence/muse_nvfp4_qwen3_coder_30b_500_rrr_native_evidence.json",
+      "qualification": "complete_verified_official_split_rrr",
+      "release_tag": "2026-10-19-snapshot",
+      "scorer_sha256": "b28a02aa5dac4d55f3e1d994ca935f6ef5b2a146b86312079378b5bdb74e37aa",
+      "summary": "evidence/muse_nvfp4_qwen3_coder_30b_500_rrr_summary.json",
+      "verified_native_result_and_verifier_files": 444
     }
   },
   "scope": "Only complete SWE-Review split RRR with unchanged official metric functions, native first attempts and SHA-verified released result/verifier files."

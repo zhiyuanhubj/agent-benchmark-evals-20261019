@@ -57,7 +57,9 @@ for label, input_group, output_group, works, prepared in PAIR:
     assert all(manifest['archive_name'] in verified for _, manifest in input_chain + output_chain)
     active = set()
     for work in works:
-        queue = work / 'gateway-recovery-20261020/queue'
+        is_beam_coder = label == 'beam' and work.name == 'qwen3_coder_30b_500'
+        queue = work / ('gateway-portfix-20261020/queue' if is_beam_coder
+                        else 'gateway-recovery-20261020/queue')
         plan = json.loads((queue / 'queue-plan.json').read_text())
         for split, spec in plan['splits'].items():
             source = Path(spec['source_tasks'])
@@ -67,8 +69,19 @@ for label, input_group, output_group, works, prepared in PAIR:
         old = work / 'queue/results'
         old_files = [str(path.relative_to(HOME)) for path in old.rglob('result.json')]
         assert set(old_files) <= output_names, 'Original pre-model failure file missing from release'
+        if is_beam_coder:
+            failure = json.loads((ROOT / 'evidence/beam_coder_pre_model_port_mismatch.json').read_text())
+            assert failure['failed_pre_model_task_count'] == 16
+            assert failure['model_response_count'] == failure['native_grade_count'] == 0
+            for record in failure['failed_records']:
+                assert record['connectivity'] in output_names, 'Beam Coder pre-model connectivity missing from release'
+                if record['native_result_exists']:
+                    assert record['result'] in output_names, 'Beam Coder pre-model result missing from release'
         resume_records = [queue / 'resume-audit.json', *queue.glob('queue-exit-pre-resume-*.json')]
-        assert {str(path.relative_to(HOME)) for path in resume_records if path.exists()} <= input_names, \
+        latest_input_archive = datetime.fromisoformat(input_chain[-1][1]['generated_utc']).timestamp()
+        due_receipts = {str(path.relative_to(HOME)) for path in resume_records
+                        if path.exists() and path.stat().st_ctime <= latest_input_archive}
+        assert due_receipts <= input_names, \
             'Revision queue resume receipt missing from release'
     prepared_files = {str(path.relative_to(HOME)): path
                       for name in ('task.toml', 'instruction.md')
@@ -94,9 +107,13 @@ for label, input_group, output_group, works, prepared in PAIR:
                    prepared_files[name].parent.stat().st_ctime) >= recent_cutoff
                for name in pending), 'An old prepared revision task card is missing from the release'
     assert not any('/solution/' in '/' + name or '/tests/' in '/' + name for name in input_names)
-    original_outputs = sum('/queue/results/' in '/' + name and '/gateway-recovery-20261020/' not in '/' + name
+    original_outputs = sum('/queue/results/' in '/' + name and
+                           '/gateway-recovery-20261020/' not in '/' + name and
+                           '/gateway-portfix-20261020/' not in '/' + name
                            for name in output_names)
-    recovery_outputs = sum('/gateway-recovery-20261020/queue/results/' in '/' + name for name in output_names)
+    recovery_outputs = sum(('/gateway-recovery-20261020/queue/results/' in '/' + name or
+                            '/gateway-portfix-20261020/queue/results/' in '/' + name)
+                           for name in output_names)
     assert original_outputs and recovery_outputs
     observed.append(dict(reviewer=label, expected_task_card_files=len(expected),
                          expected_task_cards=len(cards),

@@ -1,0 +1,12 @@
+{
+  "scope": "Correct only the sandbox firewall allowlist port from 31411 to the pinned Qwen3-Coder endpoint 31410. Preserve the old first batch as pre-model infrastructure failures; no old trial counts as a model attempt or grade.",
+  "failed_batch_audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_coder_pre_model_port_mismatch.json",
+  "failed_batch_audit_sha256": "b861f0c76ebb6a619d8ab9472bb34723d8f98246a640db4af43a167ac061a8d3",
+  "old_harness_swe_entry_sha256": "41cdaf4f2065984435d3170f47c8ee4416c9a2cd7260969257143d8b182737ac",
+  "corrected_harness_swe_entry_sha256": "3f57dec27122b3d896a977928a08102c7adc54f70f2a4dfcce93bdf0fc677bbe",
+  "bridge_agent_sha256": "edb3a479365fbc6698d1585185475a675d59e2ba2b49e80ede4567cb16bca9b9",
+  "model_endpoint": "http://172.17.0.1:31410/v1",
+  "corrected_firewall_allowed_port": 31410,
+  "source_native_config_sha256": "764e61c902bc0a4561a3a91dda6450db3b17cb38d42510c7f59930984b5676ae",
+  "synthetic_config_sha256": "10ff7441a19d0818766d3bb340384701b5c7364caf2864e7e839cda347c0b75f"
+}

@@ -32,9 +32,12 @@ def trial_results(root):
 
 rows = []
 for reviewer, split, work in GROUPS:
-    recovery = work / 'gateway-recovery-20261020'
+    beam_coder = reviewer == 'beam-bf16' and split == 'qwen3_coder_30b_500'
+    recovery = work / ('gateway-portfix-20261020' if beam_coder else 'gateway-recovery-20261020')
     queue = recovery / 'queue'
     plan_path = queue / 'queue-plan.json'
+    if beam_coder and not plan_path.exists():
+        plan_path = work / 'gateway-recovery-20261020/queue/queue-plan.json'
     plan = json.loads(plan_path.read_text())
     tasks = plan['splits'][split]['tasks']
     expected = set(tasks)
@@ -47,6 +50,22 @@ for reviewer, split, work in GROUPS:
     old_raw = list(old.rglob('raw_responses/*.json')) if old.exists() else []
     old_trajectories = list(old.rglob('trajectory.json')) if old.exists() else []
     old_completions = list(old.rglob('completions/*.json')) if old.exists() else []
+    preserved_infra_results = []
+    preserved_infra_connectivity = []
+    if beam_coder:
+        prior = work / 'gateway-recovery-20261020/queue/results'
+        preserved_infra_results = [path for path, _, _ in trial_results(prior)]
+        preserved_infra_connectivity = list(prior.rglob('model-connectivity.json'))
+        failure = json.loads((ROOT / 'evidence/beam_coder_pre_model_port_mismatch.json').read_text())
+        assert len(preserved_infra_results) == failure['terminal_pre_model_result_count']
+        assert len(preserved_infra_connectivity) == failure['failed_pre_model_task_count']
+        for record in failure['failed_records']:
+            assert sha(HOME / record['connectivity']) == record['connectivity_sha256']
+            if record['result']:
+                assert sha(HOME / record['result']) == record['result_sha256']
+        old_raw += list(prior.rglob('raw_responses/*.json'))
+        old_trajectories += list(prior.rglob('trajectory.json'))
+        old_completions += list(prior.rglob('completions/*.json'))
     records = {}
     errors = []
     for path, result, result_sha in trial_results(queue / 'results'):
@@ -82,6 +101,8 @@ for reviewer, split, work in GROUPS:
     rows.append(dict(reviewer=reviewer, split=split, expected_revisions=len(tasks),
                      queue_plan_sha256=sha(plan_path), synthetic_preflight_sha256=sha(gate),
                      old_host_ip_native_results=sum(1 for _ in trial_results(old)),
+                     preserved_pre_model_infrastructure_results=len(preserved_infra_results),
+                     preserved_pre_model_infrastructure_connectivity=len(preserved_infra_connectivity),
                      old_host_ip_saved_model_responses=len(old_raw) + len(old_trajectories) + len(old_completions),
                      gateway_model_attempt_result_files=len(records), native_graded_revisions=graded,
                      native_successful_revisions=success,
@@ -94,7 +115,7 @@ for reviewer, split, work in GROUPS:
 
 out = dict(generated_utc=datetime.now(timezone.utc).isoformat(),
            scope='Live native SWE-Review original-generator revision results. Partial graded counts are progress, not RRR or a benchmark accuracy. Synthetic preflights and old pre-model connection failures are excluded.',
-           model_attempt_policy='One scored gateway-recovery result per canonically rejected PR; native verifier reward and report are required for a grade.',
+           model_attempt_policy='One scored result from the corrected gateway queue per canonically rejected PR; native verifier reward and report are required for a grade.',
            groups=rows)
 target = ROOT / 'evidence/swe_review_revision_gateway_progress.json'
 temp = target.with_suffix('.tmp')

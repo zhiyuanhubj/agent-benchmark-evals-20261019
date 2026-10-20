@@ -95,8 +95,10 @@ def main():
                 da_metrics = da(reviews, benchmark)
                 assert da_metrics['total'] == spec['expected']
                 work = root / 'revision/generation' / split
+                recovery = ('gateway-portfix-20261020' if reviewer == 'beam-bf16'
+                            and split == 'qwen3_coder_30b_500' else 'gateway-recovery-20261020')
                 outcomes, ungraded, seen, sources = {}, {}, set(), {}
-                for path in (work / 'gateway-recovery-20261020/queue/results' / split).glob('*/*/result.json'):
+                for path in (work / recovery / 'queue/results' / split).glob('*/*/result.json'):
                     result = json.loads(path.read_text())
                     if not result.get('task_name'):
                         continue
@@ -113,7 +115,7 @@ def main():
                     else:
                         outcomes[iid] = outcome['resolved']
                         sources.update(outcome['source_sha256'])
-                exit_path = work / 'gateway-recovery-20261020/queue/queue-exit.json'
+                exit_path = work / recovery / 'queue/queue-exit.json'
                 queue_done = exit_path.exists() and json.loads(exit_path.read_text()).get('scheduled_attempts_finished') is True
                 missing = set(receipt['expected_rejected']) - set(outcomes)
                 complete = queue_done and not missing and not ungraded
