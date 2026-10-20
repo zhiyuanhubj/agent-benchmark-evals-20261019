@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T06:40:24.472845+00:00",
+  "generated_utc": "2026-10-20T06:55:30.528592+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -248,9 +248,9 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 64,
-            "graded": 64,
-            "success": 48,
+            "terminal": 67,
+            "graded": 67,
+            "success": 50,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 0,
@@ -324,10 +324,10 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 78,
-            "2": 64,
+            "2": 67,
             "3": 0
           },
-          "new_raw_model_responses": 8915,
+          "new_raw_model_responses": 9014,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
@@ -340,14 +340,14 @@
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 839,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1278,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1291,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 643,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 430,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 152,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 45,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 17
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 444,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 174,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 69,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 43
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T06:40:29+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-20T06:55:41+00:00",
           "active_recovery_trial_dirs": 9,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -402,7 +402,7 @@
             "ready_proof": "evidence/muse_nvfp4_local2866_ready.json",
             "route_count": 1,
             "claimed_task_count": 10,
-            "terminal": 0
+            "terminal": 1
           },
           "round_2_password_recovery_replacement": {
             "claim": "evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json",
@@ -436,9 +436,9 @@
             "no_best_of_selection": true
           },
           "round_2_original_first_draw": {
-            "terminal": 64,
-            "graded": 61,
-            "success": 45,
+            "terminal": 67,
+            "graded": 64,
+            "success": 47,
             "qualification": "Original first draws only; ungraded native exceptions remain ungraded. Separately declared replacements are excluded."
           },
           "round_2_pytorch_model_cli_storage_replacement": {
@@ -461,9 +461,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 156,
-        "graded": 155,
-        "success": 94,
+        "terminal": 157,
+        "graded": 156,
+        "success": 95,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -476,8 +476,8 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 19,
-          "graded": 19,
+          "terminal": 21,
+          "graded": 21,
           "success": 7,
           "status": "partial_no_full_score"
         },
@@ -536,7 +536,7 @@
             "graded": 54,
             "success": 38,
             "active_trial_dirs": 59,
-            "archived_actual_model_responses": 3892,
+            "archived_actual_model_responses": 3927,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 3,
@@ -792,9 +792,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 144,
-        "graded": 144,
-        "success": 90,
+        "terminal": 145,
+        "graded": 145,
+        "success": 91,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
@@ -843,9 +843,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 62,
-          "graded": 62,
-          "success": 32,
+          "terminal": 64,
+          "graded": 64,
+          "success": 33,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -876,24 +876,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 141,
-        "native_graded": 141,
+        "native_terminal": 147,
+        "native_graded": 147,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 44,
-            "native_graded": 44
+            "native_terminal": 47,
+            "native_graded": 47
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 52,
-            "native_graded": 52
+            "native_terminal": 53,
+            "native_graded": 53
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 45,
-            "native_graded": 45
+            "native_terminal": 47,
+            "native_graded": 47
           }
         },
         "DA": null,

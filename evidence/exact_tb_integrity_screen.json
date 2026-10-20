@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T06:42:00.388313+00:00",
+  "generated_utc": "2026-10-20T06:57:24.682045+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 61,
+      "scored_trajectories_checked": 65,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -5415,6 +5415,54 @@
       "trajectory_sha256": "0cf0cd622d0bdceb49f801193740088a1b3168d7501512bd371eb4dd13692599",
       "steps": 17,
       "tool_calls": 61,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "regex-chess",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/regex-chess__WwRYtP7/agent/trajectory.json",
+      "trajectory_sha256": "ef44c280cdd4e3ef159c12e1a6c52a1f62f915e838b785b4b41a03ffd12db0fd",
+      "steps": 20,
+      "tool_calls": 46,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "regex-log",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/regex-log__6VYRUtB/agent/trajectory.json",
+      "trajectory_sha256": "0ff511a641aeff844770c55e79b901d4f7357a9a53fb927a1e677703e07da9fe",
+      "steps": 6,
+      "tool_calls": 9,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "torch-tensor-parallelism",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/torch-tensor-parallelism__oYbQEWD/agent/trajectory.json",
+      "trajectory_sha256": "b7cf6f03221c28940bb0807f088f4cb4b442564283379e6e78462b66d8c66740",
+      "steps": 10,
+      "tool_calls": 22,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "torch-pipeline-parallelism",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/torch-pipeline-parallelism__auYkco3/agent/trajectory.json",
+      "trajectory_sha256": "d997cada1d21fad2cdd47a2b37c05799b9f1b5af3364690833a36b090add612e",
+      "steps": 12,
+      "tool_calls": 28,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
