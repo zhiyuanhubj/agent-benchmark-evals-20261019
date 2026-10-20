@@ -1,16 +1,15 @@
 {
-  "generated_utc": "2026-10-20T07:13:51.436828+00:00",
+  "generated_utc": "2026-10-20T07:47:50.887279+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T070257Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T073505Z.tar.zst",
   "expected": 89,
-  "terminal": 55,
-  "graded": 54,
-  "success": 38,
+  "terminal": 56,
+  "graded": 55,
+  "success": 39,
   "missing_graded_tasks": [
-    "fix-ocaml-gc",
     "git-multibranch",
     "make-mips-interpreter",
     "path-tracing",
@@ -49,7 +48,9 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "polyglot-c-py"
+  ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -266,6 +267,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/fix-git__Md9e6JA/result.json",
       "raw_response_count": 9,
       "responses_with_reasoning_content": 9
+    },
+    "fix-ocaml-gc": {
+      "reward": 1.0,
+      "result_sha256": "aca5b1f71f3bb7d39a12e716d6e962d1f5ab1b5e300131407a7716342dda2b90",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/fix-ocaml-gc__mZrhoUn/result.json",
+      "raw_response_count": 1009,
+      "responses_with_reasoning_content": 1009
     },
     "gcode-to-text": {
       "reward": 0.0,

@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-20T07:00:07.756307+00:00",
+  "utc": "2026-10-20T07:43:40.002304+00:00",
   "precision": "BF16",
   "model_repo": "meta-models/Muse-Spark-Open-816B-A42B",
   "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9",
@@ -51,6 +51,17 @@
     "review": true,
     "replica_2886_rank0": true,
     "replica_2886_rank1": true
+  },
+  "allocation_expiry_recovery": {
+    "verified": true,
+    "bridge_active": true,
+    "replacement_controllers_active": {
+      "pro": true,
+      "tb": true,
+      "deep": true
+    },
+    "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/bridge-and-resume-claim.json",
+    "original_allocation_2865_expired": true
   },
   "model_sampling_started": true,
   "problems": [],

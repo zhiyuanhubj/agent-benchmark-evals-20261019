@@ -1,0 +1,25 @@
+{
+  "generated_utc": "2026-10-20T07:42:26.484026+00:00",
+  "group": "beam_review_revision_inputs",
+  "scope": "Model-visible SWE-Review revision inputs and queue receipts changed since the previous archive. Hidden solution and tests are excluded. Apply after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/beam_review_revision_inputs_delta_20261020T070925Z.json",
+  "cutoff_utc": "2026-10-20T07:04:25.681518+00:00",
+  "new_source_roots": [],
+  "archive_name": "beam_review_revision_inputs_delta_20261020T074226Z.tar.zst",
+  "archive_size_bytes": 1276,
+  "archive_sha256": "225abf7ae6856c8edd1c12846104747f5185e64ac41a7e367c211fb006b62f9c",
+  "file_count": 3,
+  "source_bytes": 5565,
+  "filename_counts": {
+    "qwen3_coder_30b_500-13.json": 2,
+    "queue-exit.json": 1
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/glm5_500",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_30b_instruct2507_500",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_coder_30b_500"
+  ]
+}

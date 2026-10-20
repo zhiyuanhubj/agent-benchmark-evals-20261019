@@ -1,0 +1,45 @@
+{
+  "DA": {
+    "CR": 90.3,
+    "DA": 77.2,
+    "DA_total_50": 74.6,
+    "FAR": 17.9,
+    "FN": 59,
+    "FP": 36,
+    "FRR": 27.3,
+    "TN": 165,
+    "TP": 157,
+    "correct": 322,
+    "model_fail": 45,
+    "produced": 417,
+    "total": 462
+  },
+  "RRR": {
+    "RRR": 59.1,
+    "approved": 193,
+    "approved_resolved": 157,
+    "baseline_RR": 50.9,
+    "delta": 8.2,
+    "fallback": 45,
+    "fallback_resolved": 19,
+    "revised": 224,
+    "revised_resolved": 97,
+    "total": 462,
+    "total_resolved": 273
+  },
+  "complete": true,
+  "expected_revisions": 224,
+  "invalid_report_count": 1,
+  "invalid_reports": [
+    {
+      "instance_id": "psf__requests-2317",
+      "parse_error": "Extra data: line 28 column 1 (char 2315)",
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_coder_30b_500/beam-review-20261018-qwen3_coder_30b_500-batch17/psf__requests-2317__M8N5Jj7/verifier/review_report.json",
+      "sha256": "638107758e72430ef231c63459f1cc040ace269dc03a7ec379199eea6b13c399"
+    }
+  ],
+  "missing_native_grade_count": 0,
+  "native_graded_revisions": 224,
+  "phase": "complete",
+  "revision_queue_terminal": true
+}
