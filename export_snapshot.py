@@ -168,6 +168,9 @@ bf16_swr_alignment_path = ROOT / 'evidence/muse_bf16_swr_alignment.json'
 bf16_swr_alignment = read(bf16_swr_alignment_path) if bf16_swr_alignment_path.exists() else {}
 bf16_swr_final = bf16_swr_alignment.get('final_score') or {}
 bf16_swr_complete = bf16_swr_final.get('qualification') == 'complete_verified'
+bf16_review_progress_path = ROOT / 'evidence/muse_bf16_swe_review_progress.json'
+bf16_review_progress = read(bf16_review_progress_path) if bf16_review_progress_path.exists() else {}
+assert not bf16_review_progress.get('errors', [])
 bf16_source_round1 = ex['muse_bf16']['tb']['1']
 bf16_complete = (bf16_source_round1['graded'] == 89 and
                  bf16_io.get('qualification') == 'complete_verified' and
@@ -280,6 +283,16 @@ snapshot = {
                 'judge': 'gpt-5.5',
                 'evidence': 'evidence/muse_bf16_swr_alignment.json',
             },
+            'swe_review': {
+                'status': 'partial_no_final_da_or_rrr',
+                'native_terminal': bf16_review_progress.get('total_native_terminal', 0),
+                'native_graded': bf16_review_progress.get('total_native_graded', 0),
+                'expected': bf16_review_progress.get('total_expected', 1384),
+                'splits': {name: {key: value[key] for key in ('expected', 'native_terminal', 'native_graded')}
+                           for name, value in bf16_review_progress.get('splits', {}).items()},
+                'DA': None, 'RRR': None,
+                'evidence': 'evidence/muse_bf16_swe_review_progress.json',
+            },
             'qualification': 'Original BF16 native Pro, TB2.1 and DeepSWE started after real inference and tool/thinking preflight; partial counts are progress, not accuracy.',
         },
     },
@@ -348,6 +361,11 @@ if bf16_swr_alignment_path.exists():
         'sha256': hashlib.sha256(bf16_swr_alignment_path.read_bytes()).hexdigest(),
         'size_bytes': bf16_swr_alignment_path.stat().st_size,
         'source': str(bf16_swr_alignment_path)}
+if bf16_review_progress_path.exists():
+    files[str(bf16_review_progress_path.relative_to(ROOT))] = {
+        'sha256': hashlib.sha256(bf16_review_progress_path.read_bytes()).hexdigest(),
+        'size_bytes': bf16_review_progress_path.stat().st_size,
+        'source': str(bf16_review_progress_path)}
 shared_timeout_path = ROOT / 'evidence/shared_element_hq_eval_timeout.json'
 assert shared_timeout_path.is_file()
 files[str(shared_timeout_path.relative_to(ROOT))] = {
@@ -485,6 +503,20 @@ elif bf16_review_phase == 'verified_2886_swr_generation_judging_and_review_pipel
 else:
     bf16_review_en = 'Incomplete; current launch state needs review'
     bf16_review_zh = '；SWE-Review 尚未完成，启动状态待核查'
+if bf16_review_progress:
+    splits = bf16_review_progress['splits']
+    glm_progress = splits['glm5_500']['native_terminal']
+    coder_progress = splits['qwen3_coder_30b_500']['native_terminal']
+    instruct_progress = splits['qwen3_30b_instruct2507_500']['native_terminal']
+    review_total = bf16_review_progress['total_native_terminal']
+    review_expected = bf16_review_progress['total_expected']
+    bf16_review_en = (f'{review_total}/{review_expected} native outcomes '
+                      f'(GLM {glm_progress}/500, Coder {coder_progress}/462, '
+                      f'Instruct {instruct_progress}/422); official DA/RRR pending')
+    bf16_review_zh = (f'；SWE-Review 原生任务终态 {review_total}/{review_expected}'
+                      f'（GLM {glm_progress}/500、Coder {coder_progress}/462、'
+                      f'Instruct {instruct_progress}/422），官方 DA/RRR 待完成；'
+                      f'已预建 {bf16_review_ready_images} 个任务镜像')
 bf16_swr_en = (f"**{bf16_swr_final['accuracy']:.1%}** ({bf16_swr_final['judged']}/1000 judged), "
                 f"PR F1 **{bf16_swr_final['f1']:.4f}**") if bf16_swr_complete else (
                 f'{len(bf16_swr_generated)}/1000 generated, {len(bf16_swr_judged)}/1000 judged; score pending')
@@ -602,6 +634,9 @@ if bf16_swr_alignment:
     assert not bf16_swr_alignment['errors']
     readme = readme.replace('For actively changing Pro/legacy/Deep results,',
         f"The [BF16 SWRBench generation/judge alignment audit](evidence/muse_bf16_swr_alignment.json) at {bf16_swr_alignment['generated_utc']} matches {bf16_swr_alignment['judged']} judged IDs to {bf16_swr_alignment['generated']} generated reviews, with no mismatched review after the pinned official evaluator's apostrophe normalization ({bf16_swr_alignment['official_apostrophe_normalization_count']} affected rows). {bf16_swr_note_en}\n\nFor actively changing Pro/legacy/Deep results,", 1)
+if bf16_review_progress:
+    readme = readme.replace('For actively changing Pro/legacy/Deep results,',
+        'The [Muse BF16 SWE-Review native progress audit](evidence/muse_bf16_swe_review_progress.json) matches each terminal result to its planned task and BF16 model configuration. These outcomes are only review-stage progress; split DA and overall RRR require the official downstream scoring stages.\n\nFor actively changing Pro/legacy/Deep results,', 1)
 slot1_route_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/r2-completion-2866-b02-route.json'
 if slot1_route_path.exists():
     slot1_route = read(slot1_route_path)
@@ -725,6 +760,9 @@ if bf16_swr_alignment:
     assert not bf16_swr_alignment['errors']
     chinese_report = chinese_report.replace('Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照',
         f"[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 {bf16_swr_alignment['generated_utc']} 将 {bf16_swr_alignment['judged']} 条裁判记录逐题对到 {bf16_swr_alignment['generated']} 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 {bf16_swr_alignment['official_apostrophe_normalization_count']} 条）。{bf16_swr_note_zh}\n\nOpus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照", 1)
+if bf16_review_progress:
+    chinese_report = chinese_report.replace('Opus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照',
+        '[Muse BF16 SWE-Review 原生进度核验](evidence/muse_bf16_swe_review_progress.json)逐题对照队列任务及 BF16 模型配置；终态数量只表示评审阶段进度，分组 DA 和整体 RRR 仍需官方后续评分。\n\nOpus 4.7 与 Beam 精确镜像 TB2.1 的当前原始输入输出快照', 1)
 if slot1_route_path.exists():
     chinese_report = chinese_report.replace('Opus 4.7 Pro 只统计原始运行的 731 道题',
         'GPU 2812 的第二个控制器槽在 b01 最后一题仍运行时领取了未抽样的精确镜像第 2 轮 b02 批次；两条控制器共用已固定的 NVFP4 服务，各批次并发 2 题，服务上限为 8 个请求。[控制器源码](protocol/muse_nvfp4_exact_future_round_controller_20261019.py)使用独立槽锁和原有逐批原子领取；b02 接管凭据及原始/实际配置哈希收录于原始输入输出快照。首轮题目及已抽样的第 2 轮题目均未重抽。\n\nOpus 4.7 Pro 只统计原始运行的 731 道题', 1)

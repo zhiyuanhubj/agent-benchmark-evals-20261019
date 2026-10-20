@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-20T02:13:00.930753+00:00",
+  "utc": "2026-10-20T02:43:05.844081+00:00",
   "source_image_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/image-identity-plan.json",
   "source_image_plan_sha256": "e8ce45c5101dd43938bea69810d1dd1098895d5d64520370e23e252c2d57b22b",
   "models": {
@@ -7,27 +7,27 @@
       "rounds": {
         "1": {
           "expected": 89,
-          "terminal": 88,
-          "graded": 88,
+          "terminal": 89,
+          "graded": 89,
           "success": 62,
           "active_trial_dirs": 89,
-          "archived_actual_model_responses": 5085,
+          "archived_actual_model_responses": 5129,
           "ungraded": 0,
           "exceptions": {
-            "AgentTimeoutError": 7
+            "AgentTimeoutError": 8
           },
           "excluded_user_reassignment_trials": [],
-          "complete": false,
-          "accuracy": null,
+          "complete": true,
+          "accuracy": 0.6966292134831461,
           "legacy_cached_tag_scores_included": false
         },
         "2": {
           "expected": 89,
-          "terminal": 42,
-          "graded": 41,
-          "success": 27,
-          "active_trial_dirs": 46,
-          "archived_actual_model_responses": 2876,
+          "terminal": 45,
+          "graded": 44,
+          "success": 29,
+          "active_trial_dirs": 49,
+          "archived_actual_model_responses": 3186,
           "ungraded": 1,
           "exceptions": {
             "AgentTimeoutError": 3,
@@ -54,9 +54,9 @@
         }
       },
       "unit": {
-        "MainPID": "798397",
-        "Result": "success",
-        "ActiveState": "active"
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ActiveState": "failed"
       },
       "replica_unit": {
         "MainPID": "2767688",

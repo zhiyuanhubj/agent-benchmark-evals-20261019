@@ -174,6 +174,7 @@ def cycle():
         run([PYTHON, str(ROOT / 'audit_swe_review_recovery.py')], timeout=180)
         run([PYTHON, str(ROOT / 'audit_beam_malformed_reviews.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_bf16_review_progress.py')], timeout=60)
         force_bf16 = False
         for attempt in range(3):
             if attempt:
@@ -260,6 +261,7 @@ def cycle():
              'input_output/manifest.json', 'input_output/archive_manifests',
              'audit_swe_review_native_complete_da.py', 'review_native_selection.py',
              'audit_beam_malformed_reviews.py', 'audit_swe_review_da.py',
+             'audit_muse_bf16_review_progress.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
              'export_snapshot.py', 'archive_trials.py', 'archive_delta.py',

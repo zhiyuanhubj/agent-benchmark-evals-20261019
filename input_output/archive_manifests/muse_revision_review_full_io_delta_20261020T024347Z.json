@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-10-20T02:43:51.525449+00:00",
+  "group": "muse_revision_review_full_io",
+  "scope": "SWE-Review original-generator revision I/O changed since the previous archive, including old pre-model infrastructure failures and separate gateway-recovery trials. Only gateway-recovery native grades enter RRR. Apply after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_revision_review_full_io_delta_20261020T022050Z.json",
+  "cutoff_utc": "2026-10-20T02:15:57.527962+00:00",
+  "new_source_roots": [],
+  "archive_name": "muse_revision_review_full_io_delta_20261020T024347Z.tar.zst",
+  "archive_size_bytes": 1906801,
+  "archive_sha256": "249e8d382df4a53da0ff26343814af4a00ddfcc0b9430b85385ef32833b54871",
+  "file_count": 1135,
+  "source_bytes": 61749032,
+  "filename_counts": {
+    "config.json": 56,
+    "completion.json": 653,
+    "model-connectivity.json": 54,
+    "openhands_sdk.txt": 56,
+    "trajectory.json": 51,
+    "result.json": 55,
+    "trial.log": 56,
+    "report.json": 51,
+    "reward.txt": 51,
+    "test-stdout.txt": 52
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results",
+    "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/queue/results"
+  ]
+}
