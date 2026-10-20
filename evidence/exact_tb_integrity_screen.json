@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T08:44:27.695677+00:00",
+  "generated_utc": "2026-10-20T09:04:16.295358+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 69,
+      "scored_trajectories_checked": 70,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 64,
+      "scored_trajectories_checked": 65,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -6297,6 +6297,18 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "tune-mjcf",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/tune-mjcf__JX8Xfs7/agent/trajectory.json",
+      "trajectory_sha256": "448401059e1bacf54bb6679c706c14bc16b37ab408e92b865a151fb994886b48",
+      "steps": 146,
+      "tool_calls": 601,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "torch-pipeline-parallelism",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b08/torch-pipeline-parallelism__auYkco3/agent/trajectory.json",
@@ -6351,6 +6363,18 @@
       "trajectory_sha256": "ba46a03157058f8fe31b58098c70e80fd975f9ed8bc66f59e5f716edf5841a10",
       "steps": 7,
       "tool_calls": 11,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "qemu-startup",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/qemu-startup__pCTmPdP/agent/trajectory.json",
+      "trajectory_sha256": "77ff7a772a1cb4a192c922bfe2000663b7cf963378c9f990f0e82940bebbf59b",
+      "steps": 50,
+      "tool_calls": 98,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
