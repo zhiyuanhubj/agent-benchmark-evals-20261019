@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-20T20:59:42.614712+00:00",
+  "generated_utc": "2026-10-20T21:29:36.423644+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T204618Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T211612Z.tar.zst",
   "expected": 89,
-  "terminal": 79,
-  "graded": 65,
+  "terminal": 80,
+  "graded": 66,
   "success": 42,
   "missing_graded_tasks": [
     "git-multibranch",
     "headless-terminal",
-    "make-mips-interpreter",
     "openssl-selfsigned-cert",
     "path-tracing",
     "path-tracing-reverse",
@@ -435,6 +434,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/make-doom-for-mips__W7hdJdF/result.json",
       "raw_response_count": 152,
       "responses_with_reasoning_content": 152
+    },
+    "make-mips-interpreter": {
+      "reward": 0.0,
+      "result_sha256": "6d877b69c53d60a7f2f7de3d45edab481895300692fa826fe616c85130e9cbc6",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/make-mips-interpreter__grWo2rL/result.json",
+      "raw_response_count": 453,
+      "responses_with_reasoning_content": 453
     },
     "mcmc-sampling-stan": {
       "reward": 1.0,
