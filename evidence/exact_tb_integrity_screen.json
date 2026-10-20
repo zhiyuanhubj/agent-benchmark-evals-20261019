@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T01:35:54.254094+00:00",
+  "generated_utc": "2026-10-20T02:03:57.703850+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 38,
+      "scored_trajectories_checked": 39,
       "pattern_hit_trajectories": 5,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -4926,6 +4926,18 @@
     {
       "model": "muse_nvfp4_r2",
       "round": 2,
+      "task": "merge-diff-arc-agi-task",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b04/merge-diff-arc-agi-task__9hS2Fyu/agent/trajectory.json",
+      "trajectory_sha256": "a97127eae6281c978aaa0f7ccd3ced52679a500a03700f48a9209f764c00a1a8",
+      "steps": 33,
+      "tool_calls": 147,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
       "task": "mcmc-sampling-stan",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b04/mcmc-sampling-stan__xxhiht8/agent/trajectory.json",
@@ -5608,9 +5620,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "b83e8d67b2c39f9a3045f1fd077dbdb751ab78e1d5aaf3846af80fb5bfdca87e",
-        "steps_at_screen": 566,
-        "tool_calls_at_screen": 1241,
+        "trajectory_sha256_at_screen": "74d1dbe219bc95fc9280ea43096c4322c98b504f6753dbeea3504ea91b88aa46",
+        "steps_at_screen": 583,
+        "tool_calls_at_screen": 1257,
         "hits": [],
         "status": "in_progress_not_scored"
       }
