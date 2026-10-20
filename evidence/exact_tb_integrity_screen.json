@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T05:17:41.999643+00:00",
+  "generated_utc": "2026-10-20T05:31:11.843607+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 54,
+      "scored_trajectories_checked": 56,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -94,6 +94,14 @@
       "task": "password-recovery",
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b05/password-recovery__mCY6tLR/result.json",
       "result_sha256": "3d33926c061c613c94f8eb113fbcea97a01e948ebcdec8ea80be24000c1cd930",
+      "exception_type": "RuntimeError",
+      "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "task": "prove-plus-comm",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/prove-plus-comm__UbAqwmS/result.json",
+      "result_sha256": "01b7f1b190562f4f23ac378c7e2bbe3ad729fd95be3377364c33b990c952e2f1",
       "exception_type": "RuntimeError",
       "qualification": "Native terminal trial without a verifier reward; excluded from scored trajectory counts."
     },
@@ -5272,6 +5280,30 @@
       "trajectory_sha256": "35d2e640d186586901ac974a4fc56ec3d80c8f1e3965faad12dbbd23273b0d7b",
       "steps": 10,
       "tool_calls": 20,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "portfolio-optimization",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/portfolio-optimization__yAPPWPC/agent/trajectory.json",
+      "trajectory_sha256": "367357c32102b2eeb189791cebb0d78dd50760b13783e3a4c25740b91167e790",
+      "steps": 18,
+      "tool_calls": 54,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "polyglot-rust-c",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/polyglot-rust-c__sRSL4By/agent/trajectory.json",
+      "trajectory_sha256": "0cf0cd622d0bdceb49f801193740088a1b3168d7501512bd371eb4dd13692599",
+      "steps": 17,
+      "tool_calls": 61,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

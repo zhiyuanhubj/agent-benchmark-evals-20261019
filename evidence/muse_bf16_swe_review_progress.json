@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-20T05:07:55.937016+00:00",
+  "generated_utc": "2026-10-20T05:22:00.867376+00:00",
   "scope": "Original Muse BF16 SWE-Review native task outcomes; progress only, not official DA or RRR.",
   "queue_plan_sha256": "d758f7f0b01b85e923ebf9ad2e5c5c358fb620aa377fc2e54a23bc432bf7a977",
   "model_id": "muse-spark-open-bf16",
   "splits": {
     "glm5_500": {
       "expected": 500,
-      "native_terminal": 29,
-      "native_graded": 29,
+      "native_terminal": 33,
+      "native_graded": 33,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch0/astropy__astropy-12907__tLSFDZR/result.json",
@@ -182,13 +182,37 @@
           "sha256": "d0d69cd7fd8892e393a6e29659fec66ec17267cbe15a0e3fae3cda0292b07bd2",
           "native_graded": true,
           "exception_type": null
+        },
+        "django__django-11087": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch1/django__django-11087__ed8TdyZ/result.json",
+          "sha256": "4face9cc0aeeffb916e7a8660da0215ce90b6da52d06131a3d851b707190a06d",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-11095": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch1/django__django-11095__4kUqJE3/result.json",
+          "sha256": "1b656cfb3c278db2c246ab7d08be625b3838aaf37d76a18894f766a3abb7ec99",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-11099": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch1/django__django-11099__ZfCcMMs/result.json",
+          "sha256": "4b5da791a8b2b5aa0ebae8da5ec3b4058f659e19c42d98572c3c5e06db99064f",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-11119": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch2/django__django-11119__6SWKggn/result.json",
+          "sha256": "5704a9a2eb81fc2b87c7c2d473a5a4e7863ebcd06a4cbdc9379e4590e9cb4948",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "native_terminal": 34,
-      "native_graded": 34,
+      "native_terminal": 37,
+      "native_graded": 37,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch0/astropy__astropy-12907__FgxbXC9/result.json",
@@ -393,13 +417,31 @@
           "sha256": "e42b72bc4ec216f425be365ca2f407549aaf909a3475941746d23782390b9a9f",
           "native_graded": true,
           "exception_type": null
+        },
+        "django__django-11149": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch2/django__django-11149__wEs5ZsQ/result.json",
+          "sha256": "6296bd2573bae7a723623a078faec44dffcb7b14a10cc9e9ece7a80ecf8fac4a",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-11163": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch2/django__django-11163__PcQ3L7S/result.json",
+          "sha256": "3c879c274f9ccab6d90c6ec81b1ba0917717ff0576b64f2b0c311f1ee6c71c84",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-11179": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch2/django__django-11179__d7o6GpA/result.json",
+          "sha256": "7838ee16571d157d31c29527ca6a5b7427ca24a24ab2fd65172bd39a1f7692b9",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "native_terminal": 30,
-      "native_graded": 30,
+      "native_terminal": 33,
+      "native_graded": 33,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch0/astropy__astropy-12907__nGRk5dr/result.json",
@@ -580,12 +622,30 @@
           "sha256": "dbc25f6ff3a398bf7bbb766be3ba87c4e394eda6afdcde96f36d90d51202147f",
           "native_graded": true,
           "exception_type": null
+        },
+        "django__django-11133": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch1/django__django-11133__8aQRSLV/result.json",
+          "sha256": "bc286032101682829ee8b6c6c010925fa50db868d60a51ff64edc6b4a08b7177",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-11138": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch1/django__django-11138__yr7iiD7/result.json",
+          "sha256": "747d354f9060932c47202f3cbff059a9f182960edd3b72c81a2fdf79ff775992",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-11141": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch2/django__django-11141__oeFTANQ/result.json",
+          "sha256": "7f2e93ed7f9d37c972e21da6db359c703505d094a05d552ec587f9ad817a65ce",
+          "native_graded": true,
+          "exception_type": null
         }
       }
     }
   },
   "errors": [],
   "total_expected": 1384,
-  "total_native_terminal": 93,
-  "total_native_graded": 93
+  "total_native_terminal": 103,
+  "total_native_graded": 103
 }

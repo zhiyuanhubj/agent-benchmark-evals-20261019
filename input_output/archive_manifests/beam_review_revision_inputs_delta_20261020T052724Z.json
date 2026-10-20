@@ -1,0 +1,40 @@
+{
+  "generated_utc": "2026-10-20T05:27:25.034227+00:00",
+  "group": "beam_review_revision_inputs",
+  "scope": "Model-visible SWE-Review revision inputs and queue receipts changed since the previous archive. Hidden solution and tests are excluded. Apply after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/beam_review_revision_inputs_delta_20261020T051348Z.json",
+  "cutoff_utc": "2026-10-20T05:08:49.115714+00:00",
+  "new_source_roots": [],
+  "archive_name": "beam_review_revision_inputs_delta_20261020T052724Z.tar.zst",
+  "archive_size_bytes": 9729,
+  "archive_sha256": "8472d3bd19a20b03328b9c24ff35ab670de224fe75ea983c918fa091be8b700e",
+  "file_count": 34,
+  "source_bytes": 69370,
+  "filename_counts": {
+    "qwen3_coder_30b_500-4.json": 2,
+    "qwen3_coder_30b_500--django__django-15280.json": 2,
+    "qwen3_coder_30b_500--django__django-15382.json": 2,
+    "qwen3_coder_30b_500--django__django-15503.json": 2,
+    "qwen3_coder_30b_500--django__django-15525.json": 2,
+    "qwen3_coder_30b_500--django__django-15563.json": 2,
+    "qwen3_coder_30b_500--django__django-15695.json": 2,
+    "qwen3_coder_30b_500--django__django-15741.json": 2,
+    "qwen3_coder_30b_500--django__django-15814.json": 2,
+    "qwen3_coder_30b_500--django__django-15863.json": 2,
+    "qwen3_coder_30b_500--django__django-15930.json": 2,
+    "qwen3_coder_30b_500--django__django-15957.json": 2,
+    "qwen3_coder_30b_500--django__django-15973.json": 2,
+    "qwen3_coder_30b_500--django__django-15987.json": 2,
+    "qwen3_coder_30b_500--django__django-16032.json": 2,
+    "qwen3_coder_30b_500--django__django-16100.json": 2,
+    "qwen3_coder_30b_500--django__django-16116.json": 2
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/glm5_500",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_30b_instruct2507_500",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_coder_30b_500"
+  ]
+}

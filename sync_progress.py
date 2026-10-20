@@ -50,6 +50,12 @@ def sync_native_archives(scores, force_bf16=False):
         ('beam_bf16', sum(value['terminal'] for value in beam_rounds), sum(value['archived_actual_model_responses'] for value in beam_rounds), [PYTHON, str(ROOT / 'snapshot_other_exact_tb.py'), 'beam_bf16']),
     ]
     for name, terminal, raw_count, command in profiles:
+        if name == 'muse_nvfp4':
+            replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-infra-replacement-password-recovery'
+            if replacement.exists():
+                terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
+                                for path in replacement.glob('*/result.json'))
+                raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
         if name == 'beam_bf16':
             replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
             if replacement.exists():
@@ -68,6 +74,11 @@ def sync_native_archives(scores, force_bf16=False):
         if name == 'muse_nvfp4':
             handoff_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
             expected_receipts = 0
+            replacement_claim = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-password-recovery-infra-replacement-claim.json'
+            if replacement_claim.exists():
+                expected_receipts += 1
+                handoff_newer |= (latest_archive_time is None or
+                                 datetime.fromtimestamp(replacement_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
             if handoff_path.exists():
                 expected_receipts += 1
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
