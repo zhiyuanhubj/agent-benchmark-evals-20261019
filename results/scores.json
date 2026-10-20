@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T11:32:43.055788+00:00",
+  "generated_utc": "2026-10-20T11:46:45.109273+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -248,14 +248,14 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 85,
-            "graded": 75,
+            "terminal": 86,
+            "graded": 76,
             "success": 55,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 10,
             "exceptions": {
-              "AgentTimeoutError": 8,
+              "AgentTimeoutError": 9,
               "RuntimeError": 3,
               "InternalServerError": 10
             },
@@ -267,13 +267,13 @@
           "3": {
             "expected": 89,
             "terminal": 89,
-            "graded": 14,
-            "success": 11.0,
+            "graded": 16,
+            "success": 13.0,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 470,
-            "ungraded": 75,
+            "archived_actual_model_responses": 541,
+            "ungraded": 73,
             "exceptions": {
-              "InternalServerError": 75
+              "InternalServerError": 73
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -283,7 +283,7 @@
         },
         "status": "round_1_complete_later_rounds_partial",
         "recovery": {
-          "controller": "active",
+          "controller": "failed",
           "parallel_controller": "inactive",
           "extra_lane_controllers": {
             "2": "inactive",
@@ -299,16 +299,16 @@
               "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07"
             ],
             "handoff_receipt": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json",
-            "round23_controller": "active",
+            "round23_controller": "inactive",
             "round23_status": {
-              "utc": 1792441287.5717053,
+              "utc": 1792496515.0728335,
               "allocation": 2867,
               "lane": 9,
               "endpoint": "http://10.1.105.182:31321/v1",
-              "phase": "running",
-              "job_name": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03",
+              "phase": "no_unclaimed_round23_batches",
               "completed_batches": [
-                "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00"
+                "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00",
+                "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03"
               ]
             },
             "round23_extra_slot_controller": "active",
@@ -327,10 +327,10 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 78,
-            "2": 85,
+            "2": 86,
             "3": 89
           },
-          "new_raw_model_responses": 9998,
+          "new_raw_model_responses": 10023,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
@@ -343,15 +343,15 @@
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 839,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1514,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1521,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 643,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 480,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 216,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 233,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 562
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 580
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T11:32:45+00:00",
-          "active_recovery_trial_dirs": 3,
+          "latest_new_raw_model_response_utc": "2026-10-20T11:46:36+00:00",
+          "active_recovery_trial_dirs": 2,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
@@ -439,8 +439,8 @@
             "no_best_of_selection": true
           },
           "round_2_original_first_draw": {
-            "terminal": 85,
-            "graded": 72,
+            "terminal": 86,
+            "graded": 73,
             "success": 52,
             "qualification": "Original first draws only; ungraded native exceptions remain ungraded. Separately declared replacements are excluded."
           },
@@ -462,10 +462,10 @@
             "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
             "original_ungraded_infra_failures": 89,
             "original_model_responses": 0,
-            "replacement_terminal": 14,
-            "replacement_graded": 14,
-            "replacement_success": 11.0,
-            "replacement_raw_responses": 470,
+            "replacement_terminal": 16,
+            "replacement_graded": 16,
+            "replacement_success": 13.0,
+            "replacement_raw_responses": 541,
             "active_trial_dirs": 6,
             "all_tasks_single_replacement_draw": true,
             "endpoint_ready": true,
@@ -479,9 +479,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 190,
-        "graded": 189,
-        "success": 111,
+        "terminal": 197,
+        "graded": 196,
+        "success": 113,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -494,16 +494,16 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 36,
-          "graded": 36,
+          "terminal": 37,
+          "graded": 37,
           "success": 15,
           "status": "partial_no_full_score"
         },
         "3": {
           "expected": 113,
-          "terminal": 34,
-          "graded": 34,
-          "success": 17,
+          "terminal": 40,
+          "graded": 40,
+          "success": 19,
           "status": "partial_no_full_score"
         }
       },
@@ -554,7 +554,7 @@
             "graded": 73,
             "success": 53,
             "active_trial_dirs": 78,
-            "archived_actual_model_responses": 4870,
+            "archived_actual_model_responses": 4943,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 6,
@@ -567,11 +567,11 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 9,
-            "graded": 9,
-            "success": 9,
-            "active_trial_dirs": 13,
-            "archived_actual_model_responses": 518,
+            "terminal": 16,
+            "graded": 16,
+            "success": 12,
+            "active_trial_dirs": 20,
+            "archived_actual_model_responses": 696,
             "ungraded": 0,
             "exceptions": {},
             "excluded_user_reassignment_trials": [],
@@ -807,10 +807,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 98,
+          "completed_trials": 102,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 400,
+          "pending_trials": 396,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:18.993248",
           "finished_at": null
@@ -822,10 +822,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 89,
+          "completed_trials": 91,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 371,
+          "pending_trials": 369,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:10.468330",
           "finished_at": null
@@ -837,10 +837,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 110,
+          "completed_trials": 120,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 310,
+          "pending_trials": 300,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:16.640783",
           "finished_at": null
@@ -871,9 +871,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 150,
-        "graded": 150,
-        "success": 100,
+        "terminal": 151,
+        "graded": 151,
+        "success": 101,
         "status": "partial_no_full_score",
         "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
         "source_run_id": "muse-bf16-pro-full-r1",
@@ -961,24 +961,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 234,
-        "native_graded": 234,
+        "native_terminal": 239,
+        "native_graded": 239,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 77,
-            "native_graded": 77
+            "native_terminal": 78,
+            "native_graded": 78
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 80,
-            "native_graded": 80
+            "native_terminal": 82,
+            "native_graded": 82
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 77,
-            "native_graded": 77
+            "native_terminal": 79,
+            "native_graded": 79
           }
         },
         "DA": null,

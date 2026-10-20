@@ -68,6 +68,11 @@ GROUPS = {
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    if 'artifacts' in rel.parts:
+        # DeepSWE's native verifier consumes this model-produced patch. Keep
+        # the patch itself, but never publish other sandbox artifacts here.
+        return (group in ('beam_legacy', 'muse_bf16')
+                and rel.parts[-4:] == ('artifacts', 'logs', 'artifacts', 'model.patch'))
     if group == 'opus47_review_inputs':
         if root.name == 'configs':
             return len(rel.parts) == 1 and path.suffix == '.json'
@@ -170,7 +175,9 @@ def iter_files(group):
         if not root.exists():
             continue
         for directory, dirs, names in os.walk(root):
-            excluded = {'.git', '__pycache__', '.venv', 'node_modules', 'sandbox', 'artifacts'}
+            excluded = {'.git', '__pycache__', '.venv', 'node_modules', 'sandbox'}
+            if group not in ('beam_legacy', 'muse_bf16'):
+                excluded.add('artifacts')
             if group in ('muse_bf16_review_inputs', 'opus47_review_inputs'):
                 excluded.update({'solution', 'tests', 'results'})
             if group.endswith('review_revision_inputs'):
@@ -180,6 +187,12 @@ def iter_files(group):
             if group.endswith('review_verifier'):
                 excluded.update({'agent', 'completions', 'logs'})
             dirs[:] = [d for d in dirs if d not in excluded]
+            if group in ('beam_legacy', 'muse_bf16'):
+                rel_dir = Path(directory).relative_to(root).parts
+                if 'artifacts' in rel_dir:
+                    after_artifacts = rel_dir[rel_dir.index('artifacts') + 1:]
+                    allowed = {(): {'logs'}, ('logs',): {'artifacts'}}.get(after_artifacts, set())
+                    dirs[:] = [d for d in dirs if d in allowed]
             for name in names:
                 path = Path(directory) / name
                 if not path.is_file() or path.is_symlink() or not include(path, root, group):

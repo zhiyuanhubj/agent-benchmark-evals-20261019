@@ -1,21 +1,17 @@
 {
-  "generated_utc": "2026-10-20T11:34:28.666113+00:00",
+  "generated_utc": "2026-10-20T11:48:11.715844+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T112628Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T113933Z.tar.zst",
   "expected": 89,
-  "terminal": 9,
-  "graded": 9,
-  "success": 9,
+  "terminal": 13,
+  "graded": 13,
+  "success": 11,
   "missing_graded_tasks": [
     "caffe-cifar-10",
     "chess-best-move",
-    "code-from-image",
-    "compile-compcert",
-    "configure-git-webserver",
-    "constraints-scheduling",
     "count-dataset-tokens",
     "crack-7z-hash",
     "custom-memory-heap-crash",
@@ -92,7 +88,14 @@
     "write-compressor"
   ],
   "ungraded_terminal_tasks": [],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "chess-best-move",
+    "count-dataset-tokens",
+    "crack-7z-hash",
+    "custom-memory-heap-crash",
+    "db-wal-recovery",
+    "distribution-search"
+  ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -162,6 +165,34 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/cobol-modernization__i3B9bep/result.json",
       "raw_response_count": 17,
       "responses_with_reasoning_content": 17
+    },
+    "code-from-image": {
+      "reward": 0.0,
+      "result_sha256": "8bbd6442a12fa48b147eab1e17c18d8aeda55320f834c06d6b471b30d131e510",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/code-from-image__Ym2okka/result.json",
+      "raw_response_count": 144,
+      "responses_with_reasoning_content": 144
+    },
+    "compile-compcert": {
+      "reward": 1.0,
+      "result_sha256": "7d34ee370287a1ebaf6696654ae2d9e87023e1ff2050242ba804f7f3a091f27a",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/compile-compcert__XCiMnZC/result.json",
+      "raw_response_count": 49,
+      "responses_with_reasoning_content": 49
+    },
+    "configure-git-webserver": {
+      "reward": 0.0,
+      "result_sha256": "2ae41078892567989e30e9cbf83c3689544d2bc0ea5584b4bea0333e42959234",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/configure-git-webserver__UP9Yn52/result.json",
+      "raw_response_count": 20,
+      "responses_with_reasoning_content": 20
+    },
+    "constraints-scheduling": {
+      "reward": 1.0,
+      "result_sha256": "dfe51b1c588a9a47b51319db3a0fa492e4a9ca77d2e7ba5a0793a9fc5ec1f9fd",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/constraints-scheduling__njHfMng/result.json",
+      "raw_response_count": 4,
+      "responses_with_reasoning_content": 4
     }
   }
 }

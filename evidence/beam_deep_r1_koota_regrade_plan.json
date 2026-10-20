@@ -1,0 +1,101 @@
+{
+  "created_utc": "2026-10-20T11:39:21.207917+00:00",
+  "status": "verifier_only_regrade_running",
+  "purpose": "Single verifier-only diagnostic for the original Beam DeepSWE r1 ungraded native timeout; no new model draw and no change to original score",
+  "model": "reflection/Beam-1.0-501B-A23B",
+  "task": "koota-composite-trait-aspects",
+  "source_trial": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-deep-r1-remaining89/koota-composite-trait-aspects__uDZiiNy",
+  "source_result_sha256": "36f6274ff77d9f13c7dbba2b4324b6cff57783d2dbf65ca3568e14d03ba2aa35",
+  "source_trajectory_sha256": "06134ebbd9a0877e4e1ba4974dcf773e9b24222c7ffd92caa3092ea1070336c3",
+  "source_patch_sha256": "56becde2676a4d59c3ce1f6305f94b2e7ae2c03743f4dd9ee90aef990b9221dd",
+  "source_patch_bytes": 40836,
+  "task_card": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/koota-composite-trait-aspects/task.toml",
+  "task_card_sha256": "fa101fd31b866c79a5d14188e5d1a8e84d9a770703f4c5ac5c983eff4a599ee7",
+  "original_verifier_timeout_seconds": 1800,
+  "regrade_verifier_timeout_seconds": 1800,
+  "cpu_allocation": 2922,
+  "output_dir": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/regrades/beam-deep-r1-koota-20261020",
+  "trial_name": "beam-deep-r1-koota-verifier-only-20261020",
+  "official_first_round_disposition": "Original VerifierTimeoutError remains ungraded until a separate policy review; regrade is never silently pooled with the first draw",
+  "started_utc": "2026-10-20T11:39:40.377239+00:00",
+  "service": "beam-deep-r1-koota-regrade-20261020.service",
+  "first_attempt": {
+    "service": "beam-deep-r1-koota-regrade-20261020.service",
+    "status": "pre_verifier_rejected",
+    "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/regrades/beam-deep-r1-koota-20261020/beam-deep-r1-koota-verifier-only-20261020/result.json",
+    "result_sha256": "da5ba7c61205c1c5825f7cb94f1e120344b83c491ef15d33bebb26a915cd7f53",
+    "exception_type": "RegradeError",
+    "reason": "Explicit model.patch artifact was marked skipped because its parent /logs/artifacts directory had already captured it",
+    "verifier_started": false
+  },
+  "adjusted_task": {
+    "path": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/regrades/beam-deep-r1-koota-20261020/adjusted-task",
+    "card_sha256": "54aeede4de71569768691de016067e415a2b8f3b824d3fab9dd6b60262f4e203",
+    "original_card_sha256": "fa101fd31b866c79a5d14188e5d1a8e84d9a770703f4c5ac5c983eff4a599ee7",
+    "only_removed_declaration": "artifacts = [\"/logs/artifacts/model.patch\"]",
+    "parsed_task_config_except_removed_artifacts_unchanged": true,
+    "all_other_files_byte_identical": true,
+    "files": [
+      {
+        "path": "environment/Dockerfile",
+        "source_sha256": "02482161ba013a92d585c04960e8c319e4acbb5f6fcdce8d6d6b56982b29b116",
+        "adjusted_sha256": "02482161ba013a92d585c04960e8c319e4acbb5f6fcdce8d6d6b56982b29b116"
+      },
+      {
+        "path": "instruction.md",
+        "source_sha256": "300c70ea3b277bf799c272cb7415368bb631856c5a89bee1e7cac474f5810c25",
+        "adjusted_sha256": "300c70ea3b277bf799c272cb7415368bb631856c5a89bee1e7cac474f5810c25"
+      },
+      {
+        "path": "solution/solution.patch",
+        "source_sha256": "6626b19e70409bd2df3f5a3b48015243bce577c4aa2fb8b87f3647d3304b6cf3",
+        "adjusted_sha256": "6626b19e70409bd2df3f5a3b48015243bce577c4aa2fb8b87f3647d3304b6cf3"
+      },
+      {
+        "path": "solution/solve.sh",
+        "source_sha256": "2f111d19625d9685d00029c2c3efb7719ee2311c6ab4f0ab0ebcc37f09c35198",
+        "adjusted_sha256": "2f111d19625d9685d00029c2c3efb7719ee2311c6ab4f0ab0ebcc37f09c35198"
+      },
+      {
+        "path": "task.toml",
+        "source_sha256": "fa101fd31b866c79a5d14188e5d1a8e84d9a770703f4c5ac5c983eff4a599ee7",
+        "adjusted_sha256": "54aeede4de71569768691de016067e415a2b8f3b824d3fab9dd6b60262f4e203"
+      },
+      {
+        "path": "tests/Dockerfile",
+        "source_sha256": "e9cfaddf37a9cadcca7256aaf80d2ef5b6317823cf42ff8ee82159d45c8e67a4",
+        "adjusted_sha256": "e9cfaddf37a9cadcca7256aaf80d2ef5b6317823cf42ff8ee82159d45c8e67a4"
+      },
+      {
+        "path": "tests/config.json",
+        "source_sha256": "3f7cc1dbf20abd2c2d354fb1270feed07a5df0a3eefa464c8c3449240c8dd8cb",
+        "adjusted_sha256": "3f7cc1dbf20abd2c2d354fb1270feed07a5df0a3eefa464c8c3449240c8dd8cb"
+      },
+      {
+        "path": "tests/grader.py",
+        "source_sha256": "47cc9eaadf21e636323c360ec4fa786f0733ec9fd1d21ea5a5717ff9f8c4077c",
+        "adjusted_sha256": "47cc9eaadf21e636323c360ec4fa786f0733ec9fd1d21ea5a5717ff9f8c4077c"
+      },
+      {
+        "path": "tests/test.patch",
+        "source_sha256": "5d8c926bf93a041f4010fda23da2942583384a15f67e97f770b5d76f227a6912",
+        "adjusted_sha256": "5d8c926bf93a041f4010fda23da2942583384a15f67e97f770b5d76f227a6912"
+      },
+      {
+        "path": "tests/test.sh",
+        "source_sha256": "775164cab62cb1b75a8586cabfde5c95629914e599e61312eaddae7f7ef6d12c",
+        "adjusted_sha256": "775164cab62cb1b75a8586cabfde5c95629914e599e61312eaddae7f7ef6d12c"
+      }
+    ]
+  },
+  "updated_utc": "2026-10-20T11:40:44.369283+00:00",
+  "second_attempt": {
+    "service": "beam-deep-r1-koota-artifactfix-20261020.service",
+    "status": "running",
+    "started_utc": "2026-10-20T11:40:44.369219+00:00",
+    "result_dir": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/regrades/beam-deep-r1-koota-20261020/beam-deep-r1-koota-verifier-only-artifactfix-20261020",
+    "same_verifier_timeout_seconds": 1800,
+    "no_new_model_draw": true,
+    "separate_from_official_first_round": true
+  }
+}
