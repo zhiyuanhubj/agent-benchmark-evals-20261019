@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T04:30:50.924671+00:00",
+  "generated_utc": "2026-10-20T04:47:45.041115+00:00",
   "scope": "Live native SWE-Review original-generator revision results. Partial graded counts are progress, not RRR or a benchmark accuracy. Synthetic preflights and old pre-model connection failures are excluded.",
   "model_attempt_policy": "One scored result from the corrected gateway queue per canonically rejected PR; native verifier reward and report are required for a grade.",
   "groups": [
@@ -5423,10 +5423,10 @@
       "preserved_pre_model_infrastructure_results": 12,
       "preserved_pre_model_infrastructure_connectivity": 16,
       "old_host_ip_saved_model_responses": 0,
-      "gateway_model_attempt_result_files": 8,
-      "native_graded_revisions": 8,
-      "native_successful_revisions": 5,
-      "gateway_trajectories": 8,
+      "gateway_model_attempt_result_files": 28,
+      "native_graded_revisions": 28,
+      "native_successful_revisions": 19,
+      "gateway_trajectories": 28,
       "pre_model_connection_failures": 0,
       "queue_scheduled_attempts_finished": false,
       "complete": false,
@@ -5476,6 +5476,17 @@
           "exception_type": null,
           "exception_message": null
         },
+        "django__django-10880": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-10880__kikv8iw/result.json",
+          "result_sha256": "bbe265b73ba1692696956ba7c94132c82b9e31e07be6dc6896fd1a5d9e1e616f",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "0945668782f67b3180407a9d7ca82aa4b73074de1121fab5524b80cac57eef7b",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
         "django__django-11138": {
           "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11138__QxPiYUp/result.json",
           "result_sha256": "1101af83acce8a8569747f941972ef5b063547a959bf9dbb747bf8725c37abf7",
@@ -5498,6 +5509,17 @@
           "exception_type": null,
           "exception_message": null
         },
+        "django__django-11206": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11206__cRhGmKF/result.json",
+          "result_sha256": "f489eb7cf4c938105f61d3c8ee53cc6e9fbf9b99138c660ed79b58c4b791c839",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "222e6282a77e79907bbfba1463db7eb1329140a81514af09a56dc89b781270ec",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
         "django__django-11211": {
           "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11211__rQgHEq2/result.json",
           "result_sha256": "d9dbe4853bea14c04422e731db2c2967c2cc2a1f62b1e0b1ae5872fe4b40d388",
@@ -5516,6 +5538,204 @@
           "native_graded": true,
           "reward": 0.0,
           "verifier_report_sha256": "3fd1536c0693a3a713754bccec4773ee8aa6f2f8946b08916dc75a59d2ef3b3f",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11292": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11292__x4LCbR9/result.json",
+          "result_sha256": "37eca8028298b958b37cf3bb8daf5845e30995c1cea4d8dfd298ba85ba6c7d1a",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "cdbfac057d611843d17721d8a9c846fc5d26ec63fd88067b78dfed249eb561ab",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11299": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11299__6J3Cxgw/result.json",
+          "result_sha256": "1e95b95000b92b4007c1e77d17103a1d1f5b975a2c5d6722c6ee65869ede3845",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "8203aaa1fdce22494506df8409c430e662c425d15abf6e299900d3468ed39480",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11333": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11333__pr5PnzJ/result.json",
+          "result_sha256": "c0399b7fd679adf65ba363739e42fb7b83ae6cd4b99b663f411c67c8c106cad4",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "bfe4952eaa510e24b06229fb95c60eeba9617b3e8749b6eec206f479728bd581",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11477": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11477__QztYx2P/result.json",
+          "result_sha256": "f8cee130dfd0d451a6b229fa5a7db9d2729e4dd0c5736af5ba72652b49c426ca",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "257808653251f48100e5da6839fad2aad82625366de468a92d873a7d806dcaaa",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11490": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11490__sJaFbPH/result.json",
+          "result_sha256": "d973cd64866d24c5ee43a5965ef8552017f16f60b91903bf5fe2b5150ddfe273",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "8a00e75a86fa73575bd1925401ff8dff8d29631c689faa00648286319c5ec613",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11555": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch0/django__django-11555__FZ3jjQq/result.json",
+          "result_sha256": "0ed42bfb9b463e2aeb7c9cd7780dc7feb04426401cf00f0ca3f342975dd5cb57",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "8eaf324cf2192f418ce273402a6859c9fba38109866afe709193e8402e7e04be",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11740": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11740__CqYM8G3/result.json",
+          "result_sha256": "4751f600edc847c2376f1b6d91319ffafa2afd9205c5194d8330ed6c570b5035",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "7f7c26d403e3e7d207b722b5c34e1331207c9451c4f4c7bea19974e18edfe6f8",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11749": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11749__aXyjkGk/result.json",
+          "result_sha256": "53d7b1880e5688d5d6d0af1342dbaead1f5eb91c8749ec24dee884c7ae40e03e",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "4f9d42fbdbce5c8d309072bedf284edcce3887f88286844a1afc0877ddc57db8",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11815": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11815__krwCrBA/result.json",
+          "result_sha256": "e529bc0031c21dd07284934cd1f498fd8d3a2fd56e602b7e47080bc4b87eee31",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "ef0c8ca466a996ac66bc7de721fe4f048b68c404ee9c385a39dbe108d01e3c03",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11820": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11820__9LqcRht/result.json",
+          "result_sha256": "b79d56ddf38855d0d37d23d8266c673dd4369b4564f8b71443913695192716e8",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "dccd5b154f6716dcfc33f4929608004a5803fa4ed353560a593d8e7b23691dd1",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11848": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11848__YqcG42H/result.json",
+          "result_sha256": "dfeb2f7149953f38ebb93cd58487fd67775c20ff30864269221c1151b7ac751f",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "f9ebad88d6f45c7ef98ec99934b11f109c573c83792c2145762b9befdcdf1624",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11885": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11885__QFkqhHe/result.json",
+          "result_sha256": "f1c47d654919c221bd79f17e373e30cfe50ebdf1962479de01d3ea07083b34da",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "d4fdbaaf76adcefbbb8378b350d1ef748411c9248068fb35471e3a7646be5858",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11951": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11951__RF3zpWz/result.json",
+          "result_sha256": "48af8c68f08845e0529a23143c7362e3e25ae944fd1452ae18dddda51d34e91a",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "2b2c50ca7a623e1167d44e84bfbd79d861a0b0e5d04d08006d078eaed152f371",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11964": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11964__pg3x6ov/result.json",
+          "result_sha256": "0139888f8aa4f7b2e9ae7ee29ff5006279439f414b7578b0ad135fa594e712e4",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "b3275f6d867d8d92be8333acafe8728514e96377149fecb542ba686c5450617e",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-11999": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-11999__FgBWL9H/result.json",
+          "result_sha256": "f50cd3ad83290b746bbf507b4aaf79045d1c7c70e615f9b5c55d0de08949e75b",
+          "finished": true,
+          "native_graded": true,
+          "reward": 0.0,
+          "verifier_report_sha256": "fbea2edd89b9aec4fe24c6345fa0a235d1a550079468153a5e815668c3f3cfd0",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-12039": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-12039__B7kSpnF/result.json",
+          "result_sha256": "d0c4c563e23a5c43cca0a08f1d3a3dbd79b8c1187f7cfa7315149d2cfe08a5cf",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "94c80b66fa259832fcd84ddb6287684487771e71bfc619bace85eb6f990002ca",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-12050": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-12050__PYnrAkV/result.json",
+          "result_sha256": "0dbab267d777c433737b1c43513e6de7fccbb0b70e34154bb2323c2b453e3dde",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "fa0e7d6e61aa6afd1057b43d2c20d21cba39d118e23c11cc1ce715a7f5d8643f",
+          "trajectory_saved": true,
+          "exception_type": null,
+          "exception_message": null
+        },
+        "django__django-12125": {
+          "result": ".private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results/qwen3_coder_30b_500/beam-bf16-original-revision-20261020-gw-v4-portfix-qwen3_coder_30b_500-batch1/django__django-12125__AmHcfK9/result.json",
+          "result_sha256": "c923f51a845f5439077897866027036a822d3c368ace46b15c9a5065ea087072",
+          "finished": true,
+          "native_graded": true,
+          "reward": 1.0,
+          "verifier_report_sha256": "d478b624722e105454e4334bee10da7367936da1395513e9d4d840e6c36d38e3",
           "trajectory_saved": true,
           "exception_type": null,
           "exception_message": null

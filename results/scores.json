@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T04:42:55.480847+00:00",
+  "generated_utc": "2026-10-20T05:02:24.832678+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -316,7 +316,7 @@
             "2": 53,
             "3": 0
           },
-          "new_raw_model_responses": 8312,
+          "new_raw_model_responses": 8410,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
@@ -328,12 +328,12 @@
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 817,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1112,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 836,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1154,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 643,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 229
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 266
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T04:43:00+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-20T05:02:35+00:00",
           "active_recovery_trial_dirs": 5,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -390,9 +390,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 148,
-        "graded": 147,
-        "success": 89,
+        "terminal": 154,
+        "graded": 153,
+        "success": 93,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -405,9 +405,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 3,
-          "graded": 3,
-          "success": 2,
+          "terminal": 7,
+          "graded": 7,
+          "success": 3,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -465,7 +465,7 @@
             "graded": 54,
             "success": 38,
             "active_trial_dirs": 59,
-            "archived_actual_model_responses": 3741,
+            "archived_actual_model_responses": 3811,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 3,
@@ -721,9 +721,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 129,
-        "graded": 129,
-        "success": 81,
+        "terminal": 132,
+        "graded": 132,
+        "success": 82,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
@@ -772,9 +772,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 57,
-          "graded": 57,
-          "success": 27,
+          "terminal": 59,
+          "graded": 59,
+          "success": 29,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -805,24 +805,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 73,
-        "native_graded": 73,
+        "native_terminal": 83,
+        "native_graded": 83,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 23,
-            "native_graded": 23
+            "native_terminal": 25,
+            "native_graded": 25
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 27,
-            "native_graded": 27
+            "native_terminal": 31,
+            "native_graded": 31
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 23,
-            "native_graded": 23
+            "native_terminal": 27,
+            "native_graded": 27
           }
         },
         "DA": null,
