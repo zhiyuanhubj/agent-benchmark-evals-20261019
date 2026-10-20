@@ -83,3 +83,5 @@ Beam 精确镜像 TB 第 3 轮交由 2901 独立执行：固定版本的 BF16 �
 [Opus 4.7 第 3 轮 thinking 传输核查](evidence/opus47_r3_thinking_transport_audit.json)生成于 2026-10-19T16:53:10.951953+00:00，覆盖 89 道终态题：1911 条归档回复中 822 条有可读 thinking，1084 条用量显示 reasoning token 为零，另 5 条虽计入 reasoning token，但上游原始流也没有可读 thinking，仅有签名。后者不能作为带完整 thinking 的训练样本。
 
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `opus47_legacy_delta_20261019T194133Z.tar.zst`、`beam_legacy_delta_20261020T114034Z.tar.zst`、`muse_bf16_delta_20261020T114113Z.tar.zst`；截止时间和文件范围见各自清单。
+
+DeepSWE verifier 使用的原生 `model.patch` 已纳入 Beam 和 Muse BF16 增量链。[Beam 一次性回填](input_output/archive_manifests/beam_legacy_delta_20261020T114916Z.json)保存 387 份补丁，[Muse BF16 一次性回填](input_output/archive_manifests/muse_bf16_delta_20261020T114927Z.json)保存 74 份；后续新补丁随增量继续归档。补丁是模型输出，不增加抽样或得分。

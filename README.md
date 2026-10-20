@@ -56,6 +56,8 @@ The [Muse BF16 SWE-Review native progress audit](evidence/muse_bf16_swe_review_p
 
 For actively changing Pro/legacy/Deep results, apply each timestamped delta after its base archive, replacing earlier files with the same path. Current delta assets are `opus47_legacy_delta_20261019T194133Z.tar.zst`, `beam_legacy_delta_20261020T114034Z.tar.zst`, and `muse_bf16_delta_20261020T114113Z.tar.zst`. Their manifests state the cutoff and source scope.
 
+The native `model.patch` files used by the DeepSWE verifier are included in the Beam and Muse BF16 delta chains. One-time backfills preserved [387 Beam patches](input_output/archive_manifests/beam_legacy_delta_20261020T114916Z.json) and [74 Muse BF16 patches](input_output/archive_manifests/muse_bf16_delta_20261020T114927Z.json); later deltas capture new patches as trials finish. These are model outputs, not extra attempts or scores.
+
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
 The release has 838 archive manifests; **838/838 assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.

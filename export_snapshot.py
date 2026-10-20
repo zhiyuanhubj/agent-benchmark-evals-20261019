@@ -1044,6 +1044,8 @@ The BF16 SWRBench [source dataset, generation, GPT-5.5 judge and raw-response ar
 
 For actively changing Pro/legacy/Deep results, apply each timestamped delta after its base archive, replacing earlier files with the same path. Current delta assets are `{latest_legacy_deltas['opus47_legacy']['archive_name']}`, `{latest_legacy_deltas['beam_legacy']['archive_name']}`, and `{latest_legacy_deltas['muse_bf16']['archive_name']}`. Their manifests state the cutoff and source scope.
 
+The native `model.patch` files used by the DeepSWE verifier are included in the Beam and Muse BF16 delta chains. One-time backfills preserved [387 Beam patches](input_output/archive_manifests/beam_legacy_delta_20261020T114916Z.json) and [74 Muse BF16 patches](input_output/archive_manifests/muse_bf16_delta_20261020T114927Z.json); later deltas capture new patches as trials finish. These are model outputs, not extra attempts or scores.
+
 The historical Opus 4.8 Pro Verified result has an existing 731-task trajectory archive in the release. Three confirmed solution retrieval cases are flagged; a conservative supplementary calculation withholding those three credits is **500/731 = 68.40%**. The raw benchmark value stays **503/731**.
 
 The release has {asset_count} archive manifests; **{release_audit_label} assets** have a matching GitHub-reported SHA-256 digest and size in `evidence/release-assets-verification.json`. The latest exact-image TB archive is a timestamped snapshot containing both terminal results and ongoing trajectories; only terminal `result.json` files count as scores.
@@ -1205,6 +1207,8 @@ Beam 精确镜像 TB 第 2 轮现由 2887 上核验过的 BF16 副本独立执�
 Beam 精确镜像 TB 第 3 轮交由 2901 独立执行：固定版本的 BF16 权重 198 个文件全部通过校验，服务通过完整的 133/133 项协议测试。[第 3 轮交接证据](evidence/beam_tb_r3_2901/manifest.json)保存原始 89 题配置、镜像凭据、仅变更模型端点的有效配置及独占轮次记录；2887 继续执行第 2 轮。第 3 轮未满 89 题前不报告完整准确率。
 
 仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `{latest_legacy_deltas['opus47_legacy']['archive_name']}`、`{latest_legacy_deltas['beam_legacy']['archive_name']}`、`{latest_legacy_deltas['muse_bf16']['archive_name']}`；截止时间和文件范围见各自清单。
+
+DeepSWE verifier 使用的原生 `model.patch` 已纳入 Beam 和 Muse BF16 增量链。[Beam 一次性回填](input_output/archive_manifests/beam_legacy_delta_20261020T114916Z.json)保存 387 份补丁，[Muse BF16 一次性回填](input_output/archive_manifests/muse_bf16_delta_20261020T114927Z.json)保存 74 份；后续新补丁随增量继续归档。补丁是模型输出，不增加抽样或得分。
 '''
 chinese_report = chinese_report.replace('新增 GPU 申请状态：', replica_note_zh + ' 新增 GPU 申请状态：', 1)
 if bf16_excluded:
