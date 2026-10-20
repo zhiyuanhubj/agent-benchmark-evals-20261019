@@ -330,6 +330,13 @@ if bf16_swr_alignment_path.exists():
         'sha256': hashlib.sha256(bf16_swr_alignment_path.read_bytes()).hexdigest(),
         'size_bytes': bf16_swr_alignment_path.stat().st_size,
         'source': str(bf16_swr_alignment_path)}
+shared_timeout_path = ROOT / 'evidence/shared_element_hq_eval_timeout.json'
+assert shared_timeout_path.is_file()
+files[str(shared_timeout_path.relative_to(ROOT))] = {
+    'sha256': hashlib.sha256(shared_timeout_path.read_bytes()).hexdigest(),
+    'size_bytes': shared_timeout_path.stat().st_size,
+    'source': str(shared_timeout_path),
+}
 write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 
 def partial(d):
@@ -564,7 +571,7 @@ if slot1_route_path.exists():
     assert slot1_route['job_name'] == 'muse-nvfp4-tb-v1-exact-r2-completion-2866-b02'
     readme = readme.replace('Scores are benchmark-recorded values.',
         'On allocation 2812, an additional controller slot claimed untouched exact-image round-2 batch b02 while b01\'s final task was still running. Both controllers use the same pinned NVFP4 endpoint, with two task trials per batch and the server\'s eight-request limit. The [controller source](protocol/muse_nvfp4_exact_future_round_controller_20261019.py) uses separate slot locks and the existing per-batch atomic claim; the b02 route receipt and original/effective config hashes are included in live I/O snapshots. Neither round-1 task nor a previously sampled round-2 task was redrawn.\n\nScores are benchmark-recorded values.', 1)
-readme = readme.replace('Scores are benchmark-recorded values.', f'Opus 4.7 Pro counts only its original 731-task run; verifier-only saved-patch retries are retained as separate evidence and never increase the first-round task denominator. One original task still lacks a native verifier score after two 3600-second timeouts. {opus_crosshost_en}\n\nScores are benchmark-recorded values.', 1)
+readme = readme.replace('Scores are benchmark-recorded values.', f'Opus 4.7 Pro counts only its original 731-task run; verifier-only saved-patch retries are retained as separate evidence and never increase the first-round task denominator. Its original `element-hq` task and both saved-patch verifier-only retries timed out after 3600 seconds. [The same task in Beam BF16’s original run](evidence/shared_element_hq_eval_timeout.json) also timed out in the native evaluate phase; neither original task has a valid binary score. This shared observation does not establish the cause or either model’s outcome. {opus_crosshost_en}\n\nScores are benchmark-recorded values.', 1)
 if nvfp4_r2_excluded:
     readme = readme.replace('Scores are benchmark-recorded values.',
                             f'Muse NVFP4 round-2 successful trajectories flagged for training exclusion pending full review: {nvfp4_r2_excluded_names}. A targeted review found a verifier-directory listing with no hidden output in the observed response; raw benchmark rewards are unchanged. See [the anchored notes](evidence/exact_tb_integrity_manual_notes.json) and [command screen](evidence/exact_tb_integrity_screen.json).\n\nScores are benchmark-recorded values.', 1)
@@ -657,7 +664,7 @@ if opus_thinking_audit:
     chinese_report = chinese_report.replace('仍在增长的 Pro/旧镜像/DeepSWE 结果，',
         f'[Opus 4.7 第 3 轮 thinking 传输核查](evidence/opus47_r3_thinking_transport_audit.json)生成于 {opus_thinking_audit["generated_utc"]}，覆盖 {oc["scored_tasks"]} 道终态题：{oc["raw_responses"]} 条归档回复中 {oc["with_thinking_text"]} 条有可读 thinking，{oc["without_text_zero_reasoning_tokens"]} 条用量显示 reasoning token 为零，另 {oc["without_text_positive_reasoning_tokens"]} 条虽计入 reasoning token，但上游原始流也没有可读 thinking，仅有签名。后者不能作为带完整 thinking 的训练样本。\n\n仍在增长的 Pro/旧镜像/DeepSWE 结果，', 1)
 chinese_report = chinese_report.replace('若本地批次先启动，不会在其他节点重复抽题。', '若本地批次先启动，不会在其他节点重复抽题。另有四个排队 GPU 节点获配后只领取第 2/3 轮尚未启动的批次；逐批文件锁和接管凭据阻止原控制器重复抽题，实际配置仅修改模型端点。', 1)
-chinese_report = chinese_report.replace('**审计限制。**', f'Opus 4.7 Pro 只统计原始运行的 731 道题；同一补丁的纯验证重试单独留证，不能增加首轮题数或成功数。原始运行仍有 1 题在两次 3600 秒验证超时后缺少有效评分。{opus_crosshost_zh}\n\n**审计限制。**', 1)
+chinese_report = chinese_report.replace('**审计限制。**', f'Opus 4.7 Pro 只统计原始运行的 731 道题；同一补丁的纯验证重试单独留证，不能增加首轮题数或成功数。原始运行的 `element-hq` 与两次纯验证重试均在 3600 秒后超时；[Beam BF16 原始运行的同一道题](evidence/shared_element_hq_eval_timeout.json)也在原生 evaluate 阶段超时，两边原始结果都没有有效二元评分。这一共同现象不能证明根因，也不能判定任一模型在该题上成功或失败。{opus_crosshost_zh}\n\n**审计限制。**', 1)
 chinese_report = chinese_report.replace('**审计限制。**', mn_timeout_zh + '**审计限制。**', 1)
 if early_b05_owner:
     if early_b05_exit and early_b05_exit['returncode'] == 0:

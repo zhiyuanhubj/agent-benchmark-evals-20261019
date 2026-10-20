@@ -1,0 +1,38 @@
+{
+  "generated_utc": "2026-10-19T23:53:56.958944+00:00",
+  "scope": "The original first-draw SWE-bench Pro Verified runs only",
+  "task_id": "instance_element-hq__element-web-459df4583e01e4744a52d45446e34183385442d6-vnan",
+  "models": {
+    "beam_bf16": {
+      "scoring_run_id": "beam-pro-r1-initial128",
+      "task_json": ".private/beam_20261018/legacy_bench_20261018/pro-results/beam_initial_fixed128/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-initial128/details/instance_element-hq__element-web-459df4583e01e4744a52d45446e34183385442d6-vnan--5275885b40cea448dd928c116c0b9b66d8fa16468352993a8602607823f3fee6/task.json",
+      "task_json_sha256": "5afc604afa86c4d178ea6aef9803cca24e1a948504110f5eefedcb8503117a8a",
+      "original_result": ".private/beam_20261018/legacy_bench_20261018/pro-results/beam_initial_fixed128/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-initial128/details/instance_element-hq__element-web-459df4583e01e4744a52d45446e34183385442d6-vnan--5275885b40cea448dd928c116c0b9b66d8fa16468352993a8602607823f3fee6/attempt-1/result.json",
+      "original_result_sha256": "a803e6921f0d0c6e6dd640b5fa762c639e2f0cebecf0045d1c8bcda60999b9de",
+      "native_status": "eval_error",
+      "native_evaluate_timeout_seconds": 3600,
+      "native_grader_completed": false,
+      "valid_binary_score": false,
+      "verified_release_archive": "beam_legacy.tar.zst",
+      "task_and_result_in_verified_release": true
+    },
+    "opus_4_7": {
+      "scoring_run_id": "opus47-pro-full-r1",
+      "task_json": "bench/opus47_full_20261018/pro-results/opus47_full/claude-opus-4-7_swebench_pro_verified_mini_swe_agent/opus47-pro-full-r1/details/instance_element-hq__element-web-459df4583e01e4744a52d45446e34183385442d6-vnan--5275885b40cea448dd928c116c0b9b66d8fa16468352993a8602607823f3fee6/task.json",
+      "task_json_sha256": "5afc604afa86c4d178ea6aef9803cca24e1a948504110f5eefedcb8503117a8a",
+      "original_result": "bench/opus47_full_20261018/pro-results/opus47_full/claude-opus-4-7_swebench_pro_verified_mini_swe_agent/opus47-pro-full-r1/details/instance_element-hq__element-web-459df4583e01e4744a52d45446e34183385442d6-vnan--5275885b40cea448dd928c116c0b9b66d8fa16468352993a8602607823f3fee6/attempt-1/result.json",
+      "original_result_sha256": "00e9d05845500c0637a36936a9eed43b1dcfe36c12a33308561bf5376678acaa",
+      "native_status": "eval_error",
+      "native_evaluate_timeout_seconds": 3600,
+      "native_grader_completed": false,
+      "valid_binary_score": false,
+      "verified_release_archive": "opus47_legacy.tar.zst",
+      "task_and_result_in_verified_release": true
+    }
+  },
+  "opus_saved_patch_verifier_only_recovery_evidence": [
+    "evidence/opus47_pro_eval_timeout_recovery.json",
+    "evidence/opus47_pro_eval_crosshost_2922.json"
+  ],
+  "qualification": "Both original runs reached the same task and timed out in the native evaluate phase after 3600 seconds. This is evidence of a shared task-level scoring gap, not proof of the underlying cause or of either model succeeding or failing. Keep both original tasks ungraded. Saved-patch verifier-only retries remain separate and cannot add a model draw or success to the original round."
+}
