@@ -2,6 +2,7 @@
 """Reconcile BF16 exact-image TB round 1 with the verified release archives."""
 
 import json
+import hashlib
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -34,10 +35,32 @@ deferred_post_score_results = []
 direct_claim_path = BASE / '.private/muse_bf16_20261018/recovery_20261020/tb-r1-direct-2886-20261020-claim.json'
 roots = [BF / 'tb-results/muse-bf16-tb-r1']
 direct_tasks = set()
+direct_root = None
 if direct_claim_path.exists():
     direct_claim = load(direct_claim_path)
     direct_tasks = set(direct_claim['tasks'])
-    roots.append(BF / 'tb-results' / direct_claim['job_name'])
+    direct_root = BF / 'tb-results' / direct_claim['job_name']
+    roots.append(direct_root)
+recovery_claim_path = BASE / '.private/muse_bf16_20261018/recovery_20261020/muse-bf16-tb-r1-pre-model-recovery-20261020-claim.json'
+recovery_claim = load(recovery_claim_path) if recovery_claim_path.exists() else None
+recovery_root = BF / 'tb-results' / recovery_claim['job_name'] if recovery_claim else None
+corrected = {}
+if recovery_root:
+    for path in recovery_root.glob('*/result.json'):
+        row = load(path)
+        if not row.get('finished_at') or datetime.fromisoformat(row['finished_at'].replace('Z', '+00:00')) > score_generated:
+            continue
+        task = Path(row['config']['task']['path']).name
+        assert task in recovery_claim['tasks'] and task not in corrected
+        assert recovery_claim['verified_direct_endpoint'] in json.dumps(row['config']['agent'])
+        corrected[task] = path
+    roots.append(recovery_root)
+replaced_origins = {}
+for task in corrected:
+    frozen = recovery_claim['tasks'][task]
+    source = Path(frozen['source_result'])
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == frozen['source_result_sha256']
+    replaced_origins[str(source)] = task
 for result_path in (path for root in roots for path in root.glob('*/result.json')):
     row = load(result_path)
     if not row.get('finished_at'):
@@ -46,8 +69,13 @@ for result_path in (path for root in roots for path in root.glob('*/result.json'
         deferred_post_score_results.append(str(result_path.relative_to(BASE)))
         continue
     task = Path(row['config']['task']['path']).name
-    if result_path.parent.parent == roots[-1] and len(roots) > 1 and task not in direct_tasks:
+    if str(result_path) in replaced_origins:
+        continue
+    if direct_root and result_path.parent.parent == direct_root and task not in direct_tasks:
         errors.append(f'BF16 direct result is outside the frozen task claim: {task}')
+        continue
+    if recovery_root and result_path.parent.parent == recovery_root and task not in corrected:
+        errors.append(f'BF16 recovery result is outside the frozen task claim: {task}')
         continue
     reward = ((row.get('verifier_result') or {}).get('rewards') or {}).get('reward')
     if task not in expected or task in scored or task in ungraded_native:
@@ -126,6 +154,8 @@ audit = {'generated_utc': datetime.now(timezone.utc).isoformat(), 'expected_task
          'nonempty_reasoning_response_count': sum(row['nonempty_reasoning_content'] for row in raw_reasoning_by_task.values()),
          'raw_reasoning_by_task': raw_reasoning_by_task, 'thinking_warnings': thinking_warnings,
          'direct_run_id': roots[1].name if len(roots) > 1 else None,
+         'pre_model_recovery_run_id': recovery_root.name if recovery_root else None,
+         'replaced_unscored_originals': replaced_origins,
          'deferred_post_score_results': deferred_post_score_results,
          'archives': [row['archive_name'] for row in manifests],
          'missing_inputs': missing_inputs, 'missing_results': missing_results,

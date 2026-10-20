@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T21:27:17.759230+00:00",
+  "generated_utc": "2026-10-20T21:37:36.600234+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -249,11 +249,11 @@
           "2": {
             "expected": 89,
             "terminal": 89,
-            "graded": 83,
+            "graded": 84,
             "success": 61,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
-            "ungraded": 6,
+            "ungraded": 5,
             "exceptions": {
               "AgentTimeoutError": 9,
               "RuntimeError": 3,
@@ -268,13 +268,13 @@
           "3": {
             "expected": 89,
             "terminal": 89,
-            "graded": 73,
-            "success": 58,
+            "graded": 76,
+            "success": 61,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 3729,
-            "ungraded": 16,
+            "archived_actual_model_responses": 3768,
+            "ungraded": 13,
             "exceptions": {
-              "InternalServerError": 16
+              "InternalServerError": 13
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -287,7 +287,7 @@
           }
         },
         "status": "round_1_complete_later_rounds_partial",
-        "native_score_snapshot_utc": "2026-10-20T21:17:43.047048+00:00",
+        "native_score_snapshot_utc": "2026-10-20T21:32:44.197784+00:00",
         "recovery": {
           "controller": "failed",
           "parallel_controller": "inactive",
@@ -470,8 +470,8 @@
             "new_allocation": 2902,
             "controller": "active",
             "tasks": 10,
-            "terminal": 4,
-            "graded": 4,
+            "terminal": 5,
+            "graded": 5,
             "success": 4,
             "active_trial_dirs": 2,
             "no_best_of_selection": true,
@@ -518,24 +518,24 @@
             "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
             "original_ungraded_infra_failures": 89,
             "original_model_responses": 0,
-            "replacement_terminal": 73,
-            "replacement_graded": 73,
-            "replacement_success": 58,
-            "replacement_raw_responses": 3729,
+            "replacement_terminal": 76,
+            "replacement_graded": 76,
+            "replacement_success": 61,
+            "replacement_raw_responses": 3768,
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
               "largest-eigenval"
             ],
-            "active_trial_dirs": 9,
+            "active_trial_dirs": 7,
             "all_tasks_single_replacement_draw": false,
             "infrastructure_interruption_continuation": {
               "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/expired2869-continuation-2900-claim.json",
               "claim_sha256": "d7048a207875858453e57f410ff1437cc217b364cff8382b3538cc0abd1b8307",
               "expected": 11,
-              "terminal": 7,
-              "graded": 7,
-              "success": 5,
-              "raw_responses": 356,
+              "terminal": 8,
+              "graded": 8,
+              "success": 6,
+              "raw_responses": 375,
               "source_partial_model_response_tasks": 4,
               "source_partial_model_responses": 150,
               "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
@@ -596,15 +596,15 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 452,
-        "graded": 332,
-        "success": 198,
+        "terminal": 453,
+        "graded": 336,
+        "success": 200,
         "status": "partial_no_full_score",
         "pre_model_disk_correction": {
           "declared_tasks": 136,
-          "native_terminal": 19,
-          "native_graded": 19,
-          "native_success": 12,
+          "native_terminal": 22,
+          "native_graded": 22,
+          "native_success": 14,
           "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
           "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json"
         },
@@ -612,9 +612,9 @@
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 68,
-        "graded": 68,
-        "success": 36,
+        "terminal": 71,
+        "graded": 71,
+        "success": 37,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -687,11 +687,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 88,
-            "graded": 87,
+            "terminal": 89,
+            "graded": 88,
             "success": 62,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 6952,
+            "archived_actual_model_responses": 6957,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 10,
@@ -708,7 +708,7 @@
             "graded": 66,
             "success": 42,
             "active_trial_dirs": 84,
-            "archived_actual_model_responses": 3731,
+            "archived_actual_model_responses": 3737,
             "ungraded": 14,
             "exceptions": {
               "RuntimeError": 13,
@@ -1012,8 +1012,8 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 183,
-        "graded": 183,
+        "terminal": 184,
+        "graded": 184,
         "success": 121,
         "status": "partial_no_full_score",
         "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
@@ -1028,7 +1028,7 @@
         "1": {
           "expected": 89,
           "terminal": 78,
-          "graded": 46,
+          "graded": 47,
           "success": 37,
           "status": "partial_no_full_score",
           "supplemental_run_id": "muse-bf16-tb-r1-direct-2886-20261020"
@@ -1054,17 +1054,17 @@
           "1": {
             "expected": 89,
             "terminal": 78,
-            "graded": 46,
+            "graded": 47,
             "success": 37,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
-            "native_score_snapshot_utc": "2026-10-20T21:17:37.894535+00:00",
+            "native_score_snapshot_utc": "2026-10-20T21:34:35.076372+00:00",
             "qualification": "Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.",
             "pre_model_infrastructure_recovery": {
               "declared_tasks": 30,
-              "native_terminal": 0,
-              "replaced_unscored_originals": 0,
+              "native_terminal": 1,
+              "replaced_unscored_originals": 1,
               "excluded_partial_model_output_tasks": [
                 "query-optimize",
                 "schemelike-metacircular-eval"
@@ -1085,14 +1085,14 @@
         "1": {
           "expected": 113,
           "terminal": 113,
-          "graded": 93,
-          "success": 50,
+          "graded": 94,
+          "success": 51,
           "status": "partial_no_full_score",
           "supplemental_run_id": "muse-bf16-deep-r1-direct-2886-20261020",
           "pre_model_endpoint_recovery": {
             "declared_tasks": 17,
-            "native_terminal": 1,
-            "replaced_unscored_originals": 1,
+            "native_terminal": 2,
+            "replaced_unscored_originals": 2,
             "prior_pre_model_client_failures": 2,
             "claim": "evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json",
             "config": "evidence/muse_bf16_deep_pre_model_endpoint_recovery_config.json",
