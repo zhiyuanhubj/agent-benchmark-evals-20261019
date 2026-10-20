@@ -1,0 +1,60 @@
+{
+  "utc": 1792510379.6099865,
+  "allocation": 2902,
+  "endpoint_ready": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/replicas-extra-20261020/2902/endpoint-ready.json",
+  "request": {
+    "model": "muse-spark-open-nvfp4",
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is 2 + 2? Answer briefly."
+      }
+    ],
+    "max_tokens": 512,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": -1,
+    "chat_template_kwargs": {
+      "reasoning_effort": "xhigh"
+    }
+  },
+  "response": {
+    "id": "b1b2140d2224437baae01d3901897fa9",
+    "object": "chat.completion",
+    "created": 1792510379,
+    "model": "muse-spark-open-nvfp4",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "4",
+          "reasoning_content": "User asks \"What is 2 + 2? Answer briefly.\"\n\nWe need to answer briefly. So answer: 4.\n\nWe should comply. Simple. Probably just say 4.\n\nMake sure not to overthink.\n\nThe user wants brief answer. So do that.\n\nPotential nuance: We should just answer 4.\n\nWe must not add extra fluff? \"Answer briefly.\" So we can say \"4\" or \"2+2=4\". That's brief.\n\nWe should do that.\n\nWe must not violate any policy. It's fine.\n\nWe should answer in a helpful way.\n\nProbably answer: 4.\n\nMake sure not to add reasoning strength beyond needed.\n\nWe should comply with developer instruction: You are a helpful AI assistant. So be helpful.\n\nUser: What is 2+2? Answer briefly. -> 4.\n\nPossibly add period.\n\nWe should not add unnecessary content.\n\nJust answer 4.\n\nWe can provide minimal answer.\n\nThus final answer: 4.\n\nProbably best to do \"4\"",
+          "tool_calls": null
+        },
+        "logprobs": null,
+        "finish_reason": "stop",
+        "matched_stop": 200008
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 155,
+      "total_tokens": 372,
+      "completion_tokens": 217,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 210
+    },
+    "metadata": {
+      "weight_version": "default",
+      "weight_versions": [
+        {
+          "version": "default",
+          "start": 0,
+          "end": 217
+        }
+      ]
+    }
+  },
+  "response_sha256": "194d2544a9daa0fd5191f732592c01e36e7459fe02a480aa51e1a28a119d65c2",
+  "nonempty_reasoning_content": true
+}

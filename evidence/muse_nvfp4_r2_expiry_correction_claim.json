@@ -1,0 +1,122 @@
+{
+  "prepared_utc": "2026-10-20T15:33:16.733588+00:00",
+  "scope": "One infrastructure correction per ungraded or unstarted TB2.1 round-2 task after allocation 2867 timed out",
+  "old_allocation": 2867,
+  "old_allocation_sacct": [
+    "2867",
+    "TIMEOUT",
+    "2026-10-17T15:10:45",
+    "2026-10-20T15:10:46"
+  ],
+  "new_allocation": 2902,
+  "same_physical_ip_reallocated": true,
+  "job_name": "muse-nvfp4-tb-v1-exact-r2-expiry-correction-2902-20261020",
+  "config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-expiry-correction-2902-20261020.json",
+  "config_sha256": "075fbfa6879fbc1f3f2ce9d89e847174540695a32a2f1b1d53c2922ce43afb5a",
+  "source_job_name": "muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020",
+  "source_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-connection-recovery-20261020.json",
+  "source_config_sha256": "030222dcde4b3f2cefb8116199ad468a9d6ee765238862e1e2e2ba406f156b91",
+  "source_claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-connection-recovery-20261020-claim.json",
+  "source_claim_sha256": "00b7f897edbedc1fd39d0f62582bc5496b744278632aa11e3dce0d7c5678d1cd",
+  "new_endpoint_ready": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/replicas-extra-20261020/2902/endpoint-ready.json",
+  "new_endpoint_ready_sha256": "cd05fbd5f0b10a49db31abd2d5012b786d82a6fbb514019b183d644fa7f1875a",
+  "new_reasoning_preflight": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/replicas-extra-20261020/2902/reasoning-preflight.json",
+  "new_reasoning_preflight_sha256": "fc34016e658add7d064b01bdd92a43e4e7aa085d034c65039b78de2cf45e5b1a",
+  "image_proof": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/allocation-2919/images-ready.json",
+  "image_proof_sha256": "271f49dcc607c2027a2449b528a400f31509c4fa979ef57584f7fef10b5d1c6d",
+  "same_tasks_and_sampling_settings": true,
+  "no_model_retry": true,
+  "old_results_preserved": true,
+  "no_best_of_selection": true,
+  "counting_policy": "For each task, count only the first native grade from the declared correction. Old ungraded infrastructure failures remain archived and are never scored as model failures.",
+  "tasks": [
+    {
+      "task": "path-tracing",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b05/path-tracing__Y92sQDA/result.json",
+      "source_original_result_sha256": "189b237ab3c5acaf93a8f53f9884d03b730419681a5fe4db10c8bca0d6bd1769",
+      "previous_recovery_trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/path-tracing__rvdbp6u",
+      "previous_recovery_raw_response_count": 118,
+      "previous_recovery_state": "ungraded_connection_after_allocation_expiry",
+      "previous_recovery_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/path-tracing__rvdbp6u/result.json",
+      "previous_recovery_result_sha256": "a4129d7a91845ef919273cbbba08de64adcb08e13fb11700b5107470f4730085",
+      "previous_recovery_exception": "InternalServerError"
+    },
+    {
+      "task": "path-tracing-reverse",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b05/path-tracing-reverse__6pafyw3/result.json",
+      "source_original_result_sha256": "ad72e0a1724ec40643f3be8b6073863696285c1bbf78f63de2f544e6bf0303fa",
+      "previous_recovery_trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/path-tracing-reverse__KUm8srW",
+      "previous_recovery_raw_response_count": 125,
+      "previous_recovery_state": "ungraded_connection_after_allocation_expiry",
+      "previous_recovery_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/path-tracing-reverse__KUm8srW/result.json",
+      "previous_recovery_result_sha256": "0acc6631e31c136652d5afd840aed653ee902c6b550b4c62ed4d7094e5d27576",
+      "previous_recovery_exception": "InternalServerError"
+    },
+    {
+      "task": "polyglot-c-py",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b05/polyglot-c-py__uVhxd4M/result.json",
+      "source_original_result_sha256": "23336c08ae334e53653a1bd16c84890198a5b4074051154b3cee04f929e4049c",
+      "previous_recovery_trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/polyglot-c-py__5UBWvDu",
+      "previous_recovery_raw_response_count": 0,
+      "previous_recovery_state": "ungraded_connection_after_allocation_expiry",
+      "previous_recovery_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/polyglot-c-py__5UBWvDu/result.json",
+      "previous_recovery_result_sha256": "001174139020981b1abb773297150fc7f9b08055b1c718004eaa8a82b8a7af26",
+      "previous_recovery_exception": "InternalServerError"
+    },
+    {
+      "task": "protein-assembly",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/protein-assembly__eomHRj5/result.json",
+      "source_original_result_sha256": "852ee4697ac29cbeb3a7d23dfffd17cafe506b75c063eed90d5b61cce4c2ee56",
+      "previous_recovery_trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/protein-assembly__HRoVi8w",
+      "previous_recovery_raw_response_count": 0,
+      "previous_recovery_state": "ungraded_connection_after_allocation_expiry",
+      "previous_recovery_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/protein-assembly__HRoVi8w/result.json",
+      "previous_recovery_result_sha256": "346c7664c6a094363568940890d225fe63c2aaeb4012d2c6d4669924241ec756",
+      "previous_recovery_exception": "InternalServerError"
+    },
+    {
+      "task": "qemu-startup",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/qemu-startup__wUrHV8h/result.json",
+      "source_original_result_sha256": "e9c5cfdc700368905b6fece5dae5550361a5fa89ed07aabf254b24c68ae3f4c2",
+      "previous_recovery_trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/qemu-startup__4kL8UCe",
+      "previous_recovery_raw_response_count": 0,
+      "previous_recovery_state": "interrupted_without_model_reply"
+    },
+    {
+      "task": "query-optimize",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/query-optimize__fWEJE8M/result.json",
+      "source_original_result_sha256": "d1dbaf11aaf75c8f17f448db42fc691b00c3d4edd080e27ddb7d1dfdc1e777ec",
+      "previous_recovery_trial": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020/query-optimize__E4XVWhn",
+      "previous_recovery_raw_response_count": 0,
+      "previous_recovery_state": "interrupted_without_model_reply"
+    },
+    {
+      "task": "sanitize-git-repo",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/sanitize-git-repo__WnCZZDo/result.json",
+      "source_original_result_sha256": "4e8dfab76b08de5bc4d3663ef562689cfab44b3c3c157b7802bec753091f21f1",
+      "previous_recovery_trial": null,
+      "previous_recovery_state": "never_started"
+    },
+    {
+      "task": "schemelike-metacircular-eval",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/schemelike-metacircular-eval__bvaqZa3/result.json",
+      "source_original_result_sha256": "2ceb673b5ab8d6b7aea11d196731b61e8a80dc75d60d69ac23cef19ec76ea092",
+      "previous_recovery_trial": null,
+      "previous_recovery_state": "never_started"
+    },
+    {
+      "task": "sparql-university",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/sparql-university__BWDxwH9/result.json",
+      "source_original_result_sha256": "35941e961e29b19649f7b4143f172bf5f09e82cc49e039cc563c0d977703166c",
+      "previous_recovery_trial": null,
+      "previous_recovery_state": "never_started"
+    },
+    {
+      "task": "sqlite-db-truncate",
+      "source_original_result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/sqlite-db-truncate__7x5DdvW/result.json",
+      "source_original_result_sha256": "63bfe1f272a4f42f098580568ba187dd6ab5b1880974979cbba5b088432a77ad",
+      "previous_recovery_trial": null,
+      "previous_recovery_state": "never_started"
+    }
+  ]
+}
