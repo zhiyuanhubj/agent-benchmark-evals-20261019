@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T02:45:22.401382+00:00",
+  "generated_utc": "2026-10-20T02:57:12.881473+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -220,14 +220,14 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 41,
-            "graded": 41,
+            "terminal": 42,
+            "graded": 42,
             "success": 33,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 0,
             "exceptions": {
-              "AgentTimeoutError": 5
+              "AgentTimeoutError": 6
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -284,26 +284,26 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 77,
-            "2": 41,
+            "2": 42,
             "3": 0
           },
-          "new_raw_model_responses": 7551,
+          "new_raw_model_responses": 7603,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b02": 428,
-            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 1095,
+            "muse-nvfp4-tb-v1-exact-r1-completion-2866-b03": 1102,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b04": 589,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b05": 428,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b06": 318,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b07": 542,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 602,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 863,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 622
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 621,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 882,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 629
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T02:45:27+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-20T02:57:14+00:00",
           "active_recovery_trial_dirs": 6,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -360,16 +360,16 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 142,
-        "graded": 141,
-        "success": 86,
+        "terminal": 143,
+        "graded": 142,
+        "success": 87,
         "status": "partial_no_full_score"
       },
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 101,
-          "graded": 100,
+          "terminal": 102,
+          "graded": 101,
           "success": 40,
           "status": "partial_no_full_score"
         },
@@ -435,7 +435,7 @@
             "graded": 44,
             "success": 29,
             "active_trial_dirs": 49,
-            "archived_actual_model_responses": 3186,
+            "archived_actual_model_responses": 3238,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 3,
@@ -474,7 +474,7 @@
       "swe_review": {
         "glm5_500": {
           "expected": 500,
-          "terminal": 471,
+          "terminal": 474,
           "status": "partial_no_full_rrr"
         },
         "qwen3_coder_30b_500": {
@@ -743,24 +743,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 32,
-        "native_graded": 32,
+        "native_terminal": 37,
+        "native_graded": 37,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 10,
-            "native_graded": 10
-          },
-          "qwen3_coder_30b_500": {
-            "expected": 462,
             "native_terminal": 12,
             "native_graded": 12
           },
+          "qwen3_coder_30b_500": {
+            "expected": 462,
+            "native_terminal": 13,
+            "native_graded": 13
+          },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 10,
-            "native_graded": 10
+            "native_terminal": 12,
+            "native_graded": 12
           }
         },
         "DA": null,
