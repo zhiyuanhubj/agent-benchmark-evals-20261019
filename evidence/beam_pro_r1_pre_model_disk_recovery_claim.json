@@ -1,0 +1,30 @@
+{
+  "prepared_utc": "2026-10-20T18:01:04.872937+00:00",
+  "scope": "Separate first actual Beam BF16 Pro round-1 model draw for tasks whose original handoff failed before any answer due to CPU disk full.",
+  "source_run_id": "beam-pro-r1-handoff-unattempted",
+  "source_command": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/handoff_20261020/command.json",
+  "source_command_sha256": "185f9c6ee8f9a62a3367b1b055c2c4886c30238124c61fbc93eecb6481b9f15d",
+  "pre_model_audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_pro_r1_pre_model_disk_failures.json",
+  "pre_model_audit_sha256": "22eaca2798c09b7322aef12e01b386cf7edd324edcf3128a6a715a45eadeca5f",
+  "model_ready": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/serving-conformance-ready.json",
+  "model_ready_sha256": "1209096306aed50069918008e3dad1cadb0bf2273ea163060605612149b43bfc",
+  "cpu_allocation": 2968,
+  "model_allocation": 2888,
+  "endpoint": "http://10.1.108.251:31328/v1",
+  "task_count": 136,
+  "run_name": "beam_pro_r1_pre_model_disk_correction_2968_20261020",
+  "run_id": "beam-pro-r1-pre-model-disk-2968-20261020",
+  "result_root": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results",
+  "same_sampling_harness_verifier_and_task_protocol": true,
+  "infrastructure_only_changes": [
+    "dedicated CPU allocation",
+    "verified equivalent Beam BF16 endpoint",
+    "disjoint correction result root",
+    "task concurrency 6 to 4"
+  ],
+  "original_results_preserved": true,
+  "no_best_of_selection": true,
+  "scoring_policy": "Keep correction separate until task-level reconciliation proves exactly one valid model draw per source task.",
+  "command": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/disk_correction_2968_20261020/command.json",
+  "command_sha256": "3c107f4799507a75342ad546d3bada5dd59017acadd2bb75c392f2d3b6680179"
+}

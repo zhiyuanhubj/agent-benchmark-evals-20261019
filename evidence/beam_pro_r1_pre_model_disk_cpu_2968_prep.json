@@ -1,0 +1,45 @@
+{
+  "audited_utc": "2026-10-20T18:05:30.796582+00:00",
+  "cpu_allocation": 2968,
+  "node": "ip-10-1-100-204",
+  "job_state": "RUNNING",
+  "builder_cache_prune_log": "/fsx/home/zhiyuan/.private/beam_20261018/cpu_capacity_20261018/build-cache-prune-2968-20261020.log",
+  "builder_cache_prune_log_sha256": "eec394e0cfb9fd2f6d0feac36273f510c917e63507991370bd031d70976e7d6b",
+  "builder_cache_reclaimed": "171.3GB",
+  "builder_cache_policy": "docker builder prune -af removed unused build cache; it did not issue image or container deletion commands.",
+  "docker_disk_free_gib_after_launch": 255.16,
+  "pre_model_audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
+  "pre_model_audit_sha256": "22eaca2798c09b7322aef12e01b386cf7edd324edcf3128a6a715a45eadeca5f",
+  "launch_claim": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/disk_correction_2968_20261020/claim.json",
+  "launch_claim_sha256": "a414c21d2229f157df623e27ba3730b41465e344d8880f3887fcccf078264887",
+  "model_ready_proof": "/fsx/home/zhiyuan/.private/beam_20261018/expanded_capacity_20261018/allocation-2888-rank-0/serving-conformance-ready.json",
+  "model_ready_proof_sha256": "1209096306aed50069918008e3dad1cadb0bf2273ea163060605612149b43bfc",
+  "controller_unit": "beam-pro-r1-pre-model-disk-correction-2968-20261020.service",
+  "controller_active": true,
+  "native_progress": {
+    "declared_tasks": 136,
+    "attempts_started": 4,
+    "running_tasks": 4,
+    "current_phase_counts": {
+      "run_harness": 4
+    }
+  },
+  "disk_guard": {
+    "unit": "beam-pro-r1-disk-correction-image-guard-2968-20261020.service",
+    "active": true,
+    "wrapper": "protocol/guard_2968_beam_pro_disk_correction_images_20261020.py",
+    "wrapper_sha256": "fe321cd043311d143a32c785344fd70adb6659d0a595e48e10d32cc826b84d53",
+    "shared_guard_source": "protocol/guard_2922_completed_muse_pro_images_20261020.py",
+    "shared_guard_source_sha256": "7bdfb5fcc297b8f679335c6abac16ef0ca76250cb7bf4332200ee061cbf75c3b",
+    "private_event_log": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/disk_correction_2968_20261020/image-guard.jsonl",
+    "latest_healthy_event": {
+      "utc": "2026-10-20T18:06:09.979280+00:00",
+      "event": "healthy",
+      "free_gib": 255.8
+    },
+    "trigger_free_gib": 80,
+    "target_free_gib": 160,
+    "check_interval_seconds": 180
+  },
+  "updated_utc": "2026-10-20T18:06:19.862012+00:00"
+}

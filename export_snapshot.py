@@ -75,6 +75,16 @@ ex = read(B / 'expanded-current.json')
 beam_pro = ex['beam_bf16']['pro']
 assert beam_pro['expected'] == 731
 assert not beam_pro['duplicate_task_ids'], 'Beam Pro task IDs overlap across original and handoff runs'
+beam_pro_disk_correction = beam_pro.get('pre_model_disk_correction')
+if beam_pro_disk_correction:
+    correction_claim_path = Path(beam_pro_disk_correction['claim'])
+    correction_claim = read(correction_claim_path)
+    assert hashlib.sha256(correction_claim_path.read_bytes()).hexdigest() == beam_pro_disk_correction['claim_sha256']
+    correction_command_path = Path(correction_claim['command'])
+    assert hashlib.sha256(correction_command_path.read_bytes()).hexdigest() == correction_claim['command_sha256']
+    assert correction_claim['task_count'] == beam_pro_disk_correction['declared_tasks'] == 136
+    write('evidence/beam_pro_r1_pre_model_disk_recovery_claim.json', correction_claim)
+    write('evidence/beam_pro_r1_pre_model_disk_recovery_command.json', read(correction_command_path))
 handoff_evidence = read(ROOT / 'evidence/beam_pro_disjoint_handoff_20261020.json')
 assert handoff_evidence['declared_count'] == 603
 assert handoff_evidence['terminal_count'] + handoff_evidence['pending_count'] == 603
@@ -88,6 +98,11 @@ write('evidence/beam_pro_handoff_progress.json', {
     'success': beam_pro['success'],
     'missing_result_task_count': beam_pro['missing_result_task_count'],
     'duplicate_task_ids': beam_pro['duplicate_task_ids'],
+    'pre_model_disk_correction': ({key: beam_pro_disk_correction[key]
+                                   for key in ('declared_tasks', 'native_terminal', 'native_graded', 'native_success')}
+                                  | {'claim': 'evidence/beam_pro_r1_pre_model_disk_recovery_claim.json',
+                                     'audit': 'evidence/beam_pro_r1_pre_model_disk_failures.json'}
+                                  if beam_pro_disk_correction else None),
     'qualification': 'Partial native first-round progress; all original and disjoint handoff task IDs are counted at most once. Not a full-set accuracy.',
 })
 bf16_expiry_recovery = read(ROOT / 'evidence/muse_bf16_2865_expiry_recovery.json')
@@ -901,7 +916,13 @@ snapshot = {
         },
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',
-            'swe_bench_pro_verified': metric(ex['beam_bf16']['pro'], 'pro', 'partial_no_full_score'),
+            'swe_bench_pro_verified': metric(ex['beam_bf16']['pro'], 'pro', 'partial_no_full_score') | {
+                'pre_model_disk_correction': ({key: beam_pro_disk_correction[key]
+                                               for key in ('declared_tasks', 'native_terminal', 'native_graded', 'native_success')}
+                                              | {'audit': 'evidence/beam_pro_r1_pre_model_disk_failures.json',
+                                                 'claim': 'evidence/beam_pro_r1_pre_model_disk_recovery_claim.json'}
+                                              if beam_pro_disk_correction else None),
+                'qualification': 'Only native-graded corrections to audited pre-model disk-full failures are counted once; later rounds remain separate. Partial, not full-set accuracy.'},
             'swe_bench_pro_verified_round_2': metric(
                 ex['beam_bf16'].get('pro_round2', {'expected': 731, 'terminal': 0,
                                                    'graded': 0, 'success': 0}),

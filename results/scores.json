@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T17:50:28.810967+00:00",
+  "generated_utc": "2026-10-20T18:07:29.977005+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -271,7 +271,7 @@
             "graded": 53,
             "success": 45,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 2795,
+            "archived_actual_model_responses": 2860,
             "ungraded": 36,
             "exceptions": {
               "InternalServerError": 36
@@ -520,7 +520,7 @@
             "replacement_terminal": 53,
             "replacement_graded": 53,
             "replacement_success": 45,
-            "replacement_raw_responses": 2795,
+            "replacement_raw_responses": 2860,
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
               "largest-eigenval"
@@ -534,7 +534,7 @@
               "terminal": 1,
               "graded": 1,
               "success": 1,
-              "raw_responses": 86,
+              "raw_responses": 107,
               "source_partial_model_response_tasks": 4,
               "source_partial_model_responses": 150,
               "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
@@ -595,16 +595,25 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 409,
-        "graded": 270,
-        "success": 163,
-        "status": "partial_no_full_score"
+        "terminal": 416,
+        "graded": 277,
+        "success": 167,
+        "status": "partial_no_full_score",
+        "pre_model_disk_correction": {
+          "declared_tasks": 136,
+          "native_terminal": 0,
+          "native_graded": 0,
+          "native_success": 0,
+          "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
+          "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json"
+        },
+        "qualification": "Only native-graded corrections to audited pre-model disk-full failures are counted once; later rounds remain separate. Partial, not full-set accuracy."
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 26,
-        "graded": 26,
-        "success": 17,
+        "terminal": 28,
+        "graded": 28,
+        "success": 19,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -621,9 +630,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 72,
-          "graded": 71,
-          "success": 29,
+          "terminal": 74,
+          "graded": 73,
+          "success": 31,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -681,7 +690,7 @@
             "graded": 85,
             "success": 62,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 6273,
+            "archived_actual_model_responses": 6326,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 8,
@@ -694,15 +703,15 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 67,
-            "graded": 53,
+            "terminal": 69,
+            "graded": 55,
             "success": 34,
-            "active_trial_dirs": 71,
-            "archived_actual_model_responses": 2878,
+            "active_trial_dirs": 73,
+            "archived_actual_model_responses": 2912,
             "ungraded": 14,
             "exceptions": {
               "RuntimeError": 13,
-              "AgentTimeoutError": 1,
+              "AgentTimeoutError": 2,
               "RewardFileNotFoundError": 1
             },
             "excluded_user_reassignment_trials": [],
@@ -938,10 +947,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 271,
+          "completed_trials": 273,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 227,
+          "pending_trials": 225,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:18.993248",
           "finished_at": null
@@ -953,10 +962,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 258,
+          "completed_trials": 265,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 202,
+          "pending_trials": 195,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:10.468330",
           "finished_at": null
@@ -968,10 +977,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 303,
+          "completed_trials": 311,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 117,
+          "pending_trials": 109,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:16.640783",
           "finished_at": null
@@ -1092,24 +1101,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 367,
-        "native_graded": 367,
+        "native_terminal": 375,
+        "native_graded": 375,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 125,
-            "native_graded": 125
+            "native_terminal": 127,
+            "native_graded": 127
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 121,
-            "native_graded": 121
+            "native_terminal": 124,
+            "native_graded": 124
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 121,
-            "native_graded": 121
+            "native_terminal": 124,
+            "native_graded": 124
           }
         },
         "DA": null,

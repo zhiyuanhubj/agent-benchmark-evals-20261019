@@ -130,7 +130,7 @@ def include(path, root, group):
         return False
     if group == 'opus47_legacy' and not any(x in rel.parts for x in ('pro-results', 'tb-results', 'deep-results', 'api_archive')):
         return False
-    if group == 'beam_legacy' and not any(x in rel.parts for x in ('pro-results', 'tb-results', 'deep-results', 'results', 'remaining_pro', 'remaining_tb', 'remaining_deep')):
+    if group == 'beam_legacy' and not any(x in rel.parts for x in ('pro-results', 'tb-results', 'deep-results', 'results', 'remaining_pro', 'remaining_tb', 'remaining_deep', 'disk_correction_results')):
         return False
     parts = rel.parts
     if path.name in ('result.json', 'task.json', 'config.json', 'trajectory.json', 'exception.txt', 'trial.log', 'openhands_sdk.txt'):

@@ -1,11 +1,19 @@
 {
-  "generated_utc": "2026-10-20T17:50:28.810967+00:00",
+  "generated_utc": "2026-10-20T18:07:29.977005+00:00",
   "handoff_plan_evidence": "evidence/beam_pro_disjoint_handoff_20261020.json",
   "expected": 731,
-  "terminal": 409,
-  "graded": 270,
-  "success": 163,
-  "missing_result_task_count": 322,
+  "terminal": 416,
+  "graded": 277,
+  "success": 167,
+  "missing_result_task_count": 315,
   "duplicate_task_ids": [],
+  "pre_model_disk_correction": {
+    "declared_tasks": 136,
+    "native_terminal": 0,
+    "native_graded": 0,
+    "native_success": 0,
+    "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json",
+    "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json"
+  },
   "qualification": "Partial native first-round progress; all original and disjoint handoff task IDs are counted at most once. Not a full-set accuracy."
 }

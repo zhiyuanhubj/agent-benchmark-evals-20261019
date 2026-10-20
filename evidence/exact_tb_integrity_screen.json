@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T17:52:39.403071+00:00",
+  "generated_utc": "2026-10-20T18:09:51.122553+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -89,7 +89,7 @@
       }
     },
     "beam_bf16_r3": {
-      "scored_trajectories_checked": 54,
+      "scored_trajectories_checked": 57,
       "pattern_hit_trajectories": 4,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -9351,6 +9351,18 @@
     {
       "model": "beam_bf16_r3",
       "round": 3,
+      "task": "raman-fitting",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/raman-fitting__WYEF3J7/agent/trajectory.json",
+      "trajectory_sha256": "101e666a4099eee043162e6252fc99d1bd5041fc2eae7b627b54c7e32118f7bb",
+      "steps": 73,
+      "tool_calls": 76,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
       "task": "circuit-fibsqrt",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/circuit-fibsqrt__wwR2fRY/agent/trajectory.json",
@@ -9429,6 +9441,18 @@
       "trajectory_sha256": "41745b773f3e4dc66cbd6cbc96795c5d50bf8c3f206ab6652df48277974a689b",
       "steps": 20,
       "tool_calls": 26,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
+      "task": "query-optimize",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/query-optimize__MuaDN5b/agent/trajectory.json",
+      "trajectory_sha256": "3ca1fdeea9b11331ae9de27470e7c909541bafc630d8601f4f7e291342dc0a28",
+      "steps": 38,
+      "tool_calls": 72,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -9683,6 +9707,18 @@
       "trajectory_sha256": "c4c9a6f9c6f1e3b590b9f32d578830bb0170e8ba894244c7fd726ef672eb914c",
       "steps": 5,
       "tool_calls": 9,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
+      "task": "regex-log",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/regex-log__4rATd5J/agent/trajectory.json",
+      "trajectory_sha256": "5baffb102c86710ec0c852da25369f23abe5a0b70b9896a0b45789e4fcb6473f",
+      "steps": 19,
+      "tool_calls": 22,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

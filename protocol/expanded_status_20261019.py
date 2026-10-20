@@ -113,6 +113,51 @@ record['beam_bf16'] = dict(
             excluded_run_names=(beam_pro_round2_name,)),
     pro_round2=pro([beam_pro_round2_root], beam_pro_ids),
 )
+beam_disk_audit_path = Path('/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_pro_r1_pre_model_disk_failures.json')
+beam_disk_claim_path = legacy / 'remaining_pro/disk_correction_2968_20261020/claim.json'
+if beam_disk_claim_path.exists():
+    audit = load(beam_disk_audit_path)
+    claim = load(beam_disk_claim_path)
+    assert hashlib.sha256(beam_disk_audit_path.read_bytes()).hexdigest() == claim['pre_model_audit_sha256']
+    assert claim['source_run_id'] == 'beam-pro-r1-handoff-unattempted'
+    assert claim['task_count'] == audit['pre_model_disk_failure_count'] == 136
+    originals = {row['task']: row for row in audit['tasks']}
+    assert len(originals) == 136
+    correction_root = (legacy / 'disk_correction_results' / claim['run_name'] /
+                       'Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent' /
+                       claim['run_id'])
+    correction_rows = {}
+    for path in correction_root.glob('details/*/attempt-1/result.json'):
+        task = load(path.parent.parent / 'task.json')['task_id']
+        assert task in originals and task not in correction_rows
+        original = originals[task]
+        assert hashlib.sha256(Path(original['result']).read_bytes()).hexdigest() == original['result_sha256']
+        result = load(path)
+        evaluation = (((result.get('meta') or {}).get('benchmark') or {}).get('eval_raw_data') or {})
+        score = (result.get('metrics') or {}).get('correct')
+        graded = evaluation.get('completed') is True and isinstance(score, bool)
+        if graded:
+            assert score == bool(evaluation['resolved'])
+        correction_rows[task] = {'result': str(path), 'result_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                                 'native_status': result.get('status'), 'graded': graded,
+                                 'success': graded and score is True}
+    correction_graded = sum(row['graded'] for row in correction_rows.values())
+    correction_success = sum(row['success'] for row in correction_rows.values())
+    beam_pro = record['beam_bf16']['pro']
+    assert beam_pro['native_status_counts'].get('run_error_or_eval_error', 0) >= correction_graded
+    beam_pro['graded'] += correction_graded
+    beam_pro['success'] += correction_success
+    beam_pro['missing_native_grader_completion'] -= correction_graded
+    beam_pro['native_status_counts']['run_error_or_eval_error'] -= correction_graded
+    beam_pro['native_status_counts']['completed'] = beam_pro['native_status_counts'].get('completed', 0) + correction_graded
+    beam_pro['pre_model_disk_correction'] = {
+        'claim': str(beam_disk_claim_path), 'claim_sha256': hashlib.sha256(beam_disk_claim_path.read_bytes()).hexdigest(),
+        'audit': str(beam_disk_audit_path), 'audit_sha256': claim['pre_model_audit_sha256'],
+        'declared_tasks': 136, 'native_terminal': len(correction_rows),
+        'native_graded': correction_graded, 'native_success': correction_success,
+        'rows': correction_rows,
+        'qualification': 'Only native-graded first actual model draws replace matching pre-model disk-full non-samples. Original results are preserved; no correctness-based selection.'}
+    beam_pro['qualification'] += ' Audited pre-model disk-full corrections are counted once only when their native grader completes.'
 record['beam_bf16']['tb_initial_client_protocol_issue'] = load(legacy / 'state/tb-initial-output-length-client-issue.json')
 record['beam_bf16']['future_tb_output_length_thinking_validation'] = load(legacy / 'remaining_tb/state/output-length-thinking-validation.json')
 beam_tb_recovery = legacy / 'tb_protocol_recovery_20261018'

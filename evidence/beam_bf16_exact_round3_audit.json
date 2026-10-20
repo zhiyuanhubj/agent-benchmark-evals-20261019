@@ -1,16 +1,15 @@
 {
-  "generated_utc": "2026-10-20T17:52:22.974408+00:00",
+  "generated_utc": "2026-10-20T18:09:33.658022+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T174105Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T175854Z.tar.zst",
   "expected": 89,
-  "terminal": 67,
-  "graded": 53,
+  "terminal": 68,
+  "graded": 54,
   "success": 34,
   "missing_graded_tasks": [
-    "extract-moves-from-video",
     "git-multibranch",
     "headless-terminal",
     "make-mips-interpreter",
@@ -126,7 +125,9 @@
     }
   },
   "unarchived_new_terminal_tasks": [
-    "extract-moves-from-video"
+    "query-optimize",
+    "raman-fitting",
+    "regex-log"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -295,6 +296,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/extract-elf__jzhhBmB/result.json",
       "raw_response_count": 9,
       "responses_with_reasoning_content": 9
+    },
+    "extract-moves-from-video": {
+      "reward": 0.0,
+      "result_sha256": "50e737feba325e93698e27db5ab18e4c49e9f4e09835976787c12543a34e7642",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/extract-moves-from-video__HTae9Jf/result.json",
+      "raw_response_count": 463,
+      "responses_with_reasoning_content": 463
     },
     "feal-differential-cryptanalysis": {
       "reward": 1.0,
