@@ -57,6 +57,7 @@ def sync_native_archives(scores, force_bf16=False):
                                  for task in ('password-recovery', 'prove-plus-comm')]
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm')
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli')
+            replacement_names.append('muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020')
             for job_name in replacement_names:
                 replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / job_name
                 if replacement.exists():
@@ -113,6 +114,11 @@ def sync_native_archives(scores, force_bf16=False):
                 expected_receipts += 1
                 handoff_newer |= (latest_archive_time is None or
                                  datetime.fromtimestamp(storage_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
+            connection_claim = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-connection-recovery-20261020-claim.json'
+            if connection_claim.exists():
+                expected_receipts += 1
+                handoff_newer |= (latest_archive_time is None or
+                                 datetime.fromtimestamp(connection_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
             if handoff_path.exists():
                 expected_receipts += 1
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
@@ -327,6 +333,7 @@ def cycle():
              'beam_exact_round3_2901.py',
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',
+             'prepare_muse_nvfp4_r2_connection_recovery.py',
              'audit_muse_nvfp4_r2_prove_ungraded.py',
              'prepare_muse_nvfp4_r2_prove_replacement.py',
              'audit_muse_nvfp4_r2_prove_transport.py',
@@ -343,6 +350,7 @@ def cycle():
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
              'export_snapshot.py', 'snapshot_live_tb.py', 'snapshot_other_exact_tb.py',
+             'verify_muse_exact_io.py',
              'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)

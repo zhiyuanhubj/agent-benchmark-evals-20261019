@@ -27,6 +27,7 @@ replacement_jobs = [RESULTS / f'muse-nvfp4-tb-v1-exact-r2-infra-replacement-{tas
                     for task in ('password-recovery', 'prove-plus-comm')]
 transport_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm'
 storage_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli'
+connection_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020'
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
 jobs.extend(RESULTS.glob('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b*'))
 jobs.extend(job for job in replacement_jobs if job.exists())
@@ -34,6 +35,8 @@ if transport_job.exists():
     jobs.append(transport_job)
 if storage_job.exists():
     jobs.append(storage_job)
+if connection_job.exists():
+    jobs.append(connection_job)
 for job in sorted(jobs):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
     if config.exists():
@@ -210,6 +213,24 @@ if storage_claim.exists():
     if config not in payloads:
         payloads[config] = config.read_bytes()
         counts['job_config'] += 1
+connection_claim = SOURCE / 'muse_nvfp4/state/r2-connection-recovery-20261020-claim.json'
+if connection_claim.exists():
+    claim = json.loads(connection_claim.read_text())
+    assert claim['job_name'] == connection_job.name
+    assert len(claim['origins']) == 10 and len({row['task'] for row in claim['origins']}) == 10
+    config = Path(claim['config'])
+    assert hashlib.sha256(config.read_bytes()).hexdigest() == claim['config_sha256']
+    for origin in claim['origins']:
+        original = Path(origin['original_result'])
+        assert hashlib.sha256(original.read_bytes()).hexdigest() == origin['original_result_sha256']
+    payloads[connection_claim] = connection_claim.read_bytes()
+    counts['handoff_receipt'] += 1
+    if config not in payloads:
+        payloads[config] = config.read_bytes()
+        counts['job_config'] += 1
+    source_script = ROOT / 'prepare_muse_nvfp4_r2_connection_recovery.py'
+    payloads[source_script] = source_script.read_bytes()
+    counts['controller_source'] += 1
 assert counts['raw_response'] > 0 and counts['task_input'] > 0
 proc = subprocess.Popen(['zstd', '-q', '-T2', '-3', '-o', str(temp)], stdin=subprocess.PIPE)
 try:

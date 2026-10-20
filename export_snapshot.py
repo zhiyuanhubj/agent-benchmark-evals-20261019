@@ -146,6 +146,31 @@ assert hashlib.sha256(Path(pytorch_replacement_claim['original_ungraded_evidence
 pytorch_replacement_integrity = read(ROOT / 'evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_integrity.json')
 assert pytorch_replacement_integrity['claim_sha256'] == hashlib.sha256(pytorch_replacement_claim_path.read_bytes()).hexdigest()
 assert pytorch_replacement_integrity['replacement_native_reward'] == 1
+connection_claim_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r2-connection-recovery-20261020-claim.json'
+connection_claim = read(connection_claim_path)
+connection_config = Path(connection_claim['config'])
+assert hashlib.sha256(connection_config.read_bytes()).hexdigest() == connection_claim['config_sha256']
+connection_spec = read(connection_config)
+assert connection_spec['job_name'] == connection_claim['job_name']
+assert connection_spec['n_attempts'] == 1 and connection_spec['retry']['max_retries'] == 0
+assert connection_spec['agents'][0]['kwargs']['api_base'] == connection_claim['model_endpoint']
+assert len(connection_claim['origins']) == 10 and len({row['task'] for row in connection_claim['origins']}) == 10
+assert {Path(task['path']).name for task in connection_spec['tasks']} == {row['task'] for row in connection_claim['origins']}
+assert connection_claim['one_replacement_draw_per_task'] and connection_claim['model_retry_disabled']
+assert hashlib.sha256(Path(connection_claim['ready_proof']).read_bytes()).hexdigest() == connection_claim['ready_proof_sha256']
+assert hashlib.sha256(Path(connection_claim['image_proof']).read_bytes()).hexdigest() == connection_claim['image_proof_sha256']
+for origin in connection_claim['origins']:
+    original_result = Path(origin['original_result'])
+    assert hashlib.sha256(original_result.read_bytes()).hexdigest() == origin['original_result_sha256']
+    assert hashlib.sha256(Path(origin['source_config']).read_bytes()).hexdigest() == origin['source_config_sha256']
+    assert hashlib.sha256(Path(origin['route_receipt']).read_bytes()).hexdigest() == origin['route_receipt_sha256']
+    original = read(original_result)
+    assert original.get('finished_at') and ((original.get('verifier_result') or {}).get('rewards') or {}).get('reward') is None
+    assert (original.get('exception_info') or {}).get('exception_type') == 'InternalServerError'
+    assert 'Connection error' in (original.get('exception_info') or {}).get('exception_message', '')
+    assert original['config']['agent']['kwargs']['api_base'] == origin['original_endpoint']
+    assert hashlib.sha256((Path(original['config']['task']['path']) / 'task.toml').read_bytes()).hexdigest() == origin['task_toml_sha256']
+(ROOT / 'evidence/muse_nvfp4_r2_connection_recovery_claim.json').write_bytes(connection_claim_path.read_bytes())
 nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-completion-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 nvfp4_parallel_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-parallel-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 extra_lane_units = {str(lane): subprocess.run(['systemctl', '--user', 'is-active', f'muse-nvfp4-exact-tb-extra-lane{lane}-2866-20261019.service'], capture_output=True, text=True).stdout.strip() for lane in (2, 3)}
@@ -333,6 +358,35 @@ pytorch_replacement_reward_en = ('running/pending' if pytorch_replacement_result
 pytorch_replacement_reward_zh = ('运行中/待判分' if pytorch_replacement_result is None else
                                  '原生异常后仍未判分' if pytorch_replacement_result['reward'] not in (0, 1)
                                  else str(pytorch_replacement_result['reward']))
+connection_job = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / connection_claim['job_name']
+connection_expected = {row['task']: row for row in connection_claim['origins']}
+connection_results = {}
+connection_active = 0
+connection_seen = set()
+for trial in connection_job.glob('*'):
+    if not trial.is_dir():
+        continue
+    task = trial.name.split('__', 1)[0]
+    assert task in connection_expected and task not in connection_seen
+    connection_seen.add(task)
+    result_path = trial / 'result.json'
+    if not result_path.exists():
+        connection_active += 1
+        continue
+    result = read(result_path)
+    assert Path(result['config']['task']['path']).name == task
+    assert result['config']['agent']['kwargs']['api_base'] == connection_claim['model_endpoint']
+    if not result.get('finished_at'):
+        connection_active += 1
+        continue
+    reward = ((result.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+    connection_results[task] = {'result_path': str(result_path), 'result_sha256': hashlib.sha256(result_path.read_bytes()).hexdigest(), 'reward': reward}
+    if reward in (0, 1):
+        original = new_terminal_by_round['2'][task]
+        assert original['reward'] is None and original['source'] == connection_expected[task]['original_result']
+        assert original['exception'] == 'InternalServerError'
+        original['reward'] = reward
+        original['replacement'] = connection_results[task]
 for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['terminal'] += len(rows)
     nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
@@ -625,6 +679,19 @@ snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['rou
     'no_best_of_selection': True,
 }
 snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_original_first_draw'] = round2_first_draw
+snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_connection_recovery'] = {
+    'claim': 'evidence/muse_nvfp4_r2_connection_recovery_claim.json',
+    'controller': subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-r2-connection-recovery-20261020.service'], capture_output=True, text=True).stdout.strip(),
+    'original_ungraded_connection_failures': len(connection_expected),
+    'original_partial_raw_model_responses': sum(row['original_raw_model_responses'] for row in connection_claim['origins']),
+    'replacement_terminal': len(connection_results),
+    'replacement_graded': sum(row['reward'] in (0, 1) for row in connection_results.values()),
+    'replacement_success': sum(row['reward'] == 1 for row in connection_results.values()),
+    'replacement_active_trial_dirs': connection_active,
+    'one_replacement_draw_per_task': True,
+    'no_best_of_selection': True,
+    'qualification': 'Original endpoint connection failures remain archived and ungraded; only the single declared replacement reward can fill each missing grade.',
+}
 snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_pytorch_model_cli_storage_replacement'] = {
     'claim': 'evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json',
     'original_native_reward': None,
@@ -1066,6 +1133,8 @@ The original NVFP4 service on GPU allocation 2866 is also taking untouched round
 
 The round-2 **original first draws** currently have {round2_first_draw['terminal']} terminal tasks, {round2_first_draw['graded']} native grades, and {round2_first_draw['success']} successes; the repaired-round count above includes only explicitly declared replacement grades. `pytorch-model-cli` [lost its tmux channel with the shared 500 GB Docker backing disk at 100%](evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json), leaving its original reward unknown. A [single storage-isolated replacement](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json) on CPU allocation 2922 has native reward **{pytorch_replacement_reward_en}**. Its [limited command and thinking audit](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_integrity.json) found 13/13 raw replies with reasoning and no visible verifier, grader, hidden-test, or reward access in 40 bash commands; this is not full reward-hacking clearance. The original draw remains ungraded and both trajectories are retained; the full-disk observation alone does not establish which process consumed the space.
 
+Ten more original round-2 trials lost their model endpoint with `InternalServerError: Connection error`. Their {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} original raw responses remain preserved. The [hash-anchored recovery claim](evidence/muse_nvfp4_r2_connection_recovery_claim.json) declares one separate replacement draw per task with unchanged tasks, images and sampling settings. So far it has {len(connection_results)} terminal tasks, {sum(row['reward'] in (0, 1) for row in connection_results.values())} native grades, and {sum(row['reward'] == 1 for row in connection_results.values())} successes; only a native grade can fill an original missing grade, with no best-of selection.
+
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. At this snapshot, the continuation has {new_raw_responses} raw model responses, {active_recovery_trial_dirs} active trial directories, and the latest response at {new_raw_response_latest_utc}; these are activity indicators, not scores. The original controller verifies delegated batches before advancing, preventing duplicate scoring. The [first-round task audit](evidence/muse_nvfp4_exact_round1_audit.json) checks task coverage, duplicate draws, frozen original results, endpoint settings, rewards, and preserved raw reasoning; the final score is published only after all 89 tasks pass reconciliation. Additional GPU allocation states: {extra_gpu_status}. A watcher starts the pinned Muse service when a queued allocation is granted. A ready extra GPU atomically claims one untouched round-one batch from b03 or b05; the released 2812 allocation can claim up to two. The existing CPU evaluators retain their original tasks and images, and only the model endpoint changes. A batch that starts locally first cannot be redrawn on another node. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
 Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json) found returned reasoning in every raw response of the five completed successful recovery tasks checked. One agent created `/tests/filter.py` by copying the exposed, unchanged `/app/filter.py` to run the task's permitted local test; no filter/verifier rewrite was observed in its commands. This is not a full reward-hacking clearance. The Muse DeepSWE successful trajectory `ipython-session-bundle-replay` attempted to inspect verifier logs, but the returned directory was empty; it remains flagged for training-data review. One successful Muse Pro task lacks a trajectory and is unsuitable for thinking-data export. Source paths and hashes are in `results/scores.json` and `input_output/manifest.json`; raw API credentials and model weights are excluded.
@@ -1191,6 +1260,8 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 原 NVFP4 服务节点 2866 也开始领取第 2/3 轮尚未启动的批次。[节点就绪凭据](evidence/muse_nvfp4_local2866_ready.json)、[实时路由审计](evidence/muse_nvfp4_local2866_route_audit.json)及[控制器代码](protocol/muse_nvfp4_local2866/README.md)显示，本次快照已有 {local2866_audit['route_count']} 条加锁路由，独占 {local2866_audit['claimed_task_count']} 道不同题；只按原生结果统计完成题。
 
 第 2 轮**原始首抽**目前有 {round2_first_draw['terminal']} 题终态、{round2_first_draw['graded']} 题有效原生判分、{round2_first_draw['success']} 题成功；上面的修复后统计只补入已单独声明的有效补跑判分。`pytorch-model-cli` 的[原尝试](evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json)在共用 500 GB Docker 底盘占满时失去 tmux 通道，原始 reward 未知。[单次隔离存储补跑](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json)改用 CPU 节点 2922，当前原生 reward 为 **{pytorch_replacement_reward_zh}**。[局部命令与 thinking 核验](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_integrity.json)显示原始回复 13/13 条含推理，40 条 bash 命令中未见访问裁判、隐藏测试或 reward 的迹象；这不等于完整排除 reward hacking。原始首抽仍未判分，两次轨迹都保留；磁盘占满本身不能证明由哪个进程消耗了空间。
+
+另有 10 题原始第 2 轮尝试因旧模型端点连接中断而报 `InternalServerError: Connection error`，原有 {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} 条模型回复均保留。[哈希锚定补跑声明](evidence/muse_nvfp4_r2_connection_recovery_claim.json)逐题只安排一次独立基础设施补跑，题目、镜像和采样参数不变。目前补跑有 {len(connection_results)} 题终态、{sum(row['reward'] in (0, 1) for row in connection_results.values())} 题获原生判分、{sum(row['reward'] == 1 for row in connection_results.values())} 题成功；只有有效判分才填补原题的缺失值，不择优取样。
 
 [Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)} 条含非空 thinking**。
 

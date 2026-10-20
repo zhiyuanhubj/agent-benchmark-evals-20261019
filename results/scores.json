@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T12:40:29.219191+00:00",
+  "generated_utc": "2026-10-20T13:13:24.031911+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -270,7 +270,7 @@
             "graded": 19,
             "success": 16.0,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 772,
+            "archived_actual_model_responses": 890,
             "ungraded": 70,
             "exceptions": {
               "InternalServerError": 70
@@ -330,7 +330,7 @@
             "2": 86,
             "3": 89
           },
-          "new_raw_model_responses": 10103,
+          "new_raw_model_responses": 10148,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
@@ -348,9 +348,9 @@
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 480,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 216,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 233,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 660
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b08": 705
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T12:40:47+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-20T13:13:32+00:00",
           "active_recovery_trial_dirs": 2,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -444,6 +444,19 @@
             "success": 52,
             "qualification": "Original first draws only; ungraded native exceptions remain ungraded. Separately declared replacements are excluded."
           },
+          "round_2_connection_recovery": {
+            "claim": "evidence/muse_nvfp4_r2_connection_recovery_claim.json",
+            "controller": "active",
+            "original_ungraded_connection_failures": 10,
+            "original_partial_raw_model_responses": 431,
+            "replacement_terminal": 0,
+            "replacement_graded": 0,
+            "replacement_success": 0,
+            "replacement_active_trial_dirs": 2,
+            "one_replacement_draw_per_task": true,
+            "no_best_of_selection": true,
+            "qualification": "Original endpoint connection failures remain archived and ungraded; only the single declared replacement reward can fill each missing grade."
+          },
           "round_2_pytorch_model_cli_storage_replacement": {
             "claim": "evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json",
             "original_native_reward": null,
@@ -465,7 +478,7 @@
             "replacement_terminal": 19,
             "replacement_graded": 19,
             "replacement_success": 16.0,
-            "replacement_raw_responses": 772,
+            "replacement_raw_responses": 890,
             "active_trial_dirs": 6,
             "all_tasks_single_replacement_draw": true,
             "endpoint_ready": true,
@@ -494,16 +507,16 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 40,
-          "graded": 40,
-          "success": 16,
+          "terminal": 45,
+          "graded": 45,
+          "success": 18,
           "status": "partial_no_full_score"
         },
         "3": {
           "expected": 113,
-          "terminal": 58,
-          "graded": 58,
-          "success": 24,
+          "terminal": 69,
+          "graded": 68,
+          "success": 30,
           "status": "partial_no_full_score"
         }
       },
@@ -550,11 +563,11 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 78,
-            "graded": 77,
-            "success": 56,
-            "active_trial_dirs": 82,
-            "archived_actual_model_responses": 5083,
+            "terminal": 79,
+            "graded": 78,
+            "success": 57,
+            "active_trial_dirs": 83,
+            "archived_actual_model_responses": 5263,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 7,
@@ -567,13 +580,15 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 27,
-            "graded": 27,
-            "success": 20,
-            "active_trial_dirs": 31,
-            "archived_actual_model_responses": 1102,
-            "ungraded": 0,
-            "exceptions": {},
+            "terminal": 31,
+            "graded": 30,
+            "success": 22,
+            "active_trial_dirs": 35,
+            "archived_actual_model_responses": 1398,
+            "ungraded": 1,
+            "exceptions": {
+              "RuntimeError": 1
+            },
             "excluded_user_reassignment_trials": [],
             "complete": false,
             "accuracy": null,
@@ -807,10 +822,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 129,
+          "completed_trials": 142,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 369,
+          "pending_trials": 356,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:18.993248",
           "finished_at": null
@@ -822,10 +837,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 122,
+          "completed_trials": 137,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 338,
+          "pending_trials": 323,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:10.468330",
           "finished_at": null
@@ -837,10 +852,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 142,
+          "completed_trials": 157,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 278,
+          "pending_trials": 263,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:16.640783",
           "finished_at": null
@@ -928,9 +943,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 75,
-          "graded": 75,
-          "success": 39,
+          "terminal": 77,
+          "graded": 77,
+          "success": 40,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -961,24 +976,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 255,
-        "native_graded": 255,
+        "native_terminal": 264,
+        "native_graded": 264,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 84,
-            "native_graded": 84
+            "native_terminal": 88,
+            "native_graded": 88
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 86,
-            "native_graded": 86
+            "native_terminal": 88,
+            "native_graded": 88
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 85,
-            "native_graded": 85
+            "native_terminal": 88,
+            "native_graded": 88
           }
         },
         "DA": null,

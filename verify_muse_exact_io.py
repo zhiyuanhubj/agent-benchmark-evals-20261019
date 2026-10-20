@@ -61,6 +61,34 @@ if audit.get('early_b05_handoff'):
         required_handoff_files.append(str(Path(handoff['exit_path']).relative_to(BASE)))
 missing_handoff_files = sorted(set(required_handoff_files) - entries)
 
+connection_claim = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-connection-recovery-20261020-claim.json'
+connection_config = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-connection-recovery-20261020.json'
+connection_job = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-connection-recovery-20261020'
+missing_connection_files = []
+missing_connection_results = []
+missing_connection_raw = []
+missing_connection_trajectories = []
+if connection_claim.exists():
+    for path in (connection_claim, connection_config, ROOT / 'prepare_muse_nvfp4_r2_connection_recovery.py'):
+        if str(path.relative_to(BASE)) not in entries:
+            missing_connection_files.append(str(path.relative_to(BASE)))
+    for trial in connection_job.glob('*'):
+        if not trial.is_dir():
+            continue
+        result = trial / 'result.json'
+        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+            continue
+        result_name = str(result.relative_to(BASE))
+        if result_name not in entries:
+            missing_connection_results.append(trial.name)
+        raw_dir = trial / 'agent/raw_responses'
+        if any(raw_dir.glob('*.json')) and not any(
+                path.startswith(str(raw_dir.relative_to(BASE)) + '/') for path in entries):
+            missing_connection_raw.append(trial.name)
+        trajectory = trial / 'agent/trajectory.json'
+        if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
+            missing_connection_trajectories.append(trial.name)
+
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())
 verified_names = {item['asset'] for item in remote_audit['items'] if item.get('sha256_matches') and item.get('bytes_match')}
 unverified = sorted(manifest['archive_name'] for manifest in manifests if manifest['archive_name'] not in verified_names)
@@ -75,6 +103,14 @@ if missing_trajectories:
     errors.append(f'{len(missing_trajectories)} scored trajectories missing')
 if missing_handoff_files:
     errors.append(f'{len(missing_handoff_files)} replica handoff configs/receipt missing')
+if missing_connection_files:
+    errors.append(f'{len(missing_connection_files)} round-2 connection recovery inputs missing')
+if missing_connection_results:
+    errors.append(f'{len(missing_connection_results)} round-2 connection recovery results missing')
+if missing_connection_raw:
+    errors.append(f'{len(missing_connection_raw)} round-2 connection recovery raw-response sets missing')
+if missing_connection_trajectories:
+    errors.append(f'{len(missing_connection_trajectories)} round-2 connection recovery trajectories missing')
 if unverified:
     errors.append(f'{len(unverified)} release assets not SHA/size verified')
 
@@ -92,6 +128,10 @@ record = {
     'missing_raw_responses': missing_raw,
     'missing_trajectories': missing_trajectories,
     'missing_handoff_files': missing_handoff_files,
+    'missing_connection_files': missing_connection_files,
+    'missing_connection_results': missing_connection_results,
+    'missing_connection_raw_responses': missing_connection_raw,
+    'missing_connection_trajectories': missing_connection_trajectories,
     'unverified_assets': unverified,
     'errors': errors,
     'qualification': 'complete_verified' if not errors and audit['qualification'] == 'complete_verified' else 'partial_or_needs_review',
