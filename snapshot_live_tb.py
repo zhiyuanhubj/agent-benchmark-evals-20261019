@@ -21,13 +21,14 @@ archive.parent.mkdir(exist_ok=True)
 assert not archive.exists()
 
 payloads = {}
-counts = {'job_config': 0, 'handoff_receipt': 0, 'ready_proof': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
+counts = {'job_config': 0, 'handoff_receipt': 0, 'ready_proof': 0, 'controller_source': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
 terminal_results = 0
 replacement_jobs = [RESULTS / f'muse-nvfp4-tb-v1-exact-r2-infra-replacement-{task}'
                     for task in ('password-recovery', 'prove-plus-comm')]
 transport_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm'
 storage_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli'
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
+jobs.extend(RESULTS.glob('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b*'))
 jobs.extend(job for job in replacement_jobs if job.exists())
 if transport_job.exists():
     jobs.append(transport_job)
@@ -71,6 +72,34 @@ for job in sorted(jobs):
             if task_file.exists() and task_file not in payloads:
                 payloads[task_file] = task_file.read_bytes()
                 counts['task_input'] += 1
+r3_state = SOURCE / 'muse_nvfp4/state/r3-infra-replacement-2900'
+r3_plan = r3_state / 'plan.json'
+if r3_plan.exists():
+    plan = json.loads(r3_plan.read_text())
+    assert plan['expected_tasks'] == 89 and len(plan['batches']) == 9
+    payloads[r3_plan] = r3_plan.read_bytes()
+    counts['handoff_receipt'] += 1
+    script = SOURCE / 'muse_nvfp4/recover_r3_2900.py'
+    payloads[script] = script.read_bytes()
+    counts['controller_source'] += 1
+    for batch in plan['batches']:
+        for item in batch['tasks']:
+            original_result = Path(item['original_result'])
+            assert hashlib.sha256(original_result.read_bytes()).hexdigest() == item['original_result_sha256']
+        effective = Path(batch['effective_config'])
+        assert hashlib.sha256(effective.read_bytes()).hexdigest() == batch['effective_config_sha256']
+        if effective not in payloads:
+            payloads[effective] = effective.read_bytes()
+            counts['job_config'] += 1
+        for suffix in ('started', 'exit'):
+            marker = r3_state / f'b{batch["index"]:02}-{suffix}.json'
+            if marker.exists():
+                payloads[marker] = marker.read_bytes()
+                counts['handoff_receipt'] += 1
+    ready = r3_state.parent / 'replica-2900/endpoint-ready.json'
+    if ready.exists():
+        payloads[ready] = ready.read_bytes()
+        counts['ready_proof'] += 1
 handoff = SOURCE / 'muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
 if handoff.exists():
     payloads[handoff] = handoff.read_bytes()

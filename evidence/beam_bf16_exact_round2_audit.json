@@ -1,21 +1,19 @@
 {
-  "generated_utc": "2026-10-20T09:33:02.522544+00:00",
+  "generated_utc": "2026-10-20T09:47:40.005120+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T092435Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T093923Z.tar.zst",
   "expected": 89,
-  "terminal": 68,
-  "graded": 67,
-  "success": 47,
+  "terminal": 70,
+  "graded": 69,
+  "success": 49,
   "missing_graded_tasks": [
     "git-multibranch",
     "protein-assembly",
-    "query-optimize",
     "raman-fitting",
     "regex-chess",
-    "regex-log",
     "reshard-c4-data",
     "rstan-to-pystan",
     "sam-cell-seg",
@@ -519,6 +517,20 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/qemu-startup__pCTmPdP/result.json",
       "raw_response_count": 49,
       "responses_with_reasoning_content": 49
+    },
+    "query-optimize": {
+      "reward": 1.0,
+      "result_sha256": "c18c126f800a94d84a5fd3420b1ffb53a8ac0264a26a54561090cb74f7812c1b",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/query-optimize__sqWoayT/result.json",
+      "raw_response_count": 23,
+      "responses_with_reasoning_content": 23
+    },
+    "regex-log": {
+      "reward": 1.0,
+      "result_sha256": "e8c10a03768338fa33c54cf18ed4d39f04bdfc0987c0c0c310941d495616ce41",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/regex-log__TK2Cz67/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
     }
   }
 }

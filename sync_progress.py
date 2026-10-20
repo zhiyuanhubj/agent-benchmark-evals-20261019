@@ -63,6 +63,11 @@ def sync_native_archives(scores, force_bf16=False):
                     terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
                                     for path in replacement.glob('*/result.json'))
                     raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
+            for replacement in (BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4').glob(
+                    'muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b*'):
+                terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
+                                for path in replacement.glob('*/result.json'))
+                raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
         if name == 'beam_bf16':
             replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
             if replacement.exists():
@@ -79,6 +84,17 @@ def sync_native_archives(scores, force_bf16=False):
             latest_filename_counts = latest['filename_counts']
         handoff_newer = False
         if name == 'muse_nvfp4':
+            r3_state = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900'
+            if (r3_state / 'plan.json').exists():
+                markers = [r3_state / 'plan.json', *r3_state.glob('b*-started.json'),
+                           *r3_state.glob('b*-exit.json')]
+                ready_2900 = r3_state.parent / 'replica-2900/endpoint-ready.json'
+                if ready_2900.exists():
+                    markers.append(ready_2900)
+                handoff_newer |= latest_filename_counts.get('controller_source', 0) < 1
+                handoff_newer |= any(latest_archive_time is None or
+                                     datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
+                                     for marker in markers)
             handoff_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
             expected_receipts = 0
             for task in ('password-recovery', 'prove-plus-comm'):

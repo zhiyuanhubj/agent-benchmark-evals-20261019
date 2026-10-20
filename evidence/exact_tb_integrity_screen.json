@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T09:33:16.001974+00:00",
+  "generated_utc": "2026-10-20T09:47:53.216949+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 67,
+      "scored_trajectories_checked": 69,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -6681,6 +6681,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "regex-log",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/regex-log__TK2Cz67/agent/trajectory.json",
+      "trajectory_sha256": "61d09702af35c847af3394886b52fbffaf65cf94c8bd18b5b9a7bf3d94ab4785",
+      "steps": 8,
+      "tool_calls": 9,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "git-leak-recovery",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/git-leak-recovery__MDTEHLN/agent/trajectory.json",
@@ -7099,6 +7111,18 @@
       "trajectory_sha256": "8b3ff24bca22c82625be23f8e4d956c178b26f2e14acc1703039679e88c5c301",
       "steps": 21,
       "tool_calls": 33,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "query-optimize",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/query-optimize__sqWoayT/agent/trajectory.json",
+      "trajectory_sha256": "179cae5d935dee65ef5e32c6ecda91cbaab832db2837fc6fa5bc0f52a419da39",
+      "steps": 23,
+      "tool_calls": 32,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

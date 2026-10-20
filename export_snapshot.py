@@ -346,6 +346,89 @@ for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['complete'] = nvfp4_rounds[rnd]['graded'] == 89
     nvfp4_rounds[rnd]['accuracy'] = nvfp4_rounds[rnd]['success'] / 89 if nvfp4_rounds[rnd]['complete'] else None
 
+# All 89 original round-3 trials hit the same refused model endpoint without a
+# single model response. Count one separately declared infrastructure replacement
+# per task when it is graded; keep the original exception and both result paths.
+r3_replacement_root = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900'
+r3_replacement_plan = read(r3_replacement_root / 'plan.json') if (r3_replacement_root / 'plan.json').exists() else None
+r3_replacement_progress = None
+if r3_replacement_plan:
+    assert r3_replacement_plan['expected_tasks'] == 89 and len(r3_replacement_plan['batches']) == 9
+    assert nvfp4_rounds['3']['terminal'] == 89 and nvfp4_rounds['3']['graded'] == 0
+    assert nvfp4_rounds['3']['exceptions'].get('InternalServerError') == 89
+    seen = set()
+    terminal = graded = success = raw_responses = active = 0
+    for batch in r3_replacement_plan['batches']:
+        original_config = Path(batch['source_config'])
+        effective_config = Path(batch['effective_config'])
+        assert hashlib.sha256(original_config.read_bytes()).hexdigest() == batch['source_config_sha256']
+        assert hashlib.sha256(effective_config.read_bytes()).hexdigest() == batch['effective_config_sha256']
+        original = read(original_config)
+        effective = read(effective_config)
+        assert effective['job_name'] == batch['job_name']
+        effective['job_name'] = original['job_name']
+        assert effective['agents'][0]['kwargs']['api_base'] == r3_replacement_plan['endpoint']
+        effective['agents'][0]['kwargs']['api_base'] = original['agents'][0]['kwargs']['api_base']
+        assert effective == original, 'Round-3 replacement changed task or generation settings'
+        expected = {item['task'] for item in batch['tasks']}
+        assert len(expected) == len(batch['tasks'])
+        for item in batch['tasks']:
+            assert item['task'] not in seen
+            seen.add(item['task'])
+            old_result = Path(item['original_result'])
+            assert hashlib.sha256(old_result.read_bytes()).hexdigest() == item['original_result_sha256']
+            assert new_terminal_by_round['3'][item['task']]['reward'] is None
+        found = set()
+        job_root = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / batch['job_name']
+        for trial in job_root.glob('*'):
+            if not trial.is_dir():
+                continue
+            name = trial.name.split('__', 1)[0]
+            assert name in expected and name not in found, 'Duplicate round-3 replacement trial'
+            found.add(name)
+            raws = list((trial / 'agent/raw_responses').glob('*.json'))
+            raw_responses += len(raws)
+            result_path = trial / 'result.json'
+            if not result_path.exists():
+                active += 1
+                continue
+            value = read(result_path)
+            if not value.get('finished_at'):
+                active += 1
+                continue
+            assert Path(value['config']['task']['path']).name == name
+            assert value['config']['agent']['kwargs']['api_base'] == r3_replacement_plan['endpoint']
+            terminal += 1
+            reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+            if reward in (0, 1):
+                graded += 1
+                success += reward
+                nvfp4_rounds['3']['exceptions']['InternalServerError'] -= 1
+            elif value.get('exception_info'):
+                kind = value['exception_info']['exception_type']
+                nvfp4_rounds['3']['exceptions'][f'replacement_{kind}'] = \
+                    nvfp4_rounds['3']['exceptions'].get(f'replacement_{kind}', 0) + 1
+    assert len(seen) == 89
+    nvfp4_rounds['3']['graded'] = graded
+    nvfp4_rounds['3']['success'] = success
+    nvfp4_rounds['3']['ungraded'] = 89 - graded
+    nvfp4_rounds['3']['complete'] = graded == 89
+    nvfp4_rounds['3']['accuracy'] = success / 89 if graded == 89 else None
+    nvfp4_rounds['3']['archived_actual_model_responses'] += raw_responses
+    if nvfp4_rounds['3']['exceptions']['InternalServerError'] == 0:
+        del nvfp4_rounds['3']['exceptions']['InternalServerError']
+    r3_replacement_progress = {
+        'plan': str(r3_replacement_root / 'plan.json'),
+        'plan_sha256': hashlib.sha256((r3_replacement_root / 'plan.json').read_bytes()).hexdigest(),
+        'original_ungraded_infra_failures': 89, 'original_model_responses': 0,
+        'replacement_terminal': terminal, 'replacement_graded': graded,
+        'replacement_success': success, 'replacement_raw_responses': raw_responses,
+        'active_trial_dirs': active, 'all_tasks_single_replacement_draw': len(seen) == 89,
+        'endpoint_ready': (r3_replacement_root.parent / 'replica-2900/endpoint-ready.json').exists(),
+        'qualification': 'Original 89 connection-refused trials remain preserved and ungraded. Each task gets one separately declared infrastructure replacement with unchanged task/image/generation settings.',
+    }
+    write('evidence/muse_nvfp4_r3_infra_replacement_progress.json', r3_replacement_progress)
+
 
 def tb_profile_status(rounds):
     if all(row['complete'] for row in rounds.values()):
@@ -551,6 +634,9 @@ snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['rou
     'counted_as_one_task_in_repaired_round': True,
     'no_best_of_selection': True,
 }
+if r3_replacement_progress:
+    snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_3_infra_replacement'] = (
+        r3_replacement_progress | {'evidence': 'evidence/muse_nvfp4_r3_infra_replacement_progress.json'})
 for reviewer, model_key in (('muse-nvfp4', 'muse_nvfp4'), ('beam-bf16', 'beam_bf16'),
                             ('muse-bf16', 'muse_bf16')):
     for split, value in snapshot['models'][model_key].get('swe_review', {}).items():
