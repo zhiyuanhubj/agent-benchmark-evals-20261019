@@ -15,6 +15,7 @@ PAIR = (
         HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500'),
      HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared'),
     ('beam', 'beam_review_revision_inputs', 'beam_revision_review_full_io', (
+        HOME / '.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500',
         HOME / '.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500',),
      HOME / '.private/beam_20261018/review_bench/revision/prepared'),
 )
@@ -69,19 +70,40 @@ for label, input_group, output_group, works, prepared in PAIR:
         resume_records = [queue / 'resume-audit.json', *queue.glob('queue-exit-pre-resume-*.json')]
         assert {str(path.relative_to(HOME)) for path in resume_records if path.exists()} <= input_names, \
             'Revision queue resume receipt missing from release'
-    expected = {str(path.relative_to(HOME)) for path in prepared.rglob('task.toml')}
-    expected |= {str(path.relative_to(HOME)) for path in prepared.rglob('instruction.md')}
-    assert len(expected) % 2 == 0 and active <= expected
-    assert expected <= input_names
+    prepared_files = {str(path.relative_to(HOME)): path
+                      for name in ('task.toml', 'instruction.md')
+                      for path in prepared.rglob(name)}
+    expected = set(prepared_files)
+    cards = {}
+    for path in prepared_files.values():
+        cards.setdefault(path.parent, set()).add(path.name)
+    assert active <= expected
+    assert active <= input_names, 'An active revision task card is missing from the release'
+    # Preparation can publish a new directory while this verifier reads the
+    # release. Preserve the strict check for old omissions, but let recent
+    # unqueued cards wait for the next ten-minute input archive.
+    latest_input_archive = datetime.fromisoformat(input_chain[-1][1]['generated_utc']).timestamp()
+    recent_cutoff = max(latest_input_archive - 300,
+                        datetime.now(timezone.utc).timestamp() - 600)
+    incomplete_cards = [directory for directory, names in cards.items()
+                        if names != {'task.toml', 'instruction.md'}]
+    assert all(directory.stat().st_ctime >= recent_cutoff for directory in incomplete_cards), \
+        'An old prepared revision card is incomplete'
+    pending = expected - input_names
+    assert all(max(prepared_files[name].stat().st_ctime,
+                   prepared_files[name].parent.stat().st_ctime) >= recent_cutoff
+               for name in pending), 'An old prepared revision task card is missing from the release'
     assert not any('/solution/' in '/' + name or '/tests/' in '/' + name for name in input_names)
     original_outputs = sum('/queue/results/' in '/' + name and '/gateway-recovery-20261020/' not in '/' + name
                            for name in output_names)
     recovery_outputs = sum('/gateway-recovery-20261020/queue/results/' in '/' + name for name in output_names)
     assert original_outputs and recovery_outputs
     observed.append(dict(reviewer=label, expected_task_card_files=len(expected),
-                         expected_task_cards=len(expected) // 2,
+                         expected_task_cards=len(cards),
                          active_gateway_recovery_task_cards=len(active) // 2,
                          released_task_card_files=len(expected & input_names),
+                         pending_new_task_card_files=len(pending),
+                         pending_incomplete_task_cards=len(incomplete_cards),
                          released_input_file_count=len(input_names),
                          released_original_host_ip_output_files=original_outputs,
                          released_gateway_recovery_output_files=recovery_outputs,
@@ -92,13 +114,14 @@ for label, input_group, output_group, works, prepared in PAIR:
                          remote_sha256_and_size_verified=True))
 
 result = dict(generated_utc=datetime.now(timezone.utc).isoformat(),
-              scope='Released base and delta archive coverage of prepared revision task cards. Live native output files added or changed afterward require later timestamped delta archives; this is not a claim of current complete revision output coverage.',
+              scope='Released base and delta archive coverage of prepared revision task cards. Every active gateway task card is released; recently materialized unqueued cards are counted as pending until the next input archive. Live native outputs require later timestamped delta archives; this is not a claim of current complete revision output coverage.',
               groups=observed)
 target = ROOT / 'evidence/review_revision_release_coverage.json'
 temp = target.with_suffix('.tmp')
 temp.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
 temp.replace(target)
 print(json.dumps({row['reviewer']: dict(tasks=row['expected_task_cards'],
+                                         pending_new_task_card_files=row['pending_new_task_card_files'],
                                          original_files=row['released_original_host_ip_output_files'],
                                          recovery_files=row['released_gateway_recovery_output_files'])
                   for row in observed}))

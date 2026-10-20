@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parent
 GROUPS = (
     ('muse-nvfp4', 'qwen3_coder_30b_500', HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500'),
     ('muse-nvfp4', 'qwen3_30b_instruct2507_500', HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500'),
+    ('beam-bf16', 'qwen3_coder_30b_500', HOME / '.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500'),
     ('beam-bf16', 'qwen3_30b_instruct2507_500', HOME / '.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500'),
 )
 

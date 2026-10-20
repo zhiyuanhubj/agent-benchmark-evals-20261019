@@ -1,0 +1,12 @@
+{
+  "purpose": "Reuse the successful synthetic transport preflight for the exact same original-generator model, bridge agent and endpoint; no synthetic result enters Beam scoring.",
+  "model_id": "Qwen3-Coder-30B-A3B-Instruct",
+  "endpoint": "http://172.17.0.1:31410/v1",
+  "synthetic_preflight": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/synthetic-bridge-v2-passed.json",
+  "synthetic_preflight_sha256": "12b723136bc2570ee6d8190f81b2e16d5e1f37e841f8699b184945df0fb77b17",
+  "beam_preparation_receipt": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_coder_30b_500/receipt.json",
+  "beam_preparation_receipt_sha256": "99da7257d1eb8831c22059f7e0f87ce5a84769215eb60acc9da4d4410ca2c678",
+  "harness_agent_sha256": "edb3a479365fbc6698d1585185475a675d59e2ba2b49e80ede4567cb16bca9b9",
+  "native_config_sha256": "764e61c902bc0a4561a3a91dda6450db3b17cb38d42510c7f59930984b5676ae",
+  "expected_revisions": 224
+}
