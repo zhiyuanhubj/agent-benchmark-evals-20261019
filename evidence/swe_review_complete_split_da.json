@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T00:55:22.664477+00:00",
+  "generated_utc": "2026-10-20T01:14:00.014554+00:00",
   "metric": "Official SWE-Review compute_da.py, complete canonical review splits only",
   "metric_source_sha256": "35fdc90b8a5a14034df40fab7d70c7f3d5be587c0e8f92b67e0155996b52b035",
   "plan_sha256": "85414c294153273b0f4a975470233afebd9dd3fb8d116c6642a337f4837eea3c",
@@ -85,6 +85,39 @@
       }
     },
     "beam-bf16": {
+      "qwen3_coder_30b_500": {
+        "status": "final_da_for_this_split",
+        "expected": 462,
+        "metrics": {
+          "DA": 77.2,
+          "DA_total_50": 74.6,
+          "CR": 90.3,
+          "FAR": 17.9,
+          "FRR": 27.3,
+          "total": 462,
+          "correct": 322,
+          "model_fail": 45,
+          "produced": 417,
+          "TP": 157,
+          "FP": 36,
+          "TN": 165,
+          "FN": 59
+        },
+        "canonical_receipt_sha256": "99da7257d1eb8831c22059f7e0f87ce5a84769215eb60acc9da4d4410ca2c678",
+        "benchmark_sha256": "680e49366fdf5e95d3aedb337f88433e245d66eb58b4293aa2db17b826c22bfa",
+        "verified_review_count": 462,
+        "invalid_report_count": 1,
+        "invalid_reports": [
+          {
+            "instance_id": "psf__requests-2317",
+            "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_coder_30b_500/beam-review-20261018-qwen3_coder_30b_500-batch17/psf__requests-2317__M8N5Jj7/verifier/review_report.json",
+            "sha256": "638107758e72430ef231c63459f1cc040ace269dc03a7ec379199eea6b13c399",
+            "parse_error": "Extra data: line 28 column 1 (char 2315)"
+          }
+        ],
+        "RRR": null,
+        "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
+      },
       "qwen3_30b_instruct2507_500": {
         "status": "final_da_for_this_split",
         "expected": 422,

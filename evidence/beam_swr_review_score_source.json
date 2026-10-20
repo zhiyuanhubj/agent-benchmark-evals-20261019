@@ -1,5 +1,5 @@
 {
-  "utc": 1792457828.2385406,
+  "utc": 1792459619.3997047,
   "model": "reflection/Beam-1.0-501B-A23B",
   "precision": "BF16",
   "download-current": {
@@ -345,63 +345,47 @@
   "swe_review": {
     "glm5_500": {
       "expected": 500,
-      "terminal": 427,
+      "terminal": 439,
       "exceptions": 9,
       "prepared_image_phases": {
-        "image_ready": 448
+        "image_ready": 464
       },
       "controller": {
-        "utc": 1792456368.956267,
+        "utc": 1792458566.763246,
         "phase": "running",
-        "batch": 26,
+        "batch": 27,
         "tasks": [
-          "sphinx-doc__sphinx-9320",
-          "sphinx-doc__sphinx-9367",
-          "sphinx-doc__sphinx-9461",
-          "sphinx-doc__sphinx-9591",
-          "sphinx-doc__sphinx-9602",
-          "sphinx-doc__sphinx-9658",
-          "sphinx-doc__sphinx-9673",
-          "sphinx-doc__sphinx-9698",
-          "sphinx-doc__sphinx-9711",
-          "sympy__sympy-11618",
-          "sympy__sympy-12096",
-          "sympy__sympy-12419",
-          "sympy__sympy-12481",
-          "sympy__sympy-12489",
-          "sympy__sympy-13031",
-          "sympy__sympy-13091"
+          "sympy__sympy-13372",
+          "sympy__sympy-13480",
+          "sympy__sympy-13551",
+          "sympy__sympy-13615",
+          "sympy__sympy-13647",
+          "sympy__sympy-13757",
+          "sympy__sympy-13798",
+          "sympy__sympy-13852",
+          "sympy__sympy-13877",
+          "sympy__sympy-13878",
+          "sympy__sympy-13974",
+          "sympy__sympy-14248",
+          "sympy__sympy-14531",
+          "sympy__sympy-14711",
+          "sympy__sympy-14976",
+          "sympy__sympy-15017"
         ]
       },
       "full_official_rrr_complete": false
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "terminal": 457,
+      "terminal": 462,
       "exceptions": 6,
       "prepared_image_phases": {
         "image_ready": 462
       },
       "controller": {
-        "utc": 1792456731.8675985,
-        "phase": "running",
-        "batch": 28,
-        "tasks": [
-          "sympy__sympy-21930",
-          "sympy__sympy-22080",
-          "sympy__sympy-22456",
-          "sympy__sympy-22714",
-          "sympy__sympy-22914",
-          "sympy__sympy-23262",
-          "sympy__sympy-23534",
-          "sympy__sympy-23950",
-          "sympy__sympy-24066",
-          "sympy__sympy-24213",
-          "sympy__sympy-24443",
-          "sympy__sympy-24539",
-          "sympy__sympy-24562",
-          "sympy__sympy-24661"
-        ]
+        "utc": 1792458423.282252,
+        "phase": "scheduled_attempts_finished",
+        "expected": 462
       },
       "full_official_rrr_complete": false
     },
@@ -454,11 +438,17 @@
         "count": 279,
         "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_30b_instruct2507_500/receipt.json",
         "sha256": "72339a332b1a223146589bc8f391a5bc3efea2df2d115fb48914ede3ddcba94c"
+      },
+      "qwen3_coder_30b_500": {
+        "status": "tasks_prepared",
+        "count": 224,
+        "receipt": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/prepared/qwen3_coder_30b_500/receipt.json",
+        "sha256": "99da7257d1eb8831c22059f7e0f87ce5a84769215eb60acc9da4d4410ca2c678"
       }
     },
     "complete": false,
     "model_generation_started": false,
-    "utc": "2026-10-20T00:56:04.291841+00:00",
+    "utc": "2026-10-20T01:27:00.573372+00:00",
     "grader_preflight_passed": true
   },
   "revision_preparation_controller": "MainPID=3430427\nResult=success\nActiveState=active\n",

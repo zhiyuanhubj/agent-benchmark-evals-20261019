@@ -27,6 +27,7 @@ RAW_ARCHIVE_INTERVAL_SECONDS = 600  # Keep live I/O snapshots within each 15-min
 # the ten-minute cadence so new trajectories reach the release promptly.
 STATIC_ARCHIVE_INTERVAL_SECONDS = 3600
 STATIC_ARCHIVE_GROUPS = {'opus47_legacy', 'muse_review_full_io', 'muse_review_verifier'}
+ARCHIVE_SCAN_STATE = LOG.with_name('github-archive-scan-state.json')
 
 
 def run(command, timeout=180):
@@ -118,6 +119,7 @@ def sync_native_archives(scores, force_bf16=False):
                             and (datetime.now(timezone.utc) - latest_archive_time).total_seconds() >= RAW_ARCHIVE_INTERVAL_SECONDS)
         if terminal > archived_terminal or handoff_newer or raw_snapshot_due:
             run(command, timeout=300)
+    static_scans = json.loads(ARCHIVE_SCAN_STATE.read_text()) if ARCHIVE_SCAN_STATE.exists() else {}
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
                   'muse_bf16_review_inputs',
                   'muse_review_full_io', 'beam_review_full_io',
@@ -128,10 +130,17 @@ def sync_native_archives(scores, force_bf16=False):
             continue  # A new archive group joins only after its base asset is created.
         previous = sorted([manifest_dir / f'{group}.json', *manifest_dir.glob(f'{group}_delta_*.json')])[-1]
         previous_time = datetime.fromisoformat(json.loads(previous.read_text())['generated_utc'])
-        interval = (STATIC_ARCHIVE_INTERVAL_SECONDS if group in STATIC_ARCHIVE_GROUPS
-                    else RAW_ARCHIVE_INTERVAL_SECONDS)
+        static = group in STATIC_ARCHIVE_GROUPS
+        if static and group in static_scans:
+            previous_time = max(previous_time, datetime.fromisoformat(static_scans[group]))
+        interval = STATIC_ARCHIVE_INTERVAL_SECONDS if static else RAW_ARCHIVE_INTERVAL_SECONDS
         if (datetime.now(timezone.utc) - previous_time).total_seconds() >= interval or (group == 'muse_bf16' and force_bf16):
             run([PYTHON, str(ROOT / 'archive_delta.py'), group, '--if-changed'], timeout=600)
+            if static:
+                static_scans[group] = datetime.now(timezone.utc).isoformat()
+                temp = ARCHIVE_SCAN_STATE.with_suffix('.tmp')
+                temp.write_text(json.dumps(static_scans, indent=2) + '\n')
+                temp.replace(ARCHIVE_SCAN_STATE)
     live_manifests = sorted(manifest_dir.glob('*_exact_tb_live_*.json'))
     delta_manifests = sorted(manifest_dir.glob('*_delta_*.json'))
     release = json.loads(subprocess.check_output([
