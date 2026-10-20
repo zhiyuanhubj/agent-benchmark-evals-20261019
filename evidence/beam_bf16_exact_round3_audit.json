@@ -1,25 +1,18 @@
 {
-  "generated_utc": "2026-10-20T11:48:11.715844+00:00",
+  "generated_utc": "2026-10-20T12:01:54.211720+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T113933Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T115408Z.tar.zst",
   "expected": 89,
-  "terminal": 13,
-  "graded": 13,
-  "success": 11,
+  "terminal": 20,
+  "graded": 20,
+  "success": 15,
   "missing_graded_tasks": [
     "caffe-cifar-10",
-    "chess-best-move",
-    "count-dataset-tokens",
-    "crack-7z-hash",
-    "custom-memory-heap-crash",
-    "db-wal-recovery",
-    "distribution-search",
     "dna-assembly",
     "dna-insert",
-    "extract-elf",
     "extract-moves-from-video",
     "feal-differential-cryptanalysis",
     "feal-linear-cryptanalysis",
@@ -89,12 +82,8 @@
   ],
   "ungraded_terminal_tasks": [],
   "unarchived_new_terminal_tasks": [
-    "chess-best-move",
-    "count-dataset-tokens",
-    "crack-7z-hash",
-    "custom-memory-heap-crash",
-    "db-wal-recovery",
-    "distribution-search"
+    "dna-insert",
+    "feal-differential-cryptanalysis"
   ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
@@ -152,6 +141,13 @@
       "raw_response_count": 39,
       "responses_with_reasoning_content": 39
     },
+    "chess-best-move": {
+      "reward": 0.0,
+      "result_sha256": "01e6b7961925e06a40b9756d3fae91cd3d4c7724b7532d6ee3153062cf5e4744",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/chess-best-move__Ds24DfB/result.json",
+      "raw_response_count": 123,
+      "responses_with_reasoning_content": 123
+    },
     "circuit-fibsqrt": {
       "reward": 1.0,
       "result_sha256": "344ae35ac6ddf75e89412c6adcc53c4e67bca5666cc7bed8df7957406b20eb45",
@@ -193,6 +189,48 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/constraints-scheduling__njHfMng/result.json",
       "raw_response_count": 4,
       "responses_with_reasoning_content": 4
+    },
+    "count-dataset-tokens": {
+      "reward": 0.0,
+      "result_sha256": "c20ad37b5a18bbae4b58cd5ee4e1f8a72ad0aabfccc7c180937d7b6562ead4c2",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/count-dataset-tokens__wMuERa9/result.json",
+      "raw_response_count": 19,
+      "responses_with_reasoning_content": 19
+    },
+    "crack-7z-hash": {
+      "reward": 1.0,
+      "result_sha256": "9171dd0c7155ecee1977850580e27a29db5ee6c8c3419f70519e9acb087af1c5",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/crack-7z-hash__uA4eNHk/result.json",
+      "raw_response_count": 14,
+      "responses_with_reasoning_content": 14
+    },
+    "custom-memory-heap-crash": {
+      "reward": 1.0,
+      "result_sha256": "8dbb0d4ee3a2b68e1f4c0a9fdbcb17e0725f74f3e7ba50a3beb9128819260522",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/custom-memory-heap-crash__7ctVrHS/result.json",
+      "raw_response_count": 16,
+      "responses_with_reasoning_content": 16
+    },
+    "db-wal-recovery": {
+      "reward": 0.0,
+      "result_sha256": "29b65d6ddb7853a5f9419254edd03f9039a2f194f186c2011fdd3e80e9f17fb0",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/db-wal-recovery__kQT857r/result.json",
+      "raw_response_count": 33,
+      "responses_with_reasoning_content": 33
+    },
+    "distribution-search": {
+      "reward": 1.0,
+      "result_sha256": "89b0154e77ce6d21c1b8c4f8f2d81d9bd028b1212421b60d51bb8e4702b17501",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/distribution-search__q6mLV5h/result.json",
+      "raw_response_count": 7,
+      "responses_with_reasoning_content": 7
+    },
+    "extract-elf": {
+      "reward": 1.0,
+      "result_sha256": "32e64c489d4389825ee7fb5e5c82d4e046a7d97eaadfdbdc96750c9df5eb7d84",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/extract-elf__jzhhBmB/result.json",
+      "raw_response_count": 9,
+      "responses_with_reasoning_content": 9
     }
   }
 }

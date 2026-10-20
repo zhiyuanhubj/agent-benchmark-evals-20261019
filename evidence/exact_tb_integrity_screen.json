@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T11:48:24.266251+00:00",
+  "generated_utc": "2026-10-20T12:02:07.778881+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -82,7 +82,7 @@
       }
     },
     "beam_bf16_r3": {
-      "scored_trajectories_checked": 19,
+      "scored_trajectories_checked": 22,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -7489,6 +7489,18 @@
     {
       "model": "beam_bf16_r3",
       "round": 3,
+      "task": "extract-elf",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/extract-elf__jzhhBmB/agent/trajectory.json",
+      "trajectory_sha256": "25c6b7046abe2516747621e6ae48d110d064f1413b49f54d5b88e9b42cac6d33",
+      "steps": 10,
+      "tool_calls": 23,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
       "task": "break-filter-js-from-html",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/break-filter-js-from-html__9AVbqQy/agent/trajectory.json",
@@ -7523,6 +7535,18 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
+      "task": "dna-insert",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/dna-insert__uAq9wZC/agent/trajectory.json",
+      "trajectory_sha256": "7f9c3d1ce8f06173329f1e7288ace39a63028efade2b1d972337493ce834a528",
+      "steps": 11,
+      "tool_calls": 22,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "beam_bf16_r3",
@@ -7646,6 +7670,18 @@
       "trajectory_sha256": "5923a0b5b9249ecb9ce8f365af5ce205af0f1fd13fbe84a3c4b57b2c4ed12ef7",
       "steps": 12,
       "tool_calls": 17,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
+      "task": "feal-differential-cryptanalysis",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/feal-differential-cryptanalysis__rd6b87C/agent/trajectory.json",
+      "trajectory_sha256": "b238ba794f351ebf6e9ac7f5a52c34f15aca839dc0761e6b0cc06417293645f6",
+      "steps": 9,
+      "tool_calls": 11,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
