@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T06:57:24.682045+00:00",
+  "generated_utc": "2026-10-20T07:14:03.548288+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -52,7 +52,7 @@
       }
     },
     "muse_nvfp4_r2": {
-      "scored_trajectories_checked": 65,
+      "scored_trajectories_checked": 66,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -5439,6 +5439,18 @@
       "trajectory_sha256": "0ff511a641aeff844770c55e79b901d4f7357a9a53fb927a1e677703e07da9fe",
       "steps": 6,
       "tool_calls": 9,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r2",
+      "round": 2,
+      "task": "raman-fitting",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b07/raman-fitting__dSbkLhT/agent/trajectory.json",
+      "trajectory_sha256": "44a3b7a2bd947d689e372ab954170f7d129cfd40e802926f0fb5d724e4e91a53",
+      "steps": 43,
+      "tool_calls": 64,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
