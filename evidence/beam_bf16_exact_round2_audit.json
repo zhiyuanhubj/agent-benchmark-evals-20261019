@@ -1,20 +1,19 @@
 {
-  "generated_utc": "2026-10-20T13:15:00.517954+00:00",
+  "generated_utc": "2026-10-20T13:41:25.415607+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T130455Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T133200Z.tar.zst",
   "expected": 89,
-  "terminal": 79,
-  "graded": 78,
-  "success": 57,
+  "terminal": 80,
+  "graded": 79,
+  "success": 58,
   "missing_graded_tasks": [
     "git-multibranch",
     "protein-assembly",
     "regex-chess",
     "schemelike-metacircular-eval",
-    "torch-tensor-parallelism",
     "train-fasttext",
     "tune-mjcf",
     "video-processing",
@@ -25,9 +24,7 @@
   "ungraded_terminal_tasks": [
     "git-multibranch"
   ],
-  "unarchived_new_terminal_tasks": [
-    "torch-tensor-parallelism"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -587,6 +584,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/torch-pipeline-parallelism__AN3Psuy/result.json",
       "raw_response_count": 45,
       "responses_with_reasoning_content": 45
+    },
+    "torch-tensor-parallelism": {
+      "reward": 1.0,
+      "result_sha256": "657adc01fb2bac1e430c7ee1b3a1d2e6b0c39e9ccb4bc61f77d086e35c9a935d",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/torch-tensor-parallelism__9CQrVfm/result.json",
+      "raw_response_count": 63,
+      "responses_with_reasoning_content": 63
     }
   }
 }
