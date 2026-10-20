@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-20T18:12:50.128820+00:00",
+  "allocation": 2919,
+  "hostname": "ip-10-1-30-147",
+  "benchmark": "Beam BF16 SWE-bench Pro Verified round 1 handoff",
+  "guard_service": "beam-pro-r1-cpu2919-image-guard-20261020.service",
+  "guard_service_active_at_snapshot": true,
+  "guard_source": "protocol/guard_2919_completed_beam_pro_images_20261020.py",
+  "guard_source_sha256": "e2980c99813d3c030673d3f3c6e47259b80c44f2cabfdff3f5edfd3abb8be9e5",
+  "first_cleanup": {
+    "utc": "2026-10-20T18:12:50.128820+00:00",
+    "event": "cleanup_finish",
+    "free_gib_before": 54.6,
+    "free_gib_after": 90.36,
+    "recovered_gib": 35.76,
+    "candidate_count": 27,
+    "removed": 12,
+    "refused": 1,
+    "target_reached": true
+  },
+  "policy": "Delete only jefzda/sweap-images tags for native-graded handoff tasks, after verifying image ID and result SHA; no --force, no container or result deletion. Docker rejects referenced images."
+}

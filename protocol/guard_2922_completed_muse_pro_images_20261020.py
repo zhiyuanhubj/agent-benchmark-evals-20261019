@@ -17,6 +17,8 @@ SOURCE = BASE / ('.private/muse_bf16_20261018/legacy_bench/pro-results/muse_bf16
                  'muse-bf16-pro-full-r1-resume-20261020/details')
 LOG = BASE / '.private/muse_bf16_20261018/recovery_20261020/cpu-2922-image-guard.jsonl'
 DISK = '/opt/sagemaker'
+JOB_ID = '2922'
+NODE_NAME = 'ip-10-1-69-250'
 TRIGGER = 50 * 2**30
 TARGET = 80 * 2**30
 
@@ -70,8 +72,8 @@ def candidates():
 
 
 def cycle():
-    assert os.environ.get('SLURM_JOB_ID') == '2922'
-    assert os.uname().nodename == 'ip-10-1-69-250'
+    assert os.environ.get('SLURM_JOB_ID') == JOB_ID
+    assert os.uname().nodename == NODE_NAME
     before = shutil.disk_usage(DISK).free
     if before >= TRIGGER:
         return record(event='healthy', free_gib=round(before / 2**30, 2))

@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-10-20T18:09:33.658022+00:00",
+  "generated_utc": "2026-10-20T19:04:02.087980+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T175854Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T185243Z.tar.zst",
   "expected": 89,
-  "terminal": 68,
-  "graded": 54,
-  "success": 34,
+  "terminal": 78,
+  "graded": 64,
+  "success": 41,
   "missing_graded_tasks": [
     "git-multibranch",
     "headless-terminal",
@@ -25,18 +25,8 @@
     "pytorch-model-cli",
     "pytorch-model-recovery",
     "qemu-alpine-ssh",
-    "query-optimize",
-    "raman-fitting",
     "regex-chess",
-    "regex-log",
-    "reshard-c4-data",
-    "rstan-to-pystan",
-    "sam-cell-seg",
-    "sanitize-git-repo",
     "schemelike-metacircular-eval",
-    "sparql-university",
-    "sqlite-db-truncate",
-    "sqlite-with-gcov",
     "torch-pipeline-parallelism",
     "torch-tensor-parallelism",
     "train-fasttext",
@@ -124,11 +114,7 @@
       "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
     }
   },
-  "unarchived_new_terminal_tasks": [
-    "query-optimize",
-    "raman-fitting",
-    "regex-log"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -611,6 +597,76 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/qemu-startup__9iRcWhK/result.json",
       "raw_response_count": 13,
       "responses_with_reasoning_content": 13
+    },
+    "query-optimize": {
+      "reward": 1.0,
+      "result_sha256": "d4dccf5ac965df697c6d5d7ef8a44e5c0384226bd57102291403a2af19ae7259",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/query-optimize__MuaDN5b/result.json",
+      "raw_response_count": 38,
+      "responses_with_reasoning_content": 38
+    },
+    "raman-fitting": {
+      "reward": 0.0,
+      "result_sha256": "b7c35d1a330d668ba777cce11212d4cdde3899371f072b8d8807211cd4ee8f2f",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/raman-fitting__WYEF3J7/result.json",
+      "raw_response_count": 72,
+      "responses_with_reasoning_content": 72
+    },
+    "regex-log": {
+      "reward": 1.0,
+      "result_sha256": "fd438bb4cdba4a28014bca649da00891ca8da33e83a4b2efe5dfaff97fe67968",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/regex-log__4rATd5J/result.json",
+      "raw_response_count": 18,
+      "responses_with_reasoning_content": 18
+    },
+    "reshard-c4-data": {
+      "reward": 1.0,
+      "result_sha256": "a9897557fb43ae5e0cb0caec9bae0a27ec17252d4ef1ec8d9c0e9d12ce8ff9e9",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/reshard-c4-data__5RxCnhd/result.json",
+      "raw_response_count": 44,
+      "responses_with_reasoning_content": 44
+    },
+    "rstan-to-pystan": {
+      "reward": 1.0,
+      "result_sha256": "91c3fb33c0b1a46f553eebc6310dc8ce720d74ce6a219f46bce72502f4581324",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/rstan-to-pystan__gDsfHaj/result.json",
+      "raw_response_count": 36,
+      "responses_with_reasoning_content": 36
+    },
+    "sam-cell-seg": {
+      "reward": 0.0,
+      "result_sha256": "2e798e47580093916481c27598e0cfd36e7b10762c7eb9fb6af27fd2059ba413",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/sam-cell-seg__LkA2UYr/result.json",
+      "raw_response_count": 12,
+      "responses_with_reasoning_content": 12
+    },
+    "sanitize-git-repo": {
+      "reward": 1.0,
+      "result_sha256": "44a098dcd8e53ec24b180da242045ae4f81b02e0a1bda68ec5db4859ba3c639d",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/sanitize-git-repo__qLUEHpk/result.json",
+      "raw_response_count": 23,
+      "responses_with_reasoning_content": 23
+    },
+    "sparql-university": {
+      "reward": 0.0,
+      "result_sha256": "175637cb30adb1a5b490fd65999bdce14994f12815ac1b42531b101c3fb55899",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/sparql-university__f6Yc5UH/result.json",
+      "raw_response_count": 6,
+      "responses_with_reasoning_content": 6
+    },
+    "sqlite-db-truncate": {
+      "reward": 1.0,
+      "result_sha256": "c0ae69d45083e8be6311758ad0405dfd2ff2929fa710df5a20a3b4cc4e447bbf",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/sqlite-db-truncate__z2Zb8bw/result.json",
+      "raw_response_count": 9,
+      "responses_with_reasoning_content": 9
+    },
+    "sqlite-with-gcov": {
+      "reward": 1.0,
+      "result_sha256": "456bbb0b01834e6a9db7d622e45248221fede5b99b277e3f6f962340bfad1963",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/sqlite-with-gcov__4BmG2Bm/result.json",
+      "raw_response_count": 20,
+      "responses_with_reasoning_content": 20
     }
   }
 }

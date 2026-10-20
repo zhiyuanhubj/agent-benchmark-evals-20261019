@@ -17,6 +17,24 @@ names = [
     sorted(MANIFESTS.glob('muse_nvfp4_exact_tb_live_*.json'))[-1].name,
 ]
 manifests = [json.loads((MANIFESTS / name).read_text()) for name in names]
+live_stamp = names[-1].removesuffix('.json').rsplit('_live_', 1)[1]
+live_archive_started = datetime.strptime(live_stamp, '%Y%m%dT%H%M%SZ').replace(tzinfo=timezone.utc)
+score_generated = datetime.fromisoformat(json.loads((ROOT / 'results/scores.json').read_text())['generated_utc'])
+deferred_post_score_results = []
+
+
+def finished_by_score_snapshot(result):
+    if not result.exists():
+        return False
+    finished = json.loads(result.read_text()).get('finished_at')
+    if not finished:
+        return False
+    if datetime.fromisoformat(finished.replace('Z', '+00:00')) > score_generated:
+        deferred_post_score_results.append(str(result.relative_to(BASE)))
+        return False
+    return True
+
+
 entries = set()
 for manifest in manifests:
     archive = ROOT / '.release_assets' / manifest['archive_name']
@@ -76,7 +94,7 @@ if connection_claim.exists():
         if not trial.is_dir():
             continue
         result = trial / 'result.json'
-        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+        if not finished_by_score_snapshot(result):
             continue
         result_name = str(result.relative_to(BASE))
         if result_name not in entries:
@@ -107,7 +125,7 @@ if expiry_claim_path.exists():
         if not trial.is_dir():
             continue
         result = trial / 'result.json'
-        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+        if not finished_by_score_snapshot(result):
             continue
         if str(result.relative_to(BASE)) not in entries:
             missing_expiry_results.append(trial.name)
@@ -138,7 +156,7 @@ for label in ('fasttext-expiry', 'fasttext-tmux'):
                          ROOT / 'protocol/probe_muse_nvfp4_fasttext_tmux_20261020.py'))
     for suffix in ('start', 'exit'):
         marker = claim_path.with_name(f'r2-{label}-2902-20261020-{suffix}.json')
-        if marker.exists():
+        if marker.exists() and marker.stat().st_mtime <= live_archive_started.timestamp():
             required.append(marker)
     missing_fasttext_files.extend(str(path.relative_to(BASE)) for path in required
                                   if str(path.relative_to(BASE)) not in entries)
@@ -147,7 +165,7 @@ for label in ('fasttext-expiry', 'fasttext-tmux'):
         if not trial.is_dir():
             continue
         result = trial / 'result.json'
-        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+        if not finished_by_score_snapshot(result):
             continue
         if str(result.relative_to(BASE)) not in entries:
             missing_fasttext_results.append(trial.name)
@@ -171,7 +189,7 @@ if b07_path.exists():
                 ROOT / 'protocol/continue_muse_nvfp4_r3_b07_2900_20261020.py']
     for suffix in ('started', 'exit'):
         marker = r3_state / f'b07-2900-{suffix}.json'
-        if marker.exists():
+        if marker.exists() and marker.stat().st_mtime <= live_archive_started.timestamp():
             required.append(marker)
     missing_r3_continuation_files.extend(str(path.relative_to(BASE)) for path in required
                                          if str(path.relative_to(BASE)) not in entries)
@@ -182,7 +200,7 @@ if expired_path.exists():
                 ROOT / 'protocol/continue_muse_nvfp4_r3_expired2869_2900_20261020.py']
     for suffix in ('start', 'exit'):
         marker = r3_state / f'expired2869-continuation-2900-{suffix}.json'
-        if marker.exists():
+        if marker.exists() and marker.stat().st_mtime <= live_archive_started.timestamp():
             required.append(marker)
     for row in expired['tasks']:
         for raw in row['source_partial_raw']:
@@ -196,7 +214,7 @@ for job_name in ('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b07',
         if not trial.is_dir():
             continue
         result = trial / 'result.json'
-        if not result.exists() or not json.loads(result.read_text()).get('finished_at'):
+        if not finished_by_score_snapshot(result):
             continue
         if str(result.relative_to(BASE)) not in entries:
             missing_r3_continuation_results.append(trial.name)
@@ -259,6 +277,9 @@ if unverified:
 
 record = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
+    'live_archive_started_utc': live_archive_started.isoformat(),
+    'score_generated_utc': score_generated.isoformat(),
+    'deferred_post_score_snapshot_results': sorted(set(deferred_post_score_results)),
     'archives': [manifest['archive_name'] for manifest in manifests],
     'expected_inputs': 89,
     'covered_inputs': 89 - len(missing_inputs),

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T18:07:29.977005+00:00",
+  "generated_utc": "2026-10-20T19:01:43.301945+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -249,11 +249,11 @@
           "2": {
             "expected": 89,
             "terminal": 89,
-            "graded": 79,
-            "success": 57,
+            "graded": 81,
+            "success": 59,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
-            "ungraded": 10,
+            "ungraded": 8,
             "exceptions": {
               "AgentTimeoutError": 9,
               "RuntimeError": 3,
@@ -268,13 +268,13 @@
           "3": {
             "expected": 89,
             "terminal": 89,
-            "graded": 53,
+            "graded": 54,
             "success": 45,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 2860,
-            "ungraded": 36,
+            "archived_actual_model_responses": 3098,
+            "ungraded": 35,
             "exceptions": {
-              "InternalServerError": 36
+              "InternalServerError": 35
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -469,9 +469,9 @@
             "new_allocation": 2902,
             "controller": "active",
             "tasks": 10,
-            "terminal": 0,
-            "graded": 0,
-            "success": 0,
+            "terminal": 2,
+            "graded": 2,
+            "success": 2,
             "active_trial_dirs": 2,
             "no_best_of_selection": true,
             "qualification": "Only one hash-declared correction result per task may fill an ungraded infrastructure failure; prior attempts remain preserved."
@@ -517,10 +517,10 @@
             "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
             "original_ungraded_infra_failures": 89,
             "original_model_responses": 0,
-            "replacement_terminal": 53,
-            "replacement_graded": 53,
+            "replacement_terminal": 54,
+            "replacement_graded": 54,
             "replacement_success": 45,
-            "replacement_raw_responses": 2860,
+            "replacement_raw_responses": 3098,
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
               "largest-eigenval"
@@ -534,7 +534,7 @@
               "terminal": 1,
               "graded": 1,
               "success": 1,
-              "raw_responses": 107,
+              "raw_responses": 174,
               "source_partial_model_response_tasks": 4,
               "source_partial_model_responses": 150,
               "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
@@ -595,15 +595,15 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 416,
-        "graded": 277,
-        "success": 167,
+        "terminal": 422,
+        "graded": 288,
+        "success": 173,
         "status": "partial_no_full_score",
         "pre_model_disk_correction": {
           "declared_tasks": 136,
-          "native_terminal": 0,
-          "native_graded": 0,
-          "native_success": 0,
+          "native_terminal": 5,
+          "native_graded": 5,
+          "native_success": 4,
           "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
           "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json"
         },
@@ -611,9 +611,9 @@
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 28,
-        "graded": 28,
-        "success": 19,
+        "terminal": 36,
+        "graded": 36,
+        "success": 25,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -630,8 +630,8 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 74,
-          "graded": 73,
+          "terminal": 76,
+          "graded": 75,
           "success": 31,
           "status": "partial_no_full_score"
         },
@@ -690,7 +690,7 @@
             "graded": 85,
             "success": 62,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 6326,
+            "archived_actual_model_responses": 6537,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 8,
@@ -703,11 +703,11 @@
           },
           "3": {
             "expected": 89,
-            "terminal": 69,
-            "graded": 55,
-            "success": 34,
-            "active_trial_dirs": 73,
-            "archived_actual_model_responses": 2912,
+            "terminal": 77,
+            "graded": 63,
+            "success": 40,
+            "active_trial_dirs": 81,
+            "archived_actual_model_responses": 3423,
             "ungraded": 14,
             "exceptions": {
               "RuntimeError": 13,
@@ -947,10 +947,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 273,
+          "completed_trials": 280,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 225,
+          "pending_trials": 218,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:18.993248",
           "finished_at": null
@@ -962,10 +962,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 265,
+          "completed_trials": 274,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 195,
+          "pending_trials": 186,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:10.468330",
           "finished_at": null
@@ -977,10 +977,10 @@
           "status": "review_stage_running",
           "DA": null,
           "RRR": null,
-          "completed_trials": 311,
+          "completed_trials": 324,
           "errored_trials": 0,
           "running_trials": 2,
-          "pending_trials": 109,
+          "pending_trials": 96,
           "cancelled_trials": 0,
           "started_at": "2026-10-20T08:16:16.640783",
           "finished_at": null
@@ -1101,24 +1101,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 375,
-        "native_graded": 375,
+        "native_terminal": 379,
+        "native_graded": 379,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 127,
-            "native_graded": 127
+            "native_terminal": 128,
+            "native_graded": 128
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 124,
-            "native_graded": 124
+            "native_terminal": 125,
+            "native_graded": 125
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 124,
-            "native_graded": 124
+            "native_terminal": 126,
+            "native_graded": 126
           }
         },
         "DA": null,
