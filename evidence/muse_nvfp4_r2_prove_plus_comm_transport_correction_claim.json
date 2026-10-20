@@ -1,0 +1,39 @@
+{
+  "prepared_utc": "2026-10-20T05:40:19.108099+00:00",
+  "scope": "One corrected service-environment run after both earlier attempts ended before any model response.",
+  "task": "prove-plus-comm",
+  "original_ungraded_evidence": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_r2_prove_plus_comm_ungraded.json",
+  "original_ungraded_evidence_sha256": "17bcbfb6ecaf32f906aa5c4d1c853373196570a86fa420f8dc5d58fb2efc3e49",
+  "failed_transport_evidence": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_r2_prove_plus_comm_transport_failure.json",
+  "failed_transport_evidence_sha256": "bd3bec92565c953f44506ed14c4c2ae6969f889e84e72234dec508b457870d2b",
+  "source_job_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-infra-replacement-prove-plus-comm.json",
+  "source_job_config_sha256": "0a1188a0ffbd428590da514657c89bfc63e821caf04695f6165bf829ce3f39e8",
+  "replacement_job_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-infra-transport-correction-prove-plus-comm.json",
+  "replacement_job_config_sha256": "1e1eaf8bc567f18e2c18a1ccdb55d6147b31cd6de7b64bf2a9675c5462950917",
+  "replacement_job_name": "muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm",
+  "model_endpoint": "http://10.1.95.27:31320/v1",
+  "model_id": "muse-spark-open-nvfp4",
+  "model_ready_check": {
+    "object": "list",
+    "data": [
+      {
+        "id": "muse-spark-open-nvfp4",
+        "object": "model",
+        "created": 1792474819,
+        "owned_by": "sglang",
+        "root": "muse-spark-open-nvfp4",
+        "parent": null,
+        "max_model_len": 1048576
+      }
+    ]
+  },
+  "service_process_environment": {
+    "OPENAI_API_KEY": "EMPTY"
+  },
+  "only_changes": [
+    "job_name",
+    "service process OPENAI_API_KEY=EMPTY to satisfy LiteLLM client construction"
+  ],
+  "no_retry": true,
+  "metric_policy": "Both earlier attempts have zero raw model responses and no native grade. Count at most one native grade from this correction for the original task; preserve all attempts and never select best-of."
+}

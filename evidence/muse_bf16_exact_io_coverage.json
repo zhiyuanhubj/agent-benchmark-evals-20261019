@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T05:30:20.015313+00:00",
+  "generated_utc": "2026-10-20T06:11:53.528318+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 33,
-  "success_count": 28,
+  "scored_tasks": 36,
+  "success_count": 30,
   "tasks": {
     "circuit-fibsqrt": {
       "reward": 1.0,
@@ -15,6 +15,10 @@
     "regex-log": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/regex-log__ynqEXWv/result.json"
+    },
+    "install-windows-3.11": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/install-windows-3.11__mRLbACf/result.json"
     },
     "feal-linear-cryptanalysis": {
       "reward": 0.0,
@@ -47,6 +51,10 @@
     "dna-insert": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/dna-insert__oFnavPA/result.json"
+    },
+    "modernize-scientific-stack": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/modernize-scientific-stack__ud5RhGY/result.json"
     },
     "custom-memory-heap-crash": {
       "reward": 1.0,
@@ -83,6 +91,10 @@
     "bn-fit-modify": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/bn-fit-modify__enY7gAz/result.json"
+    },
+    "nginx-request-logging": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/nginx-request-logging__zy3i3kS/result.json"
     },
     "chess-best-move": {
       "reward": 0.0,
@@ -138,11 +150,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 33,
-  "covered_raw_response_sets": 33,
-  "covered_trajectories": 33,
-  "scored_raw_response_count": 1057,
-  "nonempty_reasoning_response_count": 1056,
+  "covered_results": 36,
+  "covered_raw_response_sets": 36,
+  "covered_trajectories": 36,
+  "scored_raw_response_count": 1336,
+  "nonempty_reasoning_response_count": 1335,
   "raw_reasoning_by_task": {
     "circuit-fibsqrt": {
       "raw_responses": 12,
@@ -155,6 +167,10 @@
     "regex-log": {
       "raw_responses": 7,
       "nonempty_reasoning_content": 7
+    },
+    "install-windows-3.11": {
+      "raw_responses": 266,
+      "nonempty_reasoning_content": 266
     },
     "feal-linear-cryptanalysis": {
       "raw_responses": 116,
@@ -187,6 +203,10 @@
     "dna-insert": {
       "raw_responses": 17,
       "nonempty_reasoning_content": 17
+    },
+    "modernize-scientific-stack": {
+      "raw_responses": 6,
+      "nonempty_reasoning_content": 6
     },
     "custom-memory-heap-crash": {
       "raw_responses": 13,
@@ -223,6 +243,10 @@
     "bn-fit-modify": {
       "raw_responses": 13,
       "nonempty_reasoning_content": 13
+    },
+    "nginx-request-logging": {
+      "raw_responses": 7,
+      "nonempty_reasoning_content": 7
     },
     "chess-best-move": {
       "raw_responses": 68,
@@ -373,6 +397,9 @@
     "muse_bf16_delta_20261020T045217Z.tar.zst",
     "muse_bf16_delta_20261020T050949Z.tar.zst",
     "muse_bf16_delta_20261020T052344Z.tar.zst",
+    "muse_bf16_delta_20261020T053654Z.tar.zst",
+    "muse_bf16_delta_20261020T054907Z.tar.zst",
+    "muse_bf16_delta_20261020T060119Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

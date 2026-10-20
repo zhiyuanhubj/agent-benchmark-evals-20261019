@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T05:29:45.378363+00:00",
+  "generated_utc": "2026-10-20T06:11:14.921081+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -248,15 +248,15 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 57,
-            "graded": 56,
-            "success": 41,
+            "terminal": 61,
+            "graded": 60,
+            "success": 44,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 1,
             "exceptions": {
-              "AgentTimeoutError": 7,
-              "RuntimeError": 1
+              "AgentTimeoutError": 8,
+              "RuntimeError": 3
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -313,10 +313,10 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 78,
-            "2": 57,
+            "2": 61,
             "3": 0
           },
-          "new_raw_model_responses": 8560,
+          "new_raw_model_responses": 8768,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
@@ -329,13 +329,14 @@
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 839,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1205,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1251,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 643,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 324,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 38
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 399,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 105,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 20
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T05:29:41+00:00",
-          "active_recovery_trial_dirs": 6,
+          "latest_new_raw_model_response_utc": "2026-10-20T06:11:20+00:00",
+          "active_recovery_trial_dirs": 7,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
             "2923": {
@@ -384,10 +385,41 @@
             "endpoint": "http://10.1.101.159:31320/v1"
           },
           "qualification": "No graded task replay. Eight ungraded tasks interrupted by user BF16 node cutover receive explicitly identified infrastructure replacement attempts; their original partial responses remain archived. Remaining 70 r1 tasks were never sampled. Rounds 2 and 3 use original tasks/images and generation settings. No best-of selection.",
+          "local_2866_backfill": {
+            "evidence": "evidence/muse_nvfp4_local2866_route_audit.json",
+            "ready_proof": "evidence/muse_nvfp4_local2866_ready.json",
+            "route_count": 1,
+            "claimed_task_count": 10,
+            "terminal": 0
+          },
           "round_2_password_recovery_replacement": {
             "claim": "evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json",
             "original_native_reward": null,
-            "replacement_result": null,
+            "replacement_result": {
+              "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-infra-replacement-password-recovery/password-recovery__X2sxzTb/result.json",
+              "reward": 1.0,
+              "result_sha256": "773351e2c7bf881819f9c6cb34b9092d7edb8dd72ed4e982da8e7e905e6d1da2"
+            },
+            "training_disposition": "exclude_from_clean_training",
+            "integrity_evidence": "evidence/muse_nvfp4_r2_password_replacement_integrity_alert.json",
+            "counted_as_one_task": true,
+            "no_best_of_selection": true
+          },
+          "round_2_prove_plus_comm_replacement": {
+            "claim": "evidence/muse_nvfp4_r2_prove_plus_comm_replacement_claim.json",
+            "original_native_reward": null,
+            "original_model_response_count": 0,
+            "replacement_result": {
+              "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-infra-replacement-prove-plus-comm/prove-plus-comm__8dLX5dB/result.json",
+              "reward": null,
+              "result_sha256": "923945dfe45028a1f59330e577a7979e317b67b58129bfad4a49d5c5cf8a8e10"
+            },
+            "transport_correction_claim": "evidence/muse_nvfp4_r2_prove_plus_comm_transport_correction_claim.json",
+            "transport_correction_result": {
+              "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm/prove-plus-comm__vnLL3LW/result.json",
+              "reward": 1.0,
+              "result_sha256": "bc3356027d7afc75da1ae6a5658fbe5319513b02d468ed3837789bd22807e617"
+            },
             "counted_as_one_task": true,
             "no_best_of_selection": true
           }
@@ -398,9 +430,9 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 154,
-        "graded": 153,
-        "success": 93,
+        "terminal": 156,
+        "graded": 155,
+        "success": 94,
         "status": "partial_no_full_score"
       },
       "deepswe": {
@@ -413,8 +445,8 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 11,
-          "graded": 11,
+          "terminal": 14,
+          "graded": 14,
           "success": 4,
           "status": "partial_no_full_score"
         },
@@ -473,7 +505,7 @@
             "graded": 54,
             "success": 38,
             "active_trial_dirs": 59,
-            "archived_actual_model_responses": 3870,
+            "archived_actual_model_responses": 3883,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 3,
@@ -729,17 +761,17 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 136,
-        "graded": 136,
-        "success": 85,
+        "terminal": 140,
+        "graded": 140,
+        "success": 87,
         "status": "partial_no_full_score"
       },
       "tb2_1_legacy_cached_tag": {
         "1": {
           "expected": 89,
-          "terminal": 33,
-          "graded": 33,
-          "success": 28,
+          "terminal": 36,
+          "graded": 36,
+          "success": 30,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -762,9 +794,9 @@
         "rounds": {
           "1": {
             "expected": 89,
-            "terminal": 33,
-            "graded": 33,
-            "success": 28,
+            "terminal": 36,
+            "graded": 36,
+            "success": 30,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
@@ -780,9 +812,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 60,
-          "graded": 60,
-          "success": 30,
+          "terminal": 61,
+          "graded": 61,
+          "success": 31,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -813,24 +845,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 103,
-        "native_graded": 103,
+        "native_terminal": 118,
+        "native_graded": 118,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 33,
-            "native_graded": 33
+            "native_terminal": 38,
+            "native_graded": 38
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 37,
-            "native_graded": 37
+            "native_terminal": 42,
+            "native_graded": 42
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 33,
-            "native_graded": 33
+            "native_terminal": 38,
+            "native_graded": 38
           }
         },
         "DA": null,

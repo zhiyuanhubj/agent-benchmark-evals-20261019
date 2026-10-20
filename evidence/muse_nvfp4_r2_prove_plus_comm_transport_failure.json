@@ -1,0 +1,17 @@
+{
+  "generated_utc": "2026-10-20T05:40:19.023302+00:00",
+  "scope": "First declared infrastructure replacement; failed before any model response.",
+  "task": "prove-plus-comm",
+  "job": "muse-nvfp4-tb-v1-exact-r2-infra-replacement-prove-plus-comm",
+  "native_trial": "prove-plus-comm__8dLX5dB",
+  "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-infra-replacement-prove-plus-comm/prove-plus-comm__8dLX5dB/result.json",
+  "result_sha256": "923945dfe45028a1f59330e577a7979e317b67b58129bfad4a49d5c5cf8a8e10",
+  "claim_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-prove-plus-comm-infra-replacement-claim.json",
+  "claim_sha256": "3831e7b0f8df33d921857a0e738793d5fb7e514e3bf54f8537c0047e4b5c6d8b",
+  "exception_type": "InternalServerError",
+  "exception_message": "litellm.InternalServerError: InternalServerError: OpenAIException - Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment variable.",
+  "exception_occurred_at": "2026-10-20T05:39:01.583092Z",
+  "model_raw_response_count": 0,
+  "native_verifier_reward": null,
+  "disposition": "Transport configuration failed before the first model call because the transient service process lacked OPENAI_API_KEY. Preserve as infrastructure failure; no model score or best-of draw exists."
+}

@@ -23,9 +23,9 @@ LOG = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/stat
 LOCK = LOG.with_suffix('.lock')
 RAW_ARCHIVE_INTERVAL_SECONDS = 600  # Keep live I/O snapshots within each 15-minute sync cycle.
 # These original runs have finished and their controllers are stopped. Scan
-# their large legacy trees hourly; the active review-revision trees below keep
-# the ten-minute cadence so new trajectories reach the release promptly.
-STATIC_ARCHIVE_INTERVAL_SECONDS = 3600
+# their large legacy trees every six hours; the active review-revision trees
+# below keep the ten-minute cadence so new trajectories reach the release promptly.
+STATIC_ARCHIVE_INTERVAL_SECONDS = 21600
 STATIC_ARCHIVE_GROUPS = {'opus47_legacy', 'muse_review_full_io', 'muse_review_verifier'}
 ARCHIVE_SCAN_STATE = LOG.with_name('github-archive-scan-state.json')
 
@@ -51,11 +51,15 @@ def sync_native_archives(scores, force_bf16=False):
     ]
     for name, terminal, raw_count, command in profiles:
         if name == 'muse_nvfp4':
-            replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-infra-replacement-password-recovery'
-            if replacement.exists():
-                terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
-                                for path in replacement.glob('*/result.json'))
-                raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
+            replacement_names = [f'muse-nvfp4-tb-v1-exact-r2-infra-replacement-{task}'
+                                 for task in ('password-recovery', 'prove-plus-comm')]
+            replacement_names.append('muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm')
+            for job_name in replacement_names:
+                replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / job_name
+                if replacement.exists():
+                    terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
+                                    for path in replacement.glob('*/result.json'))
+                    raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
         if name == 'beam_bf16':
             replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
             if replacement.exists():
@@ -74,16 +78,22 @@ def sync_native_archives(scores, force_bf16=False):
         if name == 'muse_nvfp4':
             handoff_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
             expected_receipts = 0
-            replacement_claim = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-password-recovery-infra-replacement-claim.json'
-            if replacement_claim.exists():
+            for task in ('password-recovery', 'prove-plus-comm'):
+                replacement_claim = BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-{task}-infra-replacement-claim.json'
+                if replacement_claim.exists():
+                    expected_receipts += 1
+                    handoff_newer |= (latest_archive_time is None or
+                                     datetime.fromtimestamp(replacement_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
+            transport_claim = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-prove-plus-comm-transport-correction-claim.json'
+            if transport_claim.exists():
                 expected_receipts += 1
                 handoff_newer |= (latest_archive_time is None or
-                                 datetime.fromtimestamp(replacement_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
+                                 datetime.fromtimestamp(transport_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
             if handoff_path.exists():
                 expected_receipts += 1
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
-                handoff_newer = (latest_archive_time is None or handoff_time > latest_archive_time
-                                 or latest_filename_counts.get('handoff_receipt', 0) < expected_receipts)
+                handoff_newer |= (latest_archive_time is None or handoff_time > latest_archive_time
+                                  or latest_filename_counts.get('handoff_receipt', 0) < expected_receipts)
             route_allocations = set()
             for batch in ('b03', 'b05'):
                 route = BASE / f'.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/extra_gpu/r1-{batch}-extra-route.json'
@@ -187,6 +197,10 @@ def cycle():
         run([PYTHON, str(ROOT / 'audit_muse_bf16_swr_alignment.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_bf16_review_progress.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_ungraded.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_prove_ungraded.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_prove_transport.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_password_replacement_integrity.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_nvfp4_local2866.py')], timeout=60)
         force_bf16 = False
         for attempt in range(3):
             if attempt:
@@ -277,6 +291,14 @@ def cycle():
              'audit_muse_bf16_review_progress.py',
              'audit_muse_nvfp4_r2_ungraded.py',
              'prepare_muse_nvfp4_r2_password_replacement.py',
+             'audit_muse_nvfp4_r2_prove_ungraded.py',
+             'prepare_muse_nvfp4_r2_prove_replacement.py',
+             'audit_muse_nvfp4_r2_prove_transport.py',
+             'prepare_muse_nvfp4_r2_prove_transport_correction.py',
+             'audit_muse_nvfp4_r2_password_replacement_integrity.py',
+             'audit_muse_nvfp4_local2866.py',
+             'prepare_muse_nvfp4_local2866.py',
+             'protocol/muse_nvfp4_local2866',
              'audit_swe_review_official_rrr.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',

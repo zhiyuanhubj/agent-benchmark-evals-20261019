@@ -23,10 +23,13 @@ assert not archive.exists()
 payloads = {}
 counts = {'job_config': 0, 'handoff_receipt': 0, 'ready_proof': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0}
 terminal_results = 0
-replacement_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-replacement-password-recovery'
+replacement_jobs = [RESULTS / f'muse-nvfp4-tb-v1-exact-r2-infra-replacement-{task}'
+                    for task in ('password-recovery', 'prove-plus-comm')]
+transport_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm'
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
-if replacement_job.exists():
-    jobs.append(replacement_job)
+jobs.extend(job for job in replacement_jobs if job.exists())
+if transport_job.exists():
+    jobs.append(transport_job)
 for job in sorted(jobs):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
     if config.exists():
@@ -97,7 +100,7 @@ for batch in ('b03', 'b05'):
 for receipt_path in sorted((SOURCE / 'muse_nvfp4/state/future-routes').glob('r[23]-completion-2866-b*-route.json')):
     receipt_bytes = receipt_path.read_bytes()
     receipt = json.loads(receipt_bytes)
-    assert receipt['round'] in (2, 3) and receipt['allocation'] in (2812, 2867, 2923, 2924, 2927, 2928)
+    assert receipt['round'] in (2, 3) and receipt['allocation'] in (2812, 2866, 2867, 2923, 2924, 2927, 2928)
     original, effective = Path(receipt['original_config']), Path(receipt['effective_config'])
     assert original.is_file() and effective.is_file()
     assert hashlib.sha256(original.read_bytes()).hexdigest() == receipt['original_sha256']
@@ -136,14 +139,28 @@ for marker_name in ('r1-b05-early-owner.json', 'r1-b05-early-exit.json', 'r1-b05
     if marker.exists():
         payloads[marker] = marker.read_bytes()
         counts['handoff_receipt'] += 1
-replacement_claim = SOURCE / 'muse_nvfp4/state/r2-password-recovery-infra-replacement-claim.json'
-if replacement_claim.exists():
-    claim = json.loads(replacement_claim.read_text())
-    assert claim['replacement_job_name'] == replacement_job.name
+for task, replacement_job in zip(('password-recovery', 'prove-plus-comm'), replacement_jobs):
+    replacement_claim = SOURCE / f'muse_nvfp4/state/r2-{task}-infra-replacement-claim.json'
+    if replacement_claim.exists():
+        claim = json.loads(replacement_claim.read_text())
+        assert claim['replacement_job_name'] == replacement_job.name
+        config = Path(claim['replacement_job_config'])
+        assert hashlib.sha256(config.read_bytes()).hexdigest() == claim['replacement_job_config_sha256']
+        assert hashlib.sha256(Path(claim['original_result_path']).read_bytes()).hexdigest() == claim['original_result_sha256']
+        payloads[replacement_claim] = replacement_claim.read_bytes()
+        counts['handoff_receipt'] += 1
+        if config not in payloads:
+            payloads[config] = config.read_bytes()
+            counts['job_config'] += 1
+transport_claim = SOURCE / 'muse_nvfp4/state/r2-prove-plus-comm-transport-correction-claim.json'
+if transport_claim.exists():
+    claim = json.loads(transport_claim.read_text())
+    assert claim['replacement_job_name'] == transport_job.name
     config = Path(claim['replacement_job_config'])
+    failed_evidence = Path(claim['failed_transport_evidence'])
     assert hashlib.sha256(config.read_bytes()).hexdigest() == claim['replacement_job_config_sha256']
-    assert hashlib.sha256(Path(claim['original_result_path']).read_bytes()).hexdigest() == claim['original_result_sha256']
-    payloads[replacement_claim] = replacement_claim.read_bytes()
+    assert hashlib.sha256(failed_evidence.read_bytes()).hexdigest() == claim['failed_transport_evidence_sha256']
+    payloads[transport_claim] = transport_claim.read_bytes()
     counts['handoff_receipt'] += 1
     if config not in payloads:
         payloads[config] = config.read_bytes()

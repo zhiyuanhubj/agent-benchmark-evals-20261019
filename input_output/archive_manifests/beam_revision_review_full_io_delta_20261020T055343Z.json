@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-10-20T05:53:45.887392+00:00",
+  "group": "beam_revision_review_full_io",
+  "scope": "SWE-Review original-generator revision I/O changed since the previous archive, including old pre-model infrastructure failures and separate gateway-recovery trials. Only gateway-recovery native grades enter RRR. Apply after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/beam_revision_review_full_io_delta_20261020T054118Z.json",
+  "cutoff_utc": "2026-10-20T05:36:22.270996+00:00",
+  "new_source_roots": [],
+  "archive_name": "beam_revision_review_full_io_delta_20261020T055343Z.tar.zst",
+  "archive_size_bytes": 1702282,
+  "archive_sha256": "951e58ee8c59496a1fdd6ccaa2e584d4664663b3f48f6bb73caef0b32e060e92",
+  "file_count": 883,
+  "source_bytes": 75879630,
+  "filename_counts": {
+    "completion.json": 678,
+    "openhands_sdk.txt": 25,
+    "trajectory.json": 22,
+    "result.json": 24,
+    "trial.log": 25,
+    "report.json": 22,
+    "reward.txt": 22,
+    "test-stdout.txt": 22,
+    "model-connectivity.json": 21,
+    "config.json": 22
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue/results",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500/queue/results",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue/results",
+    "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue/results"
+  ]
+}

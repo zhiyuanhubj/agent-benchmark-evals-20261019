@@ -1,0 +1,25 @@
+{
+  "utc": 1792475390.608336,
+  "job": 2866,
+  "phase": "ready",
+  "endpoint": "http://10.1.95.27:31320/v1",
+  "model": "muse-spark-open-nvfp4",
+  "model_check": {
+    "object": "list",
+    "data": [
+      {
+        "id": "muse-spark-open-nvfp4",
+        "object": "model",
+        "created": 1792475390,
+        "owned_by": "sglang",
+        "root": "muse-spark-open-nvfp4",
+        "parent": null,
+        "max_model_len": 1048576
+      }
+    ]
+  },
+  "service_unit": "muse-review-serve-2866-reassigned-20261018.service",
+  "gpu_allocation": "RUNNING|ip-10-1-95-27",
+  "claimed_round1_batches": [],
+  "purpose": "Route untouched exact-image TB2.1 round-2/3 batches to the already-running original Muse NVFP4 model node, with atomic disjoint ownership."
+}

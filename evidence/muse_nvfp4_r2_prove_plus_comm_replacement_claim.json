@@ -1,0 +1,41 @@
+{
+  "prepared_utc": "2026-10-20T05:37:59.149578+00:00",
+  "scope": "One infrastructure replacement of an original pre-model, ungraded Muse NVFP4 exact-image TB2.1 round-2 prove-plus-comm trial.",
+  "original_result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/prove-plus-comm__UbAqwmS/result.json",
+  "original_result_sha256": "01b7f1b190562f4f23ac378c7e2bbe3ad729fd95be3377364c33b990c952e2f1",
+  "original_ungraded_evidence": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_r2_prove_plus_comm_ungraded.json",
+  "original_ungraded_evidence_sha256": "17bcbfb6ecaf32f906aa5c4d1c853373196570a86fa420f8dc5d58fb2efc3e49",
+  "original_route_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/r2-completion-2866-b06-route.json",
+  "original_route_sha256": "0e792de97ef033451a925e7b3b5adf337b1e1ab43381c1b44473a5e7dbeb9e4b",
+  "source_job_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b06.json",
+  "source_job_config_sha256": "d2319285df1746802dee41db3c33248d1817e3041370761d397da2a995bc7c9a",
+  "replacement_job_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-infra-replacement-prove-plus-comm.json",
+  "replacement_job_config_sha256": "0a1188a0ffbd428590da514657c89bfc63e821caf04695f6165bf829ce3f39e8",
+  "replacement_job_name": "muse-nvfp4-tb-v1-exact-r2-infra-replacement-prove-plus-comm",
+  "task": "prove-plus-comm",
+  "task_toml_sha256": "240f3ac0076e3362685c8598c4e56658e3882eb25a14ae6cc7e9ab3a4f6b09ea",
+  "model_endpoint": "http://10.1.95.27:31320/v1",
+  "model_id": "muse-spark-open-nvfp4",
+  "model_ready_check": {
+    "object": "list",
+    "data": [
+      {
+        "id": "muse-spark-open-nvfp4",
+        "object": "model",
+        "created": 1792474679,
+        "owned_by": "sglang",
+        "root": "muse-spark-open-nvfp4",
+        "parent": null,
+        "max_model_len": 1048576
+      }
+    ]
+  },
+  "only_changes": [
+    "job_name",
+    "single original task",
+    "one concurrent trial",
+    "endpoint restored to original pinned Muse NVFP4 service after routed 2812 attempt"
+  ],
+  "no_retry": true,
+  "metric_policy": "Original attempt had no model response and no native grade. One replacement attempt may fill this single missing grade. Preserve both attempts; never select best-of."
+}
