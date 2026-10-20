@@ -26,10 +26,13 @@ terminal_results = 0
 replacement_jobs = [RESULTS / f'muse-nvfp4-tb-v1-exact-r2-infra-replacement-{task}'
                     for task in ('password-recovery', 'prove-plus-comm')]
 transport_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm'
+storage_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli'
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
 jobs.extend(job for job in replacement_jobs if job.exists())
 if transport_job.exists():
     jobs.append(transport_job)
+if storage_job.exists():
+    jobs.append(storage_job)
 for job in sorted(jobs):
     config = CONFIGS / (job.name.replace('muse-nvfp4-tb-v1-exact-', '') + '.json')
     if config.exists():
@@ -161,6 +164,19 @@ if transport_claim.exists():
     assert hashlib.sha256(config.read_bytes()).hexdigest() == claim['replacement_job_config_sha256']
     assert hashlib.sha256(failed_evidence.read_bytes()).hexdigest() == claim['failed_transport_evidence_sha256']
     payloads[transport_claim] = transport_claim.read_bytes()
+    counts['handoff_receipt'] += 1
+    if config not in payloads:
+        payloads[config] = config.read_bytes()
+        counts['job_config'] += 1
+storage_claim = SOURCE / 'muse_nvfp4/state/r2-pytorch-model-cli-storage-replacement-claim.json'
+if storage_claim.exists():
+    claim = json.loads(storage_claim.read_text())
+    assert claim['replacement_job_name'] == storage_job.name
+    config = Path(claim['replacement_job_config'])
+    original = Path(claim['original_result_path'])
+    assert hashlib.sha256(config.read_bytes()).hexdigest() == claim['replacement_job_config_sha256']
+    assert hashlib.sha256(original.read_bytes()).hexdigest() == claim['original_result_sha256']
+    payloads[storage_claim] = storage_claim.read_bytes()
     counts['handoff_receipt'] += 1
     if config not in payloads:
         payloads[config] = config.read_bytes()

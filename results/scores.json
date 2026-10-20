@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T06:11:14.921081+00:00",
+  "generated_utc": "2026-10-20T06:25:45.322146+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -248,9 +248,9 @@
           },
           "2": {
             "expected": 89,
-            "terminal": 61,
-            "graded": 60,
-            "success": 44,
+            "terminal": 62,
+            "graded": 61,
+            "success": 45,
             "active_trial_dirs": 0,
             "archived_actual_model_responses": 0,
             "ungraded": 1,
@@ -313,10 +313,10 @@
           "queued_round_1": 78,
           "new_terminal_by_round": {
             "1": 78,
-            "2": 61,
+            "2": 62,
             "3": 0
           },
-          "new_raw_model_responses": 8768,
+          "new_raw_model_responses": 8839,
           "new_raw_model_responses_by_batch": {
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b00": 667,
             "muse-nvfp4-tb-v1-exact-r1-completion-2866-b01": 435,
@@ -329,13 +329,13 @@
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b00": 586,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b01": 376,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b02": 839,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1251,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b03": 1268,
             "muse-nvfp4-tb-v1-exact-r2-completion-2866-b04": 643,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 399,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 105,
-            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 20
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b05": 417,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06": 129,
+            "muse-nvfp4-tb-v1-exact-r2-completion-2866-b07": 32
           },
-          "latest_new_raw_model_response_utc": "2026-10-20T06:11:20+00:00",
+          "latest_new_raw_model_response_utc": "2026-10-20T06:25:59+00:00",
           "active_recovery_trial_dirs": 7,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
@@ -422,6 +422,20 @@
             },
             "counted_as_one_task": true,
             "no_best_of_selection": true
+          },
+          "round_2_original_first_draw": {
+            "terminal": 62,
+            "graded": 59,
+            "success": 43,
+            "qualification": "Original first draws only; ungraded native exceptions remain ungraded. Separately declared replacements are excluded."
+          },
+          "round_2_pytorch_model_cli_storage_replacement": {
+            "claim": "evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json",
+            "original_native_reward": null,
+            "original_ungraded_evidence": "evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json",
+            "replacement_result": null,
+            "counted_as_one_task_in_repaired_round": true,
+            "no_best_of_selection": true
           }
         }
       }
@@ -445,9 +459,9 @@
         },
         "2": {
           "expected": 113,
-          "terminal": 14,
-          "graded": 14,
-          "success": 4,
+          "terminal": 17,
+          "graded": 17,
+          "success": 5,
           "status": "partial_no_full_score"
         },
         "3": {
@@ -505,7 +519,7 @@
             "graded": 54,
             "success": 38,
             "active_trial_dirs": 59,
-            "archived_actual_model_responses": 3883,
+            "archived_actual_model_responses": 3887,
             "ungraded": 1,
             "exceptions": {
               "AgentTimeoutError": 3,
@@ -761,8 +775,8 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 140,
-        "graded": 140,
+        "terminal": 141,
+        "graded": 141,
         "success": 87,
         "status": "partial_no_full_score"
       },
@@ -812,9 +826,9 @@
       "deepswe": {
         "1": {
           "expected": 113,
-          "terminal": 61,
-          "graded": 61,
-          "success": 31,
+          "terminal": 62,
+          "graded": 62,
+          "success": 32,
           "status": "partial_no_full_score"
         },
         "2": {
@@ -845,24 +859,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 118,
-        "native_graded": 118,
+        "native_terminal": 134,
+        "native_graded": 134,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 38,
-            "native_graded": 38
-          },
-          "qwen3_coder_30b_500": {
-            "expected": 462,
             "native_terminal": 42,
             "native_graded": 42
           },
+          "qwen3_coder_30b_500": {
+            "expected": 462,
+            "native_terminal": 49,
+            "native_graded": 49
+          },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 38,
-            "native_graded": 38
+            "native_terminal": 43,
+            "native_graded": 43
           }
         },
         "DA": null,

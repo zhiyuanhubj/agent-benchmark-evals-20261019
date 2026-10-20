@@ -1,0 +1,44 @@
+{
+  "prepared_utc": "2026-10-20T06:17:07.328682+00:00",
+  "scope": "One separately declared storage-failure replacement after an ungraded original exact-image TB2.1 round-2 draw.",
+  "original_result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/result.json",
+  "original_result_sha256": "306065c1b6bfd726826b12ca8fc0d920cbca3f45148004e3056f425d7f785275",
+  "original_ungraded_evidence": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json",
+  "original_ungraded_evidence_sha256": "f696e4dd1ffac5cd7152a18115ecc421e8a55ec3e30c48fa8ff0737ec01fdef1",
+  "original_route_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/r2-completion-2866-b06-route.json",
+  "original_route_sha256": "0e792de97ef033451a925e7b3b5adf337b1e1ab43381c1b44473a5e7dbeb9e4b",
+  "source_job_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b06.json",
+  "source_job_config_sha256": "d2319285df1746802dee41db3c33248d1817e3041370761d397da2a995bc7c9a",
+  "replacement_job_config": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-storage-replacement-pytorch-model-cli.json",
+  "replacement_job_config_sha256": "6c41b2ca32c26606700d89a45e41215d21b940989541fa6405dec4a097dba80a",
+  "replacement_job_name": "muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli",
+  "task": "pytorch-model-cli",
+  "task_toml_sha256": "fc1c018efbd5d0537ac0741d53d1ebad3886faa51d14cbde8ec953856411bc0d",
+  "cpu_allocation": 2922,
+  "cpu_host_available_kib_before_launch": 245548148,
+  "model_endpoint": "http://10.1.95.27:31320/v1",
+  "model_id": "muse-spark-open-nvfp4",
+  "model_ready_check": {
+    "object": "list",
+    "data": [
+      {
+        "id": "muse-spark-open-nvfp4",
+        "object": "model",
+        "created": 1792477027,
+        "owned_by": "sglang",
+        "root": "muse-spark-open-nvfp4",
+        "parent": null,
+        "max_model_len": 1048576
+      }
+    ]
+  },
+  "only_changes": [
+    "job_name",
+    "single original task",
+    "one concurrent trial",
+    "CPU host 2922 for storage isolation",
+    "endpoint restored to original NVFP4 service"
+  ],
+  "no_retry": true,
+  "metric_policy": "The original first draw remains ungraded. Preserve both draws. Report the replacement reward separately and, if native-graded, use it at most once in the explicitly labeled repaired-round metric; never select best-of."
+}

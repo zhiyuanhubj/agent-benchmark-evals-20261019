@@ -113,6 +113,14 @@ prove_transport_claim = read(prove_transport_claim_path)
 assert hashlib.sha256(Path(prove_transport_claim['failed_transport_evidence']).read_bytes()).hexdigest() == prove_transport_claim['failed_transport_evidence_sha256']
 assert hashlib.sha256(Path(prove_transport_claim['replacement_job_config']).read_bytes()).hexdigest() == prove_transport_claim['replacement_job_config_sha256']
 (ROOT / 'evidence/muse_nvfp4_r2_prove_plus_comm_transport_correction_claim.json').write_bytes(prove_transport_claim_path.read_bytes())
+pytorch_ungraded_evidence = read(ROOT / 'evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json')
+assert pytorch_ungraded_evidence['native_verifier_reward'] is None
+pytorch_replacement_claim_path = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r2-pytorch-model-cli-storage-replacement-claim.json'
+pytorch_replacement_claim = read(pytorch_replacement_claim_path)
+assert hashlib.sha256(Path(pytorch_replacement_claim['original_result_path']).read_bytes()).hexdigest() == pytorch_replacement_claim['original_result_sha256']
+assert hashlib.sha256(Path(pytorch_replacement_claim['replacement_job_config']).read_bytes()).hexdigest() == pytorch_replacement_claim['replacement_job_config_sha256']
+assert hashlib.sha256(Path(pytorch_replacement_claim['original_ungraded_evidence']).read_bytes()).hexdigest() == pytorch_replacement_claim['original_ungraded_evidence_sha256']
+(ROOT / 'evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json').write_bytes(pytorch_replacement_claim_path.read_bytes())
 nvfp4_recovery_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-completion-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 nvfp4_parallel_unit = subprocess.run(['systemctl', '--user', 'is-active', 'muse-nvfp4-exact-tb-parallel-2866-20261019.service'], capture_output=True, text=True).stdout.strip()
 extra_lane_units = {str(lane): subprocess.run(['systemctl', '--user', 'is-active', f'muse-nvfp4-exact-tb-extra-lane{lane}-2866-20261019.service'], capture_output=True, text=True).stdout.strip() for lane in (2, 3)}
@@ -174,6 +182,12 @@ for item in nvfp4_recovery['configurations']:
     if batch_raw_count:
         new_raw_response_by_batch[item['job_name']] = batch_raw_count
 new_raw_response_latest_utc = datetime.fromtimestamp(new_raw_response_latest_mtime, timezone.utc).isoformat() if new_raw_response_latest_mtime is not None else None
+round2_first_draw = {
+    'terminal': len(new_terminal_by_round['2']),
+    'graded': sum(row['reward'] in (0, 1) for row in new_terminal_by_round['2'].values()),
+    'success': sum(row['reward'] == 1 for row in new_terminal_by_round['2'].values()),
+    'qualification': 'Original first draws only; ungraded native exceptions remain ungraded. Separately declared replacements are excluded.',
+}
 r2_replacement_result = None
 replacement_job = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / r2_replacement_claim['replacement_job_name']
 assert len([path for path in replacement_job.glob('password-recovery__*') if path.is_dir()]) <= 1, \
@@ -262,6 +276,34 @@ prove_transport_reward_en = ('running/pending' if prove_transport_result is None
 prove_transport_reward_zh = ('运行中/待判分' if prove_transport_result is None else
                              '原生异常后仍未判分' if prove_transport_result['reward'] not in (0, 1)
                              else str(prove_transport_result['reward']))
+pytorch_replacement_result = None
+pytorch_job = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / pytorch_replacement_claim['replacement_job_name']
+assert len([path for path in pytorch_job.glob('pytorch-model-cli__*') if path.is_dir()]) <= 1, \
+    'Multiple pytorch-model-cli storage replacement trial directories'
+pytorch_trials = [path for path in pytorch_job.glob('*/result.json') if read(path).get('task_name')]
+assert len(pytorch_trials) <= 1, 'Multiple pytorch-model-cli storage replacement draws'
+if pytorch_trials:
+    path = pytorch_trials[0]
+    value = read(path)
+    assert Path(value['task_name']).name == 'pytorch-model-cli'
+    assert Path(value['config']['task']['path']).name == 'pytorch-model-cli'
+    assert value['config']['agent']['kwargs']['api_base'] == pytorch_replacement_claim['model_endpoint']
+    if value.get('finished_at'):
+        reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        pytorch_replacement_result = {'result_path': str(path), 'reward': reward,
+                                      'result_sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        if reward in (0, 1):
+            original = new_terminal_by_round['2']['pytorch-model-cli']
+            assert original['reward'] is None
+            assert original['source'] == pytorch_ungraded_evidence['result_path']
+            original['reward'] = reward
+            original['replacement'] = pytorch_replacement_result
+pytorch_replacement_reward_en = ('running/pending' if pytorch_replacement_result is None else
+                                 'ungraded after native exception' if pytorch_replacement_result['reward'] not in (0, 1)
+                                 else str(pytorch_replacement_result['reward']))
+pytorch_replacement_reward_zh = ('运行中/待判分' if pytorch_replacement_result is None else
+                                 '原生异常后仍未判分' if pytorch_replacement_result['reward'] not in (0, 1)
+                                 else str(pytorch_replacement_result['reward']))
 for rnd, rows in new_terminal_by_round.items():
     nvfp4_rounds[rnd]['terminal'] += len(rows)
     nvfp4_rounds[rnd]['graded'] += sum(row['reward'] in (0, 1) for row in rows.values())
@@ -463,6 +505,15 @@ snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['rou
     'counted_as_one_task': True,
     'no_best_of_selection': True,
 }
+snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_original_first_draw'] = round2_first_draw
+snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['round_2_pytorch_model_cli_storage_replacement'] = {
+    'claim': 'evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json',
+    'original_native_reward': None,
+    'original_ungraded_evidence': 'evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json',
+    'replacement_result': pytorch_replacement_result,
+    'counted_as_one_task_in_repaired_round': True,
+    'no_best_of_selection': True,
+}
 for reviewer, model_key in (('muse-nvfp4', 'muse_nvfp4'), ('beam-bf16', 'beam_bf16'),
                             ('muse-bf16', 'muse_bf16')):
     for split, value in snapshot['models'][model_key].get('swe_review', {}).items():
@@ -544,6 +595,8 @@ for evidence_name in ('swe_review_revision_queue_recovery_20261020.json',
                       'muse_nvfp4_r2_prove_plus_comm_transport_correction_claim.json',
                       'muse_nvfp4_local2866_ready.json',
                       'muse_nvfp4_local2866_route_audit.json',
+                      'muse_nvfp4_r2_pytorch_model_cli_ungraded.json',
+                      'muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json',
                       'swe_review_official_rrr.json'):
     path = ROOT / 'evidence' / evidence_name
     assert path.is_file()
@@ -852,6 +905,8 @@ The original `prove-plus-comm` trial [timed out during agent setup](evidence/mus
 
 The original NVFP4 service on GPU allocation 2866 is also taking untouched round-2/3 batches. Its [ready proof](evidence/muse_nvfp4_local2866_ready.json), [live route audit](evidence/muse_nvfp4_local2866_route_audit.json), and [controller code](protocol/muse_nvfp4_local2866/README.md) show {local2866_audit['route_count']} locked route(s) owning {local2866_audit['claimed_task_count']} distinct tasks at this snapshot; completed tasks are counted only from their native results.
 
+The round-2 **original first draws** currently have {round2_first_draw['terminal']} terminal tasks, {round2_first_draw['graded']} native grades, and {round2_first_draw['success']} successes; the repaired-round count above includes only explicitly declared replacement grades. `pytorch-model-cli` [lost its tmux channel with the shared 500 GB Docker backing disk at 100%](evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json), leaving its original reward unknown. A [single storage-isolated replacement](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json) on CPU allocation 2922 has native reward **{pytorch_replacement_reward_en}**. The original draw remains ungraded and both trajectories are retained; the full-disk observation alone does not establish which process consumed the space.
+
 Muse NVFP4 exact-image TB2.1 stopped when two model nodes were reassigned to original BF16. Four disjoint continuation lanes are now active on the surviving NVFP4 node 2866, with up to eight simultaneous task trials: 11 previously graded round-1 results are locked, 70 tasks had not been sampled, and 8 interrupted ungraded attempts retain their original partial outputs and are labeled infrastructure replacements. At this snapshot, the continuation has {new_raw_responses} raw model responses, {active_recovery_trial_dirs} active trial directories, and the latest response at {new_raw_response_latest_utc}; these are activity indicators, not scores. The original controller verifies delegated batches before advancing, preventing duplicate scoring. The [first-round task audit](evidence/muse_nvfp4_exact_round1_audit.json) checks task coverage, duplicate draws, frozen original results, endpoint settings, rewards, and preserved raw reasoning; the final score is published only after all 89 tasks pass reconciliation. Additional GPU allocation states: {extra_gpu_status}. A watcher starts the pinned Muse service when a queued allocation is granted. A ready extra GPU atomically claims one untouched round-one batch from b03 or b05; the released 2812 allocation can claim up to two. The existing CPU evaluators retain their original tasks and images, and only the model endpoint changes. A batch that starts locally first cannot be redrawn on another node. This continuation is separate from both the legacy-image scores and the BF16 evaluation.
 
 Scores are benchmark-recorded values. A targeted [Muse exact-TB spot check](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json) found returned reasoning in every raw response of the five completed successful recovery tasks checked. One agent created `/tests/filter.py` by copying the exposed, unchanged `/app/filter.py` to run the task's permitted local test; no filter/verifier rewrite was observed in its commands. This is not a full reward-hacking clearance. The Muse DeepSWE successful trajectory `ipython-session-bundle-replay` attempted to inspect verifier logs, but the returned directory was empty; it remains flagged for training-data review. One successful Muse Pro task lacks a trajectory and is unsuitable for thinking-data export. Source paths and hashes are in `results/scores.json` and `input_output/manifest.json`; raw API credentials and model weights are excluded.
@@ -958,6 +1013,8 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 `prove-plus-comm` 原始尝试在 agent 初始化时[超时](evidence/muse_nvfp4_r2_prove_plus_comm_ungraded.json)，模型没有产生回复，也没有原生判分。首次[已声明补跑](evidence/muse_nvfp4_r2_prove_plus_comm_replacement_claim.json)因服务进程缺少 API-key 环境变量，在模型首回复前再次失败且未判分；[故障记录](evidence/muse_nvfp4_r2_prove_plus_comm_transport_failure.json)保留了原始证据。随后另行声明[服务环境修正](evidence/muse_nvfp4_r2_prove_plus_comm_transport_correction_claim.json)，其原生 reward 当前为 **{prove_transport_reward_zh}**。本题只允许修正后的首个有效原生判分填补缺失值；所有尝试均保留，不择优取样。
 
 原 NVFP4 服务节点 2866 也开始领取第 2/3 轮尚未启动的批次。[节点就绪凭据](evidence/muse_nvfp4_local2866_ready.json)、[实时路由审计](evidence/muse_nvfp4_local2866_route_audit.json)及[控制器代码](protocol/muse_nvfp4_local2866/README.md)显示，本次快照已有 {local2866_audit['route_count']} 条加锁路由，独占 {local2866_audit['claimed_task_count']} 道不同题；只按原生结果统计完成题。
+
+第 2 轮**原始首抽**目前有 {round2_first_draw['terminal']} 题终态、{round2_first_draw['graded']} 题有效原生判分、{round2_first_draw['success']} 题成功；上面的修复后统计只补入已单独声明的有效补跑判分。`pytorch-model-cli` 的[原尝试](evidence/muse_nvfp4_r2_pytorch_model_cli_ungraded.json)在共用 500 GB Docker 底盘占满时失去 tmux 通道，原始 reward 未知。[单次隔离存储补跑](evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json)改用 CPU 节点 2922，当前原生 reward 为 **{pytorch_replacement_reward_zh}**。原始首抽仍未判分，两次轨迹都保留；磁盘占满本身不能证明由哪个进程消耗了空间。
 
 [Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **{bf16_io.get('nonempty_reasoning_response_count', 0)}/{bf16_io.get('scored_raw_response_count', 0)} 条含非空 thinking**。
 

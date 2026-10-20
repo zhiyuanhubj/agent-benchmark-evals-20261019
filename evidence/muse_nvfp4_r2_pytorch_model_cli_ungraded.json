@@ -1,0 +1,102 @@
+{
+  "generated_utc": "2026-10-20T06:17:07.145250+00:00",
+  "scope": "Exact user-supplied-image TB2.1, Muse NVFP4, round 2, original first attempt only.",
+  "task": "pytorch-model-cli",
+  "job": "muse-nvfp4-tb-v1-exact-r2-completion-2866-b06",
+  "native_trial": "pytorch-model-cli__mJNSKQ5",
+  "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/result.json",
+  "result_sha256": "306065c1b6bfd726826b12ca8fc0d920cbca3f45148004e3056f425d7f785275",
+  "trajectory_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/trajectory.json",
+  "trajectory_sha256": "b90d871779b58e8ae87704aa44eb0bd62c91004c85e9465397aeee662913c245",
+  "route_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/future-routes/r2-completion-2866-b06-route.json",
+  "route_sha256": "0e792de97ef033451a925e7b3b5adf337b1e1ab43381c1b44473a5e7dbeb9e4b",
+  "original_config_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b06.json",
+  "original_config_sha256": "d2319285df1746802dee41db3c33248d1817e3041370761d397da2a995bc7c9a",
+  "effective_config_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/configs/r2-completion-2866-b06-routed-2812.json",
+  "effective_config_sha256": "801785c1ce847df7cd145df9737c1fbe71f9cc3f29663cb4812daf1dcea70357",
+  "exception_type": "RuntimeError",
+  "exception_message": "pytorch-model-cli__mJNSKQ5__env: failed to send non-blocking keys: command=\"tmux send-keys -t terminus-2 -- 'ls -lh /app/ && cat /app/prediction.txt | od -An -tx1 && ./cli_too, return_code=1, stderr=None, stdout=\"couldn't create directory /tmp/tmux-0 (No space left on device)\\n\"",
+  "exception_occurred_at": "2026-10-20T05:48:04.426138Z",
+  "observed_overlay_full": "500G used / 500G total, 32K available, 100% utilization",
+  "model_raw_response_count": 15,
+  "model_raw_response_with_reasoning_count": 15,
+  "raw_responses": [
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474563348491563-ea21cc4821224f1cbc06f2edacceb6fc.json",
+      "sha256": "082a5d20c8ef242fe36387b41f9e70843727cf666b9dc4e307de0edaa9ca054e",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474581651025218-f951950c1daf4c5db9bf4d335320cbed.json",
+      "sha256": "3bc86ea632c72e43b8589f75ac58ebe0fe60e7a71e2993e9650ada0f9984540c",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474598977721690-93fd71452d2b43d592cec64ba713c617.json",
+      "sha256": "5f10961971aa02e6182fd228be031d07f3bc5931fc7ba9c7e1ca22706881fc15",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474625949406488-4865dbcdeeea4657b34d7b6990d64447.json",
+      "sha256": "038416f91200a7530e75af6e3891fddcf2c3ac3b185726ce37c1fd109b12f55f",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474689004017420-35789859519346769451e9f4cc3d25ea.json",
+      "sha256": "79ce0e3eb75d80a550c3d48e19c384c821298d05dec9f286f9b88ce44cf5f624",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474802466387689-c6b36c42c3d24c6fa04d1f352c1f4052.json",
+      "sha256": "6a4d4e58bb6d28dc21bd1122895ac65f12eb2c8cbe9568eae010fb6dd9926671",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474837059954751-d48a45b6dda444d9b4817abe0d169f48.json",
+      "sha256": "8e1af9ab4bc15ad553175ed1a88244c09200e7d66e3df21e6f13d7921080cfd8",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792474903310301624-ccf698ea5e6f4eafa80dcadc3ec1f823.json",
+      "sha256": "b89ef424c88c31b2280a13686824eda2bc5e756dcb6ee79b75b6d03c53553f81",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792475021501473401-2964209676ec42e1b3b9883525b697c6.json",
+      "sha256": "fd02742e6db09caa159f053e8c37e68a6bc8e45785c0ecfbddc36e077f38d566",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792475103000173054-60e615b1b2414b73aefaba1f0ab585fc.json",
+      "sha256": "b457b584d8ed61a26bec906e65d40c0a60a7065eda944d7732f1157a01310c0a",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792475123559926659-be8e40d27ffc4d0c96f1b73029c7dd03.json",
+      "sha256": "6ebfec3b2599f5452963031bbcd4c922ae58fd6121e87136730d26f2edb67a7c",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792475135800219023-c3e2cc801d5b4403b9362152961ab83a.json",
+      "sha256": "a80240a768c1e6e802d7b5a62d96bcfc4ab2345ebb95640334980e654c1694ea",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792475208764889015-ab25b63efeaf4a7f8c4fd081e769099f.json",
+      "sha256": "37d20d4ba1c7fe6e26618d6665b0f14cdbc65e86fee2859051db794382c9c155",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792475258177674656-c3a2a772af05403096c12adc77efb429.json",
+      "sha256": "b7a38ef0cd8b8549fc2502f2ce9934dff627b21895ae7ab95c0858c37552ba09",
+      "nonempty_reasoning": true
+    },
+    {
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r2-completion-2866-b06/pytorch-model-cli__mJNSKQ5/agent/raw_responses/1792475281971511243-26b565d5fa6043fdb55dd2ee23837a7e.json",
+      "sha256": "55dc086d8261dfaec3280cfcb030c11c2b92639ea26dcb3adb8db0dd0b848c3d",
+      "nonempty_reasoning": true
+    }
+  ],
+  "native_verifier_reward": null,
+  "disposition": "Unscored first draw: tmux failed while the sandbox overlay backing filesystem reported 100% utilization. The observed full shared disk does not establish which process consumed the space. Preserve all original model replies and do not assign reward zero or success. Any later draw must be declared separately."
+}

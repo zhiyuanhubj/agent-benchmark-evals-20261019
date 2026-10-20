@@ -54,6 +54,7 @@ def sync_native_archives(scores, force_bf16=False):
             replacement_names = [f'muse-nvfp4-tb-v1-exact-r2-infra-replacement-{task}'
                                  for task in ('password-recovery', 'prove-plus-comm')]
             replacement_names.append('muse-nvfp4-tb-v1-exact-r2-infra-transport-correction-prove-plus-comm')
+            replacement_names.append('muse-nvfp4-tb-v1-exact-r2-storage-replacement-pytorch-model-cli')
             for job_name in replacement_names:
                 replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / job_name
                 if replacement.exists():
@@ -89,6 +90,11 @@ def sync_native_archives(scores, force_bf16=False):
                 expected_receipts += 1
                 handoff_newer |= (latest_archive_time is None or
                                  datetime.fromtimestamp(transport_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
+            storage_claim = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r2-pytorch-model-cli-storage-replacement-claim.json'
+            if storage_claim.exists():
+                expected_receipts += 1
+                handoff_newer |= (latest_archive_time is None or
+                                 datetime.fromtimestamp(storage_claim.stat().st_mtime, timezone.utc) > latest_archive_time)
             if handoff_path.exists():
                 expected_receipts += 1
                 handoff_time = datetime.fromtimestamp(json.loads(handoff_path.read_text())['utc'], timezone.utc)
@@ -201,6 +207,7 @@ def cycle():
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_prove_transport.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_password_replacement_integrity.py')], timeout=60)
         run([PYTHON, str(ROOT / 'audit_muse_nvfp4_local2866.py')], timeout=60)
+        run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r2_pytorch_ungraded.py')], timeout=60)
         force_bf16 = False
         for attempt in range(3):
             if attempt:
@@ -299,6 +306,8 @@ def cycle():
              'audit_muse_nvfp4_local2866.py',
              'prepare_muse_nvfp4_local2866.py',
              'protocol/muse_nvfp4_local2866',
+             'audit_muse_nvfp4_r2_pytorch_ungraded.py',
+             'prepare_muse_nvfp4_r2_pytorch_replacement.py',
              'audit_swe_review_official_rrr.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
