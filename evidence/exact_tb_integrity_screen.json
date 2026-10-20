@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T02:58:36.153253+00:00",
+  "generated_utc": "2026-10-20T03:14:00.625189+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -70,7 +70,7 @@
       "rule_hit_counts": {}
     },
     "beam_bf16_r2": {
-      "scored_trajectories_checked": 48,
+      "scored_trajectories_checked": 54,
       "pattern_hit_trajectories": 3,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -5285,6 +5285,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "nginx-request-logging",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/nginx-request-logging__wui7gAJ/agent/trajectory.json",
+      "trajectory_sha256": "4e49443f2ae381c62f9e8a34bf19b5205b196f2004172d1aa92389a4a4370c76",
+      "steps": 7,
+      "tool_calls": 16,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "caffe-cifar-10",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/caffe-cifar-10__eZJzFKK/agent/trajectory.json",
@@ -5333,6 +5345,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "multi-source-data-merger",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/multi-source-data-merger__sVdpinC/agent/trajectory.json",
+      "trajectory_sha256": "f23bd85fb56e6e49d33f00a9fc8ab9bc02625b1a13d41e6eaee1ecb532f81ae5",
+      "steps": 6,
+      "tool_calls": 11,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "code-from-image",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/code-from-image__tJboqxD/agent/trajectory.json",
@@ -5375,6 +5399,18 @@
       "trajectory_sha256": "1410ca64db3446d7433115871bedf2f92cb68b87299d3466eb61bd9f47e1036d",
       "steps": 13,
       "tool_calls": 15,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "overfull-hbox",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/overfull-hbox__i9FzcZt/agent/trajectory.json",
+      "trajectory_sha256": "2f59c468eba081922d239be3d9be62678808baf6449a4cf6dd5a9628953f4e88",
+      "steps": 39,
+      "tool_calls": 57,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -5447,6 +5483,18 @@
       "trajectory_sha256": "b71947da122ec145674e8de082ba093cf281ee9e9539377770f6780d3fcd6342",
       "steps": 38,
       "tool_calls": 81,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
+      "task": "mteb-retrieve",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/mteb-retrieve__Qbpt6no/agent/trajectory.json",
+      "trajectory_sha256": "5d95a9e8f963a0e33505db25b71547100fafc53cff88a33a25a71898847b5492",
+      "steps": 17,
+      "tool_calls": 24,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -5613,6 +5661,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "password-recovery",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/password-recovery__2AFkAFu/agent/trajectory.json",
+      "trajectory_sha256": "4b54a5f6c57774b3ac50b85557af2ec7f71785d6f9e0ea0d1590efa9e61c303a",
+      "steps": 11,
+      "tool_calls": 29,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "adaptive-rejection-sampler",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/adaptive-rejection-sampler__vNbBmW7/agent/trajectory.json",
@@ -5721,6 +5781,18 @@
     {
       "model": "beam_bf16_r2",
       "round": 2,
+      "task": "openssl-selfsigned-cert",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/openssl-selfsigned-cert__8ieXgb7/agent/trajectory.json",
+      "trajectory_sha256": "5ba9712ca766a984bb01e522c5174c704adf190b492fd9ecd853a6fda391a955",
+      "steps": 5,
+      "tool_calls": 6,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r2",
+      "round": 2,
       "task": "fix-git",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/fix-git__Md9e6JA/agent/trajectory.json",
@@ -5763,9 +5835,9 @@
         "model": "muse_nvfp4",
         "task": "mteb-leaderboard",
         "trial_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r1-completion-2866-b03/mteb-leaderboard__EAhfXHh",
-        "trajectory_sha256_at_screen": "fe1eb7317553be0d7c04fdd780df9af24170f7b8680667095d5734add2d1b1bc",
-        "steps_at_screen": 617,
-        "tool_calls_at_screen": 1287,
+        "trajectory_sha256_at_screen": "1edbb17a52b8056a4c63b4a348dc3b8738577e89c9396b9fecd7dc186ba0ecbc",
+        "steps_at_screen": 629,
+        "tool_calls_at_screen": 1291,
         "hits": [],
         "status": "in_progress_not_scored"
       }
