@@ -1,20 +1,19 @@
 {
-  "generated_utc": "2026-10-20T15:26:19.123453+00:00",
+  "generated_utc": "2026-10-20T15:50:42.926168+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T151703Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T154251Z.tar.zst",
   "expected": 89,
-  "terminal": 85,
-  "graded": 84,
-  "success": 61,
+  "terminal": 86,
+  "graded": 85,
+  "success": 62,
   "missing_graded_tasks": [
     "git-multibranch",
     "regex-chess",
     "schemelike-metacircular-eval",
-    "train-fasttext",
-    "write-compressor"
+    "train-fasttext"
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch"
@@ -621,6 +620,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/winning-avg-corewars__SneQybe/result.json",
       "raw_response_count": 14,
       "responses_with_reasoning_content": 14
+    },
+    "write-compressor": {
+      "reward": 1.0,
+      "result_sha256": "57e992cecff35651c5ffcb505259dced981c217c4fec62dc6d0729da7d2e2ed4",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/write-compressor__fiduegJ/result.json",
+      "raw_response_count": 31,
+      "responses_with_reasoning_content": 31
     }
   }
 }

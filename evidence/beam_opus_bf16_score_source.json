@@ -1,20 +1,20 @@
 {
-  "utc": "2026-10-20T15:14:34.785964+00:00",
+  "utc": "2026-10-20T15:44:48.682432+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
-      "terminal": 239,
-      "unique_tasks": 239,
-      "graded": 238,
-      "success": 142,
+      "terminal": 248,
+      "unique_tasks": 248,
+      "graded": 247,
+      "success": 147,
       "missing_native_grader_completion": 1,
       "native_status_counts": {
-        "completed": 236,
-        "run_error": 2,
+        "completed": 244,
+        "run_error": 3,
         "eval_error": 1
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 492,
+      "missing_result_task_count": 483,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -135,16 +135,16 @@
       },
       "2": {
         "expected": 113,
-        "terminal": 56,
-        "unique_tasks": 56,
-        "graded": 55,
-        "success": 23,
+        "terminal": 59,
+        "unique_tasks": 59,
+        "graded": 58,
+        "success": 25,
         "exceptions": {
           "VerifierTimeoutError": 1
         },
         "duplicate_task_ids": [],
         "excluded_invalid_protocol_originals": [],
-        "missing_result_task_count": 57,
+        "missing_result_task_count": 54,
         "task_id_source": "Original trial config task path; finished native trial and binary reward required"
       },
       "3": {
@@ -164,7 +164,7 @@
     },
     "tb_first_round_client_protocol_recovery": {
       "current": {
-        "utc": 1792509274.618128,
+        "utc": 1792511088.4316633,
         "phase": "one_corrected_client_sample_terminal",
         "native_unit": {
           "MainPID": "0",
@@ -393,17 +393,17 @@
     },
     "pro": {
       "expected": 731,
-      "terminal": 167,
-      "unique_tasks": 167,
-      "graded": 167,
-      "success": 113,
+      "terminal": 169,
+      "unique_tasks": 169,
+      "graded": 169,
+      "success": 114,
       "missing_native_grader_completion": 0,
       "native_status_counts": {
-        "completed": 163,
+        "completed": 165,
         "run_error": 4
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 564,
+      "missing_result_task_count": 562,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection.",
       "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
@@ -498,7 +498,7 @@
     }
   },
   "reserved_capacity": {
-    "utc": 1792509322.6239624,
+    "utc": 1792511126.5194793,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2902": {
@@ -624,7 +624,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792509301.9489608,
+    "utc": 1792511133.1693182,
     "allocations": {
       "2887": {
         "phase": "ready",
@@ -995,7 +995,7 @@
         }
       },
       "scorer_version": "v3_gateway_recovery_and_malformed_original_report_fallback",
-      "utc": 1792509238.0993502
+      "utc": 1792511154.375167
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -1440,7 +1440,7 @@
       "qualification": "Same predeclared 128 Pro task IDs and identical harness/model request budgets. The original screening round and separately sampled full-run responses stay separate; no best-of selection or score replacement. This does not supply a full 731-task base run, a held-out estimate, three complete repetitions, or a cross-benchmark promotion decision. Serving-batch nondeterminism can remain at temperature zero."
     },
     "early9_supplemental_report_aggregation": {
-      "utc": 1792508453.9892287,
+      "utc": 1792510252.2874258,
       "benchmark": "DeepSWE",
       "model": "early9",
       "expected": 113,
@@ -1460,7 +1460,7 @@
       "qualification": "Native counts remain unchanged. Supplemental values are the unchanged original scorer applied only to already-produced original reports. No model response or tests are rerun, and no original timeout record is overwritten. Not a completed 113-task run or three-round mean."
     },
     "early9_never_started_deep_remainder_handoff": {
-      "utc": 1792509274.5187964,
+      "utc": 1792511088.3218381,
       "phase": "recovered_remainder_native_trials_terminal",
       "expected": 19,
       "terminal": 19,
@@ -2048,7 +2048,7 @@
     },
     "early9_client_infrastructure_recovery": {
       "current": {
-        "utc": 1792509274.5187964,
+        "utc": 1792511088.3218381,
         "phase": "recovered_remainder_native_trials_terminal",
         "expected": 19,
         "terminal": 19,
@@ -4442,7 +4442,7 @@
       "qualification": "Original449 and469 have real observed weight differences. This does not establish a stronger checkpoint, full449 availability, full-model nonfinite clearance, or training-update magnitude over all parameters. No model sampling, data edits or GPU interruption."
     },
     "mix449_original_file_recovery": {
-      "utc": 1792509327.6149538,
+      "utc": 1792511150.191095,
       "sources": {
         "2812": {
           "phase": "ready",
@@ -4924,7 +4924,7 @@
       "utc": 1792356179.122217
     },
     "mix449_receiver_independent_archive": {
-      "utc": 1792509274.7350364,
+      "utc": 1792511088.627586,
       "phase": "waiting_for_missing_original_native_shards",
       "persistent_native_shards": 32,
       "expected_native_shards": 64,
@@ -4982,7 +4982,7 @@
         }
       },
       "complete_original_source_archives": [],
-      "separate_data_volume_available_bytes": 74174693376,
+      "separate_data_volume_available_bytes": 73137127424,
       "minimum_shared_free_bytes": 274877906944,
       "original_training_step": 449,
       "original_sources_deleted": false,
@@ -5187,13 +5187,13 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792509265.9818394
+      "utc": 1792511112.6179729
     },
     "queue_states": {
       "mix449": {
         "phase": "waiting_for_complete_original_artifact",
         "candidate": "mix449",
-        "utc": 1792509329.0217078
+        "utc": 1792511129.7365386
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
@@ -5213,7 +5213,7 @@
       "phase": "waiting_for_complete_original449_artifact",
       "model_generation_started": false,
       "frozen_top_two_unchanged": true,
-      "utc": 1792509329.0209494
+      "utc": 1792511129.7314706
     },
     "original449_export_controller": null,
     "original449_inference_ready": null,

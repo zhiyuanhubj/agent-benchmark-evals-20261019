@@ -1,20 +1,18 @@
 {
-  "generated_utc": "2026-10-20T15:26:25.489037+00:00",
+  "generated_utc": "2026-10-20T15:50:49.247421+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T151703Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T154251Z.tar.zst",
   "expected": 89,
-  "terminal": 42,
-  "graded": 40,
-  "success": 29,
+  "terminal": 44,
+  "graded": 42,
+  "success": 30,
   "missing_graded_tasks": [
     "extract-moves-from-video",
     "git-multibranch",
-    "gpt2-codegolf",
     "headless-terminal",
-    "make-doom-for-mips",
     "make-mips-interpreter",
     "mcmc-sampling-stan",
     "merge-diff-arc-agi-task",
@@ -64,7 +62,9 @@
     "git-multibranch",
     "headless-terminal"
   ],
-  "unarchived_new_terminal_tasks": [],
+  "unarchived_new_terminal_tasks": [
+    "merge-diff-arc-agi-task"
+  ],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -303,6 +303,13 @@
       "raw_response_count": 7,
       "responses_with_reasoning_content": 7
     },
+    "gpt2-codegolf": {
+      "reward": 0.0,
+      "result_sha256": "741be4569ef00e1eed05486c011b9eb97eafb176d581e855799913c3c4af6999",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/gpt2-codegolf__vmLYX76/result.json",
+      "raw_response_count": 287,
+      "responses_with_reasoning_content": 287
+    },
     "headless-terminal": {
       "reward": null,
       "result_sha256": "7cb5b1c5741143650fa0883b156d23ce6752273235eccc451df2dcb9ae0195b3",
@@ -365,6 +372,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/mailman__ZfVgrjj/result.json",
       "raw_response_count": 107,
       "responses_with_reasoning_content": 107
+    },
+    "make-doom-for-mips": {
+      "reward": 1.0,
+      "result_sha256": "e251179da6a92bd0927ba2047e3c5da739e2b300285566ab5b9cf4e7ebb0f17e",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/make-doom-for-mips__W7hdJdF/result.json",
+      "raw_response_count": 152,
+      "responses_with_reasoning_content": 152
     }
   }
 }
