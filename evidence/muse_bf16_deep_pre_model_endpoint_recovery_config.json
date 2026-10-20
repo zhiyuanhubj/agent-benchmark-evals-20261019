@@ -1,0 +1,118 @@
+{
+  "config": {
+    "job_name": "muse-bf16-deep-r1-pre-model-client-recovery-20261020",
+    "jobs_dir": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results",
+    "n_attempts": 1,
+    "n_concurrent_trials": 2,
+    "quiet": true,
+    "timeout_multiplier": 1.0,
+    "environment": {
+      "import_path": "strict_docker:StrictDocker",
+      "delete": true
+    },
+    "agents": [
+      {
+        "import_path": "audited_agents:AuditedMini",
+        "model_name": "openai/muse-spark-open-bf16",
+        "kwargs": {
+          "version": "2.4.2",
+          "max_tokens": 32768,
+          "cost_limit": "0",
+          "config": {
+            "model": {
+              "model_class": "litellm",
+              "model_kwargs": {
+                "api_base": "http://10.1.13.41:31324/v1",
+                "max_tokens": 32768,
+                "drop_params": true,
+                "temperature": 1,
+                "extra_body": {
+                  "chat_template_kwargs": {
+                    "reasoning_effort": "xhigh"
+                  },
+                  "top_k": -1
+                },
+                "reasoning_effort": "xhigh",
+                "top_p": 1.0
+              }
+            }
+          }
+        },
+        "env": {
+          "OPENAI_API_KEY": "EMPTY",
+          "MSWEA_API_KEY": "EMPTY",
+          "OPENAI_BASE_URL": "http://10.1.13.41:31324/v1",
+          "OPENAI_API_BASE": "http://10.1.13.41:31324/v1"
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/adaptix-name-mapping-aliases"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/arcane-drift-detection-baselines"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/bandit-interprocedural-taint-checks"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/clack-async-autocomplete-options"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/dasel-html-document-format"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/dynamodb-toolbox-lazy-recursive-schemas"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/expr-try-catch-errors"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/geo-shapeindex-serialization"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/goreleaser-retry-publish-auditing"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/helm-array-merge-strategies"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/httpx-streaming-json-iteration"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/katex-multicolumn-array-spans"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/kombu-single-active-consumer-priority"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/koota-entity-snapshot-rollback"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/langchain-request-coalescing"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/mobly-grouped-test-barriers"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/obsidian-linter-link-format-conversion"
+      }
+    ],
+    "retry": {
+      "max_retries": 2,
+      "include_exceptions": [
+        "EnvironmentStartTimeoutError",
+        "AgentSetupTimeoutError",
+        "ApiRateLimitError",
+        "ApiInternalServerError",
+        "ApiOverloadedError",
+        "ApiConnectionClosedError"
+      ]
+    }
+  },
+  "regrade": false,
+  "slurm_job": 2812,
+  "kind": "muse_spark_open_bf16",
+  "benchmark": "deep"
+}

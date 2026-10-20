@@ -31,7 +31,11 @@ for split, item in PLAN['splits'].items():
         pending = counts['n_pending_trials']
         cancelled = counts['n_cancelled_trials']
         assert 0 <= errored <= completed
-        assert completed + running + pending + cancelled == item['expected']
+        # Harbor includes cancelled trials in n_completed_trials. Its
+        # n_cancelled_trials counter is a subtype, like n_errored_trials.
+        assert result['n_total_trials'] == item['expected']
+        assert 0 <= cancelled <= completed
+        assert completed + running + pending == item['expected']
         row.update(
             status='review_stage_complete_da_pending' if result['finished_at'] else 'review_stage_running',
             completed_trials=completed,

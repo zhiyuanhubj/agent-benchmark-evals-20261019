@@ -67,8 +67,19 @@ def harbor(roots, expected_ids, excluded_originals=None):
             if str(path) in excluded_originals:
                 frozen = excluded_originals[str(path)]
                 assert hashlib.sha256(path.read_bytes()).hexdigest() == frozen['sha256'], 'Frozen invalid original changed'
-                assert score is None and (data.get('exception_info') or {}).get('exception_type') == 'BadRequestError'
-                assert 'missing its reasoning' in data['exception_info']['exception_message']
+                if frozen.get('reason') == 'pre_model_endpoint_failure':
+                    exception = data.get('exception_info') or {}
+                    assert score is None and exception.get('exception_type') == 'AssertionError'
+                    assert 'Model endpoint unavailable from sandbox' in exception.get('exception_message', '')
+                    assert frozen['old_endpoint'] + '/models' in exception['exception_message']
+                    assert not list((path.parent / 'agent/raw_responses').glob('*.json'))
+                    assert not (path.parent / 'agent/trajectory.json').exists()
+                    empty_patch = Path(frozen['empty_patch'])
+                    assert empty_patch.stat().st_size == 0
+                    assert hashlib.sha256(empty_patch.read_bytes()).hexdigest() == frozen['empty_patch_sha256']
+                else:
+                    assert score is None and (data.get('exception_info') or {}).get('exception_type') == 'BadRequestError'
+                    assert 'missing its reasoning' in data['exception_info']['exception_message']
                 excluded.append(dict(path=str(path), task=task, **frozen))
                 continue
             records.append(dict(task=task, reward=score,
@@ -80,7 +91,8 @@ def harbor(roots, expected_ids, excluded_originals=None):
                 success=sum(row['reward'] == 1 for row in records),
                 exceptions=dict(Counter(row['exception'] for row in records if row['exception'])),
                 duplicate_task_ids=[key for key, value in ids.items() if value > 1],
-                excluded_invalid_protocol_originals=excluded,
+                excluded_invalid_protocol_originals=[row for row in excluded if row.get('reason') != 'pre_model_endpoint_failure'],
+                excluded_pre_model_endpoint_originals=[row for row in excluded if row.get('reason') == 'pre_model_endpoint_failure'],
                 missing_result_task_count=len(expected_set - set(ids)),
                 task_id_source='Original trial config task path; finished native trial and binary reward required')
 
@@ -240,6 +252,7 @@ for kind, count in [('tb', 89), ('deep', 113)]:
     rounds = {}
     for number in [1, 2, 3]:
         roots = [MUSE / ('legacy_bench/' + kind + '-results') / ('muse-bf16-' + kind + '-r' + str(number))]
+        excluded = {}
         if number == 1:
             direct_claim_path = MUSE / 'recovery_20261020' / (kind + '-r1-direct-2886-20261020-claim.json')
             if direct_claim_path.exists():
@@ -250,10 +263,60 @@ for kind, count in [('tb', 89), ('deep', 113)]:
                 assert len(direct_tasks) == len(set(direct_tasks))
                 assert set(direct_tasks) <= set(direct_claim['tasks'])
                 roots.append(direct_root)
-        rounds[str(number)] = harbor(roots, expected_harbor[kind])
+        initial_endpoint_claim_path = MUSE / 'recovery_20261020/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020-claim.json'
+        client_retry_claim_path = MUSE / 'recovery_20261020/muse-bf16-deep-r1-pre-model-client-recovery-20261020-claim.json'
+        endpoint_claim_path = client_retry_claim_path if client_retry_claim_path.exists() else initial_endpoint_claim_path
+        if kind == 'deep' and number == 1 and endpoint_claim_path.exists():
+            endpoint_claim = load(endpoint_claim_path)
+            assert endpoint_claim['source_config_sha256'] == hashlib.sha256(Path(endpoint_claim['source_config']).read_bytes()).hexdigest()
+            assert endpoint_claim['config_sha256'] == hashlib.sha256(Path(endpoint_claim['config']).read_bytes()).hexdigest()
+            assert len(endpoint_claim['tasks']) == 17
+            assert not (set(endpoint_claim['tasks']) & set(direct_claim['tasks']))
+            if endpoint_claim_path == client_retry_claim_path:
+                assert endpoint_claim['initial_claim_sha256'] == hashlib.sha256(initial_endpoint_claim_path.read_bytes()).hexdigest()
+                assert endpoint_claim['client_dependency_sha256'] == hashlib.sha256(Path(endpoint_claim['client_dependency_runtime']).read_bytes()).hexdigest()
+                assert endpoint_claim['client_dependency_sha256'] == hashlib.sha256(Path(endpoint_claim['client_dependency_source']).read_bytes()).hexdigest()
+                for task, prior in endpoint_claim['first_pre_model_results'].items():
+                    assert task in endpoint_claim['tasks']
+                    previous = Path(prior['result'])
+                    assert hashlib.sha256(previous.read_bytes()).hexdigest() == prior['result_sha256']
+                    assert not list((previous.parent / 'agent/raw_responses').glob('*.json'))
+                    assert not (previous.parent / 'agent/trajectory.json').exists()
+                    empty_patch = Path(prior['empty_patch'])
+                    assert empty_patch.stat().st_size == 0
+                    assert hashlib.sha256(empty_patch.read_bytes()).hexdigest() == prior['empty_patch_sha256']
+                for task, prior in endpoint_claim['first_interrupted_without_model_response'].items():
+                    assert task in endpoint_claim['tasks']
+                    assert not list((Path(prior['trial_dir']) / 'agent/raw_responses').glob('*.json'))
+            correction_root = MUSE / 'legacy_bench/deep-results' / endpoint_claim['job_name']
+            corrected = {}
+            for result_path in correction_root.glob('*/result.json'):
+                result = load(result_path)
+                if not result.get('finished_at'):
+                    continue
+                task = Path(result['config']['task']['path']).name
+                assert task in endpoint_claim['tasks'] and task not in corrected
+                assert endpoint_claim['verified_direct_endpoint'] in json.dumps(result['config']['agent'])
+                corrected[task] = result_path
+            excluded = {endpoint_claim['tasks'][task]['result']: {
+                'sha256': endpoint_claim['tasks'][task]['result_sha256'],
+                'reason': 'pre_model_endpoint_failure',
+                'old_endpoint': endpoint_claim['old_endpoint'],
+                'empty_patch': endpoint_claim['tasks'][task]['empty_patch'],
+                'empty_patch_sha256': endpoint_claim['tasks'][task]['empty_patch_sha256']}
+                for task in corrected}
+            roots.append(correction_root)
+        rounds[str(number)] = harbor(roots, expected_harbor[kind], excluded)
         assert not rounds[str(number)]['duplicate_task_ids']
         if number == 1 and len(roots) > 1:
             rounds[str(number)]['supplemental_run_id'] = roots[1].name
+        if kind == 'deep' and number == 1 and endpoint_claim_path.exists():
+            rounds[str(number)]['pre_model_endpoint_recovery'] = {
+                'claim': str(endpoint_claim_path), 'claim_sha256': hashlib.sha256(endpoint_claim_path.read_bytes()).hexdigest(),
+                'declared_tasks': len(endpoint_claim['tasks']), 'native_terminal': len(corrected),
+                'replaced_unscored_originals': len(excluded),
+                'prior_pre_model_client_failures': len(endpoint_claim.get('first_pre_model_results', {})),
+                'qualification': 'Only frozen originals with zero model responses and an empty patch are replaced by first actual model draws; no correctness-based selection.'}
     record['muse_bf16'][kind] = rounds
 record['reserved_capacity'] = load(BEAM / 'expanded_capacity_20261018/current.json')
 record['reserved_beam_servers'] = load(BEAM / 'expanded_capacity_20261018/serving-current.json')

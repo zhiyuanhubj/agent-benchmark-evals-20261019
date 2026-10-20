@@ -1,0 +1,227 @@
+{
+  "utc": "2026-10-20T20:24:51.385583+00:00",
+  "kind": "deep",
+  "round": 1,
+  "precision": "BF16",
+  "model_allocation": 2886,
+  "cpu_allocation": 2922,
+  "reason": "The first endpoint-correction job stopped before model access because the client version guard accepted LiteLLM 1.106.0 but the pinned task image has 1.106.1. Runtime guard now accepts either version and preserves whichever is present.",
+  "source_config": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/configs/deep-r1.json",
+  "source_config_sha256": "4560a14204bfb88be0a0e92acd28f33c2164f6ba723be8a641cdaadc9d31a3f4",
+  "direct_config": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/configs/deep-r1-direct-2886-20261020.json",
+  "direct_config_sha256": "f1b0e3d25351538101d734f060ffc90f3f584cf15b0a35507ae5247007021f20",
+  "config": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/configs/muse-bf16-deep-r1-pre-model-client-recovery-20261020.json",
+  "config_sha256": "eca3300ac039f6a042bad21ec013bfc452dc01694103a92547a064570302a3b6",
+  "job_name": "muse-bf16-deep-r1-pre-model-client-recovery-20261020",
+  "old_endpoint": "http://10.1.77.106:31324/v1",
+  "verified_direct_endpoint": "http://10.1.13.41:31324/v1",
+  "tasks": {
+    "katex-multicolumn-array-spans": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/katex-multicolumn-array-spans__HqT2DWa/result.json",
+      "result_sha256": "acb4c9da34f29e55278fead4271f2335ecaec3d95945cf8659233bed35a6bb39",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/katex-multicolumn-array-spans__HqT2DWa/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "dasel-html-document-format": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dasel-html-document-format__NpYXNey/result.json",
+      "result_sha256": "e0a004208bd7ee914e1491725c5059a4982f53f74a4622b98b104a368d0bfbf4",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dasel-html-document-format__NpYXNey/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "kombu-single-active-consumer-priority": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kombu-single-active-consumer-pri__5BfDQmQ/result.json",
+      "result_sha256": "cad9e5eda761ce932e9979ff6899ba6473c3baa8dc070747fb793aaa5f0205e5",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/kombu-single-active-consumer-pri__5BfDQmQ/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "helm-array-merge-strategies": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/helm-array-merge-strategies__QNENKFx/result.json",
+      "result_sha256": "b730c924933933207a267a60dd0a447cae540a01732db915d3e5733b9421178e",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/helm-array-merge-strategies__QNENKFx/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "expr-try-catch-errors": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/expr-try-catch-errors__hFKGRxW/result.json",
+      "result_sha256": "7f7289363009d6ef899e53aba77da9026631151781bcbd926020a343229eaf76",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/expr-try-catch-errors__hFKGRxW/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "bandit-interprocedural-taint-checks": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/bandit-interprocedural-taint-che__yYMV6mT/result.json",
+      "result_sha256": "bab43a3941693265cc4062b8039e46a5c3313e05f1e27f2352a59d11167ec437",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/bandit-interprocedural-taint-che__yYMV6mT/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "mobly-grouped-test-barriers": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/mobly-grouped-test-barriers__C5eQoQE/result.json",
+      "result_sha256": "6a49646f161659ce1ec2772bb8f7070522adda58e981bc4314078050b2aef72f",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/mobly-grouped-test-barriers__C5eQoQE/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "httpx-streaming-json-iteration": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/httpx-streaming-json-iteration__jteJZNV/result.json",
+      "result_sha256": "6476583267af3e7c0000399e8c494c97a7f83ffcdd84045af5c7bd2c1b20eb8e",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/httpx-streaming-json-iteration__jteJZNV/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "arcane-drift-detection-baselines": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/arcane-drift-detection-baselines__yYJFsLs/result.json",
+      "result_sha256": "44d766dee62dba564d50f18335b07687815b0de3bc16917bb7d168bdca90df74",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/arcane-drift-detection-baselines__yYJFsLs/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "geo-shapeindex-serialization": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/geo-shapeindex-serialization__J3LjZW6/result.json",
+      "result_sha256": "fe1e8c6bbc1295378cb10f8f89d584807d08a008b570ee5a42a768a23a707ffb",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/geo-shapeindex-serialization__J3LjZW6/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "goreleaser-retry-publish-auditing": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/goreleaser-retry-publish-auditin__vGw3o77/result.json",
+      "result_sha256": "779068c61f04a7594ff7a50a01b5bf1056a0f26c48dd5bbc854ac7a6f65dc6dd",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/goreleaser-retry-publish-auditin__vGw3o77/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "adaptix-name-mapping-aliases": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/adaptix-name-mapping-aliases__LQAkqnG/result.json",
+      "result_sha256": "76944d9222f0ed36a4a5e5da6d840c42bbaeddf85b741b0752c30ac887f0c87a",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/adaptix-name-mapping-aliases__LQAkqnG/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "clack-async-autocomplete-options": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/clack-async-autocomplete-options__or3UB4k/result.json",
+      "result_sha256": "365b58ac3a7392ecd60c574a88a7ab6cc0be86dca2b4dda82b8b77d5302e57e4",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/clack-async-autocomplete-options__or3UB4k/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "koota-entity-snapshot-rollback": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/koota-entity-snapshot-rollback__yUBpHS2/result.json",
+      "result_sha256": "465548f6c0de5d92502401b7132ad1663ef2e1fc3dd7697d9718281f6b7eda18",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/koota-entity-snapshot-rollback__yUBpHS2/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "obsidian-linter-link-format-conversion": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/obsidian-linter-link-format-conv__aRyZCYW/result.json",
+      "result_sha256": "57852cf0bec6fc6a7184137b1813da17a49d5aa7d89479ff4ae4aef19f84c0da",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/obsidian-linter-link-format-conv__aRyZCYW/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "dynamodb-toolbox-lazy-recursive-schemas": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dynamodb-toolbox-lazy-recursive__CnDDryW/result.json",
+      "result_sha256": "a5e564cab76d30b9f3c2822753a7f99e6568be90b137ddccbc0ae2cb2b9189b8",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dynamodb-toolbox-lazy-recursive__CnDDryW/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    },
+    "langchain-request-coalescing": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/langchain-request-coalescing__BFzS8Gm/result.json",
+      "result_sha256": "39003879bd2935e947a4cb4994d50baaf68d02e3aca997f6d4a3ecb8a00db708",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/langchain-request-coalescing__BFzS8Gm/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError",
+      "exception_message": "Model endpoint unavailable from sandbox: {'endpoint': 'http://10.1.77.106:31324/v1/models', 'return_code': 7, 'stdout': \"curl: (7) Failed to connect to 10.1.77.106 port 31324 after 0 ms: Couldn't connect to server\\n\", 'stderr': None}"
+    }
+  },
+  "policy": "The first correction had no model responses. Count only the first native result from this new job for each frozen task; preserve all prior records.",
+  "initial_claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020-claim.json",
+  "initial_claim_sha256": "9c598aabb82486b085a0a8ba1eb034b3cc650d49ccf0eb5017870b0cce15cff6",
+  "first_job_name": "muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020",
+  "first_pre_model_results": {
+    "arcane-drift-detection-baselines": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020/arcane-drift-detection-baselines__PSppVNz/result.json",
+      "result_sha256": "bf3f5f6169384fd41b7a4afe8ba75089272195febc0a34c6a6ccab94a7d1f194",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020/arcane-drift-detection-baselines__PSppVNz/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError"
+    },
+    "adaptix-name-mapping-aliases": {
+      "result": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020/adaptix-name-mapping-aliases__ZhTzn24/result.json",
+      "result_sha256": "c2629eac0c19ae6f6fb7649ba441d72d752a464d12929a112f389968fe957fd0",
+      "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020/adaptix-name-mapping-aliases__ZhTzn24/artifacts/logs/artifacts/model.patch",
+      "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_model_responses": 0,
+      "trajectory_present": false,
+      "exception_type": "AssertionError"
+    }
+  },
+  "first_interrupted_without_model_response": {
+    "bandit-interprocedural-taint-checks": {
+      "trial_dir": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020/bandit-interprocedural-taint-che__SDWFKgc",
+      "raw_model_responses": 0
+    },
+    "clack-async-autocomplete-options": {
+      "trial_dir": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020/clack-async-autocomplete-options__KuFmAFb",
+      "raw_model_responses": 0
+    }
+  },
+  "client_dependency_source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/protocol/muse_bf16_client_dependency.py",
+  "client_dependency_runtime": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/client_dependency.py",
+  "client_dependency_sha256": "b9e28cf14e400f63977d89356df17f99c9f469e797bf39bf485b2163e60b757f"
+}

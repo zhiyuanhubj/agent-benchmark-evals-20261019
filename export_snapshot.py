@@ -171,6 +171,24 @@ if pro_direct_claim_path.exists():
         'qualification': 'Disjoint first-round infrastructure continuation. Native results are merged by original task ID into the round 1 score at snapshot time.',
     }
 write('evidence/muse_bf16_2869_direct_resume_progress.json', bf16_direct_progress)
+bf16_deep_initial_claim_path = BF / 'recovery_20261020/muse-bf16-deep-r1-pre-model-endpoint-recovery-20261020-claim.json'
+bf16_deep_client_retry_claim_path = BF / 'recovery_20261020/muse-bf16-deep-r1-pre-model-client-recovery-20261020-claim.json'
+bf16_deep_endpoint_claim_path = (bf16_deep_client_retry_claim_path if bf16_deep_client_retry_claim_path.exists()
+                                 else bf16_deep_initial_claim_path)
+if bf16_deep_endpoint_claim_path.exists():
+    bf16_deep_endpoint_claim = read(bf16_deep_endpoint_claim_path)
+    endpoint_progress = ex['muse_bf16']['deep']['1']['pre_model_endpoint_recovery']
+    assert endpoint_progress['declared_tasks'] == len(bf16_deep_endpoint_claim['tasks']) == 17
+    assert endpoint_progress['claim_sha256'] == hashlib.sha256(bf16_deep_endpoint_claim_path.read_bytes()).hexdigest()
+    assert bf16_deep_endpoint_claim['source_config_sha256'] == hashlib.sha256(Path(bf16_deep_endpoint_claim['source_config']).read_bytes()).hexdigest()
+    assert bf16_deep_endpoint_claim['config_sha256'] == hashlib.sha256(Path(bf16_deep_endpoint_claim['config']).read_bytes()).hexdigest()
+    write('evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json', bf16_deep_endpoint_claim)
+    write('evidence/muse_bf16_deep_pre_model_endpoint_recovery_config.json', read(Path(bf16_deep_endpoint_claim['config'])))
+    if bf16_deep_client_retry_claim_path.exists():
+        initial_claim = read(bf16_deep_initial_claim_path)
+        assert bf16_deep_endpoint_claim['initial_claim_sha256'] == hashlib.sha256(bf16_deep_initial_claim_path.read_bytes()).hexdigest()
+        write('evidence/muse_bf16_deep_initial_endpoint_recovery_claim.json', initial_claim)
+        write('evidence/muse_bf16_deep_initial_endpoint_recovery_config.json', read(Path(initial_claim['config'])))
 br = read(B / 'current.json')
 for split, row in review_da['reviewers'].get('beam-bf16', {}).items():
     assert br['swe_review'][split]['terminal'] == row['expected']
@@ -976,7 +994,18 @@ snapshot = {
                 'image_identity_audit': 'evidence/muse_bf16_exact_image_identity.json',
                 'released_io_audit': 'evidence/muse_bf16_exact_io_coverage.json',
                 'qualification': 'The 89 supplied archive image identities, task paths and agent settings were verified before BF16 round 1 launched and rechecked on the running node. A full-round accuracy awaits all 89 native results and task-level audit.'},
-            'deepswe': {k: metric(v, k, 'partial_no_full_score') | ({'supplemental_run_id': v['supplemental_run_id']} if 'supplemental_run_id' in v else {}) for k, v in ex['muse_bf16']['deep'].items()},
+            'deepswe': {k: metric(v, k, 'partial_no_full_score')
+                        | ({'supplemental_run_id': v['supplemental_run_id']} if 'supplemental_run_id' in v else {})
+                        | ({'pre_model_endpoint_recovery': {
+                            'declared_tasks': v['pre_model_endpoint_recovery']['declared_tasks'],
+                            'native_terminal': v['pre_model_endpoint_recovery']['native_terminal'],
+                            'replaced_unscored_originals': v['pre_model_endpoint_recovery']['replaced_unscored_originals'],
+                            'prior_pre_model_client_failures': v['pre_model_endpoint_recovery']['prior_pre_model_client_failures'],
+                            'claim': 'evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json',
+                            'config': 'evidence/muse_bf16_deep_pre_model_endpoint_recovery_config.json',
+                            'qualification': v['pre_model_endpoint_recovery']['qualification']}}
+                           if 'pre_model_endpoint_recovery' in v else {})
+                        for k, v in ex['muse_bf16']['deep'].items()},
             'swrbench': {
                 'status': 'complete' if bf16_swr_complete else 'partial_no_full_score',
                 'expected': 1000,
@@ -1475,6 +1504,8 @@ Muse BF16's original GPU allocation expired during Pro, TB2.1 and DeepSWE runs. 
 
 After bridge allocation 2869 expired, the [direct-endpoint continuation](evidence/muse_bf16_2869_direct_resume_progress.json) separately declared 560 Pro, 16 TB2.1 and 11 DeepSWE tasks without an original native result. Completed native results are reconciled by original task ID into the first-round scores. Their run directories and prior artifacts remain separate; ungraded originals are never counted as model failures.
 
+A separate [DeepSWE endpoint-failure claim](evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json) freezes 17 original trials that stopped at the expired endpoint healthcheck with zero raw model responses, no trajectory and an empty patch. The first correction reached two client-dependency assertions before model access; its [frozen claim](evidence/muse_bf16_deep_initial_endpoint_recovery_claim.json) and artifacts are preserved. The current correction accepts the task image's pinned LiteLLM version while preserving all installed package versions. A correction replaces its matching unscored original only after a native terminal result; original files stay preserved.
+
 Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits](evidence/swe_review_complete_split_da.json): GLM5 **{review_glm_da['DA']}%** on {review_glm_da['produced']} parseable decisions (500 task outcomes), Qwen3-Coder **{review_coder_da['DA']}%** on {review_coder_da['produced']} (462 outcomes), and Qwen3-30B-Instruct **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} (422 outcomes). [The v2 receipt audit](evidence/muse_swe_review_revision_v2_receipts.json) verifies 8 GLM5 and 2 Coder task-generation-only adapters for finished native verifier reports lacking Harbor summaries; no adapter is a model result. {muse_rrr_en_note}
 
 The [revision infrastructure audit](evidence/swe_review_revision_queue_recovery_20261020.json) records two task input formats, preparation failures, and a sandbox-to-model connection timeout before any model response. Those native failures remain excluded from model scores. Two synthetic Harbor trials then completed model generation, terminal tool use, and native verification through the Docker host bridge; they do not enter benchmark metrics. Four declared original-generator recovery queues have run or are running with the [bridge agent](protocol/muse_review_revision_v2/revision_agents_bridge_v4.py) and the original task inputs. The [live native-grade audit](evidence/swe_review_revision_gateway_progress.json) has Muse Coder **{review_revision_muse_coder['native_graded_revisions']}/{review_revision_muse_coder['expected_revisions']}**, Muse Instruct **{review_revision_muse_instruct['native_graded_revisions']}/{review_revision_muse_instruct['expected_revisions']}**, Beam Coder **{review_revision_beam_coder['native_graded_revisions']}/{review_revision_beam_coder['expected_revisions']}**, and Beam Instruct **{review_revision_beam_instruct['native_graded_revisions']}/{review_revision_beam_instruct['expected_revisions']}** revisions graded; split RRR is reported only after every required native grade and released evidence is verified. The [v3 scorer](protocol/muse_review_revision_v2/revision_score_v3.py) reads only the corrected gateway results, preserves five malformed Beam review reports as model failures, and exactly reproduces all four sealed DA split metrics.
@@ -1643,6 +1674,8 @@ Opus 4.7 SWE-Review 使用未改动的官方题卡，每题仅一次评审抽样
 Muse BF16 原节点在 Pro、TB2.1、DeepSWE 运行中到期。[恢复审计](evidence/muse_bf16_2865_expiry_recovery.json)记录了原始及续跑 ID：**137 道已完成的 Pro 题仅复用一次**，原运行的 10 道失败题和 4 道中断题单独保留。当前 Pro 分数按原始题目 ID 合并续跑结果与互不重叠的直连结果。另有两道 TB 和两道 DeepSWE 的中断原始输入输出及轨迹，分别保存在已做 SHA 校验的 [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) 与 [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) 归档中；这些原记录尚未判分，不计为模型失败。
 
 2869 转发节点到期后，[直连续跑清单](evidence/muse_bf16_2869_direct_resume_progress.json)另外声明了原轮次中没有原生结果的 Pro 560 题、TB2.1 16 题、DeepSWE 11 题。已完成的原生结果按原始题目 ID 合并进首轮分数，运行目录和旧轨迹仍分别保留；原始未判分记录不算模型失败。
+
+[DeepSWE 端点故障清单](evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json)另冻结了 17 条旧端点健康检查失败的原始记录：没有模型原始回复和轨迹，补丁为空。首个补跑中两题在模型调用前又被客户端依赖检查挡住，[原清单](evidence/muse_bf16_deep_initial_endpoint_recovery_claim.json)及轨迹均保留；现在的补跑接受任务镜像中已锁定的 LiteLLM 版本，仍保持所有已安装包版本。只有新补跑产生原生终态后，才逐题替换对应的未判分原记录。
 
 **SWE-Review 三组 DA 均已有封存收据。** 官方 `compute_da.py` 在 GLM5 {review_glm_da['produced']} 个可解析决定上得 **{review_glm_da['DA']}%**（500 题终态），Qwen3-Coder {review_coder_da['produced']} 个得 **{review_coder_da['DA']}%**（462 题），Qwen3-30B-Instruct {review_instruct_da['produced']} 个得 **{review_instruct_da['DA']}%**（422 题）。[逐题哈希和官方评分核验](evidence/swe_review_complete_split_da.json)覆盖全部三组。[新版任务准备收据审计](evidence/muse_swe_review_revision_v2_receipts.json)确认 GLM5 的 8 道、Coder 的 2 道只缺 Harbor 汇总：它们的真实原生报告参与 DA，标明用途的适配文件仅供官方修复任务生成，绝非模型结果。{muse_rrr_zh_note}
 

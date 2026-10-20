@@ -1,18 +1,17 @@
 {
-  "generated_utc": "2026-10-20T19:03:51.584937+00:00",
+  "generated_utc": "2026-10-20T20:59:31.702334+00:00",
   "model": "beam_bf16",
   "round": 2,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "12c1bc154e76a40281e70762fbd6f1aa4f9d7a895efd2efa12131410deccd6fa",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T185243Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T204618Z.tar.zst",
   "expected": 89,
-  "terminal": 86,
-  "graded": 85,
+  "terminal": 87,
+  "graded": 86,
   "success": 62,
   "missing_graded_tasks": [
     "git-multibranch",
     "regex-chess",
-    "schemelike-metacircular-eval",
     "train-fasttext"
   ],
   "ungraded_terminal_tasks": [
@@ -558,6 +557,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/sanitize-git-repo__Sg2zkat/result.json",
       "raw_response_count": 12,
       "responses_with_reasoning_content": 12
+    },
+    "schemelike-metacircular-eval": {
+      "reward": 0.0,
+      "result_sha256": "eb4952cee1e7c5a3958174ea95e52da3b34c2e9e3bb2b99ee59437e13335d88e",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2/schemelike-metacircular-eval__A2Y6UBG/result.json",
+      "raw_response_count": 521,
+      "responses_with_reasoning_content": 521
     },
     "sparql-university": {
       "reward": 1.0,

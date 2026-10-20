@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-10-20T19:04:02.087980+00:00",
+  "generated_utc": "2026-10-20T20:59:42.614712+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261020T185243Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261020T204618Z.tar.zst",
   "expected": 89,
-  "terminal": 78,
-  "graded": 64,
-  "success": 41,
+  "terminal": 79,
+  "graded": 65,
+  "success": 42,
   "missing_graded_tasks": [
     "git-multibranch",
     "headless-terminal",
@@ -27,7 +27,6 @@
     "qemu-alpine-ssh",
     "regex-chess",
     "schemelike-metacircular-eval",
-    "torch-pipeline-parallelism",
     "torch-tensor-parallelism",
     "train-fasttext",
     "tune-mjcf",
@@ -667,6 +666,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/sqlite-with-gcov__4BmG2Bm/result.json",
       "raw_response_count": 20,
       "responses_with_reasoning_content": 20
+    },
+    "torch-pipeline-parallelism": {
+      "reward": 1.0,
+      "result_sha256": "082bb0dc0e727589e47d976efb97ebdccec34d228e0398d8e66dd1f49cf9aa35",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/torch-pipeline-parallelism__vFsDaDF/result.json",
+      "raw_response_count": 87,
+      "responses_with_reasoning_content": 87
     }
   }
 }
