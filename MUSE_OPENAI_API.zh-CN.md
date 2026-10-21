@@ -111,6 +111,28 @@ TTFT 从客户端开始 POST 起算，到首个非空 `reasoning_content`、正�
 
 官方还注明 vLLM 的两条记录仅为前 500 请求的功能验证，不应直接与 SGLang 全 trace 做框架排名。完整逐请求时间戳、缓存检查与统计边界见 [64K 补测证据](evidence/muse_64k_cached_speed_20261021.json) 和[补测脚本](protocol/measure_muse_64k_cached_speed_20261021.py)。
 
+### BF16 的 64K 输入与缓存复用补测
+
+2026-10-21 12:43–12:47 UTC，在对外 API 使用的同一套 16×H200、TP16/EP16 BF16 权重加 FP8 KV cache 部署上，按上一组 NVFP4 的相同合成请求构造与 SSE 统计口径补测。约 64,000 输入、400 输出 token，89.94% 公共前缀；原生检查显示公共前缀约 57,568–57,570 token 在缓存中。此次使用内网直连，现有评测与对外 API 均保持运行。
+
+| 入口并发 | 首 token p50 | 单请求解码速度 p50 | 400 token 流耗时 p50 | 本批探测合计吞吐 |
+| ---: | ---: | ---: | ---: | ---: |
+| 1 | 0.795 s | 33.0 token/s | 12.89 s | 31.5 / 31.0 / 25.8 token/s |
+| 4 | 1.625 s | 34.2 token/s | 13.28 s | 58.0 token/s |
+| 8 | 3.792 s | 32.4 token/s | 16.73 s | 116.6 token/s |
+| 12 | 15.318 s | 31.6 token/s | 27.93 s | 110.7 token/s |
+| 16 | 16.077 s | 31.4 token/s | 29.20 s | 139.3 token/s |
+
+43 个预热后的计时请求和 1 个新公共前缀基线请求均成功完成，均返回 400 个 thinking token，没有在预算内进入最终正文。新公共前缀基线的首 token 为 4.21 秒，解码约 28.8 token/s；不是清空整个副本 KV 后的冷启动。首 token 包括 thinking、排队、prefill 和内网传输；解码速度排除首 token 等待，各列独立取中位数。合计吞吐仅计算探测请求，未包含同时运行的评测或 API 调用。
+
+当前后端最多同时生成 8 路，12/16 路入口会排队。单路做三次，其余每档仅一批；这些数值是共享负载下的小样本，不能当作稳定最大容量、p95 或 SLA。BF16 与 NVFP4 分别在 16 与 8 张 H200 上、不同时间测量，不能据此计算单由量化带来的加速比，也不能视为在 GB200/GB300 上回放官方 Dynamo trace 的复现。
+
+逐请求指标见 [BF16 64K 速度证据](evidence/muse_bf16_64k_cached_speed_20261021.json)，原始请求、thinking、SSE 时间戳与缓存检查的完整清单见 [BF16 64K 归档清单](input_output/archive_manifests/muse_bf16_64k_cached_speed_20261021T124334Z.json)。可复现命令：
+
+```bash
+python -m protocol.measure_muse_64k_cached_speed_20261021 --target bf16_direct
+```
+
 ## 调用量与空闲质量探测
 
 从 2026-10-21 12:11 UTC 起，网关按 `client-01`、`client-02`、`client-03` 等标签持久记录请求数、成功/错误数、最近 5/15/60 分钟调用数及上游实际返回的 token 用量。流式响应只有携带 usage 时才能统计 token；可在请求中设置 `stream_options={"include_usage":true}`。统计库不保存 key、提示词或回答。此前没有逐 key 日志，无法补算历史调用量。

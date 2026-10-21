@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Synthetic 64K/400-token cached-prefix probe; not a Dynamo trace reproduction."""
 import asyncio
+import argparse
 import hashlib
 import json
 import statistics
@@ -51,7 +52,7 @@ async def cache_check(client, common_ids, label):
 
 
 async def batch(client, concurrency, repeat):
-    label=f'nvfp4-64k-shared90-c{concurrency}-r{repeat}'
+    label=f'{TARGET.split("_")[0]}-64k-shared90-c{concurrency}-r{repeat}'
     check=await cache_check(client,COMMON_IDS,label)
     started=time.perf_counter()
     rows=await asyncio.gather(*(stream.request(client,TARGET,label+f'-q{i}','synthetic_64k_shared90',
@@ -83,7 +84,7 @@ async def main():
                'common_prefix_tokens':shared,'nominal_shared_prefix_fraction':shared/full['count']}
         assert 62000<=full['count']<=66000 and .89<=shape['nominal_shared_prefix_fraction']<=.91,shape
         print('SHAPE',json.dumps(shape),flush=True)
-        cold=await stream.request(client,TARGET,'nvfp4-64k-cold-baseline','synthetic_64k_cold',400,seed)
+        cold=await stream.request(client,TARGET,TARGET.split('_')[0]+'-64k-cold-baseline','synthetic_64k_cold',400,seed)
         assert cold['valid'],cold
         print('COLD',json.dumps({k:cold[k] for k in ('ttft_including_reasoning_s','decode_tokens_per_second','usage')}),flush=True)
         for repeat in range(3):await batch(client,1,repeat)
@@ -104,8 +105,9 @@ async def main():
     trace=stream.BASE/'.private/muse_openai_api_20261021/reference-agentic-trace.jsonl'
     assert all((check['cached_tokens'] or 0)>=shape['common_prefix_tokens'] for check in CHECKS)
     trace_rows=[json.loads(line) for line in trace.read_text().splitlines()]
-    result={'generated_utc':datetime.now(timezone.utc).isoformat(),'hardware':'8x H200',
-        'framework':'SGLang Muse adaptation 0.0.0.dev0','precision':'NVFP4 weights + FP8 KV cache',
+    target=stream.TARGETS[TARGET]
+    result={'generated_utc':datetime.now(timezone.utc).isoformat(),'hardware':f"{target['gpus']}x H200",
+        'framework':'SGLang Muse adaptation 0.0.0.dev0','precision':target['precision']+' weights + FP8 KV cache',
         'max_running_requests':8,'shape':shape,'summary':summary,'cold_baseline':cold,
         'native_common_prefix_checks':CHECKS,'batches':BATCHES,'requests':ROWS,'raw_artifacts':str(stream.OUT),
         'reference':{'official_url':'https://docs.nvidia.com/dynamo/dev/recipes/Muse-Spark-Open',
@@ -120,10 +122,19 @@ async def main():
             'Incoming concurrency may exceed the backend limit of eight. Not AIPerf, not the original '
             '3,541-request trace, not an isolated or equal-hardware comparison with NVIDIA. '
             'The OpenAI route does not report per-request cached_tokens; native checks show common-prefix '
-            'cache residency, not a per-request measured 90% hit rate. TTFT includes returned thinking.'}
-    stream.write(stream.ROOT/'evidence/muse_64k_cached_speed_20261021.json',result)
+            'cache residency, not a per-request measured 90% hit rate. TTFT includes returned thinking.',
+        'target':TARGET}
+    filename=('muse_bf16_64k_cached_speed_20261021.json' if TARGET=='bf16_direct'
+              else 'muse_64k_cached_speed_20261021.json')
+    stream.write(stream.ROOT/'evidence'/filename,result)
     print('SUMMARY',json.dumps(summary),flush=True)
 
 
 if __name__=='__main__':
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--target', choices=('nvfp4_direct','bf16_direct'), default='nvfp4_direct')
+    args=parser.parse_args()
+    TARGET=args.target
+    BASE=stream.TARGETS[TARGET]['url'].removesuffix('/v1')
+    MODEL=stream.TARGETS[TARGET]['model']
     asyncio.run(main())
