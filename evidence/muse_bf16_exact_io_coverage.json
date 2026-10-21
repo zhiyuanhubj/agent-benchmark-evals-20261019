@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T17:04:54.572598+00:00",
+  "generated_utc": "2026-10-21T17:42:47.727247+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 82,
-  "success_count": 62,
+  "scored_tasks": 84,
+  "success_count": 64,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -248,6 +248,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/mcmc-sampling-stan__fRLJ2EA/result.json"
     },
+    "cancel-async-tasks": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/cancel-async-tasks__YFyPcGJ/result.json"
+    },
     "sparql-university": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/sparql-university__gFcoYrV/result.json"
@@ -259,6 +263,10 @@
     "path-tracing-reverse": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/path-tracing-reverse__VFfQxAu/result.json"
+    },
+    "code-from-image": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/code-from-image__cjouCpi/result.json"
     },
     "filter-js-from-html": {
       "reward": 1.0,
@@ -358,18 +366,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "code-from-image": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/code-from-image__VKqQejY/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
-    "cancel-async-tasks": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cancel-async-tasks__LVCEYdZ/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "schemelike-metacircular-eval": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/schemelike-metacircular-eval__u4fGQC2/result.json",
       "exception_type": "InternalServerError",
@@ -378,11 +374,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 82,
-  "covered_raw_response_sets": 82,
-  "covered_trajectories": 82,
-  "scored_raw_response_count": 3452,
-  "nonempty_reasoning_response_count": 3451,
+  "covered_results": 84,
+  "covered_raw_response_sets": 84,
+  "covered_trajectories": 84,
+  "scored_raw_response_count": 3486,
+  "nonempty_reasoning_response_count": 3485,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -628,6 +624,10 @@
       "raw_responses": 21,
       "nonempty_reasoning_content": 21
     },
+    "cancel-async-tasks": {
+      "raw_responses": 20,
+      "nonempty_reasoning_content": 20
+    },
     "sparql-university": {
       "raw_responses": 15,
       "nonempty_reasoning_content": 15
@@ -639,6 +639,10 @@
     "path-tracing-reverse": {
       "raw_responses": 133,
       "nonempty_reasoning_content": 133
+    },
+    "code-from-image": {
+      "raw_responses": 14,
+      "nonempty_reasoning_content": 14
     },
     "filter-js-from-html": {
       "raw_responses": 21,
@@ -723,9 +727,11 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json": "fix-ocaml-gc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/vulnerable-secret__K3AxQwV/result.json": "vulnerable-secret",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mcmc-sampling-stan__cobMK96/result.json": "mcmc-sampling-stan",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cancel-async-tasks__LVCEYdZ/result.json": "cancel-async-tasks",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/sparql-university__qKZGKXQ/result.json": "sparql-university",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mteb-leaderboard__MWhnJ4n/result.json": "mteb-leaderboard",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/path-tracing-reverse__bmfecmt/result.json": "path-tracing-reverse",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/code-from-image__VKqQejY/result.json": "code-from-image",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/filter-js-from-html__3snMrie/result.json": "filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-elf__qChRGKg/result.json": "extract-elf",
@@ -746,8 +752,8 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
   "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/cancel-async-tasks__YFyPcGJ/result.json",
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/code-from-image__cjouCpi/result.json"
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/distribution-search__KGLtcgk/result.json",
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/count-dataset-tokens__vDAkTAw/result.json"
   ],
   "archives": [
     "muse_bf16.tar.zst",
@@ -961,6 +967,8 @@
     "muse_bf16_delta_20261021T162428Z.tar.zst",
     "muse_bf16_delta_20261021T164436Z.tar.zst",
     "muse_bf16_delta_20261021T165749Z.tar.zst",
+    "muse_bf16_delta_20261021T171803Z.tar.zst",
+    "muse_bf16_delta_20261021T173540Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
