@@ -1,0 +1,99 @@
+{
+  "generated_utc": "2026-10-21T00:27:28.718450+00:00",
+  "score_generated_utc": "2026-10-21T00:27:06.600696+00:00",
+  "score_snapshot_sha256": "3e10510e3ce9b698d570e148836505a485dedaae1ab4c33c989dd089c66cc1aa",
+  "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
+  "continuation_claim_sha256": "d7048a207875858453e57f410ff1437cc217b364cff8382b3538cc0abd1b8307",
+  "expected_tasks": 89,
+  "native_graded_now": 81,
+  "score_snapshot_native_graded": 81,
+  "ungraded_tasks": 8,
+  "controller_states": {
+    "continuation_2900": "active",
+    "batch08_2899": "active"
+  },
+  "tasks": [
+    {
+      "task": "path-tracing",
+      "source_batch": 5,
+      "declared_queue": "continuation_2900",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": true,
+      "current_raw_model_responses": 133,
+      "latest_current_raw_utc": "2026-10-21T00:26:23+00:00",
+      "preserved_interrupted_source_raw_responses": 37
+    },
+    {
+      "task": "path-tracing-reverse",
+      "source_batch": 5,
+      "declared_queue": "continuation_2900",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": true,
+      "current_raw_model_responses": 119,
+      "latest_current_raw_utc": "2026-10-21T00:26:09+00:00",
+      "preserved_interrupted_source_raw_responses": 28
+    },
+    {
+      "task": "polyglot-c-py",
+      "source_batch": 5,
+      "declared_queue": "continuation_2900",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": false,
+      "current_raw_model_responses": 0,
+      "latest_current_raw_utc": null,
+      "preserved_interrupted_source_raw_responses": 0
+    },
+    {
+      "task": "train-fasttext",
+      "source_batch": 8,
+      "declared_queue": "batch08_2899",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": true,
+      "current_raw_model_responses": 109,
+      "latest_current_raw_utc": "2026-10-21T00:27:09+00:00",
+      "preserved_interrupted_source_raw_responses": 0
+    },
+    {
+      "task": "video-processing",
+      "source_batch": 8,
+      "declared_queue": "batch08_2899",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": true,
+      "current_raw_model_responses": 12,
+      "latest_current_raw_utc": "2026-10-21T00:26:53+00:00",
+      "preserved_interrupted_source_raw_responses": 0
+    },
+    {
+      "task": "vulnerable-secret",
+      "source_batch": 8,
+      "declared_queue": "batch08_2899",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": false,
+      "current_raw_model_responses": 0,
+      "latest_current_raw_utc": null,
+      "preserved_interrupted_source_raw_responses": 0
+    },
+    {
+      "task": "winning-avg-corewars",
+      "source_batch": 8,
+      "declared_queue": "batch08_2899",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": false,
+      "current_raw_model_responses": 0,
+      "latest_current_raw_utc": null,
+      "preserved_interrupted_source_raw_responses": 0
+    },
+    {
+      "task": "write-compressor",
+      "source_batch": 8,
+      "declared_queue": "batch08_2899",
+      "queue_service_active_at_snapshot": true,
+      "current_trial_directory_exists": false,
+      "current_raw_model_responses": 0,
+      "latest_current_raw_utc": null,
+      "preserved_interrupted_source_raw_responses": 0
+    }
+  ],
+  "qualification": "all_ungraded_tasks_in_declared_active_queues_at_snapshot_time",
+  "note": "Existing interrupted directories are preserved separately; one task may have both an old partial directory and a declared continuation. Trial-directory counts must not be added to task counts."
+}

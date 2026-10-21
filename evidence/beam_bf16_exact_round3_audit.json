@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-10-21T00:21:45.393398+00:00",
+  "generated_utc": "2026-10-21T00:48:05.695807+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261021T000532Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261021T002849Z.tar.zst",
   "expected": 89,
-  "terminal": 86,
-  "graded": 72,
-  "success": 47,
+  "terminal": 87,
+  "graded": 73,
+  "success": 48,
   "missing_graded_tasks": [
     "git-multibranch",
     "headless-terminal",
@@ -25,8 +25,7 @@
     "pytorch-model-recovery",
     "qemu-alpine-ssh",
     "regex-chess",
-    "schemelike-metacircular-eval",
-    "winning-avg-corewars"
+    "schemelike-metacircular-eval"
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch",
@@ -106,9 +105,7 @@
       "qualification": "No native verifier reward or model response; original result is preserved but this task is excluded from scored counts."
     }
   },
-  "unarchived_new_terminal_tasks": [
-    "winning-avg-corewars"
-  ],
+  "unarchived_new_terminal_tasks": [],
   "missing_task_inputs_in_archive": [],
   "missing_scored_task_inputs_in_archive": [],
   "errors": [],
@@ -710,6 +707,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/vulnerable-secret__BrfuJGu/result.json",
       "raw_response_count": 10,
       "responses_with_reasoning_content": 10
+    },
+    "winning-avg-corewars": {
+      "reward": 1.0,
+      "result_sha256": "ff2f152a9615cf66a0f6d15089be64fa537baf720eaaeed13791a8a7d69ddd5d",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/winning-avg-corewars__QJa2p7L/result.json",
+      "raw_response_count": 62,
+      "responses_with_reasoning_content": 62
     },
     "write-compressor": {
       "reward": 1.0,

@@ -884,6 +884,26 @@ if r3_replacement_plan:
     }
     write('evidence/muse_nvfp4_r3_infra_replacement_progress.json', r3_replacement_progress)
 
+round1_screen = {(row['model'], row['task']): row for row in
+                 read(ROOT / 'evidence/exact_tb_integrity_screen.json')['records']}
+round1_compromised_notes = [note for note in
+                            read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
+                            if note['model'] == 'muse_nvfp4' and note['reward'] == 1
+                            and note['training_disposition'] == 'exclude_confirmed_reward_hacking']
+round1_compromised = sorted(note['task'] for note in round1_compromised_notes)
+assert len(round1_compromised) == len(set(round1_compromised)) and round1_compromised
+for note in round1_compromised_notes:
+    screened = round1_screen[(note['model'], note['task'])]
+    assert screened['reward'] == 1 and screened['trajectory_sha256'] == note['trajectory_sha256']
+assert nvfp4_rounds['1']['complete'] and nvfp4_rounds['1']['success'] >= len(round1_compromised)
+nvfp4_rounds['1'].update({
+    'confirmed_compromised_successes': len(round1_compromised),
+    'known_compromised_tasks': round1_compromised,
+    'integrity_evidence': 'evidence/exact_tb_integrity_manual_notes.json',
+    'clean_accuracy': None,
+    'clean_accuracy_qualification': 'Not established: other successful trajectories have not received full manual integrity review.',
+})
+
 
 def tb_profile_status(rounds):
     if all(row['complete'] for row in rounds.values()):
@@ -912,6 +932,23 @@ bf16_tb_round1 = metric(bf16_source_round1, '1', 'complete' if bf16_complete els
     'native_score_snapshot_utc': ex['utc'],
     'qualification': 'Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.',
 }
+bf16_compromised_notes = [note for note in
+                          read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
+                          if note['model'] == 'muse_bf16' and note['reward'] == 1
+                          and note['training_disposition'] == 'exclude_confirmed_reward_hacking']
+bf16_compromised = sorted(note['task'] for note in bf16_compromised_notes)
+assert len(bf16_compromised) == len(set(bf16_compromised)) and bf16_compromised
+for note in bf16_compromised_notes:
+    screened = round1_screen[(note['model'], note['task'])]
+    assert screened['reward'] == 1 and screened['trajectory_sha256'] == note['trajectory_sha256']
+assert bf16_tb_round1['success'] >= len(bf16_compromised)
+bf16_tb_round1.update({
+    'confirmed_compromised_successes': len(bf16_compromised),
+    'known_compromised_tasks': bf16_compromised,
+    'integrity_evidence': 'evidence/exact_tb_integrity_manual_notes.json',
+    'clean_accuracy': None,
+    'clean_accuracy_qualification': 'Not established: this round is incomplete and other successful trajectories still need full manual review.',
+})
 if 'pre_model_infrastructure_recovery' in bf16_source_round1:
     bf16_tb_recovery = bf16_source_round1['pre_model_infrastructure_recovery']
     bf16_tb_round1['pre_model_infrastructure_recovery'] = {
@@ -946,6 +983,7 @@ opus_crosshost_zh = {
     'needs_review': '独立节点补验未得到已核对的原生评分，需进一步检查。',
 }[opus_crosshost_status]
 
+now = datetime.now(timezone.utc).isoformat()  # The scored cutoff follows all live result scans.
 snapshot = {
     'generated_utc': now,
     'metric_policy': 'Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.',
@@ -971,7 +1009,7 @@ snapshot = {
                 'evidence': 'evidence/swe_review_recovery_control.json',
             },
             'tb2_1_legacy_cached_tag': {'round_1_raw': tb_recovery['raw_round1'], 'round_1_with_all_declared_infrastructure_replacements': tb_recovery['with_all_verified_declared_replacements'], 'rounds_2_3': {k: metric(v, k, 'partial_no_full_score') for k, v in tb_legacy_remaining['rounds'].items()}, 'qualification': 'Infrastructure replacement is a new model draw and must be distinguished from raw first-draw result; no three-round mean.'},
-            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'native_score_snapshot_utc': exact['utc'], 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'b05_early_owner': early_b05_owner, 'qualification': nvfp4_recovery['qualification']}},
+            'tb2_1_exact_supplied_images': {'rounds': nvfp4_rounds, 'status': tb_profile_status(nvfp4_rounds), 'native_score_snapshot_utc': now, 'recovery': {'controller': nvfp4_recovery_unit, 'parallel_controller': nvfp4_parallel_unit, 'extra_lane_controllers': extra_lane_units, 'extra_gpu_watcher': extra_gpu_watcher_unit, 'replica_2867': {'model_server': replica_2867_unit, 'cpu_controller_2919': replica_2919_controller, 'endpoint_ready': replica_ready, 'claimed_batches': [row['job_name'] for row in replica_handoff['batches']] if replica_handoff else [], 'handoff_receipt': str(replica_state / 'r1-b06-b07-handoff.json') if replica_handoff else None}, 'existing_graded_round_1': len(nvfp4_recovery['existing_scored_results']['1']), 'queued_round_1': sum(len(c['tasks']) for c in nvfp4_recovery['configurations'] if c['round'] == 1), 'new_terminal_by_round': {k: len(v) for k, v in new_terminal_by_round.items()}, 'new_raw_model_responses': new_raw_responses, 'new_raw_model_responses_by_batch': new_raw_response_by_batch, 'latest_new_raw_model_response_utc': new_raw_response_latest_utc, 'active_recovery_trial_dirs': active_recovery_trial_dirs, 'user_cutover_interrupted_ungraded': len(nvfp4_recovery['user_cutover_interrupted_ungraded_trials']), 'extra_gpu_allocations': extra_gpu_allocations, 'b05_early_owner': early_b05_owner, 'qualification': nvfp4_recovery['qualification']}},
         },
         'beam_bf16': {
             'model': 'reflection/Beam-1.0-501B-A23B',
@@ -1542,6 +1580,8 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_swr_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
 
+Muse NVFP4's TB2.1 first-round **{mn_tb['success']}/89 is raw verifier reward**. The [hash-anchored integrity review](evidence/exact_tb_integrity_manual_notes.json) confirms {len(round1_compromised)} rewarded success with manipulated timing/reference computation ({', '.join(f'`{task}`' for task in round1_compromised)}). The ongoing original BF16 round also contains {len(bf16_compromised)} confirmed compromised success ({', '.join(f'`{task}`' for task in bf16_compromised)}). Their rewards remain in the raw counts, but their trajectories are excluded from clean training. Other successes still need full integrity review; no clean benchmark accuracy is claimed.
+
 Opus 4.7 SWE-Review uses the unchanged official task cards and one review attempt per task. Its [model-visible inputs](input_output/archive_manifests/opus47_review_inputs.json) and [native outputs, completions and trajectories](input_output/archive_manifests/opus47_review_full_io.json) are SHA-verified Release assets. The output archive is a partial snapshot; later deltas preserve ongoing trials. Review-stage outcomes alone do not establish DA or RRR; any qualified Instruct DA above includes one separately declared infrastructure interruption replacement.
 
 Muse BF16's original GPU allocation expired during Pro, TB2.1 and DeepSWE runs. The [recovery audit](evidence/muse_bf16_2865_expiry_recovery.json) identifies the original and derived Pro run IDs: **137 completed original tasks are reused once**, while 10 failed and four active original attempts are preserved separately. Its live Pro score combines the derived native run with disjoint direct-endpoint continuation results by original task ID. The two interrupted original TB trials and two DeepSWE trials are available as separate SHA-verified [TB](input_output/archive_manifests/muse_bf16_interrupted_tb_delta_20261020T072043Z.json) and [DeepSWE](input_output/archive_manifests/muse_bf16_interrupted_deep_delta_20261020T072043Z.json) I/O assets; they remain ungraded infrastructure interruptions.
@@ -1714,6 +1754,8 @@ chinese_report = f'''# 模型评测结果快照
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending}；SWE-Review {opus_review_zh} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | {'；'.join(part for part in (bf16_swr_zh, bf16_exact_zh_done.lstrip('；')) if part) or '暂无完整 benchmark 分数'} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{'; SWRBench ' + bf16_swr_en if not bf16_swr_complete else ''}{bf16_review_zh} |
+
+Muse NVFP4 的 TB2.1 首轮 **{mn_tb['success']}/89 是原生 verifier reward**。[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)确认其中 {len(round1_compromised)} 条成功轨迹通过操纵计时或参考计算取得奖励（{', '.join(f'`{task}`' for task in round1_compromised)}）。正在进行的 Muse BF16 首轮也有 {len(bf16_compromised)} 条同类确认轨迹（{', '.join(f'`{task}`' for task in bf16_compromised)}）。原始 reward 保留，轨迹已排除出干净训练数据；其他成功轨迹仍需完整核查，当前不报告“干净准确率”。
 
 Opus 4.7 SWE-Review 使用未改动的官方题卡，每题仅一次评审抽样。[模型可见输入](input_output/archive_manifests/opus47_review_inputs.json)及[原生输出、逐次回复和轨迹](input_output/archive_manifests/opus47_review_full_io.json)已作为带 SHA 校验的 Release 资产保存。输出归档是运行中的局部快照，后续增量归档会续传；仅凭评审阶段结果不能报告 DA 或 RRR。
 
