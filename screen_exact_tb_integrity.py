@@ -74,53 +74,59 @@ active_unreadable = []
 source = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019'
 plan = json.loads((source / 'muse_nvfp4/state/completion-2866-plan.json').read_text())
 future_seen = {2: set(), 3: set()}
-# Round four is an independent draw over the same supplied images. Screen
-# terminal native trajectories as they appear without scoring active trials.
-r4_seen = set()
-r4_dir = source / 'results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021'
-r4_claim = json.loads((source / 'muse_nvfp4/state/r4-2902-20261021/claim.json').read_text())
-assert r4_claim['expected'] == 89 and len(r4_claim['task_toml_sha256']) == 89
-for result in r4_dir.glob('*/result.json'):
-    value = json.loads(result.read_text())
-    if not value.get('finished_at'):
+# Rounds four and five are independent draws over the same supplied images.
+# Screen terminal native trajectories as they appear; active trials are unscored.
+for extra_round, allocation in ((4, 2902), (5, 2899)):
+    seen = set()
+    job = source / f'results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r{extra_round}-{allocation}-20261021'
+    claim_path = source / f'muse_nvfp4/state/r{extra_round}-{allocation}-20261021/claim.json'
+    if not claim_path.exists():
         continue
-    task = Path(value['config']['task']['path']).name
-    assert task in r4_claim['task_toml_sha256'], f'Unclaimed round-four task: {task}'
-    assert task not in r4_seen, f'Duplicate round-four task: {task}'
-    r4_seen.add(task)
-    reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
-    if reward not in (0, 1):
-        assert reward is None and value.get('exception_info'), (result, reward)
-        ungraded_terminal_trials.append({'model': 'muse_nvfp4_r4',
-            'task': task, 'result_path': str(result.relative_to(BASE)),
-            'result_sha256': hashlib.sha256(result.read_bytes()).hexdigest(),
-            'exception_type': value['exception_info'].get('exception_type'),
-            'qualification': 'Native terminal trial without a verifier reward; excluded from scored trajectory counts.'})
-        continue
-    trajectory = result.parent / 'agent/trajectory.json'
-    if not trajectory.is_file():
-        missing_trajectories.append({'model': 'muse_nvfp4_r4', 'task': task})
-        continue
-    payload = trajectory.read_bytes()
-    steps = json.loads(payload)['steps']
-    hits = []
-    tool_count = 0
-    for step in steps:
-        if step.get('source') != 'agent':
+    claim = json.loads(claim_path.read_text())
+    assert claim['round'] == extra_round and claim['allocation'] == allocation
+    assert claim['expected'] == 89 and len(claim['task_toml_sha256']) == 89
+    model = f'muse_nvfp4_r{extra_round}'
+    for result in job.glob('*/result.json'):
+        value = json.loads(result.read_text())
+        if not value.get('finished_at'):
             continue
-        for tool in step.get('tool_calls') or []:
-            args = tool.get('arguments') or {}
-            command = args.get('keystrokes', '') if isinstance(args, dict) else str(args)
-            tool_count += 1
-            for rule, regex in compiled.items():
-                if regex.search(command):
-                    hits.append({'rule': rule, 'step_id': step.get('step_id'),
-                                 'command_sha256': hashlib.sha256(command.encode()).hexdigest()})
-    records.append({'model': 'muse_nvfp4_r4', 'round': 4, 'task': task,
-                    'reward': reward, 'trajectory_path': str(trajectory.relative_to(BASE)),
-                    'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
-                    'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
-                    'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared'})
+        task = Path(value['config']['task']['path']).name
+        assert task in claim['task_toml_sha256'], f'Unclaimed round-{extra_round} task: {task}'
+        assert task not in seen, f'Duplicate round-{extra_round} task: {task}'
+        seen.add(task)
+        reward = ((value.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        if reward not in (0, 1):
+            assert reward is None and value.get('exception_info'), (result, reward)
+            ungraded_terminal_trials.append({'model': model,
+                'task': task, 'result_path': str(result.relative_to(BASE)),
+                'result_sha256': hashlib.sha256(result.read_bytes()).hexdigest(),
+                'exception_type': value['exception_info'].get('exception_type'),
+                'qualification': 'Native terminal trial without a verifier reward; excluded from scored trajectory counts.'})
+            continue
+        trajectory = result.parent / 'agent/trajectory.json'
+        if not trajectory.is_file():
+            missing_trajectories.append({'model': model, 'task': task})
+            continue
+        payload = trajectory.read_bytes()
+        steps = json.loads(payload)['steps']
+        hits = []
+        tool_count = 0
+        for step in steps:
+            if step.get('source') != 'agent':
+                continue
+            for tool in step.get('tool_calls') or []:
+                args = tool.get('arguments') or {}
+                command = args.get('keystrokes', '') if isinstance(args, dict) else str(args)
+                tool_count += 1
+                for rule, regex in compiled.items():
+                    if regex.search(command):
+                        hits.append({'rule': rule, 'step_id': step.get('step_id'),
+                                     'command_sha256': hashlib.sha256(command.encode()).hexdigest()})
+        records.append({'model': model, 'round': extra_round, 'task': task,
+                        'reward': reward, 'trajectory_path': str(trajectory.relative_to(BASE)),
+                        'trajectory_sha256': hashlib.sha256(payload).hexdigest(),
+                        'steps': len(steps), 'tool_calls': tool_count, 'hits': hits,
+                        'review_status': 'needs_context_review' if hits else 'no_pattern_hit_not_cleared'})
 
 for item in plan['configurations']:
     round_number = item['round']
@@ -379,7 +385,7 @@ for item in plan['configurations']:
                                'hits': hits, 'status': 'in_progress_not_scored'})
 
 summary = {}
-for model in [*profiles, 'muse_nvfp4_r2', 'muse_nvfp4_r3', 'muse_nvfp4_r4', 'beam_bf16_r2', 'beam_bf16_r3']:
+for model in [*profiles, 'muse_nvfp4_r2', 'muse_nvfp4_r3', 'muse_nvfp4_r4', 'muse_nvfp4_r5', 'beam_bf16_r2', 'beam_bf16_r3']:
     subset = [row for row in records if row['model'] == model]
     rules = Counter(hit['rule'] for row in subset for hit in row['hits'])
     summary[model] = {
@@ -388,15 +394,20 @@ for model in [*profiles, 'muse_nvfp4_r2', 'muse_nvfp4_r3', 'muse_nvfp4_r4', 'bea
         'pattern_hit_successes': sum(bool(row['hits']) and row['reward'] == 1 for row in subset),
         'rule_hit_counts': dict(rules),
     }
-r4_scored = json.loads((ROOT / 'results/scores.json').read_text())['models']['muse_nvfp4'][
-    'tb2_1_exact_supplied_images']['rounds']['4']['graded']
-assert (summary['muse_nvfp4_r4']['scored_trajectories_checked'] +
-        sum(row['model'] == 'muse_nvfp4_r4' for row in missing_trajectories) >= r4_scored), (
-    'Round-four integrity screen missed scored trajectories'
-)
+extra_round_scores = json.loads((ROOT / 'results/scores.json').read_text())['models']['muse_nvfp4'][
+    'tb2_1_exact_supplied_images']['rounds']
+for extra_round in (4, 5):
+    if str(extra_round) not in extra_round_scores:
+        continue
+    model = f'muse_nvfp4_r{extra_round}'
+    assert (summary[model]['scored_trajectories_checked'] +
+            sum(row['model'] == model for row in missing_trajectories)
+            >= extra_round_scores[str(extra_round)]['graded']), (
+        f'Round-{extra_round} integrity screen missed scored trajectories'
+    )
 report = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
-    'scope': 'Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4 and Beam BF16 rounds 2/3.',
+    'scope': 'Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.',
     'method': 'Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.',
     'summary': summary,
     'missing_trajectories': missing_trajectories,

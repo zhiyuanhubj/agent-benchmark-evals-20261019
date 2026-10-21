@@ -32,13 +32,13 @@ expiry_correction_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-expiry-correction-2
 fasttext_expiry_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-fasttext-expiry-2902-20261020'
 fasttext_tmux_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r2-fasttext-tmux-2902-20261020'
 expired2869_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r3-expired2869-continuation-2900-20261020'
-r4_job = RESULTS / 'muse-nvfp4-tb-v1-exact-r4-2902-20261021'
+extra_round_jobs = [RESULTS / f'muse-nvfp4-tb-v1-exact-r{round_number}-{allocation}-20261021'
+                    for round_number, allocation in ((4, 2902), (5, 2899))]
 jobs = list(RESULTS.glob('muse-nvfp4-tb-v1-exact-r*-completion-2866-b*'))
 jobs.extend(RESULTS.glob('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b*'))
 if expired2869_job.exists():
     jobs.append(expired2869_job)
-if r4_job.exists():
-    jobs.append(r4_job)
+jobs.extend(job for job in extra_round_jobs if job.exists())
 jobs.extend(job for job in replacement_jobs if job.exists())
 if transport_job.exists():
     jobs.append(transport_job)
@@ -89,17 +89,20 @@ for job in sorted(jobs):
             if task_file.exists() and task_file not in payloads:
                 payloads[task_file] = task_file.read_bytes()
                 counts['task_input'] += 1
-r4_state = SOURCE / 'muse_nvfp4/state/r4-2902-20261021'
-r4_claim_path = r4_state / 'claim.json'
-if r4_claim_path.exists():
-    claim = json.loads(r4_claim_path.read_text())
-    assert claim['round'] == 4 and claim['expected'] == 89 and claim['allocation'] == 2902
+for round_number, allocation in ((4, 2902), (5, 2899)):
+    round_state = SOURCE / f'muse_nvfp4/state/r{round_number}-{allocation}-20261021'
+    claim_path = round_state / 'claim.json'
+    if not claim_path.exists():
+        continue
+    claim = json.loads(claim_path.read_text())
+    assert claim['round'] == round_number and claim['expected'] == 89
+    assert claim['allocation'] == allocation
     config = Path(claim['config'])
     assert hashlib.sha256(config.read_bytes()).hexdigest() == claim['config_sha256']
-    required = [r4_claim_path, config, Path(claim['endpoint_ready']),
+    required = [claim_path, config, Path(claim['endpoint_ready']),
                 Path(claim['reasoning_preflight']), Path(claim['runner'])]
     for suffix in ('started', 'exit'):
-        marker = r4_state / f'{suffix}.json'
+        marker = round_state / f'{suffix}.json'
         if marker.exists():
             required.append(marker)
     for path in required:

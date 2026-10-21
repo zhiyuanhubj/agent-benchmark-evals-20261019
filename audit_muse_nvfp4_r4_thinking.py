@@ -89,7 +89,8 @@ audit = {
         raw[task] - empty_reasoning[task] for task in graded),
     'archived_graded_empty_reasoning_response_count': sum(empty_reasoning[task] for task in graded),
     'empty_reasoning_tasks': sorted(task for task in graded if empty_reasoning[task]),
-    'qualification': ('all_archived_graded_raw_responses_have_thinking' if not empty_reasoning else
+    'qualification': ('no_graded_trials_yet' if not graded else
+                      'all_archived_graded_raw_responses_have_thinking' if not empty_reasoning else
                       'some_archived_graded_raw_responses_lack_thinking'),
     'limitation': ('This checks thinking preservation for archived graded trials, not correctness '
                    'or trajectory integrity. An archive may contain a new terminal trial captured '

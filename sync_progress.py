@@ -77,12 +77,13 @@ def sync_native_archives(scores, force_bf16=False):
                 terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
                                 for path in replacement.glob('*/result.json'))
                 raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
-            round4 = (BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4'
-                      / 'muse-nvfp4-tb-v1-exact-r4-2902-20261021')
-            if round4.exists():
-                terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
-                                for path in round4.glob('*/result.json'))
-                raw_count += sum(1 for _ in round4.glob('*/agent/raw_responses/*.json'))
+            for round_number, allocation in ((4, 2902), (5, 2899)):
+                extra_round = (BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4'
+                               / f'muse-nvfp4-tb-v1-exact-r{round_number}-{allocation}-20261021')
+                if extra_round.exists():
+                    terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
+                                    for path in extra_round.glob('*/result.json'))
+                    raw_count += sum(1 for _ in extra_round.glob('*/agent/raw_responses/*.json'))
         if name == 'beam_bf16':
             replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
             if replacement.exists():
@@ -139,14 +140,16 @@ def sync_native_archives(scores, force_bf16=False):
                 handoff_newer |= any(latest_archive_time is None or
                                      datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
                                      for marker in route_markers)
-            r4_state = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021'
-            if (r4_state / 'claim.json').exists():
-                markers = [r4_state / 'claim.json',
-                           *[r4_state / f'{name}.json' for name in ('started', 'exit')
-                             if (r4_state / f'{name}.json').exists()]]
-                handoff_newer |= any(latest_archive_time is None or
-                                     datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
-                                     for marker in markers)
+            for round_number, allocation in ((4, 2902), (5, 2899)):
+                round_state = BASE / ('.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/'
+                                      f'state/r{round_number}-{allocation}-20261021')
+                if (round_state / 'claim.json').exists():
+                    markers = [round_state / 'claim.json',
+                               *[round_state / f'{name}.json' for name in ('started', 'exit')
+                                 if (round_state / f'{name}.json').exists()]]
+                    handoff_newer |= any(latest_archive_time is None or
+                                         datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
+                                         for marker in markers)
             handoff_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
             expected_receipts = 0
             for task in ('password-recovery', 'prove-plus-comm'):
@@ -387,6 +390,8 @@ def cycle():
                 assert io_coverage['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB release coverage incomplete'
             if scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds'].get('4', {}).get('graded'):
                 run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r4_thinking.py')], timeout=120)
+            if scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds'].get('5', {}).get('graded'):
+                run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r5_thinking.py')], timeout=120)
             break
         else:
             raise RuntimeError('Exact TB result or released I/O changed during three snapshot attempts; retry next cycle')
@@ -488,6 +493,7 @@ def cycle():
              'protocol/continue_muse_nvfp4_r3_b07_2900_20261020.py',
              'protocol/continue_muse_nvfp4_r3_expired2869_2900_20261020.py',
              'protocol/run_muse_nvfp4_exact_r4_2902_20261021.py',
+             'protocol/run_muse_nvfp4_exact_r5_2899_20261021.py',
              'protocol/muse_nvfp4_exact_future_round_controller_20261019.py',
              'audit_muse_nvfp4_r2_pytorch_ungraded.py',
              'audit_muse_nvfp4_r2_pytorch_replacement.py',
@@ -499,6 +505,7 @@ def cycle():
              'screen_exact_tb_integrity.py',
              'verify_muse_exact_io.py',
              'audit_muse_nvfp4_r4_thinking.py',
+             'audit_muse_nvfp4_r5_thinking.py',
              'verify_muse_bf16_exact_io.py',
              'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'release_shards.py', 'verify_release.py', 'sync_progress.py'])

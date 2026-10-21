@@ -232,36 +232,39 @@ for job_name in ('muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b07',
         if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
             missing_r3_continuation_trajectories.append(trial.name)
 
-r4_state = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021'
-r4_claim_path = r4_state / 'claim.json'
-missing_r4_files = []
-missing_r4_results = []
-missing_r4_raw = []
-missing_r4_trajectories = []
-if r4_claim_path.exists():
-    claim = json.loads(r4_claim_path.read_text())
-    required = [r4_claim_path, Path(claim['config']), Path(claim['endpoint_ready']),
+extra_round_missing = {}
+for round_number, allocation in ((4, 2902), (5, 2899)):
+    state = BASE / ('.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/'
+                    f'state/r{round_number}-{allocation}-20261021')
+    claim_path = state / 'claim.json'
+    missing = {'files': [], 'results': [], 'raw_responses': [], 'trajectories': []}
+    extra_round_missing[round_number] = missing
+    if not claim_path.exists():
+        continue
+    claim = json.loads(claim_path.read_text())
+    assert claim['round'] == round_number and claim['allocation'] == allocation
+    required = [claim_path, Path(claim['config']), Path(claim['endpoint_ready']),
                 Path(claim['reasoning_preflight']), Path(claim['runner'])]
-    required.extend(path for path in (r4_state / 'started.json', r4_state / 'exit.json')
+    required.extend(path for path in (state / 'started.json', state / 'exit.json')
                     if path.exists() and path.stat().st_mtime <= live_archive_started.timestamp())
-    missing_r4_files = [str(path.relative_to(BASE)) for path in required
+    missing['files'] = [str(path.relative_to(BASE)) for path in required
                         if str(path.relative_to(BASE)) not in entries]
-    r4_job = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / claim['job_name']
-    for trial in r4_job.glob('*'):
+    job = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4' / claim['job_name']
+    for trial in job.glob('*'):
         if not trial.is_dir():
             continue
         result = trial / 'result.json'
         if not finished_by_score_snapshot(result):
             continue
         if str(result.relative_to(BASE)) not in entries:
-            missing_r4_results.append(trial.name)
+            missing['results'].append(trial.name)
         raw_dir = trial / 'agent/raw_responses'
         if any(raw_dir.glob('*.json')) and not any(
                 path.startswith(str(raw_dir.relative_to(BASE)) + '/') for path in entries):
-            missing_r4_raw.append(trial.name)
+            missing['raw_responses'].append(trial.name)
         trajectory = trial / 'agent/trajectory.json'
         if trajectory.exists() and str(trajectory.relative_to(BASE)) not in entries:
-            missing_r4_trajectories.append(trial.name)
+            missing['trajectories'].append(trial.name)
 
 remote_audit = json.loads((EVIDENCE / 'release-assets-verification.json').read_text())
 verified_names = {item['asset'] for item in remote_audit['items'] if item.get('sha256_matches') and item.get('bytes_match')}
@@ -309,14 +312,11 @@ if missing_r3_continuation_raw:
     errors.append(f'{len(missing_r3_continuation_raw)} round-3 continuation raw-response sets missing')
 if missing_r3_continuation_trajectories:
     errors.append(f'{len(missing_r3_continuation_trajectories)} round-3 continuation trajectories missing')
-if missing_r4_files:
-    errors.append(f'{len(missing_r4_files)} round-4 inputs/proofs missing')
-if missing_r4_results:
-    errors.append(f'{len(missing_r4_results)} round-4 results missing')
-if missing_r4_raw:
-    errors.append(f'{len(missing_r4_raw)} round-4 raw-response sets missing')
-if missing_r4_trajectories:
-    errors.append(f'{len(missing_r4_trajectories)} round-4 trajectories missing')
+for round_number, missing in extra_round_missing.items():
+    for category, label in (('files', 'inputs/proofs'), ('results', 'results'),
+                            ('raw_responses', 'raw-response sets'), ('trajectories', 'trajectories')):
+        if missing[category]:
+            errors.append(f'{len(missing[category])} round-{round_number} {label} missing')
 if unverified:
     errors.append(f'{len(unverified)} release assets not SHA/size verified')
 
@@ -353,10 +353,9 @@ record = {
     'missing_r3_continuation_results': missing_r3_continuation_results,
     'missing_r3_continuation_raw_responses': missing_r3_continuation_raw,
     'missing_r3_continuation_trajectories': missing_r3_continuation_trajectories,
-    'missing_r4_files': missing_r4_files,
-    'missing_r4_results': missing_r4_results,
-    'missing_r4_raw_responses': missing_r4_raw,
-    'missing_r4_trajectories': missing_r4_trajectories,
+    **{f'missing_r{round_number}_{category}': missing[category]
+       for round_number, missing in extra_round_missing.items()
+       for category in ('files', 'results', 'raw_responses', 'trajectories')},
     'unverified_assets': unverified,
     'errors': errors,
     'qualification': 'complete_verified' if not errors and audit['qualification'] == 'complete_verified' else 'partial_or_needs_review',

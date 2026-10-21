@@ -1,0 +1,33 @@
+{
+  "generated_utc": "2026-10-21T02:24:59.395213+00:00",
+  "group": "opus47_review_full_io",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/opus47_review_full_io_delta_20261021T020123Z.json",
+  "cutoff_utc": "2026-10-21T01:56:25.210215+00:00",
+  "new_source_roots": [],
+  "one_time_native_thinking_backfill": false,
+  "one_time_model_patch_backfill": false,
+  "archive_name": "opus47_review_full_io_delta_20261021T022457Z.tar.zst",
+  "archive_size_bytes": 724618,
+  "archive_sha256": "080d3b0d09512b6fd5d36e3351e4d552fa34526643129eeb7e160627145e9637",
+  "file_count": 488,
+  "source_bytes": 27679448,
+  "skipped_disappeared_during_snapshot": 0,
+  "filename_counts": {
+    "completion.json": 313,
+    "openhands_sdk.txt": 21,
+    "trajectory.json": 19,
+    "config.json": 17,
+    "result.json": 21,
+    "trial.log": 21,
+    "report.json": 19,
+    "review_report.json": 19,
+    "reward.txt": 19,
+    "test-stdout.txt": 19
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/opus47_review_20261020/swe_review/glm5_500/results",
+    "/fsx/home/zhiyuan/.private/opus47_review_20261020/swe_review/qwen3_30b_instruct2507_500/results",
+    "/fsx/home/zhiyuan/.private/opus47_review_20261020/swe_review/qwen3_coder_30b_500/results"
+  ]
+}

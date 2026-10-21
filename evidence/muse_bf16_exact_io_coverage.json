@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T02:18:47.177866+00:00",
+  "generated_utc": "2026-10-21T02:27:57.605311+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 59,
-  "success_count": 46,
+  "scored_tasks": 60,
+  "success_count": 47,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -191,6 +191,10 @@
     "financial-document-processor": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/financial-document-processor__wWCikMb/result.json"
+    },
+    "regex-chess": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/regex-chess__Ce92J49/result.json"
     },
     "mteb-retrieve": {
       "reward": 0.0,
@@ -406,11 +410,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 59,
-  "covered_raw_response_sets": 59,
-  "covered_trajectories": 59,
-  "scored_raw_response_count": 2342,
-  "nonempty_reasoning_response_count": 2341,
+  "covered_results": 60,
+  "covered_raw_response_sets": 60,
+  "covered_trajectories": 60,
+  "scored_raw_response_count": 2380,
+  "nonempty_reasoning_response_count": 2379,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -600,6 +604,10 @@
       "raw_responses": 19,
       "nonempty_reasoning_content": 19
     },
+    "regex-chess": {
+      "raw_responses": 38,
+      "nonempty_reasoning_content": 38
+    },
     "mteb-retrieve": {
       "raw_responses": 139,
       "nonempty_reasoning_content": 139
@@ -662,7 +670,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
   "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/regex-chess__Ce92J49/result.json"
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/cobol-modernization__LatX4UC/result.json"
   ],
   "archives": [
     "muse_bf16.tar.zst",
@@ -828,6 +836,7 @@
     "muse_bf16_delta_20261021T011949Z.tar.zst",
     "muse_bf16_delta_20261021T014235Z.tar.zst",
     "muse_bf16_delta_20261021T015951Z.tar.zst",
+    "muse_bf16_delta_20261021T022258Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
