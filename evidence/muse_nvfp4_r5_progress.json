@@ -1,20 +1,30 @@
 {
-  "generated_utc": "2026-10-21T06:12:09.472795+00:00",
+  "generated_utc": "2026-10-21T06:55:55.622163+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 10,
-  "graded": 10,
-  "success": 10,
+  "terminal": 14,
+  "graded": 14,
+  "success": 13,
   "active_trial_dirs": 2,
-  "raw_responses": 443,
+  "raw_responses": 551,
   "tasks": {
-    "db-wal-recovery": null,
+    "hf-model-inference": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/hf-model-inference__CkHrHWt/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "db-wal-recovery": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/db-wal-recovery__JGFbZ8Y/result.json",
+      "reward": 0.0,
+      "exception": null
+    },
     "adaptive-rejection-sampler": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/adaptive-rejection-sampler__kUXZC9c/result.json",
       "reward": 1.0,
       "exception": null
     },
+    "make-mips-interpreter": null,
     "circuit-fibsqrt": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/circuit-fibsqrt__u79PMp5/result.json",
       "reward": 1.0,
@@ -32,6 +42,11 @@
     },
     "financial-document-processor": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/financial-document-processor__a6FPvvj/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "log-summary-date-ranges": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/log-summary-date-ranges__ta24o6P/result.json",
       "reward": 1.0,
       "exception": null
     },
@@ -55,7 +70,12 @@
       "reward": 1.0,
       "exception": null
     },
-    "git-multibranch": null,
+    "git-multibranch": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/git-multibranch__8NTh9rR/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "large-scale-text-editing": null,
     "caffe-cifar-10": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/caffe-cifar-10__7W5Gnb8/result.json",
       "reward": 1.0,

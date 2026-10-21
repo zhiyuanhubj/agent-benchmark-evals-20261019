@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep CPU 2922's Docker disk usable by evicting completed Muse Pro task images."""
+"""Keep CPU 2922 usable by evicting images of native-graded Pro tasks."""
 
 import argparse
 import hashlib
@@ -12,9 +12,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 BASE = Path('/fsx/home/zhiyuan')
-SOURCE = BASE / ('.private/muse_bf16_20261018/legacy_bench/pro-results/muse_bf16_full/'
-                 'muse-spark-open-bf16_swebench_pro_verified_mini_swe_agent/'
-                 'muse-bf16-pro-full-r1-resume-20261020/details')
+RESULT_ROOT = BASE / ('.private/muse_bf16_20261018/legacy_bench/pro-results/muse_bf16_full/'
+                      'muse-spark-open-bf16_swebench_pro_verified_mini_swe_agent')
+SOURCES = tuple(RESULT_ROOT / run / 'details' for run in (
+    'muse-bf16-pro-full-r1-resume-20261020',
+    'muse-bf16-pro-r1-direct-2886-20261020',
+)) + (BASE / ('.private/beam_20261018/legacy_bench_20261018/remaining_pro/pro-results/'
+             'beam_pro_full731_round2_2888_20261020/'
+             'Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/'
+             'beam-pro-full731-r2-2888-20261020/details'),)
 LOG = BASE / '.private/muse_bf16_20261018/recovery_20261020/cpu-2922-image-guard.jsonl'
 DISK = '/opt/sagemaker'
 JOB_ID = '2922'
@@ -45,16 +51,17 @@ def record(**fields):
 
 def candidates():
     graded = {}
-    for path in SOURCE.glob('*/attempt-1/result.json'):
-        result = json.loads(path.read_text())
-        evaluation = (((result.get('meta') or {}).get('benchmark') or {}).get('eval_raw_data') or {})
-        if evaluation.get('completed') is not True:
-            continue
-        if not isinstance((result.get('metrics') or {}).get('correct'), bool):
-            continue
-        task = json.loads((path.parent.parent / 'task.json').read_text())['task_id']
-        assert task not in graded
-        graded[task] = (path, digest(path))
+    for source in SOURCES:
+        for path in source.glob('*/attempt-1/result.json'):
+            result = json.loads(path.read_text())
+            evaluation = (((result.get('meta') or {}).get('benchmark') or {}).get('eval_raw_data') or {})
+            if evaluation.get('completed') is not True:
+                continue
+            if not isinstance((result.get('metrics') or {}).get('correct'), bool):
+                continue
+            task = json.loads((path.parent.parent / 'task.json').read_text())['task_id']
+            if task not in graded:
+                graded[task] = (path, digest(path))
     images = docker('image', 'ls', '--no-trunc', '--format', '{{json .}}')
     images.check_returncode()
     eligible = []

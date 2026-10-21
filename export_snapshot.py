@@ -1519,23 +1519,44 @@ muse_rrr_zh_note = (
     f"{muse_review_instruct_rrr['baseline_RR']}%，提升 "
     f"{muse_review_instruct_rrr['delta']} 个百分点。{muse_coder_rrr_zh_note}GLM5 组及整体 RRR 尚未完成。"
     if muse_review_instruct_rrr else '原始生成模型修订仍在判分；RRR 尚未生成。')
+beam_review_glm_da = be['swe_review']['glm5_500'].get('DA')
+beam_review_coder_da = be['swe_review']['qwen3_coder_30b_500'].get('DA')
+beam_review_coder_rrr = be['swe_review']['qwen3_coder_30b_500'].get('RRR')
 beam_review_instruct_da = be['swe_review']['qwen3_30b_instruct2507_500'].get('DA')
 beam_review_instruct_rrr = be['swe_review']['qwen3_30b_instruct2507_500'].get('RRR')
+beam_da_zh_table = (
+    f"；SWE-Review 三组官方 DA：GLM5 **{beam_review_glm_da['DA']}%（500 题）**、"
+    f"Coder **{beam_review_coder_da['DA']}%（462 题）**、"
+    f"Instruct **{beam_review_instruct_da['DA']}%（422 题）**"
+    if all((beam_review_glm_da, beam_review_coder_da, beam_review_instruct_da))
+    else (f"；SWE-Review Instruct 组封存 DA **{beam_review_instruct_da['DA']}%（422 题）**"
+          if beam_review_instruct_da else '')
+)
 beam_rrr_en_note = (
     f"The [released native RRR evidence](evidence/swe_review_official_rrr.json) verifies all "
     f"{beam_review_instruct_rrr['revised']} original-generator revisions and the unchanged official "
     f"split metric: **RRR {beam_review_instruct_rrr['RRR']}%** (baseline RR "
     f"{beam_review_instruct_rrr['baseline_RR']}%, delta +{beam_review_instruct_rrr['delta']} points). "
-    f"The GLM5 and Coder splits and overall RRR remain unfinished."
+    + (f"The Coder split also has **RRR {beam_review_coder_rrr['RRR']}%** from "
+       f"{beam_review_coder_rrr['revised']} native revisions. " if beam_review_coder_rrr else '')
+    + f"The GLM5 split and overall RRR remain unfinished."
     if beam_review_instruct_rrr else 'The GLM5 and Coder splits and all RRR revision grades remain incomplete.')
 beam_rrr_zh_table = (f"；SWE-Review Instruct 组官方 RRR **{beam_review_instruct_rrr['RRR']}%**"
                      if beam_review_instruct_rrr else '')
+if beam_review_coder_rrr:
+    beam_rrr_zh_table += f"；Coder 组官方 RRR **{beam_review_coder_rrr['RRR']}%**"
+beam_review_pending_zh = ('SWE-Review GLM5 组及整体 RRR 未完成' if beam_review_coder_rrr
+                          else 'SWE-Review 另两组与整体 RRR 未完成')
 beam_rrr_zh_note = (
     f"[已归档的原生 RRR 证据](evidence/swe_review_official_rrr.json)核对了全部 "
     f"{beam_review_instruct_rrr['revised']} 条原始生成模型修订和未改动的官方分组指标："
     f"**RRR {beam_review_instruct_rrr['RRR']}%**，原始 baseline RR "
     f"{beam_review_instruct_rrr['baseline_RR']}%，提升 "
-    f"{beam_review_instruct_rrr['delta']} 个百分点。GLM5/Coder 两组及整体 RRR 尚未完成。"
+    f"{beam_review_instruct_rrr['delta']} 个百分点。"
+    + (f"Coder 组另有 **RRR {beam_review_coder_rrr['RRR']}%**，"
+       f"{beam_review_coder_rrr['revised']} 条原生修订已核验。" if beam_review_coder_rrr else '')
+    + ('GLM5 组及整体 RRR 尚未完成。' if beam_review_coder_rrr
+       else 'GLM5/Coder 两组及整体 RRR 尚未完成。')
     if beam_review_instruct_rrr else 'GLM5/Coder 两组和全部 RRR 修复判分仍未完成。')
 mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
 mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
@@ -1553,6 +1574,7 @@ bf16_excluded_names = ', '.join(f'`{name}`' for name in bf16_excluded)
 nvfp4_r2_excluded_names = ', '.join(f'`{name}`' for name in nvfp4_r2_excluded)
 beam_tb_rounds = be['tb2_1_exact_supplied_images']['rounds']
 be_tb = beam_tb_rounds['1']
+beam_r2_recovery = beam_tb_rounds['2'].get('infra_replacement')
 beam_setup_recovery_path = ROOT / 'evidence/beam_r3_setup_recovery_20261021.json'
 beam_setup_recovery = read(beam_setup_recovery_path) if beam_setup_recovery_path.exists() else None
 op_tb = op['tb2_1_exact_supplied_images']['rounds']['1']
@@ -1592,6 +1614,10 @@ beam_exact_en = '; '.join(
     else f"r{number} {row['success']}/{row['graded']} graded (partial)"
     for number, row in beam_tb_rounds.items() if row['graded'] or row['complete']
 )
+if beam_r2_recovery and beam_r2_recovery['complete_if_admitted']:
+    repaired_success = beam_r2_recovery['effective_success_if_admitted']
+    beam_exact_en += f'; r2 with declared tmux correction {repaired_success}/89 complete (raw first draw remains ungraded)'
+    beam_exact_zh_done += f'；精确镜像 TB2.1 第2轮基础设施补测后 **{repaired_success}/89**'
 beam_exact_zh_done += ''.join(
     f"；精确镜像 TB2.1 第{number}轮 **{row['success']}/89**"
     for number, row in beam_tb_rounds.items() if number != '1' and row['complete']
@@ -1599,6 +1625,7 @@ beam_exact_zh_done += ''.join(
 beam_exact_zh_pending += ''.join(
     f"；精确镜像 TB2.1 第{number}轮 {row['graded']}/89 已判分、{row['success']} 成功，未完成"
     for number, row in beam_tb_rounds.items() if number != '1' and not row['complete'] and row['graded']
+    and not (number == '2' and beam_r2_recovery and beam_r2_recovery['complete_if_admitted'])
 )
 opus_tb_rounds = op['tb2_1_exact_supplied_images']['rounds']
 opus_exact_en = '; '.join(
@@ -1751,7 +1778,7 @@ The [SWE-Review controller audit](evidence/swe_review_recovery_control.json) rec
 
 Beam SWE-Review has [**{beam_malformed_count} sampled reports with invalid JSON**](evidence/beam_swe_review_malformed_reports.json). The original task-preparation controller failed while reading one. A [source-pinned v2 preparation protocol](protocol/beam_review_revision_v2/task-preparation-plan-v2.json) preserves the raw files and applies the official generator's missing-decision fallback; its current phase is `{beam_prep_phase}`. The remaining review splits are still running.
 
-Beam BF16's Qwen3-30B-Instruct SWE-Review split has a [sealed official DA](evidence/swe_review_complete_split_da.json) of **{beam_review_instruct_da['DA']}%** on {beam_review_instruct_da['produced']} parseable decisions from 422 task outcomes. Its {be['swe_review']['qwen3_30b_instruct2507_500']['invalid_report_count']} malformed reports are preserved as model failures. {beam_rrr_en_note}
+Beam BF16's [sealed official SWE-Review DA](evidence/swe_review_complete_split_da.json) is **{beam_review_glm_da['DA']}%** on GLM5, **{beam_review_coder_da['DA']}%** on Coder, and **{beam_review_instruct_da['DA']}%** on Instruct. The Instruct split has {beam_review_instruct_da['produced']} parseable decisions from 422 task outcomes; its {be['swe_review']['qwen3_30b_instruct2507_500']['invalid_report_count']} malformed reports are preserved as model failures. {beam_rrr_en_note}
 
 The TB2.1 **legacy cached-tag image profile is separate** from the exact user-supplied-image profile. Muse NVFP4 legacy round 1 was **68/88 graded on raw first draw** (one ungraded); its separately labeled score after declared infrastructure replacement draws is **71/89**. Muse NVFP4 legacy rounds 2/3 remain **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}** and **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}** graded. Opus 4.7 completed legacy round 1 at **70/89**; Beam legacy round 1 is {be['tb2_1_legacy_cached_tag']['1']['success']}/{be['tb2_1_legacy_cached_tag']['1']['graded']} graded and partial. The original BF16 run is an exception to the old file label: its 89 image identities and tasks match the supplied archive, so its historical `tb2_1_legacy_cached_tag` field and exact-image field refer to **the same trials**, not two samples. None of the partial counts is a full benchmark accuracy. Independent exact-image and legacy-image trials must not be pooled.
 
@@ -1907,6 +1934,14 @@ if r5_progress:
             f"**{r5['graded']}/89 native grades and {r5['success']} successes**. "
             "A complete fifth-round accuracy awaits all 89 native grades and trajectory review.\n\n")
     readme = readme.replace('Scores are benchmark-recorded values.', note + 'Scores are benchmark-recorded values.', 1)
+if beam_r2_recovery:
+    note = ("Beam TB2.1 round 2 has an original `git-multibranch` trial with six real "
+            "model responses but no verifier grade after its tmux session disappeared. "
+            f"The [separately declared recovery audit](evidence/beam_r2_git_multibranch_recovery_20261021.json) "
+            f"records {beam_r2_recovery['native_graded']}/1 native replacement grade and "
+            f"{beam_r2_recovery['native_success']} success. The raw first draw remains ungraded; "
+            "at most one replacement grade can fill it, with no best-of selection.\n\n")
+    readme = readme.replace('Beam exact-image TB round 2 runs', note + 'Beam exact-image TB round 2 runs', 1)
 if beam_setup_recovery:
     note = (f"Beam TB2.1 round 3 has {beam_setup_recovery['expected_original_setup_failures']} "
             "original task attempts that stopped during sandbox setup before any model response. "
@@ -1925,7 +1960,7 @@ chinese_report = f'''# 模型评测结果快照
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
 | Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | Pro Verified 独立第二轮第 0 分片 **{mn['swe_bench_pro_verified']['round_2']['graded']}/183 已判分、{mn['swe_bench_pro_verified']['round_2']['success']} 成功**，整轮 731 题尚未完成；{muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
-| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review Instruct 组封存 DA **{beam_review_instruct_da['DA']}%（422 题）**{beam_rrr_zh_table}{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 另两组与整体 RRR 未完成 |
+| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_da_zh_table}{beam_rrr_zh_table}{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；{beam_review_pending_zh} |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending}；SWE-Review {opus_review_zh} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
 | Muse 原始 BF16 | {'；'.join(part for part in (bf16_swr_zh, bf16_exact_zh_done.lstrip('；')) if part) or '暂无完整 benchmark 分数'} | Pro Verified **{models['muse_bf16']['swe_bench_pro_verified']['graded']}/731 已判分**{bf16_exact_zh_pending}；DeepSWE 运行中{'; SWRBench ' + bf16_swr_en if not bf16_swr_complete else ''}{bf16_review_zh} |
@@ -1952,7 +1987,7 @@ Muse BF16 原节点在 Pro、TB2.1、DeepSWE 运行中到期。[恢复审计](ev
 
 Beam SWE-Review 有[**{beam_malformed_count} 份已抽样但 JSON 无法解析的报告**](evidence/beam_swe_review_malformed_reports.json)，旧任务准备控制器因此失败。[带源码哈希的新版本准备协议](protocol/beam_review_revision_v2/task-preparation-plan-v2.json)保留原始文件，并按官方生成器的缺失决定回退处理；当前阶段为 `{beam_prep_phase}`。另两组评审仍在继续。
 
-Beam BF16 的 SWE-Review Instruct 组已有[封存的官方 DA](evidence/swe_review_complete_split_da.json)：422 题终态中 {beam_review_instruct_da['produced']} 个决定可解析，**DA {beam_review_instruct_da['DA']}%**。其中 {be['swe_review']['qwen3_30b_instruct2507_500']['invalid_report_count']} 份格式错误的原始报告保留，按模型无有效决定处理。{beam_rrr_zh_note}
+Beam BF16 的 SWE-Review 三组已有[封存的官方 DA](evidence/swe_review_complete_split_da.json)：GLM5 **{beam_review_glm_da['DA']}%**、Coder **{beam_review_coder_da['DA']}%**、Instruct **{beam_review_instruct_da['DA']}%**。Instruct 的 422 题终态中 {beam_review_instruct_da['produced']} 个决定可解析；其中 {be['swe_review']['qwen3_30b_instruct2507_500']['invalid_report_count']} 份格式错误的原始报告保留，按模型无有效决定处理。{beam_rrr_zh_note}
 
 **TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}**、**{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}**，尚无三轮均值。BF16 的历史字段虽名为 `tb2_1_legacy_cached_tag`，[镜像身份审计](evidence/muse_bf16_exact_image_identity.json)已证实启动前及运行节点上的 89 个镜像与指定归档一致，题目和推理设置也一致；它与精确镜像字段指向**同一轮测试**，不能相加。{mn_exact_note_zh}{mteb_timeout_note_zh}两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成四条互不重叠的队列，最多 8 题并行。本次快照中恢复任务已有 {new_raw_responses} 条原始模型响应、{active_recovery_trial_dirs} 个运行中题目目录，最新响应时间为 {new_raw_response_latest_utc}；这些是活跃度，不是分数。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；[首轮逐题核验](evidence/muse_nvfp4_exact_round1_audit.json)会检查重复、缺题、原始结果哈希、判分和 thinking 原始响应，满 89 题且核验通过后才发布首轮准确率。新增 GPU 申请状态：{extra_gpu_status}。排队节点获配后监控器会启动同一 NVFP4 模型服务，并逐批加锁领取 b03、b05 中尚未启动的一批；early95 结束后腾出的 2812 最多可领取两批。原 CPU 评测器继续使用原题目和镜像，仅模型端点变化；若本地批次先启动，不会在其他节点重复抽题。
 
@@ -2092,6 +2127,14 @@ if r5_progress:
             f"**{r5['graded']}/89 题原生判分、{r5['success']} 题成功**。"
             "全部判分和轨迹审查完成前不报告第 5 轮准确率。\n\n")
     chinese_report = chinese_report.replace('# 模型评测结果快照\n', '# 模型评测结果快照\n\n' + note, 1)
+if beam_r2_recovery:
+    note = ("Beam TB2.1 第 2 轮 `git-multibranch` 原始尝试已有 6 条真实模型回复，但 tmux 会话丢失后"
+            "没有 verifier 判分。"
+            f"[单独声明的补测审计](evidence/beam_r2_git_multibranch_recovery_20261021.json)现有 "
+            f"{beam_r2_recovery['native_graded']}/1 题原生补测判分，其中 "
+            f"{beam_r2_recovery['native_success']} 题成功。原始首抽仍未判分，"
+            "最多只用这一次补测填补空缺，不按正确与否择优。\n\n")
+    chinese_report = chinese_report.replace('Beam 精确镜像 TB 第 2 轮', note + 'Beam 精确镜像 TB 第 2 轮', 1)
 if beam_setup_recovery:
     note = (f"Beam TB2.1 第 3 轮有 {beam_setup_recovery['expected_original_setup_failures']} 题原始尝试"
             "在沙箱启动阶段、模型首回复前失败。"

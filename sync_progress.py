@@ -240,6 +240,11 @@ def sync_native_archives(scores, force_bf16=False):
                          'r3-setup-replacement-20261021-exit.json')]
             receipts = [marker for marker in receipts if marker.exists()]
             handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < len(receipts)
+            handoff_newer |= latest_filename_counts.get('controller_source', 0) < sum(
+                (ROOT / name).exists() for name in (
+                    'beam_r2_git_multibranch_infra_recovery.py',
+                    'protocol/beam_r3_setup_recovery_20261021.py'))
+            handoff_newer |= latest_filename_counts.get('scoring_source', 0) < 1
             handoff_newer |= any(latest_archive_time is None or
                                  datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
                                  for marker in receipts)
@@ -354,6 +359,7 @@ def cycle():
                 for source in SOURCES:
                     run([PYTHON, str(source)], timeout=600)
                 run([PYTHON, str(ROOT / 'audit_muse_bf16_expiry_recovery.py')], timeout=60)
+            run([PYTHON, str(ROOT / 'audit_beam_r2_git_multibranch_recovery.py')], timeout=60)
             run([PYTHON, str(ROOT / 'audit_beam_r3_setup_recovery.py')], timeout=60)
             run([PYTHON, str(ROOT / 'export_snapshot.py')])
             scores = json.loads((ROOT / 'results/scores.json').read_text())
@@ -464,6 +470,8 @@ def cycle():
              'audit_opus47_provider_retries.py',
              'audit_other_exact_round1.py',
              'audit_beam_r3_setup_recovery.py',
+             'audit_beam_r2_git_multibranch_recovery.py',
+             'beam_r2_git_multibranch_infra_recovery.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',
              'protocol/muse_bf16_status_20261020.py',

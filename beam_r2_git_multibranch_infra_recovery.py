@@ -81,13 +81,29 @@ def source_proof():
 
 
 def ready_to_launch():
-    if not (STATE / 'complete.json').exists():
-        return False
+    # Round 3 was reassigned to the verified 2901 replica, so the old
+    # sequential controller never writes complete.json. Native exit receipts
+    # and terminal results are the actual completion gate for all three draws.
     for round_number in (1, 2, 3):
         receipt = STATE / f'r{round_number}-exit.json'
         if not receipt.exists():
             return False
         assert read(receipt)['returncode'] == 0, f'Round {round_number} exited with an error'
+        config = read(WORK / f'configs/r{round_number}.json')
+        expected = {Path(row['path']).name for row in config['tasks']}
+        assert len(expected) == 89
+        results = SOURCE / 'results/beam_bf16' / config['job_name']
+        found = {}
+        for path in results.glob('*/result.json'):
+            result = read(path)
+            if not result.get('finished_at'):
+                return False
+            task = Path(result['config']['task']['path']).name
+            assert task not in found, f'Duplicate round-{round_number} task: {task}'
+            found[task] = path
+        if len(found) < 89:
+            return False
+        assert set(found) == expected, f'Round {round_number} task inventory changed'
     return True
 
 
@@ -112,6 +128,10 @@ def launch(proof):
         'profile': 'TB2.1 user-supplied exact images', 'round': 2,
         'reason': 'Original native trial had no verifier or reward after tmux server disappeared',
         'source_trial': str(TRIAL), 'source_proof': proof,
+        'original_round_exit_sha256': {
+            str(number): sha(STATE / f'r{number}-exit.json') for number in (1, 2, 3)
+        },
+        'original_round_terminal_tasks': {'1': 89, '2': 89, '3': 89},
         'replacement_job_name': JOB_NAME, 'replacement_config': str(CONFIG),
         'replacement_config_sha256': sha(CONFIG), 'endpoint': ENDPOINT,
         'model_allocation': 2887, 'cpu_allocation': 2919,

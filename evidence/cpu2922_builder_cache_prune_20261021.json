@@ -1,0 +1,14 @@
+{
+  "measured_utc": "2026-10-21T06:54:51.552776+00:00",
+  "allocation": 2922,
+  "node": "ip-10-1-69-250",
+  "filesystem": "/opt/sagemaker/docker/data-root",
+  "free_gib_before_cache_prune": 34.2,
+  "free_gib_after_cache_prune": 117.88,
+  "delta_free_gib_approx": 83.68,
+  "command": "docker builder prune --all --force",
+  "command_exit_code": 0,
+  "docker_builder_reported_reclaimed": "24.94GB",
+  "docker_build_cache_after": "0B",
+  "qualification": "The before value is from the preceding ECR tag removal evidence; the after value is the direct disk usage on the same node after builder prune. Disk delta can include concurrent Docker activity and is not solely attributed to the reported build-cache accounting. Active/stopped containers and benchmark results were not pruned."
+}

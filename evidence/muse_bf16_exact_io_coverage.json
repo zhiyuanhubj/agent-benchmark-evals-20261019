@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T06:22:37.192280+00:00",
+  "generated_utc": "2026-10-21T07:02:11.999404+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 68,
-  "success_count": 52,
+  "scored_tasks": 70,
+  "success_count": 54,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -236,6 +236,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/fix-ocaml-gc__9dykfRc/result.json"
     },
+    "mcmc-sampling-stan": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/mcmc-sampling-stan__fRLJ2EA/result.json"
+    },
     "filter-js-from-html": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/filter-js-from-html__pPxgEjS/result.json"
@@ -247,6 +251,10 @@
     "extract-elf": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/extract-elf__TA4j864/result.json"
+    },
+    "log-summary-date-ranges": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/log-summary-date-ranges__EAC3bHs/result.json"
     },
     "kv-store-grpc": {
       "reward": 1.0,
@@ -356,20 +364,8 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "log-summary-date-ranges": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/log-summary-date-ranges__mnesrMc/result.json",
-      "exception_type": "InternalServerError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "cancel-async-tasks": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cancel-async-tasks__LVCEYdZ/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
-    "mcmc-sampling-stan": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mcmc-sampling-stan__cobMK96/result.json",
       "exception_type": "RuntimeError",
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
@@ -406,11 +402,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 68,
-  "covered_raw_response_sets": 68,
-  "covered_trajectories": 68,
-  "scored_raw_response_count": 2844,
-  "nonempty_reasoning_response_count": 2843,
+  "covered_results": 70,
+  "covered_raw_response_sets": 70,
+  "covered_trajectories": 70,
+  "scored_raw_response_count": 2872,
+  "nonempty_reasoning_response_count": 2871,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -644,6 +640,10 @@
       "raw_responses": 81,
       "nonempty_reasoning_content": 81
     },
+    "mcmc-sampling-stan": {
+      "raw_responses": 21,
+      "nonempty_reasoning_content": 21
+    },
     "filter-js-from-html": {
       "raw_responses": 21,
       "nonempty_reasoning_content": 21
@@ -655,6 +655,10 @@
     "extract-elf": {
       "raw_responses": 34,
       "nonempty_reasoning_content": 34
+    },
+    "log-summary-date-ranges": {
+      "raw_responses": 7,
+      "nonempty_reasoning_content": 7
     },
     "kv-store-grpc": {
       "raw_responses": 10,
@@ -692,9 +696,11 @@
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json": "fix-ocaml-gc",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mcmc-sampling-stan__cobMK96/result.json": "mcmc-sampling-stan",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/filter-js-from-html__3snMrie/result.json": "filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-elf__qChRGKg/result.json": "extract-elf",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/log-summary-date-ranges__mnesrMc/result.json": "log-summary-date-ranges",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/kv-store-grpc__7PfvuA5/result.json": "kv-store-grpc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/db-wal-recovery__e9zUrop/result.json": "db-wal-recovery",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json": "cobol-modernization",
@@ -703,9 +709,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json": "constraints-scheduling",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
-  "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/log-summary-date-ranges__EAC3bHs/result.json"
-  ],
+  "deferred_post_score_results": [],
   "archives": [
     "muse_bf16.tar.zst",
     "muse_bf16_delta_20261019T053146Z.tar.zst",
@@ -884,6 +888,8 @@
     "muse_bf16_delta_20261021T053447Z.tar.zst",
     "muse_bf16_delta_20261021T060259Z.tar.zst",
     "muse_bf16_delta_20261021T061602Z.tar.zst",
+    "muse_bf16_delta_20261021T063705Z.tar.zst",
+    "muse_bf16_delta_20261021T064942Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

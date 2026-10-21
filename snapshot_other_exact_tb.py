@@ -31,9 +31,12 @@ archive.parent.mkdir(exist_ok=True)
 assert not archive.exists()
 
 payloads = {}
-counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0, 'handoff_receipt': 0, 'controller_source': 0}
+counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0, 'handoff_receipt': 0, 'controller_source': 0, 'scoring_source': 0}
 terminal_results = 0
 if model == 'beam_bf16':
+    scoring_source = SOURCE / 'status.py'
+    payloads[scoring_source] = scoring_source.read_bytes()
+    counts['scoring_source'] = 1
     for receipt_name in ('r23-2887-handoff.json', 'r2-launch.json', 'r3-launch.json',
                          'r2-exit.json', 'r3-exit.json',
                          'r2-git-multibranch-infra-replacement-claim.json',
@@ -45,10 +48,12 @@ if model == 'beam_bf16':
         if receipt.exists():
             payloads[receipt] = receipt.read_bytes()
             counts['handoff_receipt'] += 1
-    controller = ROOT / 'protocol/beam_r3_setup_recovery_20261021.py'
-    if controller.exists():
-        payloads[controller] = controller.read_bytes()
-        counts['controller_source'] += 1
+    for controller_name in ('beam_r2_git_multibranch_infra_recovery.py',
+                            'protocol/beam_r3_setup_recovery_20261021.py'):
+        controller = ROOT / controller_name
+        if controller.exists():
+            payloads[controller] = controller.read_bytes()
+            counts['controller_source'] += 1
 for job in sorted(result_root.glob(profile['job_pattern'])):
     if not job.is_dir():
         continue

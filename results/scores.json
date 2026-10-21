@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T06:12:09.499802+00:00",
+  "generated_utc": "2026-10-21T06:55:55.656478+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -16,11 +16,11 @@
         "round_2": {
           "status": "partial_no_full_score",
           "expected": 731,
-          "graded": 9,
-          "success": 6,
+          "graded": 13,
+          "success": 7,
           "accuracy": null,
           "shard0_expected": 183,
-          "shard0_terminal": 9,
+          "shard0_terminal": 13,
           "evidence": "evidence/muse_nvfp4_pro_r2_shard0_progress.json",
           "qualification": "Only predeclared shard zero of the independent second 731-task draw. No complete round accuracy or best-of merging with round one."
         }
@@ -303,12 +303,12 @@
           },
           "4": {
             "expected": 89,
-            "terminal": 15,
-            "graded": 15,
-            "success": 13,
+            "terminal": 16,
+            "graded": 16,
+            "success": 14,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 596,
+            "archived_actual_model_responses": 680,
             "exceptions": {
               "AgentTimeoutError": 1
             },
@@ -320,12 +320,12 @@
           },
           "5": {
             "expected": 89,
-            "terminal": 10,
-            "graded": 10,
-            "success": 10,
+            "terminal": 14,
+            "graded": 14,
+            "success": 13,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 443,
+            "archived_actual_model_responses": 551,
             "exceptions": {},
             "complete": false,
             "accuracy": null,
@@ -335,7 +335,7 @@
           }
         },
         "status": "complete_three_rounds_later_rounds_partial",
-        "native_score_snapshot_utc": "2026-10-21T06:12:09.499802+00:00",
+        "native_score_snapshot_utc": "2026-10-21T06:55:55.656478+00:00",
         "recovery": {
           "controller": "failed",
           "parallel_controller": "inactive",
@@ -650,15 +650,15 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 616,
-        "graded": 564,
-        "success": 334,
+        "terminal": 628,
+        "graded": 579,
+        "success": 342,
         "status": "partial_no_full_score",
         "pre_model_disk_correction": {
           "declared_tasks": 136,
-          "native_terminal": 87,
-          "native_graded": 87,
-          "native_success": 46,
+          "native_terminal": 90,
+          "native_graded": 90,
+          "native_success": 47,
           "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
           "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json"
         },
@@ -666,9 +666,9 @@
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 177,
-        "graded": 177,
-        "success": 115,
+        "terminal": 189,
+        "graded": 189,
+        "success": 123,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -686,14 +686,14 @@
         "2": {
           "expected": 113,
           "terminal": 113,
-          "graded": 106,
-          "success": 44,
+          "graded": 112,
+          "success": 47,
           "status": "partial_no_full_score",
           "pre_model_client_recovery": {
             "declared_tasks": 35,
-            "native_terminal": 29,
-            "native_graded": 29,
-            "native_success": 13,
+            "native_terminal": 35,
+            "native_graded": 35,
+            "native_success": 16,
             "qualification": "Frozen original no-response AssertionErrors remain preserved. Only first correction draws with model trajectory and native binary reward replace the corresponding ungraded originals; no correctness-based selection.",
             "claim": "evidence/beam_deep_r2_client_recovery_claim.json",
             "progress": "evidence/beam_deep_r2_client_recovery_progress.json"
@@ -763,7 +763,20 @@
             "excluded_user_reassignment_trials": [],
             "complete": false,
             "accuracy": null,
-            "legacy_cached_tag_scores_included": false
+            "legacy_cached_tag_scores_included": false,
+            "infra_replacement": {
+              "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r2-git-multibranch-infra-replacement-claim.json",
+              "original_raw_responses": 6,
+              "native_terminal": 1,
+              "native_graded": 1,
+              "native_success": 1,
+              "native_raw_responses": 11,
+              "effective_graded_if_admitted": 89,
+              "effective_success_if_admitted": 63,
+              "complete_if_admitted": true,
+              "accuracy_if_admitted": 0.7078651685393258,
+              "qualification": "One declared post-model infrastructure replacement after original tmux loss; original six-response ungraded draw stays separate and no result is selected by correctness."
+            }
           },
           "3": {
             "expected": 89,
@@ -788,7 +801,7 @@
               "native_terminal": 1,
               "native_graded": 1,
               "native_success": 1,
-              "native_raw_responses": 6,
+              "native_raw_responses": 163,
               "effective_graded_if_replacements_admitted": 76,
               "effective_success_if_replacements_admitted": 49,
               "qualification": "Original ungraded setup failures remain preserved; one declared first replacement per task is shown separately, never best-of."
@@ -1103,9 +1116,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 299,
-        "graded": 205,
-        "success": 131,
+        "terminal": 302,
+        "graded": 208,
+        "success": 134,
         "status": "partial_no_full_score",
         "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
         "source_run_id": "muse-bf16-pro-full-r1",
@@ -1119,8 +1132,8 @@
         "1": {
           "expected": 89,
           "terminal": 89,
-          "graded": 68,
-          "success": 52,
+          "graded": 70,
+          "success": 54,
           "status": "partial_no_full_score",
           "supplemental_run_id": "muse-bf16-tb-r1-direct-2886-20261020"
         },
@@ -1145,12 +1158,12 @@
           "1": {
             "expected": 89,
             "terminal": 89,
-            "graded": 68,
-            "success": 52,
+            "graded": 70,
+            "success": 54,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
-            "native_score_snapshot_utc": "2026-10-21T06:06:00.859109+00:00",
+            "native_score_snapshot_utc": "2026-10-21T06:50:51.784007+00:00",
             "qualification": "Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.",
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
@@ -1161,8 +1174,8 @@
             "clean_accuracy_qualification": "Not established: this round is incomplete and other successful trajectories still need full manual review.",
             "pre_model_infrastructure_recovery": {
               "declared_tasks": 30,
-              "native_terminal": 11,
-              "replaced_unscored_originals": 11,
+              "native_terminal": 13,
+              "replaced_unscored_originals": 13,
               "excluded_partial_model_output_tasks": [
                 "query-optimize",
                 "schemelike-metacircular-eval"
@@ -1225,24 +1238,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 617,
-        "native_graded": 617,
+        "native_terminal": 634,
+        "native_graded": 634,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 206,
-            "native_graded": 206
+            "native_terminal": 212,
+            "native_graded": 212
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 199,
-            "native_graded": 199
+            "native_terminal": 205,
+            "native_graded": 205
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 212,
-            "native_graded": 212
+            "native_terminal": 217,
+            "native_graded": 217
           }
         },
         "DA": null,

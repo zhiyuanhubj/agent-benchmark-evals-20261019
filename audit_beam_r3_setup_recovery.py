@@ -77,6 +77,7 @@ success = sum(row['reward'] == 1 for row in replacements.values())
 receipt = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
     'claim': str(CLAIM), 'claim_sha256': sha(CLAIM),
+    'scoring_source_sha256': sha(SOURCE / 'status.py'),
     'round': 3, 'precision': 'BF16', 'expected_original_setup_failures': 11,
     'originals': originals, 'replacement_job': claim['replacement_job'],
     'replacement_trial_directories': len(trial_dirs),

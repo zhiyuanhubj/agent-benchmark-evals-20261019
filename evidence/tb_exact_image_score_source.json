@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-21T06:06:09.128949+00:00",
+  "utc": "2026-10-21T06:50:59.904721+00:00",
   "source_image_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/image-identity-plan.json",
   "source_image_plan_sha256": "e8ce45c5101dd43938bea69810d1dd1098895d5d64520370e23e252c2d57b22b",
   "models": {
@@ -36,7 +36,20 @@
           "excluded_user_reassignment_trials": [],
           "complete": false,
           "accuracy": null,
-          "legacy_cached_tag_scores_included": false
+          "legacy_cached_tag_scores_included": false,
+          "infra_replacement": {
+            "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r2-git-multibranch-infra-replacement-claim.json",
+            "original_raw_responses": 6,
+            "native_terminal": 1,
+            "native_graded": 1,
+            "native_success": 1,
+            "native_raw_responses": 11,
+            "effective_graded_if_admitted": 89,
+            "effective_success_if_admitted": 63,
+            "complete_if_admitted": true,
+            "accuracy_if_admitted": 0.7078651685393258,
+            "qualification": "One declared post-model infrastructure replacement after original tmux loss; original six-response ungraded draw stays separate and no result is selected by correctness."
+          }
         },
         "3": {
           "expected": 89,
@@ -61,7 +74,7 @@
             "native_terminal": 1,
             "native_graded": 1,
             "native_success": 1,
-            "native_raw_responses": 6,
+            "native_raw_responses": 163,
             "effective_graded_if_replacements_admitted": 76,
             "effective_success_if_replacements_admitted": 49,
             "qualification": "Original ungraded setup failures remain preserved; one declared first replacement per task is shown separately, never best-of."
@@ -86,9 +99,9 @@
           "ActiveState": "inactive"
         },
         "beam-r2-git-multibranch-infra-recovery-20261019": {
-          "MainPID": "3563440",
+          "MainPID": "0",
           "Result": "success",
-          "ActiveState": "active"
+          "ActiveState": "inactive"
         },
         "beam-r3-setup-recovery-20261021": {
           "MainPID": "2709867",
