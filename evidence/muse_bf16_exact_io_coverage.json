@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-10-21T03:03:24.601483+00:00",
+  "generated_utc": "2026-10-21T03:13:03.130784+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 61,
+  "scored_tasks": 62,
   "success_count": 48,
   "tasks": {
     "pytorch-model-cli": {
@@ -228,6 +228,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/break-filter-js-from-html__WqN7m7x/result.json"
     },
+    "db-wal-recovery": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/db-wal-recovery__wkb6MdA/result.json"
+    },
     "cobol-modernization": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/cobol-modernization__LatX4UC/result.json"
@@ -312,12 +316,6 @@
     },
     "gpt2-codegolf": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/gpt2-codegolf__7Dz2bfB/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
-    "db-wal-recovery": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/db-wal-recovery__e9zUrop/result.json",
       "exception_type": "RuntimeError",
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
@@ -408,11 +406,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 61,
-  "covered_raw_response_sets": 61,
-  "covered_trajectories": 61,
-  "scored_raw_response_count": 2409,
-  "nonempty_reasoning_response_count": 2408,
+  "covered_results": 62,
+  "covered_raw_response_sets": 62,
+  "covered_trajectories": 62,
+  "scored_raw_response_count": 2453,
+  "nonempty_reasoning_response_count": 2452,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -638,6 +636,10 @@
       "raw_responses": 25,
       "nonempty_reasoning_content": 25
     },
+    "db-wal-recovery": {
+      "raw_responses": 44,
+      "nonempty_reasoning_content": 44
+    },
     "cobol-modernization": {
       "raw_responses": 29,
       "nonempty_reasoning_content": 29
@@ -666,6 +668,7 @@
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/db-wal-recovery__e9zUrop/result.json": "db-wal-recovery",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json": "cobol-modernization",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
@@ -840,6 +843,7 @@
     "muse_bf16_delta_20261021T022258Z.tar.zst",
     "muse_bf16_delta_20261021T023838Z.tar.zst",
     "muse_bf16_delta_20261021T025639Z.tar.zst",
+    "muse_bf16_delta_20261021T031206Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

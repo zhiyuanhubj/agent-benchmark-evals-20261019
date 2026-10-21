@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T03:03:39.928290+00:00",
+  "generated_utc": "2026-10-21T03:06:52.501656+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -278,7 +278,7 @@
             "graded": 88,
             "success": 69,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 4516,
+            "archived_actual_model_responses": 4517,
             "ungraded": 1,
             "exceptions": {
               "InternalServerError": 1
@@ -299,7 +299,7 @@
             "success": 6,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 268,
+            "archived_actual_model_responses": 272,
             "exceptions": {},
             "complete": false,
             "accuracy": null,
@@ -309,12 +309,12 @@
           },
           "5": {
             "expected": 89,
-            "terminal": 1,
-            "graded": 1,
-            "success": 1,
+            "terminal": 2,
+            "graded": 2,
+            "success": 2,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 114,
+            "archived_actual_model_responses": 124,
             "exceptions": {},
             "complete": false,
             "accuracy": null,
@@ -324,7 +324,7 @@
           }
         },
         "status": "round_1_complete_later_rounds_partial",
-        "native_score_snapshot_utc": "2026-10-21T03:03:39.928290+00:00",
+        "native_score_snapshot_utc": "2026-10-21T03:06:52.501656+00:00",
         "recovery": {
           "controller": "failed",
           "parallel_controller": "inactive",
@@ -558,7 +558,7 @@
             "replacement_terminal": 88,
             "replacement_graded": 88,
             "replacement_success": 69,
-            "replacement_raw_responses": 4516,
+            "replacement_raw_responses": 4517,
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
               "largest-eigenval"
@@ -572,7 +572,7 @@
               "terminal": 10,
               "graded": 10,
               "success": 8,
-              "raw_responses": 693,
+              "raw_responses": 694,
               "source_partial_model_response_tasks": 4,
               "source_partial_model_responses": 150,
               "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
@@ -633,15 +633,15 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 549,
-        "graded": 476,
-        "success": 280,
+        "terminal": 561,
+        "graded": 490,
+        "success": 290,
         "status": "partial_no_full_score",
         "pre_model_disk_correction": {
           "declared_tasks": 136,
-          "native_terminal": 66,
-          "native_graded": 66,
-          "native_success": 34,
+          "native_terminal": 68,
+          "native_graded": 68,
+          "native_success": 35,
           "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
           "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json"
         },
@@ -649,9 +649,9 @@
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 142,
-        "graded": 142,
-        "success": 89,
+        "terminal": 152,
+        "graded": 152,
+        "success": 97,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -745,7 +745,7 @@
             "graded": 74,
             "success": 48,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 5047,
+            "archived_actual_model_responses": 5087,
             "ungraded": 14,
             "exceptions": {
               "RuntimeError": 13,
@@ -1066,9 +1066,9 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 196,
-        "graded": 196,
-        "success": 127,
+        "terminal": 197,
+        "graded": 197,
+        "success": 128,
         "status": "partial_no_full_score",
         "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
         "source_run_id": "muse-bf16-pro-full-r1",
@@ -1082,7 +1082,7 @@
         "1": {
           "expected": 89,
           "terminal": 87,
-          "graded": 61,
+          "graded": 62,
           "success": 48,
           "status": "partial_no_full_score",
           "supplemental_run_id": "muse-bf16-tb-r1-direct-2886-20261020"
@@ -1108,12 +1108,12 @@
           "1": {
             "expected": 89,
             "terminal": 87,
-            "graded": 61,
+            "graded": 62,
             "success": 48,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
-            "native_score_snapshot_utc": "2026-10-21T02:49:14.645806+00:00",
+            "native_score_snapshot_utc": "2026-10-21T03:05:23.614216+00:00",
             "qualification": "Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.",
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
@@ -1124,8 +1124,8 @@
             "clean_accuracy_qualification": "Not established: this round is incomplete and other successful trajectories still need full manual review.",
             "pre_model_infrastructure_recovery": {
               "declared_tasks": 30,
-              "native_terminal": 6,
-              "replaced_unscored_originals": 6,
+              "native_terminal": 7,
+              "replaced_unscored_originals": 7,
               "excluded_partial_model_output_tasks": [
                 "query-optimize",
                 "schemelike-metacircular-eval"
