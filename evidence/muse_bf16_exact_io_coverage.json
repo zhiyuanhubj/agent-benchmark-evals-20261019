@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T15:50:50.413210+00:00",
+  "generated_utc": "2026-10-21T16:31:09.133784+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 79,
-  "success_count": 60,
+  "scored_tasks": 80,
+  "success_count": 61,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -240,6 +240,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/fix-ocaml-gc__9dykfRc/result.json"
     },
+    "vulnerable-secret": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/vulnerable-secret__byGkE9w/result.json"
+    },
     "mcmc-sampling-stan": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/mcmc-sampling-stan__fRLJ2EA/result.json"
@@ -346,12 +350,6 @@
       "raw_response_count": 51,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "vulnerable-secret": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/vulnerable-secret__K3AxQwV/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "distribution-search": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/distribution-search__vLkVhW6/result.json",
       "exception_type": "RuntimeError",
@@ -384,11 +382,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 79,
-  "covered_raw_response_sets": 79,
-  "covered_trajectories": 79,
-  "scored_raw_response_count": 3308,
-  "nonempty_reasoning_response_count": 3307,
+  "covered_results": 80,
+  "covered_raw_response_sets": 80,
+  "covered_trajectories": 80,
+  "scored_raw_response_count": 3316,
+  "nonempty_reasoning_response_count": 3315,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -626,6 +624,10 @@
       "raw_responses": 81,
       "nonempty_reasoning_content": 81
     },
+    "vulnerable-secret": {
+      "raw_responses": 8,
+      "nonempty_reasoning_content": 8
+    },
     "mcmc-sampling-stan": {
       "raw_responses": 21,
       "nonempty_reasoning_content": 21
@@ -715,6 +717,7 @@
   "replaced_unscored_originals": {
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/openssl-selfsigned-cert__4v8jpyZ/result.json": "openssl-selfsigned-cert",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json": "fix-ocaml-gc",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/vulnerable-secret__K3AxQwV/result.json": "vulnerable-secret",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mcmc-sampling-stan__cobMK96/result.json": "mcmc-sampling-stan",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/sparql-university__qKZGKXQ/result.json": "sparql-university",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mteb-leaderboard__MWhnJ4n/result.json": "mteb-leaderboard",
@@ -737,7 +740,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
   "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/vulnerable-secret__byGkE9w/result.json"
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/build-cython-ext__aKTj7hr/result.json"
   ],
   "archives": [
     "muse_bf16.tar.zst",
@@ -947,6 +950,8 @@
     "muse_bf16_delta_20261021T151004Z.tar.zst",
     "muse_bf16_delta_20261021T153158Z.tar.zst",
     "muse_bf16_delta_20261021T154413Z.tar.zst",
+    "muse_bf16_delta_20261021T161045Z.tar.zst",
+    "muse_bf16_delta_20261021T162428Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
