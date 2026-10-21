@@ -1,14 +1,19 @@
 {
-  "generated_utc": "2026-10-21T12:29:13.004788+00:00",
+  "generated_utc": "2026-10-21T13:01:00.358309+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 22,
-  "graded": 22,
-  "success": 17,
+  "terminal": 24,
+  "graded": 24,
+  "success": 19,
   "active_trial_dirs": 2,
-  "raw_responses": 1085,
+  "raw_responses": 1125,
   "tasks": {
+    "regex-log": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/regex-log__Lr7bTua/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "hf-model-inference": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/hf-model-inference__CkHrHWt/result.json",
       "reward": 1.0,
@@ -59,7 +64,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "query-optimize": null,
+    "query-optimize": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/query-optimize__oynXWUo/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "pytorch-model-recovery": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/pytorch-model-recovery__pxd6TTq/result.json",
       "reward": 0.0,
@@ -80,6 +89,7 @@
       "reward": 1.0,
       "exception": null
     },
+    "sam-cell-seg": null,
     "fix-ocaml-gc": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/fix-ocaml-gc__RXckNii/result.json",
       "reward": 1.0,
