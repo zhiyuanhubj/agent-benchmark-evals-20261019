@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T20:44:50.999059+00:00",
+  "generated_utc": "2026-10-21T21:19:50.187844+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 48,
+      "scored_trajectories_checked": 50,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -9295,6 +9295,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "portfolio-optimization",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/portfolio-optimization__QFXcDKD/agent/trajectory.json",
+      "trajectory_sha256": "dc0444a0de618e615b66ed9e070dfeb8944b5bfd27d1144a10a19370d622f992",
+      "steps": 14,
+      "tool_calls": 38,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "modernize-scientific-stack",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/modernize-scientific-stack__acxogJS/agent/trajectory.json",
@@ -9925,6 +9937,18 @@
       "trajectory_sha256": "db2a4582e90e39bb56ff935fca4f9ef11a62b887080af1bfff1090201dfea30b",
       "steps": 14,
       "tool_calls": 28,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
+      "task": "mailman",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/mailman__6x63yhG/agent/trajectory.json",
+      "trajectory_sha256": "a03e35dc0ae518a6ce49657aae53a5681699ab3a1b2a7c889d55fed537a776b1",
+      "steps": 100,
+      "tool_calls": 504,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

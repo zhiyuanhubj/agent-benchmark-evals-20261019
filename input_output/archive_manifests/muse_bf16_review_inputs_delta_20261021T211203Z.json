@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-10-21T21:12:03.309650+00:00",
+  "group": "muse_bf16_review_inputs",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_review_inputs_delta_20261021T205927Z.json",
+  "cutoff_utc": "2026-10-21T20:54:27.492270+00:00",
+  "new_source_roots": [],
+  "one_time_native_thinking_backfill": false,
+  "one_time_model_patch_backfill": false,
+  "archive_name": "muse_bf16_review_inputs_delta_20261021T211203Z.tar.zst",
+  "archive_size_bytes": 847,
+  "archive_sha256": "efc0713048db8d39e92d2bff0c09ff05ae6ea190cbddc8eae0177fcc2c307892",
+  "file_count": 5,
+  "source_bytes": 1920,
+  "skipped_disappeared_during_snapshot": 0,
+  "filename_counts": {
+    "qwen3_30b_instruct2507_500-20.json": 1,
+    "task.toml": 4
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/queue"
+  ]
+}

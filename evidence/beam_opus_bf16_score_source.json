@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-21T20:11:35.207797+00:00",
+  "utc": "2026-10-21T20:48:04.994039+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
@@ -988,18 +988,18 @@
     },
     "pro_round2": {
       "expected": 731,
-      "terminal": 334,
-      "unique_tasks": 334,
-      "graded": 332,
-      "success": 200,
+      "terminal": 345,
+      "unique_tasks": 345,
+      "graded": 343,
+      "success": 207,
       "missing_native_grader_completion": 2,
       "native_status_counts": {
-        "completed": 330,
+        "completed": 341,
         "eval_error": 2,
         "run_error": 2
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 397,
+      "missing_result_task_count": 386,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -1383,7 +1383,7 @@
     },
     "tb_first_round_client_protocol_recovery": {
       "current": {
-        "utc": 1792613156.1083915,
+        "utc": 1792614958.4726012,
         "phase": "one_corrected_client_sample_terminal",
         "native_unit": {
           "MainPID": "0",
@@ -2158,7 +2158,7 @@
     }
   },
   "reserved_capacity": {
-    "utc": 1792613472.820784,
+    "utc": 1792615666.119204,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2902": {
@@ -2228,7 +2228,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792613480.6884048,
+    "utc": 1792615672.3384721,
     "allocations": {
       "2887": {
         "phase": "ready",
@@ -2623,7 +2623,7 @@
         }
       },
       "scorer_version": "v3_declared_glm_original_and_gateway_recovery_with_malformed_report_fallback",
-      "utc": 1792613432.2911031
+      "utc": 1792615616.7153323
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -3088,7 +3088,7 @@
       "qualification": "Native counts remain unchanged. Supplemental values are the unchanged original scorer applied only to already-produced original reports. No model response or tests are rerun, and no original timeout record is overwritten. Not a completed 113-task run or three-round mean."
     },
     "early9_never_started_deep_remainder_handoff": {
-      "utc": 1792613156.0079358,
+      "utc": 1792614958.3652437,
       "phase": "recovered_remainder_native_trials_terminal",
       "expected": 19,
       "terminal": 19,
@@ -3676,7 +3676,7 @@
     },
     "early9_client_infrastructure_recovery": {
       "current": {
-        "utc": 1792613156.0079358,
+        "utc": 1792614958.3652437,
         "phase": "recovered_remainder_native_trials_terminal",
         "expected": 19,
         "terminal": 19,
@@ -6552,7 +6552,7 @@
       "utc": 1792356179.122217
     },
     "mix449_receiver_independent_archive": {
-      "utc": 1792613156.2871535,
+      "utc": 1792614958.6223874,
       "phase": "waiting_for_missing_original_native_shards",
       "persistent_native_shards": 32,
       "expected_native_shards": 64,
@@ -6616,7 +6616,7 @@
         }
       },
       "complete_original_source_archives": [],
-      "separate_data_volume_available_bytes": 71030013952,
+      "separate_data_volume_available_bytes": 71028178944,
       "minimum_shared_free_bytes": 274877906944,
       "original_training_step": 449,
       "original_sources_deleted": false,
@@ -6821,7 +6821,7 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792613490.0370622
+      "utc": 1792615679.7378674
     },
     "queue_states": {
       "mix449": {
@@ -6829,7 +6829,7 @@
         "candidate": "mix449",
         "actual_allocation": 2733,
         "no_gpu_work_started": true,
-        "utc": 1792613471.5718753
+        "utc": 1792615662.7980297
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
