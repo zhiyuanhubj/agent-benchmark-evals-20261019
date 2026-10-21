@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T17:44:58.229571+00:00",
+  "generated_utc": "2026-10-21T18:17:13.304580+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -19,7 +19,7 @@
       }
     },
     "muse_bf16": {
-      "scored_trajectories_checked": 84,
+      "scored_trajectories_checked": 86,
       "pattern_hit_trajectories": 21,
       "pattern_hit_successes": 14,
       "rule_hit_counts": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 40,
+      "scored_trajectories_checked": 41,
       "pattern_hit_trajectories": 5,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -5155,6 +5155,17 @@
     },
     {
       "model": "muse_bf16",
+      "task": "distribution-search",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/distribution-search__KGLtcgk/agent/trajectory.json",
+      "trajectory_sha256": "3b8f4374e07907cea1f9a444dcbab718c37f92f477a224e9bd1b40ca4ba900c7",
+      "steps": 35,
+      "tool_calls": 65,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_bf16",
       "task": "pytorch-model-recovery",
       "reward": 1.0,
       "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/pytorch-model-recovery__r5eYLKT/agent/trajectory.json",
@@ -5816,6 +5827,17 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "count-dataset-tokens",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/count-dataset-tokens__vDAkTAw/agent/trajectory.json",
+      "trajectory_sha256": "d1bc85a1262f249e1d9d56fa92734800e420f4c34bde82a661668698381f79e1",
+      "steps": 26,
+      "tool_calls": 35,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "opus47",
@@ -9041,6 +9063,18 @@
       "trajectory_sha256": "d4bbfeb428e006447ad94b67a43b72205fe52645fd533223396ab950d9f154df",
       "steps": 58,
       "tool_calls": 309,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
+      "task": "gcode-to-text",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/gcode-to-text__SCaVr6B/agent/trajectory.json",
+      "trajectory_sha256": "4dc6b7778ffdcd77bcf3225d3766457ae204debb34076697e1990e2bb1dc10f9",
+      "steps": 132,
+      "tool_calls": 485,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
