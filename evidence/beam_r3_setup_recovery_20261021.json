@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T09:52:02.295087+00:00",
+  "generated_utc": "2026-10-21T10:30:21.057284+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r3-setup-replacement-20261021-claim.json",
   "claim_sha256": "b86a7482e7bf5d822e6a4820e32c59779885a4251d08bbbb79c309164d2ddd43",
   "scoring_source_sha256": "fc47adc4ebde3479cab26520131cf68670c5ddc3223db325a224dbeedf29ab76",
@@ -64,10 +64,10 @@
     }
   },
   "replacement_job": "beam-tb-v1-exact-r3-setup-replacement-20261021",
-  "replacement_trial_directories": 6,
-  "replacement_terminal": 5,
-  "replacement_graded": 5,
-  "replacement_success": 4,
+  "replacement_trial_directories": 11,
+  "replacement_terminal": 10,
+  "replacement_graded": 10,
+  "replacement_success": 7,
   "replacements": {
     "path-tracing-reverse": {
       "reward": 1.0,
@@ -75,6 +75,34 @@
       "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/path-tracing-reverse__HKWuGR2/result.json",
       "exception_type": null,
       "raw_response_count": 346
+    },
+    "pytorch-model-recovery": {
+      "reward": 1.0,
+      "result_sha256": "b593669b8145fb126c6dded73270ac2ecc508ec7d2d60926eebf4a19239a227f",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/pytorch-model-recovery__9SJ7uLN/result.json",
+      "exception_type": null,
+      "raw_response_count": 13
+    },
+    "protein-assembly": {
+      "reward": 0.0,
+      "result_sha256": "13f4a019a1ced7d74b4e3a6f0ab0b1e65b09c2f3c3e3323b4c12289f3a530b84",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/protein-assembly__odJ7TzA/result.json",
+      "exception_type": null,
+      "raw_response_count": 68
+    },
+    "pypi-server": {
+      "reward": 1.0,
+      "result_sha256": "d43381523f71863f0cd3a1982d6e1b4bb3e6d07c882467be2b89916bd18a7046",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/pypi-server__5b8Rkgs/result.json",
+      "exception_type": null,
+      "raw_response_count": 8
+    },
+    "pytorch-model-cli": {
+      "reward": 0.0,
+      "result_sha256": "15555e8a358e0d182c3a985f8c0e808990846a0d401d1d0bb31dfb632ae52fac",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/pytorch-model-cli__zFNmJBg/result.json",
+      "exception_type": null,
+      "raw_response_count": 24
     },
     "portfolio-optimization": {
       "reward": 1.0,
@@ -103,10 +131,17 @@
       "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/polyglot-c-py__VHWLK5E/result.json",
       "exception_type": null,
       "raw_response_count": 21
+    },
+    "prove-plus-comm": {
+      "reward": 1.0,
+      "result_sha256": "355b671593729ab06f2752fa8a0983c5253b7eb4beb06dde03e9a653449e2ead",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/prove-plus-comm__h6hSYkb/result.json",
+      "exception_type": null,
+      "raw_response_count": 4
     }
   },
-  "replacement_raw_responses": 444,
-  "nonempty_reasoning_responses": 444,
+  "replacement_raw_responses": 618,
+  "nonempty_reasoning_responses": 618,
   "empty_or_missing_reasoning_responses": 0,
   "score_policy": "Keep all original results ungraded. Report first replacement grades separately; never select best-of outcomes.",
   "qualification": "Original ungraded attempts remain immutable and separate. At most one declared replacement draw per setup failure; no best-of selection."

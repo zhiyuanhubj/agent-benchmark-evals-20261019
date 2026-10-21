@@ -1,0 +1,41 @@
+{
+  "generated_utc": "2026-10-21T10:37:20.254339+00:00",
+  "group": "muse_bf16_review_inputs",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_review_inputs_delta_20261021T101721Z.json",
+  "cutoff_utc": "2026-10-21T10:12:21.802479+00:00",
+  "new_source_roots": [],
+  "one_time_native_thinking_backfill": false,
+  "one_time_model_patch_backfill": false,
+  "archive_name": "muse_bf16_review_inputs_delta_20261021T103720Z.tar.zst",
+  "archive_size_bytes": 9034,
+  "archive_sha256": "b2002a195c0207bd78f8bc73677f3def5405509c0a5fd55000c4724033b55f43",
+  "file_count": 55,
+  "source_bytes": 79596,
+  "skipped_disappeared_during_snapshot": 0,
+  "filename_counts": {
+    "qwen3_30b_instruct2507_500-15.json": 2,
+    "qwen3_coder_30b_500-15.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-4687.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-4695.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-4966.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-6461.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-6599.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-6721.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-6744.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-6938.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-6992.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-7229.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-7233.json": 2,
+    "qwen3_30b_instruct2507_500--pydata__xarray-7393.json": 2,
+    "qwen3_30b_instruct2507_500--pylint-dev__pylint-4551.json": 2,
+    "qwen3_30b_instruct2507_500--pylint-dev__pylint-4604.json": 2,
+    "qwen3_30b_instruct2507_500--pylint-dev__pylint-4661.json": 2,
+    "qwen3_30b_instruct2507_500--pylint-dev__pylint-4970.json": 2,
+    "qwen3_coder_30b_500--matplotlib__matplotlib-25311.json": 2,
+    "task.toml": 17
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/queue"
+  ]
+}
