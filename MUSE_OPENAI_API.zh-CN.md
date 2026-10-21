@@ -64,6 +64,33 @@ print(response.choices[0].message)
 
 部署和鉴权验证见 [Muse API 证据](evidence/muse_openai_bf16_deployment_20261021.json)，并发配置和实测原始数值见 [并发证据](evidence/muse_openai_concurrency_20261021.json)。
 
+## 推理框架与速度实测
+
+2026-10-21 12:24 UTC 的运行配置核验显示，两种精度均使用固定镜像中的 Muse 适配版 SGLang，包版本为 `0.0.0.dev0`。当前 BF16 为一套两节点、16 张 H200 的 TP16/EP16 部署；NVFP4 为七套单节点、每套八张 H200 的 TP8/EP8 副本。两者 Attention 后端均为 FA3，KV cache 均为 `fp8_e4m3`，最多同时生成八个请求，未开启 speculative decoding。BF16 权重精度与 FP8 KV cache 精度应分开描述。镜像固定为 `lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a`，容器内 PyTorch 为 2.14.1、CUDA 13.0；完整配置见[运行证据](evidence/muse_serving_runtime_20261021.json)。
+
+以下为约 12:26–12:29 UTC 的客户端 SSE 实测。短输入约 260 token，长输入约 7,200 token；每个输入场景三次单请求，输出固定预算 256 token，表中均为中位数。现有评测持续共享各自副本，未暂停评测来制造独占环境。
+
+| 部署与访问路径 | 输入 token | 首个生成 token（TTFT） | 解码速度 | 平均每输出 token 耗时 | 256 token 流耗时 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| BF16，内网直连 | 约 260 | 0.180 s | 33.7 token/s | 29.7 ms | 7.74 s |
+| BF16，内网直连 | 约 7,200 | 0.592 s | 32.7 token/s | 30.5 ms | 8.39 s |
+| NVFP4，内网直连 | 约 260 | 0.116 s | 63.5 token/s | 15.7 ms | 7.43 s |
+| NVFP4，内网直连 | 约 7,200 | 0.669 s | 63.7 token/s | 15.7 ms | 4.67 s |
+| BF16，公网 API | 约 260 | 0.299 s | 34.1 token/s | 29.3 ms | 7.83 s |
+
+TTFT 从客户端开始 POST 起算，到首个非空 `reasoning_content`、正文或工具调用 delta 为止，包含排队、prefill 与网络耗时；空的 role 事件不算首 token。此次 39 个计时请求都在 256 token 预算内持续输出 thinking，没有到最终回答，因此上述流耗时不能当成完整回答耗时。解码速度以服务器实际返回的 completion token 数除以首个到最后一个非空 token delta 的时间计算；首 token 和总耗时分别取中位数，不能将各列中位数直接相加。NVFP4 短输入有一次 TTFT 为 3.495 秒、另一次流中生成变慢，所以其解码速度更快也不代表每条请求的总耗时都缩短。
+
+短输入另各测了一批 4 路和 8 路并发，每请求 256 输出 token：
+
+| 部署 | 4 路探测请求合计吞吐 | 8 路探测请求合计吞吐 | 8 路首 token 中位数 / 最慢 |
+| --- | ---: | ---: | ---: |
+| BF16 | 98.4 token/s | 115.1 token/s | 3.84 s / 7.86 s |
+| NVFP4 | 216.1 token/s | 234.8 token/s | 0.209 s / 4.69 s |
+
+吞吐仅计算这批探测请求的输出，未包括同时运行的评测请求，不能作为服务总吞吐上限。两组硬件规模、实时负载不同，也不能用这张表计算单由量化带来的加速比。每并发档只有一批，本次没有足够样本报告 p95、长上下文 SLA 或稳定最大吞吐。全部 39/39 请求返回 HTTP 200、`[DONE]` 和 256 个 completion token。
+
+逐请求指标、统计口径和原生 SSE 归档指针见[速度证据](evidence/muse_serving_speed_20261021.json)，可复现脚本见[测量脚本](protocol/measure_muse_serving_speed_20261021.py)。
+
 ## 调用量与空闲质量探测
 
 从 2026-10-21 12:11 UTC 起，网关按 `client-01`、`client-02`、`client-03` 等标签持久记录请求数、成功/错误数、最近 5/15/60 分钟调用数及上游实际返回的 token 用量。流式响应只有携带 usage 时才能统计 token；可在请求中设置 `stream_options={"include_usage":true}`。统计库不保存 key、提示词或回答。此前没有逐 key 日志，无法补算历史调用量。

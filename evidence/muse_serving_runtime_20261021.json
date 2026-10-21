@@ -1,0 +1,425 @@
+{
+  "runtime": {
+    "bf16-2886": {
+      "endpoint": "http://10.1.13.41:31324",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "bfloat16",
+        "quantization": null,
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 16,
+        "nnodes": 2,
+        "ep_size": 16,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.88,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-bf16",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 203.54309400184323,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 103.988,
+            "kvcache": 16.68,
+            "startup_available": 16.44,
+            "token_capacity": 1276984,
+            "token_capacity_swa": 1021587,
+            "graph": {
+              "prefill": 8.111,
+              "decode": 0.18,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "nvfp4-2900": {
+      "endpoint": "http://10.1.101.159:31321",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "auto",
+        "quantization": "modelopt_fp4",
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 8,
+        "nnodes": 1,
+        "ep_size": 8,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.9,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-nvfp4",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 146.4896780077916,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 69.85,
+            "kvcache": 54.242,
+            "startup_available": 13.871,
+            "token_capacity": 3759939,
+            "token_capacity_swa": 3007951,
+            "graph": {
+              "prefill": 6.424,
+              "decode": 0.098,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "nvfp4-2899": {
+      "endpoint": "http://10.1.114.210:31321",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "auto",
+        "quantization": "modelopt_fp4",
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 8,
+        "nnodes": 1,
+        "ep_size": 8,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.9,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-nvfp4",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 76.11970566534731,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 69.85,
+            "kvcache": 54.242,
+            "startup_available": 13.871,
+            "token_capacity": 3759939,
+            "token_capacity_swa": 3007951,
+            "graph": {
+              "prefill": 6.424,
+              "decode": 0.098,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "nvfp4-2902": {
+      "endpoint": "http://10.1.105.182:31321",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "auto",
+        "quantization": "modelopt_fp4",
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 8,
+        "nnodes": 1,
+        "ep_size": 8,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.9,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-nvfp4",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 81.08658916590127,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 69.85,
+            "kvcache": 54.242,
+            "startup_available": 13.871,
+            "token_capacity": 3759939,
+            "token_capacity_swa": 3007951,
+            "graph": {
+              "prefill": 6.424,
+              "decode": 0.098,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "nvfp4-2923": {
+      "endpoint": "http://10.1.76.28:31320",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "auto",
+        "quantization": "modelopt_fp4",
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 8,
+        "nnodes": 1,
+        "ep_size": 8,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.9,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-nvfp4",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 145.39401903150772,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 69.85,
+            "kvcache": 54.242,
+            "startup_available": 13.871,
+            "token_capacity": 3759939,
+            "token_capacity_swa": 3007951,
+            "graph": {
+              "prefill": 6.424,
+              "decode": 0.098,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "nvfp4-2924": {
+      "endpoint": "http://10.1.98.133:31320",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "auto",
+        "quantization": "modelopt_fp4",
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 8,
+        "nnodes": 1,
+        "ep_size": 8,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.9,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-nvfp4",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 145.91917298457614,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 69.85,
+            "kvcache": 54.242,
+            "startup_available": 13.871,
+            "token_capacity": 3759939,
+            "token_capacity_swa": 3007951,
+            "graph": {
+              "prefill": 6.424,
+              "decode": 0.098,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "nvfp4-2927": {
+      "endpoint": "http://10.1.98.127:31320",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "auto",
+        "quantization": "modelopt_fp4",
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 8,
+        "nnodes": 1,
+        "ep_size": 8,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.9,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-nvfp4",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 70.0307399452729,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 69.85,
+            "kvcache": 54.242,
+            "startup_available": 13.871,
+            "token_capacity": 3759939,
+            "token_capacity_swa": 3007951,
+            "graph": {
+              "prefill": 6.424,
+              "decode": 0.098,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "nvfp4-2928": {
+      "endpoint": "http://10.1.69.108:31320",
+      "configuration": {
+        "version": "0.0.0.dev0",
+        "dtype": "auto",
+        "quantization": "modelopt_fp4",
+        "kv_cache_dtype": "fp8_e4m3",
+        "tp_size": 8,
+        "nnodes": 1,
+        "ep_size": 8,
+        "max_running_requests": 8,
+        "max_queued_requests": null,
+        "attention_backend": "fa3",
+        "decode_attention_backend": null,
+        "prefill_attention_backend": null,
+        "bf16_gemm_backend": "auto",
+        "fp4_gemm_runner_backend": "auto",
+        "context_length": 1048576,
+        "mem_fraction_static": 0.9,
+        "enable_dp_attention": false,
+        "disable_overlap_schedule": false,
+        "disable_radix_cache": false,
+        "disable_chunked_prefix_cache": false,
+        "served_model_name": "muse-spark-open-nvfp4",
+        "speculative_algorithm": null,
+        "reasoning_parser": "muse",
+        "tool_call_parser": "muse"
+      },
+      "runtime": [
+        {
+          "last_gen_throughput": 80.95772858879003,
+          "effective_max_running_requests_per_dp": 8,
+          "memory_usage": {
+            "weight": 69.85,
+            "kvcache": 54.242,
+            "startup_available": 13.871,
+            "token_capacity": 3759939,
+            "token_capacity_swa": 3007951,
+            "graph": {
+              "prefill": 6.424,
+              "decode": 0.098,
+              "target_verify": 0.0,
+              "draft_prefill": 0.0,
+              "draft_decode": 0.0,
+              "draft_extend": 0.0
+            }
+          }
+        }
+      ]
+    }
+  },
+  "images": [
+    {
+      "allocation": 2886,
+      "image": "\"lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a\" \"sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a\"",
+      "returncode": 0
+    },
+    {
+      "allocation": 2923,
+      "image": "\"lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a\" \"sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a\"",
+      "returncode": 0
+    }
+  ],
+  "software": {
+    "sglang": "0.0.0.dev0",
+    "source_tree": "/sgl-workspace/sglang-muse-spark/python/sglang",
+    "torch": "2.14.1",
+    "cuda": "13.0",
+    "flashinfer": "0.7.0.post1",
+    "transformers": "5.19.0",
+    "qualification": "Versions queried inside each running BF16/NVFP4 container. Custom Muse source tree has no git metadata; do not use the separate base SGLang repository SHA as its revision."
+  }
+}
