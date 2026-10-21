@@ -1814,6 +1814,8 @@ if r4_progress:
     note = (f"Muse NVFP4 exact-image TB2.1 round 4 is an independently declared 89-task draw on allocation 2902. "
             f"Its [pinned task and endpoint receipt](evidence/muse_nvfp4_r4_progress.json) currently records "
             f"**{r4['graded']}/89 native grades and {r4['success']} successes**. "
+            "The [released-response thinking audit](evidence/muse_nvfp4_r4_thinking_audit.json) "
+            "checks every raw reply in the archived graded round-four trials. "
             "A complete round accuracy awaits 89 native grades and trajectory review; the existing first-three-round scores are unchanged.\n\n")
     readme = readme.replace('Scores are benchmark-recorded values.', note + 'Scores are benchmark-recorded values.', 1)
 (ROOT / 'README.md').write_text(readme)
@@ -1981,6 +1983,7 @@ if r4_progress:
     note = (f"Muse NVFP4 精确镜像 TB2.1 第 4 轮在 2902 上独立抽样 89 题；"
             f"[固定题目和端点凭据](evidence/muse_nvfp4_r4_progress.json)现记录 "
             f"**{r4['graded']}/89 题原生判分、{r4['success']} 题成功**。"
+            "[已发布回复的 thinking 核验](evidence/muse_nvfp4_r4_thinking_audit.json)逐条检查第 4 轮已判分题目的原始回复。"
             "全部判分和轨迹审查完成前不报告整轮准确率，既有前三轮统计保持独立。\n\n")
     chinese_report = chinese_report.replace('# 模型评测结果快照\n', '# 模型评测结果快照\n\n' + note, 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)

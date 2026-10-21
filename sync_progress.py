@@ -385,6 +385,8 @@ def cycle():
             if reported['complete']:
                 assert audit['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB first-round audit failed'
                 assert io_coverage['qualification'] == 'complete_verified', 'Muse NVFP4 exact TB release coverage incomplete'
+            if scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds'].get('4', {}).get('graded'):
+                run([PYTHON, str(ROOT / 'audit_muse_nvfp4_r4_thinking.py')], timeout=120)
             break
         else:
             raise RuntimeError('Exact TB result or released I/O changed during three snapshot attempts; retry next cycle')
@@ -496,6 +498,7 @@ def cycle():
              'export_snapshot.py', 'snapshot_live_tb.py', 'snapshot_other_exact_tb.py',
              'screen_exact_tb_integrity.py',
              'verify_muse_exact_io.py',
+             'audit_muse_nvfp4_r4_thinking.py',
              'verify_muse_bf16_exact_io.py',
              'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'release_shards.py', 'verify_release.py', 'sync_progress.py'])

@@ -1,0 +1,20 @@
+{
+  "generated_utc": "2026-10-21T02:00:51.891497+00:00",
+  "score_generated_utc": "2026-10-21T01:52:38.208887+00:00",
+  "archive_manifest": "input_output/archive_manifests/muse_nvfp4_exact_tb_live_20261021T015256Z.json",
+  "archive_sha256": "b36fb1a58c97cb214056e5be0db1b0730a8848ebd05de587e8a713ff074a313a",
+  "github_release_sha256_and_size_match": true,
+  "score_graded_tasks": 2,
+  "score_successes": 1,
+  "graded_tasks_in_archive": 2,
+  "successes_in_archive": 1,
+  "archived_graded_task_raw_response_counts": {
+    "adaptive-rejection-sampler": 11,
+    "build-cython-ext": 57
+  },
+  "archived_graded_nonempty_reasoning_response_count": 68,
+  "archived_graded_empty_reasoning_response_count": 0,
+  "empty_reasoning_tasks": [],
+  "qualification": "all_archived_graded_raw_responses_have_thinking",
+  "limitation": "This checks thinking preservation for archived graded trials, not correctness or trajectory integrity. An archive may contain a new terminal trial captured after the score snapshot."
+}
