@@ -1,19 +1,44 @@
 {
-  "generated_utc": "2026-10-21T04:39:12.053864+00:00",
+  "generated_utc": "2026-10-21T05:06:45.873870+00:00",
   "model": "Muse-Spark-Open-816B-A42B-NVFP4",
   "benchmark": "SWE-bench Pro Verified",
   "round": 2,
   "shard": 0,
   "expected_round": 731,
   "expected_shard": 183,
-  "terminal": 0,
-  "graded": 0,
-  "success": 0,
+  "terminal": 3,
+  "graded": 3,
+  "success": 3,
   "status": "partial_no_full_score",
   "accuracy": null,
   "claim": "evidence/muse_nvfp4_pro_r2_shard0_claim.json",
   "claim_sha256": "2c1c937f27a37bf427332213f9f5eed0691103a238066c58aba886e81f8c4a69",
   "run_id": "muse-nvfp4-pro-r2-shard0-2900",
-  "records": {},
+  "records": {
+    "instance_NodeBB__NodeBB-04998908ba6721d64eba79ae3b65a351dcfbc5b5-vnan": {
+      "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_NodeBB__NodeBB-04998908ba6721d64eba79ae3b65a351dcfbc5b5-vnan--8d6fe0f61e2051275215e057e662e43dff2dce9058394e556c479abb6a99ce12/task.json",
+      "task_sha256": "725adc1e80c29f1938f18b077997ee158a1acc1754436859f8dab1af430db5e6",
+      "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_NodeBB__NodeBB-04998908ba6721d64eba79ae3b65a351dcfbc5b5-vnan--8d6fe0f61e2051275215e057e662e43dff2dce9058394e556c479abb6a99ce12/attempt-1/result.json",
+      "result_sha256": "5f28bc10cee5519cbc15c6fd5b40724023acca545be33bab5a8c39f55753cf86",
+      "native_graded": true,
+      "success": true
+    },
+    "instance_ansible__ansible-a26c325bd8f6e2822d9d7e62f77a424c1db4fbf6-v0f01c69f1e2528b935359cfe578530722bca2c59": {
+      "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_ansible__ansible-a26c325bd8f6e2822d9d7e62f77a424c1db4fbf6-v0f01c69f1e25--53f390170db137058add83421544df08abe411becaf27b1e862f507a5a1e3cf9/task.json",
+      "task_sha256": "3be7321a939f181346e6abc1a499d4d383a0c47a7420e62e30b00551dcff3d5e",
+      "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_ansible__ansible-a26c325bd8f6e2822d9d7e62f77a424c1db4fbf6-v0f01c69f1e25--53f390170db137058add83421544df08abe411becaf27b1e862f507a5a1e3cf9/attempt-1/result.json",
+      "result_sha256": "cb71e619b4caa8a93eb5081ca3740cb0e5f1320a126e29ef6236c4de4f2f08ff",
+      "native_graded": true,
+      "success": true
+    },
+    "instance_qutebrowser__qutebrowser-f91ace96223cac8161c16dd061907e138fe85111-v059c6fdc75567943479b23ebca7c07b5e9a7f34c": {
+      "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_qutebrowser__qutebrowser-f91ace96223cac8161c16dd061907e138fe85111-v059c--079f62123358053ce1c8d999ad8621253073434127b53ed984edf3ee1b222c0d/task.json",
+      "task_sha256": "8032e820e1b48582ac2c8eb5168d3feb5913e8ff11de77575a25443e1a872384",
+      "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_qutebrowser__qutebrowser-f91ace96223cac8161c16dd061907e138fe85111-v059c--079f62123358053ce1c8d999ad8621253073434127b53ed984edf3ee1b222c0d/attempt-1/result.json",
+      "result_sha256": "b09734f3ac1738632e914dbef276eea5311664cd6e366853f9ef14a48e5c6471",
+      "native_graded": true,
+      "success": true
+    }
+  },
   "qualification": "Only predeclared shard zero of the independent second 731-task draw. No complete round accuracy or best-of merging with round one."
 }
