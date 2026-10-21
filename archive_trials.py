@@ -19,6 +19,8 @@ OPUS_REVIEW = BASE / '.private/opus47_review_20261020'
 
 GROUPS = {
     **{f'muse_pro_shard{i}': [M / f'shard{i}/results/muse-pro'] for i in range(4)},
+    'muse_nvfp4_pro_r2': [M / 'pro_round2_20261021/shard0-2900',
+                          M / 'pro_round2_20261021/results/muse-pro-r2'],
     **{f'muse_harbor_shard{i}': [M / f'shard{i}/results'] for i in range(4)},
     'muse_deep_round3_remainder': [M / 'remaining_deep3_2812_20261018/results'],
     'muse_deep_canonical_3round': [M / 'remaining_deep3_2812_20261018/state/three-round-completion-audit.json'],
@@ -68,6 +70,8 @@ GROUPS = {
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    if group == 'muse_nvfp4_pro_r2' and root.name == 'shard0-2900':
+        return path.name in ('claim.json', 'command.json', 'started.json', 'exit.json')
     if 'artifacts' in rel.parts:
         # DeepSWE's native verifier consumes this model-produced patch. Keep
         # the patch itself, but never publish other sandbox artifacts here.

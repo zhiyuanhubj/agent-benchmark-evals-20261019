@@ -244,6 +244,7 @@ def sync_native_archives(scores, force_bf16=False):
             run(command, timeout=300)
     static_scans = json.loads(ARCHIVE_SCAN_STATE.read_text()) if ARCHIVE_SCAN_STATE.exists() else {}
     for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
+                  'muse_nvfp4_pro_r2',
                   'opus47_review_inputs', 'opus47_review_full_io',
                   'muse_bf16_review_inputs',
                   'muse_review_full_io', 'beam_review_full_io',
@@ -293,7 +294,7 @@ def sync_native_archives(scores, force_bf16=False):
     remote = {asset['name'] for _, assets in releases for asset in assets}
     assert len(remote) == sum(len(assets) for _, assets in releases), 'Duplicate archive name across releases'
     revision_base_manifests = [manifest_dir / f'{group}.json' for group in
-        ('opus47_review_inputs', 'opus47_review_full_io',
+        ('muse_nvfp4_pro_r2', 'opus47_review_inputs', 'opus47_review_full_io',
          'muse_review_revision_inputs', 'beam_review_revision_inputs',
          'muse_revision_review_full_io', 'beam_revision_review_full_io')]
     revision_base_manifests = [path for path in revision_base_manifests if path.exists()]
@@ -511,6 +512,12 @@ def cycle():
              'audit_muse_nvfp4_r4_thinking.py',
              'audit_muse_nvfp4_r5_thinking.py',
              'verify_muse_bf16_exact_io.py',
+             'audit_muse_nvfp4_pro_r2_shard0.py',
+             'protocol/run_muse_nvfp4_pro_r2_shard0_2900.py',
+             'protocol/guard_2900_muse_nvfp4_pro_r2_images.py',
+             'protocol/muse_openai_key_relay_20261021.py',
+             'protocol/MUSE_OPENAI_API_20261021.md',
+             'evidence/muse_openai_bf16_deployment_20261021.json',
              'archive_trials.py', 'archive_delta.py',
              'verify_review_revision_archives.py', 'release_shards.py', 'verify_release.py', 'sync_progress.py'])
         changed = subprocess.run(['git', 'diff', '--cached', '--quiet'], cwd=ROOT)

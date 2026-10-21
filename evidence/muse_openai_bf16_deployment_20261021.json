@@ -1,0 +1,53 @@
+{
+  "generated_utc": "2026-10-21T04:50:56.118893+00:00",
+  "allocation": {
+    "job_id": 2886,
+    "nodes": [
+      "ip-10-1-13-41",
+      "ip-10-1-122-30"
+    ],
+    "gpu_count": 16,
+    "precision": "BF16",
+    "end_time_utc": "2026-10-26T18:21:46Z"
+  },
+  "upstream": {
+    "base_url": "http://10.1.13.41:31324/v1",
+    "model_id": "muse-spark-open-bf16"
+  },
+  "public_api": {
+    "base_url": "https://muse.zhiyuanllm.com/v1",
+    "models": [
+      "muse-spark-open",
+      "muse-spark-open-bf16"
+    ],
+    "protocol": "OpenAI-compatible chat/completions and streaming SSE",
+    "tunnel_id": "48aaafa8-b392-4941-8a04-442ec8a1bff9"
+  },
+  "authorization": {
+    "scheme": "Bearer",
+    "key_count": 2,
+    "key_files": [
+      "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/primary.key",
+      "/fsx/home/zhiyuan/bench/model-relay-token.txt"
+    ],
+    "per_key_alias_allowlist": true,
+    "no_key_values_recorded": true
+  },
+  "services": {
+    "relay": "muse-openai-relay-bf16.service",
+    "tunnel": "muse-openai-tunnel.service",
+    "systemd_user_units_enabled": true,
+    "user_linger": true
+  },
+  "validation": {
+    "local_health_http": 200,
+    "public_health_http": 200,
+    "anonymous_models_http": 401,
+    "authorized_models_http": 200,
+    "authorized_chat_http": 200,
+    "authorized_stream_http": 200,
+    "stream_done_marker": true,
+    "reasoning_tokens_preserved": true
+  },
+  "evaluation_context": "The BF16 GPU pair is the model deployment. Evaluation clients running on CPU hosts currently call its endpoint; their GPU demand shares the same inference capacity."
+}
