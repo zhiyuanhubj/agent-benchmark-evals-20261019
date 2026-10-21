@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T01:52:38.208887+00:00",
+  "generated_utc": "2026-10-21T02:07:40.038373+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -278,7 +278,7 @@
             "graded": 86,
             "success": 67,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 4459,
+            "archived_actual_model_responses": 4471,
             "ungraded": 3,
             "exceptions": {
               "InternalServerError": 3
@@ -294,12 +294,12 @@
           },
           "4": {
             "expected": 89,
-            "terminal": 2,
-            "graded": 2,
-            "success": 1,
+            "terminal": 3,
+            "graded": 3,
+            "success": 2,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 105,
+            "archived_actual_model_responses": 128,
             "exceptions": {},
             "complete": false,
             "accuracy": null,
@@ -309,7 +309,7 @@
           }
         },
         "status": "round_1_complete_later_rounds_partial",
-        "native_score_snapshot_utc": "2026-10-21T01:52:38.208887+00:00",
+        "native_score_snapshot_utc": "2026-10-21T02:07:40.038373+00:00",
         "recovery": {
           "controller": "failed",
           "parallel_controller": "inactive",
@@ -543,7 +543,7 @@
             "replacement_terminal": 86,
             "replacement_graded": 86,
             "replacement_success": 67,
-            "replacement_raw_responses": 4459,
+            "replacement_raw_responses": 4471,
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
               "largest-eigenval"
@@ -557,7 +557,7 @@
               "terminal": 8,
               "graded": 8,
               "success": 6,
-              "raw_responses": 636,
+              "raw_responses": 648,
               "source_partial_model_response_tasks": 4,
               "source_partial_model_responses": 150,
               "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
@@ -618,15 +618,15 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 531,
-        "graded": 453,
-        "success": 265,
+        "terminal": 534,
+        "graded": 457,
+        "success": 268,
         "status": "partial_no_full_score",
         "pre_model_disk_correction": {
           "declared_tasks": 136,
-          "native_terminal": 61,
-          "native_graded": 61,
-          "native_success": 31,
+          "native_terminal": 62,
+          "native_graded": 62,
+          "native_success": 32,
           "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
           "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json"
         },
@@ -634,9 +634,9 @@
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 128,
-        "graded": 128,
-        "success": 79,
+        "terminal": 131,
+        "graded": 131,
+        "success": 81,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -730,7 +730,7 @@
             "graded": 73,
             "success": 48,
             "active_trial_dirs": 89,
-            "archived_actual_model_responses": 4941,
+            "archived_actual_model_responses": 4957,
             "ungraded": 14,
             "exceptions": {
               "RuntimeError": 13,
@@ -1098,7 +1098,7 @@
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
-            "native_score_snapshot_utc": "2026-10-21T01:51:10.774361+00:00",
+            "native_score_snapshot_utc": "2026-10-21T02:04:17.799586+00:00",
             "qualification": "Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.",
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
@@ -1131,14 +1131,14 @@
         "1": {
           "expected": 113,
           "terminal": 113,
-          "graded": 103,
-          "success": 55,
+          "graded": 104,
+          "success": 56,
           "status": "partial_no_full_score",
           "supplemental_run_id": "muse-bf16-deep-r1-direct-2886-20261020",
           "pre_model_endpoint_recovery": {
             "declared_tasks": 17,
-            "native_terminal": 11,
-            "replaced_unscored_originals": 11,
+            "native_terminal": 12,
+            "replaced_unscored_originals": 12,
             "prior_pre_model_client_failures": 2,
             "claim": "evidence/muse_bf16_deep_pre_model_endpoint_recovery_claim.json",
             "config": "evidence/muse_bf16_deep_pre_model_endpoint_recovery_config.json",
