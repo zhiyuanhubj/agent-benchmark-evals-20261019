@@ -1,0 +1,25 @@
+{
+  "generated_utc": "2026-10-21T05:36:40.183259+00:00",
+  "group": "muse_bf16_review_inputs",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_review_inputs_delta_20261021T051528Z.json",
+  "cutoff_utc": "2026-10-21T05:10:28.316256+00:00",
+  "new_source_roots": [],
+  "one_time_native_thinking_backfill": false,
+  "one_time_model_patch_backfill": false,
+  "archive_name": "muse_bf16_review_inputs_delta_20261021T053640Z.tar.zst",
+  "archive_size_bytes": 2766,
+  "archive_sha256": "64ef1c07357de1178b32c4c2b62d50523541274d02efe1b21c6e8d4d1bb5ea17",
+  "file_count": 8,
+  "source_bytes": 13182,
+  "skipped_disappeared_during_snapshot": 0,
+  "filename_counts": {
+    "qwen3_30b_instruct2507_500-13.json": 2,
+    "qwen3_30b_instruct2507_500--matplotlib__matplotlib-24026.json": 2,
+    "qwen3_30b_instruct2507_500--matplotlib__matplotlib-24149.json": 2,
+    "task.toml": 2
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/queue"
+  ]
+}
