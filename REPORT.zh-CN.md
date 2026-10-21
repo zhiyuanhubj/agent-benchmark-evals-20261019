@@ -1,17 +1,17 @@
 # 模型评测结果快照
 
-Muse NVFP4 精确镜像 TB2.1 第 4 轮在 2902 上独立抽样 89 题；[固定题目和端点凭据](evidence/muse_nvfp4_r4_progress.json)现记录 **0/89 题原生判分、0 题成功**。全部判分和轨迹审查完成前不报告整轮准确率，既有前三轮统计保持独立。
+Muse NVFP4 精确镜像 TB2.1 第 4 轮在 2902 上独立抽样 89 题；[固定题目和端点凭据](evidence/muse_nvfp4_r4_progress.json)现记录 **1/89 题原生判分、1 题成功**。全部判分和轨迹审查完成前不报告整轮准确率，既有前三轮统计保持独立。
 
 
-更新时间：**2026-10-21T01:26:58.198564+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases) 和 `input_output/archive_manifests/`。当前仓库为私有。
+更新时间：**2026-10-21T01:34:52.179626+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases) 和 `input_output/archive_manifests/`。当前仓库为私有。
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
 | Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **75.7%（500 题）**、Coder **81.2%（462 题）**、Instruct **87.2%（422 题）**；SWE-Review Instruct 组官方 RRR **45.5%**；Coder 组官方 RRR **59.7%**；精确镜像 TB2.1 首轮 **68/89（76.40%）**，首轮完整 | SWE-Review 整体 RRR 尚未完成 |
-| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review Instruct 组封存 DA **86.5%（422 题）**；SWE-Review Instruct 组官方 RRR **42.7%**；精确镜像 TB2.1 首轮 **62/89（69.66%）**，首轮完整 | Pro Verified **435/731 已判分、255 成功**；DeepSWE 首轮 **112/113、47 成功**；精确镜像 TB2.1 第2轮 88/89 已判分、62 成功，未完成；精确镜像 TB2.1 第3轮 73/89 已判分、48 成功，未完成；SWE-Review 另两组与整体 RRR 未完成 |
-| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 第1轮 **51/113**；DeepSWE 第2轮 **43/113**；DeepSWE 第3轮 **39/113**；精确镜像 TB2.1 第1轮 **70/89**；精确镜像 TB2.1 第2轮 **71/89**；精确镜像 TB2.1 第3轮 **69/89** | Pro Verified **730/731 已判分、451 成功**；SWE-Review glm5_500 434/500 题终态、qwen3_coder_30b_500 430/462 题终态、qwen3_30b_instruct2507_500 422/422 题终态；Instruct 组官方 DA 86.3%，含 1 道事先声明的中断续测；RRR 未完成 |
+| Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review Instruct 组封存 DA **86.5%（422 题）**；SWE-Review Instruct 组官方 RRR **42.7%**；精确镜像 TB2.1 首轮 **62/89（69.66%）**，首轮完整 | Pro Verified **446/731 已判分、260 成功**；DeepSWE 首轮 **112/113、47 成功**；精确镜像 TB2.1 第2轮 88/89 已判分、62 成功，未完成；精确镜像 TB2.1 第3轮 73/89 已判分、48 成功，未完成；SWE-Review 另两组与整体 RRR 未完成 |
+| Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 第1轮 **51/113**；DeepSWE 第2轮 **43/113**；DeepSWE 第3轮 **39/113**；精确镜像 TB2.1 第1轮 **70/89**；精确镜像 TB2.1 第2轮 **71/89**；精确镜像 TB2.1 第3轮 **69/89** | Pro Verified **730/731 已判分、451 成功**；SWE-Review glm5_500 444/500 题终态、qwen3_coder_30b_500 443/462 题终态、qwen3_30b_instruct2507_500 422/422 题终态；Instruct 组官方 DA 86.3%，含 1 道事先声明的中断续测；RRR 未完成 |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
-| Muse 原始 BF16 | SWRBench GPT-5.5 裁判 **54.2%（1000/1000）**，PR 分类 F1 **0.4967** | Pro Verified **193/731 已判分**；指定精确镜像 TB2.1 首轮 **59/89 已判分、46 成功**，首轮未完成；DeepSWE 运行中；SWE-Review 原生任务终态 517/1384（GLM 176/500、Coder 169/462、Instruct 172/422），官方 DA/RRR 待完成；已预建 592 个任务镜像 |
+| Muse 原始 BF16 | SWRBench GPT-5.5 裁判 **54.2%（1000/1000）**，PR 分类 F1 **0.4967** | Pro Verified **194/731 已判分**；指定精确镜像 TB2.1 首轮 **59/89 已判分、46 成功**，首轮未完成；DeepSWE 运行中；SWE-Review 原生任务终态 523/1384（GLM 176/500、Coder 172/462、Instruct 175/422），官方 DA/RRR 待完成；已预建 592 个任务镜像 |
 
 Muse NVFP4 的 TB2.1 首轮 **68/89 是原生 verifier reward**。[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)确认其中 1 条成功轨迹通过操纵计时或参考计算取得奖励（`largest-eigenval`）。正在进行的 Muse BF16 首轮也有 1 条同类确认轨迹（`largest-eigenval`）。原始 reward 保留，轨迹已排除出干净训练数据；其他成功轨迹仍需完整核查，当前不报告“干净准确率”。
 
@@ -71,11 +71,11 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 
 GPU allocation 2867 到期时，第 2 轮连接补跑留下 4 题无分连接错误、2 题无模型回复的中断目录、4 题尚未启动；原始记录全部保留。[2902 新 allocation 的纠错声明](evidence/muse_nvfp4_r2_expiry_correction_claim.json)在[非空 thinking 预检](evidence/muse_nvfp4_replica_2902_reasoning_preflight.json)后逐题仅抽一次，题目、镜像和采样设置不变。当前纠错有 10 题终态、10 题原生判分、8 题成功；不择优取样。
 
-第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。[补跑审计](evidence/muse_nvfp4_r3_infra_replacement_progress.json)现计 **84/89 题获原生判分、66 题成功**；全部 89 题获原生判分前不报告整轮准确率。2869 后来在接手的批次运行中到期：已完成的原生结果只计一次，尚无终态结果的 11 题另有明确标记的基础设施续跑，转到仍在线的 2900。其中 4 题在中断前已有共 150 条模型回复，原始不完整轨迹保留但不当作独立分数。b07 在 2869 尚未采样，已在首次采样前转到 2900；2899 继续负责原定批次。使用同一固定 NVFP4 权重、题目镜像和采样参数；Release 归档保存路由凭据、输入、原始回复和轨迹，不按对错择优。
+第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。[补跑审计](evidence/muse_nvfp4_r3_infra_replacement_progress.json)现计 **85/89 题获原生判分、66 题成功**；全部 89 题获原生判分前不报告整轮准确率。2869 后来在接手的批次运行中到期：已完成的原生结果只计一次，尚无终态结果的 11 题另有明确标记的基础设施续跑，转到仍在线的 2900。其中 4 题在中断前已有共 150 条模型回复，原始不完整轨迹保留但不当作独立分数。b07 在 2869 尚未采样，已在首次采样前转到 2900；2899 继续负责原定批次。使用同一固定 NVFP4 权重、题目镜像和采样参数；Release 归档保存路由凭据、输入、原始回复和轨迹，不按对错择优。
 
 第 3 轮原生成功数包含 `largest-eigenval`。[哈希锚定轨迹核查](evidence/exact_tb_integrity_manual_notes.json)确认 agent 通过 Python 启动钩子拖慢 NumPy 参考求解器；原始 reward 保留，但这一题不能证明未受干预的加速，轨迹已排除出干净训练数据。
 
-[Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **2329/2330 条含非空 thinking**。
+[Muse BF16 精确镜像输入输出核验](evidence/muse_bf16_exact_io_coverage.json)逐题确认 BF16 已判分结果、原始回复和轨迹都在远端校验过的 BF16 归档中，89 道题输入由相同的指定镜像任务输入归档覆盖；当前已判分题的原始回复中 **2341/2342 条含非空 thinking**。
 
 [BF16 2886 双节点部署核验](evidence/muse_bf16_2886_deployment_audit.json)记录两台节点各 78 个固定权重文件的校验、SGLang 镜像版本、16 卡 NCCL/EFA 预检、BF16 接口，以及与正式评测分开的工具调用和 thinking 往返检查；这不是 benchmark 成绩。
 
@@ -83,7 +83,7 @@ BF16 SWRBench 的[逐题源数据、生成、GPT-5.5 裁判及原始回复归档
 
 [BF16 SWE-Review 输入归档](input_output/archive_manifests/muse_bf16_review_inputs.json)保存了 96 道已准备题目的模型可见任务卡、指令、Dockerfile、公开题目数据，以及队列与镜像记录；不含隐藏解法和测试。正式轨迹与判分将在任务完成后另行归档。
 
-[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 2026-10-21T01:11:56.000321+00:00 将 1000 条裁判记录逐题对到 1000 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 93 条）。1000 题官方结果已与生成、裁判、结果文件及指标收据核对；准确率统计 PR 分类，PR 分类 F1 为 0.4967，逐问题点 F1 为 0.1170。
+[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 2026-10-21T01:34:33.463182+00:00 将 1000 条裁判记录逐题对到 1000 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 93 条）。1000 题官方结果已与生成、裁判、结果文件及指标收据核对；准确率统计 PR 分类，PR 分类 F1 为 0.4967，逐问题点 F1 为 0.1170。
 
 [Muse BF16 SWE-Review 原生进度核验](evidence/muse_bf16_swe_review_progress.json)逐题对照队列任务及 BF16 模型配置；终态数量只表示评审阶段进度，分组 DA 和整体 RRR 仍需官方后续评分。
 
