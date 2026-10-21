@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T21:19:50.187844+00:00",
+  "generated_utc": "2026-10-21T22:01:08.249429+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 50,
+      "scored_trajectories_checked": 51,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -95,7 +95,7 @@
       }
     },
     "muse_nvfp4_r5": {
-      "scored_trajectories_checked": 40,
+      "scored_trajectories_checked": 41,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 2,
       "rule_hit_counts": {
@@ -9012,6 +9012,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "pypi-server",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/pypi-server__h7b6egP/agent/trajectory.json",
+      "trajectory_sha256": "2810d06ec77817baf256c67edf91cad8cafcc6e399b06fdf845c8574a95f0db3",
+      "steps": 14,
+      "tool_calls": 78,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "tune-mjcf",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/tune-mjcf__rCDMMoD/agent/trajectory.json",
@@ -11362,6 +11374,18 @@
       "trajectory_sha256": "a165be51ca8ac19c0b89fae93d0b715c7fb0be839f199cb579f27b73fdf417a3",
       "steps": 43,
       "tool_calls": 205,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "feal-linear-cryptanalysis",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/feal-linear-cryptanalysis__UEbk9Tz/agent/trajectory.json",
+      "trajectory_sha256": "12b05a9ec6d21a85c1ee5ddd261459e4f2a542eb7a8431b1098ad4dd96b54f0f",
+      "steps": 394,
+      "tool_calls": 581,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
