@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T01:07:11.887886+00:00",
+  "generated_utc": "2026-10-21T01:29:17.776516+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -18,7 +18,7 @@
       }
     },
     "muse_bf16": {
-      "scored_trajectories_checked": 58,
+      "scored_trajectories_checked": 59,
       "pattern_hit_trajectories": 14,
       "pattern_hit_successes": 10,
       "rule_hit_counts": {
@@ -66,7 +66,7 @@
       }
     },
     "muse_nvfp4_r3": {
-      "scored_trajectories_checked": 82,
+      "scored_trajectories_checked": 84,
       "pattern_hit_trajectories": 14,
       "pattern_hit_successes": 9,
       "rule_hit_counts": {
@@ -3529,6 +3529,17 @@
       "trajectory_sha256": "e28debe784974e4a0ef0856d2ff39acb3893f266d13b369236a9b856f3236805",
       "steps": 11,
       "tool_calls": 37,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_bf16",
+      "task": "sqlite-db-truncate",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/sqlite-db-truncate__Bc2vUSP/agent/trajectory.json",
+      "trajectory_sha256": "144787cb62bc3572013bfb311fb6d1549a54056607072c6a4b4fd219e58c74d0",
+      "steps": 13,
+      "tool_calls": 24,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -8862,12 +8873,38 @@
     {
       "model": "muse_nvfp4_r3",
       "round": 3,
+      "task": "vulnerable-secret",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b08/vulnerable-secret__fZed5gE/agent/trajectory.json",
+      "trajectory_sha256": "054c75d6d3930178b6204010c8c2f5c5e36a416c59254bb58c71a584c1ce5b63",
+      "steps": 12,
+      "tool_calls": 36,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared",
+      "attempt_kind": "infrastructure_replacement"
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "round": 3,
       "task": "sqlite-with-gcov",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b08/sqlite-with-gcov__C5hRrNA/agent/trajectory.json",
       "trajectory_sha256": "e3568d1be75011e4cb98d954817fab875294816c1004802909688140c11e0f59",
       "steps": 20,
       "tool_calls": 102,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared",
+      "attempt_kind": "infrastructure_replacement"
+    },
+    {
+      "model": "muse_nvfp4_r3",
+      "round": 3,
+      "task": "winning-avg-corewars",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r3-infra-replacement-2900-b08/winning-avg-corewars__9u66Fv6/agent/trajectory.json",
+      "trajectory_sha256": "b03d831a1f2c82a1637603f2f2d2a76c47908f2a89d06671d51b418bfb6b2dd2",
+      "steps": 21,
+      "tool_calls": 95,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared",
       "attempt_kind": "infrastructure_replacement"

@@ -77,6 +77,12 @@ def sync_native_archives(scores, force_bf16=False):
                 terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
                                 for path in replacement.glob('*/result.json'))
                 raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
+            round4 = (BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4'
+                      / 'muse-nvfp4-tb-v1-exact-r4-2902-20261021')
+            if round4.exists():
+                terminal += sum(bool(json.loads(path.read_text()).get('finished_at'))
+                                for path in round4.glob('*/result.json'))
+                raw_count += sum(1 for _ in round4.glob('*/agent/raw_responses/*.json'))
         if name == 'beam_bf16':
             replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
             if replacement.exists():
@@ -133,6 +139,14 @@ def sync_native_archives(scores, force_bf16=False):
                 handoff_newer |= any(latest_archive_time is None or
                                      datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
                                      for marker in route_markers)
+            r4_state = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021'
+            if (r4_state / 'claim.json').exists():
+                markers = [r4_state / 'claim.json',
+                           *[r4_state / f'{name}.json' for name in ('started', 'exit')
+                             if (r4_state / f'{name}.json').exists()]]
+                handoff_newer |= any(latest_archive_time is None or
+                                     datetime.fromtimestamp(marker.stat().st_mtime, timezone.utc) > latest_archive_time
+                                     for marker in markers)
             handoff_path = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json'
             expected_receipts = 0
             for task in ('password-recovery', 'prove-plus-comm'):
@@ -471,6 +485,7 @@ def cycle():
              'protocol/run_muse_nvfp4_r3_extra_routes_20261020.py',
              'protocol/continue_muse_nvfp4_r3_b07_2900_20261020.py',
              'protocol/continue_muse_nvfp4_r3_expired2869_2900_20261020.py',
+             'protocol/run_muse_nvfp4_exact_r4_2902_20261021.py',
              'protocol/muse_nvfp4_exact_future_round_controller_20261019.py',
              'audit_muse_nvfp4_r2_pytorch_ungraded.py',
              'audit_muse_nvfp4_r2_pytorch_replacement.py',

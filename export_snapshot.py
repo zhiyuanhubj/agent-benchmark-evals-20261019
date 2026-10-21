@@ -884,6 +884,73 @@ if r3_replacement_plan:
     }
     write('evidence/muse_nvfp4_r3_infra_replacement_progress.json', r3_replacement_progress)
 
+r4_state = B / 'tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021'
+r4_claim_path = r4_state / 'claim.json'
+r4_progress = None
+if r4_claim_path.exists():
+    claim = read(r4_claim_path)
+    assert claim['round'] == 4 and claim['expected'] == 89 and claim['allocation'] == 2902
+    config_path = Path(claim['config'])
+    assert hashlib.sha256(config_path.read_bytes()).hexdigest() == claim['config_sha256']
+    config = read(config_path)
+    assert config['job_name'] == claim['job_name'] and config['n_attempts'] == 1
+    assert config['retry']['max_retries'] == 0 and len(config['tasks']) == 89
+    assert config['agents'][0]['kwargs']['api_base'] == claim['api_base']
+    expected = set(claim['task_toml_sha256'])
+    assert len(expected) == 89 == len({Path(row['path']).name for row in config['tasks']})
+    for row in config['tasks']:
+        task = Path(row['path']).name
+        assert hashlib.sha256((Path(row['path']) / 'task.toml').read_bytes()).hexdigest() == claim['task_toml_sha256'][task]
+    job_root = B / 'tb_v1_exact_images_20261019/results/muse_nvfp4' / claim['job_name']
+    found = {}
+    raw_responses = active = 0
+    exceptions = {}
+    for trial in job_root.glob('*'):
+        if not trial.is_dir():
+            continue
+        trial_config = trial / 'config.json'
+        if not trial_config.exists():
+            active += 1
+            continue
+        task = Path(read(trial_config)['task']['path']).name
+        assert task in expected and task not in found, 'Duplicate fourth-round task draw'
+        raws = list((trial / 'agent/raw_responses').glob('*.json'))
+        raw_responses += len(raws)
+        result_path = trial / 'result.json'
+        if not result_path.exists():
+            active += 1
+            found[task] = None
+            continue
+        result = read(result_path)
+        if not result.get('finished_at'):
+            active += 1
+            found[task] = None
+            continue
+        reward = ((result.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+        kind = (result.get('exception_info') or {}).get('exception_type')
+        if kind:
+            exceptions[kind] = exceptions.get(kind, 0) + 1
+        found[task] = {'result': str(result_path), 'reward': reward, 'exception': kind}
+    terminal = [value for value in found.values() if value is not None]
+    graded = sum(value['reward'] in (0, 1) for value in terminal)
+    success = sum(value['reward'] == 1 for value in terminal)
+    nvfp4_rounds['4'] = {
+        'expected': 89, 'terminal': len(terminal), 'graded': graded,
+        'success': success, 'ungraded': len(terminal) - graded,
+        'active_trial_dirs': active, 'archived_actual_model_responses': raw_responses,
+        'exceptions': exceptions, 'complete': graded == 89,
+        'accuracy': success / 89 if graded == 89 else None,
+        'clean_accuracy': None,
+        'qualification': 'Independent fourth draw on the same 89 supplied images; raw reward is provisional pending trajectory audit.',
+        'claim': 'evidence/muse_nvfp4_r4_progress.json',
+    }
+    r4_progress = {'generated_utc': datetime.now(timezone.utc).isoformat(),
+                   'claim': str(r4_claim_path), 'claim_sha256': hashlib.sha256(r4_claim_path.read_bytes()).hexdigest(),
+                   'expected': 89, 'terminal': len(terminal), 'graded': graded,
+                   'success': success, 'active_trial_dirs': active,
+                   'raw_responses': raw_responses, 'tasks': found}
+    write('evidence/muse_nvfp4_r4_progress.json', r4_progress)
+
 round1_screen = {(row['model'], row['task']): row for row in
                  read(ROOT / 'evidence/exact_tb_integrity_screen.json')['records']}
 round1_compromised_notes = [note for note in
@@ -906,8 +973,8 @@ nvfp4_rounds['1'].update({
 
 
 def tb_profile_status(rounds):
-    if all(row['complete'] for row in rounds.values()):
-        return 'complete_three_rounds'
+    if all(rounds[str(number)]['complete'] for number in (1, 2, 3)):
+        return 'complete_three_rounds_r4_partial' if '4' in rounds and not rounds['4']['complete'] else 'complete_three_rounds'
     if rounds['1']['complete']:
         return 'round_1_complete_later_rounds_partial'
     return 'partial_no_full_score'
@@ -1742,6 +1809,13 @@ if expiry_correction_claim:
          f'{sum(row["reward"] in (0, 1) for row in expiry_results.values())} native grades and '
          f'{sum(row["reward"] == 1 for row in expiry_results.values())} successes; no best-of selection.\n\n'
          'The 89 original round-3 trials reached a refused endpoint before any model response.'), 1)
+if r4_progress:
+    r4 = nvfp4_rounds['4']
+    note = (f"Muse NVFP4 exact-image TB2.1 round 4 is an independently declared 89-task draw on allocation 2902. "
+            f"Its [pinned task and endpoint receipt](evidence/muse_nvfp4_r4_progress.json) currently records "
+            f"**{r4['graded']}/89 native grades and {r4['success']} successes**. "
+            "A complete round accuracy awaits 89 native grades and trajectory review; the existing first-three-round scores are unchanged.\n\n")
+    readme = readme.replace('Scores are benchmark-recorded values.', note + 'Scores are benchmark-recorded values.', 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -1902,5 +1976,12 @@ if expiry_correction_claim:
          f'{sum(row["reward"] in (0, 1) for row in expiry_results.values())} 题原生判分、'
          f'{sum(row["reward"] == 1 for row in expiry_results.values())} 题成功；不择优取样。\n\n'
          '第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。'), 1)
+if r4_progress:
+    r4 = nvfp4_rounds['4']
+    note = (f"Muse NVFP4 精确镜像 TB2.1 第 4 轮在 2902 上独立抽样 89 题；"
+            f"[固定题目和端点凭据](evidence/muse_nvfp4_r4_progress.json)现记录 "
+            f"**{r4['graded']}/89 题原生判分、{r4['success']} 题成功**。"
+            "全部判分和轨迹审查完成前不报告整轮准确率，既有前三轮统计保持独立。\n\n")
+    chinese_report = chinese_report.replace('# 模型评测结果快照\n', '# 模型评测结果快照\n\n' + note, 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))

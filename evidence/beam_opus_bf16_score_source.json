@@ -1,21 +1,21 @@
 {
-  "utc": "2026-10-21T01:03:35.691597+00:00",
+  "utc": "2026-10-21T01:18:38.806467+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
-      "terminal": 519,
-      "unique_tasks": 519,
-      "graded": 432,
-      "success": 253,
-      "missing_native_grader_completion": 87,
+      "terminal": 521,
+      "unique_tasks": 521,
+      "graded": 435,
+      "success": 255,
+      "missing_native_grader_completion": 86,
       "native_status_counts": {
-        "completed": 428,
+        "completed": 431,
         "run_error": 4,
         "eval_error": 2,
-        "run_error_or_eval_error": 85
+        "run_error_or_eval_error": 84
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 212,
+      "missing_result_task_count": 210,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection. Audited pre-model disk-full corrections are counted once only when their native grader completes.",
       "late_orphan_source_results_excluded": 2,
@@ -26,9 +26,9 @@
         "audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_pro_r1_pre_model_disk_failures.json",
         "audit_sha256": "22eaca2798c09b7322aef12e01b386cf7edd324edcf3128a6a715a45eadeca5f",
         "declared_tasks": 136,
-        "native_terminal": 52,
-        "native_graded": 52,
-        "native_success": 27,
+        "native_terminal": 53,
+        "native_graded": 53,
+        "native_success": 28,
         "rows": {
           "instance_ansible__ansible-29aea9ff3466e4cd2ed00524b9e56738d568ce8b-vba6da65a0f3baefda7a058ebbd0a8dcafb8512f5": {
             "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_ansible__ansible-29aea9ff3466e4cd2ed00524b9e56738d568ce8b-vba6da65a0f3b--5fc9d75ea74920cca25b5fb49bc3ce2407fbfe629f73c4ae9b5d0022a55fa999/attempt-1/result.json",
@@ -387,6 +387,13 @@
             "graded": true,
             "success": false
           },
+          "instance_internetarchive__openlibrary-7bf3238533070f2d24bafbb26eedf675d51941f6-v08d8e8889ec945ab821fb156c04c7d2e2810debb": {
+            "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_internetarchive__openlibrary-7bf3238533070f2d24bafbb26eedf675d51941f6-v--8a9759ba22bceb8d83f7e6b817517a72211896e6bd03a4172beba4cc1fc76874/attempt-1/result.json",
+            "result_sha256": "307cb77151ec0cf8e7fff0dffdaf4b68b62eed2e4161b78924f3f6622ef99a8e",
+            "native_status": "completed",
+            "graded": true,
+            "success": true
+          },
           "instance_NodeBB__NodeBB-70b4a0e2aebebe8f2f559de6680093d96a697b2f-vnan": {
             "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_NodeBB__NodeBB-70b4a0e2aebebe8f2f559de6680093d96a697b2f-vnan--a121312cd08487ae8eafc31cd397bef5cf1c0c4dfe17e6c78d434b734d9720db/attempt-1/result.json",
             "result_sha256": "c0ae867e7c289cadf184b05704aca80e57c709e98ed0eefcd336fc59e90aa9b3",
@@ -400,16 +407,16 @@
     },
     "pro_round2": {
       "expected": 731,
-      "terminal": 118,
-      "unique_tasks": 118,
-      "graded": 118,
-      "success": 71,
+      "terminal": 124,
+      "unique_tasks": 124,
+      "graded": 124,
+      "success": 76,
       "missing_native_grader_completion": 0,
       "native_status_counts": {
-        "completed": 118
+        "completed": 124
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 613,
+      "missing_result_task_count": 607,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -572,7 +579,7 @@
     },
     "tb_first_round_client_protocol_recovery": {
       "current": {
-        "utc": 1792544537.7597303,
+        "utc": 1792545441.0530775,
         "phase": "one_corrected_client_sample_terminal",
         "native_unit": {
           "MainPID": "0",
@@ -813,17 +820,17 @@
     },
     "pro": {
       "expected": 731,
-      "terminal": 191,
-      "unique_tasks": 191,
-      "graded": 191,
-      "success": 125,
+      "terminal": 193,
+      "unique_tasks": 193,
+      "graded": 193,
+      "success": 126,
       "missing_native_grader_completion": 0,
       "native_status_counts": {
-        "completed": 184,
+        "completed": 186,
         "run_error": 7
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 540,
+      "missing_result_task_count": 538,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection.",
       "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
@@ -836,10 +843,10 @@
     "tb": {
       "1": {
         "expected": 89,
-        "terminal": 85,
-        "unique_tasks": 85,
-        "graded": 58,
-        "success": 45,
+        "terminal": 86,
+        "unique_tasks": 86,
+        "graded": 59,
+        "success": 46,
         "exceptions": {
           "InternalServerError": 9,
           "RuntimeError": 18,
@@ -890,7 +897,7 @@
             "trajectory_sha256": null
           }
         ],
-        "missing_result_task_count": 4,
+        "missing_result_task_count": 3,
         "task_id_source": "Original trial config task path; finished native trial and binary reward required",
         "supplemental_run_id": "muse-bf16-tb-r1-direct-2886-20261020",
         "pre_model_infrastructure_recovery": {
@@ -940,10 +947,10 @@
         "expected": 113,
         "terminal": 113,
         "unique_tasks": 113,
-        "graded": 101,
-        "success": 53,
+        "graded": 102,
+        "success": 54,
         "exceptions": {
-          "AssertionError": 12,
+          "AssertionError": 11,
           "NetworkConnectionError": 2
         },
         "duplicate_task_ids": [],
@@ -956,6 +963,15 @@
             "reason": "pre_model_endpoint_failure",
             "old_endpoint": "http://10.1.77.106:31324/v1",
             "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/dasel-html-document-format__NpYXNey/artifacts/logs/artifacts/model.patch",
+            "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/helm-array-merge-strategies__QNENKFx/result.json",
+            "task": "helm-array-merge-strategies",
+            "sha256": "b730c924933933207a267a60dd0a447cae540a01732db915d3e5733b9421178e",
+            "reason": "pre_model_endpoint_failure",
+            "old_endpoint": "http://10.1.77.106:31324/v1",
+            "empty_patch": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/deep-results/muse-bf16-deep-r1/helm-array-merge-strategies__QNENKFx/artifacts/logs/artifacts/model.patch",
             "empty_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
           },
           {
@@ -1039,8 +1055,8 @@
           "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/muse-bf16-deep-r1-pre-model-client-recovery-20261020-claim.json",
           "claim_sha256": "d08d8518436891c00cdda642dbb1580a04e1d90355baaf659f2dc9fcce97c1ef",
           "declared_tasks": 17,
-          "native_terminal": 9,
-          "replaced_unscored_originals": 9,
+          "native_terminal": 10,
+          "replaced_unscored_originals": 10,
           "prior_pre_model_client_failures": 2,
           "qualification": "Only frozen originals with zero model responses and an empty patch are replaced by first actual model draws; no correctness-based selection."
         }
@@ -1082,7 +1098,7 @@
     }
   },
   "reserved_capacity": {
-    "utc": 1792544603.7003987,
+    "utc": 1792545505.7148674,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2902": {
@@ -1208,7 +1224,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792544609.8653264,
+    "utc": 1792545510.4295053,
     "allocations": {
       "2887": {
         "phase": "ready",
@@ -1579,7 +1595,7 @@
         }
       },
       "scorer_version": "v3_gateway_recovery_and_malformed_original_report_fallback",
-      "utc": 1792544600.492308
+      "utc": 1792545477.4819858
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -2024,7 +2040,7 @@
       "qualification": "Same predeclared 128 Pro task IDs and identical harness/model request budgets. The original screening round and separately sampled full-run responses stay separate; no best-of selection or score replacement. This does not supply a full 731-task base run, a held-out estimate, three complete repetitions, or a cross-benchmark promotion decision. Serving-batch nondeterminism can remain at temperature zero."
     },
     "early9_supplemental_report_aggregation": {
-      "utc": 1792543728.8115826,
+      "utc": 1792544621.9779327,
       "benchmark": "DeepSWE",
       "model": "early9",
       "expected": 113,
@@ -2044,7 +2060,7 @@
       "qualification": "Native counts remain unchanged. Supplemental values are the unchanged original scorer applied only to already-produced original reports. No model response or tests are rerun, and no original timeout record is overwritten. Not a completed 113-task run or three-round mean."
     },
     "early9_never_started_deep_remainder_handoff": {
-      "utc": 1792544537.6625504,
+      "utc": 1792545440.947837,
       "phase": "recovered_remainder_native_trials_terminal",
       "expected": 19,
       "terminal": 19,
@@ -2632,7 +2648,7 @@
     },
     "early9_client_infrastructure_recovery": {
       "current": {
-        "utc": 1792544537.6625504,
+        "utc": 1792545440.947837,
         "phase": "recovered_remainder_native_trials_terminal",
         "expected": 19,
         "terminal": 19,
@@ -5026,7 +5042,7 @@
       "qualification": "Original449 and469 have real observed weight differences. This does not establish a stronger checkpoint, full449 availability, full-model nonfinite clearance, or training-update magnitude over all parameters. No model sampling, data edits or GPU interruption."
     },
     "mix449_original_file_recovery": {
-      "utc": 1792544605.0127149,
+      "utc": 1792545508.614572,
       "sources": {
         "2812": {
           "phase": "ready",
@@ -5508,7 +5524,7 @@
       "utc": 1792356179.122217
     },
     "mix449_receiver_independent_archive": {
-      "utc": 1792544537.9064074,
+      "utc": 1792545441.2314384,
       "phase": "waiting_for_missing_original_native_shards",
       "persistent_native_shards": 32,
       "expected_native_shards": 64,
@@ -5566,7 +5582,7 @@
         }
       },
       "complete_original_source_archives": [],
-      "separate_data_volume_available_bytes": 71441842176,
+      "separate_data_volume_available_bytes": 71142998016,
       "minimum_shared_free_bytes": 274877906944,
       "original_training_step": 449,
       "original_sources_deleted": false,
@@ -5771,13 +5787,13 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792544607.1977136
+      "utc": 1792545453.595907
     },
     "queue_states": {
       "mix449": {
         "phase": "waiting_for_complete_original_artifact",
         "candidate": "mix449",
-        "utc": 1792544605.1824667
+        "utc": 1792545505.6048567
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
@@ -5797,7 +5813,7 @@
       "phase": "waiting_for_complete_original449_artifact",
       "model_generation_started": false,
       "frozen_top_two_unchanged": true,
-      "utc": 1792544605.1649404
+      "utc": 1792545505.6028798
     },
     "original449_export_controller": null,
     "original449_inference_ready": null,
