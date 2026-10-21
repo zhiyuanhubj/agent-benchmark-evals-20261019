@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T07:02:11.999404+00:00",
+  "generated_utc": "2026-10-21T07:32:46.484236+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 70,
-  "success_count": 54,
+  "scored_tasks": 72,
+  "success_count": 55,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -232,6 +232,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/sqlite-db-truncate__Bc2vUSP/result.json"
     },
+    "openssl-selfsigned-cert": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/openssl-selfsigned-cert__PpieyPZ/result.json"
+    },
     "fix-ocaml-gc": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/fix-ocaml-gc__9dykfRc/result.json"
@@ -267,6 +271,10 @@
     "cobol-modernization": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/cobol-modernization__LatX4UC/result.json"
+    },
+    "gpt2-codegolf": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/gpt2-codegolf__CWsev6N/result.json"
     },
     "caffe-cifar-10": {
       "reward": 1.0,
@@ -334,12 +342,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "gpt2-codegolf": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/gpt2-codegolf__7Dz2bfB/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "rstan-to-pystan": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/rstan-to-pystan__JPLRyEx/result.json",
       "exception_type": "RuntimeError",
@@ -370,12 +372,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "openssl-selfsigned-cert": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/openssl-selfsigned-cert__4v8jpyZ/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "sparql-university": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/sparql-university__qKZGKXQ/result.json",
       "exception_type": "RuntimeError",
@@ -402,11 +398,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 70,
-  "covered_raw_response_sets": 70,
-  "covered_trajectories": 70,
-  "scored_raw_response_count": 2872,
-  "nonempty_reasoning_response_count": 2871,
+  "covered_results": 72,
+  "covered_raw_response_sets": 72,
+  "covered_trajectories": 72,
+  "scored_raw_response_count": 2912,
+  "nonempty_reasoning_response_count": 2911,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -636,6 +632,10 @@
       "raw_responses": 12,
       "nonempty_reasoning_content": 12
     },
+    "openssl-selfsigned-cert": {
+      "raw_responses": 9,
+      "nonempty_reasoning_content": 9
+    },
     "fix-ocaml-gc": {
       "raw_responses": 81,
       "nonempty_reasoning_content": 81
@@ -672,6 +672,10 @@
       "raw_responses": 29,
       "nonempty_reasoning_content": 29
     },
+    "gpt2-codegolf": {
+      "raw_responses": 31,
+      "nonempty_reasoning_content": 31
+    },
     "caffe-cifar-10": {
       "raw_responses": 58,
       "nonempty_reasoning_content": 58
@@ -695,6 +699,7 @@
   "direct_run_id": "muse-bf16-tb-r1-direct-2886-20261020",
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/openssl-selfsigned-cert__4v8jpyZ/result.json": "openssl-selfsigned-cert",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json": "fix-ocaml-gc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mcmc-sampling-stan__cobMK96/result.json": "mcmc-sampling-stan",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/filter-js-from-html__3snMrie/result.json": "filter-js-from-html",
@@ -704,6 +709,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/kv-store-grpc__7PfvuA5/result.json": "kv-store-grpc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/db-wal-recovery__e9zUrop/result.json": "db-wal-recovery",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json": "cobol-modernization",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/gpt2-codegolf__7Dz2bfB/result.json": "gpt2-codegolf",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json": "constraints-scheduling",
@@ -890,6 +896,8 @@
     "muse_bf16_delta_20261021T061602Z.tar.zst",
     "muse_bf16_delta_20261021T063705Z.tar.zst",
     "muse_bf16_delta_20261021T064942Z.tar.zst",
+    "muse_bf16_delta_20261021T071448Z.tar.zst",
+    "muse_bf16_delta_20261021T072634Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

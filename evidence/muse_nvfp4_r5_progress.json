@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T06:55:55.622163+00:00",
+  "generated_utc": "2026-10-21T07:22:04.403652+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 14,
-  "graded": 14,
-  "success": 13,
+  "terminal": 15,
+  "graded": 15,
+  "success": 14,
   "active_trial_dirs": 2,
-  "raw_responses": 551,
+  "raw_responses": 598,
   "tasks": {
     "hf-model-inference": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/hf-model-inference__CkHrHWt/result.json",
@@ -75,11 +75,16 @@
       "reward": 1.0,
       "exception": null
     },
-    "large-scale-text-editing": null,
+    "large-scale-text-editing": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/large-scale-text-editing__hdiehJb/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "caffe-cifar-10": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/caffe-cifar-10__7W5Gnb8/result.json",
       "reward": 1.0,
       "exception": null
-    }
+    },
+    "model-extraction-relu-logits": null
   }
 }

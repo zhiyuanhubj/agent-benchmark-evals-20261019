@@ -445,6 +445,8 @@ def cycle():
         scored_rounds = (
             ('muse_nvfp4_r2', scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['2']['graded']),
             ('muse_nvfp4_r3', scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['3']['graded']),
+            ('muse_nvfp4_r4', scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds'].get('4', {}).get('graded', 0)),
+            ('muse_nvfp4_r5', scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds'].get('5', {}).get('graded', 0)),
             ('beam_bf16_r2', scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds']['2']['graded']),
             ('beam_bf16_r3', scores['models']['beam_bf16']['tb2_1_exact_supplied_images']['rounds']['3']['graded']),
         )

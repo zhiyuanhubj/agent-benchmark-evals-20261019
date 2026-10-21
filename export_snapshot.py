@@ -981,8 +981,8 @@ for round_number, allocation, ordinal in ((4, 2902, 'fourth'), (5, 2899, 'fifth'
 
 round1_screen = {(row['model'], row['task']): row for row in
                  read(ROOT / 'evidence/exact_tb_integrity_screen.json')['records']}
-round1_compromised_notes = [note for note in
-                            read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
+manual_score_notes = read(ROOT / 'evidence/exact_tb_integrity_manual_notes.json')['notes']
+round1_compromised_notes = [note for note in manual_score_notes
                             if note['model'] == 'muse_nvfp4' and note['reward'] == 1
                             and note['training_disposition'] == 'exclude_confirmed_reward_hacking']
 round1_compromised = sorted(note['task'] for note in round1_compromised_notes)
@@ -998,6 +998,21 @@ nvfp4_rounds['1'].update({
     'clean_accuracy': None,
     'clean_accuracy_qualification': 'Not established: other successful trajectories have not received full manual integrity review.',
 })
+for extra_round in (4, 5):
+    model_name = f'muse_nvfp4_r{extra_round}'
+    flagged = [note for note in manual_score_notes
+               if note['model'] == model_name and note['reward'] == 1
+               and note['training_disposition'].startswith('exclude_')]
+    for note in flagged:
+        screened = round1_screen[(model_name, note['task'])]
+        assert screened['reward'] == 1 and screened['trajectory_sha256'] == note['trajectory_sha256']
+    assert len({note['task'] for note in flagged}) == len(flagged)
+    assert len(flagged) <= nvfp4_rounds[str(extra_round)]['success']
+    nvfp4_rounds[str(extra_round)].update({
+        'integrity_flagged_successes': len(flagged),
+        'integrity_flagged_tasks': sorted(note['task'] for note in flagged),
+        'integrity_evidence': 'evidence/exact_tb_integrity_manual_notes.json',
+    })
 
 
 def tb_profile_status(rounds):
@@ -1924,8 +1939,14 @@ if r4_progress:
             f"Its [pinned task and endpoint receipt](evidence/muse_nvfp4_r4_progress.json) currently records "
             f"**{r4['graded']}/89 native grades and {r4['success']} successes**. "
             "The [released-response thinking audit](evidence/muse_nvfp4_r4_thinking_audit.json) "
-            "checks every raw reply in the archived graded round-four trials. "
+            "checks the graded trials in its cited archive; newer trials await the next archive and audit. "
             "A complete round accuracy awaits 89 native grades and trajectory review; the existing first-three-round scores are unchanged.\n\n")
+    if r4['integrity_flagged_tasks']:
+        flagged_names = ', '.join(f'`{task}`' for task in r4['integrity_flagged_tasks'])
+        note = (note.rstrip() + f" [Hash-anchored manual review](evidence/exact_tb_integrity_manual_notes.json) "
+                f"flags rewarded {flagged_names} for accessing or probing evaluation/agent logs; "
+                "raw rewards remain recorded, but these trajectories are excluded from clean training pending full review. "
+                "The observed probes alone do not prove hidden-answer retrieval or reward alteration.\n\n")
     readme = readme.replace('Scores are benchmark-recorded values.', note + 'Scores are benchmark-recorded values.', 1)
 if r5_progress:
     r5 = nvfp4_rounds['5']
@@ -1933,6 +1954,12 @@ if r5_progress:
             f"Its [pinned task and endpoint receipt](evidence/muse_nvfp4_r5_progress.json) records "
             f"**{r5['graded']}/89 native grades and {r5['success']} successes**. "
             "A complete fifth-round accuracy awaits all 89 native grades and trajectory review.\n\n")
+    if r5['integrity_flagged_tasks']:
+        flagged_names = ', '.join(f'`{task}`' for task in r5['integrity_flagged_tasks'])
+        note = (note.rstrip() + f" [Hash-anchored manual review](evidence/exact_tb_integrity_manual_notes.json) "
+                f"flags rewarded {flagged_names} for accessing or probing evaluation/agent logs; "
+                "raw rewards remain recorded, but these trajectories are excluded from clean training pending full review. "
+                "The observed probes alone do not prove hidden-answer retrieval or reward alteration.\n\n")
     readme = readme.replace('Scores are benchmark-recorded values.', note + 'Scores are benchmark-recorded values.', 1)
 if beam_r2_recovery:
     note = ("Beam TB2.1 round 2 has an original `git-multibranch` trial with six real "
@@ -2117,8 +2144,13 @@ if r4_progress:
     note = (f"Muse NVFP4 精确镜像 TB2.1 第 4 轮在 2902 上独立抽样 89 题；"
             f"[固定题目和端点凭据](evidence/muse_nvfp4_r4_progress.json)现记录 "
             f"**{r4['graded']}/89 题原生判分、{r4['success']} 题成功**。"
-            "[已发布回复的 thinking 核验](evidence/muse_nvfp4_r4_thinking_audit.json)逐条检查第 4 轮已判分题目的原始回复。"
+            "[已发布回复的 thinking 核验](evidence/muse_nvfp4_r4_thinking_audit.json)覆盖其所引用归档内的已判分题目；新增题目待下一次归档核验。"
             "全部判分和轨迹审查完成前不报告整轮准确率，既有前三轮统计保持独立。\n\n")
+    if r4['integrity_flagged_tasks']:
+        flagged_names = '、'.join(f'`{task}`' for task in r4['integrity_flagged_tasks'])
+        note = (note.rstrip() + f"[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)标记了成功题 {flagged_names} "
+                "探查评测或 agent 日志。原始 reward 保留，轨迹暂不进入干净训练集；"
+                "目前不能据此断定读到了隐藏答案或修改了评分。\n\n")
     chinese_report = chinese_report.replace('# 模型评测结果快照\n', '# 模型评测结果快照\n\n' + note, 1)
 if r5_progress:
     r5 = nvfp4_rounds['5']
@@ -2126,6 +2158,11 @@ if r5_progress:
             f"[固定题目和端点凭据](evidence/muse_nvfp4_r5_progress.json)现记录 "
             f"**{r5['graded']}/89 题原生判分、{r5['success']} 题成功**。"
             "全部判分和轨迹审查完成前不报告第 5 轮准确率。\n\n")
+    if r5['integrity_flagged_tasks']:
+        flagged_names = '、'.join(f'`{task}`' for task in r5['integrity_flagged_tasks'])
+        note = (note.rstrip() + f"[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)标记了成功题 {flagged_names} "
+                "探查评测或 agent 日志。原始 reward 保留，轨迹暂不进入干净训练集；"
+                "目前不能据此断定读到了隐藏答案或修改了评分。\n\n")
     chinese_report = chinese_report.replace('# 模型评测结果快照\n', '# 模型评测结果快照\n\n' + note, 1)
 if beam_r2_recovery:
     note = ("Beam TB2.1 第 2 轮 `git-multibranch` 原始尝试已有 6 条真实模型回复，但 tmux 会话丢失后"
