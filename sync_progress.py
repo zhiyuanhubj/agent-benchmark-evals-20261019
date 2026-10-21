@@ -371,6 +371,10 @@ def cycle():
                 continue
             run([PYTHON, str(ROOT / 'export_snapshot.py')])
             scores = json.loads((ROOT / 'results/scores.json').read_text())
+            # Audit work above can take minutes while live TB trials finish.
+            # Reconcile the refreshed score cutoff with the archive before
+            # checking released I/O, instead of forcing a full source rescan.
+            sync_native_archives(scores)
             run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
             audit = json.loads((ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json').read_text())
             reported = scores['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['rounds']['1']
