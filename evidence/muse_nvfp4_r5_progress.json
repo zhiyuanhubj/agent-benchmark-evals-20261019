@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T11:54:39.365781+00:00",
+  "generated_utc": "2026-10-21T12:29:13.004788+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 21,
-  "graded": 21,
+  "terminal": 22,
+  "graded": 22,
   "success": 17,
   "active_trial_dirs": 2,
-  "raw_responses": 1042,
+  "raw_responses": 1085,
   "tasks": {
     "hf-model-inference": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/hf-model-inference__CkHrHWt/result.json",
@@ -59,7 +59,12 @@
       "reward": 1.0,
       "exception": null
     },
-    "pytorch-model-recovery": null,
+    "query-optimize": null,
+    "pytorch-model-recovery": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/pytorch-model-recovery__pxd6TTq/result.json",
+      "reward": 0.0,
+      "exception": "AgentTimeoutError"
+    },
     "log-summary-date-ranges": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/log-summary-date-ranges__ta24o6P/result.json",
       "reward": 1.0,
