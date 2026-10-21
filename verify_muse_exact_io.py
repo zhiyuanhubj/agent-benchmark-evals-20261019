@@ -22,6 +22,10 @@ live_archive_started = datetime.strptime(live_stamp, '%Y%m%dT%H%M%SZ').replace(t
 published = json.loads((ROOT / 'results/scores.json').read_text())
 exact_profile = published['models']['muse_nvfp4']['tb2_1_exact_supplied_images']
 score_generated = datetime.fromisoformat(exact_profile.get('native_score_snapshot_utc', published['generated_utc']))
+assert score_generated == datetime.fromisoformat(published['generated_utc']), (
+    'Muse NVFP4 native score cutoff must match the published snapshot; '
+    'a stale cutoff can hide scored results from the released I/O audit'
+)
 deferred_post_score_results = []
 
 
