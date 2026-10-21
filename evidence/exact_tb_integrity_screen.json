@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T02:27:01.767929+00:00",
+  "generated_utc": "2026-10-21T02:32:38.147424+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -18,7 +18,7 @@
       }
     },
     "muse_bf16": {
-      "scored_trajectories_checked": 59,
+      "scored_trajectories_checked": 60,
       "pattern_hit_trajectories": 14,
       "pattern_hit_successes": 10,
       "rule_hit_counts": {
@@ -85,7 +85,7 @@
       "rule_hit_counts": {}
     },
     "muse_nvfp4_r5": {
-      "scored_trajectories_checked": 0,
+      "scored_trajectories_checked": 1,
       "pattern_hit_trajectories": 0,
       "pattern_hit_successes": 0,
       "rule_hit_counts": {}
@@ -103,7 +103,7 @@
       }
     },
     "beam_bf16_r3": {
-      "scored_trajectories_checked": 73,
+      "scored_trajectories_checked": 74,
       "pattern_hit_trajectories": 6,
       "pattern_hit_successes": 2,
       "rule_hit_counts": {
@@ -3458,6 +3458,17 @@
     },
     {
       "model": "muse_bf16",
+      "task": "regex-chess",
+      "reward": 1.0,
+      "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/regex-chess__Ce92J49/agent/trajectory.json",
+      "trajectory_sha256": "e52967ff6640f347a7fb744ac0dbca521aa0690a7d173c838442036453c35e71",
+      "steps": 38,
+      "tool_calls": 82,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_bf16",
       "task": "mteb-retrieve",
       "reward": 0.0,
       "trajectory_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/mteb-retrieve__BJH96VD/agent/trajectory.json",
@@ -5830,6 +5841,18 @@
       "trajectory_sha256": "4ad6f4068ac0f76a0af7f386e1a83fd6a213df6a3ce6c90c95e819b1a1c15a83",
       "steps": 46,
       "tool_calls": 167,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "adaptive-rejection-sampler",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/adaptive-rejection-sampler__kUXZC9c/agent/trajectory.json",
+      "trajectory_sha256": "00d43f9f261942a5e7192100324e0d1cc24e700c8cc435b5fcbc1059fa8ed23d",
+      "steps": 10,
+      "tool_calls": 28,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -11227,6 +11250,18 @@
       "trajectory_sha256": "b238ba794f351ebf6e9ac7f5a52c34f15aca839dc0761e6b0cc06417293645f6",
       "steps": 9,
       "tool_calls": 11,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "beam_bf16_r3",
+      "round": 3,
+      "task": "schemelike-metacircular-eval",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/schemelike-metacircular-eval__aYsPSia/agent/trajectory.json",
+      "trajectory_sha256": "4152ffa282be69b76253ee7c44ed5368de1588ed4e7851333872353d5463b916",
+      "steps": 627,
+      "tool_calls": 696,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

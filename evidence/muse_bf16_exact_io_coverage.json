@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T02:27:57.605311+00:00",
+  "generated_utc": "2026-10-21T02:53:51.936321+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 60,
-  "success_count": 47,
+  "scored_tasks": 61,
+  "success_count": 48,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -228,6 +228,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/break-filter-js-from-html__WqN7m7x/result.json"
     },
+    "cobol-modernization": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/cobol-modernization__LatX4UC/result.json"
+    },
     "caffe-cifar-10": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/caffe-cifar-10__VAciJUM/result.json"
@@ -246,12 +250,6 @@
     }
   },
   "ungraded_native_terminal_tasks": {
-    "cobol-modernization": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json",
-      "exception_type": "InternalServerError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "extract-elf": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-elf__qChRGKg/result.json",
       "exception_type": "InternalServerError",
@@ -410,11 +408,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 60,
-  "covered_raw_response_sets": 60,
-  "covered_trajectories": 60,
-  "scored_raw_response_count": 2380,
-  "nonempty_reasoning_response_count": 2379,
+  "covered_results": 61,
+  "covered_raw_response_sets": 61,
+  "covered_trajectories": 61,
+  "scored_raw_response_count": 2409,
+  "nonempty_reasoning_response_count": 2408,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -640,6 +638,10 @@
       "raw_responses": 25,
       "nonempty_reasoning_content": 25
     },
+    "cobol-modernization": {
+      "raw_responses": 29,
+      "nonempty_reasoning_content": 29
+    },
     "caffe-cifar-10": {
       "raw_responses": 58,
       "nonempty_reasoning_content": 58
@@ -664,14 +666,13 @@
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json": "cobol-modernization",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json": "constraints-scheduling",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
-  "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/cobol-modernization__LatX4UC/result.json"
-  ],
+  "deferred_post_score_results": [],
   "archives": [
     "muse_bf16.tar.zst",
     "muse_bf16_delta_20261019T053146Z.tar.zst",
@@ -837,6 +838,7 @@
     "muse_bf16_delta_20261021T014235Z.tar.zst",
     "muse_bf16_delta_20261021T015951Z.tar.zst",
     "muse_bf16_delta_20261021T022258Z.tar.zst",
+    "muse_bf16_delta_20261021T023838Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

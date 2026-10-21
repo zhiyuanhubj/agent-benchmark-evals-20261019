@@ -1,17 +1,19 @@
 {
-  "generated_utc": "2026-10-21T02:26:39.582473+00:00",
-  "score_generated_utc": "2026-10-21T02:23:57.773485+00:00",
-  "archive_manifest": "input_output/archive_manifests/muse_nvfp4_exact_tb_live_20261021T022414Z.json",
-  "archive_sha256": "6319de7808569f21951bfbed942422d1fd92944a380d401491c08dedecc132cc",
+  "generated_utc": "2026-10-21T02:53:24.929381+00:00",
+  "score_generated_utc": "2026-10-21T02:49:38.686464+00:00",
+  "archive_manifest": "input_output/archive_manifests/muse_nvfp4_exact_tb_live_20261021T024959Z.json",
+  "archive_sha256": "832fff111f115a374b8e71b694af0877db6126baea428aa2bedac85fe3f3c796",
   "github_release_sha256_and_size_match": true,
-  "score_graded_tasks": 0,
-  "score_successes": 0,
-  "graded_tasks_in_archive": 0,
-  "successes_in_archive": 0,
-  "archived_graded_task_raw_response_counts": {},
-  "archived_graded_nonempty_reasoning_response_count": 0,
+  "score_graded_tasks": 1,
+  "score_successes": 1,
+  "graded_tasks_in_archive": 1,
+  "successes_in_archive": 1,
+  "archived_graded_task_raw_response_counts": {
+    "adaptive-rejection-sampler": 9
+  },
+  "archived_graded_nonempty_reasoning_response_count": 9,
   "archived_graded_empty_reasoning_response_count": 0,
   "empty_reasoning_tasks": [],
-  "qualification": "no_graded_trials_yet",
+  "qualification": "all_archived_graded_raw_responses_have_thinking",
   "limitation": "This checks thinking preservation for archived graded trials, not correctness or trajectory integrity. An archive may contain a new terminal trial captured after the score snapshot."
 }

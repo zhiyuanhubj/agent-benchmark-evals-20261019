@@ -1,0 +1,30 @@
+{
+  "generated_utc": "2026-10-21T02:41:25.889263+00:00",
+  "group": "muse_bf16_review_inputs",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_review_inputs_delta_20261021T022520Z.json",
+  "cutoff_utc": "2026-10-21T02:20:20.537150+00:00",
+  "new_source_roots": [],
+  "one_time_native_thinking_backfill": false,
+  "one_time_model_patch_backfill": false,
+  "archive_name": "muse_bf16_review_inputs_delta_20261021T024125Z.tar.zst",
+  "archive_size_bytes": 3949,
+  "archive_sha256": "16afdb29a06dd794619db2822ad525eca463623dc3c7ec3d9a5ecfc68617dac8",
+  "file_count": 24,
+  "source_bytes": 32705,
+  "skipped_disappeared_during_snapshot": 0,
+  "filename_counts": {
+    "qwen3_coder_30b_500--django__django-16100.json": 2,
+    "qwen3_coder_30b_500--django__django-16116.json": 2,
+    "qwen3_coder_30b_500--django__django-16136.json": 2,
+    "qwen3_coder_30b_500--django__django-16139.json": 2,
+    "qwen3_coder_30b_500--django__django-16255.json": 2,
+    "qwen3_coder_30b_500--django__django-16256.json": 2,
+    "qwen3_coder_30b_500--django__django-16263.json": 2,
+    "qwen3_coder_30b_500--django__django-16315.json": 2,
+    "task.toml": 8
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/queue"
+  ]
+}
