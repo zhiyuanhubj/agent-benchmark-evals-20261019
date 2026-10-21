@@ -233,6 +233,65 @@ for kind, count in [('tb', 89), ('deep', 113)]:
                 original_actual_model_responses=93,
                 qualification=beam_tb_recovery_plan['qualification'])}
         rounds[str(number)] = harbor(roots, expected_harbor[kind], excluded)
+        if kind == 'deep' and number == 2:
+            recovery_claim_path = Path('/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_deep_r2_client_recovery_claim.json')
+            if recovery_claim_path.exists():
+                claim = load(recovery_claim_path)
+                declared = claim['declared_tasks']
+                assert len(declared) == len(set(declared)) == 35
+                assert set(declared) <= set(expected_harbor[kind])
+                assert claim['source_config_sha256'] == hashlib.sha256(Path(claim['source_config']).read_bytes()).hexdigest()
+                assert claim['fixed_client_sha256'] == hashlib.sha256(Path(claim['fixed_client_source']).read_bytes()).hexdigest()
+                original_rows = claim['original_failed_before_model']
+                assert set(original_rows) == set(declared)
+                for task, frozen in original_rows.items():
+                    original_result = Path(frozen['original_result'])
+                    assert hashlib.sha256(original_result.read_bytes()).hexdigest() == frozen['original_result_sha256']
+                    original = load(original_result)
+                    assert (original.get('exception_info') or {}).get('exception_type') == 'AssertionError'
+                    assert 'before.get(\'litellm\') == \'1.106.0\'' in original['exception_info']['exception_traceback']
+                    assert not list((original_result.parent / 'agent/raw_responses').glob('*.json'))
+                    assert not (original_result.parent / 'agent/trajectory.json').exists()
+                    empty_patch = Path(frozen['empty_patch'])
+                    assert empty_patch.stat().st_size == 0
+                    assert hashlib.sha256(empty_patch.read_bytes()).hexdigest() == frozen['empty_patch_sha256']
+                    assert hashlib.sha256(Path(frozen['task_toml']).read_bytes()).hexdigest() == frozen['task_toml_sha256']
+                observed, qualified = {}, {}
+                for part, split in claim['splits'].items():
+                    config = Path(split['config'])
+                    assert hashlib.sha256(config.read_bytes()).hexdigest() == split['config_sha256']
+                    assert set(split['tasks']) <= set(declared)
+                    correction_root = legacy / 'remaining_deep/deep-results' / split['job_name']
+                    for result_path in correction_root.glob('*/result.json'):
+                        result = load(result_path)
+                        if not result.get('finished_at'):
+                            continue
+                        task = Path(result['config']['task']['path']).name
+                        assert task in split['tasks'] and task not in observed
+                        assert claim['endpoint'] in json.dumps(result['config']['agent'])
+                        reward = ((result.get('verifier_result') or {}).get('rewards') or {}).get('reward')
+                        row = {'result': str(result_path), 'result_sha256': hashlib.sha256(result_path.read_bytes()).hexdigest(),
+                               'reward': reward, 'exception': (result.get('exception_info') or {}).get('exception_type')}
+                        observed[task] = row
+                        if reward in (0, 1):
+                            trajectory = result_path.parent / 'agent/trajectory.json'
+                            assert trajectory.exists() and any(step.get('source') == 'agent' for step in load(trajectory)['steps'])
+                            assert (result_path.parent / 'agent/mini-swe-agent.trajectory.json').exists()
+                            qualified[task] = row
+                assert {task for split in claim['splits'].values() for task in split['tasks']} == set(declared)
+                original_metrics = rounds[str(number)]
+                assert original_metrics['terminal'] == original_metrics['unique_tasks'] == 113
+                assert original_metrics['exceptions'].get('AssertionError', 0) >= len(qualified)
+                original_metrics['graded'] += len(qualified)
+                original_metrics['success'] += sum(row['reward'] == 1 for row in qualified.values())
+                original_metrics['exceptions']['AssertionError'] -= len(qualified)
+                original_metrics['pre_model_client_recovery'] = {
+                    'claim': str(recovery_claim_path), 'claim_sha256': hashlib.sha256(recovery_claim_path.read_bytes()).hexdigest(),
+                    'declared_tasks': len(declared), 'native_terminal': len(observed),
+                    'native_graded': len(qualified),
+                    'native_success': sum(row['reward'] == 1 for row in qualified.values()),
+                    'observed': observed,
+                    'qualification': 'Frozen original no-response AssertionErrors remain preserved. Only first correction draws with model trajectory and native binary reward replace the corresponding ungraded originals; no correctness-based selection.'}
     record['beam_bf16'][kind] = rounds
 opus_pro_run_id = opus_command[opus_command.index('--run-id') + 1]
 opus_pro_roots = list((OPUS / 'pro-results').glob(f'*/*/{opus_pro_run_id}'))

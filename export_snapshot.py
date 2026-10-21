@@ -92,6 +92,24 @@ for split, row in native_review_da['splits'].items():
     assert mr['swe_review'][split]['metrics_on_terminal_subset'] == row['metrics']
 ex = read(B / 'expanded-current.json')
 beam_pro = ex['beam_bf16']['pro']
+beam_deep_client_recovery = ex['beam_bf16']['deep']['2'].get('pre_model_client_recovery')
+if beam_deep_client_recovery:
+    claim_path = Path(beam_deep_client_recovery['claim'])
+    claim = read(claim_path)
+    assert hashlib.sha256(claim_path.read_bytes()).hexdigest() == beam_deep_client_recovery['claim_sha256']
+    assert claim['expected_original_tasks'] == 113
+    assert len(claim['declared_tasks']) == beam_deep_client_recovery['declared_tasks'] == 35
+    for part, split in claim['splits'].items():
+        config_path = Path(split['config'])
+        assert hashlib.sha256(config_path.read_bytes()).hexdigest() == split['config_sha256']
+        write(f'evidence/beam_deep_r2_client_recovery_{part}_config.json', read(config_path))
+    write('evidence/beam_deep_r2_client_recovery_progress.json', {
+        'generated_utc': now,
+        'claim': 'evidence/beam_deep_r2_client_recovery_claim.json',
+        'claim_sha256': beam_deep_client_recovery['claim_sha256'],
+        **{key: beam_deep_client_recovery[key] for key in
+           ('declared_tasks', 'native_terminal', 'native_graded', 'native_success', 'observed', 'qualification')},
+    })
 assert beam_pro['expected'] == 731
 assert not beam_pro['duplicate_task_ids'], 'Beam Pro task IDs overlap across original and handoff runs'
 beam_pro_disk_correction = beam_pro.get('pre_model_disk_correction')
@@ -1104,7 +1122,14 @@ snapshot = {
                     'model_allocation': 2888,
                     'launch_claim': '/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_pro/round2_2888_20261020/launch-claim.json',
                     'qualification': 'Independent second 731-task draw; native grades remain separate from round 1.'},
-            'deepswe': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['beam_bf16']['deep'].items()},
+            'deepswe': {k: metric(v, k, 'complete' if v['graded'] == v['expected'] else 'partial_no_full_score') |
+                        ({'pre_model_client_recovery': {
+                            key: v['pre_model_client_recovery'][key]
+                            for key in ('declared_tasks', 'native_terminal', 'native_graded', 'native_success', 'qualification')
+                        } | {'claim': 'evidence/beam_deep_r2_client_recovery_claim.json',
+                             'progress': 'evidence/beam_deep_r2_client_recovery_progress.json'}}
+                         if 'pre_model_client_recovery' in v else {})
+                        for k, v in ex['beam_bf16']['deep'].items()},
             'tb2_1_legacy_cached_tag': {k: metric(v, k, 'partial_no_full_score') for k, v in ex['beam_bf16']['tb'].items()},
             'tb2_1_exact_supplied_images': {'rounds': exact['models']['beam_bf16']['rounds'], 'status': tb_profile_status(exact['models']['beam_bf16']['rounds'])},
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': br['swrbench']['judged'], 'accuracy': br['swrbench']['final_metrics']['overall']['accuracy'], 'f1': br['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},

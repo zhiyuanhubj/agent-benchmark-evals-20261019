@@ -1,0 +1,168 @@
+{
+  "config": {
+    "job_name": "beam-client-r2-remaining-20261021",
+    "jobs_dir": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results",
+    "n_attempts": 1,
+    "n_concurrent_trials": 2,
+    "quiet": true,
+    "timeout_multiplier": 1.0,
+    "environment": {
+      "import_path": "strict_docker:StrictDocker",
+      "delete": true
+    },
+    "agents": [
+      {
+        "import_path": "audited_agents:AuditedMini",
+        "model_name": "openai/Beam-1.0-501B-A23B",
+        "kwargs": {
+          "version": "2.4.2",
+          "max_tokens": 32768,
+          "cost_limit": "0",
+          "config": {
+            "model": {
+              "model_class": "litellm",
+              "model_kwargs": {
+                "api_base": "http://10.1.95.27:31328/v1",
+                "max_tokens": 32768,
+                "drop_params": true,
+                "temperature": 0.7,
+                "extra_body": {
+                  "chat_template_kwargs": {
+                    "reasoning_effort": "max"
+                  },
+                  "top_k": -1,
+                  "top_p": 0.99
+                }
+              }
+            }
+          }
+        },
+        "env": {
+          "OPENAI_API_KEY": "EMPTY",
+          "MSWEA_API_KEY": "EMPTY",
+          "OPENAI_BASE_URL": "http://10.1.95.27:31328/v1",
+          "OPENAI_API_BASE": "http://10.1.95.27:31328/v1"
+        }
+      }
+    ],
+    "tasks": [
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/prometheus-typed-label-sorting"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/psd-tools-blend-range-api"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/pwntools-tube-multiplexing"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/python-statemachine-state-data-scoping"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/query-persist-restored-query-state"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/quill-shared-toolbar-focus"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/returns-validated-error-accumulation"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/scc-bounded-memory-spilling"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/scriggo-method-declarations"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/skrub-duration-encoding"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/sql-formatter-bigquery-pipe-formatting"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/sqlfmt-create-table-ddl-formatting"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/sqlite-utils-safe-import-checkpoints"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/superjson-error-stack-serialization"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/task-task-graph-export"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/tengo-callable-instance-isolation"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/tengo-destructuring-bindings"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/termenv-preserve-ansi-resets"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/testem-bail-on-test-failure"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/testem-per-launcher-reports"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/textual-kitty-key-phases"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/textual-richlog-follow-state"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/tomlkit-toml-table-converters"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/true-myth-iterable-collection-combinators"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/ts-pattern-match-each"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/updo-policy-alerting"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/valibot-recursive-schema-composition"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/vitest-duration-sharding"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/vulture-persistent-analysis-cache"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/wasmi-trap-coredumps"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/wazero-multi-module-snapshots"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/yaegi-go-embed-directives"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/yjs-map-conflict-detection"
+      },
+      {
+        "path": "/fsx/home/zhiyuan/bench/strict_four_models_20261008/sources/deep-swe/tasks/ytt-jsonpath-query-api"
+      }
+    ],
+    "retry": {
+      "max_retries": 2,
+      "include_exceptions": [
+        "EnvironmentStartTimeoutError",
+        "AgentSetupTimeoutError",
+        "ApiRateLimitError",
+        "ApiInternalServerError",
+        "ApiOverloadedError",
+        "ApiConnectionClosedError"
+      ]
+    }
+  },
+  "regrade": false,
+  "slurm_job": 2968,
+  "kind": "beam_bf16",
+  "benchmark": "deep"
+}
