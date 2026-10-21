@@ -85,10 +85,12 @@ def sync_native_archives(scores, force_bf16=False):
                                     for path in extra_round.glob('*/result.json'))
                     raw_count += sum(1 for _ in extra_round.glob('*/agent/raw_responses/*.json'))
         if name == 'beam_bf16':
-            replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
-            if replacement.exists():
-                terminal += sum(bool(json.loads(path.read_text()).get('finished_at')) for path in replacement.glob('*/result.json'))
-                raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
+            for replacement_name in ('beam-tb-v1-exact-r2-infra-replacement-git-multibranch',
+                                     'beam-tb-v1-exact-r3-setup-replacement-20261021'):
+                replacement = BASE / '.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16' / replacement_name
+                if replacement.exists():
+                    terminal += sum(bool(json.loads(path.read_text()).get('finished_at')) for path in replacement.glob('*/result.json'))
+                    raw_count += sum(1 for _ in replacement.glob('*/agent/raw_responses/*.json'))
         live_manifests = sorted(manifest_dir.glob(f'{name}_exact_tb_live_*.json'))
         archived_terminal = 0
         latest_archive_time = None
@@ -232,7 +234,10 @@ def sync_native_archives(scores, force_bf16=False):
                         ('r23-2887-handoff.json', 'r2-launch.json', 'r3-launch.json',
                          'r2-exit.json', 'r3-exit.json',
                          'r2-git-multibranch-infra-replacement-claim.json',
-                         'r2-git-multibranch-infra-replacement-exit.json')]
+                         'r2-git-multibranch-infra-replacement-exit.json',
+                         'r3-setup-replacement-20261021-claim.json',
+                         'r3-setup-replacement-20261021-started.json',
+                         'r3-setup-replacement-20261021-exit.json')]
             receipts = [marker for marker in receipts if marker.exists()]
             handoff_newer |= latest_filename_counts.get('handoff_receipt', 0) < len(receipts)
             handoff_newer |= any(latest_archive_time is None or
@@ -349,6 +354,7 @@ def cycle():
                 for source in SOURCES:
                     run([PYTHON, str(source)], timeout=600)
                 run([PYTHON, str(ROOT / 'audit_muse_bf16_expiry_recovery.py')], timeout=60)
+            run([PYTHON, str(ROOT / 'audit_beam_r3_setup_recovery.py')], timeout=60)
             run([PYTHON, str(ROOT / 'export_snapshot.py')])
             scores = json.loads((ROOT / 'results/scores.json').read_text())
             run([PYTHON, str(ROOT / 'audit_muse_exact_round1.py')], timeout=180)
@@ -457,6 +463,7 @@ def cycle():
              'audit_opus47_provider_thinking.py',
              'audit_opus47_provider_retries.py',
              'audit_other_exact_round1.py',
+             'audit_beam_r3_setup_recovery.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',
              'protocol/muse_bf16_status_20261020.py',
@@ -506,6 +513,7 @@ def cycle():
              'audit_swe_review_official_rrr.py',
              'audit_muse_review_revision_v2.py', 'audit_review_revision_gateway.py',
              'protocol/beam_review_revision_v2', 'protocol/muse_review_revision_v2',
+             'protocol/beam_r3_setup_recovery_20261021.py',
              'export_snapshot.py', 'snapshot_live_tb.py', 'snapshot_other_exact_tb.py',
              'screen_exact_tb_integrity.py',
              'verify_muse_exact_io.py',

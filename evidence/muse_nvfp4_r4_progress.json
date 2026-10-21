@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T05:41:48.513972+00:00",
+  "generated_utc": "2026-10-21T06:12:09.211013+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021/claim.json",
   "claim_sha256": "a567060c9086480b734f8ccb308a79d2f9ff2bdf7824e299cd515a5334c60735",
   "expected": 89,
-  "terminal": 13,
-  "graded": 13,
-  "success": 11,
-  "active_trial_dirs": 1,
-  "raw_responses": 515,
+  "terminal": 15,
+  "graded": 15,
+  "success": 13,
+  "active_trial_dirs": 2,
+  "raw_responses": 596,
   "tasks": {
     "adaptive-rejection-sampler": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/adaptive-rejection-sampler__z8HM6wx/result.json",
@@ -24,9 +24,18 @@
       "reward": 1.0,
       "exception": null
     },
-    "large-scale-text-editing": null,
+    "large-scale-text-editing": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/large-scale-text-editing__Cnqttzo/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "circuit-fibsqrt": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/circuit-fibsqrt__yqX48gj/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "log-summary-date-ranges": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/log-summary-date-ranges__BNTzyTm/result.json",
       "reward": 1.0,
       "exception": null
     },
@@ -40,6 +49,8 @@
       "reward": 1.0,
       "exception": null
     },
+    "model-extraction-relu-logits": null,
+    "make-mips-interpreter": null,
     "count-dataset-tokens": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/count-dataset-tokens__RocrtEQ/result.json",
       "reward": 1.0,

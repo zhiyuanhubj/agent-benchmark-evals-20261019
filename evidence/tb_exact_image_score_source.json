@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-21T05:35:35.100949+00:00",
+  "utc": "2026-10-21T06:06:09.128949+00:00",
   "source_image_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/image-identity-plan.json",
   "source_image_plan_sha256": "e8ce45c5101dd43938bea69810d1dd1098895d5d64520370e23e252c2d57b22b",
   "models": {
@@ -40,21 +40,32 @@
         },
         "3": {
           "expected": 89,
-          "terminal": 88,
-          "graded": 74,
+          "terminal": 89,
+          "graded": 75,
           "success": 48,
           "active_trial_dirs": 89,
-          "archived_actual_model_responses": 5310,
+          "archived_actual_model_responses": 5317,
           "ungraded": 14,
           "exceptions": {
             "RuntimeError": 13,
-            "AgentTimeoutError": 4,
+            "AgentTimeoutError": 5,
             "RewardFileNotFoundError": 1
           },
           "excluded_user_reassignment_trials": [],
           "complete": false,
           "accuracy": null,
-          "legacy_cached_tag_scores_included": false
+          "legacy_cached_tag_scores_included": false,
+          "setup_replacement": {
+            "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r3-setup-replacement-20261021-claim.json",
+            "declared_tasks": 11,
+            "native_terminal": 1,
+            "native_graded": 1,
+            "native_success": 1,
+            "native_raw_responses": 6,
+            "effective_graded_if_replacements_admitted": 76,
+            "effective_success_if_replacements_admitted": 49,
+            "qualification": "Original ungraded setup failures remain preserved; one declared first replacement per task is shown separately, never best-of."
+          }
         }
       },
       "unit": {
@@ -70,12 +81,17 @@
       "exact_supplied_images_ready": true,
       "continuation_units": {
         "beam-exact-r3-2901-20261020": {
-          "MainPID": "556992",
+          "MainPID": "0",
           "Result": "success",
-          "ActiveState": "active"
+          "ActiveState": "inactive"
         },
         "beam-r2-git-multibranch-infra-recovery-20261019": {
           "MainPID": "3563440",
+          "Result": "success",
+          "ActiveState": "active"
+        },
+        "beam-r3-setup-recovery-20261021": {
+          "MainPID": "2709867",
           "Result": "success",
           "ActiveState": "active"
         }

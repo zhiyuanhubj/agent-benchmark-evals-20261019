@@ -1238,6 +1238,14 @@ snapshot = {
         'muse_bf16_exact_released_io_audit': str(bf16_io_path),
     },
 }
+if all(nvfp4_rounds[number]['complete'] for number in ('1', '2', '3')):
+    three_success = sum(nvfp4_rounds[number]['success'] for number in ('1', '2', '3'))
+    snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['three_round_raw_reward_mean'] = {
+        'success': three_success,
+        'total': 267,
+        'accuracy': three_success / 267,
+        'qualification': 'Mean of three complete 89-task exact-image rounds using native verifier rewards; separately declared infrastructure replacements are counted once. Known compromised successes remain in raw reward, so this is not clean accuracy.',
+    }
 snapshot['models']['muse_nvfp4']['tb2_1_exact_supplied_images']['recovery']['replica_2867'].update({
     'round23_controller': replica_2867_r23_unit,
     'round23_status': replica_r23_status,
@@ -1545,6 +1553,8 @@ bf16_excluded_names = ', '.join(f'`{name}`' for name in bf16_excluded)
 nvfp4_r2_excluded_names = ', '.join(f'`{name}`' for name in nvfp4_r2_excluded)
 beam_tb_rounds = be['tb2_1_exact_supplied_images']['rounds']
 be_tb = beam_tb_rounds['1']
+beam_setup_recovery_path = ROOT / 'evidence/beam_r3_setup_recovery_20261021.json'
+beam_setup_recovery = read(beam_setup_recovery_path) if beam_setup_recovery_path.exists() else None
 op_tb = op['tb2_1_exact_supplied_images']['rounds']['1']
 
 
@@ -1556,8 +1566,25 @@ def tb_zh(row):
     return f"**{row['success']}/89（{row['accuracy']:.2%}）**，首轮完整" if row['complete'] else f"**{row['graded']}/89 已判分、{row['success']} 成功**，首轮未完成"
 
 
-muse_exact_zh_done = f'；精确镜像 TB2.1 首轮 {tb_zh(mn_tb)}' if mn_tb['complete'] else ''
-muse_exact_zh_pending = '' if mn_tb['complete'] else f'精确镜像 TB2.1 首轮 {tb_zh(mn_tb)}；'
+muse_exact_en = '; '.join(
+    f"r{number} {row['success']}/89 complete" if row['complete']
+    else f"r{number} {row['success']}/{row['graded']} graded (partial)"
+    for number, row in nvfp4_rounds.items() if number in ('1', '2', '3')
+)
+muse_exact_zh_done = ''.join(
+    f"；精确镜像 TB2.1 第{number}轮 **{row['success']}/89（{row['accuracy']:.2%}）**"
+    for number, row in nvfp4_rounds.items() if number in ('1', '2', '3') and row['complete']
+)
+muse_exact_zh_pending = ''.join(
+    f"；精确镜像 TB2.1 第{number}轮 {row['graded']}/89 已判分、{row['success']} 成功，未完成"
+    for number, row in nvfp4_rounds.items() if number in ('1', '2', '3') and not row['complete']
+).lstrip('；')
+if muse_exact_zh_pending:
+    muse_exact_zh_pending += '；'
+if all(nvfp4_rounds[number]['complete'] for number in ('1', '2', '3')):
+    muse_exact_three_success = sum(nvfp4_rounds[number]['success'] for number in ('1', '2', '3'))
+    muse_exact_en += f'; raw 3-round mean {muse_exact_three_success}/267 = {muse_exact_three_success / 267:.2%}'
+    muse_exact_zh_done += f'；三轮原始 reward 均值 **{muse_exact_three_success}/267（{muse_exact_three_success / 267:.2%}）**'
 beam_exact_zh_done = f'；精确镜像 TB2.1 首轮 {tb_zh(be_tb)}' if be_tb['complete'] else ''
 beam_exact_zh_pending = '' if be_tb['complete'] else f'；精确镜像 TB2.1 首轮 {tb_zh(be_tb)}'
 beam_exact_en = '; '.join(
@@ -1696,7 +1723,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
-| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete; independent round 2 shard 0: {mn['swe_bench_pro_verified']['round_2']['graded']}/183 graded, {mn['swe_bench_pro_verified']['round_2']['success']} success (partial) | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {tb_en(mn_tb)} | {review(mn['swe_review'])} |
+| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete; independent round 2 shard 0: {mn['swe_bench_pro_verified']['round_2']['graded']}/183 graded, {mn['swe_bench_pro_verified']['round_2']['success']} success (partial) | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {muse_exact_en} | {review(mn['swe_review'])} |
 | Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'])} |
 | Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | {opus_review_en} |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
@@ -1762,7 +1789,7 @@ Muse NVFP4 round-one inputs are in `muse_nvfp4_exact_tb_round1_inputs_20261019.t
 
 The [round-one task audit](evidence/muse_nvfp4_exact_round1_audit.json) currently finds nonempty returned thinking in **{mn_audit.get('scored_nonempty_reasoning_response_count', 0)}/{mn_audit.get('scored_raw_response_count', 0)}** raw responses of scored Muse NVFP4 tasks. This is a field-preservation check, not a clean-trajectory verdict.
 
-Round 2 currently has **{nvfp4_rounds['2']['terminal']} terminal tasks, {nvfp4_rounds['2']['graded']} native grades, and {nvfp4_rounds['2']['success']} successes**. Its original `password-recovery` attempt lost the tmux session before verification; [the anchored record](evidence/muse_nvfp4_r2_password_recovery_ungraded.json) preserves the native exception, trajectory and {r2_ungraded_evidence['model_raw_response_count']} raw model responses. That original attempt remains ungraded. A [separately declared one-task infrastructure replacement](evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json) uses the same task, image and sampling settings on an equivalent pinned NVFP4 replica; its native reward is **{r2_replacement_reward_en}**. The round counts at most one grade for this task, with no best-of selection.
+Round 2 has **{nvfp4_rounds['2']['terminal']} terminal tasks, {nvfp4_rounds['2']['graded']} native grades, and {nvfp4_rounds['2']['success']} successes**. Its original `password-recovery` attempt lost the tmux session before verification; [the anchored record](evidence/muse_nvfp4_r2_password_recovery_ungraded.json) preserves the native exception, trajectory and {r2_ungraded_evidence['model_raw_response_count']} raw model responses. That original attempt remains ungraded. A [separately declared one-task infrastructure replacement](evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json) uses the same task, image and sampling settings on an equivalent pinned NVFP4 replica; its native reward is **{r2_replacement_reward_en}**. The round counts at most one grade for this task, with no best-of selection.
 
 The graded `password-recovery` replacement has a [trajectory integrity alert](evidence/muse_nvfp4_r2_password_replacement_integrity_alert.json): {password_replacement_integrity['host_boundary_probe_count']} tool calls probed host mount or block-device paths, including `nsenter` attempts that returned permission denied. Its raw reward remains recorded, but this trajectory is excluded from clean training. The inspected output does not establish successful host access or hidden-answer retrieval.
 
@@ -1774,7 +1801,7 @@ The round-2 **original first draws** currently have {round2_first_draw['terminal
 
 Ten more original round-2 trials lost their model endpoint with `InternalServerError: Connection error`. Their {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} original raw responses remain preserved. The [hash-anchored recovery claim](evidence/muse_nvfp4_r2_connection_recovery_claim.json) declares one separate replacement draw per task with unchanged tasks, images and sampling settings. So far it has {len(connection_results)} terminal tasks, {sum(row['reward'] in (0, 1) for row in connection_results.values())} native grades, and {sum(row['reward'] == 1 for row in connection_results.values())} successes; only a native grade can fill an original missing grade, with no best-of selection.
 
-The 89 original round-3 trials reached a refused endpoint before any model response. The [replacement audit](evidence/muse_nvfp4_r3_infra_replacement_progress.json) currently counts **{r3_replacement_progress['replacement_graded']}/89 native grades and {r3_replacement_progress['replacement_success']} successes**; a full-round score requires all 89 native grades. Allocation 2869 then timed out during its routed replacement batches. Its terminal results remain counted once, while 11 tasks without a terminal result have a separately documented infrastructure continuation on live allocation 2900. Four of those 11 retain interrupted source trajectories with 150 actual model replies; those originals are preserved and cannot be counted as independent scores. Batch b07 had not sampled on 2869 and was rerouted to 2900 before its first draw. Allocation 2899 continues its assigned batches. The same pinned NVFP4 weights, task images and generation settings are used; [routed controller](protocol/run_muse_nvfp4_r3_extra_routes_20261020.py) receipts, inputs, raw replies and trajectories are kept in the release archives. No result is selected by correctness.
+The 89 original round-3 trials reached a refused endpoint before any model response. The [replacement audit](evidence/muse_nvfp4_r3_infra_replacement_progress.json) counts **{r3_replacement_progress['replacement_graded']}/89 native grades and {r3_replacement_progress['replacement_success']} successes**; the full-round score is reported above only when all 89 native grades exist. Allocation 2869 then timed out during its routed replacement batches. Its terminal results remain counted once, while 11 tasks without a terminal result have a separately documented infrastructure continuation on live allocation 2900. Four of those 11 retain interrupted source trajectories with 150 actual model replies; those originals are preserved and cannot be counted as independent scores. Batch b07 had not sampled on 2869 and was rerouted to 2900 before its first draw. Allocation 2899 continues its assigned batches. The same pinned NVFP4 weights, task images and generation settings are used; [routed controller](protocol/run_muse_nvfp4_r3_extra_routes_20261020.py) receipts, inputs, raw replies and trajectories are kept in the release archives. No result is selected by correctness.
 
 The round-3 native success count includes `largest-eigenval`, whose [hash-anchored trajectory review](evidence/exact_tb_integrity_manual_notes.json) confirms that the agent slowed the NumPy reference solver through Python startup hooks. Its recorded reward is preserved, but this success is compromised as evidence of an unmodified speedup and the trajectory is excluded from clean training data.
 
@@ -1880,6 +1907,16 @@ if r5_progress:
             f"**{r5['graded']}/89 native grades and {r5['success']} successes**. "
             "A complete fifth-round accuracy awaits all 89 native grades and trajectory review.\n\n")
     readme = readme.replace('Scores are benchmark-recorded values.', note + 'Scores are benchmark-recorded values.', 1)
+if beam_setup_recovery:
+    note = (f"Beam TB2.1 round 3 has {beam_setup_recovery['expected_original_setup_failures']} "
+            "original task attempts that stopped during sandbox setup before any model response. "
+            f"A [predeclared one-draw recovery audit](evidence/beam_r3_setup_recovery_20261021.json) "
+            f"currently records {beam_setup_recovery['replacement_graded']}/"
+            f"{beam_setup_recovery['expected_original_setup_failures']} native replacement grades and "
+            f"{beam_setup_recovery['replacement_success']} successes. Original results and "
+            "replacement results remain separate; the ungraded originals are not model failures, "
+            "and no best-of selection is used.\n\n")
+    readme = readme.replace('Beam exact-image TB round 3 runs', note + 'Beam exact-image TB round 3 runs', 1)
 (ROOT / 'README.md').write_text(readme)
 chinese_report = f'''# 模型评测结果快照
 
@@ -1931,7 +1968,7 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 
 [Muse NVFP4 首轮逐题审计](evidence/muse_nvfp4_exact_round1_audit.json)目前确认已判分题的原始回复中 **{mn_audit.get('scored_nonempty_reasoning_response_count', 0)}/{mn_audit.get('scored_raw_response_count', 0)} 条含非空 thinking**。这只核验字段留存，不表示轨迹可直接作为干净训练数据。
 
-第 2 轮目前 **{nvfp4_rounds['2']['terminal']} 题终态、{nvfp4_rounds['2']['graded']} 题有原生判分、{nvfp4_rounds['2']['success']} 题成功**。原始 `password-recovery` 尝试在验证前失去 tmux 会话；[哈希锚定记录](evidence/muse_nvfp4_r2_password_recovery_ungraded.json)保留了原生异常、轨迹和 {r2_ungraded_evidence['model_raw_response_count']} 条模型原始回复，原尝试仍未判分。[单题基础设施补测声明](evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json)固定原题、镜像和采样设置，使用已核验的等价 NVFP4 副本；补测原生 reward 当前为 **{r2_replacement_reward_zh}**。本轮该题最多计一个有效判分，不择优取样。
+第 2 轮已有 **{nvfp4_rounds['2']['terminal']} 题终态、{nvfp4_rounds['2']['graded']} 题原生判分、{nvfp4_rounds['2']['success']} 题成功**。原始 `password-recovery` 尝试在验证前失去 tmux 会话；[哈希锚定记录](evidence/muse_nvfp4_r2_password_recovery_ungraded.json)保留了原生异常、轨迹和 {r2_ungraded_evidence['model_raw_response_count']} 条模型原始回复，原尝试仍未判分。[单题基础设施补测声明](evidence/muse_nvfp4_r2_password_recovery_replacement_claim.json)固定原题、镜像和采样设置，使用已核验的等价 NVFP4 副本；补测原生 reward 为 **{r2_replacement_reward_zh}**。本轮该题最多计一个有效判分，不择优取样。
 
 `password-recovery` 已判分补跑有[轨迹完整性警报](evidence/muse_nvfp4_r2_password_replacement_integrity_alert.json)：{password_replacement_integrity['host_boundary_probe_count']} 次工具调用探查宿主挂载或块设备路径，其中 `nsenter` 返回权限不足。原始 reward 保留，但这条轨迹排除出干净训练集；所检查的输出不能证明成功进入宿主或读取隐藏答案。
 
@@ -1943,7 +1980,7 @@ Muse NVFP4 首轮全部 89 题的公开 `task.toml`、原始分题配置和镜�
 
 另有 10 题原始第 2 轮尝试因旧模型端点连接中断而报 `InternalServerError: Connection error`，原有 {sum(row['original_raw_model_responses'] for row in connection_claim['origins'])} 条模型回复均保留。[哈希锚定补跑声明](evidence/muse_nvfp4_r2_connection_recovery_claim.json)逐题只安排一次独立基础设施补跑，题目、镜像和采样参数不变。目前补跑有 {len(connection_results)} 题终态、{sum(row['reward'] in (0, 1) for row in connection_results.values())} 题获原生判分、{sum(row['reward'] == 1 for row in connection_results.values())} 题成功；只有有效判分才填补原题的缺失值，不择优取样。
 
-第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。[补跑审计](evidence/muse_nvfp4_r3_infra_replacement_progress.json)现计 **{r3_replacement_progress['replacement_graded']}/89 题获原生判分、{r3_replacement_progress['replacement_success']} 题成功**；全部 89 题获原生判分前不报告整轮准确率。2869 后来在接手的批次运行中到期：已完成的原生结果只计一次，尚无终态结果的 11 题另有明确标记的基础设施续跑，转到仍在线的 2900。其中 4 题在中断前已有共 150 条模型回复，原始不完整轨迹保留但不当作独立分数。b07 在 2869 尚未采样，已在首次采样前转到 2900；2899 继续负责原定批次。使用同一固定 NVFP4 权重、题目镜像和采样参数；Release 归档保存路由凭据、输入、原始回复和轨迹，不按对错择优。
+第 3 轮原始 89 题均在模型首回复前遇到旧端点拒绝连接。[补跑审计](evidence/muse_nvfp4_r3_infra_replacement_progress.json)计 **{r3_replacement_progress['replacement_graded']}/89 题获原生判分、{r3_replacement_progress['replacement_success']} 题成功**；仅在 89 题全部判分后才在上表报告整轮准确率。2869 后来在接手的批次运行中到期：已完成的原生结果只计一次，尚无终态结果的 11 题另有明确标记的基础设施续跑，转到仍在线的 2900。其中 4 题在中断前已有共 150 条模型回复，原始不完整轨迹保留但不当作独立分数。b07 在 2869 尚未采样，已在首次采样前转到 2900；2899 继续负责原定批次。使用同一固定 NVFP4 权重、题目镜像和采样参数；Release 归档保存路由凭据、输入、原始回复和轨迹，不按对错择优。
 
 第 3 轮原生成功数包含 `largest-eigenval`。[哈希锚定轨迹核查](evidence/exact_tb_integrity_manual_notes.json)确认 agent 通过 Python 启动钩子拖慢 NumPy 参考求解器；原始 reward 保留，但这一题不能证明未受干预的加速，轨迹已排除出干净训练数据。
 
@@ -2055,5 +2092,14 @@ if r5_progress:
             f"**{r5['graded']}/89 题原生判分、{r5['success']} 题成功**。"
             "全部判分和轨迹审查完成前不报告第 5 轮准确率。\n\n")
     chinese_report = chinese_report.replace('# 模型评测结果快照\n', '# 模型评测结果快照\n\n' + note, 1)
+if beam_setup_recovery:
+    note = (f"Beam TB2.1 第 3 轮有 {beam_setup_recovery['expected_original_setup_failures']} 题原始尝试"
+            "在沙箱启动阶段、模型首回复前失败。"
+            f"[事先声明的单次补测审计](evidence/beam_r3_setup_recovery_20261021.json)现记录 "
+            f"{beam_setup_recovery['replacement_graded']}/"
+            f"{beam_setup_recovery['expected_original_setup_failures']} 题补测获原生判分，"
+            f"其中 {beam_setup_recovery['replacement_success']} 题成功。原始失败和补测结果分开保存；"
+            "未判分的原尝试不算模型失败，也不按成功与否择优取样。\n\n")
+    chinese_report = chinese_report.replace('Beam 精确镜像 TB 第 3 轮交由', note + 'Beam 精确镜像 TB 第 3 轮交由', 1)
 (ROOT / 'REPORT.zh-CN.md').write_text(chinese_report)
 print(json.dumps({'snapshot': now, 'files': len(files), 'repo': str(ROOT)}))

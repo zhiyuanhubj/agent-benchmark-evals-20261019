@@ -1,21 +1,21 @@
 {
-  "utc": "2026-10-21T05:35:29.987933+00:00",
+  "utc": "2026-10-21T06:06:00.859109+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
-      "terminal": 608,
-      "unique_tasks": 608,
-      "graded": 554,
-      "success": 327,
-      "missing_native_grader_completion": 54,
+      "terminal": 616,
+      "unique_tasks": 616,
+      "graded": 564,
+      "success": 334,
+      "missing_native_grader_completion": 52,
       "native_status_counts": {
-        "completed": 550,
+        "completed": 560,
         "run_error": 4,
         "eval_error": 2,
-        "run_error_or_eval_error": 52
+        "run_error_or_eval_error": 50
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 123,
+      "missing_result_task_count": 115,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection. Audited pre-model disk-full corrections are counted once only when their native grader completes.",
       "late_orphan_source_results_excluded": 2,
@@ -26,9 +26,9 @@
         "audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_pro_r1_pre_model_disk_failures.json",
         "audit_sha256": "22eaca2798c09b7322aef12e01b386cf7edd324edcf3128a6a715a45eadeca5f",
         "declared_tasks": 136,
-        "native_terminal": 85,
-        "native_graded": 85,
-        "native_success": 45,
+        "native_terminal": 87,
+        "native_graded": 87,
+        "native_success": 46,
         "rows": {
           "instance_ansible__ansible-29aea9ff3466e4cd2ed00524b9e56738d568ce8b-vba6da65a0f3baefda7a058ebbd0a8dcafb8512f5": {
             "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_ansible__ansible-29aea9ff3466e4cd2ed00524b9e56738d568ce8b-vba6da65a0f3b--5fc9d75ea74920cca25b5fb49bc3ce2407fbfe629f73c4ae9b5d0022a55fa999/attempt-1/result.json",
@@ -135,6 +135,13 @@
             "graded": true,
             "success": false
           },
+          "instance_ansible__ansible-ea04e0048dbb3b63f876aad7020e1de8eee9f362-v1055803c3a812189a1133297f7f5468579283f86": {
+            "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_ansible__ansible-ea04e0048dbb3b63f876aad7020e1de8eee9f362-v1055803c3a81--4fd9d295791a8fedc704f76376112808f7465230032b0346c4c13441e8e33a81/attempt-1/result.json",
+            "result_sha256": "cac102239f66017c4839279df871ef95fe027a1f94eebe7a95207836ad8cd67a",
+            "native_status": "completed",
+            "graded": true,
+            "success": true
+          },
           "instance_flipt-io__flipt-65581fef4aa807540cb933753d085feb0d7e736f": {
             "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_flipt-io__flipt-65581fef4aa807540cb933753d085feb0d7e736f--786ea238718abcd50805ce1381714bf6633a859da47709efe7de43839ae9e74e/attempt-1/result.json",
             "result_sha256": "9f07a2c61fc4d9812229ad8057f87d470b5c4ddcd62b83d6b718c67ced3cd989",
@@ -211,6 +218,13 @@
             "native_status": "completed",
             "graded": true,
             "success": true
+          },
+          "instance_internetarchive__openlibrary-7edd1ef09d91fe0b435707633c5cc9af41dedddf-v76304ecdb3a5954fcf13feb710e8c40fcf24b73c": {
+            "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_internetarchive__openlibrary-7edd1ef09d91fe0b435707633c5cc9af41dedddf-v--64f5adae27bff24ff7175cc0f059fc6c47f0d220037fd17a557623c4cfee88a8/attempt-1/result.json",
+            "result_sha256": "03e070697a6baeed1316b2806c9ff77d00c9b5159d794c27d3f5d1cc37d495c3",
+            "native_status": "completed",
+            "graded": true,
+            "success": false
           },
           "instance_internetarchive__openlibrary-427f1f4eddfc54735ca451779d4f95bf683d1b0e-v0f5aece3601a5b4419f7ccec1dbda2071be28ee4": {
             "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/disk_correction_results/beam_pro_r1_pre_model_disk_correction_2968_20261020/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r1-pre-model-disk-2968-20261020/details/instance_internetarchive__openlibrary-427f1f4eddfc54735ca451779d4f95bf683d1b0e-v--33ecee04d3328cdc5b794e71cfd3778551f6ab660d38d9f8309c4d2b87d01b66/attempt-1/result.json",
@@ -631,17 +645,17 @@
     },
     "pro_round2": {
       "expected": 731,
-      "terminal": 173,
-      "unique_tasks": 173,
-      "graded": 173,
-      "success": 113,
+      "terminal": 177,
+      "unique_tasks": 177,
+      "graded": 177,
+      "success": 115,
       "missing_native_grader_completion": 0,
       "native_status_counts": {
-        "completed": 171,
+        "completed": 175,
         "run_error": 2
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 558,
+      "missing_result_task_count": 554,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -772,10 +786,10 @@
         "expected": 113,
         "terminal": 113,
         "unique_tasks": 113,
-        "graded": 102,
-        "success": 42,
+        "graded": 106,
+        "success": 44,
         "exceptions": {
-          "AssertionError": 10,
+          "AssertionError": 6,
           "VerifierTimeoutError": 1
         },
         "duplicate_task_ids": [],
@@ -788,9 +802,9 @@
           "claim": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/beam_deep_r2_client_recovery_claim.json",
           "claim_sha256": "e2161fdbc40d903cd9fb8705342259df1b0a5b9a6232de4fcaccdb0f620ec410",
           "declared_tasks": 35,
-          "native_terminal": 25,
-          "native_graded": 25,
-          "native_success": 11,
+          "native_terminal": 29,
+          "native_graded": 29,
+          "native_success": 13,
           "observed": {
             "prometheus-transactional-reload-status": {
               "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-pilot-20261021/prometheus-transactional-reload__GkjhV26/result.json",
@@ -808,6 +822,12 @@
               "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/textual-richlog-follow-state__Xq6nN9n/result.json",
               "result_sha256": "c5b0a455dac27e78b0b5dcac0651aedaeabc9192f103e7a2cb6e935bb32293e6",
               "reward": 1,
+              "exception": null
+            },
+            "updo-policy-alerting": {
+              "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/updo-policy-alerting__ogYNcWk/result.json",
+              "result_sha256": "c1dd46bcdc4f7ecac425b45378d40f494f31e121294181c2093e744fb75ce7f2",
+              "reward": 0,
               "exception": null
             },
             "true-myth-iterable-collection-combinators": {
@@ -864,6 +884,12 @@
               "reward": 0,
               "exception": null
             },
+            "ts-pattern-match-each": {
+              "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/ts-pattern-match-each__H68NEUE/result.json",
+              "result_sha256": "bfc10fd81d069f8e746241c98b5f6478b3dde25edaafb23e36056223787c7b6a",
+              "reward": 1,
+              "exception": null
+            },
             "superjson-error-stack-serialization": {
               "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/superjson-error-stack-serializat__grAiSHq/result.json",
               "result_sha256": "f540acdad2f3982297395060f313d0a647367e7ab200917b23816e5fc3917f3a",
@@ -903,6 +929,18 @@
             "pwntools-tube-multiplexing": {
               "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/pwntools-tube-multiplexing__FRufFKY/result.json",
               "result_sha256": "a99492b33232ee9728474316f6153f1d6a096cb6143efac928736030269c2bb8",
+              "reward": 0,
+              "exception": null
+            },
+            "vitest-duration-sharding": {
+              "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/vitest-duration-sharding__uqbwL4F/result.json",
+              "result_sha256": "d78f4a37c29b49b3aeda398b017010a84ae8ba6e54b4c30cf1def4934bf8661d",
+              "reward": 1,
+              "exception": null
+            },
+            "vulture-persistent-analysis-cache": {
+              "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/vulture-persistent-analysis-cach__g4UR6jW/result.json",
+              "result_sha256": "eb43fc90c7fae6d185a2dd99a18e58c843f41c43293f248ebcf5beccb8803e7c",
               "reward": 0,
               "exception": null
             },
@@ -965,7 +1003,7 @@
     },
     "tb_first_round_client_protocol_recovery": {
       "current": {
-        "utc": 1792560840.9303696,
+        "utc": 1792562652.4494636,
         "phase": "one_corrected_client_sample_terminal",
         "native_unit": {
           "MainPID": "0",
@@ -1206,17 +1244,18 @@
     },
     "pro": {
       "expected": 731,
-      "terminal": 204,
-      "unique_tasks": 204,
-      "graded": 204,
+      "terminal": 299,
+      "unique_tasks": 299,
+      "graded": 205,
       "success": 131,
-      "missing_native_grader_completion": 0,
+      "missing_native_grader_completion": 94,
       "native_status_counts": {
         "completed": 195,
-        "run_error": 9
+        "run_error": 10,
+        "run_error_or_eval_error": 94
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 527,
+      "missing_result_task_count": 432,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection.",
       "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
@@ -1229,13 +1268,13 @@
     "tb": {
       "1": {
         "expected": 89,
-        "terminal": 88,
-        "unique_tasks": 88,
-        "graded": 65,
-        "success": 50,
+        "terminal": 89,
+        "unique_tasks": 89,
+        "graded": 68,
+        "success": 52,
         "exceptions": {
-          "RuntimeError": 17,
-          "InternalServerError": 6,
+          "RuntimeError": 16,
+          "InternalServerError": 5,
           "AgentTimeoutError": 9
         },
         "duplicate_task_ids": [],
@@ -1265,6 +1304,14 @@
             "reason": "pre_model_infrastructure_failure",
             "exception_type": "InternalServerError",
             "trajectory_sha256": "082c5b8ef92545fe31cf5c023dd09f35609942ad5a4ac537d1f091daee57f446"
+          },
+          {
+            "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json",
+            "task": "fix-ocaml-gc",
+            "sha256": "86705a495062b3f2d84239fd9c6cd334afc6bb43d94b2b14a0df4ac7f383b78b",
+            "reason": "pre_model_infrastructure_failure",
+            "exception_type": "InternalServerError",
+            "trajectory_sha256": "2919e26281a58fd6128c749127dfea1807b3834f695805ffe581dcbf8a6bfef0"
           },
           {
             "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json",
@@ -1313,17 +1360,25 @@
             "reason": "pre_model_infrastructure_failure",
             "exception_type": "RuntimeError",
             "trajectory_sha256": null
+          },
+          {
+            "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/kv-store-grpc__7PfvuA5/result.json",
+            "task": "kv-store-grpc",
+            "sha256": "4204e0affed24e944b6c1a278aeadb3990855f1fdbcbe1be80fb46a1de8ecf02",
+            "reason": "pre_model_infrastructure_failure",
+            "exception_type": "RuntimeError",
+            "trajectory_sha256": null
           }
         ],
-        "missing_result_task_count": 1,
+        "missing_result_task_count": 0,
         "task_id_source": "Original trial config task path; finished native trial and binary reward required",
         "supplemental_run_id": "muse-bf16-tb-r1-direct-2886-20261020",
         "pre_model_infrastructure_recovery": {
           "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/muse-bf16-tb-r1-pre-model-recovery-20261020-claim.json",
           "claim_sha256": "e4c6f81ac0d58ce519ab07c7d85e1cde70633d3dd9ca045145a5f3ff8ccdbe2e",
           "declared_tasks": 30,
-          "native_terminal": 9,
-          "replaced_unscored_originals": 9,
+          "native_terminal": 11,
+          "replaced_unscored_originals": 11,
           "excluded_partial_model_output_tasks": [
             "query-optimize",
             "schemelike-metacircular-eval"
@@ -1579,7 +1634,7 @@
     }
   },
   "reserved_capacity": {
-    "utc": 1792560900.9131556,
+    "utc": 1792562735.1972003,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2902": {
@@ -1705,7 +1760,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792560911.386531,
+    "utc": 1792562742.7217994,
     "allocations": {
       "2887": {
         "phase": "ready",
@@ -2076,7 +2131,7 @@
         }
       },
       "scorer_version": "v3_gateway_recovery_and_malformed_original_report_fallback",
-      "utc": 1792560919.8516402
+      "utc": 1792562742.6483471
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -2521,7 +2576,7 @@
       "qualification": "Same predeclared 128 Pro task IDs and identical harness/model request budgets. The original screening round and separately sampled full-run responses stay separate; no best-of selection or score replacement. This does not supply a full 731-task base run, a held-out estimate, three complete repetitions, or a cross-benchmark promotion decision. Serving-batch nondeterminism can remain at temperature zero."
     },
     "early9_supplemental_report_aggregation": {
-      "utc": 1792560053.896629,
+      "utc": 1792561843.4597788,
       "benchmark": "DeepSWE",
       "model": "early9",
       "expected": 113,
@@ -2541,7 +2596,7 @@
       "qualification": "Native counts remain unchanged. Supplemental values are the unchanged original scorer applied only to already-produced original reports. No model response or tests are rerun, and no original timeout record is overwritten. Not a completed 113-task run or three-round mean."
     },
     "early9_never_started_deep_remainder_handoff": {
-      "utc": 1792560840.8318381,
+      "utc": 1792562652.3299072,
       "phase": "recovered_remainder_native_trials_terminal",
       "expected": 19,
       "terminal": 19,
@@ -3129,7 +3184,7 @@
     },
     "early9_client_infrastructure_recovery": {
       "current": {
-        "utc": 1792560840.8318381,
+        "utc": 1792562652.3299072,
         "phase": "recovered_remainder_native_trials_terminal",
         "expected": 19,
         "terminal": 19,
@@ -5523,7 +5578,7 @@
       "qualification": "Original449 and469 have real observed weight differences. This does not establish a stronger checkpoint, full449 availability, full-model nonfinite clearance, or training-update magnitude over all parameters. No model sampling, data edits or GPU interruption."
     },
     "mix449_original_file_recovery": {
-      "utc": 1792560919.787154,
+      "utc": 1792562757.72178,
       "sources": {
         "2812": {
           "phase": "ready",
@@ -6005,7 +6060,7 @@
       "utc": 1792356179.122217
     },
     "mix449_receiver_independent_archive": {
-      "utc": 1792560841.0887504,
+      "utc": 1792562652.6414735,
       "phase": "waiting_for_missing_original_native_shards",
       "persistent_native_shards": 32,
       "expected_native_shards": 64,
@@ -6063,7 +6118,7 @@
         }
       },
       "complete_original_source_archives": [],
-      "separate_data_volume_available_bytes": 71111802880,
+      "separate_data_volume_available_bytes": 71094239232,
       "minimum_shared_free_bytes": 274877906944,
       "original_training_step": 449,
       "original_sources_deleted": false,
@@ -6268,13 +6323,13 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792560874.713461
+      "utc": 1792562745.8052077
     },
     "queue_states": {
       "mix449": {
         "phase": "waiting_for_complete_original_artifact",
         "candidate": "mix449",
-        "utc": 1792560902.0116901
+        "utc": 1792562732.789722
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
@@ -6294,7 +6349,7 @@
       "phase": "waiting_for_complete_original449_artifact",
       "model_generation_started": false,
       "frozen_top_two_unchanged": true,
-      "utc": 1792560901.9870908
+      "utc": 1792562732.7874708
     },
     "original449_export_controller": null,
     "original449_inference_ready": null,

@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T05:50:59.204274+00:00",
+  "generated_utc": "2026-10-21T06:24:13.815229+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261021T053114Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261021T055916Z.tar.zst",
   "expected": 89,
-  "terminal": 88,
-  "graded": 74,
+  "terminal": 89,
+  "graded": 75,
   "success": 48,
   "missing_graded_tasks": [
     "git-multibranch",
@@ -23,8 +23,7 @@
     "pypi-server",
     "pytorch-model-cli",
     "pytorch-model-recovery",
-    "qemu-alpine-ssh",
-    "regex-chess"
+    "qemu-alpine-ssh"
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch",
@@ -608,6 +607,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/raman-fitting__WYEF3J7/result.json",
       "raw_response_count": 72,
       "responses_with_reasoning_content": 72
+    },
+    "regex-chess": {
+      "reward": 0.0,
+      "result_sha256": "b7865a5e571b796bb0ae2641589b2e8f2e342e08ef3c7bc0861c29028fab6394",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/regex-chess__AyoxyUx/result.json",
+      "raw_response_count": 935,
+      "responses_with_reasoning_content": 935
     },
     "regex-log": {
       "reward": 1.0,

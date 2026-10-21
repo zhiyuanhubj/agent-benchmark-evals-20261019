@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T05:49:20.756969+00:00",
+  "generated_utc": "2026-10-21T06:22:37.192280+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 65,
-  "success_count": 50,
+  "scored_tasks": 68,
+  "success_count": 52,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -172,6 +172,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/mailman__dHHrW9p/result.json"
     },
+    "train-fasttext": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/train-fasttext__XJZBhMj/result.json"
+    },
     "gcode-to-text": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/gcode-to-text__CD9osqm/result.json"
@@ -228,6 +232,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/sqlite-db-truncate__Bc2vUSP/result.json"
     },
+    "fix-ocaml-gc": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/fix-ocaml-gc__9dykfRc/result.json"
+    },
     "filter-js-from-html": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/filter-js-from-html__pPxgEjS/result.json"
@@ -239,6 +247,10 @@
     "extract-elf": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/extract-elf__TA4j864/result.json"
+    },
+    "kv-store-grpc": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/kv-store-grpc__FBrbUtr/result.json"
     },
     "db-wal-recovery": {
       "reward": 0.0,
@@ -280,12 +292,6 @@
     },
     "protein-assembly": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/protein-assembly__9JFswSK/result.json",
-      "exception_type": "InternalServerError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
-    "fix-ocaml-gc": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json",
       "exception_type": "InternalServerError",
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
@@ -368,12 +374,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "kv-store-grpc": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/kv-store-grpc__7PfvuA5/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "openssl-selfsigned-cert": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/openssl-selfsigned-cert__4v8jpyZ/result.json",
       "exception_type": "RuntimeError",
@@ -406,11 +406,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 65,
-  "covered_raw_response_sets": 65,
-  "covered_trajectories": 65,
-  "scored_raw_response_count": 2544,
-  "nonempty_reasoning_response_count": 2543,
+  "covered_results": 68,
+  "covered_raw_response_sets": 68,
+  "covered_trajectories": 68,
+  "scored_raw_response_count": 2844,
+  "nonempty_reasoning_response_count": 2843,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -580,6 +580,10 @@
       "raw_responses": 120,
       "nonempty_reasoning_content": 120
     },
+    "train-fasttext": {
+      "raw_responses": 209,
+      "nonempty_reasoning_content": 209
+    },
     "gcode-to-text": {
       "raw_responses": 83,
       "nonempty_reasoning_content": 83
@@ -636,6 +640,10 @@
       "raw_responses": 12,
       "nonempty_reasoning_content": 12
     },
+    "fix-ocaml-gc": {
+      "raw_responses": 81,
+      "nonempty_reasoning_content": 81
+    },
     "filter-js-from-html": {
       "raw_responses": 21,
       "nonempty_reasoning_content": 21
@@ -647,6 +655,10 @@
     "extract-elf": {
       "raw_responses": 34,
       "nonempty_reasoning_content": 34
+    },
+    "kv-store-grpc": {
+      "raw_responses": 10,
+      "nonempty_reasoning_content": 10
     },
     "db-wal-recovery": {
       "raw_responses": 44,
@@ -679,9 +691,11 @@
   "direct_run_id": "muse-bf16-tb-r1-direct-2886-20261020",
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json": "fix-ocaml-gc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/filter-js-from-html__3snMrie/result.json": "filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-elf__qChRGKg/result.json": "extract-elf",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/kv-store-grpc__7PfvuA5/result.json": "kv-store-grpc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/db-wal-recovery__e9zUrop/result.json": "db-wal-recovery",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json": "cobol-modernization",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
@@ -689,7 +703,9 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json": "constraints-scheduling",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
-  "deferred_post_score_results": [],
+  "deferred_post_score_results": [
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/log-summary-date-ranges__EAC3bHs/result.json"
+  ],
   "archives": [
     "muse_bf16.tar.zst",
     "muse_bf16_delta_20261019T053146Z.tar.zst",
@@ -866,6 +882,8 @@
     "muse_bf16_delta_20261021T045226Z.tar.zst",
     "muse_bf16_delta_20261021T051257Z.tar.zst",
     "muse_bf16_delta_20261021T053447Z.tar.zst",
+    "muse_bf16_delta_20261021T060259Z.tar.zst",
+    "muse_bf16_delta_20261021T061602Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

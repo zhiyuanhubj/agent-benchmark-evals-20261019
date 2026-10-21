@@ -31,24 +31,34 @@ archive.parent.mkdir(exist_ok=True)
 assert not archive.exists()
 
 payloads = {}
-counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0, 'handoff_receipt': 0}
+counts = {'job_config': 0, 'task_input': 0, 'trial_config': 0, 'trajectory': 0, 'raw_response': 0, 'result': 0, 'handoff_receipt': 0, 'controller_source': 0}
 terminal_results = 0
 if model == 'beam_bf16':
     for receipt_name in ('r23-2887-handoff.json', 'r2-launch.json', 'r3-launch.json',
                          'r2-exit.json', 'r3-exit.json',
                          'r2-git-multibranch-infra-replacement-claim.json',
-                         'r2-git-multibranch-infra-replacement-exit.json'):
+                         'r2-git-multibranch-infra-replacement-exit.json',
+                         'r3-setup-replacement-20261021-claim.json',
+                         'r3-setup-replacement-20261021-started.json',
+                         'r3-setup-replacement-20261021-exit.json'):
         receipt = SOURCE / 'beam/state' / receipt_name
         if receipt.exists():
             payloads[receipt] = receipt.read_bytes()
             counts['handoff_receipt'] += 1
+    controller = ROOT / 'protocol/beam_r3_setup_recovery_20261021.py'
+    if controller.exists():
+        payloads[controller] = controller.read_bytes()
+        counts['controller_source'] += 1
 for job in sorted(result_root.glob(profile['job_pattern'])):
     if not job.is_dir():
         continue
-    replacement = model == 'beam_bf16' and job.name == 'beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
+    r2_replacement = model == 'beam_bf16' and job.name == 'beam-tb-v1-exact-r2-infra-replacement-git-multibranch'
+    r3_replacement = model == 'beam_bf16' and job.name == 'beam-tb-v1-exact-r3-setup-replacement-20261021'
     match = re.search(r'-r([123])$', job.name)
-    if replacement:
+    if r2_replacement:
         match = re.search(r'-r(2)-infra-replacement-git-multibranch$', job.name)
+    elif r3_replacement:
+        match = re.search(r'-r(3)-setup-replacement-20261021$', job.name)
     assert match, f'Unexpected job name: {job.name}'
     job_config = config_root / f'r{match.group(1)}.json'
     if job_config.exists():
@@ -66,9 +76,16 @@ for job in sorted(result_root.glob(profile['job_pattern'])):
         if effective_config.exists():
             payloads[effective_config] = effective_config.read_bytes()
             counts['job_config'] += 1
-        if replacement:
+        if r2_replacement:
             replacement_config = config_root / 'r2-git-multibranch-infra-replacement.json'
             assert replacement_config.is_file()
+            payloads[replacement_config] = replacement_config.read_bytes()
+            counts['job_config'] += 1
+        if r3_replacement:
+            replacement_config = config_root / 'r3-setup-replacement-20261021.json'
+            claim = json.loads((SOURCE / 'beam/state/r3-setup-replacement-20261021-claim.json').read_text())
+            assert replacement_config.is_file()
+            assert hashlib.sha256(replacement_config.read_bytes()).hexdigest() == claim['replacement_config_sha256']
             payloads[replacement_config] = replacement_config.read_bytes()
             counts['job_config'] += 1
     for trial in sorted(job.iterdir()):

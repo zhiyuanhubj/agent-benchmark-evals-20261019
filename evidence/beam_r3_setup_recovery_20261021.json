@@ -1,0 +1,84 @@
+{
+  "generated_utc": "2026-10-21T06:23:59.318055+00:00",
+  "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r3-setup-replacement-20261021-claim.json",
+  "claim_sha256": "b86a7482e7bf5d822e6a4820e32c59779885a4251d08bbbb79c309164d2ddd43",
+  "round": 3,
+  "precision": "BF16",
+  "expected_original_setup_failures": 11,
+  "originals": {
+    "openssl-selfsigned-cert": {
+      "result_sha256": "b0c6aa258abf14533c5d7ab7d73957245be11b2ca3ea984f62c662fda0c24a8e",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "path-tracing-reverse": {
+      "result_sha256": "47b03261020fada5c42827fad7e236c21e26232310dab483852aece63b8605b3",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "polyglot-c-py": {
+      "result_sha256": "4e790b434ecb46a718a76afee454b65b4e57a5acba27844d3c998a23a6df4667",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "polyglot-rust-c": {
+      "result_sha256": "8e629f93236b0a28f9790dd0128cadc8976b423fa67fa4386d6c54d04609c965",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "portfolio-optimization": {
+      "result_sha256": "ce98537c96bdba215af6cd3ec2a9f4317e4b5fb9557e69fc59020cd124bfc674",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "protein-assembly": {
+      "result_sha256": "bb7b67aa112bbab4eab14af3fc043e2ac86b9c3d576be71e020e6e59c5da30d8",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "prove-plus-comm": {
+      "result_sha256": "c8f38920a7baa6ae8877ff478fc409a3509809e4f3d5e7f0c5e94154f3b0f1ba",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "pypi-server": {
+      "result_sha256": "4255ca59dbe058d5c7c701cce94203b5e9f7fe09d26c4125bfdc4458ad73bc91",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "pytorch-model-cli": {
+      "result_sha256": "c49e149e1bbd99d189eafb3b2edb5d8fd8b4b3f1289fb26b80890bea883792aa",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "pytorch-model-recovery": {
+      "result_sha256": "996e669b2d1dc91b342195724d0e74d7d2c016951895a824ddd0472354018ae4",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    },
+    "qemu-alpine-ssh": {
+      "result_sha256": "8ac0d1cddcd1069f8069885a5d8ebf2e54051ef1091c6ab09d4167c01a4e051b",
+      "exception_type": "RuntimeError",
+      "original_raw_response_count": 0
+    }
+  },
+  "replacement_job": "beam-tb-v1-exact-r3-setup-replacement-20261021",
+  "replacement_trial_directories": 2,
+  "replacement_terminal": 1,
+  "replacement_graded": 1,
+  "replacement_success": 1,
+  "replacements": {
+    "openssl-selfsigned-cert": {
+      "reward": 1.0,
+      "result_sha256": "a382df20853d354888c8ac2925738dac60e3bcc06d729bd37d2e0e5e34211c6f",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/openssl-selfsigned-cert__PkNYBU4/result.json",
+      "exception_type": null,
+      "raw_response_count": 4
+    }
+  },
+  "replacement_raw_responses": 69,
+  "nonempty_reasoning_responses": 69,
+  "empty_or_missing_reasoning_responses": 0,
+  "score_policy": "Keep all original results ungraded. Report first replacement grades separately; never select best-of outcomes.",
+  "qualification": "Original ungraded attempts remain immutable and separate. At most one declared replacement draw per setup failure; no best-of selection."
+}
