@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T09:32:19.876602+00:00",
+  "generated_utc": "2026-10-21T10:09:30.962355+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021/claim.json",
   "claim_sha256": "a567060c9086480b734f8ccb308a79d2f9ff2bdf7824e299cd515a5334c60735",
   "expected": 89,
-  "terminal": 24,
-  "graded": 24,
-  "success": 21,
+  "terminal": 26,
+  "graded": 26,
+  "success": 23,
   "active_trial_dirs": 2,
-  "raw_responses": 1026,
+  "raw_responses": 1076,
   "tasks": {
     "adaptive-rejection-sampler": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/adaptive-rejection-sampler__z8HM6wx/result.json",
@@ -16,6 +16,11 @@
     },
     "openssl-selfsigned-cert": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/openssl-selfsigned-cert__ZV3huxT/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "sparql-university": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/sparql-university__2H22qKT/result.json",
       "reward": 1.0,
       "exception": null
     },
@@ -105,7 +110,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "sam-cell-seg": null,
+    "sam-cell-seg": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/sam-cell-seg__9q6pvhb/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "feal-differential-cryptanalysis": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/feal-differential-cryptanalysis__AKh2Z7B/result.json",
       "reward": 1.0,
@@ -130,6 +139,7 @@
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/git-multibranch__yEM5Thu/result.json",
       "reward": 1.0,
       "exception": null
-    }
+    },
+    "torch-pipeline-parallelism": null
   }
 }
