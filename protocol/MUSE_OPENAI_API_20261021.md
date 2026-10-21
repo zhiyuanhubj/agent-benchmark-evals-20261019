@@ -20,6 +20,6 @@ response = client.chat.completions.create(
 print(response.choices[0].message)
 ```
 
-The relay and Cloudflare tunnel are enabled user systemd services (`muse-openai-relay-bf16.service` and `muse-openai-tunnel.service`); user lingering is enabled. Job 2886 is currently allocated until `2026-10-26T18:21:46Z`, so the BF16 GPU pair must be renewed or replaced before then for uninterrupted service. The existing `llm.zhiyuanllm.com` gateway was not changed. The BF16 evaluation clients on CPU nodes continue calling this deployment and share its inference throughput.
+The relay and Cloudflare tunnel are enabled user systemd services (`muse-openai-relay-bf16.service` and `muse-openai-tunnel.service`); user lingering is enabled. Job 2886 is currently allocated until `2026-10-26T18:21:46Z`, so the BF16 GPU pair must be renewed or replaced before then for uninterrupted service. The existing `llm.zhiyuanllm.com` gateway was not changed. BF16 evaluation clients continue calling this deployment and share its inference throughput. The second GPU host also has in-progress SWE-Review CPU sandboxes; their original trials remain running so they are not misclassified as model failures.
 
 Deployment validation is recorded in [`../evidence/muse_openai_bf16_deployment_20261021.json`](../evidence/muse_openai_bf16_deployment_20261021.json).

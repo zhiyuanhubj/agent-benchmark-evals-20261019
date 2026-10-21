@@ -49,5 +49,5 @@
     "stream_done_marker": true,
     "reasoning_tokens_preserved": true
   },
-  "evaluation_context": "The BF16 GPU pair is the model deployment. Evaluation clients running on CPU hosts currently call its endpoint; their GPU demand shares the same inference capacity."
+  "evaluation_context": "Both GPU hosts run the 16-GPU BF16 model. BF16 evaluation clients still call the model and share inference capacity. Host ip-10-1-122-30 also runs in-progress SWE-Review CPU sandboxes; they have not been interrupted or moved."
 }
