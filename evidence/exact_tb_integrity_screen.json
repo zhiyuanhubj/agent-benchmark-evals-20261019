@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T10:55:52.777265+00:00",
+  "generated_utc": "2026-10-21T11:34:07.903993+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 26,
+      "scored_trajectories_checked": 29,
       "pattern_hit_trajectories": 2,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -8134,6 +8134,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "winning-avg-corewars",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/winning-avg-corewars__sQyZQrv/agent/trajectory.json",
+      "trajectory_sha256": "e698125ac79672bde912c48ec006bec413f1f57408a1e56c94dede1b17777f90",
+      "steps": 27,
+      "tool_calls": 78,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "build-cython-ext",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/build-cython-ext__QbfM2kb/agent/trajectory.json",
@@ -8221,6 +8233,18 @@
       "trajectory_sha256": "d7a5c0ea5e75c64a63aab890e75cb65c36a8166d0b5aa025d03c00b56ecee942",
       "steps": 94,
       "tool_calls": 349,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
+      "task": "path-tracing",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/path-tracing__t6fcoA2/agent/trajectory.json",
+      "trajectory_sha256": "5c3c9379efbfec24a1f907ca9fca725ba8f02f6366f49047bf6288ae61b51ad8",
+      "steps": 189,
+      "tool_calls": 874,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -8341,6 +8365,18 @@
       "trajectory_sha256": "0f21ac3064059b58e0bac3a29a4be72e6fa68bb90c3084a875325f183079c92f",
       "steps": 36,
       "tool_calls": 299,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
+      "task": "torch-pipeline-parallelism",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/torch-pipeline-parallelism__8CfAkLc/agent/trajectory.json",
+      "trajectory_sha256": "526a654919746bfac6932d52530382b464126096d93e8d3ed9db44a08518aac0",
+      "steps": 41,
+      "tool_calls": 118,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
