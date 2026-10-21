@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T21:44:53.433779+00:00",
+  "generated_utc": "2026-10-21T22:30:44.383573+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 40,
-  "graded": 40,
+  "terminal": 43,
+  "graded": 43,
   "success": 31,
   "active_trial_dirs": 2,
-  "raw_responses": 2101,
+  "raw_responses": 2204,
   "tasks": {
     "distribution-search": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/distribution-search__L3yVbGp/result.json",
@@ -29,6 +29,7 @@
       "reward": 0.0,
       "exception": null
     },
+    "mailman": null,
     "adaptive-rejection-sampler": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/adaptive-rejection-sampler__kUXZC9c/result.json",
       "reward": 1.0,
@@ -84,7 +85,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "feal-linear-cryptanalysis": null,
+    "feal-linear-cryptanalysis": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/feal-linear-cryptanalysis__UEbk9Tz/result.json",
+      "reward": 0.0,
+      "exception": "AgentTimeoutError"
+    },
     "query-optimize": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/query-optimize__oynXWUo/result.json",
       "reward": 1.0,
@@ -115,7 +120,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "gpt2-codegolf": null,
+    "gpt2-codegolf": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/gpt2-codegolf__Q5REhsf/result.json",
+      "reward": 0.0,
+      "exception": "AgentTimeoutError"
+    },
     "sam-cell-seg": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/sam-cell-seg__2282uNb/result.json",
       "reward": 1.0,
@@ -201,9 +210,15 @@
       "reward": 1.0,
       "exception": null
     },
+    "largest-eigenval": null,
     "tune-mjcf": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/tune-mjcf__X5vwb32/result.json",
       "reward": 1.0,
+      "exception": null
+    },
+    "install-windows-3.11": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/install-windows-3.11__uzNS8YC/result.json",
+      "reward": 0.0,
       "exception": null
     },
     "sparql-university": {
