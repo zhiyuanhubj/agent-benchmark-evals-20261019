@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-21T12:52:01.719982+00:00",
+  "utc": "2026-10-21T14:22:15.757600+00:00",
   "source_image_plan": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/image-identity-plan.json",
   "source_image_plan_sha256": "e8ce45c5101dd43938bea69810d1dd1098895d5d64520370e23e252c2d57b22b",
   "models": {
@@ -71,11 +71,11 @@
           "setup_replacement": {
             "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r3-setup-replacement-20261021-claim.json",
             "declared_tasks": 11,
-            "native_terminal": 10,
-            "native_graded": 10,
+            "native_terminal": 11,
+            "native_graded": 11,
             "native_success": 7,
-            "native_raw_responses": 1147,
-            "effective_graded_if_replacements_admitted": 85,
+            "native_raw_responses": 1208,
+            "effective_graded_if_replacements_admitted": 86,
             "effective_success_if_replacements_admitted": 55,
             "qualification": "Original ungraded setup failures remain preserved; one declared first replacement per task is shown separately, never best-of."
           }
@@ -104,9 +104,9 @@
           "ActiveState": "inactive"
         },
         "beam-r3-setup-recovery-20261021": {
-          "MainPID": "2709867",
+          "MainPID": "0",
           "Result": "success",
-          "ActiveState": "active"
+          "ActiveState": "inactive"
         }
       },
       "cpu_allocation": 2919,
@@ -231,5 +231,12 @@
       "user_authorized_bf16_reassignment": true
     }
   },
+  "runtime_alerts": [
+    {
+      "model": "beam_bf16",
+      "kind": "original_profile_incomplete_without_live_controller",
+      "qualification": "Operational alert; retired originals and replacement draws are audited separately. No score completion is implied."
+    }
+  ],
   "qualification": "Independent user-supplied prebuilt-image profile. Cached-tag legacy outcomes are retained separately; never merged into this mean. Partial success counts are not final accuracy."
 }

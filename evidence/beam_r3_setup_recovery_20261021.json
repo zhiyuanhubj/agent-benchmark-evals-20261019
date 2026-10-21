@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T12:48:05.365186+00:00",
+  "generated_utc": "2026-10-21T14:14:28.890979+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r3-setup-replacement-20261021-claim.json",
   "claim_sha256": "b86a7482e7bf5d822e6a4820e32c59779885a4251d08bbbb79c309164d2ddd43",
-  "scoring_source_sha256": "fc47adc4ebde3479cab26520131cf68670c5ddc3223db325a224dbeedf29ab76",
+  "scoring_source_sha256": "9f61397156a2db5dd83b85ffd3ab79d85ca4d807391e8faa3ddc9ec2406859be",
   "round": 3,
   "precision": "BF16",
   "expected_original_setup_failures": 11,
@@ -65,8 +65,8 @@
   },
   "replacement_job": "beam-tb-v1-exact-r3-setup-replacement-20261021",
   "replacement_trial_directories": 11,
-  "replacement_terminal": 10,
-  "replacement_graded": 10,
+  "replacement_terminal": 11,
+  "replacement_graded": 11,
   "replacement_success": 7,
   "replacements": {
     "path-tracing-reverse": {
@@ -118,6 +118,13 @@
       "exception_type": null,
       "raw_response_count": 10
     },
+    "qemu-alpine-ssh": {
+      "reward": 0.0,
+      "result_sha256": "4390a4a35a7016fe32bf004ddf20c8bbb167d114272fff9bc2ac27935922dc20",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/qemu-alpine-ssh__QoAU7mu/result.json",
+      "exception_type": "AgentTimeoutError",
+      "raw_response_count": 701
+    },
     "openssl-selfsigned-cert": {
       "reward": 1.0,
       "result_sha256": "a382df20853d354888c8ac2925738dac60e3bcc06d729bd37d2e0e5e34211c6f",
@@ -140,8 +147,8 @@
       "raw_response_count": 4
     }
   },
-  "replacement_raw_responses": 1133,
-  "nonempty_reasoning_responses": 1133,
+  "replacement_raw_responses": 1208,
+  "nonempty_reasoning_responses": 1208,
   "empty_or_missing_reasoning_responses": 0,
   "score_policy": "Keep all original results ungraded. Report first replacement grades separately; never select best-of outcomes.",
   "qualification": "Original ungraded attempts remain immutable and separate. At most one declared replacement draw per setup failure; no best-of selection."
