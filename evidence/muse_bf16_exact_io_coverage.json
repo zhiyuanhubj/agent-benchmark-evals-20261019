@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T14:44:25.865566+00:00",
+  "generated_utc": "2026-10-21T15:18:12.283262+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 76,
-  "success_count": 58,
+  "scored_tasks": 77,
+  "success_count": 59,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -304,6 +304,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/constraints-scheduling__Q9xAxhi/result.json"
     },
+    "rstan-to-pystan": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/rstan-to-pystan__Z5drQe7/result.json"
+    },
     "torch-pipeline-parallelism": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/torch-pipeline-parallelism__pFNFkx3/result.json"
@@ -352,12 +356,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "rstan-to-pystan": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/rstan-to-pystan__JPLRyEx/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "code-from-image": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/code-from-image__VKqQejY/result.json",
       "exception_type": "RuntimeError",
@@ -390,11 +388,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 76,
-  "covered_raw_response_sets": 76,
-  "covered_trajectories": 76,
-  "scored_raw_response_count": 3250,
-  "nonempty_reasoning_response_count": 3249,
+  "covered_results": 77,
+  "covered_raw_response_sets": 77,
+  "covered_trajectories": 77,
+  "scored_raw_response_count": 3282,
+  "nonempty_reasoning_response_count": 3281,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -696,6 +694,10 @@
       "raw_responses": 9,
       "nonempty_reasoning_content": 9
     },
+    "rstan-to-pystan": {
+      "raw_responses": 32,
+      "nonempty_reasoning_content": 32
+    },
     "torch-pipeline-parallelism": {
       "raw_responses": 10,
       "nonempty_reasoning_content": 10
@@ -725,10 +727,11 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/protein-assembly__9JFswSK/result.json": "protein-assembly",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json": "constraints-scheduling",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/rstan-to-pystan__JPLRyEx/result.json": "rstan-to-pystan",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
   "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/rstan-to-pystan__Z5drQe7/result.json"
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/sparql-university__gFcoYrV/result.json"
   ],
   "archives": [
     "muse_bf16.tar.zst",
@@ -934,6 +937,8 @@
     "muse_bf16_delta_20261021T130603Z.tar.zst",
     "muse_bf16_delta_20261021T142228Z.tar.zst",
     "muse_bf16_delta_20261021T143654Z.tar.zst",
+    "muse_bf16_delta_20261021T145802Z.tar.zst",
+    "muse_bf16_delta_20261021T151004Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
