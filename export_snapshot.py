@@ -53,6 +53,8 @@ pro = read(M / 'state/monitor-current.json')['pro_round1_verified_completion']
 subprocess.run([sys.executable, str(ROOT / 'audit_muse_nvfp4_pro_r2_shard0.py')],
                check=True, timeout=60)
 pro_r2_shard0 = read(ROOT / 'evidence/muse_nvfp4_pro_r2_shard0_progress.json')
+subprocess.run([sys.executable, str(ROOT / 'audit_spare_pro_capacity.py')], check=True, timeout=60)
+spare_pro = read(ROOT / 'evidence/spare_pro_capacity_progress_20261021.json')
 tb_recovery = read(M / 'state/monitor-current.json')['reshard_recorder_recovery']
 tb_legacy_remaining = read(ROOT / 'results/muse_tb_legacy_status.json')
 deep = read(M / 'remaining_deep3_2812_20261018/state/current.json')['three_round_summary']
@@ -1361,6 +1363,11 @@ for reviewer, model_key in (('muse-nvfp4', 'muse_nvfp4'), ('beam-bf16', 'beam_bf
     overall = review_rrr.get('complete_overall', {}).get(reviewer)
     if overall:
         snapshot['models'][model_key]['swe_review_overall'] = overall
+snapshot['spare_replica_pro_capacity'] = spare_pro
+if 'muse/round_2' in spare_pro['rounds']:
+    second = spare_pro['rounds']['muse/round_2']['with_original_shard0']
+    snapshot['models']['muse_nvfp4']['swe_bench_pro_verified']['round_2'].update(
+        second | {'evidence':'evidence/spare_pro_capacity_progress_20261021.json'})
 write('results/scores.json', snapshot)
 
 files = {}
@@ -1792,9 +1799,11 @@ readme = f'''# Agent benchmark evaluation snapshot
 
 Snapshot: **{now}**. This repository is private because the native task inputs, model outputs and thinking trajectories may contain sensitive text. The score table separates finished evaluations from partial runs. Input/output artifacts are in `input_output/` and the [native archive releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases); each archive has a SHA-256 manifest.
 
+[Spare-replica capacity](evidence/spare_pro_capacity_progress_20261021.json) now runs disjoint Muse Pro round-two shards on 2923/2924/2927, a Muse round-three shard on 2928, and three disjoint Beam Pro round-three shards on 2888/2901/2733. New attempts stay separate from prior rounds. The [BF16 API documentation](MUSE_OPENAI_API.zh-CN.md) describes per-key usage tracking and separately labelled, cancellable idle quality probes.
+
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
-| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete; independent round 2 shard 0: {mn['swe_bench_pro_verified']['round_2']['graded']}/183 graded, {mn['swe_bench_pro_verified']['round_2']['success']} success (partial) | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {muse_exact_en} | {review(mn['swe_review'], mn.get('swe_review_overall'))} |
+| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete; independent round 2: {mn['swe_bench_pro_verified']['round_2']['graded']}/731 graded, {mn['swe_bench_pro_verified']['round_2']['success']} success (partial) | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {muse_exact_en} | {review(mn['swe_review'], mn.get('swe_review_overall'))} |
 | Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'], be.get('swe_review_overall'))} |
 | Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | {opus_review_en} |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
@@ -2013,9 +2022,11 @@ chinese_report = f'''# 模型评测结果快照
 
 更新时间：**{now}**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases) 和 `input_output/archive_manifests/`。当前仓库为私有。
 
+[空闲副本任务核验](evidence/spare_pro_capacity_progress_20261021.json)：2923/2924/2927 分跑 Muse Pro 第二轮剩余分片，2928 跑 Muse 第三轮首分片；2888/2901/2733 分跑 Beam Pro 第三轮互斥分片。各轮独立计分。[BF16 API 文档](MUSE_OPENAI_API.zh-CN.md)已补充逐 key 用量统计、真实请求优先和单独标记的空闲质量探测。
+
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
-| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | Pro Verified 独立第二轮第 0 分片 **{mn['swe_bench_pro_verified']['round_2']['graded']}/183 已判分、{mn['swe_bench_pro_verified']['round_2']['success']} 成功**，整轮 731 题尚未完成；{muse_exact_zh_pending}{'SWE-Review 整体 RRR 已完成' if muse_overall_rrr else 'SWE-Review 整体 RRR 尚未完成'} |
+| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | Pro Verified 独立第二轮 **{mn['swe_bench_pro_verified']['round_2']['graded']}/731 已判分、{mn['swe_bench_pro_verified']['round_2']['success']} 成功**，尚未完成；{muse_exact_zh_pending}{'SWE-Review 整体 RRR 已完成' if muse_overall_rrr else 'SWE-Review 整体 RRR 尚未完成'} |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_da_zh_table}{beam_rrr_zh_table}{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；{beam_review_pending_zh} |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending}；SWE-Review {opus_review_zh} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |

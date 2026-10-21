@@ -253,7 +253,7 @@ def sync_native_archives(scores, force_bf16=False):
         if terminal > archived_terminal or handoff_newer or raw_snapshot_due or scored_result_newer:
             run(command, timeout=300)
     static_scans = json.loads(ARCHIVE_SCAN_STATE.read_text()) if ARCHIVE_SCAN_STATE.exists() else {}
-    for group in ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
+    for group in ('spare_pro_capacity', 'opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
                   'muse_nvfp4_pro_r2',
                   'opus47_review_inputs', 'opus47_review_full_io',
                   'muse_bf16_review_inputs',
@@ -304,7 +304,7 @@ def sync_native_archives(scores, force_bf16=False):
     remote = {asset['name'] for _, assets in releases for asset in assets}
     assert len(remote) == sum(len(assets) for _, assets in releases), 'Duplicate archive name across releases'
     revision_base_manifests = [manifest_dir / f'{group}.json' for group in
-        ('muse_nvfp4_pro_r2', 'opus47_review_inputs', 'opus47_review_full_io',
+        ('spare_pro_capacity', 'muse_nvfp4_pro_r2', 'opus47_review_inputs', 'opus47_review_full_io',
          'muse_review_revision_inputs', 'beam_review_revision_inputs',
          'muse_revision_review_full_io', 'beam_revision_review_full_io')]
     revision_base_manifests = [path for path in revision_base_manifests if path.exists()]
@@ -534,6 +534,9 @@ def cycle():
              'protocol/run_muse_nvfp4_pro_r2_shard0_2900.py',
              'protocol/guard_2900_muse_nvfp4_pro_r2_images.py',
              'protocol/muse_openai_key_relay_20261021.py',
+             'protocol/muse_api_activity_20261021.py', 'protocol/muse_api_idle_quality_20261021.py',
+             'protocol/run_spare_pro_capacity_20261021.py', 'audit_spare_pro_capacity.py',
+             'tests/test_muse_api_activity.py', 'MUSE_OPENAI_API.zh-CN.md',
              'protocol/MUSE_OPENAI_API_20261021.md',
              'evidence/muse_openai_bf16_deployment_20261021.json',
              'archive_trials.py', 'archive_delta.py',

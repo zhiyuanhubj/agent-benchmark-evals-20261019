@@ -1,0 +1,88 @@
+{
+  "generated_utc": 1792584877.1108568,
+  "public_nonstream_status": 200,
+  "public_stream_done": true,
+  "usage": {
+    "observed_since": 1792584703.0859601,
+    "process_started": 1792584703.0859601,
+    "last_real_activity": 1792584876.6321204,
+    "idle_seconds": 0.47132253646850586,
+    "real_active": 0,
+    "background_active": 0,
+    "by_key": {
+      "primary": {
+        "requests": 2,
+        "succeeded": 2,
+        "errors": 0,
+        "last_started": 1792584876.6321204,
+        "prompt_tokens": 294,
+        "completion_tokens": 16,
+        "requests_in_seconds": {
+          "300": 2,
+          "900": 2,
+          "3600": 2
+        }
+      },
+      "model-relay-token": {
+        "requests": 0,
+        "succeeded": 0,
+        "errors": 0,
+        "requests_in_seconds": {
+          "300": 0,
+          "900": 0,
+          "3600": 0
+        }
+      },
+      "client-01": {
+        "requests": 0,
+        "succeeded": 0,
+        "errors": 0,
+        "requests_in_seconds": {
+          "300": 0,
+          "900": 0,
+          "3600": 0
+        }
+      },
+      "client-02": {
+        "requests": 0,
+        "succeeded": 0,
+        "errors": 0,
+        "requests_in_seconds": {
+          "300": 0,
+          "900": 0,
+          "3600": 0
+        }
+      },
+      "client-03": {
+        "requests": 0,
+        "succeeded": 0,
+        "errors": 0,
+        "requests_in_seconds": {
+          "300": 0,
+          "900": 0,
+          "3600": 0
+        }
+      },
+      "background-quality": {
+        "requests": 0,
+        "succeeded": 0,
+        "errors": 0,
+        "requests_in_seconds": {
+          "300": 0,
+          "900": 0,
+          "3600": 0
+        }
+      }
+    },
+    "qualification": "Counts begin when instrumentation was installed; historical per-key usage is unknown."
+  },
+  "background_policy": {
+    "quiet_seconds": 120,
+    "poll_seconds": 30,
+    "gpu_threshold_percent": 10,
+    "max_output_tokens": 256,
+    "concurrency": 1,
+    "real_request_cancels_background": true
+  },
+  "verification": "Three mocked regression tests passed, including cancellation before upstream headers; live public nonstream and SSE requests succeeded."
+}

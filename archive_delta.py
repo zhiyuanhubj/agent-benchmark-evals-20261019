@@ -12,7 +12,7 @@ from pathlib import Path
 
 BASE = Path('/fsx/home/zhiyuan')
 ROOT = Path(__file__).resolve().parent
-ALLOWED = ('opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
+ALLOWED = ('spare_pro_capacity', 'opus47_legacy', 'beam_legacy', 'muse_bf16', 'muse_bf16_swr',
            'muse_nvfp4_pro_r2',
            'opus47_review_inputs', 'opus47_review_full_io',
            'muse_bf16_review_inputs',
@@ -110,7 +110,7 @@ with archive.open('rb') as stream:
 manifest = {
     'generated_utc': datetime.now(timezone.utc).isoformat(),
     'group': group,
-    'scope': ('SWE-Review original-generator revision I/O changed since the previous archive, including old pre-model infrastructure failures and separate gateway-recovery trials. Only gateway-recovery native grades enter RRR. Apply after the named previous archive; later paths replace earlier paths.'
+    'scope': ('SWE-Review original-generator revision I/O changed since the previous archive. RRR uses the claimed GLM5 original queues and corrected Coder/Instruct gateway queues; earlier infrastructure failures remain separate. Apply after the named previous archive; later paths replace earlier paths.'
               if group.endswith('revision_review_full_io') else
               'Model-visible SWE-Review revision inputs and queue receipts changed since the previous archive. Hidden solution and tests are excluded. Apply after the named previous archive; later paths replace earlier paths.'
               if group.endswith('review_revision_inputs') else

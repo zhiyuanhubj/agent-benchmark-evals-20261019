@@ -63,3 +63,15 @@ print(response.choices[0].message)
 服务通过启用的 `muse-openai-relay-bf16.service` 与 `muse-openai-tunnel.service` 提供。BF16 的 Slurm allocation 2886 当前截至 **2026-10-26 18:21:46 UTC**；到期前必须续接或更换部署，才能持续对外服务。现有 `llm.zhiyuanllm.com` 网关没有改动。
 
 部署和鉴权验证见 [Muse API 证据](evidence/muse_openai_bf16_deployment_20261021.json)，并发配置和实测原始数值见 [并发证据](evidence/muse_openai_concurrency_20261021.json)。
+
+## 调用量与空闲质量探测
+
+从 2026-10-21 12:11 UTC 起，网关按 `client-01`、`client-02`、`client-03` 等标签持久记录请求数、成功/错误数、最近 5/15/60 分钟调用数及上游实际返回的 token 用量。流式响应只有携带 usage 时才能统计 token；可在请求中设置 `stream_options={"include_usage":true}`。统计库不保存 key、提示词或回答。此前没有逐 key 日志，无法补算历史调用量。
+
+管理员可使用原有 `primary.key` 请求 `GET /admin/usage` 查看统计；三个客户端 key 无权读取管理统计。重启网关保留已记录数据。
+
+`muse-api-idle-quality.service` 每 30 秒检查一次。所有真实调用连续安静至少 120 秒、没有活动请求，且 BF16 主节点八卡平均 GPU 利用率低于 10% 时，才发出一个非 benchmark 质量探测请求。每次最多 256 个输出 token、并发为 1；真实请求到来会取消后台 HTTP 请求，后台输出不计入 benchmark 成绩或三个客户端的调用量。现有直连评测使 GPU 忙碌时，也不会补发探测。
+
+探测使用独立的 `background-quality` 身份，其响应与返回的 thinking 保存在服务器私有目录 `background-quality/` 中；单段日志不超过约 10 MiB。服务由 systemd 自动启动和故障重启，可用 `systemctl --user stop muse-api-idle-quality.service` 停止。管理员的 `background-current.json` 记录最近一次跳过或执行原因。
+
+这是健康检查和空闲性能采样，不保证豁免集群的空闲回收、抢占或 allocation 到期规则。应按实际集群规则续期或申请服务用途的节点。

@@ -18,6 +18,7 @@ BF = BASE / '.private/muse_bf16_20261018'
 OPUS_REVIEW = BASE / '.private/opus47_review_20261020'
 
 GROUPS = {
+    'spare_pro_capacity': [BASE / '.private/spare_pro_capacity_20261021'],
     **{f'muse_pro_shard{i}': [M / f'shard{i}/results/muse-pro'] for i in range(4)},
     'muse_nvfp4_pro_r2': [M / 'pro_round2_20261021/shard0-2900',
                           M / 'pro_round2_20261021/results/muse-pro-r2'],
@@ -72,6 +73,8 @@ GROUPS = {
 
 def include(path, root, group):
     rel = path.relative_to(root)
+    if group == 'spare_pro_capacity' and rel.parts[0] != 'results':
+        return rel.parts[0] == 'claims' and path.name in ('claim.json','started.json','exit.json','image-guard.jsonl')
     if group == 'muse_nvfp4_pro_r2' and root.name == 'shard0-2900':
         return path.name in ('claim.json', 'command.json', 'started.json', 'exit.json')
     if 'artifacts' in rel.parts:
@@ -141,7 +144,7 @@ def include(path, root, group):
     parts = rel.parts
     if path.name in ('result.json', 'task.json', 'config.json', 'trajectory.json', 'exception.txt', 'trial.log', 'openhands_sdk.txt'):
         return True
-    if group in ('beam_legacy', 'muse_bf16') and path.name == 'mini-swe-agent.trajectory.json':
+    if group in ('beam_legacy', 'muse_bf16', 'spare_pro_capacity') and path.name == 'mini-swe-agent.trajectory.json':
         # Harbor's generic trajectory omits reasoning_content for DeepSWE;
         # the native mini-swe-agent trajectory contains the returned thinking.
         # Active files can be rewritten; archive the stable terminal copy.
