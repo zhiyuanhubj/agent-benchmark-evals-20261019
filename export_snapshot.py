@@ -50,6 +50,9 @@ def metric(d, name, status=None):
 
 now = datetime.now(timezone.utc).isoformat()
 pro = read(M / 'state/monitor-current.json')['pro_round1_verified_completion']
+subprocess.run([sys.executable, str(ROOT / 'audit_muse_nvfp4_pro_r2_shard0.py')],
+               check=True, timeout=60)
+pro_r2_shard0 = read(ROOT / 'evidence/muse_nvfp4_pro_r2_shard0_progress.json')
 tb_recovery = read(M / 'state/monitor-current.json')['reshard_recorder_recovery']
 tb_legacy_remaining = read(ROOT / 'results/muse_tb_legacy_status.json')
 deep = read(M / 'remaining_deep3_2812_20261018/state/current.json')['three_round_summary']
@@ -1084,7 +1087,18 @@ snapshot = {
     'models': {
         'muse_nvfp4': {
             'model': 'Muse-Spark-Open-816B-A42B-NVFP4',
-            'swe_bench_pro_verified': {'round_1': {'status': 'complete', 'expected': 731, 'graded': 731, 'success': pro['success'], 'accuracy': pro['accuracy'], 'qualification': pro['qualification']}},
+            'swe_bench_pro_verified': {
+                'round_1': {'status': 'complete', 'expected': 731, 'graded': 731,
+                            'success': pro['success'], 'accuracy': pro['accuracy'],
+                            'qualification': pro['qualification']},
+                'round_2': {'status': 'partial_no_full_score', 'expected': 731,
+                            'graded': pro_r2_shard0['graded'],
+                            'success': pro_r2_shard0['success'], 'accuracy': None,
+                            'shard0_expected': pro_r2_shard0['expected_shard'],
+                            'shard0_terminal': pro_r2_shard0['terminal'],
+                            'evidence': 'evidence/muse_nvfp4_pro_r2_shard0_progress.json',
+                            'qualification': pro_r2_shard0['qualification']},
+            },
             'deepswe': {'rounds': deep['rounds'], 'mean_three_round_accuracy': deep['benchmark_recorded_mean_accuracy'], 'status': 'complete_three_rounds', 'qualification': deep['metric_scope'], 'trajectory_review_flag': deep['targeted_review']['successful_trajectory_with_verifier_log_probe']},
             'swrbench': {'status': 'complete', 'expected': 1000, 'judged': mr['swrbench']['judged'], 'accuracy': mr['swrbench']['final_metrics']['overall']['accuracy'], 'f1': mr['swrbench']['final_metrics']['overall']['f1'], 'judge': 'gpt-5.5'},
             'swe_review': {key: metric(value, key, 'final_da_rrr_pending' if key in review_da['reviewers'].get('muse-nvfp4', {}) else 'supplementary_complete_da_rrr_pending') |
@@ -1357,6 +1371,13 @@ if replica_handoff:
     shutil.copy2(source, dest)
     files[str(dest.relative_to(ROOT))] = {'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(), 'size_bytes': dest.stat().st_size, 'source': str(source)}
 bf16_audit_path = ROOT / 'evidence/muse_bf16_exact_image_identity.json'
+for pro_r2_evidence in ('muse_nvfp4_pro_r2_shard0_progress.json',
+                        'muse_nvfp4_pro_r2_shard0_claim.json'):
+    path = ROOT / 'evidence' / pro_r2_evidence
+    files[str(path.relative_to(ROOT))] = {
+        'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+        'size_bytes': path.stat().st_size, 'source': str(path),
+    }
 files[str(bf16_audit_path.relative_to(ROOT))] = {'sha256': hashlib.sha256(bf16_audit_path.read_bytes()).hexdigest(), 'size_bytes': bf16_audit_path.stat().st_size,
     'source': str(bf16_audit_path)}
 if bf16_io_path.exists():
@@ -1675,7 +1696,7 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
-| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {tb_en(mn_tb)} | {review(mn['swe_review'])} |
+| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete; independent round 2 shard 0: {mn['swe_bench_pro_verified']['round_2']['graded']}/183 graded, {mn['swe_bench_pro_verified']['round_2']['success']} success (partial) | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {tb_en(mn_tb)} | {review(mn['swe_review'])} |
 | Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'])} |
 | Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | {opus_review_en} |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
@@ -1866,7 +1887,7 @@ chinese_report = f'''# 模型评测结果快照
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
-| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | {muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
+| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | Pro Verified 独立第二轮第 0 分片 **{mn['swe_bench_pro_verified']['round_2']['graded']}/183 已判分、{mn['swe_bench_pro_verified']['round_2']['success']} 成功**，整轮 731 题尚未完成；{muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review Instruct 组封存 DA **{beam_review_instruct_da['DA']}%（422 题）**{beam_rrr_zh_table}{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；SWE-Review 另两组与整体 RRR 未完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending}；SWE-Review {opus_review_zh} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |

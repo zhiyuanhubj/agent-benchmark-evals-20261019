@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T04:11:56.044241+00:00",
+  "generated_utc": "2026-10-21T04:39:37.770018+00:00",
   "files": {
     "input_output/swrbench/muse_nvfp4/generation.jsonl": {
       "sha256": "bef428f7a50c1e53cbddeba884921c2c28b468209418f096c06a62ff49a95f15",
@@ -32,7 +32,7 @@
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/state/monitor-current.json"
     },
     "evidence/muse_deep_completion.json": {
-      "sha256": "52244c56276f45e95b913c99d32c6185e6702f3d4345d1c1735cc2d7f3c14317",
+      "sha256": "4f69b834155aeb49b013b3f1cf19bc6773be2736ea70f1f39d28f543096f8df9",
       "size_bytes": 4423,
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/remaining_deep3_2812_20261018/state/current.json"
     },
@@ -42,22 +42,22 @@
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/remaining_deep3_2812_20261018/state/three-round-completion-audit.json"
     },
     "evidence/muse_swr_review_score_source.json": {
-      "sha256": "d16240c137dd744ef94a03df6f712cfdb93780a193d886639d4976112e365db4",
+      "sha256": "f413adbe70dc8f6bbb2772ee38d51103d48527c340605c88e30210369a341655",
       "size_bytes": 23665,
       "source": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/review_bench_20261018/state/current.json"
     },
     "evidence/beam_opus_bf16_score_source.json": {
-      "sha256": "764834f390ff8356c834e2df7abe9038ce0a36d533e62527bd1beb21aadebeef",
-      "size_bytes": 341429,
+      "sha256": "31475439b8b91dd4d053950f523e6cf55fe8a1cd555b065cf72b193e5e3a3410",
+      "size_bytes": 347146,
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/expanded-current.json"
     },
     "evidence/beam_swr_review_score_source.json": {
-      "sha256": "6cb8789287cb366ac0289e855397b54125b4ebf940b0fe7030f8b1665c7b8a30",
+      "sha256": "128a51adfbe2a880082cdf1c9591d188ef2a324bac44d3c4e494927c8205e90b",
       "size_bytes": 14865,
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/current.json"
     },
     "evidence/tb_exact_image_score_source.json": {
-      "sha256": "7120aaa4c16c16f548d09430312d5b45982c8503e5c6a9688d7163bdeefa5d57",
+      "sha256": "bb3ea5afc04b67651c4d3159f51be16e79c552b211e362b92fe8c59eed29b287",
       "size_bytes": 6272,
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/status-current.json"
     },
@@ -82,7 +82,7 @@
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/completion-2866-plan.json"
     },
     "evidence/muse_bf16_runtime_status.json": {
-      "sha256": "ac7a01c20773618bef9379c12cb5bad9743a84dcef5a475d143cf63b570cdc64",
+      "sha256": "e3bf8c3f84bb60bd8e054164b3659467936fd67d6387221a8c3a0cd139368761",
       "size_bytes": 2565,
       "source": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/status-current.json"
     },
@@ -91,24 +91,34 @@
       "size_bytes": 2120,
       "source": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/reassigned-2867/r1-b06-b07-handoff.json"
     },
+    "evidence/muse_nvfp4_pro_r2_shard0_progress.json": {
+      "sha256": "a74b8f11a62aa7e7b7db210702ba514e739c60fdb8cc213bdf43645ef890b194",
+      "size_bytes": 688,
+      "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_pro_r2_shard0_progress.json"
+    },
+    "evidence/muse_nvfp4_pro_r2_shard0_claim.json": {
+      "sha256": "2c1c937f27a37bf427332213f9f5eed0691103a238066c58aba886e81f8c4a69",
+      "size_bytes": 20505,
+      "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_pro_r2_shard0_claim.json"
+    },
     "evidence/muse_bf16_exact_image_identity.json": {
-      "sha256": "b7bd28ebcc458892472721817d42d2766d50db76219339de8310aeeac4bf908b",
+      "sha256": "34a0fb544213f2db6111c0963c1d256a816bb6ed4331c537146539c6e6da441a",
       "size_bytes": 1826,
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_exact_image_identity.json"
     },
     "evidence/muse_bf16_exact_io_coverage.json": {
-      "sha256": "f46f427b642c2bdec95d2a883bf9b01a2cfbe719031f18d6acaaeec4438dadfd",
-      "size_bytes": 37508,
+      "sha256": "f72f8b6116167fe61c152bcb3b1be826c50111507b173f957d4aeed6dc235ba1",
+      "size_bytes": 37702,
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_exact_io_coverage.json"
     },
     "evidence/muse_bf16_swr_alignment.json": {
-      "sha256": "dd08d52b4a337c027507b940c9b4ca2979431ac6a94676314720ebca79fbaf8c",
+      "sha256": "374ea95ab6f2101fe2b89d0248a97bfe72b4b392ecf2456b450782487db41ca6",
       "size_bytes": 1756,
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_swr_alignment.json"
     },
     "evidence/muse_bf16_swe_review_progress.json": {
-      "sha256": "9d1e37894178b169ad868f2ffcd898ba26a149baeb724e15e7248219c6dd38b2",
-      "size_bytes": 223053,
+      "sha256": "597e5ed35d83ca05e020cc067394ae83554568d4301ec1a2b2a30cd6f4db159c",
+      "size_bytes": 227344,
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_swe_review_progress.json"
     },
     "evidence/shared_element_hq_eval_timeout.json": {
@@ -122,7 +132,7 @@
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/swe_review_revision_queue_recovery_20261020.json"
     },
     "evidence/swe_review_revision_gateway_progress.json": {
-      "sha256": "843fb501b6eaf7753c14471a80c8ce2a34e76745021cb47c11b1f1ac668a76c4",
+      "sha256": "882a9f80f705a6fad55beba0101843d9ad3e651afda8f0263d9f258482c8a9b6",
       "size_bytes": 744122,
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/swe_review_revision_gateway_progress.json"
     },
@@ -172,7 +182,7 @@
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_local2866_ready.json"
     },
     "evidence/muse_nvfp4_local2866_route_audit.json": {
-      "sha256": "4d38f23b13f2d122baff2d1377f65a287087b7e6ac6753ba67380647b4eb8d43",
+      "sha256": "9ed36d659edd733e63769185706cd148b829da058ae7bb58c9605f2f0758b0c5",
       "size_bytes": 1259,
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_local2866_route_audit.json"
     },
@@ -187,7 +197,7 @@
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_claim.json"
     },
     "evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_integrity.json": {
-      "sha256": "398a8de1d993524526797710e6843799383f3fda49809e40e78244c66d3342b4",
+      "sha256": "06a88560ddb5fc4d5a4c342118ce2c75fd32049865eb6e4091e62ab829f986e4",
       "size_bytes": 909,
       "source": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_nvfp4_r2_pytorch_model_cli_replacement_integrity.json"
     },
