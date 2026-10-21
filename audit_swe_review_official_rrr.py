@@ -78,6 +78,7 @@ def main():
                 if row['sha256_matches'] and row['bytes_match']}
     sealed_da = json.loads((ROOT / 'evidence/swe_review_complete_split_da.json').read_text())
     complete = {}
+    complete_overall = {}
     for reviewer, (review_root, archive_group) in REVIEWERS.items():
         for split, spec in plan['splits'].items():
             metrics_dir = review_root / 'revision/metrics'
@@ -126,9 +127,33 @@ def main():
                 'release_tags': release.get('release_tags', [release['release_tag']]),
                 'qualification': 'complete_verified_official_split_rrr',
             }
+        split_keys = [f'{reviewer}/{split}' for split in plan['splits']]
+        full_path = review_root / 'revision/metrics/full-completion-summary.json'
+        if all(key in complete for key in split_keys) and full_path.is_file():
+            full = json.loads(full_path.read_text())
+            assert full['complete'] and full['expected'] == 1384
+            assert full['RRR']['total'] == full['DA']['total'] == 1384
+            assert full['RRR']['revised'] == sum(complete[key]['RRR']['revised'] for key in split_keys)
+            assert full['RRR']['total_resolved'] == sum(
+                complete[key]['RRR']['total_resolved'] for key in split_keys)
+            for split, key in zip(plan['splits'], split_keys):
+                state = full['per_split'][split]
+                assert state['complete'] and state['DA'] == complete[key]['DA']
+                assert state['RRR'] == complete[key]['RRR']
+            label = reviewer.replace('-', '_')
+            public_path = ROOT / 'evidence' / f'{label}_full_rrr_summary.json'
+            write_if_changed(public_path, {key: value for key, value in full.items() if key != 'utc'})
+            complete_overall[reviewer] = {
+                'DA': full['DA'], 'RRR': full['RRR'], 'total': 1384,
+                'verified_splits': split_keys,
+                'summary': str(public_path.relative_to(ROOT)),
+                'release_tag': release['release_tag'],
+                'release_tags': release.get('release_tags', [release['release_tag']]),
+                'qualification': 'complete_verified_official_overall_rrr',
+            }
     output = {'scope': 'Only complete SWE-Review split RRR with unchanged official metric functions, '
                        'native first attempts and SHA-verified released result/verifier files.',
-              'complete_splits': complete}
+              'complete_splits': complete, 'complete_overall': complete_overall}
     write_if_changed(ROOT / 'evidence/swe_review_official_rrr.json', output)
     print(json.dumps({name: row['RRR']['RRR'] for name, row in complete.items()}))
 

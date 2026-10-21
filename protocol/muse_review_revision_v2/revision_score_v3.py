@@ -1,7 +1,8 @@
-"""Compute official DA/RRR from the declared gateway recovery queue.
+"""Compute official DA/RRR from the declared native revision queues.
 
 The pinned v1/v2 scorers and host-IP trial failures remain unchanged. This v3
-reads only the one-response-per-task gateway recovery results. It preserves v2's
+reads the first complete GLM5 queue and the one-response-per-task gateway
+recovery results for Coder/Instruct. It preserves v2's
 malformed-review fallback; the official metric functions are unchanged.
 """
 from pathlib import Path
@@ -48,6 +49,35 @@ def load_function(path, name):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return getattr(module, name)
+
+
+def declared_glm_results(work, split):
+    """Read only claimed original-generator jobs, excluding synthetic preflights."""
+    queue = work / 'queue'
+    plan = json.loads((queue / 'queue-plan.json').read_text())
+    expected_tasks = set(plan['splits'][split]['tasks'])
+    claimed_tasks, paths = set(), []
+    claims = sorted((queue / 'claims').glob(f'{split}-*.json'))
+    assert claims and not json.loads((queue / 'queue-exit.json').read_text())['errors']
+    for claim_path in claims:
+        claim = json.loads(claim_path.read_text())
+        config_path = queue / 'configs' / claim_path.name
+        assert sha(config_path) == claim['config_sha256']
+        config = json.loads(config_path.read_text())['config']
+        batch = claim_path.stem.rsplit('-', 1)[1]
+        job_name = f"{plan['job_prefix']}-{split}-batch{batch}"
+        assert config['job_name'] == job_name and claim['model_attempt_started'] is True
+        assert json.loads((queue / 'exits' / claim_path.name).read_text())['returncode'] == 0
+        tasks = set(claim['tasks'])
+        assert tasks == {Path(row['path']).name for row in config['tasks']}
+        assert not claimed_tasks.intersection(tasks)
+        claimed_tasks.update(tasks)
+        job_paths = sorted((queue / 'results' / split / job_name).glob('*/result.json'))
+        names = [json.loads(path.read_text())['task_name'] for path in job_paths]
+        assert len(names) == len(tasks) and set(names) == tasks
+        paths.extend(job_paths)
+    assert claimed_tasks == expected_tasks
+    return paths
 
 
 def main():
@@ -97,8 +127,11 @@ def main():
                 work = root / 'revision/generation' / split
                 recovery = ('gateway-portfix-20261020' if reviewer == 'beam-bf16'
                             and split == 'qwen3_coder_30b_500' else 'gateway-recovery-20261020')
+                queue = work / ('queue' if split == 'glm5_500' else recovery + '/queue')
+                result_paths = (declared_glm_results(work, split) if split == 'glm5_500'
+                                else (queue / 'results' / split).glob('*/*/result.json'))
                 outcomes, ungraded, seen, sources = {}, {}, set(), {}
-                for path in (work / recovery / 'queue/results' / split).glob('*/*/result.json'):
+                for path in result_paths:
                     result = json.loads(path.read_text())
                     if not result.get('task_name'):
                         continue
@@ -115,7 +148,7 @@ def main():
                     else:
                         outcomes[iid] = outcome['resolved']
                         sources.update(outcome['source_sha256'])
-                exit_path = work / recovery / 'queue/queue-exit.json'
+                exit_path = queue / 'queue-exit.json'
                 queue_done = exit_path.exists() and json.loads(exit_path.read_text()).get('scheduled_attempts_finished') is True
                 missing = set(receipt['expected_rejected']) - set(outcomes)
                 complete = queue_done and not missing and not ungraded
@@ -153,7 +186,7 @@ def main():
         current = ROOT / ('revision-scoring-v3-preflight.json' if '--once' in sys.argv
                           else 'revision-scoring-current.json')
         save(current, dict(reviewers=observed,
-                           scorer_version='v3_gateway_recovery_and_malformed_original_report_fallback'))
+                           scorer_version='v3_declared_glm_original_and_gateway_recovery_with_malformed_report_fallback'))
         if '--once' in sys.argv:
             return
         if all((Path(root) / 'revision/metrics/full-completion-summary.json').exists() for root in plan['reviewers'].values()):

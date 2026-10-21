@@ -1,5 +1,134 @@
 {
+  "complete_overall": {
+    "beam-bf16": {
+      "DA": {
+        "CR": 90.5,
+        "DA": 78.5,
+        "DA_total_50": 75.8,
+        "FAR": 22.6,
+        "FN": 135,
+        "FP": 134,
+        "FRR": 20.5,
+        "TN": 459,
+        "TP": 524,
+        "correct": 983,
+        "model_fail": 132,
+        "produced": 1252,
+        "total": 1384
+      },
+      "RRR": {
+        "RRR": 59.5,
+        "approved": 658,
+        "approved_resolved": 524,
+        "baseline_RR": 51.4,
+        "delta": 8.1,
+        "fallback": 132,
+        "fallback_resolved": 53,
+        "revised": 594,
+        "revised_resolved": 247,
+        "total": 1384,
+        "total_resolved": 824
+      },
+      "qualification": "complete_verified_official_overall_rrr",
+      "release_tag": "2026-10-19-snapshot",
+      "release_tags": [
+        "2026-10-19-snapshot",
+        "2026-10-19-snapshot-part2"
+      ],
+      "summary": "evidence/beam_bf16_full_rrr_summary.json",
+      "total": 1384,
+      "verified_splits": [
+        "beam-bf16/glm5_500",
+        "beam-bf16/qwen3_coder_30b_500",
+        "beam-bf16/qwen3_30b_instruct2507_500"
+      ]
+    },
+    "muse-nvfp4": {
+      "DA": {
+        "CR": 90.2,
+        "DA": 80.9,
+        "DA_total_50": 77.9,
+        "FAR": 23.3,
+        "FN": 97,
+        "FP": 141,
+        "FRR": 15.1,
+        "TN": 464,
+        "TP": 546,
+        "correct": 1010,
+        "model_fail": 136,
+        "produced": 1248,
+        "total": 1384
+      },
+      "RRR": {
+        "RRR": 60.9,
+        "approved": 687,
+        "approved_resolved": 546,
+        "baseline_RR": 51.4,
+        "delta": 9.5,
+        "fallback": 136,
+        "fallback_resolved": 69,
+        "revised": 561,
+        "revised_resolved": 228,
+        "total": 1384,
+        "total_resolved": 843
+      },
+      "qualification": "complete_verified_official_overall_rrr",
+      "release_tag": "2026-10-19-snapshot",
+      "release_tags": [
+        "2026-10-19-snapshot",
+        "2026-10-19-snapshot-part2"
+      ],
+      "summary": "evidence/muse_nvfp4_full_rrr_summary.json",
+      "total": 1384,
+      "verified_splits": [
+        "muse-nvfp4/glm5_500",
+        "muse-nvfp4/qwen3_coder_30b_500",
+        "muse-nvfp4/qwen3_30b_instruct2507_500"
+      ]
+    }
+  },
   "complete_splits": {
+    "beam-bf16/glm5_500": {
+      "DA": {
+        "CR": 91.2,
+        "DA": 73.0,
+        "DA_total_50": 71.0,
+        "FAR": 62.9,
+        "FN": 45,
+        "FP": 78,
+        "FRR": 13.6,
+        "TN": 46,
+        "TP": 287,
+        "correct": 333,
+        "model_fail": 44,
+        "produced": 456,
+        "total": 500
+      },
+      "RRR": {
+        "RRR": 74.2,
+        "approved": 365,
+        "approved_resolved": 287,
+        "baseline_RR": 72.2,
+        "delta": 2.0,
+        "fallback": 44,
+        "fallback_resolved": 29,
+        "revised": 91,
+        "revised_resolved": 55,
+        "total": 500,
+        "total_resolved": 371
+      },
+      "expected_revisions": 91,
+      "native_evidence": "evidence/beam_bf16_glm5_500_rrr_native_evidence.json",
+      "qualification": "complete_verified_official_split_rrr",
+      "release_tag": "2026-10-19-snapshot",
+      "release_tags": [
+        "2026-10-19-snapshot",
+        "2026-10-19-snapshot-part2"
+      ],
+      "scorer_sha256": "77ab2e89f2a28db9b89532936c2545bddc6d584a6d3179183ffb0ceb6ca345c1",
+      "summary": "evidence/beam_bf16_glm5_500_rrr_summary.json",
+      "verified_native_result_and_verifier_files": 182
+    },
     "beam-bf16/qwen3_30b_instruct2507_500": {
       "DA": {
         "CR": 89.8,
@@ -37,7 +166,7 @@
         "2026-10-19-snapshot",
         "2026-10-19-snapshot-part2"
       ],
-      "scorer_sha256": "b28a02aa5dac4d55f3e1d994ca935f6ef5b2a146b86312079378b5bdb74e37aa",
+      "scorer_sha256": "77ab2e89f2a28db9b89532936c2545bddc6d584a6d3179183ffb0ceb6ca345c1",
       "summary": "evidence/beam_bf16_qwen3_30b_instruct2507_500_rrr_summary.json",
       "verified_native_result_and_verifier_files": 558
     },
@@ -78,9 +207,50 @@
         "2026-10-19-snapshot",
         "2026-10-19-snapshot-part2"
       ],
-      "scorer_sha256": "b28a02aa5dac4d55f3e1d994ca935f6ef5b2a146b86312079378b5bdb74e37aa",
+      "scorer_sha256": "77ab2e89f2a28db9b89532936c2545bddc6d584a6d3179183ffb0ceb6ca345c1",
       "summary": "evidence/beam_bf16_qwen3_coder_30b_500_rrr_summary.json",
       "verified_native_result_and_verifier_files": 448
+    },
+    "muse-nvfp4/glm5_500": {
+      "DA": {
+        "CR": 92.0,
+        "DA": 75.7,
+        "DA_total_50": 73.6,
+        "FAR": 64.9,
+        "FN": 27,
+        "FP": 85,
+        "FRR": 8.2,
+        "TN": 46,
+        "TP": 302,
+        "correct": 348,
+        "model_fail": 40,
+        "produced": 460,
+        "total": 500
+      },
+      "RRR": {
+        "RRR": 75.0,
+        "approved": 387,
+        "approved_resolved": 302,
+        "baseline_RR": 72.2,
+        "delta": 2.8,
+        "fallback": 40,
+        "fallback_resolved": 32,
+        "revised": 73,
+        "revised_resolved": 41,
+        "total": 500,
+        "total_resolved": 375
+      },
+      "expected_revisions": 73,
+      "native_evidence": "evidence/muse_nvfp4_glm5_500_rrr_native_evidence.json",
+      "qualification": "complete_verified_official_split_rrr",
+      "release_tag": "2026-10-19-snapshot",
+      "release_tags": [
+        "2026-10-19-snapshot",
+        "2026-10-19-snapshot-part2"
+      ],
+      "scorer_sha256": "77ab2e89f2a28db9b89532936c2545bddc6d584a6d3179183ffb0ceb6ca345c1",
+      "summary": "evidence/muse_nvfp4_glm5_500_rrr_summary.json",
+      "verified_native_result_and_verifier_files": 146
     },
     "muse-nvfp4/qwen3_30b_instruct2507_500": {
       "DA": {
@@ -119,7 +289,7 @@
         "2026-10-19-snapshot",
         "2026-10-19-snapshot-part2"
       ],
-      "scorer_sha256": "b28a02aa5dac4d55f3e1d994ca935f6ef5b2a146b86312079378b5bdb74e37aa",
+      "scorer_sha256": "77ab2e89f2a28db9b89532936c2545bddc6d584a6d3179183ffb0ceb6ca345c1",
       "summary": "evidence/muse_nvfp4_qwen3_30b_instruct2507_500_rrr_summary.json",
       "verified_native_result_and_verifier_files": 532
     },
@@ -160,7 +330,7 @@
         "2026-10-19-snapshot",
         "2026-10-19-snapshot-part2"
       ],
-      "scorer_sha256": "b28a02aa5dac4d55f3e1d994ca935f6ef5b2a146b86312079378b5bdb74e37aa",
+      "scorer_sha256": "77ab2e89f2a28db9b89532936c2545bddc6d584a6d3179183ffb0ceb6ca345c1",
       "summary": "evidence/muse_nvfp4_qwen3_coder_30b_500_rrr_summary.json",
       "verified_native_result_and_verifier_files": 444
     }

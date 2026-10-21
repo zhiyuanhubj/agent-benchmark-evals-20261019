@@ -1,0 +1,194 @@
+{
+  "DA": {
+    "CR": 90.5,
+    "DA": 78.5,
+    "DA_total_50": 75.8,
+    "FAR": 22.6,
+    "FN": 135,
+    "FP": 134,
+    "FRR": 20.5,
+    "TN": 459,
+    "TP": 524,
+    "correct": 983,
+    "model_fail": 132,
+    "produced": 1252,
+    "total": 1384
+  },
+  "RRR": {
+    "RRR": 59.5,
+    "approved": 658,
+    "approved_resolved": 524,
+    "baseline_RR": 51.4,
+    "delta": 8.1,
+    "fallback": 132,
+    "fallback_resolved": 53,
+    "revised": 594,
+    "revised_resolved": 247,
+    "total": 1384,
+    "total_resolved": 824
+  },
+  "complete": true,
+  "expected": 1384,
+  "per_split": {
+    "glm5_500": {
+      "DA": {
+        "CR": 91.2,
+        "DA": 73.0,
+        "DA_total_50": 71.0,
+        "FAR": 62.9,
+        "FN": 45,
+        "FP": 78,
+        "FRR": 13.6,
+        "TN": 46,
+        "TP": 287,
+        "correct": 333,
+        "model_fail": 44,
+        "produced": 456,
+        "total": 500
+      },
+      "RRR": {
+        "RRR": 74.2,
+        "approved": 365,
+        "approved_resolved": 287,
+        "baseline_RR": 72.2,
+        "delta": 2.0,
+        "fallback": 44,
+        "fallback_resolved": 29,
+        "revised": 91,
+        "revised_resolved": 55,
+        "total": 500,
+        "total_resolved": 371
+      },
+      "complete": true,
+      "expected_revisions": 91,
+      "invalid_report_count": 1,
+      "invalid_reports": [
+        {
+          "instance_id": "sphinx-doc__sphinx-8638",
+          "parse_error": "Extra data: line 35 column 1 (char 2799)",
+          "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/glm5_500/beam-review-20261018-glm5_500-batch25/sphinx-doc__sphinx-8638__HDyN3j9/verifier/review_report.json",
+          "sha256": "a5b04b6179d44b9cb84981ae33e08966c0064188236765a52bd56da7e64fc131"
+        }
+      ],
+      "missing_native_grade_count": 0,
+      "native_graded_revisions": 91,
+      "phase": "complete",
+      "revision_queue_terminal": true
+    },
+    "qwen3_30b_instruct2507_500": {
+      "DA": {
+        "CR": 89.8,
+        "DA": 86.5,
+        "DA_total_50": 82.8,
+        "FAR": 7.5,
+        "FN": 31,
+        "FP": 20,
+        "FRR": 27.9,
+        "TN": 248,
+        "TP": 80,
+        "correct": 328,
+        "model_fail": 43,
+        "produced": 379,
+        "total": 422
+      },
+      "RRR": {
+        "RRR": 42.7,
+        "approved": 100,
+        "approved_resolved": 80,
+        "baseline_RR": 27.5,
+        "delta": 15.2,
+        "fallback": 43,
+        "fallback_resolved": 5,
+        "revised": 279,
+        "revised_resolved": 95,
+        "total": 422,
+        "total_resolved": 180
+      },
+      "complete": true,
+      "expected_revisions": 279,
+      "invalid_report_count": 5,
+      "invalid_reports": [
+        {
+          "instance_id": "django__django-11490",
+          "parse_error": "Extra data: line 28 column 1 (char 2571)",
+          "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch2/django__django-11490__eAv4JwQ/verifier/review_report.json",
+          "sha256": "9e8d443ae1d539e9a5a51b8c3700ff1d855859863c59f20538564988cfc8cf67"
+        },
+        {
+          "instance_id": "django__django-11740",
+          "parse_error": "Extra data: line 21 column 1 (char 1877)",
+          "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch3/django__django-11740__hcUDVwe/verifier/review_report.json",
+          "sha256": "3d77646e3f7f99ef007872cc7615578a5519b98c3897e1eacfb7b5347c54a4e1"
+        },
+        {
+          "instance_id": "matplotlib__matplotlib-25287",
+          "parse_error": "Extra data: line 47 column 1 (char 2675)",
+          "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch14/matplotlib__matplotlib-25287__HPmoZBy/verifier/review_report.json",
+          "sha256": "30b241bfcd7b0526a59c0647d26d1fd49435502b388049ec07db6c48dba8e7ac"
+        },
+        {
+          "instance_id": "sphinx-doc__sphinx-9591",
+          "parse_error": "Extra data: line 28 column 1 (char 2303)",
+          "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch21/sphinx-doc__sphinx-9591__dZc2hAj/verifier/review_report.json",
+          "sha256": "5bf687a5761e3d874e3066412b9cc0a621b25fe1522d6b7cd5ee5dd233ef968f"
+        },
+        {
+          "instance_id": "sympy__sympy-12489",
+          "parse_error": "Extra data: line 28 column 1 (char 2139)",
+          "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/beam-review-20261018-qwen3_30b_instruct2507_500-batch22/sympy__sympy-12489__Ah8tXnS/verifier/review_report.json",
+          "sha256": "9e22468c4c8bf41707f23972fcb814e9a1ec4e8f7ff1478deefe7bbf1f8e9022"
+        }
+      ],
+      "missing_native_grade_count": 0,
+      "native_graded_revisions": 279,
+      "phase": "complete",
+      "revision_queue_terminal": true
+    },
+    "qwen3_coder_30b_500": {
+      "DA": {
+        "CR": 90.3,
+        "DA": 77.2,
+        "DA_total_50": 74.6,
+        "FAR": 17.9,
+        "FN": 59,
+        "FP": 36,
+        "FRR": 27.3,
+        "TN": 165,
+        "TP": 157,
+        "correct": 322,
+        "model_fail": 45,
+        "produced": 417,
+        "total": 462
+      },
+      "RRR": {
+        "RRR": 59.1,
+        "approved": 193,
+        "approved_resolved": 157,
+        "baseline_RR": 50.9,
+        "delta": 8.2,
+        "fallback": 45,
+        "fallback_resolved": 19,
+        "revised": 224,
+        "revised_resolved": 97,
+        "total": 462,
+        "total_resolved": 273
+      },
+      "complete": true,
+      "expected_revisions": 224,
+      "invalid_report_count": 1,
+      "invalid_reports": [
+        {
+          "instance_id": "psf__requests-2317",
+          "parse_error": "Extra data: line 28 column 1 (char 2315)",
+          "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/qwen3_coder_30b_500/beam-review-20261018-qwen3_coder_30b_500-batch17/psf__requests-2317__M8N5Jj7/verifier/review_report.json",
+          "sha256": "638107758e72430ef231c63459f1cc040ace269dc03a7ec379199eea6b13c399"
+        }
+      ],
+      "missing_native_grade_count": 0,
+      "native_graded_revisions": 224,
+      "phase": "complete",
+      "revision_queue_terminal": true
+    }
+  },
+  "protocol": "Unchanged official metric functions; one canonical review and one original-generator revision per rejection; task identity prefixed by split only during metric aggregation."
+}

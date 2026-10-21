@@ -36,10 +36,12 @@ GROUPS = {
     'beam_review_verifier': [B / 'review_bench/swe_review', B / 'review_bench/queue/results'],
     'muse_review_revision_inputs': [*(M / 'review_bench_20261018/revision/prepared' / split
                                       for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
+                                    M / 'review_bench_20261018/revision/generation/glm5_500/queue',
                                     M / 'review_bench_20261018/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue',
                                     M / 'review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue'],
     'beam_review_revision_inputs': [*(B / 'review_bench/revision/prepared' / split
                                       for split in ('glm5_500', 'qwen3_coder_30b_500', 'qwen3_30b_instruct2507_500')),
+                                    B / 'review_bench/revision/generation/glm5_500/queue',
                                     B / 'review_bench/revision/generation/qwen3_coder_30b_500/gateway-recovery-20261020/queue',
                                     B / 'review_bench/revision/generation/qwen3_coder_30b_500/gateway-portfix-20261020/queue',
                                     B / 'review_bench/revision/generation/qwen3_30b_instruct2507_500/gateway-recovery-20261020/queue'],
@@ -265,9 +267,9 @@ def main():
         'source_roots': [str(x) for x in GROUPS[group]],
         'scope': ('Exact official SWE-Review model-visible task cards and frozen Opus 4.7 review configs. Hidden solution and tests, credentials, model weights and outputs are excluded; outputs are archived separately.'
                   if group == 'opus47_review_inputs' else
-                  'Original-generator SWE-Review revision task instructions, task cards, Dockerfiles and public model-visible task data, plus canonical preparation and isolated gateway recovery queue receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
+                  'Original-generator SWE-Review revision task instructions, task cards, Dockerfiles and public model-visible task data, plus canonical preparation, GLM5 original queue and gateway recovery queue receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
                   if group.endswith('review_revision_inputs') else
-                  'Original-generator revision native I/O. Original host-IP and Beam Coder wrong-port trials that failed before any model response are preserved as infrastructure evidence; only the separate corrected gateway queue paths are eligible for RRR scoring. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files.'
+                  'Original-generator revision native I/O. GLM5 uses its claimed original queue; Coder/Instruct use their corrected gateway queues. Earlier host-IP and Beam Coder wrong-port trials are preserved as infrastructure evidence. Includes trajectories, completions, native verifier results, and model connectivity receipts. Excludes credentials, weights, caches and hidden solution files.'
                   if group.endswith('revision_review_full_io') else
                   'Model-visible BF16 SWE-Review task instructions, task cards, Dockerfiles and public task data, plus queue/config/claim/image receipts. Hidden solution/ and tests/ directories, credentials, model weights and results are excluded; results are archived separately.'
                   if group == 'muse_bf16_review_inputs' else

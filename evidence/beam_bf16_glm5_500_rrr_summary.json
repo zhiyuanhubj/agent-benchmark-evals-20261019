@@ -1,0 +1,45 @@
+{
+  "DA": {
+    "CR": 91.2,
+    "DA": 73.0,
+    "DA_total_50": 71.0,
+    "FAR": 62.9,
+    "FN": 45,
+    "FP": 78,
+    "FRR": 13.6,
+    "TN": 46,
+    "TP": 287,
+    "correct": 333,
+    "model_fail": 44,
+    "produced": 456,
+    "total": 500
+  },
+  "RRR": {
+    "RRR": 74.2,
+    "approved": 365,
+    "approved_resolved": 287,
+    "baseline_RR": 72.2,
+    "delta": 2.0,
+    "fallback": 44,
+    "fallback_resolved": 29,
+    "revised": 91,
+    "revised_resolved": 55,
+    "total": 500,
+    "total_resolved": 371
+  },
+  "complete": true,
+  "expected_revisions": 91,
+  "invalid_report_count": 1,
+  "invalid_reports": [
+    {
+      "instance_id": "sphinx-doc__sphinx-8638",
+      "parse_error": "Extra data: line 35 column 1 (char 2799)",
+      "path": "/fsx/home/zhiyuan/.private/beam_20261018/review_bench/queue/results/glm5_500/beam-review-20261018-glm5_500-batch25/sphinx-doc__sphinx-8638__HDyN3j9/verifier/review_report.json",
+      "sha256": "a5b04b6179d44b9cb84981ae33e08966c0064188236765a52bd56da7e64fc131"
+    }
+  ],
+  "missing_native_grade_count": 0,
+  "native_graded_revisions": 91,
+  "phase": "complete",
+  "revision_queue_terminal": true
+}

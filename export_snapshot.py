@@ -1358,6 +1358,9 @@ for reviewer, model_key in (('muse-nvfp4', 'muse_nvfp4'), ('beam-bf16', 'beam_bf
             value.update(status='final_split_da_rrr_complete', RRR=official['RRR'],
                          rrr_evidence=official['native_evidence'],
                          rrr_summary=official['summary'])
+    overall = review_rrr.get('complete_overall', {}).get(reviewer)
+    if overall:
+        snapshot['models'][model_key]['swe_review_overall'] = overall
 write('results/scores.json', snapshot)
 
 files = {}
@@ -1469,13 +1472,14 @@ write('input_output/manifest.json', {'generated_utc': now, 'files': files})
 def partial(d):
     return f"{d['graded']}/{d['expected']} graded; {d['success']} success (partial)" if d.get('graded') else f"0/{d['expected']} graded"
 
-def review(d):
+def review(d, overall=None):
     return ', '.join((f"{v['terminal']}/{v['expected']} task outcomes; {v['DA']['produced']} parseable decisions; "
                       f"{'final split DA' if v['status'] in ('final_da_rrr_pending', 'final_split_da_rrr_complete') else 'audited supplementary DA'} {v['DA']['DA']}% "
                       f"(DA_total_50 {v['DA']['DA_total_50']}%)"
                       + (f"; final split RRR {v['RRR']['RRR']}%" if v.get('RRR') else '') if v.get('DA')
                       else f"{v['terminal']}/{v['expected']} terminal")
-                     for v in d.values()) + '; overall official RRR incomplete'
+                     for v in d.values()) + (f"; overall official RRR {overall['RRR']['RRR']}%"
+                                             if overall else '; overall official RRR incomplete')
 
 models = snapshot['models']
 asset_count = len(list((ROOT / 'input_output/archive_manifests').glob('*.json')))
@@ -1506,6 +1510,8 @@ review_glm_da = mn['swe_review']['glm5_500']['DA']
 review_coder_da = mn['swe_review']['qwen3_coder_30b_500']['DA']
 muse_review_instruct_rrr = mn['swe_review']['qwen3_30b_instruct2507_500'].get('RRR')
 muse_review_coder_rrr = mn['swe_review']['qwen3_coder_30b_500'].get('RRR')
+muse_review_glm_rrr = mn['swe_review']['glm5_500'].get('RRR')
+muse_overall_rrr = mn.get('swe_review_overall', {}).get('RRR')
 muse_coder_rrr_en_note = (
     f"The Coder split also has {muse_review_coder_rrr['revised']} verified native revisions: "
     f"**RRR {muse_review_coder_rrr['RRR']}%** (baseline RR "
@@ -1521,22 +1527,36 @@ muse_rrr_en_note = (
     f"{muse_review_instruct_rrr['revised']} original-generator revisions for the Instruct split: "
     f"**RRR {muse_review_instruct_rrr['RRR']}%** (baseline RR "
     f"{muse_review_instruct_rrr['baseline_RR']}%, delta +{muse_review_instruct_rrr['delta']} points). "
-    f"{muse_coder_rrr_en_note}The GLM5 split and overall RRR remain unfinished."
+    f"{muse_coder_rrr_en_note}"
+    + (f"GLM5 RRR **{muse_review_glm_rrr['RRR']}%**. " if muse_review_glm_rrr
+       else 'The GLM5 split remains unfinished. ')
+    + (f"Overall official RRR **{muse_overall_rrr['RRR']}%**."
+       if muse_overall_rrr else 'Overall RRR remains unfinished.')
     if muse_review_instruct_rrr else 'Original-generator revisions are still being graded; RRR remains pending.')
 muse_rrr_zh_table = (f"；SWE-Review Instruct 组官方 RRR **{muse_review_instruct_rrr['RRR']}%**"
                      if muse_review_instruct_rrr else '')
 muse_rrr_zh_table += (f"；Coder 组官方 RRR **{muse_review_coder_rrr['RRR']}%**"
                       if muse_review_coder_rrr else '')
+muse_rrr_zh_table += (f"；GLM5 组官方 RRR **{muse_review_glm_rrr['RRR']}%**"
+                      if muse_review_glm_rrr else '')
+muse_rrr_zh_table += (f"；整体官方 RRR **{muse_overall_rrr['RRR']}%**"
+                      if muse_overall_rrr else '')
 muse_rrr_zh_note = (
     f"[已归档的原生 RRR 证据](evidence/swe_review_official_rrr.json)核对了 Instruct 组全部 "
     f"{muse_review_instruct_rrr['revised']} 条原始生成模型修订："
     f"**RRR {muse_review_instruct_rrr['RRR']}%**，原始 baseline RR "
     f"{muse_review_instruct_rrr['baseline_RR']}%，提升 "
-    f"{muse_review_instruct_rrr['delta']} 个百分点。{muse_coder_rrr_zh_note}GLM5 组及整体 RRR 尚未完成。"
+    f"{muse_review_instruct_rrr['delta']} 个百分点。{muse_coder_rrr_zh_note}"
+    + (f"GLM5 组 **RRR {muse_review_glm_rrr['RRR']}%**。" if muse_review_glm_rrr
+       else 'GLM5 组 RRR 尚未完成。')
+    + (f"整体官方 **RRR {muse_overall_rrr['RRR']}%**。" if muse_overall_rrr
+       else '整体 RRR 尚未完成。')
     if muse_review_instruct_rrr else '原始生成模型修订仍在判分；RRR 尚未生成。')
 beam_review_glm_da = be['swe_review']['glm5_500'].get('DA')
 beam_review_coder_da = be['swe_review']['qwen3_coder_30b_500'].get('DA')
 beam_review_coder_rrr = be['swe_review']['qwen3_coder_30b_500'].get('RRR')
+beam_review_glm_rrr = be['swe_review']['glm5_500'].get('RRR')
+beam_overall_rrr = be.get('swe_review_overall', {}).get('RRR')
 beam_review_instruct_da = be['swe_review']['qwen3_30b_instruct2507_500'].get('DA')
 beam_review_instruct_rrr = be['swe_review']['qwen3_30b_instruct2507_500'].get('RRR')
 beam_da_zh_table = (
@@ -1554,14 +1574,21 @@ beam_rrr_en_note = (
     f"{beam_review_instruct_rrr['baseline_RR']}%, delta +{beam_review_instruct_rrr['delta']} points). "
     + (f"The Coder split also has **RRR {beam_review_coder_rrr['RRR']}%** from "
        f"{beam_review_coder_rrr['revised']} native revisions. " if beam_review_coder_rrr else '')
-    + f"The GLM5 split and overall RRR remain unfinished."
+    + (f"GLM5 RRR **{beam_review_glm_rrr['RRR']}%**. " if beam_review_glm_rrr
+       else 'The GLM5 split remains unfinished. ')
+    + (f"Overall official RRR **{beam_overall_rrr['RRR']}%**."
+       if beam_overall_rrr else 'Overall RRR remains unfinished.')
     if beam_review_instruct_rrr else 'The GLM5 and Coder splits and all RRR revision grades remain incomplete.')
 beam_rrr_zh_table = (f"；SWE-Review Instruct 组官方 RRR **{beam_review_instruct_rrr['RRR']}%**"
                      if beam_review_instruct_rrr else '')
 if beam_review_coder_rrr:
     beam_rrr_zh_table += f"；Coder 组官方 RRR **{beam_review_coder_rrr['RRR']}%**"
-beam_review_pending_zh = ('SWE-Review GLM5 组及整体 RRR 未完成' if beam_review_coder_rrr
-                          else 'SWE-Review 另两组与整体 RRR 未完成')
+if beam_review_glm_rrr:
+    beam_rrr_zh_table += f"；GLM5 组官方 RRR **{beam_review_glm_rrr['RRR']}%**"
+if beam_overall_rrr:
+    beam_rrr_zh_table += f"；整体官方 RRR **{beam_overall_rrr['RRR']}%**"
+beam_review_pending_zh = ('SWE-Review 三组及整体 RRR 已完成' if beam_overall_rrr
+                          else 'SWE-Review 整体 RRR 未完成')
 beam_rrr_zh_note = (
     f"[已归档的原生 RRR 证据](evidence/swe_review_official_rrr.json)核对了全部 "
     f"{beam_review_instruct_rrr['revised']} 条原始生成模型修订和未改动的官方分组指标："
@@ -1570,8 +1597,10 @@ beam_rrr_zh_note = (
     f"{beam_review_instruct_rrr['delta']} 个百分点。"
     + (f"Coder 组另有 **RRR {beam_review_coder_rrr['RRR']}%**，"
        f"{beam_review_coder_rrr['revised']} 条原生修订已核验。" if beam_review_coder_rrr else '')
-    + ('GLM5 组及整体 RRR 尚未完成。' if beam_review_coder_rrr
-       else 'GLM5/Coder 两组及整体 RRR 尚未完成。')
+    + (f"GLM5 组 **RRR {beam_review_glm_rrr['RRR']}%**。" if beam_review_glm_rrr
+       else 'GLM5 组 RRR 尚未完成。')
+    + (f"整体官方 **RRR {beam_overall_rrr['RRR']}%**。" if beam_overall_rrr
+       else '整体 RRR 尚未完成。')
     if beam_review_instruct_rrr else 'GLM5/Coder 两组和全部 RRR 修复判分仍未完成。')
 mn_tb = mn['tb2_1_exact_supplied_images']['rounds']['1']
 mn_audit = read(ROOT / 'evidence/muse_nvfp4_exact_round1_audit.json')
@@ -1765,8 +1794,8 @@ Snapshot: **{now}**. This repository is private because the native task inputs, 
 
 | Model / precision | SWE-bench Pro Verified | DeepSWE | SWRBench (GPT-5.5 judge) | TB2.1 exact supplied images | SWE-Review |
 |---|---|---|---|---|---|
-| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete; independent round 2 shard 0: {mn['swe_bench_pro_verified']['round_2']['graded']}/183 graded, {mn['swe_bench_pro_verified']['round_2']['success']} success (partial) | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {muse_exact_en} | {review(mn['swe_review'])} |
-| Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'])} |
+| Muse NVFP4 | **496/731 = 67.85%**, round 1 complete; independent round 2 shard 0: {mn['swe_bench_pro_verified']['round_2']['graded']}/183 graded, {mn['swe_bench_pro_verified']['round_2']['success']} success (partial) | **57/113, 59/113, 63/113**; 3-round mean **52.80%** | **55.4%** (1000/1000 judged) | {muse_exact_en} | {review(mn['swe_review'], mn.get('swe_review_overall'))} |
+| Beam BF16 | {partial(be['swe_bench_pro_verified'])} | {partial(be['deepswe']['1'])}, round 1 | **55.6%** (1000/1000 judged) | {beam_exact_en} | {review(be['swe_review'], be.get('swe_review_overall'))} |
 | Opus 4.7 | {partial(op['swe_bench_pro_verified'])} | {opus_deep_en} | — | {opus_exact_en} | {opus_review_en} |
 | Opus 4.8 (historical) | **503/731 = 68.81%**, completed run; 3 confirmed solution retrieval cases | — | — | — | — |
 | Muse original BF16 | {partial(models['muse_bf16']['swe_bench_pro_verified'])} | {partial(models['muse_bf16']['deepswe']['1'])}, round 1 | {bf16_swr_en} | {tb_en(bf16_tb_round1)}; [89 image identities verified](evidence/muse_bf16_exact_image_identity.json) | {bf16_review_en} |
@@ -1785,7 +1814,7 @@ The [BF16 TB2.1 failure audit](evidence/muse_bf16_tb_ungraded_audit.json) identi
 
 Muse NVFP4 now has [sealed official DA receipts for all three SWE-Review splits](evidence/swe_review_complete_split_da.json): GLM5 **{review_glm_da['DA']}%** on {review_glm_da['produced']} parseable decisions (500 task outcomes), Qwen3-Coder **{review_coder_da['DA']}%** on {review_coder_da['produced']} (462 outcomes), and Qwen3-30B-Instruct **{review_instruct_da['DA']}%** on {review_instruct_da['produced']} (422 outcomes). [The v2 receipt audit](evidence/muse_swe_review_revision_v2_receipts.json) verifies 8 GLM5 and 2 Coder task-generation-only adapters for finished native verifier reports lacking Harbor summaries; no adapter is a model result. {muse_rrr_en_note}
 
-The [revision infrastructure audit](evidence/swe_review_revision_queue_recovery_20261020.json) records two task input formats, preparation failures, and a sandbox-to-model connection timeout before any model response. Those native failures remain excluded from model scores. Two synthetic Harbor trials then completed model generation, terminal tool use, and native verification through the Docker host bridge; they do not enter benchmark metrics. Four declared original-generator recovery queues have run or are running with the [bridge agent](protocol/muse_review_revision_v2/revision_agents_bridge_v4.py) and the original task inputs. The [live native-grade audit](evidence/swe_review_revision_gateway_progress.json) has Muse Coder **{review_revision_muse_coder['native_graded_revisions']}/{review_revision_muse_coder['expected_revisions']}**, Muse Instruct **{review_revision_muse_instruct['native_graded_revisions']}/{review_revision_muse_instruct['expected_revisions']}**, Beam Coder **{review_revision_beam_coder['native_graded_revisions']}/{review_revision_beam_coder['expected_revisions']}**, and Beam Instruct **{review_revision_beam_instruct['native_graded_revisions']}/{review_revision_beam_instruct['expected_revisions']}** revisions graded; split RRR is reported only after every required native grade and released evidence is verified. The [v3 scorer](protocol/muse_review_revision_v2/revision_score_v3.py) reads only the corrected gateway results, preserves five malformed Beam review reports as model failures, and exactly reproduces all four sealed DA split metrics.
+The [revision infrastructure audit](evidence/swe_review_revision_queue_recovery_20261020.json) records two task input formats, preparation failures, and a sandbox-to-model connection timeout before any model response. Those native failures remain excluded from model scores. Two synthetic Harbor trials then completed model generation, terminal tool use, and native verification through the Docker host bridge; they do not enter benchmark metrics. The GLM5 original-generator queues and four declared Coder/Instruct recovery queues use the original task inputs. The [live native-grade audit](evidence/swe_review_revision_gateway_progress.json) tracks the Coder/Instruct recovery queues; split RRR is reported only after every required native grade and released evidence is verified. The [v3 scorer](protocol/muse_review_revision_v2/revision_score_v3.py) reads the claimed GLM5 original queues and corrected Coder/Instruct gateway queues, preserves five malformed Beam review reports as model failures, and reproduces the sealed DA split metrics.
 
 The [Beam Coder port-mismatch audit](evidence/beam_coder_pre_model_port_mismatch.json) preserves 16 first-batch infrastructure failures: the sandbox allowed port 31411 while the Qwen3-Coder model served port 31410, so none received a model response or native grade. They are excluded from model scores. The separate [corrected 224-task queue](protocol/beam_review_revision_v2/beam_coder_portfix/queue-plan.json) allows port 31410; its [independent synthetic preflight](protocol/beam_review_revision_v2/beam_coder_portfix/synthetic-portfix-r2-passed.json) completed model generation and native verification. Synthetic output is excluded from scores, and each rejected PR receives one native model attempt in the corrected queue.
 
@@ -1986,7 +2015,7 @@ chinese_report = f'''# 模型评测结果快照
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
-| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | Pro Verified 独立第二轮第 0 分片 **{mn['swe_bench_pro_verified']['round_2']['graded']}/183 已判分、{mn['swe_bench_pro_verified']['round_2']['success']} 成功**，整轮 731 题尚未完成；{muse_exact_zh_pending}SWE-Review 整体 RRR 尚未完成 |
+| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **{review_glm_da['DA']}%（500 题）**、Coder **{review_coder_da['DA']}%（462 题）**、Instruct **{review_instruct_da['DA']}%（422 题）**{muse_rrr_zh_table}{muse_exact_zh_done} | Pro Verified 独立第二轮第 0 分片 **{mn['swe_bench_pro_verified']['round_2']['graded']}/183 已判分、{mn['swe_bench_pro_verified']['round_2']['success']} 成功**，整轮 731 题尚未完成；{muse_exact_zh_pending}{'SWE-Review 整体 RRR 已完成' if muse_overall_rrr else 'SWE-Review 整体 RRR 尚未完成'} |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**{beam_da_zh_table}{beam_rrr_zh_table}{beam_exact_zh_done} | Pro Verified **{be['swe_bench_pro_verified']['graded']}/731 已判分、{be['swe_bench_pro_verified']['success']} 成功**；DeepSWE 首轮 **{be['deepswe']['1']['graded']}/113、{be['deepswe']['1']['success']} 成功**{beam_exact_zh_pending}；{beam_review_pending_zh} |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**{opus_deep_zh_done}{opus_exact_zh_done} | Pro Verified **{op['swe_bench_pro_verified']['graded']}/731 已判分、{op['swe_bench_pro_verified']['success']} 成功**{opus_deep_zh_pending}{opus_exact_zh_pending}；SWE-Review {opus_review_zh} |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
@@ -2018,7 +2047,7 @@ Beam BF16 的 SWE-Review 三组已有[封存的官方 DA](evidence/swe_review_co
 
 **TB2.1 镜像口径必须分开。** Muse NVFP4 的旧缓存镜像首轮原始首抽为 **68/88 判分、1 题无分**；事先记录的基础设施修复重跑后为 **71/89**。旧镜像第 2、3 轮目前分别是 **{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['2']['graded']}**、**{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['success']}/{mn['tb2_1_legacy_cached_tag']['rounds_2_3']['3']['graded']}**，尚无三轮均值。BF16 的历史字段虽名为 `tb2_1_legacy_cached_tag`，[镜像身份审计](evidence/muse_bf16_exact_image_identity.json)已证实启动前及运行节点上的 89 个镜像与指定归档一致，题目和推理设置也一致；它与精确镜像字段指向**同一轮测试**，不能相加。{mn_exact_note_zh}{mteb_timeout_note_zh}两节点切给原始 BF16 后，该评测中断；现在已在保留的 2866 节点恢复，首轮拆成四条互不重叠的队列，最多 8 题并行。本次快照中恢复任务已有 {new_raw_responses} 条原始模型响应、{active_recovery_trial_dirs} 个运行中题目目录，最新响应时间为 {new_raw_response_latest_utc}；这些是活跃度，不是分数。原来 8 个未判分但已有部分模型响应的记录仍保留，后续尝试明确标为基础设施重跑；[首轮逐题核验](evidence/muse_nvfp4_exact_round1_audit.json)会检查重复、缺题、原始结果哈希、判分和 thinking 原始响应，满 89 题且核验通过后才发布首轮准确率。新增 GPU 申请状态：{extra_gpu_status}。排队节点获配后监控器会启动同一 NVFP4 模型服务，并逐批加锁领取 b03、b05 中尚未启动的一批；early95 结束后腾出的 2812 最多可领取两批。原 CPU 评测器继续使用原题目和镜像，仅模型端点变化；若本地批次先启动，不会在其他节点重复抽题。
 
-**审计限制。** [Muse 精确镜像 TB 抽查](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json)显示，当时新增的 5 道成功题每条原始响应都有 reasoning 字段。其中一题把题目公开的 `/app/filter.py` 原样复制到 `/tests/filter.py` 做本地测试；检查到的命令没有改写过滤器或 verifier，但这只是定点核查，不能宣称所有轨迹都干净。Muse DeepSWE 有一条成功轨迹尝试查看 verifier 日志，但返回的目录为空；这条轨迹已单独标记供训练数据筛查，现有证据不能断言读到了隐藏答案。Muse Pro Verified 有一条成功记录缺少轨迹，不应作为带 thinking 的训练样本。SWE-Review 的完整官方 RRR 尚未生成，任何已结束题数都不等于最终成绩。
+**审计限制。** [Muse 精确镜像 TB 抽查](evidence/muse_nvfp4_exact_recovery_success_spotcheck.json)显示，当时新增的 5 道成功题每条原始响应都有 reasoning 字段。其中一题把题目公开的 `/app/filter.py` 原样复制到 `/tests/filter.py` 做本地测试；检查到的命令没有改写过滤器或 verifier，但这只是定点核查，不能宣称所有轨迹都干净。Muse DeepSWE 有一条成功轨迹尝试查看 verifier 日志，但返回的目录为空；这条轨迹已单独标记供训练数据筛查，现有证据不能断言读到了隐藏答案。Muse Pro Verified 有一条成功记录缺少轨迹，不应作为带 thinking 的训练样本。SWE-Review 仅在全部原生判分和 Release 哈希验证后报告官方 RRR；未核验的已结束题数不等于最终成绩。
 
 [精确镜像 TB 命令筛查](evidence/exact_tb_integrity_screen.json)及[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)目前将 Muse NVFP4 的 {len(nvfp4_excluded)} 条、Muse BF16 的 {len(bf16_excluded)} 条成功轨迹排除出“干净训练轨迹”候选。排除的 NVFP4 题目是 {nvfp4_excluded_names}；逐题核查记录了 verifier 与 agent 日志探查、向 `/tests/filter.py` 复制公开文件或计时篡改；已检查的日志探查输出没有确认获得隐藏答案。BF16 和 NVFP4 的 `largest-eigenval` 都通过修改计时函数、拖慢参考特征值求解器拿到原始 reward 1；原始分数保留，NVFP4 的[最终轨迹审计](evidence/muse_nvfp4_largest_eigenval_live_integrity_alert.json)有哈希锚定，但这两条高分不能当作未经篡改的加速证据。另一份判分前预警记录了 NVFP4 [`db-wal-recovery` 对宿主边界的探查](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)，它不证明边界探查成功，也不是最终分数。关键词未命中也不代表轨迹已获干净认证。
 

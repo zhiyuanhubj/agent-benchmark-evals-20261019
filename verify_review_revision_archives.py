@@ -11,10 +11,12 @@ HOME = Path('/fsx/home/zhiyuan')
 ROOT = Path(__file__).resolve().parent
 PAIR = (
     ('muse', 'muse_review_revision_inputs', 'muse_revision_review_full_io', (
+        HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/glm5_500',
         HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_coder_30b_500',
         HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/generation/qwen3_30b_instruct2507_500'),
      HOME / '.private/muse_spark_open_20261016/review_bench_20261018/revision/prepared'),
     ('beam', 'beam_review_revision_inputs', 'beam_revision_review_full_io', (
+        HOME / '.private/beam_20261018/review_bench/revision/generation/glm5_500',
         HOME / '.private/beam_20261018/review_bench/revision/generation/qwen3_coder_30b_500',
         HOME / '.private/beam_20261018/review_bench/revision/generation/qwen3_30b_instruct2507_500',),
      HOME / '.private/beam_20261018/review_bench/revision/prepared'),
@@ -58,7 +60,8 @@ for label, input_group, output_group, works, prepared in PAIR:
     active = set()
     for work in works:
         is_beam_coder = label == 'beam' and work.name == 'qwen3_coder_30b_500'
-        queue = work / ('gateway-portfix-20261020/queue' if is_beam_coder
+        queue = work / ('queue' if work.name == 'glm5_500' else
+                        'gateway-portfix-20261020/queue' if is_beam_coder
                         else 'gateway-recovery-20261020/queue')
         plan_path = queue / 'queue-plan.json'
         assert str(plan_path.relative_to(HOME)) in input_names, \
