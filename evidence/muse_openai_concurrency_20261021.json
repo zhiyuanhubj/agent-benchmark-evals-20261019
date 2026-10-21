@@ -1,0 +1,26 @@
+{
+  "date_utc": "2026-10-21",
+  "endpoint": "https://muse.zhiyuanllm.com/v1/chat/completions",
+  "model": "muse-spark-open",
+  "precision": "BF16",
+  "backend": {
+    "engine": "SGLang",
+    "source": "running server /get_server_info and pair_node.py launch arguments",
+    "max_running_requests": 8,
+    "max_queued_requests": null,
+    "key_specific_limits": false
+  },
+  "test": {
+    "request_type": "short independent non-streaming chat completions",
+    "max_output_tokens_per_request": 8,
+    "existing_bf16_evaluation_clients_shared_capacity": true,
+    "results": [
+      {"concurrency": 1, "http_200": 1, "total": 1, "wall_seconds": 0.639, "median_request_seconds": 0.639, "max_request_seconds": 0.639},
+      {"concurrency": 2, "http_200": 2, "total": 2, "wall_seconds": 0.440, "median_request_seconds": 0.439, "max_request_seconds": 0.439},
+      {"concurrency": 4, "http_200": 4, "total": 4, "wall_seconds": 0.598, "median_request_seconds": 0.455, "max_request_seconds": 0.597},
+      {"concurrency": 8, "http_200": 8, "total": 8, "wall_seconds": 1.175, "median_request_seconds": 0.738, "max_request_seconds": 1.174},
+      {"concurrency": 16, "http_200": 16, "total": 16, "wall_seconds": 4.946, "median_request_seconds": 2.603, "max_request_seconds": 4.743}
+    ]
+  },
+  "interpretation": "Eight is the hard active-generation limit. Higher incoming concurrency can queue; the 16-request result is not a sustained throughput or long-context SLA."
+}

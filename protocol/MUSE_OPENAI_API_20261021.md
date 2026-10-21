@@ -1,10 +1,12 @@
 # Muse Spark BF16 OpenAI API
 
+中文调用示例、三个独立 key 的位置和并发实测见 [Muse 对外 API 使用说明](../MUSE_OPENAI_API.zh-CN.md)。
+
 Muse Spark BF16 runs on the two GPU hosts in Slurm job 2886: `ip-10-1-13-41` and `ip-10-1-122-30` (16 GPUs total). Its upstream is `http://10.1.13.41:31324/v1`; the dedicated, key-protected public base URL is `https://muse.zhiyuanllm.com/v1`.
 
 Use `muse-spark-open` or `muse-spark-open-bf16` as the model name. Both route to the same BF16 deployment. The relay supports `/v1/models`, `/v1/models/{id}`, `/v1/chat/completions` (including streaming), and `/v1/completions`. It passes the upstream response through, including `reasoning_content`, tool calls, and SSE chunks.
 
-The new API key is in `/fsx/home/zhiyuan/.private/muse_openai_api_20261021/primary.key`. The existing `/fsx/home/zhiyuan/bench/model-relay-token.txt` is also mapped to these two model names. Key values are not stored in this repository. To add or restrict a key, edit the private `gateway-bf16.json` file and restart the `muse-openai-relay-bf16.service` user unit. The relay compares Bearer keys and returns only model aliases allowed for that key.
+Three independent client keys are in `/fsx/home/zhiyuan/.private/muse_openai_api_20261021/client-01.key` through `client-03.key`. The existing `primary.key` and `/fsx/home/zhiyuan/bench/model-relay-token.txt` are also mapped to these two model names. Key values are not stored in this repository. To add or restrict a key, edit the private `gateway-bf16.json` file and restart the `muse-openai-relay-bf16.service` user unit. The relay compares Bearer keys and returns only model aliases allowed for that key.
 
 ```python
 from openai import OpenAI

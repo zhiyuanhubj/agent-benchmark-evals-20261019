@@ -25,10 +25,13 @@
   },
   "authorization": {
     "scheme": "Bearer",
-    "key_count": 2,
+    "key_count": 5,
     "key_files": [
       "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/primary.key",
-      "/fsx/home/zhiyuan/bench/model-relay-token.txt"
+      "/fsx/home/zhiyuan/bench/model-relay-token.txt",
+      "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/client-01.key",
+      "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/client-02.key",
+      "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/client-03.key"
     ],
     "per_key_alias_allowlist": true,
     "no_key_values_recorded": true
@@ -47,7 +50,8 @@
     "authorized_chat_http": 200,
     "authorized_stream_http": 200,
     "stream_done_marker": true,
-    "reasoning_tokens_preserved": true
+    "reasoning_tokens_preserved": true,
+    "new_client_keys_public_models_http": [200, 200, 200]
   },
   "evaluation_context": "Both GPU hosts run the 16-GPU BF16 model. BF16 evaluation clients still call the model and share inference capacity. Host ip-10-1-122-30 also runs in-progress SWE-Review CPU sandboxes; they have not been interrupted or moved."
 }
