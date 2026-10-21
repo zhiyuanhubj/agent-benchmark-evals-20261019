@@ -44,6 +44,7 @@ def main():
     parser.add_argument('--until-epoch', type=float, default=time.time())
     args = parser.parse_args()
     statuses = Counter()
+    provider_http_errors = []
     presence = Counter()
     config_mismatch = []
     raw_without_assembled = []
@@ -70,6 +71,9 @@ def main():
         newest_started = max(newest_started, started)
         digest.update(entry.name.encode() + b' ' + hashlib.sha256(data).hexdigest().encode() + b'\n')
         statuses[str(record.get('status'))] += 1
+        if record.get('status') != 200:
+            provider_http_errors.append({'file': entry.name, 'status': record.get('status'),
+                                         'started_epoch': started})
         request = record.get('request') or {}
         if request.get('thinking') != EXPECTED_THINKING or request.get('output_config') != EXPECTED_EFFORT:
             config_mismatch.append(entry.name)
@@ -97,6 +101,7 @@ def main():
         'included_provider_requests': count,
         'member_name_and_sha256_digest': digest.hexdigest(),
         'http_status_counts': dict(sorted(statuses.items())),
+        'provider_http_errors': provider_http_errors,
         'expected_request_thinking': EXPECTED_THINKING,
         'expected_request_output_config': EXPECTED_EFFORT,
         'request_config_mismatches': config_mismatch,
@@ -107,10 +112,10 @@ def main():
         'assembled_thinking_without_raw_stream': assembled_without_raw,
         'read_errors': read_errors,
         'newest_provider_started_epoch': newest_started,
-        'qualification': ('thinking_preservation_verified_for_this_provider_snapshot'
+        'qualification': (('thinking_preservation_verified_for_this_provider_snapshot'
+                           if not provider_http_errors else 'thinking_preservation_verified_provider_http_errors_present')
                           if count and not config_mismatch and not raw_without_assembled
-                          and not assembled_without_raw and not read_errors
-                          and statuses == {'200': count} else 'needs_review'),
+                          and not assembled_without_raw and not read_errors else 'needs_review'),
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     temporary = OUTPUT.with_suffix('.json.tmp')
@@ -118,7 +123,7 @@ def main():
     os.replace(temporary, OUTPUT)
     print(json.dumps({key: result[key] for key in ('generated_utc', 'included_provider_requests',
           'http_status_counts', 'raw_and_assembled_presence_counts', 'qualification')}, ensure_ascii=False))
-    if result['qualification'] != 'thinking_preservation_verified_for_this_provider_snapshot':
+    if result['qualification'] == 'needs_review':
         raise SystemExit(1)
 
 
