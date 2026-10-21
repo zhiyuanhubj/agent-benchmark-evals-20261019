@@ -42,9 +42,14 @@ def main():
             evaluation = ((result.get('meta') or {}).get('benchmark') or {}).get('eval_raw_data') or {}
             correct = (result.get('metrics') or {}).get('correct')
             graded = evaluation.get('completed') is True and type(correct) is bool
+            turns = [step.get('assistant_content') for step in (result.get('trajectory') or {}).get('steps', [])]
+            turns = [turn for turn in turns if isinstance(turn, dict)]
             records[task] = {'result':str(result_path), 'result_sha256':sha(result_path),
                              'task_sha256':sha(task_path), 'graded':graded,
-                             'success':correct if graded else None}
+                             'success':correct if graded else None,
+                             'assistant_turns':len(turns),
+                             'nonempty_thinking_turns':sum(bool((turn.get('reasoning_content') or '').strip())
+                                                          for turn in turns)}
         row['records'].update(records)
         service = f"pro-spare-capacity-{claim['allocation']}-20261021.service"
         phase = subprocess.run(['systemctl','--user','is-active',service],

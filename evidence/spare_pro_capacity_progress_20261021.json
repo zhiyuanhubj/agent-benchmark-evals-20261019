@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T12:14:34.265074+00:00",
+  "generated_utc": "2026-10-21T12:16:37.775840+00:00",
   "rounds": {
     "beam/round_3": {
       "model": "beam",
@@ -744,14 +744,36 @@
           "result_sha256": "d49c23c420adc975245d5d066cd3687faad9d0c0b41a0397c92cc19ae70c1af4",
           "task_sha256": "725adc1e80c29f1938f18b077997ee158a1acc1754436859f8dab1af430db5e6",
           "graded": true,
-          "success": true
+          "success": true,
+          "assistant_turns": 36,
+          "nonempty_thinking_turns": 36
+        },
+        "instance_internetarchive__openlibrary-4a5d2a7d24c9e4c11d3069220c0685b736d5ecde-v13642507b4fc1f8d234172bf8129942da2c2ca26": {
+          "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/beam-pro-r3-shard0-2888-capacity-20261021/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r3-shard0-2888-capacity-20261021/details/instance_internetarchive__openlibrary-4a5d2a7d24c9e4c11d3069220c0685b736d5ecde-v--5d47e790112bf0c8397ca1e4ec5790dda55c2e620104c7b31ac6e49a12adaca6/attempt-1/result.json",
+          "result_sha256": "24fab6a30a27150d06bf6ea73415b7d9a3f09288c037dceb06f41814dc6a38c9",
+          "task_sha256": "9b10d2a077111949c4365e4e95e9ebdfd2f53ca1d00691d55e56af3ce91429cd",
+          "graded": true,
+          "success": true,
+          "assistant_turns": 31,
+          "nonempty_thinking_turns": 31
+        },
+        "instance_ansible__ansible-f327e65d11bb905ed9f15996024f857a95592629-vba6da65a0f3baefda7a058ebbd0a8dcafb8512f5": {
+          "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/beam-pro-r3-shard1-2901-capacity-20261021/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r3-shard1-2901-capacity-20261021/details/instance_ansible__ansible-f327e65d11bb905ed9f15996024f857a95592629-vba6da65a0f3b--eae2c289bd2b90011cd6dbe6641c2eb01ebbad00da4ee3e74b0ac3a362274ad7/attempt-1/result.json",
+          "result_sha256": "0d28db7dd2bf2c91cf469fe89ecca701d05f94fc5b9d1197da171d63c76d59c0",
+          "task_sha256": "8a45ab65197c478df9def542de29fb24f208b1e8bd3943353f2e91e75245fc27",
+          "graded": true,
+          "success": true,
+          "assistant_turns": 75,
+          "nonempty_thinking_turns": 75
         },
         "instance_qutebrowser__qutebrowser-f91ace96223cac8161c16dd061907e138fe85111-v059c6fdc75567943479b23ebca7c07b5e9a7f34c": {
           "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/beam-pro-r3-shard1-2901-capacity-20261021/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r3-shard1-2901-capacity-20261021/details/instance_qutebrowser__qutebrowser-f91ace96223cac8161c16dd061907e138fe85111-v059c--079f62123358053ce1c8d999ad8621253073434127b53ed984edf3ee1b222c0d/attempt-1/result.json",
           "result_sha256": "05f755e91137bb6b4f1e0f9e3606c9e0abcd7901c0827fe89646f39639ccaec1",
           "task_sha256": "8032e820e1b48582ac2c8eb5168d3feb5913e8ff11de77575a25443e1a872384",
           "graded": true,
-          "success": true
+          "success": true,
+          "assistant_turns": 40,
+          "nonempty_thinking_turns": 40
         }
       },
       "shards": [
@@ -760,7 +782,7 @@
           "shard": 0,
           "run_id": "beam-pro-r3-shard0-2888-capacity-20261021",
           "expected": 244,
-          "native_terminal": 1,
+          "native_terminal": 2,
           "service": "active",
           "started": true,
           "exit": null,
@@ -771,7 +793,7 @@
           "shard": 1,
           "run_id": "beam-pro-r3-shard1-2901-capacity-20261021",
           "expected": 244,
-          "native_terminal": 1,
+          "native_terminal": 2,
           "service": "active",
           "started": true,
           "exit": null,
@@ -789,9 +811,9 @@
           "claim_sha256": "785e1df6df0b87248f08955f50e3e9a52a09c5e93f05c62fa7b95fc076c25856"
         }
       ],
-      "terminal": 2,
-      "graded": 2,
-      "success": 2,
+      "terminal": 4,
+      "graded": 4,
+      "success": 4,
       "accuracy": null,
       "status": "partial_independent_draw"
     },

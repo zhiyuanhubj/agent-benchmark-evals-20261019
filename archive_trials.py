@@ -78,6 +78,8 @@ def include(path, root, group):
     if group == 'muse_nvfp4_pro_r2' and root.name == 'shard0-2900':
         return path.name in ('claim.json', 'command.json', 'started.json', 'exit.json')
     if 'artifacts' in rel.parts:
+        if group == 'spare_pro_capacity':
+            return rel.parts[-3:] == ('artifacts', 'app', 'patch.txt')
         # DeepSWE's native verifier consumes this model-produced patch. Keep
         # the patch itself, but never publish other sandbox artifacts here.
         return (group in ('beam_legacy', 'muse_bf16')
@@ -185,7 +187,7 @@ def iter_files(group):
             continue
         for directory, dirs, names in os.walk(root):
             excluded = {'.git', '__pycache__', '.venv', 'node_modules', 'sandbox'}
-            if group not in ('beam_legacy', 'muse_bf16'):
+            if group not in ('beam_legacy', 'muse_bf16', 'spare_pro_capacity'):
                 excluded.add('artifacts')
             if group in ('muse_bf16_review_inputs', 'opus47_review_inputs'):
                 excluded.update({'solution', 'tests', 'results'})
@@ -201,6 +203,12 @@ def iter_files(group):
                 if 'artifacts' in rel_dir:
                     after_artifacts = rel_dir[rel_dir.index('artifacts') + 1:]
                     allowed = {(): {'logs'}, ('logs',): {'artifacts'}}.get(after_artifacts, set())
+                    dirs[:] = [d for d in dirs if d in allowed]
+            if group == 'spare_pro_capacity':
+                rel_dir = Path(directory).relative_to(root).parts
+                if 'artifacts' in rel_dir:
+                    after = rel_dir[rel_dir.index('artifacts') + 1:]
+                    allowed = {'app'} if not after else set()
                     dirs[:] = [d for d in dirs if d in allowed]
             for name in names:
                 path = Path(directory) / name

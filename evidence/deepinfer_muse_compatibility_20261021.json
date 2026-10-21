@@ -1,0 +1,22 @@
+{
+  "checked_utc": "2026-10-21T12:15:42.981539+00:00",
+  "repository": "https://github.com/deepseek-ai/DeepInfer",
+  "revision": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9",
+  "official_readme": "https://github.com/deepseek-ai/DeepInfer/blob/9bd9cf243fc53ef9afbf8f04d391d989117d6ab9/README.md",
+  "official_supported_models": [
+    "DeepSeek-V4.1-Flash"
+  ],
+  "official_supported_hardware": [
+    "NVIDIA SM100",
+    "Huawei Ascend 950"
+  ],
+  "complete_online_service_included": false,
+  "missing_service_components": [
+    "KV cache system",
+    "prefill/decode disaggregation deployment",
+    "replica load balancing"
+  ],
+  "current_muse_hardware": "NVIDIA H200",
+  "current_muse_backend": "SGLang, BF16 TP16 on two nodes; separate NVFP4 TP8 replicas",
+  "assessment": "No advertised Muse model adapter or H200 hardware support; not a drop-in acceleration path. Porting and hardware support work would be required. No speedup is claimed or measured."
+}
