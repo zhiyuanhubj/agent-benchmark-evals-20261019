@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T09:12:38.067348+00:00",
+  "generated_utc": "2026-10-21T09:46:10.868911+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 22,
+      "scored_trajectories_checked": 24,
       "pattern_hit_trajectories": 2,
       "pattern_hit_successes": 1,
       "rule_hit_counts": {
@@ -8110,6 +8110,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "regex-log",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/regex-log__TSNabxP/agent/trajectory.json",
+      "trajectory_sha256": "5022c240b96aba840cbfa7780b3d9a48033cbd44166b9d4cb1ffdcee58f08e23",
+      "steps": 8,
+      "tool_calls": 20,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "build-cython-ext",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/build-cython-ext__QbfM2kb/agent/trajectory.json",
@@ -8151,6 +8163,18 @@
         }
       ],
       "review_status": "needs_context_review"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
+      "task": "query-optimize",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/query-optimize__zxsiL47/agent/trajectory.json",
+      "trajectory_sha256": "3db47e757f5c3afe5bcb20dae3799b0b73b2ad5b4a7f65fcdd7be4ce5950b7ea",
+      "steps": 58,
+      "tool_calls": 182,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
     },
     {
       "model": "muse_nvfp4_r4",
