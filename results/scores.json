@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T02:49:38.686464+00:00",
+  "generated_utc": "2026-10-21T03:03:39.928290+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -275,13 +275,13 @@
           "3": {
             "expected": 89,
             "terminal": 89,
-            "graded": 86,
-            "success": 67,
+            "graded": 88,
+            "success": 69,
             "active_trial_dirs": 0,
-            "archived_actual_model_responses": 4502,
-            "ungraded": 3,
+            "archived_actual_model_responses": 4516,
+            "ungraded": 1,
             "exceptions": {
-              "InternalServerError": 3
+              "InternalServerError": 1
             },
             "excluded_user_reassignment_trials": [],
             "complete": false,
@@ -294,12 +294,12 @@
           },
           "4": {
             "expected": 89,
-            "terminal": 6,
-            "graded": 6,
-            "success": 5,
+            "terminal": 7,
+            "graded": 7,
+            "success": 6,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 247,
+            "archived_actual_model_responses": 268,
             "exceptions": {},
             "complete": false,
             "accuracy": null,
@@ -314,7 +314,7 @@
             "success": 1,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 84,
+            "archived_actual_model_responses": 114,
             "exceptions": {},
             "complete": false,
             "accuracy": null,
@@ -324,7 +324,7 @@
           }
         },
         "status": "round_1_complete_later_rounds_partial",
-        "native_score_snapshot_utc": "2026-10-21T02:49:38.686464+00:00",
+        "native_score_snapshot_utc": "2026-10-21T03:03:39.928290+00:00",
         "recovery": {
           "controller": "failed",
           "parallel_controller": "inactive",
@@ -555,24 +555,24 @@
             "plan_sha256": "413f2926bffd2d8d14754fa8d4b69168876771931dca9316c3373240ae209bda",
             "original_ungraded_infra_failures": 89,
             "original_model_responses": 0,
-            "replacement_terminal": 86,
-            "replacement_graded": 86,
-            "replacement_success": 67,
-            "replacement_raw_responses": 4502,
+            "replacement_terminal": 88,
+            "replacement_graded": 88,
+            "replacement_success": 69,
+            "replacement_raw_responses": 4516,
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
               "largest-eigenval"
             ],
-            "active_trial_dirs": 6,
+            "active_trial_dirs": 5,
             "all_tasks_single_replacement_draw": false,
             "infrastructure_interruption_continuation": {
               "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r3-infra-replacement-2900/expired2869-continuation-2900-claim.json",
               "claim_sha256": "d7048a207875858453e57f410ff1437cc217b364cff8382b3538cc0abd1b8307",
               "expected": 11,
-              "terminal": 8,
-              "graded": 8,
-              "success": 6,
-              "raw_responses": 679,
+              "terminal": 10,
+              "graded": 10,
+              "success": 8,
+              "raw_responses": 693,
               "source_partial_model_response_tasks": 4,
               "source_partial_model_responses": 150,
               "qualification": "Allocation 2869 timed out. Only 11 tasks without a native terminal result continue; four interrupted source trajectories with 150 model replies remain separately preserved."
