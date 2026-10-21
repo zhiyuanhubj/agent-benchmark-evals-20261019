@@ -91,6 +91,26 @@ TTFT 从客户端开始 POST 起算，到首个非空 `reasoning_content`、正�
 
 逐请求指标、统计口径和原生 SSE 归档指针见[速度证据](evidence/muse_serving_speed_20261021.json)，可复现脚本见[测量脚本](protocol/measure_muse_serving_speed_20261021.py)。
 
+### 64K 输入与缓存复用补测
+
+此前约 260/7,200 token 的短测不能代表 NVIDIA Dynamo 的 Agent 长上下文性能。12:35–12:38 UTC 在同一个 8×H200 NVFP4 副本补测了约 64,000 输入、400 输出、89.95%公共前缀的合成负载。原生 `/generate` 检查确认公共前缀约 57,567–57,569 token 已在缓存；OpenAI 路由不返回逐请求缓存命中数，所以这里称为“公共前缀已预热”，不声称逐请求实测命中率恰好为 90%。
+
+| 来源/部署 | GPU | 入口并发 | 首 token p50 | 单请求解码速度 p50 |
+| --- | --- | ---: | ---: | ---: |
+| NVIDIA Dynamo + SGLang，官方 Agent trace | 4×GB200 | 12 | 222 ms | 57.4 token/s |
+| NVIDIA Dynamo + SGLang，官方 Agent trace | 4×GB300 | 16 | 178 ms | 51.0 token/s |
+| 本部署 SGLang，合成公共前缀请求 | 8×H200 | 1 | 755 ms | 63.2 token/s |
+| 本部署 SGLang，合成公共前缀请求 | 8×H200 | 4 | 2,361 ms | 38.3 token/s |
+| 本部署 SGLang，合成公共前缀请求 | 8×H200 | 8 | 3,372 ms | 55.0 token/s |
+| 本部署 SGLang，合成公共前缀请求 | 8×H200 | 12 | 8,573 ms | 54.8 token/s |
+| 本部署 SGLang，合成公共前缀请求 | 8×H200 | 16 | 14,255 ms | 51.3 token/s |
+
+官方数字见 [Dynamo Muse recipe](https://docs.nvidia.com/dynamo/dev/recipes/Muse-Spark-Open)。表格并列供参考：本次没有使用 AIPerf 回放官方 3,541 请求 trace，没有重启清空整个副本的 KV，也没有停止共享的 Pro 评测；硬件、框架版本、入口并发和负载长度分布均不同。当前后端执行上限为 8，入口 12/16 路会排队。本次 1 路为三次请求，其余每档只有一批；44 个请求（含冷输入基线）均成功，不能据此声明长期 p50/p95 或独占峰值。低并发下的解码速度可以达到约 63 token/s，但 64K 并发首 token 延迟目前没有达到官方约 0.2 秒的结果。
+
+这些 p50 都先计算逐请求指标再取中位数，不是算术平均值；解码速度不包含首 token 等待。12 路时，本部署将等待算入后的每请求输出速度 p50 只有约 28.2 token/s，16 路约 18.2 token/s。单次冷 64K 请求的首 token 为 6.58 秒；预热公共前缀后，三次单请求首 token 中位数为 0.755 秒，但这仍是共享负载下的小样本。
+
+官方还注明 vLLM 的两条记录仅为前 500 请求的功能验证，不应直接与 SGLang 全 trace 做框架排名。完整逐请求时间戳、缓存检查与统计边界见 [64K 补测证据](evidence/muse_64k_cached_speed_20261021.json) 和[补测脚本](protocol/measure_muse_64k_cached_speed_20261021.py)。
+
 ## 调用量与空闲质量探测
 
 从 2026-10-21 12:11 UTC 起，网关按 `client-01`、`client-02`、`client-03` 等标签持久记录请求数、成功/错误数、最近 5/15/60 分钟调用数及上游实际返回的 token 用量。流式响应只有携带 usage 时才能统计 token；可在请求中设置 `stream_options={"include_usage":true}`。统计库不保存 key、提示词或回答。此前没有逐 key 日志，无法补算历史调用量。

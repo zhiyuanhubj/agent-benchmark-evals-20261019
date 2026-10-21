@@ -27,7 +27,7 @@ def write(path, value):
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False)+'\n')
 
 
-async def request(client, target, name, length, output_tokens=256):
+async def request(client, target, name, length, output_tokens=256, body_override=None):
     text = ('The stored record contains a number and a label.\n' * (8 if length=='short' else 700))
     prompt = ('Independent performance probe '+uuid.uuid4().hex+'\n'+text+
               '\nExplain the invariant of binary search and give pseudocode. This is a synthetic service probe.')
@@ -35,6 +35,8 @@ async def request(client, target, name, length, output_tokens=256):
             'max_tokens':output_tokens, 'temperature':0, 'stream':True,
             'stream_options':{'include_usage':True}, 'ignore_eos':True,
             'chat_template_kwargs':{'reasoning_effort':'xhigh'}}
+    if body_override is not None:
+        body = body_override
     write(OUT/(name+'.request.json'), body)
     events, usage = [], {}
     started = time.perf_counter()
