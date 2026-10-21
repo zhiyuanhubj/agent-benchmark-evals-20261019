@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T01:28:58.093806+00:00",
+  "generated_utc": "2026-10-21T04:25:07.803896+00:00",
   "model": "beam_bf16",
   "round": 3,
   "profile": "exact user-supplied prebuilt TB2.1 images",
   "job_config_sha256": "fd3aaef265bd18ebba29029d5b7672140ef706eec57c2dc78955e912c937f99d",
-  "archive_name": "beam_bf16_exact_tb_live_20261021T011338Z.tar.zst",
+  "archive_name": "beam_bf16_exact_tb_live_20261021T041322Z.tar.zst",
   "expected": 89,
-  "terminal": 87,
-  "graded": 73,
+  "terminal": 88,
+  "graded": 74,
   "success": 48,
   "missing_graded_tasks": [
     "git-multibranch",
@@ -24,8 +24,7 @@
     "pytorch-model-cli",
     "pytorch-model-recovery",
     "qemu-alpine-ssh",
-    "regex-chess",
-    "schemelike-metacircular-eval"
+    "regex-chess"
   ],
   "ungraded_terminal_tasks": [
     "git-multibranch",
@@ -644,6 +643,13 @@
       "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/sanitize-git-repo__qLUEHpk/result.json",
       "raw_response_count": 23,
       "responses_with_reasoning_content": 23
+    },
+    "schemelike-metacircular-eval": {
+      "reward": 0.0,
+      "result_sha256": "4775052b1cee2886242b4f3b4c4dfd20a06cbd46aa947f136b479815c67ea60d",
+      "result_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3/schemelike-metacircular-eval__aYsPSia/result.json",
+      "raw_response_count": 635,
+      "responses_with_reasoning_content": 635
     },
     "sparql-university": {
       "reward": 0.0,

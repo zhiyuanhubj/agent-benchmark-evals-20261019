@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T03:13:03.130784+00:00",
+  "generated_utc": "2026-10-21T04:23:37.711704+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 62,
-  "success_count": 48,
+  "scored_tasks": 64,
+  "success_count": 49,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -200,6 +200,10 @@
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/mteb-retrieve__BJH96VD/result.json"
     },
+    "winning-avg-corewars": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/winning-avg-corewars__Gx4FkvG/result.json"
+    },
     "merge-diff-arc-agi-task": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/merge-diff-arc-agi-task__SLwAPtL/result.json"
@@ -228,6 +232,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/break-filter-js-from-html__WqN7m7x/result.json"
     },
+    "extract-elf": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/extract-elf__TA4j864/result.json"
+    },
     "db-wal-recovery": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/db-wal-recovery__wkb6MdA/result.json"
@@ -254,12 +262,6 @@
     }
   },
   "ungraded_native_terminal_tasks": {
-    "extract-elf": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-elf__qChRGKg/result.json",
-      "exception_type": "InternalServerError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "build-cython-ext": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/build-cython-ext__h6pvRUQ/result.json",
       "exception_type": "RuntimeError",
@@ -406,11 +408,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 62,
-  "covered_raw_response_sets": 62,
-  "covered_trajectories": 62,
-  "scored_raw_response_count": 2453,
-  "nonempty_reasoning_response_count": 2452,
+  "covered_results": 64,
+  "covered_raw_response_sets": 64,
+  "covered_trajectories": 64,
+  "scored_raw_response_count": 2523,
+  "nonempty_reasoning_response_count": 2522,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -608,6 +610,10 @@
       "raw_responses": 139,
       "nonempty_reasoning_content": 139
     },
+    "winning-avg-corewars": {
+      "raw_responses": 36,
+      "nonempty_reasoning_content": 36
+    },
     "merge-diff-arc-agi-task": {
       "raw_responses": 14,
       "nonempty_reasoning_content": 14
@@ -635,6 +641,10 @@
     "break-filter-js-from-html": {
       "raw_responses": 25,
       "nonempty_reasoning_content": 25
+    },
+    "extract-elf": {
+      "raw_responses": 34,
+      "nonempty_reasoning_content": 34
     },
     "db-wal-recovery": {
       "raw_responses": 44,
@@ -668,6 +678,7 @@
   "pre_model_recovery_run_id": "muse-bf16-tb-r1-pre-model-recovery-20261020",
   "replaced_unscored_originals": {
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-elf__qChRGKg/result.json": "extract-elf",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/db-wal-recovery__e9zUrop/result.json": "db-wal-recovery",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json": "cobol-modernization",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
@@ -675,7 +686,9 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json": "constraints-scheduling",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
-  "deferred_post_score_results": [],
+  "deferred_post_score_results": [
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/filter-js-from-html__pPxgEjS/result.json"
+  ],
   "archives": [
     "muse_bf16.tar.zst",
     "muse_bf16_delta_20261019T053146Z.tar.zst",
@@ -844,6 +857,10 @@
     "muse_bf16_delta_20261021T023838Z.tar.zst",
     "muse_bf16_delta_20261021T025639Z.tar.zst",
     "muse_bf16_delta_20261021T031206Z.tar.zst",
+    "muse_bf16_delta_20261021T033051Z.tar.zst",
+    "muse_bf16_delta_20261021T034730Z.tar.zst",
+    "muse_bf16_delta_20261021T040453Z.tar.zst",
+    "muse_bf16_delta_20261021T041642Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

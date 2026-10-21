@@ -1,11 +1,48 @@
 {
-  "generated_utc": "2026-10-21T03:28:19.224179+00:00",
+  "generated_utc": "2026-10-21T04:11:33.875507+00:00",
   "claim": "evidence/beam_deep_r2_client_recovery_claim.json",
   "claim_sha256": "e2161fdbc40d903cd9fb8705342259df1b0a5b9a6232de4fcaccdb0f620ec410",
   "declared_tasks": 35,
-  "native_terminal": 0,
-  "native_graded": 0,
-  "native_success": 0,
-  "observed": {},
+  "native_terminal": 6,
+  "native_graded": 6,
+  "native_success": 4,
+  "observed": {
+    "prometheus-transactional-reload-status": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-pilot-20261021/prometheus-transactional-reload__GkjhV26/result.json",
+      "result_sha256": "a883e13ea654be61d22bb022dbbc26a594738a46463ee6034ec9e138e9baa2aa",
+      "reward": 1,
+      "exception": null
+    },
+    "query-persist-restored-query-state": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/query-persist-restored-query-sta__tiAJKWK/result.json",
+      "result_sha256": "850d5ce78999394a8a627c7e7f2e2787d263f0d8c22daa7580ef443d28bf5ca1",
+      "reward": 1,
+      "exception": null
+    },
+    "psd-tools-blend-range-api": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/psd-tools-blend-range-api__9uLm2zg/result.json",
+      "result_sha256": "5994febe9fb22c4446e82dcc1ba30c67e6dd252308c09ddfa8b8bb2bdd82a8b7",
+      "reward": 1,
+      "exception": null
+    },
+    "python-statemachine-state-data-scoping": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/python-statemachine-state-data-s__BLynVa4/result.json",
+      "result_sha256": "486f7803cf3c3d900c335b57f3dedf59b760c355deaa62a71bd4d1eeff7806fa",
+      "reward": 0,
+      "exception": null
+    },
+    "prometheus-typed-label-sorting": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/prometheus-typed-label-sorting__hXz47tx/result.json",
+      "result_sha256": "8825f880a07baee8d98f51d179c8630e4f3c04ddb0ce1c5de201bd5fbfab34bc",
+      "reward": 1,
+      "exception": null
+    },
+    "pwntools-tube-multiplexing": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/legacy_bench_20261018/remaining_deep/deep-results/beam-client-r2-remaining-20261021/pwntools-tube-multiplexing__FRufFKY/result.json",
+      "result_sha256": "a99492b33232ee9728474316f6153f1d6a096cb6143efac928736030269c2bb8",
+      "reward": 0,
+      "exception": null
+    }
+  },
   "qualification": "Frozen original no-response AssertionErrors remain preserved. Only first correction draws with model trajectory and native binary reward replace the corresponding ungraded originals; no correctness-based selection."
 }
