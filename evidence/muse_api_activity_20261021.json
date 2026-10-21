@@ -5,22 +5,35 @@
   "usage": {
     "observed_since": 1792584703.0859601,
     "process_started": 1792584703.0859601,
-    "last_real_activity": 1792584876.6321204,
-    "idle_seconds": 0.47132253646850586,
+    "last_real_activity": 1792585062.594678,
+    "idle_seconds": 0.5372474193572998,
     "real_active": 0,
     "background_active": 0,
     "by_key": {
       "primary": {
-        "requests": 2,
-        "succeeded": 2,
+        "requests": 3,
+        "succeeded": 3,
         "errors": 0,
-        "last_started": 1792584876.6321204,
-        "prompt_tokens": 294,
-        "completion_tokens": 16,
+        "last_started": 1792585062.594678,
+        "prompt_tokens": 441,
+        "completion_tokens": 24,
         "requests_in_seconds": {
           "300": 2,
-          "900": 2,
-          "3600": 2
+          "900": 3,
+          "3600": 3
+        }
+      },
+      "background-quality": {
+        "requests": 1,
+        "succeeded": 0,
+        "errors": 1,
+        "last_started": 1792585062.427389,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "requests_in_seconds": {
+          "300": 1,
+          "900": 1,
+          "3600": 1
         }
       },
       "model-relay-token": {
@@ -62,16 +75,6 @@
           "900": 0,
           "3600": 0
         }
-      },
-      "background-quality": {
-        "requests": 0,
-        "succeeded": 0,
-        "errors": 0,
-        "requests_in_seconds": {
-          "300": 0,
-          "900": 0,
-          "3600": 0
-        }
       }
     },
     "qualification": "Counts begin when instrumentation was installed; historical per-key usage is unknown."
@@ -84,5 +87,11 @@
     "concurrency": 1,
     "real_request_cancels_background": true
   },
-  "verification": "Three mocked regression tests passed, including cancellation before upstream headers; live public nonstream and SSE requests succeeded."
+  "verification": "Three mocked regression tests passed, including cancellation before upstream headers; live public nonstream and SSE requests succeeded.",
+  "live_priority_validation": {
+    "kind": "one_explicit_nonbenchmark_live_priority_validation",
+    "foreground_status": 200,
+    "background_status": 499,
+    "foreground_elapsed_seconds": 0.5342082977294922
+  }
 }
