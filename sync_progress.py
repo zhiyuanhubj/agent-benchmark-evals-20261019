@@ -536,6 +536,8 @@ def cycle():
              'protocol/muse_openai_key_relay_20261021.py',
              'protocol/muse_api_activity_20261021.py', 'protocol/muse_api_idle_quality_20261021.py',
              'protocol/run_spare_pro_capacity_20261021.py', 'audit_spare_pro_capacity.py',
+             'protocol/recover_pro_capacity_timeout_20261021.py',
+             'protocol/benchmark_hold_20261021.sbatch', 'CAPACITY_STATUS_20261021.zh-CN.md',
              'tests/test_muse_api_activity.py', 'MUSE_OPENAI_API.zh-CN.md',
              'protocol/MUSE_OPENAI_API_20261021.md',
              'evidence/muse_openai_bf16_deployment_20261021.json',

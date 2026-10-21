@@ -15,6 +15,28 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def native_records(run_dir, ids):
+    records = {}
+    for path in sorted(run_dir.glob('*/*/details/*/attempt-1/result.json')):
+        try:
+            result = json.loads(path.read_text())
+        except json.JSONDecodeError:
+            continue
+        task_path = path.parent.parent/'task.json'
+        task = json.loads(task_path.read_text())['task_id']
+        assert task in ids and task not in records
+        evaluation = ((result.get('meta') or {}).get('benchmark') or {}).get('eval_raw_data') or {}
+        correct = (result.get('metrics') or {}).get('correct')
+        graded = evaluation.get('completed') is True and type(correct) is bool
+        turns = [s.get('assistant_content') for s in (result.get('trajectory') or {}).get('steps', [])]
+        turns = [turn for turn in turns if isinstance(turn, dict)]
+        records[task] = {'result':str(path), 'result_sha256':sha(path),
+            'task_sha256':sha(task_path), 'graded':graded, 'success':correct if graded else None,
+            'assistant_turns':len(turns), 'nonempty_thinking_turns':sum(
+                bool((turn.get('reasoning_content') or '').strip()) for turn in turns)}
+    return records
+
+
 def main():
     rounds, claims = {}, []
     for path in sorted((WORK/'claims').glob('*/claim.json')):
@@ -29,27 +51,9 @@ def main():
             'expected_round':731, 'declared_tasks':[], 'records':{}, 'shards':[]})
         assert not ids.intersection(row['declared_tasks'])
         row['declared_tasks'] += claim['task_ids']
-        records = {}
         run_dir = WORK/'results'/claim['run_id']
-        for result_path in sorted(run_dir.glob('*/*/details/*/attempt-1/result.json')):
-            try:
-                result = json.loads(result_path.read_text())
-            except json.JSONDecodeError:
-                continue  # A writer has not yet atomically completed its native result.
-            task_path = result_path.parent.parent/'task.json'
-            task = json.loads(task_path.read_text())['task_id']
-            assert task in ids and task not in records and task not in row['records']
-            evaluation = ((result.get('meta') or {}).get('benchmark') or {}).get('eval_raw_data') or {}
-            correct = (result.get('metrics') or {}).get('correct')
-            graded = evaluation.get('completed') is True and type(correct) is bool
-            turns = [step.get('assistant_content') for step in (result.get('trajectory') or {}).get('steps', [])]
-            turns = [turn for turn in turns if isinstance(turn, dict)]
-            records[task] = {'result':str(result_path), 'result_sha256':sha(result_path),
-                             'task_sha256':sha(task_path), 'graded':graded,
-                             'success':correct if graded else None,
-                             'assistant_turns':len(turns),
-                             'nonempty_thinking_turns':sum(bool((turn.get('reasoning_content') or '').strip())
-                                                          for turn in turns)}
+        records = native_records(run_dir, ids)
+        assert not records.keys() & row['records'].keys()
         row['records'].update(records)
         service = f"pro-spare-capacity-{claim['allocation']}-20261021.service"
         phase = subprocess.run(['systemctl','--user','is-active',service],
@@ -60,6 +64,31 @@ def main():
             'exit':json.loads((path.parent/'exit.json').read_text()) if (path.parent/'exit.json').exists() else None,
             'claim_sha256':sha(path)})
         claims.append(claim)
+    recovery = WORK/'recovery-2928'
+    if (recovery/'plan.json').exists():
+        plan = json.loads((recovery/'plan.json').read_text())
+        assert plan['runner_sha256'] == sha(ROOT/'protocol/recover_pro_capacity_timeout_20261021.py')
+        assert plan['original_claim_sha256'] == sha(plan['original_claim'])
+        assert all(sha(p) == digest for p, digest in plan['native_proof_sha256'].items())
+        original_claim = json.loads(Path(plan['original_claim']).read_text())
+        pending, started = set(plan['pending_task_ids']), set(plan['started_task_ids'])
+        assert not pending & started and pending | started == set(original_claim['task_ids'])
+        row = rounds['muse/round_3']
+        progress = {'plan_sha256':sha(recovery/'plan.json'), 'never_started':len(pending),
+            'interrupted_preserved':plan['interrupted_task_ids'], 'status':'waiting_for_allocation'}
+        if (recovery/'started.json').exists():
+            receipt = json.loads((recovery/'started.json').read_text())
+            assert receipt['plan_sha256'] == sha(recovery/'plan.json')
+            assert receipt['command_sha256'] == sha(recovery/'continuation-command.json')
+            command = json.loads((recovery/'continuation-command.json').read_text())
+            assert set(json.loads(command[command.index('--benchmark-params')+1])['sample_ids']) == pending
+            records = native_records(WORK/'results'/receipt['run_id'], pending)
+            assert not records.keys() & row['records'].keys()
+            row['records'].update(records)
+            progress.update(status='started', receipt=receipt, native_terminal=len(records))
+        row['allocation_timeout_continuation'] = progress
+        (ROOT/'evidence/capacity_timeout_recovery_20261021.json').write_text(
+            json.dumps({'plan':plan, 'progress':progress},indent=2)+'\n')
     for row in rounds.values():
         row.update(terminal=len(row['records']), graded=sum(r['graded'] for r in row['records'].values()),
                    success=sum(r['success'] is True for r in row['records'].values()),

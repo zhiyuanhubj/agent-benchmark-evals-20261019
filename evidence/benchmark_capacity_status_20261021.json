@@ -1,13 +1,11 @@
 {
-  "generated_utc": "2026-10-21T12:44:48.033087+00:00",
-  "gpu_nodes": 12,
-  "cards": 96,
+  "generated_utc": "2026-10-21T14:11:17.661172+00:00",
+  "gpu_nodes": 11,
+  "cards": 88,
   "nodes": [
     {
       "allocation": 2886,
       "node": "ip-10-1-13-41",
-      "work": "Muse BF16 API and evaluations",
-      "returncode": 0,
       "gpu_utilization": [
         98,
         98,
@@ -18,13 +16,12 @@
         98,
         98
       ],
-      "mean_utilization": 98.0
+      "mean_utilization": 98.0,
+      "returncode": 0
     },
     {
       "allocation": 2886,
       "node": "ip-10-1-122-30",
-      "work": "Muse BF16 second rank",
-      "returncode": 0,
       "gpu_utilization": [
         98,
         98,
@@ -35,13 +32,12 @@
         98,
         98
       ],
-      "mean_utilization": 98.0
+      "mean_utilization": 98.0,
+      "returncode": 0
     },
     {
       "allocation": 2923,
       "node": null,
-      "work": "Muse NVFP4 Pro r2 shard1",
-      "returncode": 0,
       "gpu_utilization": [
         100,
         100,
@@ -52,13 +48,12 @@
         100,
         100
       ],
-      "mean_utilization": 100.0
+      "mean_utilization": 100.0,
+      "returncode": 0
     },
     {
       "allocation": 2924,
       "node": null,
-      "work": "Muse NVFP4 Pro r2 shard2",
-      "returncode": 0,
       "gpu_utilization": [
         100,
         100,
@@ -69,30 +64,12 @@
         100,
         100
       ],
-      "mean_utilization": 100.0
+      "mean_utilization": 100.0,
+      "returncode": 0
     },
     {
       "allocation": 2927,
       "node": null,
-      "work": "Muse NVFP4 Pro r2 shard3",
-      "returncode": 0,
-      "gpu_utilization": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "mean_utilization": 0.0
-    },
-    {
-      "allocation": 2928,
-      "node": null,
-      "work": "Muse NVFP4 Pro r3 shard0",
-      "returncode": 0,
       "gpu_utilization": [
         100,
         100,
@@ -103,13 +80,12 @@
         100,
         100
       ],
-      "mean_utilization": 100.0
+      "mean_utilization": 100.0,
+      "returncode": 0
     },
     {
       "allocation": 2900,
       "node": null,
-      "work": "Muse NVFP4 Pro r2 shard0",
-      "returncode": 0,
       "gpu_utilization": [
         100,
         100,
@@ -120,13 +96,12 @@
         100,
         100
       ],
-      "mean_utilization": 100.0
+      "mean_utilization": 100.0,
+      "returncode": 0
     },
     {
       "allocation": 2899,
       "node": null,
-      "work": "Muse NVFP4 TB r5",
-      "returncode": 0,
       "gpu_utilization": [
         100,
         100,
@@ -137,13 +112,12 @@
         100,
         100
       ],
-      "mean_utilization": 100.0
+      "mean_utilization": 100.0,
+      "returncode": 0
     },
     {
       "allocation": 2902,
       "node": null,
-      "work": "Muse NVFP4 TB r4",
-      "returncode": 0,
       "gpu_utilization": [
         100,
         100,
@@ -154,30 +128,12 @@
         100,
         100
       ],
-      "mean_utilization": 100.0
+      "mean_utilization": 100.0,
+      "returncode": 0
     },
     {
       "allocation": 2888,
       "node": null,
-      "work": "Beam BF16 Pro r2/r3",
-      "returncode": 0,
-      "gpu_utilization": [
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100,
-        100
-      ],
-      "mean_utilization": 100.0
-    },
-    {
-      "allocation": 2901,
-      "node": null,
-      "work": "Beam BF16 Pro r3 and TB recovery",
-      "returncode": 0,
       "gpu_utilization": [
         0,
         0,
@@ -188,35 +144,50 @@
         0,
         0
       ],
-      "mean_utilization": 0.0
+      "mean_utilization": 0.0,
+      "returncode": 0
+    },
+    {
+      "allocation": 2901,
+      "node": null,
+      "gpu_utilization": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "mean_utilization": 0.0,
+      "returncode": 0
     },
     {
       "allocation": 2733,
       "node": null,
-      "work": "Beam BF16 Pro r1/r3",
-      "returncode": 0,
       "gpu_utilization": [
-        100,
-        24,
-        100,
-        20,
-        100,
-        65,
-        100,
-        72
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "mean_utilization": 72.625
+      "mean_utilization": 0.0,
+      "returncode": 0
     }
   ],
-  "qualification": "Single counter snapshot. Active agent jobs can be in CPU tool/test phases; not sustained full-utilization evidence.",
-  "beam_2901_observation": {
-    "active_model_authored_tools": 2,
-    "command": "grep recursively over filesystem root",
-    "observed_running_seconds": [
-      1491,
-      1772
-    ],
-    "predeclared_command_timeout_seconds": 2400,
-    "action": "Preserve native command timeout and sampled trajectories; no correctness restart."
-  }
+  "expired_allocation": {
+    "job": 2928,
+    "state": "TIMEOUT",
+    "end_utc": "2026-10-21T14:00:46+00:00",
+    "time_limit": "06:00:00"
+  },
+  "replacement_queue": "2989|PENDING|(Priority)\n2990|PENDING|(Priority)",
+  "watcher": "benchmark-replace-expired-2928-20261021.service",
+  "qualification": "Single counter snapshot; agent tools and tests use CPU between model calls. Allocation/queue activity does not imply sustained GPU use.",
+  "beam_idle_observation": "2901 and 2733 have native model-authored root filesystem grep commands; preserved command timeout 2400 seconds, no sampled draw restart."
 }

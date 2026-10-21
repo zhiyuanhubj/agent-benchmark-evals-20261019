@@ -74,6 +74,8 @@ GROUPS = {
 def include(path, root, group):
     rel = path.relative_to(root)
     if group == 'spare_pro_capacity' and rel.parts[0] != 'results':
+        if rel.parts[0] == 'recovery-2928':
+            return path.name in ('plan.json','assignment.json','ready.json','started.json','exit.json','image-guard.jsonl')
         return rel.parts[0] == 'claims' and path.name in ('claim.json','started.json','exit.json','image-guard.jsonl')
     if group == 'muse_nvfp4_pro_r2' and root.name == 'shard0-2900':
         return path.name in ('claim.json', 'command.json', 'started.json', 'exit.json')

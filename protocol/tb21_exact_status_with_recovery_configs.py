@@ -102,16 +102,20 @@ def main():
                             user_authorized_bf16_reassignment=bool(name == 'muse_nvfp4' and (MUSE_BF16_CUTOVER / 'cutover-intent.json').exists()))
     receipt = dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), source_image_plan=str(ROOT / 'image-identity-plan.json'),
         source_image_plan_sha256=hashlib.sha256((ROOT / 'image-identity-plan.json').read_bytes()).hexdigest(),
-        models=models, qualification='Independent user-supplied prebuilt-image profile. Cached-tag legacy outcomes are retained separately; never merged into this mean. Partial success counts are not final accuracy.')
+        models=models, runtime_alerts=[{'model': name, 'kind': 'original_profile_incomplete_without_live_controller',
+            'qualification': 'Operational alert; retired originals and replacement draws are audited separately. No score completion is implied.'}
+            for name, x in models.items() if not (x['all_three_complete'] or
+                x['unit']['ActiveState'] == 'active' or
+                (x['replica_unit'] and x['replica_unit']['ActiveState'] == 'active') or
+                any(unit['ActiveState'] == 'active' for unit in x['continuation_units'].values()) or
+                x['user_authorized_bf16_reassignment'])], qualification='Independent user-supplied prebuilt-image profile. Cached-tag legacy outcomes are retained separately; never merged into this mean. Partial success counts are not final accuracy.')
     state = ROOT / 'status-current.json'
     temp = state.with_name(state.name + '.' + str(os.getpid()) + '.tmp')
     temp.write_text(json.dumps(receipt, indent=2) + '\n')
     temp.replace(state)
     print(json.dumps({model: {'images_ready': value['exact_supplied_images_ready'], 'rounds': {n:{k:v[k] for k in ['terminal','graded','success','archived_actual_model_responses']} for n,v in value['rounds'].items()}} for model,value in models.items()}))
-    assert all(x['all_three_complete'] or x['unit']['ActiveState'] == 'active' or
-               (x['replica_unit'] and x['replica_unit']['ActiveState'] == 'active') or
-               any(unit['ActiveState'] == 'active' for unit in x['continuation_units'].values()) or
-               x['user_authorized_bf16_reassignment'] for x in models.values()), 'Unfinished supplied-image profile has no active controller'
+    # Operational controller health must remain visible without preventing
+    # publication of independently validated native grades and interrupted work.
 
 if __name__ == '__main__':
     main()
