@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-10-21T08:23:28.041115+00:00",
+  "generated_utc": "2026-10-21T08:58:16.870272+00:00",
   "model": "Muse-Spark-Open-816B-A42B-NVFP4",
   "benchmark": "SWE-bench Pro Verified",
   "round": 2,
   "shard": 0,
   "expected_round": 731,
   "expected_shard": 183,
-  "terminal": 19,
-  "graded": 19,
-  "success": 11,
+  "terminal": 23,
+  "graded": 23,
+  "success": 14,
   "status": "partial_no_full_score",
   "accuracy": null,
   "claim": "evidence/muse_nvfp4_pro_r2_shard0_claim.json",
@@ -47,11 +47,27 @@
       "native_graded": true,
       "success": false
     },
+    "instance_ansible__ansible-e64c6c1ca50d7d26a8e7747d8eb87642e767cd74-v0f01c69f1e2528b935359cfe578530722bca2c59": {
+      "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_ansible__ansible-e64c6c1ca50d7d26a8e7747d8eb87642e767cd74-v0f01c69f1e25--7a5ac3b33c4def9bf20acc88506e31c2e6df251e574e38191578018656ca5fb8/task.json",
+      "task_sha256": "5c0cc70d19564fb72110e148f05419d4abdd7bfa8186c0216a8653e440491fc5",
+      "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_ansible__ansible-e64c6c1ca50d7d26a8e7747d8eb87642e767cd74-v0f01c69f1e25--7a5ac3b33c4def9bf20acc88506e31c2e6df251e574e38191578018656ca5fb8/attempt-1/result.json",
+      "result_sha256": "305030772145956cbf14aa1b9f4bc5547a53f270b84f8f49e23c3e96acdaf52d",
+      "native_graded": true,
+      "success": true
+    },
     "instance_element-hq__element-web-5dfde12c1c1c0b6e48f17e3405468593e39d9492-vnan": {
       "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_element-hq__element-web-5dfde12c1c1c0b6e48f17e3405468593e39d9492-vnan--8277dd1f3d7966e4881d66b268fec65f62393b9f59e3ebe9e890ce7c31167249/task.json",
       "task_sha256": "28c95ceabdc2f79e96e50a4d7faa166fabe1b1ea7dd46a39df24a73a24b6929e",
       "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_element-hq__element-web-5dfde12c1c1c0b6e48f17e3405468593e39d9492-vnan--8277dd1f3d7966e4881d66b268fec65f62393b9f59e3ebe9e890ce7c31167249/attempt-1/result.json",
       "result_sha256": "17725b89b5f64aa47c1794fac2676deee7c146117578ad446d078c8ee18acfd6",
+      "native_graded": true,
+      "success": false
+    },
+    "instance_element-hq__element-web-71fe08ea0f159ccb707904d87f0a4aef205a167c-vnan": {
+      "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_element-hq__element-web-71fe08ea0f159ccb707904d87f0a4aef205a167c-vnan--021650bf7ffa4439a4f1e4f6bb2a73507b4f3489566575366120d7c48720d053/task.json",
+      "task_sha256": "a10fedf736f7059796ac333448cde7bab3c4a0d2bf881585394a70bb50744aec",
+      "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_element-hq__element-web-71fe08ea0f159ccb707904d87f0a4aef205a167c-vnan--021650bf7ffa4439a4f1e4f6bb2a73507b4f3489566575366120d7c48720d053/attempt-1/result.json",
+      "result_sha256": "409c38b9199e47940eb508918d76b7e0350844c4e999c2c4c12aa428f219fa81",
       "native_graded": true,
       "success": false
     },
@@ -84,6 +100,22 @@
       "task_sha256": "486e1af086014b71829781ca783d5ab43ebd07b77a50f065a4392bc12a08e2fc",
       "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_future-architect__vuls-5af1a227339e46c7abf3f2815e4c636a0c01098e--659ebd6cf8cfb13f52e11a2b95d925a949dc72318e91fa596746203c2973042a/attempt-1/result.json",
       "result_sha256": "0b9c71ced28a46c282ad8e488ad07b859f1e4d2f63329e40fc7ea56374c55836",
+      "native_graded": true,
+      "success": true
+    },
+    "instance_future-architect__vuls-be7b9114cc9545e68fb0ee7bc63d7ec53d1a00ad": {
+      "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_future-architect__vuls-be7b9114cc9545e68fb0ee7bc63d7ec53d1a00ad--ac8461920f24e29ca03e9f316141cfc4122041842cdc1440e90c6add7caa8062/task.json",
+      "task_sha256": "8e61680fb3555a9550b1db81c7c098992a63b38524b1ac0d4a4e1fa7126e8e5c",
+      "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_future-architect__vuls-be7b9114cc9545e68fb0ee7bc63d7ec53d1a00ad--ac8461920f24e29ca03e9f316141cfc4122041842cdc1440e90c6add7caa8062/attempt-1/result.json",
+      "result_sha256": "384b433a2f96117c9fb2356897d197a7a46aa3dbe2247111721fbde2c9e3a816",
+      "native_graded": true,
+      "success": true
+    },
+    "instance_gravitational__teleport-2be514d3c33b0ae9188e11ac9975485c853d98bb-vce94f93ad1030e3136852817f2423c1b3ac37bc4": {
+      "task_json": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_gravitational__teleport-2be514d3c33b0ae9188e11ac9975485c853d98bb-vce94f--ee9440b5999f1280f100e1cee7a12c73dde15832acfbf811d4258ec69d1ac4f1/task.json",
+      "task_sha256": "574fd15a095db1407d3c462def43471f6328e78e6d8cb4658c7cc9125480888c",
+      "result": "/fsx/home/zhiyuan/.private/muse_spark_open_20261016/pro_round2_20261021/results/muse-pro-r2/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-nvfp4-pro-r2-shard0-2900/details/instance_gravitational__teleport-2be514d3c33b0ae9188e11ac9975485c853d98bb-vce94f--ee9440b5999f1280f100e1cee7a12c73dde15832acfbf811d4258ec69d1ac4f1/attempt-1/result.json",
+      "result_sha256": "abca14be0f0ab726c008b71d01fbe3f781097bc8cbe168e92f379257d8b78b94",
       "native_graded": true,
       "success": true
     },
