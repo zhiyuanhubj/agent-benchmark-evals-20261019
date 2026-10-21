@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T07:39:26.387423+00:00",
+  "generated_utc": "2026-10-21T08:11:09.323801+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r3-setup-replacement-20261021-claim.json",
   "claim_sha256": "b86a7482e7bf5d822e6a4820e32c59779885a4251d08bbbb79c309164d2ddd43",
   "scoring_source_sha256": "fc47adc4ebde3479cab26520131cf68670c5ddc3223db325a224dbeedf29ab76",
@@ -64,21 +64,49 @@
     }
   },
   "replacement_job": "beam-tb-v1-exact-r3-setup-replacement-20261021",
-  "replacement_trial_directories": 2,
-  "replacement_terminal": 1,
-  "replacement_graded": 1,
-  "replacement_success": 1,
+  "replacement_trial_directories": 6,
+  "replacement_terminal": 5,
+  "replacement_graded": 5,
+  "replacement_success": 4,
   "replacements": {
+    "path-tracing-reverse": {
+      "reward": 1.0,
+      "result_sha256": "127b39b7d6935103c93d70474e8a2afa0f827cfdd586aed06265f079b33922ec",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/path-tracing-reverse__HKWuGR2/result.json",
+      "exception_type": null,
+      "raw_response_count": 346
+    },
+    "portfolio-optimization": {
+      "reward": 1.0,
+      "result_sha256": "e137802bb3b81f297c69c2539523ec578f62afe739c4f52730d9e21ed75b9d7d",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/portfolio-optimization__jCNxFT3/result.json",
+      "exception_type": null,
+      "raw_response_count": 9
+    },
+    "polyglot-rust-c": {
+      "reward": 1.0,
+      "result_sha256": "84018053e558a63af7a592c07ae235cf3f24c85e6324091f5b8d5ee1dc9415c8",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/polyglot-rust-c__2oUAjkH/result.json",
+      "exception_type": null,
+      "raw_response_count": 10
+    },
     "openssl-selfsigned-cert": {
       "reward": 1.0,
       "result_sha256": "a382df20853d354888c8ac2925738dac60e3bcc06d729bd37d2e0e5e34211c6f",
       "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/openssl-selfsigned-cert__PkNYBU4/result.json",
       "exception_type": null,
       "raw_response_count": 4
+    },
+    "polyglot-c-py": {
+      "reward": 0.0,
+      "result_sha256": "bd5e763b015a8c34be348e3caba4e10afd8a5e42ad83c069943de16d264fdc15",
+      "result_path": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/beam_bf16/beam-tb-v1-exact-r3-setup-replacement-20261021/polyglot-c-py__VHWLK5E/result.json",
+      "exception_type": null,
+      "raw_response_count": 21
     }
   },
-  "replacement_raw_responses": 350,
-  "nonempty_reasoning_responses": 350,
+  "replacement_raw_responses": 403,
+  "nonempty_reasoning_responses": 403,
   "empty_or_missing_reasoning_responses": 0,
   "score_policy": "Keep all original results ungraded. Report first replacement grades separately; never select best-of outcomes.",
   "qualification": "Original ungraded attempts remain immutable and separate. At most one declared replacement draw per setup failure; no best-of selection."

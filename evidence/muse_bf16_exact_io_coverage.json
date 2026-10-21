@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T08:03:50.943577+00:00",
+  "generated_utc": "2026-10-21T08:36:06.095194+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 72,
-  "success_count": 55,
+  "scored_tasks": 73,
+  "success_count": 56,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -244,6 +244,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/mcmc-sampling-stan__fRLJ2EA/result.json"
     },
+    "mteb-leaderboard": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/mteb-leaderboard__N3oVCdd/result.json"
+    },
     "filter-js-from-html": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/filter-js-from-html__pPxgEjS/result.json"
@@ -389,20 +393,14 @@
       "exception_type": "RuntimeError",
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
-    "mteb-leaderboard": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mteb-leaderboard__MWhnJ4n/result.json",
-      "exception_type": "InternalServerError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     }
   },
   "covered_inputs": 89,
-  "covered_results": 72,
-  "covered_raw_response_sets": 72,
-  "covered_trajectories": 72,
-  "scored_raw_response_count": 2912,
-  "nonempty_reasoning_response_count": 2911,
+  "covered_results": 73,
+  "covered_raw_response_sets": 73,
+  "covered_trajectories": 73,
+  "scored_raw_response_count": 3005,
+  "nonempty_reasoning_response_count": 3004,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -644,6 +642,10 @@
       "raw_responses": 21,
       "nonempty_reasoning_content": 21
     },
+    "mteb-leaderboard": {
+      "raw_responses": 93,
+      "nonempty_reasoning_content": 93
+    },
     "filter-js-from-html": {
       "raw_responses": 21,
       "nonempty_reasoning_content": 21
@@ -702,6 +704,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/openssl-selfsigned-cert__4v8jpyZ/result.json": "openssl-selfsigned-cert",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json": "fix-ocaml-gc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mcmc-sampling-stan__cobMK96/result.json": "mcmc-sampling-stan",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mteb-leaderboard__MWhnJ4n/result.json": "mteb-leaderboard",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/filter-js-from-html__3snMrie/result.json": "filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-elf__qChRGKg/result.json": "extract-elf",
@@ -900,6 +903,8 @@
     "muse_bf16_delta_20261021T072634Z.tar.zst",
     "muse_bf16_delta_20261021T074421Z.tar.zst",
     "muse_bf16_delta_20261021T075713Z.tar.zst",
+    "muse_bf16_delta_20261021T081625Z.tar.zst",
+    "muse_bf16_delta_20261021T082843Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],

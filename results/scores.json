@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T07:52:19.929327+00:00",
+  "generated_utc": "2026-10-21T08:23:48.230863+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -16,11 +16,11 @@
         "round_2": {
           "status": "partial_no_full_score",
           "expected": 731,
-          "graded": 17,
-          "success": 10,
+          "graded": 19,
+          "success": 11,
           "accuracy": null,
           "shard0_expected": 183,
-          "shard0_terminal": 17,
+          "shard0_terminal": 19,
           "evidence": "evidence/muse_nvfp4_pro_r2_shard0_progress.json",
           "qualification": "Only predeclared shard zero of the independent second 731-task draw. No complete round accuracy or best-of merging with round one."
         }
@@ -317,12 +317,12 @@
           },
           "4": {
             "expected": 89,
-            "terminal": 19,
-            "graded": 19,
-            "success": 16,
+            "terminal": 21,
+            "graded": 21,
+            "success": 18,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 826,
+            "archived_actual_model_responses": 908,
             "exceptions": {
               "AgentTimeoutError": 1
             },
@@ -339,12 +339,12 @@
           },
           "5": {
             "expected": 89,
-            "terminal": 16,
-            "graded": 16,
-            "success": 14,
+            "terminal": 18,
+            "graded": 18,
+            "success": 15,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 654,
+            "archived_actual_model_responses": 701,
             "exceptions": {},
             "complete": false,
             "accuracy": null,
@@ -359,7 +359,7 @@
           }
         },
         "status": "complete_three_rounds_later_rounds_partial",
-        "native_score_snapshot_utc": "2026-10-21T07:52:19.929327+00:00",
+        "native_score_snapshot_utc": "2026-10-21T08:23:48.230863+00:00",
         "recovery": {
           "controller": "failed",
           "parallel_controller": "inactive",
@@ -433,25 +433,25 @@
           "active_recovery_trial_dirs": 0,
           "user_cutover_interrupted_ungraded": 8,
           "extra_gpu_allocations": {
-            "2923": {
-              "state": "PENDING",
-              "nodes": "",
-              "scheduler_start": "2026-10-22T16:00:18"
-            },
-            "2924": {
-              "state": "PENDING",
-              "nodes": "",
-              "scheduler_start": "2026-10-22T16:00:18"
+            "2928": {
+              "state": "RUNNING",
+              "nodes": "ip-10-1-69-108",
+              "scheduler_start": "2026-10-21T08:00:17"
             },
             "2927": {
-              "state": "PENDING",
-              "nodes": "",
-              "scheduler_start": "2026-10-22T16:00:18"
+              "state": "RUNNING",
+              "nodes": "ip-10-1-98-127",
+              "scheduler_start": "2026-10-21T08:00:12"
             },
-            "2928": {
-              "state": "PENDING",
-              "nodes": "",
-              "scheduler_start": "2026-10-22T16:00:18"
+            "2924": {
+              "state": "RUNNING",
+              "nodes": "ip-10-1-98-133",
+              "scheduler_start": "2026-10-21T08:00:11"
+            },
+            "2923": {
+              "state": "RUNNING",
+              "nodes": "ip-10-1-76-28",
+              "scheduler_start": "2026-10-21T08:00:05"
             }
           },
           "b05_early_owner": {
@@ -717,15 +717,15 @@
       "model": "reflection/Beam-1.0-501B-A23B",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 644,
-        "graded": 605,
-        "success": 354,
+        "terminal": 651,
+        "graded": 613,
+        "success": 357,
         "status": "partial_no_full_score",
         "pre_model_disk_correction": {
           "declared_tasks": 136,
-          "native_terminal": 101,
-          "native_graded": 100,
-          "native_success": 51,
+          "native_terminal": 102,
+          "native_graded": 101,
+          "native_success": 52,
           "audit": "evidence/beam_pro_r1_pre_model_disk_failures.json",
           "claim": "evidence/beam_pro_r1_pre_model_disk_recovery_claim.json"
         },
@@ -733,9 +733,9 @@
       },
       "swe_bench_pro_verified_round_2": {
         "expected": 731,
-        "terminal": 204,
-        "graded": 204,
-        "success": 132,
+        "terminal": 209,
+        "graded": 209,
+        "success": 134,
         "status": "partial_no_full_score",
         "scoring_run_id": "beam-pro-full731-r2-2888-20261020",
         "model_allocation": 2888,
@@ -865,12 +865,12 @@
             "setup_replacement": {
               "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/beam/state/r3-setup-replacement-20261021-claim.json",
               "declared_tasks": 11,
-              "native_terminal": 3,
-              "native_graded": 3,
-              "native_success": 2,
-              "native_raw_responses": 371,
-              "effective_graded_if_replacements_admitted": 78,
-              "effective_success_if_replacements_admitted": 50,
+              "native_terminal": 5,
+              "native_graded": 5,
+              "native_success": 4,
+              "native_raw_responses": 410,
+              "effective_graded_if_replacements_admitted": 80,
+              "effective_success_if_replacements_admitted": 52,
               "qualification": "Original ungraded setup failures remain preserved; one declared first replacement per task is shown separately, never best-of."
             }
           }
@@ -1240,8 +1240,8 @@
       "status": "in_progress",
       "swe_bench_pro_verified": {
         "expected": 731,
-        "terminal": 305,
-        "graded": 211,
+        "terminal": 307,
+        "graded": 213,
         "success": 135,
         "status": "partial_no_full_score",
         "scoring_run_id": "muse-bf16-pro-full-r1-resume-20261020",
@@ -1256,8 +1256,8 @@
         "1": {
           "expected": 89,
           "terminal": 89,
-          "graded": 72,
-          "success": 55,
+          "graded": 73,
+          "success": 56,
           "status": "partial_no_full_score",
           "supplemental_run_id": "muse-bf16-tb-r1-direct-2886-20261020"
         },
@@ -1282,12 +1282,12 @@
           "1": {
             "expected": 89,
             "terminal": 89,
-            "graded": 72,
-            "success": 55,
+            "graded": 73,
+            "success": 56,
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
-            "native_score_snapshot_utc": "2026-10-21T07:51:21.496900+00:00",
+            "native_score_snapshot_utc": "2026-10-21T08:21:11.994215+00:00",
             "qualification": "Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.",
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
@@ -1298,8 +1298,8 @@
             "clean_accuracy_qualification": "Not established: this round is incomplete and other successful trajectories still need full manual review.",
             "pre_model_infrastructure_recovery": {
               "declared_tasks": 30,
-              "native_terminal": 15,
-              "replaced_unscored_originals": 15,
+              "native_terminal": 16,
+              "replaced_unscored_originals": 16,
               "excluded_partial_model_output_tasks": [
                 "query-optimize",
                 "schemelike-metacircular-eval"
@@ -1362,24 +1362,24 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 662,
-        "native_graded": 662,
+        "native_terminal": 673,
+        "native_graded": 673,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 223,
-            "native_graded": 223
+            "native_terminal": 226,
+            "native_graded": 226
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 216,
-            "native_graded": 216
+            "native_terminal": 221,
+            "native_graded": 221
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
-            "native_terminal": 223,
-            "native_graded": 223
+            "native_terminal": 226,
+            "native_graded": 226
           }
         },
         "DA": null,

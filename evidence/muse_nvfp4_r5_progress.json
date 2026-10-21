@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T07:52:19.899129+00:00",
+  "generated_utc": "2026-10-21T08:23:48.198859+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 16,
-  "graded": 16,
-  "success": 14,
+  "terminal": 18,
+  "graded": 18,
+  "success": 15,
   "active_trial_dirs": 2,
-  "raw_responses": 654,
+  "raw_responses": 701,
   "tasks": {
     "hf-model-inference": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/hf-model-inference__CkHrHWt/result.json",
@@ -32,6 +32,11 @@
     },
     "compile-compcert": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/compile-compcert__3KecaTe/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "openssl-selfsigned-cert": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/openssl-selfsigned-cert__uaJFdVy/result.json",
       "reward": 1.0,
       "exception": null
     },
@@ -70,7 +75,12 @@
       "reward": 1.0,
       "exception": null
     },
-    "mteb-retrieve": null,
+    "path-tracing": null,
+    "mteb-retrieve": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/mteb-retrieve__GmhBwrh/result.json",
+      "reward": 0.0,
+      "exception": null
+    },
     "git-multibranch": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/git-multibranch__8NTh9rR/result.json",
       "reward": 1.0,

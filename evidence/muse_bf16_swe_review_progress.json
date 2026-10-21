@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-21T07:39:20.338113+00:00",
+  "generated_utc": "2026-10-21T08:11:02.571541+00:00",
   "scope": "Original Muse BF16 SWE-Review native task outcomes; progress only, not official DA or RRR.",
   "queue_plan_sha256": "d758f7f0b01b85e923ebf9ad2e5c5c358fb620aa377fc2e54a23bc432bf7a977",
   "model_id": "muse-spark-open-bf16",
   "splits": {
     "glm5_500": {
       "expected": 500,
-      "native_terminal": 223,
-      "native_graded": 223,
+      "native_terminal": 226,
+      "native_graded": 226,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch0/astropy__astropy-12907__tLSFDZR/result.json",
@@ -576,6 +576,24 @@
         "django__django-16256": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch13/django__django-16256__2f94wpL/result.json",
           "sha256": "583e1d4aef4fecacc42dc99dc0b7d68066e7c81d9ba412280fddf2464421356a",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16263": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch13/django__django-16263__XHGxoUS/result.json",
+          "sha256": "c6c0556e234da52ba1e5cfe3720542e964ec4c2e3e972542371cac0d491533e2",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16315": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch14/django__django-16315__9GKpUyR/result.json",
+          "sha256": "dd4872bd46de87746c30ffd42beb42c8e07c20e8390a70e72625a836487afe52",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16333": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/glm5_500/muse-bf16-review-20261018-glm5_500-batch14/django__django-16333__pdSuKBY/result.json",
+          "sha256": "daf823e76d3458167528cef14ba8743f9fe45c73249b10019c7006728c5de7f1",
           "native_graded": true,
           "exception_type": null
         },
@@ -1351,8 +1369,8 @@
     },
     "qwen3_coder_30b_500": {
       "expected": 462,
-      "native_terminal": 216,
-      "native_graded": 216,
+      "native_terminal": 221,
+      "native_graded": 221,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch0/astropy__astropy-12907__FgxbXC9/result.json",
@@ -1879,6 +1897,36 @@
         "django__django-16560": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch13/django__django-16560__YKBuwh7/result.json",
           "sha256": "3b3d372c7be0b10c000baf84a8245f8faf961ad24f0bc196c11148dd1673e02e",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16569": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch13/django__django-16569__bEtY8BN/result.json",
+          "sha256": "bf203cfc01ce7f672460fd61c52d207dcf2b651c95d0f6662393f4e7493d393c",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16595": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch13/django__django-16595__A4vaEqk/result.json",
+          "sha256": "995b63ba2af2fc78ba57f5ada3590ff510c437e0ed3fca21533d14353897c40f",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16612": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch13/django__django-16612__52Xw6u6/result.json",
+          "sha256": "fb60d0598fc1b4af9fb9e40b3c47f73ada2071dbed23c907f765e03d6ab335ed",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16631": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch13/django__django-16631__Pxmgi3t/result.json",
+          "sha256": "487fb9c4bec93277b53232e13c6cd617c7442717c5a0039d0403d6fc9e13f48c",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "django__django-16642": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_coder_30b_500/muse-bf16-review-20261018-qwen3_coder_30b_500-batch13/django__django-16642__DnXzBGa/result.json",
+          "sha256": "fa5e3e11b51ac3c2d40241858188911b7d90b2f519ca192dec8481b200b87ad4",
           "native_graded": true,
           "exception_type": null
         },
@@ -2654,8 +2702,8 @@
     },
     "qwen3_30b_instruct2507_500": {
       "expected": 422,
-      "native_terminal": 223,
-      "native_graded": 223,
+      "native_terminal": 226,
+      "native_graded": 226,
       "records": {
         "astropy__astropy-12907": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch0/astropy__astropy-12907__nGRk5dr/result.json",
@@ -3224,6 +3272,24 @@
         "matplotlib__matplotlib-22865": {
           "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch13/matplotlib__matplotlib-22865__bPKjCGx/result.json",
           "sha256": "284273a6e1cf6cb481ded3f418de415fd8802d13790b1a5f61124ea43a2fcde7",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "matplotlib__matplotlib-23476": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch13/matplotlib__matplotlib-23476__Un5QFNH/result.json",
+          "sha256": "90f980269600040e2c3ae2db4a360b2b57e0a736ee9790c1378c29157869709d",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "matplotlib__matplotlib-24026": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch14/matplotlib__matplotlib-24026__fxKBg2J/result.json",
+          "sha256": "508c1e933a9bc1c57f00a1f4285b4b0162c4ee25d6db140ec1f855cd4926ea39",
+          "native_graded": true,
+          "exception_type": null
+        },
+        "matplotlib__matplotlib-24149": {
+          "result": ".private/muse_bf16_20261018/review_bench/queue/results/qwen3_30b_instruct2507_500/muse-bf16-review-20261018-qwen3_30b_instruct2507_500-batch14/matplotlib__matplotlib-24149__4fenZxT/result.json",
+          "sha256": "de7b8aecdde1e2146e755bde3bebc762a282b030bcb5ea9880d242d95fa0bd33",
           "native_graded": true,
           "exception_type": null
         },
@@ -4000,6 +4066,6 @@
   },
   "errors": [],
   "total_expected": 1384,
-  "total_native_terminal": 662,
-  "total_native_graded": 662
+  "total_native_terminal": 673,
+  "total_native_graded": 673
 }
