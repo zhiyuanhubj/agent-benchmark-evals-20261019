@@ -429,6 +429,7 @@ def cycle():
              'audit_opus47_review_instruct_recovery_da.py',
              'verify_opus47_review_instruct_recovery_release.py',
              'audit_opus47_provider_thinking.py',
+             'audit_opus47_provider_retries.py',
              'audit_other_exact_round1.py',
              'audit_muse_bf16_expiry_recovery.py', 'publish_muse_bf16_interrupted_io.py',
              'protocol/expanded_status_20261019.py',

@@ -1,0 +1,37 @@
+{
+  "generated_utc": "2026-10-21T00:11:51.034995+00:00",
+  "scope": "The two observed HTTP 502 provider records in the Opus 4.7 SWE-Review thinking snapshot, matched to later HTTP 200 records by entire request equality. This does not assign either retry to a particular benchmark task.",
+  "release_asset": "opus47_legacy_delta_20261020T234726Z.tar.zst",
+  "release_tag": "2026-10-19-snapshot-part2",
+  "release_asset_sha256": "8ecf066f39a20dfcb1b6b345d468a3c04287dadf3d1c876b433cabfc14ba8cff",
+  "remote_asset_verification_utc": "2026-10-20T23:54:02.788659+00:00",
+  "pairs": [
+    {
+      "failed_file": "6054c1c9035d4dbf8db106fa18113008.json",
+      "failed_file_sha256": "2cd241bb456267c29843d219590bf85aad19fe571a7f9dc4ac8efe56861019af",
+      "failed_http_status": 502,
+      "successful_file": "28099b8220b04e65a61f4565c4de38a8.json",
+      "successful_file_sha256": "8bbf95062b2818b56080453542c89504715e4de1d1193c6f56d60b5e2a3287a2",
+      "successful_http_status": 200,
+      "exact_request_sha256": "bf33dd4bd8a1cce50e2e32e6eba23e35ea00d0b7044edeee421be42f3fe7b45c",
+      "retry_delay_seconds": 8.31749,
+      "thinking_config_equal": true,
+      "output_config_equal": true,
+      "both_raw_files_byte_matched_to_release_asset": true
+    },
+    {
+      "failed_file": "97ddfe2de5d444edac7c693a78382d33.json",
+      "failed_file_sha256": "24d5385208f746228e83bf5a45f713b7e6f6c93bfa61b6061cab994f171c61d4",
+      "failed_http_status": 502,
+      "successful_file": "fdb4b4febf9c401ebe1441b4f98b98f0.json",
+      "successful_file_sha256": "acff4ddbea609ceb2cced0d711fb3f48e4283c2cb67b707505dd6efb1e90417a",
+      "successful_http_status": 200,
+      "exact_request_sha256": "9a8d73346d83ae1732cf690f29dff993b94707aaf73d535785f632d1ecd7765c",
+      "retry_delay_seconds": 14.625003,
+      "thinking_config_equal": true,
+      "output_config_equal": true,
+      "both_raw_files_byte_matched_to_release_asset": true
+    }
+  ],
+  "qualification": "two_provider_transport_errors_followed_by_identical_successful_requests_with_published_raw_records"
+}

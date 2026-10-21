@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-20T23:56:47.531053+00:00",
+  "generated_utc": "2026-10-21T00:20:22.820619+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 55,
-  "success_count": 42,
+  "scored_tasks": 57,
+  "success_count": 44,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -196,6 +196,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/merge-diff-arc-agi-task__SLwAPtL/result.json"
     },
+    "qemu-alpine-ssh": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/qemu-alpine-ssh__N8dpJrf/result.json"
+    },
     "large-scale-text-editing": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/large-scale-text-editing__NrdB5Fy/result.json"
@@ -219,6 +223,10 @@
     "video-processing": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/video-processing__ZQPMSmr/result.json"
+    },
+    "constraints-scheduling": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/constraints-scheduling__Q9xAxhi/result.json"
     },
     "torch-pipeline-parallelism": {
       "reward": 0.0,
@@ -352,12 +360,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "constraints-scheduling": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "kv-store-grpc": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/kv-store-grpc__7PfvuA5/result.json",
       "exception_type": "RuntimeError",
@@ -396,11 +398,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 55,
-  "covered_raw_response_sets": 55,
-  "covered_trajectories": 55,
-  "scored_raw_response_count": 2241,
-  "nonempty_reasoning_response_count": 2240,
+  "covered_results": 57,
+  "covered_raw_response_sets": 57,
+  "covered_trajectories": 57,
+  "scored_raw_response_count": 2302,
+  "nonempty_reasoning_response_count": 2301,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -594,6 +596,10 @@
       "raw_responses": 14,
       "nonempty_reasoning_content": 14
     },
+    "qemu-alpine-ssh": {
+      "raw_responses": 52,
+      "nonempty_reasoning_content": 52
+    },
     "large-scale-text-editing": {
       "raw_responses": 24,
       "nonempty_reasoning_content": 24
@@ -618,6 +624,10 @@
       "raw_responses": 43,
       "nonempty_reasoning_content": 43
     },
+    "constraints-scheduling": {
+      "raw_responses": 9,
+      "nonempty_reasoning_content": 9
+    },
     "torch-pipeline-parallelism": {
       "raw_responses": 10,
       "nonempty_reasoning_content": 10
@@ -632,11 +642,10 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/break-filter-js-from-html__LQAF88k/result.json": "break-filter-js-from-html",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/constraints-scheduling__KzSXZCo/result.json": "constraints-scheduling",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
-  "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-direct-2886-20261020/qemu-alpine-ssh__N8dpJrf/result.json"
-  ],
+  "deferred_post_score_results": [],
   "archives": [
     "muse_bf16.tar.zst",
     "muse_bf16_delta_20261019T053146Z.tar.zst",
@@ -795,6 +804,7 @@
     "muse_bf16_delta_20261020T230511Z.tar.zst",
     "muse_bf16_delta_20261020T232727Z.tar.zst",
     "muse_bf16_delta_20261020T234915Z.tar.zst",
+    "muse_bf16_delta_20261021T001135Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
