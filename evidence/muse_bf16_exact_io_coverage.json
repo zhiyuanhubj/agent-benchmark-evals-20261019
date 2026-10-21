@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-21T15:18:12.283262+00:00",
+  "generated_utc": "2026-10-21T15:50:50.413210+00:00",
   "expected_tasks": 89,
-  "scored_tasks": 77,
-  "success_count": 59,
+  "scored_tasks": 79,
+  "success_count": 60,
   "tasks": {
     "pytorch-model-cli": {
       "reward": 1.0,
@@ -244,6 +244,10 @@
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/mcmc-sampling-stan__fRLJ2EA/result.json"
     },
+    "sparql-university": {
+      "reward": 1.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/sparql-university__gFcoYrV/result.json"
+    },
     "mteb-leaderboard": {
       "reward": 1.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/mteb-leaderboard__N3oVCdd/result.json"
@@ -287,6 +291,10 @@
     "gpt2-codegolf": {
       "reward": 0.0,
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/gpt2-codegolf__CWsev6N/result.json"
+    },
+    "torch-tensor-parallelism": {
+      "reward": 0.0,
+      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/torch-tensor-parallelism__5LRdVSY/result.json"
     },
     "caffe-cifar-10": {
       "reward": 1.0,
@@ -344,12 +352,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "torch-tensor-parallelism": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-tensor-parallelism__GZUxMX3/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "distribution-search": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/distribution-search__vLkVhW6/result.json",
       "exception_type": "RuntimeError",
@@ -368,12 +370,6 @@
       "raw_response_count": 0,
       "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
     },
-    "sparql-university": {
-      "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/sparql-university__qKZGKXQ/result.json",
-      "exception_type": "RuntimeError",
-      "raw_response_count": 0,
-      "qualification": "No native verifier reward; excluded from scored counts pending task-level audit."
-    },
     "schemelike-metacircular-eval": {
       "result_path": ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/schemelike-metacircular-eval__u4fGQC2/result.json",
       "exception_type": "InternalServerError",
@@ -388,11 +384,11 @@
     }
   },
   "covered_inputs": 89,
-  "covered_results": 77,
-  "covered_raw_response_sets": 77,
-  "covered_trajectories": 77,
-  "scored_raw_response_count": 3282,
-  "nonempty_reasoning_response_count": 3281,
+  "covered_results": 79,
+  "covered_raw_response_sets": 79,
+  "covered_trajectories": 79,
+  "scored_raw_response_count": 3308,
+  "nonempty_reasoning_response_count": 3307,
   "raw_reasoning_by_task": {
     "pytorch-model-cli": {
       "raw_responses": 20,
@@ -634,6 +630,10 @@
       "raw_responses": 21,
       "nonempty_reasoning_content": 21
     },
+    "sparql-university": {
+      "raw_responses": 15,
+      "nonempty_reasoning_content": 15
+    },
     "mteb-leaderboard": {
       "raw_responses": 93,
       "nonempty_reasoning_content": 93
@@ -678,6 +678,10 @@
       "raw_responses": 31,
       "nonempty_reasoning_content": 31
     },
+    "torch-tensor-parallelism": {
+      "raw_responses": 11,
+      "nonempty_reasoning_content": 11
+    },
     "caffe-cifar-10": {
       "raw_responses": 58,
       "nonempty_reasoning_content": 58
@@ -712,6 +716,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/openssl-selfsigned-cert__4v8jpyZ/result.json": "openssl-selfsigned-cert",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/fix-ocaml-gc__XUqfnys/result.json": "fix-ocaml-gc",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mcmc-sampling-stan__cobMK96/result.json": "mcmc-sampling-stan",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/sparql-university__qKZGKXQ/result.json": "sparql-university",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/mteb-leaderboard__MWhnJ4n/result.json": "mteb-leaderboard",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/path-tracing-reverse__bmfecmt/result.json": "path-tracing-reverse",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/filter-js-from-html__3snMrie/result.json": "filter-js-from-html",
@@ -723,6 +728,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/pytorch-model-recovery__8rbR3bf/result.json": "pytorch-model-recovery",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/cobol-modernization__rijopCJ/result.json": "cobol-modernization",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/gpt2-codegolf__7Dz2bfB/result.json": "gpt2-codegolf",
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-tensor-parallelism__GZUxMX3/result.json": "torch-tensor-parallelism",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/caffe-cifar-10__fnwtyN7/result.json": "caffe-cifar-10",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/video-processing__3WrJKGG/result.json": "video-processing",
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/protein-assembly__9JFswSK/result.json": "protein-assembly",
@@ -731,7 +737,7 @@
     "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/torch-pipeline-parallelism__mFtvtv5/result.json": "torch-pipeline-parallelism"
   },
   "deferred_post_score_results": [
-    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/sparql-university__gFcoYrV/result.json"
+    ".private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1-pre-model-recovery-20261020/vulnerable-secret__byGkE9w/result.json"
   ],
   "archives": [
     "muse_bf16.tar.zst",
@@ -939,6 +945,8 @@
     "muse_bf16_delta_20261021T143654Z.tar.zst",
     "muse_bf16_delta_20261021T145802Z.tar.zst",
     "muse_bf16_delta_20261021T151004Z.tar.zst",
+    "muse_bf16_delta_20261021T153158Z.tar.zst",
+    "muse_bf16_delta_20261021T154413Z.tar.zst",
     "muse_nvfp4_exact_tb_round1_inputs_20261019.tar.zst"
   ],
   "missing_inputs": [],
