@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-22T05:56:44.635576+00:00",
+  "generated_utc": "2026-10-22T06:38:33.253049+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 58,
-  "graded": 58,
-  "success": 42,
+  "terminal": 60,
+  "graded": 60,
+  "success": 43,
   "active_trial_dirs": 2,
-  "raw_responses": 2817,
+  "raw_responses": 2894,
   "tasks": {
     "raman-fitting": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/raman-fitting__XuUyBHW/result.json",
@@ -24,7 +24,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "video-processing": null,
+    "video-processing": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/video-processing__Z5kXR6i/result.json",
+      "reward": 0.0,
+      "exception": null
+    },
     "regex-log": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/regex-log__Lr7bTua/result.json",
       "reward": 1.0,
@@ -175,7 +179,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "write-compressor": null,
+    "write-compressor": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/write-compressor__7jCoH27/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "winning-avg-corewars": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/winning-avg-corewars__AYGKoVq/result.json",
       "reward": 1.0,
@@ -186,6 +194,7 @@
       "reward": 1.0,
       "exception": null
     },
+    "build-pov-ray": null,
     "count-dataset-tokens": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/count-dataset-tokens__4t6KD7S/result.json",
       "reward": 1.0,
@@ -196,6 +205,7 @@
       "reward": 0.0,
       "exception": "AgentTimeoutError"
     },
+    "break-filter-js-from-html": null,
     "cobol-modernization": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/cobol-modernization__J9s3qqP/result.json",
       "reward": 1.0,
