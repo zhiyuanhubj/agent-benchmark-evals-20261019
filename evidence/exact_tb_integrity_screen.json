@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T10:18:41.417392+00:00",
+  "generated_utc": "2026-10-22T11:03:14.281188+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -97,7 +97,7 @@
       }
     },
     "muse_nvfp4_r5": {
-      "scored_trajectories_checked": 72,
+      "scored_trajectories_checked": 73,
       "pattern_hit_trajectories": 12,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -13406,6 +13406,18 @@
       "trajectory_sha256": "142a7b0ee5075a9e05acbde65976169d901000851f192c5d16b953e8c49ada4a",
       "steps": 55,
       "tool_calls": 231,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "merge-diff-arc-agi-task",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/merge-diff-arc-agi-task__vTbqPf2/agent/trajectory.json",
+      "trajectory_sha256": "6de0b1dbcd3d4bb1ac56751cfc3c704555c45dd9231ce4ae6058f06c0d0f3086",
+      "steps": 23,
+      "tool_calls": 118,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
