@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T12:26:43.018040+00:00",
+  "generated_utc": "2026-10-22T13:06:16.510577+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 77,
+      "scored_trajectories_checked": 79,
       "pattern_hit_trajectories": 12,
       "pattern_hit_successes": 6,
       "rule_hit_counts": {
@@ -97,7 +97,7 @@
       }
     },
     "muse_nvfp4_r5": {
-      "scored_trajectories_checked": 76,
+      "scored_trajectories_checked": 79,
       "pattern_hit_trajectories": 13,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -8969,6 +8969,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "polyglot-c-py",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/polyglot-c-py__c3d6f8V/agent/trajectory.json",
+      "trajectory_sha256": "71f00a99a3895cd27a51f3d48dcbe12147969e3998a754d45eecb2e3e29747e4",
+      "steps": 13,
+      "tool_calls": 20,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "regex-log",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/regex-log__TSNabxP/agent/trajectory.json",
@@ -10440,6 +10452,18 @@
       "trajectory_sha256": "e08ff5a469274f45f189ae7baca0a6ba7332abe71c3b5d0df9ec4ef89737cb3a",
       "steps": 22,
       "tool_calls": 47,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
+      "task": "mteb-leaderboard",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/mteb-leaderboard__g5ihG8b/agent/trajectory.json",
+      "trajectory_sha256": "10439a28e6cb462bbb706577cb304a6c4a2cf666f407fda9d03fe844ec76b314",
+      "steps": 71,
+      "tool_calls": 228,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -12261,6 +12285,18 @@
     {
       "model": "muse_nvfp4_r5",
       "round": 5,
+      "task": "polyglot-c-py",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/polyglot-c-py__72GnTbf/agent/trajectory.json",
+      "trajectory_sha256": "7dbd71aa598b3dc31f2af23f4143e6a8c0093254e1434c4b5e1f301e09e684dd",
+      "steps": 11,
+      "tool_calls": 31,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
       "task": "circuit-fibsqrt",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/circuit-fibsqrt__u79PMp5/agent/trajectory.json",
@@ -12632,6 +12668,18 @@
       "trajectory_sha256": "fd238b0c93454f3fedebe5af597815c8adde744a10bd3ed7e7acee9524f242d4",
       "steps": 47,
       "tool_calls": 291,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "pytorch-model-cli",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/pytorch-model-cli__jWfSigj/agent/trajectory.json",
+      "trajectory_sha256": "3af5a0ab7df3a36392496b3d38b7d4f172a720c688acde56e2549bb8ac3cd250",
+      "steps": 19,
+      "tool_calls": 68,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -13373,6 +13421,18 @@
       "trajectory_sha256": "ac60b3e75f9fe18e7318ffec0dd68a18ac8281cd3cfd35e5c62181cc25ea83bb",
       "steps": 15,
       "tool_calls": 33,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "mteb-leaderboard",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/mteb-leaderboard__PgLnmKx/agent/trajectory.json",
+      "trajectory_sha256": "0e297b7dd3b5430de29f76f0642e7a2e239bb7a133fdbb70e0d33f326a1f848e",
+      "steps": 239,
+      "tool_calls": 831,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
