@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-22T01:43:35.228086+00:00",
+  "generated_utc": "2026-10-22T02:26:15.538641+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021/claim.json",
   "claim_sha256": "a567060c9086480b734f8ccb308a79d2f9ff2bdf7824e299cd515a5334c60735",
   "expected": 89,
-  "terminal": 53,
-  "graded": 53,
-  "success": 43,
+  "terminal": 57,
+  "graded": 57,
+  "success": 45,
   "active_trial_dirs": 2,
-  "raw_responses": 2480,
+  "raw_responses": 2568,
   "tasks": {
     "adaptive-rejection-sampler": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/adaptive-rejection-sampler__z8HM6wx/result.json",
@@ -34,6 +34,7 @@
       "reward": 0.0,
       "exception": null
     },
+    "video-processing": null,
     "multi-source-data-merger": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/multi-source-data-merger__rwfRZ2p/result.json",
       "reward": 1.0,
@@ -69,7 +70,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "reshard-c4-data": null,
+    "reshard-c4-data": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/reshard-c4-data__6pwjpxp/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "prove-plus-comm": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/prove-plus-comm__Sjcy9ip/result.json",
       "reward": 1.0,
@@ -100,6 +105,7 @@
       "reward": 0.0,
       "exception": null
     },
+    "torch-tensor-parallelism": null,
     "winning-avg-corewars": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/winning-avg-corewars__sQyZQrv/result.json",
       "reward": 1.0,
@@ -139,6 +145,11 @@
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/raman-fitting__EJRApcV/result.json",
       "reward": 0.0,
       "exception": "AgentTimeoutError"
+    },
+    "sqlite-db-truncate": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/sqlite-db-truncate__bnMuDo8/result.json",
+      "reward": 1.0,
+      "exception": null
     },
     "query-optimize": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/query-optimize__zxsiL47/result.json",
@@ -210,7 +221,11 @@
       "reward": 0.0,
       "exception": null
     },
-    "path-tracing-reverse": null,
+    "path-tracing-reverse": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/path-tracing-reverse__r9AktoY/result.json",
+      "reward": 0.0,
+      "exception": "AgentTimeoutError"
+    },
     "pytorch-model-recovery": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/pytorch-model-recovery__vz6bZP8/result.json",
       "reward": 1.0,
@@ -264,6 +279,11 @@
     "largest-eigenval": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/largest-eigenval__fyeatmm/result.json",
       "reward": 1.0,
+      "exception": null
+    },
+    "sanitize-git-repo": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/sanitize-git-repo__26WhMby/result.json",
+      "reward": 0.0,
       "exception": null
     },
     "git-multibranch": {
