@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T01:19:36.200717+00:00",
+  "generated_utc": "2026-10-22T01:58:18.639873+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 53,
+      "scored_trajectories_checked": 54,
       "pattern_hit_trajectories": 7,
       "pattern_hit_successes": 3,
       "rule_hit_counts": {
@@ -95,7 +95,7 @@
       }
     },
     "muse_nvfp4_r5": {
-      "scored_trajectories_checked": 50,
+      "scored_trajectories_checked": 51,
       "pattern_hit_trajectories": 8,
       "pattern_hit_successes": 2,
       "rule_hit_counts": {
@@ -8901,6 +8901,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "reshard-c4-data",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/reshard-c4-data__6pwjpxp/agent/trajectory.json",
+      "trajectory_sha256": "1a27b8918c96c325fbc22ac59744e0a5a4aa6490b81b21b5b36bed8f7bac18f8",
+      "steps": 37,
+      "tool_calls": 208,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "prove-plus-comm",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/prove-plus-comm__Sjcy9ip/agent/trajectory.json",
@@ -12414,6 +12426,18 @@
       "trajectory_sha256": "32e6f5b23e65fa19f9330b0754e6d5bb5caaee4d55ccbef046b5408d0ddf2cce",
       "steps": 60,
       "tool_calls": 228,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "pypi-server",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/pypi-server__LGUhhJk/agent/trajectory.json",
+      "trajectory_sha256": "dd2d7a2c1ff5058c3477d277b9d2365fa0c7e532c5df0f5ef2f889ef60db3741",
+      "steps": 15,
+      "tool_calls": 50,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
