@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T05:27:21.955634+00:00",
+  "generated_utc": "2026-10-22T06:13:40.948885+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -85,7 +85,7 @@
       }
     },
     "muse_nvfp4_r4": {
-      "scored_trajectories_checked": 61,
+      "scored_trajectories_checked": 65,
       "pattern_hit_trajectories": 9,
       "pattern_hit_successes": 5,
       "rule_hit_counts": {
@@ -97,7 +97,7 @@
       }
     },
     "muse_nvfp4_r5": {
-      "scored_trajectories_checked": 56,
+      "scored_trajectories_checked": 59,
       "pattern_hit_trajectories": 9,
       "pattern_hit_successes": 2,
       "rule_hit_counts": {
@@ -9206,6 +9206,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "code-from-image",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/code-from-image__c7DonAb/agent/trajectory.json",
+      "trajectory_sha256": "cfc576997dfcfb7410cb9e7731695919a4b7b40fc555c596976dc07f03d51729",
+      "steps": 20,
+      "tool_calls": 65,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "torch-tensor-parallelism",
       "reward": 0.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/torch-tensor-parallelism__4WnXKn9/agent/trajectory.json",
@@ -9577,12 +9589,36 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "constraints-scheduling",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/constraints-scheduling__zyuxJxP/agent/trajectory.json",
+      "trajectory_sha256": "84352cc1de47cad8ad5660477c1ed0955711c2fc284467c7985bc8ef91990b07",
+      "steps": 8,
+      "tool_calls": 14,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "portfolio-optimization",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/portfolio-optimization__QFXcDKD/agent/trajectory.json",
       "trajectory_sha256": "dc0444a0de618e615b66ed9e070dfeb8944b5bfd27d1144a10a19370d622f992",
       "steps": 14,
       "tool_calls": 38,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
+      "task": "custom-memory-heap-crash",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/custom-memory-heap-crash__d3THttt/agent/trajectory.json",
+      "trajectory_sha256": "8f798ef816ee91f07bf388a32620ccb9f4b40f0e03c83856403b26076881a210",
+      "steps": 17,
+      "tool_calls": 66,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -10201,6 +10237,18 @@
     {
       "model": "muse_nvfp4_r4",
       "round": 4,
+      "task": "write-compressor",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/write-compressor__fxATkr7/agent/trajectory.json",
+      "trajectory_sha256": "833cdc516599054aed2a8ab2f22f13523f87b45b6e3e8de930cb76358e3ff853",
+      "steps": 150,
+      "tool_calls": 211,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r4",
+      "round": 4,
       "task": "pytorch-model-recovery",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/pytorch-model-recovery__vz6bZP8/agent/trajectory.json",
@@ -10534,6 +10582,18 @@
       "trajectory_sha256": "e9875ee69ea126c4155dddc6451866203fa2f8cedb3f464bac9cba21a80d5bb4",
       "steps": 12,
       "tool_calls": 36,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "path-tracing-reverse",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/path-tracing-reverse__9fGAGt4/agent/trajectory.json",
+      "trajectory_sha256": "73c9dba8658c1f06aa438fef777e5a8175a14dfcd227fa2328944d5fbf4cd5a4",
+      "steps": 167,
+      "tool_calls": 1095,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
@@ -12043,6 +12103,18 @@
     {
       "model": "muse_nvfp4_r5",
       "round": 5,
+      "task": "write-compressor",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/write-compressor__7jCoH27/agent/trajectory.json",
+      "trajectory_sha256": "f59a6a8473b6264ea260bb8c2b50fcbedfceff91c1223d82d0e24a3ba53aeff1",
+      "steps": 16,
+      "tool_calls": 33,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
       "task": "winning-avg-corewars",
       "reward": 1.0,
       "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/winning-avg-corewars__AYGKoVq/agent/trajectory.json",
@@ -12371,6 +12443,18 @@
       "trajectory_sha256": "62d2ebcc9caed0bea0e070b72c1a65e78b37a96b48c546f7b335b67e48bcb327",
       "steps": 35,
       "tool_calls": 105,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "torch-tensor-parallelism",
+      "reward": 0.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/torch-tensor-parallelism__MDXkJqd/agent/trajectory.json",
+      "trajectory_sha256": "39b61845a5a1fb9596087540a0a791003c85318e1040cfd42fcc202009b55f2d",
+      "steps": 12,
+      "tool_calls": 27,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },

@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-22T05:13:23.799464+00:00",
+  "generated_utc": "2026-10-22T05:56:44.635576+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 55,
-  "graded": 55,
-  "success": 41,
+  "terminal": 58,
+  "graded": 58,
+  "success": 42,
   "active_trial_dirs": 2,
-  "raw_responses": 2765,
+  "raw_responses": 2817,
   "tasks": {
     "raman-fitting": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/raman-fitting__XuUyBHW/result.json",
@@ -24,6 +24,7 @@
       "reward": 1.0,
       "exception": null
     },
+    "video-processing": null,
     "regex-log": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/regex-log__Lr7bTua/result.json",
       "reward": 1.0,
@@ -34,7 +35,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "path-tracing-reverse": null,
+    "path-tracing-reverse": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/path-tracing-reverse__9fGAGt4/result.json",
+      "reward": 0.0,
+      "exception": "AgentTimeoutError"
+    },
     "db-wal-recovery": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/db-wal-recovery__JGFbZ8Y/result.json",
       "reward": 0.0,
@@ -165,7 +170,12 @@
       "reward": 1.0,
       "exception": null
     },
-    "sqlite-db-truncate": null,
+    "sqlite-db-truncate": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/sqlite-db-truncate__B5dXieT/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "write-compressor": null,
     "winning-avg-corewars": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/winning-avg-corewars__AYGKoVq/result.json",
       "reward": 1.0,
@@ -204,6 +214,11 @@
     "large-scale-text-editing": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/large-scale-text-editing__hdiehJb/result.json",
       "reward": 1.0,
+      "exception": null
+    },
+    "torch-tensor-parallelism": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/torch-tensor-parallelism__MDXkJqd/result.json",
+      "reward": 0.0,
       "exception": null
     },
     "gcode-to-text": {
