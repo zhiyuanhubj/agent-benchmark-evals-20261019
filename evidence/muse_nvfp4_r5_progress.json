@@ -1,16 +1,21 @@
 {
-  "generated_utc": "2026-10-22T04:33:48.558113+00:00",
+  "generated_utc": "2026-10-22T05:13:23.799464+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 53,
-  "graded": 53,
-  "success": 40,
+  "terminal": 55,
+  "graded": 55,
+  "success": 41,
   "active_trial_dirs": 2,
-  "raw_responses": 2706,
+  "raw_responses": 2765,
   "tasks": {
     "raman-fitting": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/raman-fitting__XuUyBHW/result.json",
+      "reward": 0.0,
+      "exception": null
+    },
+    "sanitize-git-repo": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/sanitize-git-repo__xm7XYnK/result.json",
       "reward": 0.0,
       "exception": null
     },
@@ -75,7 +80,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "reshard-c4-data": null,
+    "reshard-c4-data": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/reshard-c4-data__SyL7BPe/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "dna-insert": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/dna-insert__XDCXAQ7/result.json",
       "reward": 1.0,
@@ -156,6 +165,7 @@
       "reward": 1.0,
       "exception": null
     },
+    "sqlite-db-truncate": null,
     "winning-avg-corewars": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/winning-avg-corewars__AYGKoVq/result.json",
       "reward": 1.0,
