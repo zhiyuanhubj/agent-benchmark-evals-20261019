@@ -1,0 +1,155 @@
+{
+  "verified_utc": "2026-10-22T16:28:05.515261+00:00",
+  "repository": "zhiyuanhucs/agent-benchmark-repro-20261022",
+  "url": "https://huggingface.co/datasets/zhiyuanhucs/agent-benchmark-repro-20261022",
+  "revision": "8dbaaaf1d7e2a450c27492ccd1048bde77328bfe",
+  "private": true,
+  "files_verified": 22,
+  "total_payload_bytes": 375211110,
+  "readme_download_verified": true,
+  "extra_build_files_removed": [
+    "__pycache__/model_bridge.cpython-312.pyc"
+  ],
+  "file_checks": [
+    {
+      "file": "AGENTCOMPASS_LOCAL.patch",
+      "bytes": 17715,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "EXTRA_TOOL_VERSIONS.json",
+      "bytes": 493,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "INSTALLED_VERSIONS.json",
+      "bytes": 4206,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "README.md",
+      "bytes": 8821,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "SECRET_SCAN.json",
+      "bytes": 240,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "SUPPLEMENT_MANIFEST.json",
+      "bytes": 12771,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "TB21_IMAGE_LOCK.json",
+      "bytes": 88338,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "VALIDATION.json",
+      "bytes": 795,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "WORKSPACE_MANIFEST.json",
+      "bytes": 6315984,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "constraints.txt",
+      "bytes": 3293,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "evaluate.py",
+      "bytes": 9039,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "fetch_tb21_images.py",
+      "bytes": 2214,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "harbor_job.py",
+      "bytes": 538,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "model_bridge.py",
+      "bytes": 2580,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "reference/evaluation_snapshot.tar.zst",
+      "bytes": 10856664,
+      "verified": "LFS SHA-256"
+    },
+    {
+      "file": "requirements.txt",
+      "bytes": 610,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "run_swrbench.py",
+      "bytes": 5213,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "score_swe_review.py",
+      "bytes": 3133,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "setup_bundle.py",
+      "bytes": 4928,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "validate_bundle.py",
+      "bytes": 4993,
+      "verified": "Git blob SHA-1 + local SHA-256 manifest"
+    },
+    {
+      "file": "workspace.tar.zst",
+      "bytes": 348502150,
+      "verified": "LFS SHA-256"
+    },
+    {
+      "file": "workspace_supplement.tar.zst",
+      "bytes": 9366392,
+      "verified": "LFS SHA-256"
+    }
+  ],
+  "validation": {
+    "validated_utc": "2026-10-22T16:26:49.354788+00:00",
+    "source_files_total": 18980,
+    "archive_checksums": "passed",
+    "task_counts": {
+      "tb21": 89,
+      "pro": 731,
+      "deepswe": 113,
+      "swrbench": 1000,
+      "swe_review": [
+        500,
+        462,
+        422
+      ]
+    },
+    "profile_task_configs": 24,
+    "profile_wrapper_imports": "passed",
+    "bundled_agentcompass_cli_imports": 4,
+    "original_task_content_changed": 0,
+    "missing_task_files": 0,
+    "task_symlinks": 0,
+    "offline_swebench_verified_grading_records": 500,
+    "sse_thinking_preservation": "passed",
+    "gzip_json_forwarding": "passed",
+    "upstream_key_excluded_from_request_body": "passed",
+    "official_swr_modules": "passed",
+    "full_benchmark_executed": false,
+    "external_model_requests": 0,
+    "task_containers_started": 0
+  }
+}
