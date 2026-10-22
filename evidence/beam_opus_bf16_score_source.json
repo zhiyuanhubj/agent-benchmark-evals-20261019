@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-21T22:48:56.226245+00:00",
+  "utc": "2026-10-21T23:25:29.074723+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
@@ -988,18 +988,18 @@
     },
     "pro_round2": {
       "expected": 731,
-      "terminal": 381,
-      "unique_tasks": 381,
-      "graded": 379,
-      "success": 228,
+      "terminal": 386,
+      "unique_tasks": 386,
+      "graded": 384,
+      "success": 230,
       "missing_native_grader_completion": 2,
       "native_status_counts": {
-        "completed": 377,
+        "completed": 382,
         "eval_error": 2,
         "run_error": 2
       },
       "duplicate_task_ids": [],
-      "missing_result_task_count": 350,
+      "missing_result_task_count": 345,
       "task_id_source": "Original task.json task_id, never a shortened directory name",
       "qualification": "Partial counts are not full-set accuracy. Native correctness only; no best-of selection."
     },
@@ -1383,7 +1383,7 @@
     },
     "tb_first_round_client_protocol_recovery": {
       "current": {
-        "utc": 1792622175.6986482,
+        "utc": 1792624878.996207,
         "phase": "one_corrected_client_sample_terminal",
         "native_unit": {
           "MainPID": "0",
@@ -1650,12 +1650,11 @@
         "expected": 89,
         "terminal": 89,
         "unique_tasks": 89,
-        "graded": 86,
+        "graded": 87,
         "success": 66,
         "exceptions": {
-          "RuntimeError": 1,
           "InternalServerError": 2,
-          "AgentTimeoutError": 12
+          "AgentTimeoutError": 13
         },
         "duplicate_task_ids": [],
         "excluded_invalid_protocol_originals": [],
@@ -1689,6 +1688,14 @@
             "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/build-cython-ext__h6pvRUQ/result.json",
             "task": "build-cython-ext",
             "sha256": "a7523af6f6beb18644b063d17232a2df1bec42e149a4fb7870adda2f401cada8",
+            "reason": "pre_model_infrastructure_failure",
+            "exception_type": "RuntimeError",
+            "trajectory_sha256": null
+          },
+          {
+            "path": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/legacy_bench/tb-results/muse-bf16-tb-r1/extract-moves-from-video__XWjFG9K/result.json",
+            "task": "extract-moves-from-video",
+            "sha256": "cef67feee0d561db3828c82072b462ffe6600205f414d6b5c6e4b82e3489f264",
             "reason": "pre_model_infrastructure_failure",
             "exception_type": "RuntimeError",
             "trajectory_sha256": null
@@ -1901,8 +1908,8 @@
           "claim": "/fsx/home/zhiyuan/.private/muse_bf16_20261018/recovery_20261020/muse-bf16-tb-r1-pre-model-recovery-20261020-claim.json",
           "claim_sha256": "e4c6f81ac0d58ce519ab07c7d85e1cde70633d3dd9ca045145a5f3ff8ccdbe2e",
           "declared_tasks": 30,
-          "native_terminal": 29,
-          "replaced_unscored_originals": 29,
+          "native_terminal": 30,
+          "replaced_unscored_originals": 30,
           "excluded_partial_model_output_tasks": [
             "query-optimize",
             "schemelike-metacircular-eval"
@@ -2158,7 +2165,7 @@
     }
   },
   "reserved_capacity": {
-    "utc": 1792622907.0058994,
+    "utc": 1792625100.0783432,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2902": {
@@ -2228,7 +2235,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792622907.36398,
+    "utc": 1792625099.141389,
     "allocations": {
       "2887": {
         "phase": "ready",
@@ -2623,7 +2630,7 @@
         }
       },
       "scorer_version": "v3_declared_glm_original_and_gateway_recovery_with_malformed_report_fallback",
-      "utc": 1792622882.325991
+      "utc": 1792625070.9187489
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -3088,7 +3095,7 @@
       "qualification": "Native counts remain unchanged. Supplemental values are the unchanged original scorer applied only to already-produced original reports. No model response or tests are rerun, and no original timeout record is overwritten. Not a completed 113-task run or three-round mean."
     },
     "early9_never_started_deep_remainder_handoff": {
-      "utc": 1792622175.584174,
+      "utc": 1792624878.8943572,
       "phase": "recovered_remainder_native_trials_terminal",
       "expected": 19,
       "terminal": 19,
@@ -3676,7 +3683,7 @@
     },
     "early9_client_infrastructure_recovery": {
       "current": {
-        "utc": 1792622175.584174,
+        "utc": 1792624878.8943572,
         "phase": "recovered_remainder_native_trials_terminal",
         "expected": 19,
         "terminal": 19,
@@ -6552,7 +6559,7 @@
       "utc": 1792356179.122217
     },
     "mix449_receiver_independent_archive": {
-      "utc": 1792622175.8709266,
+      "utc": 1792624879.140733,
       "phase": "waiting_for_missing_original_native_shards",
       "persistent_native_shards": 32,
       "expected_native_shards": 64,
@@ -6616,7 +6623,7 @@
         }
       },
       "complete_original_source_archives": [],
-      "separate_data_volume_available_bytes": 70952157184,
+      "separate_data_volume_available_bytes": 70934593536,
       "minimum_shared_free_bytes": 274877906944,
       "original_training_step": 449,
       "original_sources_deleted": false,
@@ -6821,7 +6828,7 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792622879.4488893
+      "utc": 1792625073.97516
     },
     "queue_states": {
       "mix449": {
@@ -6829,7 +6836,7 @@
         "candidate": "mix449",
         "actual_allocation": 2733,
         "no_gpu_work_started": true,
-        "utc": 1792622926.983387
+        "utc": 1792625118.2684562
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
