@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-22T06:58:36.252528+00:00",
+  "utc": "2026-10-22T07:39:08.197523+00:00",
   "beam_bf16": {
     "pro": {
       "expected": 731,
@@ -1384,7 +1384,7 @@
     },
     "tb_first_round_client_protocol_recovery": {
       "current": {
-        "utc": 1792651942.269526,
+        "utc": 1792654640.2030842,
         "phase": "one_corrected_client_sample_terminal",
         "native_unit": {
           "MainPID": "0",
@@ -2166,7 +2166,7 @@
     }
   },
   "reserved_capacity": {
-    "utc": 1792652291.1111355,
+    "utc": 1792654724.6960156,
     "phase": "waiting_or_preparing",
     "allocations": {
       "2902": {
@@ -2236,7 +2236,7 @@
     "gpu_services_started_by_this_controller": false
   },
   "reserved_beam_servers": {
-    "utc": 1792652299.5473373,
+    "utc": 1792654731.2865145,
     "allocations": {
       "2887": {
         "phase": "ready",
@@ -2625,13 +2625,35 @@
             "complete": false
           },
           "qwen3_30b_instruct2507_500": {
-            "phase": "waiting_for_full_canonical_review",
-            "complete": false
+            "DA": {
+              "DA": 87.1,
+              "DA_total_50": 84.2,
+              "CR": 92.2,
+              "FAR": 7.4,
+              "FRR": 27.6,
+              "total": 422,
+              "correct": 339,
+              "model_fail": 33,
+              "produced": 389,
+              "TP": 76,
+              "FP": 21,
+              "TN": 263,
+              "FN": 29
+            },
+            "invalid_report_count": 0,
+            "invalid_reports": [],
+            "expected_revisions": 292,
+            "native_graded_revisions": 0,
+            "revision_queue_terminal": false,
+            "complete": false,
+            "phase": "waiting_for_revision_native_grades",
+            "missing_native_grade_count": 292,
+            "RRR": null
           }
         }
       },
       "scorer_version": "v3_declared_glm_original_and_gateway_recovery_with_malformed_report_fallback",
-      "utc": 1792652299.6149328
+      "utc": 1792654658.1477745
     },
     "native_scoring_validation": {
       "utc": 1792353708.467522,
@@ -3096,7 +3118,7 @@
       "qualification": "Native counts remain unchanged. Supplemental values are the unchanged original scorer applied only to already-produced original reports. No model response or tests are rerun, and no original timeout record is overwritten. Not a completed 113-task run or three-round mean."
     },
     "early9_never_started_deep_remainder_handoff": {
-      "utc": 1792651942.1478693,
+      "utc": 1792654640.0984542,
       "phase": "recovered_remainder_native_trials_terminal",
       "expected": 19,
       "terminal": 19,
@@ -3684,7 +3706,7 @@
     },
     "early9_client_infrastructure_recovery": {
       "current": {
-        "utc": 1792651942.1478693,
+        "utc": 1792654640.0984542,
         "phase": "recovered_remainder_native_trials_terminal",
         "expected": 19,
         "terminal": 19,
@@ -6560,7 +6582,7 @@
       "utc": 1792356179.122217
     },
     "mix449_receiver_independent_archive": {
-      "utc": 1792651942.4665446,
+      "utc": 1792654640.4034371,
       "phase": "waiting_for_missing_original_native_shards",
       "persistent_native_shards": 32,
       "expected_native_shards": 64,
@@ -6624,7 +6646,7 @@
         }
       },
       "complete_original_source_archives": [],
-      "separate_data_volume_available_bytes": 70721732608,
+      "separate_data_volume_available_bytes": 70729596928,
       "minimum_shared_free_bytes": 274877906944,
       "original_training_step": 449,
       "original_sources_deleted": false,
@@ -6829,7 +6851,7 @@
       },
       "frozen_top_two_unchanged": true,
       "qualification": "Original449 remains the frozen primary late candidate; original469 is supplemental. No automatic promotion, full-scale launch or fourth benchmark round.",
-      "utc": 1792652315.9602876
+      "utc": 1792654723.4582531
     },
     "queue_states": {
       "mix449": {
@@ -6837,7 +6859,7 @@
         "candidate": "mix449",
         "actual_allocation": 2733,
         "no_gpu_work_started": true,
-        "utc": 1792652313.719826
+        "utc": 1792654745.160052
       },
       "mix469": {
         "phase": "declared_expanded_native_samplers_launched",
