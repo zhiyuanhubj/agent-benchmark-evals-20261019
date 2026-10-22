@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-22T08:44:09.268183+00:00",
+  "generated_utc": "2026-10-22T09:24:26.659026+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 66,
-  "graded": 66,
-  "success": 49,
+  "terminal": 73,
+  "graded": 71,
+  "success": 53,
   "active_trial_dirs": 2,
-  "raw_responses": 3095,
+  "raw_responses": 3200,
   "tasks": {
     "dna-assembly": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/dna-assembly__4zo6v8s/result.json",
@@ -19,6 +19,7 @@
       "reward": 0.0,
       "exception": null
     },
+    "make-doom-for-mips": null,
     "sanitize-git-repo": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/sanitize-git-repo__xm7XYnK/result.json",
       "reward": 0.0,
@@ -69,7 +70,21 @@
       "reward": 1.0,
       "exception": null
     },
-    "chess-best-move": null,
+    "chess-best-move": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/chess-best-move__azJwrKf/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "kv-store-grpc": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/kv-store-grpc__Jx5hk8o/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "headless-terminal": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/headless-terminal__2BE4jwu/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "build-pmars": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/build-pmars__gQ3j9Kn/result.json",
       "reward": 1.0,
@@ -145,6 +160,7 @@
       "reward": 0.0,
       "exception": "AgentTimeoutError"
     },
+    "llm-inference-batching-scheduler": null,
     "log-summary-date-ranges": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/log-summary-date-ranges__ta24o6P/result.json",
       "reward": 1.0,
@@ -165,7 +181,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "extract-moves-from-video": null,
+    "extract-moves-from-video": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/extract-moves-from-video__Bh8Jyim/result.json",
+      "reward": null,
+      "exception": "RuntimeError"
+    },
     "gpt2-codegolf": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/gpt2-codegolf__Q5REhsf/result.json",
       "reward": 0.0,
@@ -220,6 +240,11 @@
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/path-tracing__Gm3uo6c/result.json",
       "reward": 0.0,
       "exception": "AgentTimeoutError"
+    },
+    "git-leak-recovery": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/git-leak-recovery__eghxsfj/result.json",
+      "reward": null,
+      "exception": "RuntimeError"
     },
     "break-filter-js-from-html": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/break-filter-js-from-html__G3F3WBf/result.json",
@@ -331,6 +356,11 @@
       "reward": 1.0,
       "exception": null
     },
+    "filter-js-from-html": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/filter-js-from-html__PRKbywa/result.json",
+      "reward": 0.0,
+      "exception": null
+    },
     "sparql-university": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/sparql-university__SpYbkpy/result.json",
       "reward": 1.0,
@@ -338,6 +368,11 @@
     },
     "qemu-alpine-ssh": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/qemu-alpine-ssh__jNgkaWV/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "fix-git": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/fix-git__KrtxGjk/result.json",
       "reward": 1.0,
       "exception": null
     }
