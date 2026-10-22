@@ -1,0 +1,29 @@
+{
+  "generated_utc": "2026-10-22T04:41:38.498899+00:00",
+  "group": "muse_bf16_review_inputs",
+  "scope": "Native benchmark input/output files with source mtime later than the previous archive time minus five minutes. Overlap is deliberate so files modified during archiving are not omitted. Reconstruct current state by applying this archive after the named previous archive; later paths replace earlier paths.",
+  "previous_manifest": "input_output/archive_manifests/muse_bf16_review_inputs_delta_20261022T042651Z.json",
+  "cutoff_utc": "2026-10-22T04:21:52.127546+00:00",
+  "new_source_roots": [],
+  "one_time_native_thinking_backfill": false,
+  "one_time_model_patch_backfill": false,
+  "archive_name": "muse_bf16_review_inputs_delta_20261022T044138Z.tar.zst",
+  "archive_size_bytes": 4306,
+  "archive_sha256": "db75ea7237d72904359666af43037b2353141521ff19e578c7452b9c2c42c4b3",
+  "file_count": 20,
+  "source_bytes": 29338,
+  "skipped_disappeared_during_snapshot": 0,
+  "filename_counts": {
+    "qwen3_30b_instruct2507_500-25.json": 2,
+    "qwen3_30b_instruct2507_500--sympy__sympy-24066.json": 2,
+    "qwen3_30b_instruct2507_500--sympy__sympy-24213.json": 2,
+    "qwen3_30b_instruct2507_500--sympy__sympy-24443.json": 2,
+    "qwen3_30b_instruct2507_500--sympy__sympy-24539.json": 2,
+    "qwen3_30b_instruct2507_500--sympy__sympy-24562.json": 2,
+    "qwen3_30b_instruct2507_500--sympy__sympy-24661.json": 2,
+    "task.toml": 6
+  },
+  "source_roots": [
+    "/fsx/home/zhiyuan/.private/muse_bf16_20261018/review_bench/queue"
+  ]
+}
