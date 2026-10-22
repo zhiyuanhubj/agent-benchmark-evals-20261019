@@ -1,22 +1,22 @@
 # 模型评测结果快照
 
-Muse NVFP4 精确镜像 TB2.1 第 5 轮在 2899 上独立抽样 89 题；[固定题目和端点凭据](evidence/muse_nvfp4_r5_progress.json)现记录 **73/89 题原生判分、55 题成功**。全部判分和轨迹审查完成前不报告第 5 轮准确率。[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)标记了成功题 `count-dataset-tokens` 探查评测或 agent 日志。原始 reward 保留，轨迹暂不进入干净训练集；目前不能据此断定读到了隐藏答案或修改了评分。
+Muse NVFP4 精确镜像 TB2.1 第 5 轮在 2899 上独立抽样 89 题；[固定题目和端点凭据](evidence/muse_nvfp4_r5_progress.json)现记录 **75/89 题原生判分、56 题成功**。全部判分和轨迹审查完成前不报告第 5 轮准确率。[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)标记了成功题 `count-dataset-tokens` 探查评测或 agent 日志。原始 reward 保留，轨迹暂不进入干净训练集；目前不能据此断定读到了隐藏答案或修改了评分。
 
 
-Muse NVFP4 精确镜像 TB2.1 第 4 轮在 2902 上独立抽样 89 题；[固定题目和端点凭据](evidence/muse_nvfp4_r4_progress.json)现记录 **73/89 题原生判分、55 题成功**。[已发布回复的 thinking 核验](evidence/muse_nvfp4_r4_thinking_audit.json)覆盖其所引用归档内的已判分题目；新增题目待下一次归档核验。全部判分和轨迹审查完成前不报告整轮准确率，既有前三轮统计保持独立。[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)标记了成功题 `fix-ocaml-gc` 探查评测或 agent 日志。原始 reward 保留，轨迹暂不进入干净训练集；目前不能据此断定读到了隐藏答案或修改了评分。
+Muse NVFP4 精确镜像 TB2.1 第 4 轮在 2902 上独立抽样 89 题；[固定题目和端点凭据](evidence/muse_nvfp4_r4_progress.json)现记录 **77/89 题原生判分、57 题成功**。[已发布回复的 thinking 核验](evidence/muse_nvfp4_r4_thinking_audit.json)覆盖其所引用归档内的已判分题目；新增题目待下一次归档核验。全部判分和轨迹审查完成前不报告整轮准确率，既有前三轮统计保持独立。[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)标记了成功题 `fix-ocaml-gc` 探查评测或 agent 日志。原始 reward 保留，轨迹暂不进入干净训练集；目前不能据此断定读到了隐藏答案或修改了评分。
 
 
-更新时间：**2026-10-22T11:27:36.302223+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases) 和 `input_output/archive_manifests/`。当前仓库为私有。
+更新时间：**2026-10-22T12:10:36.304896+00:00**。逐题原始输入、输出、thinking/轨迹及 SHA-256 清单见 [GitHub Releases](https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019/releases) 和 `input_output/archive_manifests/`。当前仓库为私有。
 
 [空闲副本任务核验](evidence/spare_pro_capacity_progress_20261021.json)：2923/2924/2927 分跑 Muse Pro 第二轮剩余分片，2928 跑 Muse 第三轮首分片；2888/2901/2733 分跑 Beam Pro 第三轮互斥分片。各轮独立计分。[BF16 API 文档](MUSE_OPENAI_API.zh-CN.md)已补充逐 key 用量统计、真实请求优先和单独标记的空闲质量探测。
 
 | 模型 | 已完成、可汇报的结果 | 尚未完成的项目 |
 |---|---|---|
-| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **75.7%（500 题）**、Coder **81.2%（462 题）**、Instruct **87.2%（422 题）**；SWE-Review Instruct 组官方 RRR **45.5%**；Coder 组官方 RRR **59.7%**；GLM5 组官方 RRR **75.0%**；整体官方 RRR **60.9%**；精确镜像 TB2.1 第1轮 **68/89（76.40%）**；精确镜像 TB2.1 第2轮 **65/89（73.03%）**；精确镜像 TB2.1 第3轮 **70/89（78.65%）**；三轮原始 reward 均值 **203/267（76.03%）** | Pro Verified 独立第二轮 **375/731 已判分、227 成功**，尚未完成；SWE-Review 整体 RRR 已完成 |
+| Muse NVFP4 | SWE-bench Pro Verified **496/731（67.85%）**，首轮；DeepSWE 三轮 **57/113、59/113、63/113**，均值 **52.80%**；SWRBench GPT-5.5 裁判 **55.4%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **75.7%（500 题）**、Coder **81.2%（462 题）**、Instruct **87.2%（422 题）**；SWE-Review Instruct 组官方 RRR **45.5%**；Coder 组官方 RRR **59.7%**；GLM5 组官方 RRR **75.0%**；整体官方 RRR **60.9%**；精确镜像 TB2.1 第1轮 **68/89（76.40%）**；精确镜像 TB2.1 第2轮 **65/89（73.03%）**；精确镜像 TB2.1 第3轮 **70/89（78.65%）**；三轮原始 reward 均值 **203/267（76.03%）** | Pro Verified 独立第二轮 **387/731 已判分、234 成功**，尚未完成；SWE-Review 整体 RRR 已完成 |
 | Beam BF16 | SWRBench GPT-5.5 裁判 **55.6%（1000/1000）**；SWE-Review 三组官方 DA：GLM5 **73.0%（500 题）**、Coder **77.2%（462 题）**、Instruct **86.5%（422 题）**；SWE-Review Instruct 组官方 RRR **42.7%**；Coder 组官方 RRR **59.1%**；GLM5 组官方 RRR **74.2%**；整体官方 RRR **59.5%**；精确镜像 TB2.1 首轮 **62/89（69.66%）**，首轮完整；精确镜像 TB2.1 第2轮基础设施补测后 **63/89** | Pro Verified **725/731 已判分、394 成功**；DeepSWE 首轮 **112/113、47 成功**；精确镜像 TB2.1 第3轮 75/89 已判分、48 成功，未完成；SWE-Review 三组及整体 RRR 已完成 |
 | Opus 4.7 | 旧缓存镜像 TB2.1 首轮 **70/89（78.65%）**；DeepSWE 第1轮 **51/113**；DeepSWE 第2轮 **43/113**；DeepSWE 第3轮 **39/113**；精确镜像 TB2.1 第1轮 **70/89**；精确镜像 TB2.1 第2轮 **71/89**；精确镜像 TB2.1 第3轮 **69/89** | Pro Verified **730/731 已判分、451 成功**；SWE-Review glm5_500 500/500 题终态、qwen3_coder_30b_500 462/462 题终态、qwen3_30b_instruct2507_500 422/422 题终态；Instruct 组官方 DA 86.3%，含 1 道事先声明的中断续测；RRR 未完成 |
 | Opus 4.8（历史） | Pro Verified **503/731（68.81%）**，其中 3 例确认检索到答案；保守扣除后 **500/731（68.40%）** | 不能把该补充计算当作原始分数 |
-| Muse 原始 BF16 | SWRBench GPT-5.5 裁判 **54.2%（1000/1000）**，PR 分类 F1 **0.4967** | Pro Verified **230/731 已判分**；指定精确镜像 TB2.1 首轮 **87/89 已判分、66 成功**，首轮未完成；DeepSWE 运行中；SWE-Review 原生任务终态 1280/1384（GLM 440/500、Coder 418/462、Instruct 422/422），官方 DA/RRR 待完成；已预建 1334 个任务镜像 |
+| Muse 原始 BF16 | SWRBench GPT-5.5 裁判 **54.2%（1000/1000）**，PR 分类 F1 **0.4967** | Pro Verified **230/731 已判分**；指定精确镜像 TB2.1 首轮 **87/89 已判分、66 成功**，首轮未完成；DeepSWE 运行中；SWE-Review 原生任务终态 1293/1384（GLM 446/500、Coder 425/462、Instruct 422/422），官方 DA/RRR 待完成；已预建 1350 个任务镜像 |
 
 Muse NVFP4 的 TB2.1 首轮 **68/89 是原生 verifier reward**。[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)确认其中 1 条成功轨迹通过操纵计时或参考计算取得奖励（`largest-eigenval`）。正在进行的 Muse BF16 首轮也有 1 条同类确认轨迹（`largest-eigenval`）。原始 reward 保留，轨迹已排除出干净训练数据；其他成功轨迹仍需完整核查，当前不报告“干净准确率”。
 
@@ -54,7 +54,7 @@ Opus 4.7 Pro 只统计原始运行的 731 道题；同一补丁的纯验证重�
 
 [精确镜像 TB 命令筛查](evidence/exact_tb_integrity_screen.json)及[哈希锚定的人工核查](evidence/exact_tb_integrity_manual_notes.json)目前将 Muse NVFP4 的 9 条、Muse BF16 的 5 条成功轨迹排除出“干净训练轨迹”候选。排除的 NVFP4 题目是 `break-filter-js-from-html`, `configure-git-webserver`, `fix-code-vulnerability`, `fix-git`, `headless-terminal`, `largest-eigenval`, `password-recovery`, `sqlite-db-truncate`, `winning-avg-corewars`；逐题核查记录了 verifier 与 agent 日志探查、向 `/tests/filter.py` 复制公开文件或计时篡改；已检查的日志探查输出没有确认获得隐藏答案。排除的 BF16 题目是 `configure-git-webserver`, `fix-git`, `hf-model-inference`, `largest-eigenval`, `password-recovery`，各题原因见逐题核查；新核查的 verifier 与宿主边界探查在已检查输出中未证实获得隐藏答案。BF16 和 NVFP4 的 `largest-eigenval` 都通过修改计时函数、拖慢参考特征值求解器拿到原始 reward 1；原始分数保留，NVFP4 的[最终轨迹审计](evidence/muse_nvfp4_largest_eigenval_live_integrity_alert.json)有哈希锚定，但这两条高分不能当作未经篡改的加速证据。此前的 NVFP4 [`db-wal-recovery` 宿主边界探查预警](evidence/muse_nvfp4_db_wal_recovery_live_integrity_alert.json)现已有终态：agent 运行 10800 秒后超时，原始奖励为 0。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)将该轨迹排除出干净训练数据；抽查输出未证明成功越过宿主边界，原始评测结果保持不变。关键词未命中也不代表轨迹已获干净认证。[人工核查记录](evidence/exact_tb_integrity_manual_notes.json)还标记了 Opus 4.7 在 `break-filter-js-from-html` 上对不存在的 `/tests` 的探查，以及 Beam BF16 在同题中把公开的过滤器临时复制到 `/tests/filter.py`、在判分前删除的行为；检查到的输出均未确认获得隐藏答案，两条轨迹暂不作为干净训练数据。Opus `torch-pipeline-parallelism` 的关键词命中只是列举 Python 可执行文件。
 
-逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 归档链共 1668 个归档，SWE-Review 的 `*_review_full_io.tar.zst` 含 OpenHands completions；`*_review_verifier.tar.zst` 含原生验证器的评审报告、判分报告和 reward，其中包括 10 道缺 Harbor 汇总文件但已完成原生验证的 Muse 题。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 1668/1668**，逐项核验见 `evidence/release-assets-verification.json`。
+逐题证据可从 `evidence/` 和 release archive 检查。`input_output/swrbench/*/generation.jsonl` 直接包含逐题 prompt、模型响应和 review，旁边的 GPT-5.5 评判 JSON 包含逐题裁判详情。Release 归档链共 1677 个归档，SWE-Review 的 `*_review_full_io.tar.zst` 含 OpenHands completions；`*_review_verifier.tar.zst` 含原生验证器的评审报告、判分报告和 reward，其中包括 10 道缺 Harbor 汇总文件但已完成原生验证的 Muse 题。最新 `muse_nvfp4_exact_tb_live_*.tar.zst` 同时包含已有判分结果和仍在运行题目的原始输入输出；只有终态 `result.json` 才计入分数。**GitHub 返回的 SHA-256 与提交的清单核对为 1677/1677**，逐项核验见 `evidence/release-assets-verification.json`。
 
 SWE-Review 原始生成模型的修订输入见 [Muse](input_output/archive_manifests/muse_review_revision_inputs.json) 和 [Beam](input_output/archive_manifests/beam_review_revision_inputs.json) 基础归档及按时间命名的增量归档；原生输出、completions、轨迹及 verifier 记录见独立的 [Muse](input_output/archive_manifests/muse_revision_review_full_io.json) 和 [Beam](input_output/archive_manifests/beam_revision_review_full_io.json) 归档链。[Release 覆盖审计](evidence/review_revision_release_coverage.json)给出当前各模型已准备及已进入桥接补测队列的任务卡数量，并确认这些输入与旧故障文件都在 SHA 校验通过的归档中。旧节点地址导致的首回复前失败与可判分的桥接补测分属不同路径；后续增量归档按时间覆盖仍在增长的文件。
 
@@ -88,7 +88,7 @@ BF16 SWRBench 的[逐题源数据、生成、GPT-5.5 裁判及原始回复归档
 
 [BF16 SWE-Review 输入归档](input_output/archive_manifests/muse_bf16_review_inputs.json)保存了 96 道已准备题目的模型可见任务卡、指令、Dockerfile、公开题目数据，以及队列与镜像记录；不含隐藏解法和测试。正式轨迹与判分将在任务完成后另行归档。
 
-[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 2026-10-22T11:09:48.700726+00:00 将 1000 条裁判记录逐题对到 1000 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 93 条）。1000 题官方结果已与生成、裁判、结果文件及指标收据核对；准确率统计 PR 分类，PR 分类 F1 为 0.4967，逐问题点 F1 为 0.1170。
+[BF16 SWRBench 生成与裁判对齐核验](evidence/muse_bf16_swr_alignment.json)于 2026-10-22T11:48:43.259057+00:00 将 1000 条裁判记录逐题对到 1000 条生成记录；按固定官方评分代码的撇号规范化后没有 review 文本错配（涉及 93 条）。1000 题官方结果已与生成、裁判、结果文件及指标收据核对；准确率统计 PR 分类，PR 分类 F1 为 0.4967，逐问题点 F1 为 0.1170。
 
 [Muse BF16 SWE-Review 原生进度核验](evidence/muse_bf16_swe_review_progress.json)逐题对照队列任务及 BF16 模型配置；终态数量只表示评审阶段进度，分组 DA 和整体 RRR 仍需官方后续评分。
 
@@ -110,7 +110,7 @@ Beam 精确镜像 TB 第 3 轮交由 2901 独立执行：固定版本的 BF16 �
 
 [Opus 4.7 第 3 轮 thinking 传输核查](evidence/opus47_r3_thinking_transport_audit.json)生成于 2026-10-19T16:53:10.951953+00:00，覆盖 89 道终态题：1911 条归档回复中 822 条有可读 thinking，1084 条用量显示 reasoning token 为零，另 5 条虽计入 reasoning token，但上游原始流也没有可读 thinking，仅有签名。后者不能作为带完整 thinking 的训练样本。
 
-仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `opus47_legacy_delta_20261021T095943Z.tar.zst`、`beam_legacy_delta_20261022T022954Z.tar.zst`、`muse_bf16_delta_20261022T111751Z.tar.zst`；截止时间和文件范围见各自清单。
+仍在增长的 Pro/旧镜像/DeepSWE 结果，需在基准归档之后按时间叠加增量归档，同路径文件以后者为准。目前三个增量分别是 `opus47_legacy_delta_20261021T095943Z.tar.zst`、`beam_legacy_delta_20261022T022954Z.tar.zst`、`muse_bf16_delta_20261022T115604Z.tar.zst`；截止时间和文件范围见各自清单。
 
 DeepSWE verifier 使用的原生 `model.patch` 已纳入 Beam 和 Muse BF16 增量链。[Beam 一次性回填](input_output/archive_manifests/beam_legacy_delta_20261020T114916Z.json)保存 387 份补丁，[Muse BF16 一次性回填](input_output/archive_manifests/muse_bf16_delta_20261020T114927Z.json)保存 74 份；后续新补丁随增量继续归档。补丁是模型输出，不增加抽样或得分。
 

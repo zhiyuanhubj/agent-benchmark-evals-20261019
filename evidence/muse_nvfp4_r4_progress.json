@@ -1,20 +1,24 @@
 {
-  "generated_utc": "2026-10-22T11:27:35.228035+00:00",
+  "generated_utc": "2026-10-22T12:10:35.306796+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r4-2902-20261021/claim.json",
   "claim_sha256": "a567060c9086480b734f8ccb308a79d2f9ff2bdf7824e299cd515a5334c60735",
   "expected": 89,
-  "terminal": 73,
-  "graded": 73,
-  "success": 55,
+  "terminal": 77,
+  "graded": 77,
+  "success": 57,
   "active_trial_dirs": 2,
-  "raw_responses": 3586,
+  "raw_responses": 3687,
   "tasks": {
     "adaptive-rejection-sampler": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/adaptive-rejection-sampler__z8HM6wx/result.json",
       "reward": 1.0,
       "exception": null
     },
-    "extract-moves-from-video": null,
+    "extract-moves-from-video": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/extract-moves-from-video__jhjq3xd/result.json",
+      "reward": 0.0,
+      "exception": null
+    },
     "openssl-selfsigned-cert": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/openssl-selfsigned-cert__ZV3huxT/result.json",
       "reward": 1.0,
@@ -245,6 +249,12 @@
       "reward": 1.0,
       "exception": null
     },
+    "merge-diff-arc-agi-task": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/merge-diff-arc-agi-task__pf7NcAd/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "password-recovery": null,
     "path-tracing": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/path-tracing__t6fcoA2/result.json",
       "reward": 1.0,
@@ -267,6 +277,11 @@
     },
     "fix-git": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/fix-git__64x2ibg/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
+    "nginx-request-logging": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/nginx-request-logging__askcmaW/result.json",
       "reward": 1.0,
       "exception": null
     },
@@ -295,6 +310,7 @@
       "reward": 1.0,
       "exception": null
     },
+    "mteb-leaderboard": null,
     "sam-cell-seg": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/sam-cell-seg__9q6pvhb/result.json",
       "reward": 1.0,
@@ -355,7 +371,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "make-doom-for-mips": null,
+    "make-doom-for-mips": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/make-doom-for-mips__5QGxw9H/result.json",
+      "reward": 0.0,
+      "exception": "AgentTimeoutError"
+    },
     "sanitize-git-repo": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r4-2902-20261021/sanitize-git-repo__26WhMby/result.json",
       "reward": 0.0,
