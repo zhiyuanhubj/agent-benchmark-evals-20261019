@@ -1,12 +1,12 @@
 # Hugging Face 迁移复现包
 
-私有仓库：[zhiyuanhucs/agent-benchmark-repro-20261022](https://huggingface.co/datasets/zhiyuanhucs/agent-benchmark-repro-20261022)。已验证版本：`8dbaaaf1d7e2a450c27492ccd1048bde77328bfe`。
+公开仓库（无需登录即可下载）：[zhiyuanhucs/agent-benchmark-repro-20261022](https://huggingface.co/datasets/zhiyuanhucs/agent-benchmark-repro-20261022)。已验证版本：`b8ee85cdf024b5afae6fc5c392d19c524ae570d7`。
 
 包含 TB2.1（89）、Pro Verified（731）、DeepSWE（113）、SWRBench（1000）和 SWE-Review（500/462/422）的工作区源码、任务输入、固定配置、运行入口、评分工具和说明，共约 375 MB。TB2.1 原预制镜像通过固定 Hub 提交下载，合计约 21.6 GB，附逐归档 SHA-256 与 Docker image/layer 身份验证。
 
 ```bash
 hf download zhiyuanhucs/agent-benchmark-repro-20261022 \
-  --type dataset --revision 8dbaaaf1d7e2a450c27492ccd1048bde77328bfe \
+  --type dataset --revision b8ee85cdf024b5afae6fc5c392d19c524ae570d7 \
   --local-dir benchmark-repro
 ```
 

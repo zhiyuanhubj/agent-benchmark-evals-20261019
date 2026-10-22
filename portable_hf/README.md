@@ -15,7 +15,7 @@ tags:
 
 # Benchmark 迁移与复现包
 
-这是 2026-10-22 从实际评测工作区生成的私有快照，包含本地修改后的 AgentCompass、实际安装的 Harbor 源码、agent 包装器、thinking/原生响应归档代码、原始任务卡、测试/评分文件、固定模型配置及依赖版本。适用于在另一台机器配置模型 API 后重新跑评测。
+这是 2026-10-22 从实际评测工作区生成的公开快照，包含本地修改后的 AgentCompass、实际安装的 Harbor 源码、agent 包装器、thinking/原生响应归档代码、原始任务卡、测试/评分文件、固定模型配置及依赖版本。适用于在另一台机器配置模型 API 后重新跑评测。
 
 | Benchmark | 固定任务规模 | 本包入口 |
 |---|---:|---|
@@ -31,10 +31,9 @@ tags:
 
 ## 下载与安装
 
-使用有权访问此私有仓库的 HF 账号登录。评测机使用 Linux x86_64、Python 3.12、Docker Engine 与 Compose v2，安装 `zstd`、`git`、`curl`。模型可在本地 GPU 或远端运行；仅调用远端 API 的评测机无需 GPU。Docker 必须支持原协议使用的隔离网络、egress sidecar 和 NET_ADMIN。
+本仓库公开，无需登录即可下载。评测机使用 Linux x86_64、Python 3.12、Docker Engine 与 Compose v2，安装 `zstd`、`git`、`curl`。模型可在本地 GPU 或远端运行；仅调用远端 API 的评测机无需 GPU。Docker 必须支持原协议使用的隔离网络、egress sidecar 和 NET_ADMIN。
 
 ```bash
-hf auth login
 hf download zhiyuanhucs/agent-benchmark-repro-20261022 \
   --type dataset --local-dir benchmark-repro
 cd benchmark-repro
