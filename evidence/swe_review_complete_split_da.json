@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T06:18:28.111476+00:00",
+  "generated_utc": "2026-10-22T06:59:55.343252+00:00",
   "metric": "Official SWE-Review compute_da.py, complete canonical review splits only",
   "metric_source_sha256": "35fdc90b8a5a14034df40fab7d70c7f3d5be587c0e8f92b67e0155996b52b035",
   "plan_sha256": "85414c294153273b0f4a975470233afebd9dd3fb8d116c6642a337f4837eea3c",
@@ -209,6 +209,33 @@
         "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
       }
     },
-    "muse-bf16": {}
+    "muse-bf16": {
+      "qwen3_30b_instruct2507_500": {
+        "status": "final_da_for_this_split",
+        "expected": 422,
+        "metrics": {
+          "DA": 87.1,
+          "DA_total_50": 84.2,
+          "CR": 92.2,
+          "FAR": 7.4,
+          "FRR": 27.6,
+          "total": 422,
+          "correct": 339,
+          "model_fail": 33,
+          "produced": 389,
+          "TP": 76,
+          "FP": 21,
+          "TN": 263,
+          "FN": 29
+        },
+        "canonical_receipt_sha256": "2333584d87e226d3290b5950822ca376bbe73961dac4f84e3c70666533cb93b6",
+        "benchmark_sha256": "531d636f1ebe470b0c4b571d87874002c37c7a45cdfec49f17a0774cf929be11",
+        "verified_review_count": 422,
+        "invalid_report_count": 0,
+        "invalid_reports": [],
+        "RRR": null,
+        "qualification": "DA is final for this split; RRR requires the separate original-generator revision stage."
+      }
+    }
   }
 }
