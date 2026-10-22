@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-10-22T12:50:39.636916+00:00",
+  "generated_utc": "2026-10-22T13:31:12.981801+00:00",
   "claim": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/muse_nvfp4/state/r5-2899-20261021/claim.json",
   "claim_sha256": "56df521405cf4daaddf8970ff9d7854c34edd20cfc2578b4e1d0beb6f6c550c0",
   "expected": 89,
-  "terminal": 81,
-  "graded": 79,
-  "success": 60,
+  "terminal": 83,
+  "graded": 81,
+  "success": 61,
   "active_trial_dirs": 2,
-  "raw_responses": 3730,
+  "raw_responses": 3786,
   "tasks": {
     "dna-assembly": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/dna-assembly__4zo6v8s/result.json",
@@ -29,6 +29,7 @@
       "reward": 0.0,
       "exception": null
     },
+    "rstan-to-pystan": null,
     "custom-memory-heap-crash": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/custom-memory-heap-crash__RkT32y2/result.json",
       "reward": 1.0,
@@ -49,7 +50,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "protein-assembly": null,
+    "protein-assembly": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/protein-assembly__4UuFHNJ/result.json",
+      "reward": 0.0,
+      "exception": null
+    },
     "hf-model-inference": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/hf-model-inference__CkHrHWt/result.json",
       "reward": 1.0,
@@ -145,7 +150,11 @@
       "reward": 1.0,
       "exception": null
     },
-    "qemu-startup": null,
+    "qemu-startup": {
+      "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/qemu-startup__3pVQbXY/result.json",
+      "reward": 1.0,
+      "exception": null
+    },
     "modernize-scientific-stack": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/modernize-scientific-stack__2KJwc6U/result.json",
       "reward": 1.0,
@@ -376,6 +385,7 @@
       "reward": 1.0,
       "exception": null
     },
+    "regex-chess": null,
     "install-windows-3.11": {
       "result": "/fsx/home/zhiyuan/.private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/install-windows-3.11__uzNS8YC/result.json",
       "reward": 0.0,
