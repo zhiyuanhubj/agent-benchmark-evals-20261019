@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T09:24:26.694743+00:00",
+  "generated_utc": "2026-10-22T10:03:47.512177+00:00",
   "metric_policy": "Only complete benchmark rounds are reported as accuracy; partial counts are progress, never accuracy. No best-of resampling.",
   "models": {
     "muse_nvfp4": {
@@ -16,14 +16,14 @@
         "round_2": {
           "status": "partial_no_full_score",
           "expected": 731,
-          "graded": 347,
-          "success": 210,
+          "graded": 360,
+          "success": 217,
           "accuracy": null,
           "shard0_expected": 183,
-          "shard0_terminal": 130,
+          "shard0_terminal": 134,
           "evidence": "evidence/spare_pro_capacity_progress_20261021.json",
           "qualification": "Disjoint task-ID union of the four declared second-round shards; not a full score until all 731 native grades and released I/O are verified.",
-          "terminal": 347
+          "terminal": 360
         }
       },
       "deepswe": {
@@ -323,7 +323,7 @@
             "success": 55,
             "ungraded": 0,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 3388,
+            "archived_actual_model_responses": 3462,
             "exceptions": {
               "AgentTimeoutError": 8
             },
@@ -340,12 +340,12 @@
           },
           "5": {
             "expected": 89,
-            "terminal": 73,
-            "graded": 71,
-            "success": 53,
+            "terminal": 74,
+            "graded": 72,
+            "success": 54,
             "ungraded": 2,
             "active_trial_dirs": 2,
-            "archived_actual_model_responses": 3200,
+            "archived_actual_model_responses": 3288,
             "exceptions": {
               "AgentTimeoutError": 6,
               "RuntimeError": 2
@@ -363,7 +363,7 @@
           }
         },
         "status": "complete_three_rounds_later_rounds_partial",
-        "native_score_snapshot_utc": "2026-10-22T09:24:26.694743+00:00",
+        "native_score_snapshot_utc": "2026-10-22T10:03:47.512177+00:00",
         "recovery": {
           "controller": "failed",
           "parallel_controller": "inactive",
@@ -1281,7 +1281,7 @@
             "status": "partial_no_full_score",
             "complete": false,
             "accuracy": null,
-            "native_score_snapshot_utc": "2026-10-22T09:03:15.750627+00:00",
+            "native_score_snapshot_utc": "2026-10-22T09:42:45.865461+00:00",
             "qualification": "Same native trials as the legacy-named BF16 field; all 89 supplied image identities and task paths verified before launch and on the running node. Partial counts only.",
             "confirmed_compromised_successes": 1,
             "known_compromised_tasks": [
@@ -1356,19 +1356,19 @@
       },
       "swe_review": {
         "status": "partial_no_final_da_or_rrr",
-        "native_terminal": 1235,
-        "native_graded": 1235,
+        "native_terminal": 1250,
+        "native_graded": 1250,
         "expected": 1384,
         "splits": {
           "glm5_500": {
             "expected": 500,
-            "native_terminal": 418,
-            "native_graded": 418
+            "native_terminal": 425,
+            "native_graded": 425
           },
           "qwen3_coder_30b_500": {
             "expected": 462,
-            "native_terminal": 395,
-            "native_graded": 395
+            "native_terminal": 403,
+            "native_graded": 403
           },
           "qwen3_30b_instruct2507_500": {
             "expected": 422,
@@ -1398,7 +1398,7 @@
     "muse_bf16_exact_released_io_audit": "/fsx/home/zhiyuan/agent-benchmark-evals-20261019/evidence/muse_bf16_exact_io_coverage.json"
   },
   "spare_replica_pro_capacity": {
-    "generated_utc": "2026-10-22T09:24:00.051106+00:00",
+    "generated_utc": "2026-10-22T10:03:22.464574+00:00",
     "rounds": {
       "beam/round_3": {
         "model": "beam",
@@ -3119,6 +3119,15 @@
             "assistant_turns": 64,
             "nonempty_thinking_turns": 64
           },
+          "instance_internetarchive__openlibrary-6a117fab6c963b74dc1ba907d838e74f76d34a4b-v13642507b4fc1f8d234172bf8129942da2c2ca26": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/beam-pro-r3-shard2-2733-capacity-20261021/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r3-shard2-2733-capacity-20261021/details/instance_internetarchive__openlibrary-6a117fab6c963b74dc1ba907d838e74f76d34a4b-v--60aa5d1465b0d879707526954f94e1332bb5c1e2e1b079b8cb4adacc2eb8fc49/attempt-1/result.json",
+            "result_sha256": "e4c0f9706965667d6987ef9cf632dde4d05e7d6a916571829deb4268a22dfaf0",
+            "task_sha256": "cd8d7e8e6e954af49bfbcfe90c0c479fb6d560c7e7101a18543143ebabfcf176",
+            "graded": true,
+            "success": true,
+            "assistant_turns": 88,
+            "nonempty_thinking_turns": 88
+          },
           "instance_internetarchive__openlibrary-b4f7c185ae5f1824ac7f3a18e8adf6a4b468459c-v08d8e8889ec945ab821fb156c04c7d2e2810debb": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/beam-pro-r3-shard2-2733-capacity-20261021/Beam-1.0-501B-A23B_swebench_pro_verified_mini_swe_agent/beam-pro-r3-shard2-2733-capacity-20261021/details/instance_internetarchive__openlibrary-b4f7c185ae5f1824ac7f3a18e8adf6a4b468459c-v--e1670fd8267591205ebfe102ee7c8ba0181b021f46d1aa770d99dc8fa4b0d7bd/attempt-1/result.json",
             "result_sha256": "c8d61a845a612a897ea1612274b0928c3c7d4d0968cd301a8527e8d904975dbd",
@@ -3328,16 +3337,16 @@
             "shard": 2,
             "run_id": "beam-pro-r3-shard2-2733-capacity-20261021",
             "expected": 243,
-            "native_terminal": 63,
+            "native_terminal": 64,
             "service": "active",
             "started": true,
             "exit": null,
             "claim_sha256": "785e1df6df0b87248f08955f50e3e9a52a09c5e93f05c62fa7b95fc076c25856"
           }
         ],
-        "terminal": 129,
-        "graded": 129,
-        "success": 79,
+        "terminal": 130,
+        "graded": 130,
+        "success": 80,
         "accuracy": null,
         "status": "partial_independent_draw"
       },
@@ -4256,6 +4265,15 @@
             "assistant_turns": 103,
             "nonempty_thinking_turns": 44
           },
+          "instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_flipt-io__flipt-e2bd19dafa7166c96b082fb2a59eb54b4be0d778--e060dc7da52ab76b0696328d700325e798ea0baf58058026b3768080d6d7e85c/attempt-1/result.json",
+            "result_sha256": "ce8bc74f10d5a91be9774b174fd91e6408511c139c513caaaefd54727aecf5fc",
+            "task_sha256": "4a7ebcf7200dfc91b2dad574e34bcf6ab59314a766901eb4521ef30653bc653f",
+            "graded": true,
+            "success": false,
+            "assistant_turns": 143,
+            "nonempty_thinking_turns": 17
+          },
           "instance_flipt-io__flipt-e5fe37c379e1eec2dd3492c5737c0be761050b26": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_flipt-io__flipt-e5fe37c379e1eec2dd3492c5737c0be761050b26--b5b51e34d9cdf4f605065f3efe68c3cfdc07ef35a5d2cd71f401b6f81e539ee9/attempt-1/result.json",
             "result_sha256": "5d9ac70f42991c7d03b8a399eaf5e982b3deb8831c86a0afd132736673a3d078",
@@ -4417,6 +4435,15 @@
             "success": false,
             "assistant_turns": 111,
             "nonempty_thinking_turns": 17
+          },
+          "instance_gravitational__teleport-96019ce0be7a2c8e36363f359eb7c943b41dde70": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_gravitational__teleport-96019ce0be7a2c8e36363f359eb7c943b41dde70--e0c38fd111b501e990c218d9402e30b427875f4afdda6ba6f6a3a13b9e6841f6/attempt-1/result.json",
+            "result_sha256": "7b01eedab7c51a8154073cecfac2ea69dcb04602614704a6f1c4af1b3648a324",
+            "task_sha256": "221b287ff36deb331bc2a4c49c702d5105d843763090b02f92b8b7f4423e17d9",
+            "graded": true,
+            "success": true,
+            "assistant_turns": 75,
+            "nonempty_thinking_turns": 26
           },
           "instance_gravitational__teleport-ad41b3c15414b28a6cec8c25424a19bfa7abd0e9-vee9b09fb20c43af7e520f57e9239bbcf46b7113d": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_gravitational__teleport-ad41b3c15414b28a6cec8c25424a19bfa7abd0e9-vee9b0--e8fb6dde49aafeb8d428e792c720ef29c32bf92a289cafbc8ca1ab1e99388f07/attempt-1/result.json",
@@ -4697,6 +4724,24 @@
             "assistant_turns": 76,
             "nonempty_thinking_turns": 20
           },
+          "instance_qutebrowser__qutebrowser-35168ade46184d7e5b91dfa04ca42fe2abd82717-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_qutebrowser__qutebrowser-35168ade46184d7e5b91dfa04ca42fe2abd82717-v363c--5014717ab8a87af5ab5b1448e42298b26e01ce232aab4428c2cec3498d788391/attempt-1/result.json",
+            "result_sha256": "0be67facfc1d3ef85355c56e0f80e29798cb25feef576e22921cbc9af3b33833",
+            "task_sha256": "139a9623dd0e186f60a86468160bfdfc117825ffdc8202972751213f24dc2450",
+            "graded": true,
+            "success": true,
+            "assistant_turns": 54,
+            "nonempty_thinking_turns": 14
+          },
+          "instance_qutebrowser__qutebrowser-36ade4bba504eb96f05d32ceab9972df7eb17bcc-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_qutebrowser__qutebrowser-36ade4bba504eb96f05d32ceab9972df7eb17bcc-v2ef3--25981ad4200e7de37a4cfa7a635817d1ea68ac9b7dfc69e327b9959e3b0d52e1/attempt-1/result.json",
+            "result_sha256": "3c54e3b95a16318c6982046f142528c69567262cacfec7f9719dc882a1818498",
+            "task_sha256": "399a61e8ce466566dcc33f4d444bc9cc258e2e655b965b5f8f61bb70e1e6ad3b",
+            "graded": true,
+            "success": true,
+            "assistant_turns": 63,
+            "nonempty_thinking_turns": 14
+          },
           "instance_qutebrowser__qutebrowser-44e64199ed38003253f0296badd4a447645067b6-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_qutebrowser__qutebrowser-44e64199ed38003253f0296badd4a447645067b6-v2ef3--72f7485d478e809c052b2b04db0b50311b7b15c8e162efb0593c1976de9b633d/attempt-1/result.json",
             "result_sha256": "3373c44856cf970b7fa414de26ef6653ace1eb52914e9415d4e1b7231ea6cf4e",
@@ -4723,6 +4768,15 @@
             "success": false,
             "assistant_turns": 120,
             "nonempty_thinking_turns": 39
+          },
+          "instance_qutebrowser__qutebrowser-a25e8a09873838ca9efefd36ea8a45170bbeb95c-vc2f56a753b62a190ddb23cd330c257b9cf560d12": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_qutebrowser__qutebrowser-a25e8a09873838ca9efefd36ea8a45170bbeb95c-vc2f5--452179b5258d19eb5cf71ea3d7107554f030d1d1576b3e3c8bacfd006acfa19f/attempt-1/result.json",
+            "result_sha256": "7b58b0ca9c3501ced9d5c9811fd33f00c731a113cc41f30b66919973bc356ee0",
+            "task_sha256": "3c11ef0f966fe612a818faf941c6fc9aa36c838c07d11ac9d1bdd31c671cbfc9",
+            "graded": true,
+            "success": true,
+            "assistant_turns": 54,
+            "nonempty_thinking_turns": 14
           },
           "instance_qutebrowser__qutebrowser-a84ecfb80a00f8ab7e341372560458e3f9cfffa2-v2ef375ac784985212b1805e1d0431dc8f1b3c171": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard1-2923-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard1-2923-capacity-20261021/details/instance_qutebrowser__qutebrowser-a84ecfb80a00f8ab7e341372560458e3f9cfffa2-v2ef3--5360a4cd3a8c1d12c76d7bbd823ed747bacef5c059291b33dfc065a24f5c4d02/attempt-1/result.json",
@@ -4895,6 +4949,15 @@
             "assistant_turns": 58,
             "nonempty_thinking_turns": 16
           },
+          "instance_ansible__ansible-9759e0ca494de1fd5fc2df2c5d11c57adbe6007c-v1055803c3a812189a1133297f7f5468579283f86": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_ansible__ansible-9759e0ca494de1fd5fc2df2c5d11c57adbe6007c-v1055803c3a81--baf05ef4939e659d73c13b38ad5de8814732daf2571797d7ed67a3359accbb38/attempt-1/result.json",
+            "result_sha256": "99aeb01947286d99e1e9793b002aa18e387f72e54b552d0f2eb261cc2bd684fa",
+            "task_sha256": "b3b0f87a3248416a634c9976efe5de1a94f09d07735cac3a0bad66a846a387e8",
+            "graded": true,
+            "success": false,
+            "assistant_turns": 250,
+            "nonempty_thinking_turns": 51
+          },
           "instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b--e081a0a91b76cb4b101e3685c16c9d660d3896a38844cec9dcf142fa8e77d58d/attempt-1/result.json",
             "result_sha256": "3111d992f69f88e007ee1855b792461e7c6f84a83336f2810b541a39480ae88f",
@@ -5065,6 +5128,15 @@
             "success": true,
             "assistant_turns": 63,
             "nonempty_thinking_turns": 21
+          },
+          "instance_flipt-io__flipt-e91615cf07966da41756017a7d571f9fc0fdbe80": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_flipt-io__flipt-e91615cf07966da41756017a7d571f9fc0fdbe80--d92e7f0ddbdd38c44e06852855f4c8d467b2faee51790b98726cbc5fc5c11c36/attempt-1/result.json",
+            "result_sha256": "d7088edd12ccb1b3df6b36f1e034387f25a5e71de6abda113f3069e480dcb2d2",
+            "task_sha256": "a653c521f24eec1fb019fe5d13f4defc6bdc75a198618b7e55ac7de4c8442a9c",
+            "graded": true,
+            "success": false,
+            "assistant_turns": 41,
+            "nonempty_thinking_turns": 15
           },
           "instance_flipt-io__flipt-ebb3f84c74d61eee4d8c6875140b990eee62e146": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_flipt-io__flipt-ebb3f84c74d61eee4d8c6875140b990eee62e146--dd4ebadc9b7be144c637db3d26f7d454a500aa91108e00538bd9356975e44952/attempt-1/result.json",
@@ -5525,6 +5597,15 @@
             "assistant_turns": 106,
             "nonempty_thinking_turns": 28
           },
+          "instance_qutebrowser__qutebrowser-c0be28ebee3e1837aaf3f30ec534ccd6d038f129-v9f8e9d96c85c85a605e382f1510bd08563afc566": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_qutebrowser__qutebrowser-c0be28ebee3e1837aaf3f30ec534ccd6d038f129-v9f8e--b431e6c36c376e76195258adcc15c3f9420e20cc76fdc163d0b966dae3f1cea8/attempt-1/result.json",
+            "result_sha256": "c38a4f523e5cd32961c331f47517c3a25e215e510117c632e3f168dac06910a1",
+            "task_sha256": "d3694d6ff74176e24e0f87297ee2dc2b0fafb023083597dbbdf45bad37047c48",
+            "graded": true,
+            "success": true,
+            "assistant_turns": 100,
+            "nonempty_thinking_turns": 31
+          },
           "instance_qutebrowser__qutebrowser-cc360cd4a34a126274c7b51f3b63afbaf3e05a02-v5fc38aaf22415ab0b70567368332beee7955b367": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_qutebrowser__qutebrowser-cc360cd4a34a126274c7b51f3b63afbaf3e05a02-v5fc3--70209a428db74684155d1459a738b7bc54b8066de8a3835956aca7946860ba04/attempt-1/result.json",
             "result_sha256": "8b20ccb1ed176f55fb3dc0235261043703ab9aa0ca10b5e34670c1b3df08d2ff",
@@ -5551,6 +5632,15 @@
             "success": true,
             "assistant_turns": 93,
             "nonempty_thinking_turns": 20
+          },
+          "instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d": {
+            "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c--5b0e365bb64c4b41f4071d7e11005c8a1cd1f0332eb58e127771056dfccc58aa/attempt-1/result.json",
+            "result_sha256": "27480de18496f7c2a96446bddee5b551012d94d656a8fe54246c0986ba7f0197",
+            "task_sha256": "c11cc937e1efe8999f75585564e3ecedd3d092212e44312863e5a19f1e5bc5bc",
+            "graded": true,
+            "success": false,
+            "assistant_turns": 240,
+            "nonempty_thinking_turns": 75
           },
           "instance_qutebrowser__qutebrowser-ed19d7f58b2664bb310c7cb6b52c5b9a06ea60b2-v059c6fdc75567943479b23ebca7c07b5e9a7f34c": {
             "result": "/fsx/home/zhiyuan/.private/spare_pro_capacity_20261021/results/muse-pro-r2-shard2-2924-capacity-20261021/muse-spark-open-nvfp4_swebench_pro_verified_mini_swe_agent/muse-pro-r2-shard2-2924-capacity-20261021/details/instance_qutebrowser__qutebrowser-ed19d7f58b2664bb310c7cb6b52c5b9a06ea60b2-v059c--63a9085600a76a5047892b640b9b74d35c066731116931a82570dd2cb8da56f5/attempt-1/result.json",
@@ -5856,7 +5946,7 @@
             "shard": 1,
             "run_id": "muse-pro-r2-shard1-2923-capacity-20261021",
             "expected": 183,
-            "native_terminal": 97,
+            "native_terminal": 102,
             "service": "active",
             "started": true,
             "exit": null,
@@ -5867,7 +5957,7 @@
             "shard": 2,
             "run_id": "muse-pro-r2-shard2-2924-capacity-20261021",
             "expected": 183,
-            "native_terminal": 91,
+            "native_terminal": 95,
             "service": "active",
             "started": true,
             "exit": null,
@@ -5885,16 +5975,16 @@
             "claim_sha256": "b950803c694dd1406bbdf3346a7b690abe0f15011c06fe46f754037b67e33c50"
           }
         ],
-        "terminal": 217,
-        "graded": 217,
-        "success": 124,
+        "terminal": 226,
+        "graded": 226,
+        "success": 129,
         "accuracy": null,
         "status": "partial_independent_draw",
         "with_original_shard0": {
           "expected": 731,
-          "terminal": 347,
-          "graded": 347,
-          "success": 210,
+          "terminal": 360,
+          "graded": 360,
+          "success": 217,
           "accuracy": null,
           "qualification": "Disjoint task-ID union of the four declared second-round shards; not a full score until all 731 native grades and released I/O are verified."
         }

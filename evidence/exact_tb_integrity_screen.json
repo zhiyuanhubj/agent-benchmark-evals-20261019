@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-22T09:39:20.208196+00:00",
+  "generated_utc": "2026-10-22T10:18:41.417392+00:00",
   "scope": "Currently scored exact supplied-image TB2.1 trajectories for Muse NVFP4, Muse BF16, Opus 4.7, and Beam BF16, including scored Muse NVFP4 rounds 2/3/4/5 and Beam BF16 rounds 2/3.",
   "method": "Search agent-issued tool keystrokes only; retain rule, step ID, and command SHA-256, with no raw command excerpts in this index.",
   "summary": {
@@ -97,7 +97,7 @@
       }
     },
     "muse_nvfp4_r5": {
-      "scored_trajectories_checked": 71,
+      "scored_trajectories_checked": 72,
       "pattern_hit_trajectories": 12,
       "pattern_hit_successes": 4,
       "rule_hit_counts": {
@@ -12291,6 +12291,18 @@
       "trajectory_sha256": "bf1ea27ee3dd183357bce6edb419d8b2e806b6e15318c006cff2782acbbfc815",
       "steps": 197,
       "tool_calls": 346,
+      "hits": [],
+      "review_status": "no_pattern_hit_not_cleared"
+    },
+    {
+      "model": "muse_nvfp4_r5",
+      "round": 5,
+      "task": "llm-inference-batching-scheduler",
+      "reward": 1.0,
+      "trajectory_path": ".private/beam_20261018/tb_v1_exact_images_20261019/results/muse_nvfp4/muse-nvfp4-tb-v1-exact-r5-2899-20261021/llm-inference-batching-scheduler__NfqZfXz/agent/trajectory.json",
+      "trajectory_sha256": "3fd41356b75093de4b56755ceef3274e34e11354492a4bcbe7d14e0c1d9a2390",
+      "steps": 30,
+      "tool_calls": 53,
       "hits": [],
       "review_status": "no_pattern_hit_not_cleared"
     },
