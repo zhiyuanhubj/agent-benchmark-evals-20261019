@@ -1,5 +1,7 @@
 # Muse Spark Open BF16 对外 API 使用说明
 
+API 源码、可复用配置模板和 systemd 启动步骤见 [Muse API 部署目录](deployment/muse-openai-api/README.zh-CN.md)。下文记录的是 2026-10-21 的部署与测量，不代表原 GPU allocation 或公网服务当前仍在线。
+
 Muse Spark Open 的 BF16 版本部署在两个 GPU 节点、共 16 张 GPU 上，通过独立的 OpenAI 兼容地址提供服务。
 
 | 项目 | 值 |

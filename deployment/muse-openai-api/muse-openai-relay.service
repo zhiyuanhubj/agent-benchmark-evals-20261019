@@ -1,0 +1,16 @@
+[Unit]
+Description=Muse OpenAI-compatible API with per-key model permissions
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/agent-benchmark-evals-20261019
+Environment=MUSE_OPENAI_RELAY_CONFIG=%h/.config/muse-api/gateway.json
+ExecStart=%h/agent-benchmark-evals-20261019/.venv/bin/python -m uvicorn protocol.muse_openai_key_relay_20261021:app --host 127.0.0.1 --port 8119 --workers 1 --no-access-log
+UMask=0077
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

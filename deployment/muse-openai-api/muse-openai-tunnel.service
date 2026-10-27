@@ -1,0 +1,14 @@
+[Unit]
+Description=Cloudflare HTTPS tunnel for the Muse API
+After=network-online.target muse-openai-relay.service
+Wants=network-online.target muse-openai-relay.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/cloudflared tunnel --no-autoupdate --config %h/.config/muse-api/cloudflared.yml run
+UMask=0077
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
