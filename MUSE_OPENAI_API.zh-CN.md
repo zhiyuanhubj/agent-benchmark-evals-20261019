@@ -1,5 +1,7 @@
 # Muse Spark Open BF16 对外 API 使用说明
 
+**2026-10-27 更新：公网 API 已恢复为 NVFP4，原三个 key 沿用。当前可用模型、调用示例与节点有效期请看 [NVFP4 服务恢复记录](MUSE_API_STATUS_20261027.zh-CN.md)。下文 BF16 配置与速度保留为历史资料。**
+
 API 源码、可复用配置模板和 systemd 启动步骤见 [Muse API 部署目录](deployment/muse-openai-api/README.zh-CN.md)。下文记录的是 2026-10-21 的部署与测量，不代表原 GPU allocation 或公网服务当前仍在线。
 
 Muse Spark Open 的 BF16 版本部署在两个 GPU 节点、共 16 张 GPU 上，通过独立的 OpenAI 兼容地址提供服务。

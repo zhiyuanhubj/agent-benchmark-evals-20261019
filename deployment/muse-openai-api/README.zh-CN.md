@@ -1,5 +1,7 @@
 # Muse OpenAI API 部署代码
 
+原域名已于 2026-10-27 接回 NVFP4 后端，原三个客户端 key 沿用；当前参数与调用方式见 [NVFP4 服务恢复记录](../../MUSE_API_STATUS_20261027.zh-CN.md)。
+
 这里整理了 2026-10-21 实际使用的 Muse API 网关及可复用的部署配置。原服务使用两节点、16 张 H200 的 SGLang BF16 后端，对外地址为 `https://muse.zhiyuanllm.com/v1`。这些是历史部署记录；本目录不证明原 GPU allocation 或域名当前在线。
 
 ## 代码与调用说明

@@ -1,0 +1,121 @@
+{
+  "utc": "2026-10-27T16:02:27.800587+00:00",
+  "precision": "NVFP4",
+  "allocation": 2989,
+  "base_url": "https://muse.zhiyuanllm.com/v1",
+  "key_values_recorded": false,
+  "clients": [
+    {
+      "label": "client-01",
+      "models_http": 200,
+      "chat_http": 200,
+      "model": "muse-spark-open-nvfp4",
+      "answer": "2 + 2 = **4**",
+      "thinking_chars": 1097,
+      "finish_reason": "stop",
+      "elapsed_seconds": 4.383,
+      "usage": {
+        "prompt_tokens": 152,
+        "total_tokens": 422,
+        "completion_tokens": 270,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 256
+      }
+    },
+    {
+      "label": "client-02",
+      "models_http": 200,
+      "chat_http": 200,
+      "model": "muse-spark-open-nvfp4",
+      "answer": "2 + 2 = **4**",
+      "thinking_chars": 67,
+      "finish_reason": "stop",
+      "elapsed_seconds": 0.908,
+      "usage": {
+        "prompt_tokens": 152,
+        "total_tokens": 189,
+        "completion_tokens": 37,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 23
+      }
+    },
+    {
+      "label": "client-03",
+      "models_http": 200,
+      "chat_http": 200,
+      "model": "muse-spark-open-nvfp4",
+      "answer": "2 + 2 = **4**.",
+      "thinking_chars": 853,
+      "finish_reason": "stop",
+      "elapsed_seconds": 4.667,
+      "usage": {
+        "prompt_tokens": 152,
+        "total_tokens": 371,
+        "completion_tokens": 219,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 205
+      }
+    }
+  ],
+  "sampling": {
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": -1
+  },
+  "probe_token_budget": 2048,
+  "zero_temperature_diagnostic": "Some greedy probes repeated reasoning until the token limit. Gateway passed the native responses through; use the recorded model sampling settings.",
+  "public_health": 200,
+  "anonymous_models": 401,
+  "invalid_key_models": 401,
+  "stream": {
+    "http": 200,
+    "done": true,
+    "thinking_chars": 653,
+    "answer": "3 + 5 = **8**",
+    "ttft_seconds": 0.187,
+    "elapsed_seconds": 2.719,
+    "usage": {
+      "prompt_tokens": 152,
+      "total_tokens": 319,
+      "completion_tokens": 167,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 153
+    }
+  },
+  "tool_call": {
+    "http": 200,
+    "function": "get_weather",
+    "arguments": {
+      "location": "Paris"
+    }
+  },
+  "usage_tracking": {
+    "client-01": 76439,
+    "client-02": 3,
+    "client-03": 3
+  },
+  "client_admin_denied": 403,
+  "low_reasoning_effort_probe": {
+    "http": 200,
+    "answer": "6 + 7 = **13**",
+    "thinking_chars": 718,
+    "finish_reason": "stop"
+  },
+  "node": "ip-10-1-25-253",
+  "gpu": "8x NVIDIA H200",
+  "framework": "SGLang Muse adaptation",
+  "quantization": "modelopt_fp4",
+  "kv_cache_dtype": "fp8_e4m3",
+  "max_running_requests": 8,
+  "allocation_end_time_utc": "2026-10-30T21:16:57Z",
+  "models": [
+    "muse-spark-open",
+    "muse-spark-open-nvfp4"
+  ],
+  "original_three_keys_preserved": true,
+  "relay_and_tunnel_active": true,
+  "relay_and_tunnel_enabled": true,
+  "persistent_service_override": true,
+  "restored_utc": "2026-10-27T16:04:24.563932+00:00",
+  "qualification": "Non-benchmark API functionality probes; timings are single probes, not a latency or throughput benchmark."
+}
