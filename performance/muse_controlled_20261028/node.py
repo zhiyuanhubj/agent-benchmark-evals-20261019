@@ -125,10 +125,6 @@ def main():
         server += ['--dtype', 'bfloat16', '--mem-fraction-static', '0.88', '--nnodes', '2',
                    '--cuda-graph-backend-prefill', 'disabled',
                    '--node-rank', str(rank), '--dist-init-addr', hosts[0].removeprefix('ip-').replace('-', '.') + ':31460']
-        if rank != 0:
-            # Headless tensor-parallel workers receive token IDs from rank 0;
-            # avoid the HF-only Muse processor lookup on the secondary node.
-            server += ['--skip-tokenizer-init']
     if not a.cache:
         server += ['--disable-radix-cache']
     if a.speculative != 'off':
