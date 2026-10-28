@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793219844.958055,
+  "generated_unix": 1793220749.6557243,
   "targets": [
     {
       "precision": "nvfp4",
@@ -272,9 +272,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 8,
-      "valid_repeats": 1,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "nvfp4",
@@ -283,9 +283,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 32,
-      "valid_repeats": 0,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "complete"
     },
     {
       "precision": "nvfp4",
@@ -481,9 +481,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 0,
+      "valid_repeats": 1,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
@@ -691,28 +691,6 @@
     {
       "precision": "nvfp4",
       "workload": "coding",
-      "input_label": "native-8192-32768",
-      "cache": false,
-      "speculative": "off",
-      "concurrency": 8,
-      "valid_repeats": 1,
-      "required_repeats": 3,
-      "status": "partial"
-    },
-    {
-      "precision": "nvfp4",
-      "workload": "coding",
-      "input_label": "native-8192-32768",
-      "cache": false,
-      "speculative": "off",
-      "concurrency": 32,
-      "valid_repeats": 0,
-      "required_repeats": 3,
-      "status": "pending"
-    },
-    {
-      "precision": "nvfp4",
-      "workload": "coding",
       "input_label": "native-input-bins-pending",
       "cache": false,
       "speculative": "NGRAM",
@@ -783,9 +761,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 0,
+      "valid_repeats": 1,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
