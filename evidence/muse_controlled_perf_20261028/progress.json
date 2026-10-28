@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793196538.231276,
+  "updated_unix": 1793197304.3730104,
   "jobs": [
     "3120|RUNNING|1|ip-10-1-101-159",
     "3121|RUNNING|2|ip-10-1-112-220,ip-10-1-114-210"
@@ -7,13 +7,14 @@
   "job_query_returncode": 0,
   "states": {
     "nvfp4": {
-      "utc_unix": 1793196470.2068703,
+      "utc_unix": 1793197133.11904,
       "job": 3120,
       "hosts": [
         "ip-10-1-101-159"
       ],
       "precision": "nvfp4",
-      "phase": "preparing_and_verifying_pinned_weights"
+      "phase": "starting_fixed_server_configuration",
+      "configuration": "cache-off-off"
     },
     "bf16": {
       "utc_unix": 1793196470.41353,
