@@ -2,7 +2,7 @@
 
 以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。
 
-更新时间：2026-10-28 18:37:10 UTC。
+更新时间：2026-10-28 18:52:11 UTC。
 
 配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。
 
@@ -17,10 +17,12 @@
 | bf16/8192 | False/off | 16 | 3 | 360.253 | 144/0 | 24.402 ± 0.055 | 27.562 ± 0.081 | 4.429/7.835 | 36.282/39.702 | 41.584/41.770 |
 | bf16/8192 | False/off | 32 | 3 | 360.416 | 192/0 | 39.856 ± 0.016 | 24.069 ± 0.050 | 8.386/15.464 | 41.548/48.345 | 50.957/51.139 |
 | bf16/8192 | False/off | 64 | 3 | 429.832 | 384/0 | 57.176 ± 0.064 | 18.442 ± 0.016 | 15.937/30.036 | 54.223/67.772 | 71.569/71.860 |
+| bf16/8192 | False/off | 128 | 3 | 663.986 | 747/0 | 74.040 ± 0.205 | 13.134 ± 0.116 | 30.008/57.917 | 76.140/103.228 | 109.599/111.177 |
 | nvfp4/32768 | False/off | 1 | 3 | 1498.857 | 99/0 | 8.454 ± 0.000 | 80.681 ± 0.001 | 2.461/2.473 | 12.395/12.399 | 15.141/15.154 |
 | nvfp4/32768 | False/off | 8 | 3 | 506.660 | 120/0 | 29.578 ± 0.021 | 38.387 ± 0.007 | 11.401/19.672 | 26.100/34.472 | 38.124/38.206 |
 | nvfp4/32768 | False/off | 32 | 3 | 653.449 | 192/0 | 37.610 ± 0.009 | 15.073 ± 0.010 | 40.963/76.706 | 66.361/101.115 | 108.961/109.145 |
 | nvfp4/65536 | False/off | 1 | 3 | 1761.552 | 99/0 | 7.194 ± 0.000 | 80.131 ± 0.001 | 5.040/5.065 | 12.479/12.483 | 17.808/17.831 |
+| nvfp4/65536 | False/off | 8 | 3 | 889.284 | 120/0 | 17.272 ± 0.004 | 28.292 ± 0.013 | 22.987/40.321 | 35.505/52.690 | 59.364/59.465 |
 | nvfp4/8192 | False/off | 1 | 3 | 1287.300 | 99/0 | 9.690 ± 0.003 | 81.188 ± 0.008 | 0.610/0.613 | 12.317/12.321 | 13.211/13.215 |
 | nvfp4/8192 | False/off | 2 | 3 | 723.959 | 102/0 | 16.987 ± 0.011 | 73.219 ± 0.031 | 1.084/1.213 | 13.658/13.802 | 15.052/15.079 |
 | nvfp4/8192 | False/off | 4 | 5 | 788.285 | 180/0 | 28.549 ± 0.021 | 62.894 ± 0.071 | 1.859/2.413 | 15.903/16.781 | 18.125/18.165 |
@@ -36,7 +38,7 @@
 
 coding+review 各 native 输入长度桶及投机开关分别成线：[coding.png](coding.png)。
 
-已完成 19 / 52 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
+已完成 21 / 53 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
 
 | 模型 | 输入/工作负载 | 缓存 | 投机 | 并发 | 有效重复/目标 | 状态 |
 |---|---|---|---|---:|---:|---|
@@ -55,7 +57,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | nvfp4 | synthetic/32768 | True | off | 8 | 0/3 | pending |
 | nvfp4 | synthetic/32768 | True | off | 32 | 0/3 | pending |
 | nvfp4 | synthetic/65536 | False | off | 1 | 3/3 | complete |
-| nvfp4 | synthetic/65536 | False | off | 8 | 2/3 | partial |
+| nvfp4 | synthetic/65536 | False | off | 8 | 3/3 | complete |
 | nvfp4 | synthetic/65536 | False | off | 32 | 0/3 | pending |
 | nvfp4 | synthetic/65536 | True | off | 1 | 0/3 | pending |
 | nvfp4 | synthetic/65536 | True | off | 8 | 0/3 | pending |
@@ -73,7 +75,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | bf16 | synthetic/8192 | False | off | 16 | 3/3 | complete |
 | bf16 | synthetic/8192 | False | off | 32 | 3/3 | complete |
 | bf16 | synthetic/8192 | False | off | 64 | 3/3 | complete |
-| bf16 | synthetic/8192 | False | off | 128 | 2/3 | partial |
+| bf16 | synthetic/8192 | False | off | 128 | 3/3 | complete |
 | bf16 | synthetic/32768 | False | off | 1 | 0/3 | pending |
 | bf16 | synthetic/32768 | False | off | 8 | 0/3 | pending |
 | bf16 | synthetic/32768 | False | off | 32 | 0/3 | pending |
@@ -92,6 +94,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 1 | 0/3 | pending |
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 8 | 0/3 | pending |
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 32 | 0/3 | pending |
+| bf16 | synthetic/8192 | False | off | 256 | 0/3 | partial |
 
 详细逐轮指标：[detailed_rounds.csv](detailed_rounds.csv)；逐请求合并后的测点统计：[detailed_points.csv](detailed_points.csv)。
 
