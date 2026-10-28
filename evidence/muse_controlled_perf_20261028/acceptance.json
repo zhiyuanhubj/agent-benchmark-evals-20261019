@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793211725.8514097,
+  "generated_unix": 1793212630.4521616,
   "targets": [
     {
       "precision": "nvfp4",
@@ -162,9 +162,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 2,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "nvfp4",
@@ -173,9 +173,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 8,
-      "valid_repeats": 0,
+      "valid_repeats": 2,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "nvfp4",
@@ -371,9 +371,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 128,
-      "valid_repeats": 0,
+      "valid_repeats": 2,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
@@ -617,21 +617,10 @@
       "input_label": "65536",
       "cache": false,
       "speculative": "off",
-      "concurrency": 1,
+      "concurrency": 8,
       "valid_repeats": 2,
       "required_repeats": 3,
       "status": "partial"
-    },
-    {
-      "precision": "nvfp4",
-      "workload": "synthetic",
-      "input_label": "65536",
-      "cache": false,
-      "speculative": "off",
-      "concurrency": 8,
-      "valid_repeats": 0,
-      "required_repeats": 3,
-      "status": "pending"
     },
     {
       "precision": "nvfp4",
@@ -750,9 +739,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 128,
-      "valid_repeats": 0,
+      "valid_repeats": 2,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
