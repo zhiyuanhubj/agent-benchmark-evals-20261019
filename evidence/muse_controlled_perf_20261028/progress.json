@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793197304.3730104,
+  "updated_unix": 1793198211.0081031,
   "jobs": [
     "3120|RUNNING|1|ip-10-1-101-159",
     "3121|RUNNING|2|ip-10-1-112-220,ip-10-1-114-210"
@@ -7,24 +7,28 @@
   "job_query_returncode": 0,
   "states": {
     "nvfp4": {
-      "utc_unix": 1793197133.11904,
+      "utc_unix": 1793197903.5200477,
       "job": 3120,
       "hosts": [
         "ip-10-1-101-159"
       ],
       "precision": "nvfp4",
-      "phase": "starting_fixed_server_configuration",
-      "configuration": "cache-off-off"
+      "phase": "measuring",
+      "configuration": "cache-off-off",
+      "workload": "synthetic",
+      "input_tokens": 8192,
+      "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-off-off/synthetic-8192"
     },
     "bf16": {
-      "utc_unix": 1793196470.41353,
       "job": 3121,
+      "precision": "bf16",
       "hosts": [
         "ip-10-1-112-220",
         "ip-10-1-114-210"
       ],
-      "precision": "bf16",
-      "phase": "preparing_and_verifying_pinned_weights"
+      "phase": "repairing_rank1_download_capacity",
+      "utc_unix": 1793198073.3426661,
+      "note": "Original controller paused to retain allocation; rank-0 download continues."
     }
   },
   "rounds": [],
