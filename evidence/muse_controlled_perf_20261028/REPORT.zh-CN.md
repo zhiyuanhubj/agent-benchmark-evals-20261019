@@ -2,15 +2,15 @@
 
 单点数据只是进度；完整曲线、长上下文与投机对照尚未全部完成。
 
-已完成 3 / 52 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
+已完成 5 / 52 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
 
 | 模型 | 输入/工作负载 | 缓存 | 投机 | 并发 | 有效重复/目标 | 状态 |
 |---|---|---|---|---:|---:|---|
 | nvfp4 | synthetic/8192 | False | off | 1 | 3/3 | complete |
 | nvfp4 | synthetic/8192 | False | off | 2 | 3/3 | complete |
 | nvfp4 | synthetic/8192 | False | off | 4 | 5/5 | complete |
-| nvfp4 | synthetic/8192 | False | off | 8 | 3/5 | partial |
-| nvfp4 | synthetic/8192 | False | off | 16 | 0/3 | pending |
+| nvfp4 | synthetic/8192 | False | off | 8 | 5/5 | complete |
+| nvfp4 | synthetic/8192 | False | off | 16 | 3/3 | complete |
 | nvfp4 | synthetic/8192 | False | off | 32 | 0/3 | pending |
 | nvfp4 | synthetic/8192 | False | off | 64 | 0/3 | pending |
 | nvfp4 | synthetic/8192 | False | off | 128 | 0/3 | pending |

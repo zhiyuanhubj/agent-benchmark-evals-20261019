@@ -1,7 +1,8 @@
 {
-  "rounds": 0,
-  "valid_rounds": 0,
-  "complete_points_with_3_repeats": 0,
+  "rounds": 19,
+  "valid_rounds": 19,
+  "complete_points_with_3_repeats": 5,
+  "complete_protocol_points": 5,
   "states": {
     "nvfp4": {
       "utc_unix": 1793197903.5200477,
@@ -17,15 +18,15 @@
       "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-off-off/synthetic-8192"
     },
     "bf16": {
+      "utc_unix": 1793202970.893357,
       "job": 3121,
-      "precision": "bf16",
       "hosts": [
         "ip-10-1-112-220",
         "ip-10-1-114-210"
       ],
-      "phase": "repairing_rank1_download_capacity",
-      "utc_unix": 1793198073.3426661,
-      "note": "Original controller paused to retain allocation; rank-0 download continues."
+      "precision": "bf16",
+      "phase": "starting_fixed_server_configuration",
+      "configuration": "cache-off-off"
     }
   }
 }
