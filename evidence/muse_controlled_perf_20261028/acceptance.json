@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793227066.1549976,
+  "generated_unix": 1793227965.4598405,
   "targets": [
     {
       "precision": "nvfp4",
@@ -217,9 +217,9 @@
       "cache": true,
       "speculative": "off",
       "concurrency": 32,
-      "valid_repeats": 2,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "nvfp4",
@@ -547,7 +547,7 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 1,
+      "valid_repeats": 2,
       "required_repeats": 3,
       "status": "partial"
     },
@@ -657,17 +657,6 @@
   "incomplete_targets": [
     {
       "precision": "nvfp4",
-      "workload": "synthetic",
-      "input_label": "65536",
-      "cache": true,
-      "speculative": "off",
-      "concurrency": 32,
-      "valid_repeats": 2,
-      "required_repeats": 3,
-      "status": "partial"
-    },
-    {
-      "precision": "nvfp4",
       "workload": "coding",
       "input_label": "native-input-bins-pending",
       "cache": false,
@@ -772,7 +761,7 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 1,
+      "valid_repeats": 2,
       "required_repeats": 3,
       "status": "partial"
     },

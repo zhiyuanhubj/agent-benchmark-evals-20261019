@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793227073.4673088,
+  "updated_unix": 1793227973.1579428,
   "jobs": [
     "3120|RUNNING|1|ip-10-1-101-159",
     "3121|RUNNING|2|ip-10-1-112-220,ip-10-1-114-210"
@@ -7,17 +7,14 @@
   "job_query_returncode": 0,
   "states": {
     "nvfp4": {
-      "utc_unix": 1793224279.946129,
+      "utc_unix": 1793227085.8043983,
       "job": 3120,
       "hosts": [
         "ip-10-1-101-159"
       ],
       "precision": "nvfp4",
-      "phase": "measuring",
-      "configuration": "cache-on-off",
-      "workload": "synthetic",
-      "input_tokens": 65536,
-      "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-on-off/synthetic-65536"
+      "phase": "starting_fixed_server_configuration",
+      "configuration": "cache-off-NGRAM"
     },
     "bf16": {
       "utc_unix": 1793225673.967659,
@@ -176,6 +173,148 @@
       "cache_hit_rate_tokens": 0.0,
       "valid_curve_point": true,
       "artifact": "bf16/cache-off-off/coding-native-0-8192/c001-r0/summary.json"
+    },
+    {
+      "measurement_start_monotonic": 8365209.793670737,
+      "measurement_end_monotonic": 8365977.037598615,
+      "measurement_seconds": 767.2439278773963,
+      "output_tokens_received_in_window": 33766,
+      "output_tokens_per_second": 44.009471790040315,
+      "output_tokens_per_second_per_gpu": 2.7505919868775197,
+      "arrivals_in_window": 33,
+      "successful_arrivals_after_drain": 33,
+      "failed_arrivals_after_drain": 0,
+      "completed_in_window": 33,
+      "failed_in_window": 0,
+      "prompt_tokens_arrival_cohort": 40608,
+      "output_tokens_arrival_cohort_including_drain": 33792,
+      "cached_prompt_tokens_arrival_cohort": 0,
+      "ttft_s": {
+        "n": 33,
+        "p50": 0.16450638696551323,
+        "p95": 0.21706793066114183
+      },
+      "tpot_s": {
+        "n": 33,
+        "p50": 0.02256498194844958,
+        "p95": 0.022618994706347657
+      },
+      "e2e_s": {
+        "n": 33,
+        "p50": 23.25047052372247,
+        "p95": 23.369346667267383
+      },
+      "decode_tokens_per_second": {
+        "n": 33,
+        "p50": 44.31645468560674,
+        "p95": 44.36584427103631
+      },
+      "decode_speed_samples": [
+        44.274299266864425,
+        44.311276839790075,
+        44.31645468560674,
+        44.37143611454799,
+        44.34517565167429,
+        44.301021516072844,
+        44.354397781584936,
+        44.33839630226499,
+        44.33718336522446,
+        44.35431252611833,
+        44.3008506348235,
+        44.30723977373643,
+        44.20823386842737,
+        44.324075200989554,
+        44.35401341996581,
+        44.331622448032654,
+        44.29240816181828,
+        44.364603334406596,
+        44.21222712806027,
+        44.34073379103182,
+        44.34412155274668,
+        44.36770567598088,
+        44.2605207230967,
+        44.26746300724779,
+        44.340744297783125,
+        44.324599733243396,
+        44.22448529989991,
+        44.16790559900851,
+        44.351525020194195,
+        44.26034603087744,
+        44.28710206621124,
+        44.30970563095734,
+        44.31044422813803
+      ],
+      "spec_verify_steps": 0,
+      "spec_num_proposed_drafts": 0,
+      "spec_num_correct_drafts": 0,
+      "spec_accept_length_weighted": null,
+      "spec_accept_rate_weighted": null,
+      "successful_completion_times": [
+        8365255.580558892,
+        8365278.836452749,
+        8365302.093790885,
+        8365325.318892035,
+        8365348.56808521,
+        8365371.829809826,
+        8365395.060388458,
+        8365418.300682469,
+        8365441.540359801,
+        8365464.781157902,
+        8365488.047917513,
+        8365511.308470076,
+        8365534.738639769,
+        8365557.988485042,
+        8365581.222362947,
+        8365604.469413834,
+        8365627.736567669,
+        8365650.965032794,
+        8365674.339552636,
+        8365697.579355043,
+        8365720.816719743,
+        8365744.041839194,
+        8365767.325268785,
+        8365790.611509261,
+        8365813.853137488,
+        8365837.103554882,
+        8365860.41842558,
+        8365883.79439533,
+        8365907.01625484,
+        8365930.297829894,
+        8365953.565131537,
+        8365976.826138827,
+        8366000.083698872
+      ],
+      "scenario": {
+        "input_tokens": 0,
+        "cache": false,
+        "speculative": "off",
+        "workload": "coding",
+        "input_range": [
+          0,
+          8192
+        ],
+        "input_label": "native-0-8192"
+      },
+      "concurrency": 1,
+      "repeat": 1,
+      "measurement_start_unix": 1793226655.0639865,
+      "measurement_end_unix": 1793227422.3079145,
+      "precision": "bf16",
+      "gpus": 16,
+      "stop_reason": "minimum_time_and_sample_count_met",
+      "warmup_seconds": 94.05983223579824,
+      "sample_target_met": true,
+      "duration_target_met": true,
+      "drain_seconds": 23.056865077465773,
+      "input_tokens": {
+        "n": 33,
+        "p50": 955.0,
+        "p95": 3079.1999999999994
+      },
+      "prometheus_samples_in_window": 369,
+      "cache_hit_rate_tokens": 0.0,
+      "valid_curve_point": true,
+      "artifact": "bf16/cache-off-off/coding-native-0-8192/c001-r1/summary.json"
     },
     {
       "measurement_start_monotonic": 8352888.391068341,
@@ -26985,13 +27124,18 @@
       "bytes": 2253327,
       "sha256": "7f2a4d0d60a72e4486b9c0a59c28ca104ead5d2ec5283ff9b3f2c3b370494774",
       "location": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-on-off/synthetic-65536/c032-r2/requests.jsonl.gz"
+    },
+    "bf16/cache-off-off/coding-native-0-8192/c001-r1/requests.jsonl.gz": {
+      "bytes": 554208,
+      "sha256": "a95e364cb2823e20c8fdc5eb9ae5aff5436466a0a48460a607e44df1b5ba224b",
+      "location": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/bf16/cache-off-off/coding-native-0-8192/c001-r1/requests.jsonl.gz"
     }
   },
-  "controlled_rounds_completed": 128,
-  "valid_rounds": 126,
+  "controlled_rounds_completed": 129,
+  "valid_rounds": 127,
   "state_directory": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ",
   "private_prompt_and_response_bodies_uploaded": false,
   "full_protocol_complete": false,
-  "complete_protocol_points": 39,
+  "complete_protocol_points": 40,
   "currently_enumerated_target_points": 59
 }
