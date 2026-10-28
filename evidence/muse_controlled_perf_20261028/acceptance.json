@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793227965.4598405,
+  "generated_unix": 1793228867.8518014,
   "targets": [
     {
       "precision": "nvfp4",
@@ -290,7 +290,7 @@
     {
       "precision": "nvfp4",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "NGRAM",
       "concurrency": 1,
@@ -301,7 +301,7 @@
     {
       "precision": "nvfp4",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "NGRAM",
       "concurrency": 8,
@@ -312,7 +312,40 @@
     {
       "precision": "nvfp4",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
+      "cache": false,
+      "speculative": "NGRAM",
+      "concurrency": 32,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "nvfp4",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "NGRAM",
+      "concurrency": 1,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "nvfp4",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "NGRAM",
+      "concurrency": 8,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "nvfp4",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
       "cache": false,
       "speculative": "NGRAM",
       "concurrency": 32,
@@ -547,9 +580,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 2,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "bf16",
@@ -558,9 +591,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 8,
-      "valid_repeats": 0,
+      "valid_repeats": 2,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
@@ -658,7 +691,7 @@
     {
       "precision": "nvfp4",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "NGRAM",
       "concurrency": 1,
@@ -669,7 +702,7 @@
     {
       "precision": "nvfp4",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "NGRAM",
       "concurrency": 8,
@@ -680,7 +713,40 @@
     {
       "precision": "nvfp4",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
+      "cache": false,
+      "speculative": "NGRAM",
+      "concurrency": 32,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "nvfp4",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "NGRAM",
+      "concurrency": 1,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "nvfp4",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "NGRAM",
+      "concurrency": 8,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "nvfp4",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
       "cache": false,
       "speculative": "NGRAM",
       "concurrency": 32,
@@ -760,21 +826,10 @@
       "input_label": "native-0-8192",
       "cache": false,
       "speculative": "off",
-      "concurrency": 1,
+      "concurrency": 8,
       "valid_repeats": 2,
       "required_repeats": 3,
       "status": "partial"
-    },
-    {
-      "precision": "bf16",
-      "workload": "coding",
-      "input_label": "native-0-8192",
-      "cache": false,
-      "speculative": "off",
-      "concurrency": 8,
-      "valid_repeats": 0,
-      "required_repeats": 3,
-      "status": "pending"
     },
     {
       "precision": "bf16",

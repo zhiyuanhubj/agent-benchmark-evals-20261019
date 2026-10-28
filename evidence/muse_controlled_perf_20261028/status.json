@@ -1,18 +1,24 @@
 {
-  "rounds": 129,
-  "valid_rounds": 127,
-  "complete_points_with_3_repeats": 40,
-  "complete_protocol_points": 40,
+  "rounds": 132,
+  "valid_rounds": 130,
+  "complete_points_with_3_repeats": 41,
+  "complete_protocol_points": 41,
   "states": {
     "nvfp4": {
-      "utc_unix": 1793227085.8043983,
+      "utc_unix": 1793228629.239163,
       "job": 3120,
       "hosts": [
         "ip-10-1-101-159"
       ],
       "precision": "nvfp4",
-      "phase": "starting_fixed_server_configuration",
-      "configuration": "cache-off-NGRAM"
+      "phase": "finished_with_incomplete_cases",
+      "failures": [
+        {
+          "configuration": "cache-off-NGRAM",
+          "case": "coding-0",
+          "returncode": 1
+        }
+      ]
     },
     "bf16": {
       "utc_unix": 1793225673.967659,
