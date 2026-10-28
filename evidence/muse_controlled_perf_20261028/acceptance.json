@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793210823.7074494,
+  "generated_unix": 1793211725.8514097,
   "targets": [
     {
       "precision": "nvfp4",
@@ -162,7 +162,7 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 1,
+      "valid_repeats": 2,
       "required_repeats": 3,
       "status": "partial"
     },
@@ -360,9 +360,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 64,
-      "valid_repeats": 0,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "complete"
     },
     {
       "precision": "bf16",
@@ -618,7 +618,7 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 1,
+      "valid_repeats": 2,
       "required_repeats": 3,
       "status": "partial"
     },
@@ -739,17 +739,6 @@
       "cache": false,
       "speculative": "NGRAM",
       "concurrency": 32,
-      "valid_repeats": 0,
-      "required_repeats": 3,
-      "status": "pending"
-    },
-    {
-      "precision": "bf16",
-      "workload": "synthetic",
-      "input_label": "8192",
-      "cache": false,
-      "speculative": "off",
-      "concurrency": 64,
       "valid_repeats": 0,
       "required_repeats": 3,
       "status": "pending"
