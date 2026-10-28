@@ -5,9 +5,9 @@ Prepared 2026-10-28. This is a new controlled experiment, separate from the shar
 ## Deployment and allocation
 
 - Existing NVFP4 API: job **2989**, 8×H200, remains in service. Real clients are actively using it; measurements from this shared endpoint are not used in these curves.
-- Dedicated NVFP4 experiment: job **3120**, one 8×H200 node.
-- Dedicated BF16 experiment: job **3121**, two nodes, 16×H200. The earlier BF16 allocation has ended; this experiment prepares a fresh pinned deployment.
-- On user instruction, weikai.huang jobs **3093, 3075, 3074** were cancelled on October 28. Older queued letian.zhang jobs **3114, 3113, 3111** subsequently acquired those nodes. This did not allocate new nodes to 3120/3121. No further jobs were cancelled.
+- Dedicated NVFP4 experiment: job **3120**, running on `ip-10-1-101-159`, one 8×H200 node.
+- Dedicated BF16 experiment: job **3121**, running on `ip-10-1-112-220` and `ip-10-1-114-210`, 16×H200. The earlier BF16 allocation has ended; this experiment prepares a fresh pinned deployment.
+- On user instruction, weikai.huang jobs **3093, 3075, 3074** were cancelled on October 28. Older queued letian.zhang jobs **3114, 3113, 3111** subsequently acquired those nodes. The user then explicitly requested cancellation of those three letian jobs; this was completed. Weikai replacement jobs 3122–3124 were held pending so the earlier request to stop three allocations would not immediately be undone. Jobs 3120/3121 are now running on the freed hosts.
 - Shared runtime state: `/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/`. `READY.json` freezes runnable code hashes; each job starts its own controller when Slurm allocates it. Scripts never use another user's running allocation.
 
 Pinned image: `lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a`.
