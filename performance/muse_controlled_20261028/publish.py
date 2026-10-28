@@ -21,6 +21,7 @@ def main():
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     def git(*args):
         return subprocess.run(['git', '-C', str(a.repo), *args], check=True, capture_output=True, text=True)
+    git('sparse-checkout', 'add', '--no-cone', '/evidence/muse_controlled_perf_20261028/')
     git('pull', '--rebase', 'origin', 'main')
     env = dict(os.environ, PYTHONPATH=str(a.state / 'plot_deps'))
     subprocess.run([sys.executable, str(a.state / 'report.py'), '--state', str(a.state)], env=env, check=True)
@@ -60,6 +61,11 @@ def main():
         if src.exists():
             shutil.copyfile(src, dest / name)
     git('add', '--sparse', '--', 'evidence/muse_controlled_perf_20261028')
+    unchanged = subprocess.run(['git', '-C', str(a.repo), 'diff', '--cached', '--quiet']).returncode
+    if unchanged == 0:
+        print('No new progress artifacts to commit', flush=True)
+        return
+    assert unchanged == 1, 'Could not inspect staged progress artifacts'
     git('-c', 'user.name=Zhiyuan Hu', '-c', 'user.email=29817400+zhiyuanhubj@users.noreply.github.com',
         'commit', '-m', 'Update controlled Muse performance experiment progress')
     result = git('push', 'origin', 'HEAD:main')
