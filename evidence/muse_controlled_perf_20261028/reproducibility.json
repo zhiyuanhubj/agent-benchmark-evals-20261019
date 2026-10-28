@@ -2905,18 +2905,15 @@
     },
     "bf16": {
       "current_state": {
-        "utc_unix": 1793203165.9481874,
+        "utc_unix": 1793203317.611555,
         "job": 3121,
         "hosts": [
           "ip-10-1-112-220",
           "ip-10-1-114-210"
         ],
         "precision": "bf16",
-        "phase": "measuring",
-        "configuration": "cache-off-off",
-        "workload": "synthetic",
-        "input_tokens": 8192,
-        "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/bf16/cache-off-off/synthetic-8192"
+        "phase": "starting_fixed_server_configuration",
+        "configuration": "cache-off-off"
       },
       "hardware": [
         {
@@ -3169,7 +3166,6 @@
           "1",
           "--dist-init-addr",
           "10.1.112.220:31460",
-          "--skip-tokenizer-init",
           "--disable-radix-cache"
         ]
       },
