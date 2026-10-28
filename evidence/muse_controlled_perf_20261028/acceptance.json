@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793225259.0861876,
+  "generated_unix": 1793226162.2473567,
   "targets": [
     {
       "precision": "nvfp4",
@@ -195,9 +195,9 @@
       "cache": true,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 1,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "nvfp4",
@@ -206,9 +206,9 @@
       "cache": true,
       "speculative": "off",
       "concurrency": 8,
-      "valid_repeats": 0,
+      "valid_repeats": 1,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "nvfp4",
@@ -503,9 +503,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 32,
-      "valid_repeats": 2,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "bf16",
@@ -543,7 +543,7 @@
     {
       "precision": "bf16",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
@@ -554,7 +554,7 @@
     {
       "precision": "bf16",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "off",
       "concurrency": 8,
@@ -565,7 +565,40 @@
     {
       "precision": "bf16",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
+      "cache": false,
+      "speculative": "off",
+      "concurrency": 32,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "bf16",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "off",
+      "concurrency": 1,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "bf16",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "off",
+      "concurrency": 8,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "bf16",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
       "cache": false,
       "speculative": "off",
       "concurrency": 32,
@@ -628,7 +661,7 @@
       "input_label": "65536",
       "cache": true,
       "speculative": "off",
-      "concurrency": 1,
+      "concurrency": 8,
       "valid_repeats": 1,
       "required_repeats": 3,
       "status": "partial"
@@ -639,17 +672,6 @@
       "input_label": "65536",
       "cache": true,
       "speculative": "off",
-      "concurrency": 8,
-      "valid_repeats": 0,
-      "required_repeats": 3,
-      "status": "pending"
-    },
-    {
-      "precision": "nvfp4",
-      "workload": "synthetic",
-      "input_label": "65536",
-      "cache": true,
-      "speculative": "off",
       "concurrency": 32,
       "valid_repeats": 0,
       "required_repeats": 3,
@@ -725,17 +747,6 @@
       "precision": "bf16",
       "workload": "synthetic",
       "input_label": "65536",
-      "cache": false,
-      "speculative": "off",
-      "concurrency": 32,
-      "valid_repeats": 2,
-      "required_repeats": 3,
-      "status": "partial"
-    },
-    {
-      "precision": "bf16",
-      "workload": "synthetic",
-      "input_label": "65536",
       "cache": true,
       "speculative": "off",
       "concurrency": 1,
@@ -768,7 +779,7 @@
     {
       "precision": "bf16",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
@@ -779,7 +790,7 @@
     {
       "precision": "bf16",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
       "cache": false,
       "speculative": "off",
       "concurrency": 8,
@@ -790,7 +801,40 @@
     {
       "precision": "bf16",
       "workload": "coding",
-      "input_label": "native-input-bins-pending",
+      "input_label": "native-0-8192",
+      "cache": false,
+      "speculative": "off",
+      "concurrency": 32,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "bf16",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "off",
+      "concurrency": 1,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "bf16",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
+      "cache": false,
+      "speculative": "off",
+      "concurrency": 8,
+      "valid_repeats": 0,
+      "required_repeats": 3,
+      "status": "pending"
+    },
+    {
+      "precision": "bf16",
+      "workload": "coding",
+      "input_label": "native-8192-32768",
       "cache": false,
       "speculative": "off",
       "concurrency": 32,
