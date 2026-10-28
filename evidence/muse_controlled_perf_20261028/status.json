@@ -1,6 +1,6 @@
 {
-  "rounds": 20,
-  "valid_rounds": 20,
+  "rounds": 21,
+  "valid_rounds": 21,
   "complete_points_with_3_repeats": 5,
   "complete_protocol_points": 5,
   "states": {
@@ -18,15 +18,18 @@
       "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-off-off/synthetic-8192"
     },
     "bf16": {
-      "utc_unix": 1793203317.611555,
+      "utc_unix": 1793203511.4677386,
       "job": 3121,
       "hosts": [
         "ip-10-1-112-220",
         "ip-10-1-114-210"
       ],
       "precision": "bf16",
-      "phase": "starting_fixed_server_configuration",
-      "configuration": "cache-off-off"
+      "phase": "measuring",
+      "configuration": "cache-off-off",
+      "workload": "synthetic",
+      "input_tokens": 8192,
+      "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/bf16/cache-off-off/synthetic-8192"
     }
   }
 }

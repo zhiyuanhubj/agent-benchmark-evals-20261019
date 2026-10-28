@@ -2905,15 +2905,18 @@
     },
     "bf16": {
       "current_state": {
-        "utc_unix": 1793203317.611555,
+        "utc_unix": 1793203511.4677386,
         "job": 3121,
         "hosts": [
           "ip-10-1-112-220",
           "ip-10-1-114-210"
         ],
         "precision": "bf16",
-        "phase": "starting_fixed_server_configuration",
-        "configuration": "cache-off-off"
+        "phase": "measuring",
+        "configuration": "cache-off-off",
+        "workload": "synthetic",
+        "input_tokens": 8192,
+        "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/bf16/cache-off-off/synthetic-8192"
       },
       "hardware": [
         {
@@ -3271,7 +3274,7 @@
           "device": "cuda",
           "base_gpu_id": 0,
           "gpu_id_step": 1,
-          "random_seed": 27213883,
+          "random_seed": 1047586471,
           "mlx_enable_sampling": false,
           "watchdog_timeout": 300,
           "soft_watchdog_timeout": null,
@@ -3837,18 +3840,18 @@
           "max_total_num_tokens": 7095870,
           "max_req_input_len": 1048570,
           "startup_time": {
-            "load_weight": 40.9431497361511,
-            "kv_cache_allocation": 1.0002556070685387,
-            "scheduler_e2e": 153.28805093374103,
+            "load_weight": 39.39635597169399,
+            "kv_cache_allocation": 1.127015014179051,
+            "scheduler_e2e": 154.84805333428085,
             "cuda_graph": {
               "prefill": 0.0,
-              "decode": 82.82300459966063,
+              "decode": 83.92430999595672,
               "target_verify": 0.0,
               "draft_prefill": 0.0,
               "draft_decode": 0.0,
               "draft_extend": 0.0
             },
-            "tokenizer_e2e": 166.31993427034467
+            "tokenizer_e2e": 167.0672042760998
           },
           "kv_events": null,
           "internal_states": [
@@ -3953,7 +3956,7 @@
               "device": "cuda",
               "base_gpu_id": 0,
               "gpu_id_step": 1,
-              "random_seed": 27213883,
+              "random_seed": 1047586471,
               "mlx_enable_sampling": false,
               "watchdog_timeout": 300,
               "soft_watchdog_timeout": null,
@@ -4515,12 +4518,12 @@
               "grpc_response_timeout_secs": 300,
               "world_size": 16,
               "startup_time": {
-                "load_weight": 34.79020589776337,
-                "kv_cache_allocation": 0.9974709562957287,
-                "scheduler_e2e": 153.21118698455393,
+                "load_weight": 36.6765749072656,
+                "kv_cache_allocation": 1.1059056054800749,
+                "scheduler_e2e": 154.84805333428085,
                 "cuda_graph": {
                   "prefill": 0.0,
-                  "decode": 82.80859431717545,
+                  "decode": 83.91632577590644,
                   "target_verify": 0.0,
                   "draft_prefill": 0.0,
                   "draft_decode": 0.0,
