@@ -2,7 +2,7 @@
 
 以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。
 
-更新时间：2026-10-28 18:52:11 UTC。
+更新时间：2026-10-28 19:07:13 UTC。
 
 配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。
 
@@ -58,7 +58,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | nvfp4 | synthetic/32768 | True | off | 32 | 0/3 | pending |
 | nvfp4 | synthetic/65536 | False | off | 1 | 3/3 | complete |
 | nvfp4 | synthetic/65536 | False | off | 8 | 3/3 | complete |
-| nvfp4 | synthetic/65536 | False | off | 32 | 0/3 | pending |
+| nvfp4 | synthetic/65536 | False | off | 32 | 1/3 | partial |
 | nvfp4 | synthetic/65536 | True | off | 1 | 0/3 | pending |
 | nvfp4 | synthetic/65536 | True | off | 8 | 0/3 | pending |
 | nvfp4 | synthetic/65536 | True | off | 32 | 0/3 | pending |
@@ -94,7 +94,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 1 | 0/3 | pending |
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 8 | 0/3 | pending |
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 32 | 0/3 | pending |
-| bf16 | synthetic/8192 | False | off | 256 | 0/3 | partial |
+| bf16 | synthetic/8192 | False | off | 256 | 1/3 | partial |
 
 详细逐轮指标：[detailed_rounds.csv](detailed_rounds.csv)；逐请求合并后的测点统计：[detailed_points.csv](detailed_points.csv)。
 
