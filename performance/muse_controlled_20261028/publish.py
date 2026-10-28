@@ -21,7 +21,7 @@ def main():
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     def git(*args):
         return subprocess.run(['git', '-C', str(a.repo), *args], check=True, capture_output=True, text=True)
-    git('sparse-checkout', 'add', '--no-cone', '/evidence/muse_controlled_perf_20261028/')
+    git('sparse-checkout', 'set', '--no-cone', '/evidence/muse_controlled_perf_20261028/')
     git('pull', '--rebase', 'origin', 'main')
     env = dict(os.environ, PYTHONPATH=str(a.state / 'plot_deps'))
     subprocess.run([sys.executable, str(a.state / 'report.py'), '--state', str(a.state)], env=env, check=True)
@@ -56,7 +56,7 @@ def main():
     progress['currently_enumerated_target_points'] = len(acceptance['targets'])
     (dest / 'progress.json').write_text(json.dumps(progress, indent=2) + '\n')
     for name in ('all_rounds.csv', 'detailed_rounds.csv', 'detailed_points.csv', 'acceptance_matrix.csv',
-                 'acceptance.json', 'REPORT.zh-CN.md', 'synthetic.png', 'synthetic.pdf', 'coding.png', 'coding.pdf', 'status.json'):
+                 'acceptance.json', 'reproducibility.json', 'REPORT.zh-CN.md', 'synthetic.png', 'synthetic.pdf', 'coding.png', 'coding.pdf', 'status.json'):
         src = a.state / 'report' / name
         if src.exists():
             shutil.copyfile(src, dest / name)

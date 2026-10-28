@@ -14,6 +14,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from bench import distribution, save
+from node import IMAGE
 
 READ_ERRORS = {}
 
@@ -246,8 +247,34 @@ def main():
                              'concurrency':c,'valid_repeats':valid,'required_repeats':3,'status':'complete' if valid>=3 else 'partial'})
     write_csv(out / 'acceptance_matrix.csv', coverage)
     unresolved = [str(p.relative_to(a.state)) for p in a.state.glob('*/cache-*/*/FOLLOWUP_REQUIRED.json')]
+    complete = not unresolved and all(r['status'] in ('complete', 'not_tested_above_measured_latency_limit') for r in coverage)
+    plan = json.loads((a.state / 'PLAN.json').read_text()) if (a.state / 'PLAN.json').exists() else {}
+    metadata = {'image': IMAGE, 'measurement_plan': {k:v for k,v in plan.items() if k != 'models'},
+                'models': plan.get('models', {}), 'deployments': {}}
+    for prec in ('nvfp4', 'bf16'):
+        root = a.state / prec
+        metadata['deployments'][prec] = {
+            'current_state': json.loads((root / 'status.json').read_text()) if (root / 'status.json').exists() else {},
+            'hardware': [json.loads(p.read_text()) for p in sorted(root.glob('rank*/hardware.json'))],
+            'launch_commands': {str(p.relative_to(root)):json.loads(p.read_text()) for p in sorted(root.glob('rank*/cache-*-command.json'))},
+            'native_server_info': {p.name:json.loads(p.read_text()) for p in sorted(root.glob('cache-*-server-info.json'))}}
+    save(out / 'reproducibility.json', metadata)
+    def fmt(value, scale=1):
+        return '—' if value is None else f'{value * scale:.3f}'
     text = ['# Muse 受控压测完整协议进度', '',
-            '单点数据只是进度；完整曲线、长上下文与投机对照尚未全部完成。', '',
+            ('全部已列测点完成；吞吐饱和与延迟边界见对应记录。' if complete else '以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。'), '',
+            f'更新时间：{time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())}。', '',
+            '配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。', '',
+            '已完成规定重复的测点如下。TTFT/E2E 单位为秒，TPOT 为毫秒/token；输出速度包含 reasoning 与回答。吞吐按实际测量窗计算。', '',
+            '| 模型/输入 | 缓存/投机 | 并发 | 重复 | 测量秒数合计 | 成功/失败入场请求 | 输出 t/s/GPU ±重复SD | 单请求 t/s p50 ±重复SD | TTFT p50/p95 | TPOT p50/p95 | E2E p50/p95 |',
+            '|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|']
+    for r in point_rows:
+        if not r['complete']:
+            continue
+        text.append(f'| {r["precision"]}/{r["input_label"]} | {r["cache"]}/{r["speculative"]} | {r["concurrency"]} | {r["valid_repeats"]} | {fmt(r["measurement_s"])} | {r["requests"]}/{r["arrival_failures_all_repeats"]} | {fmt(r["tokens_s_gpu"])} ± {fmt(r["throughput_repeat_sd"])} | {fmt(r["decode_tokens_per_second_p50"])} ± {fmt(r["decode_p50_repeat_sd"])} | {fmt(r["ttft_s_p50"])}/{fmt(r["ttft_s_p95"])} | {fmt(r["tpot_s_p50"],1000)}/{fmt(r["tpot_s_p95"],1000)} | {fmt(r["e2e_s_p50"])}/{fmt(r["e2e_s_p95"])} |')
+    text += ['', '当前吞吐—单用户速度曲线（仅含已验收测点）：', '',
+             '![synthetic curve](synthetic.png)', '',
+             'coding+review 各 native 输入长度桶及投机开关分别成线：[coding.png](coding.png)。', '',
             f'已完成 {sum(r["status"] == "complete" for r in coverage)} / {len(coverage)} 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。', '',
             '| 模型 | 输入/工作负载 | 缓存 | 投机 | 并发 | 有效重复/目标 | 状态 |',
             '|---|---|---|---|---:|---:|---|']
@@ -261,7 +288,7 @@ def main():
     save(out / 'acceptance.json', {'generated_unix': time.time(), 'targets': coverage,
          'unresolved_saturation_followups': unresolved,
          'trace_read_errors':READ_ERRORS,
-         'complete': not unresolved and all(r['status'] in ('complete', 'not_tested_above_measured_latency_limit') for r in coverage),
+         'complete': complete,
          'incomplete_targets': [r for r in coverage if r['status'] not in ('complete', 'not_tested_above_measured_latency_limit')]})
 
 
