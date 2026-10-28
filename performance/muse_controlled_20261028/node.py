@@ -35,7 +35,8 @@ def main():
     job = os.environ['SLURM_JOB_ID']
     plan = json.loads((a.state / 'PLAN.json').read_text())
     assert int(job) == plan['jobs'][a.precision]
-    hosts = subprocess.check_output(['scontrol', 'show', 'hostnames', os.environ['SLURM_JOB_NODELIST']], text=True).split()
+    node_list = subprocess.check_output(['squeue', '-h', '-j', job, '-o', '%N'], text=True).strip()
+    hosts = subprocess.check_output(['scontrol', 'show', 'hostnames', node_list], text=True).split()
     assert socket.gethostname() in hosts
     rank = hosts.index(socket.gethostname())
     assert len(hosts) == (1 if a.precision == 'nvfp4' else 2)
@@ -87,6 +88,11 @@ def main():
         return
     proof = json.loads((shared / 'weights.json').read_text())
     assert proof['complete']
+    weights_root = Path(proof['path']).resolve()
+    for row in plan['models'][a.precision]['files']:
+        target = weights_root / row['file']
+        assert target.is_file() and target.stat().st_size == row['bytes'], str(target)
+        assert target.resolve().is_relative_to(weights_root), 'Weight target escapes read-only container mount: ' + str(target)
     args = ['run', '--rm', '--init', '--name', name, '--gpus', 'all', '--network', 'host', '--ipc', 'host',
             '--ulimit', 'memlock=-1', '--ulimit', 'stack=67108864', '-v', proof['path'] + ':/weights:ro',
             '-e', 'HF_HUB_OFFLINE=1', '-e', 'TRANSFORMERS_OFFLINE=1']
@@ -117,7 +123,12 @@ def main():
         server += ['--quantization', 'modelopt_fp4', '--moe-runner-backend', 'marlin', '--mem-fraction-static', '0.9']
     else:
         server += ['--dtype', 'bfloat16', '--mem-fraction-static', '0.88', '--nnodes', '2',
+                   '--cuda-graph-backend-prefill', 'disabled',
                    '--node-rank', str(rank), '--dist-init-addr', hosts[0].removeprefix('ip-').replace('-', '.') + ':31460']
+        if rank != 0:
+            # Headless tensor-parallel workers receive token IDs from rank 0;
+            # avoid the HF-only Muse processor lookup on the secondary node.
+            server += ['--skip-tokenizer-init']
     if not a.cache:
         server += ['--disable-radix-cache']
     if a.speculative != 'off':

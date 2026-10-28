@@ -2,6 +2,7 @@
 """Closed-loop native SGLang load; token-window throughput, arrival-cohort latency."""
 import argparse
 import asyncio
+import copy
 import gzip
 import hashlib
 import json
@@ -100,7 +101,8 @@ class Prompts:
             for item in corpus:
                 tokens = await tokenize(client, base, item['prompt'])
                 # Native prompts are left unchanged; distributions are reported.
-                if len(tokens) + 1024 < 131072:
+                low, high = scenario.get('input_range', [0, 130048])
+                if low <= len(tokens) < high and len(tokens) + 1024 < 131072:
                     templates.append({'id': item['id'], 'ids': tokens, 'source': item['source']})
         else:
             n = scenario['input_tokens']
@@ -290,6 +292,8 @@ async def run(args):
     args.output.mkdir(parents=True, exist_ok=True)
     scenario = {'input_tokens': args.input_tokens, 'cache': args.cache, 'speculative': args.speculative,
                 'workload': args.workload}
+    if getattr(args, 'input_range', None):
+        scenario.update(input_range=args.input_range, input_label=args.input_label)
     corpus = [json.loads(line) for line in args.corpus.read_text().splitlines()]
     limits = httpx.Limits(max_connections=1024, max_keepalive_connections=512)
     async with httpx.AsyncClient(trust_env=False, limits=limits,
@@ -375,5 +379,89 @@ def parser():
     return p
 
 
+async def extend_saturation(args, baseline):
+    """Continue offered concurrency with the SAME pinned serving admission cap."""
+    a = copy.copy(args)
+    a.output, a.input_tokens, a.workload = baseline, 8192, 'synthetic'
+    a.cache, a.speculative = False, 'off'
+    scenario = {'input_tokens': 8192, 'cache': False, 'speculative': 'off', 'workload': 'synthetic'}
+    reference = [json.loads(p.read_text()) for p in sorted(baseline.glob('c256-r*/summary.json'))]
+    assert len(reference) == 3 and all(r['valid_curve_point'] for r in reference)
+    previous = statistics.median(r['output_tokens_per_second_per_gpu'] for r in reference)
+    corpus = [json.loads(line) for line in a.corpus.read_text().splitlines()]
+    rounds, steps, stop = [], [], None
+    async with httpx.AsyncClient(trust_env=False, limits=httpx.Limits(max_connections=4096, max_keepalive_connections=2048),
+                                 timeout=httpx.Timeout(a.request_timeout, connect=15)) as client:
+        info = (await client.get(a.base + '/server_info')).json()
+        assert info['disable_radix_cache'] and info['max_running_requests'] == a.server_cap
+        assert not info.get('speculative_algorithm') and info['kv_cache_dtype'] == 'fp8_e4m3'
+        save(baseline / 'EXTENSION_CONFIG.json', {'server_info': info, 'admission_cap_unchanged': a.server_cap,
+             'definition': 'Offered closed-loop concurrency may exceed the serving admission cap; active versus queued counts are retained. This measures saturation of this fixed configuration, not an absolute hardware optimum.'})
+        prompts = await Prompts.build(client, a.base, corpus, scenario, a.seed)
+        for c in (512, 1024, 2048):
+            group = []
+            for rep in range(3):
+                directory = baseline / f'c{c:03d}-r{rep}'
+                if (directory / 'summary.json').exists():
+                    row = json.loads((directory / 'summary.json').read_text())
+                elif directory.exists():
+                    raise RuntimeError('Interrupted extension retained: ' + str(directory))
+                else:
+                    prompts.sequence = 0
+                    row = await Round(a, scenario, c, rep, directory).run(client, prompts)
+                group.append(row); rounds.append(row)
+            current = statistics.median(r['output_tokens_per_second_per_gpu'] for r in group)
+            gain = current / previous - 1
+            steps.append({'concurrency': c, 'throughput_gain': gain, 'reference_throughput_per_gpu': previous})
+            if any(r['failed_arrivals_after_drain'] or not r['valid_curve_point'] for r in group):
+                stop = 'request_failures_or_incomplete_measurement'; break
+            if max(r['ttft_s']['p95'] for r in group) > a.ttft_limit or max(r['e2e_s']['p95'] for r in group) > a.e2e_limit:
+                stop = 'latency_limit'; break
+            if gain < .05:
+                stop = 'less_than_5_percent_throughput_gain'; break
+            previous = current
+    resolved = stop in ('latency_limit', 'less_than_5_percent_throughput_gain')
+    save(baseline / 'EXTENSION_RESOLUTION.json', {'steps': steps, 'stop_reason': stop or 'client_safety_cap_2048',
+         'saturation_or_latency_limit_observed': resolved, 'rounds': rounds})
+    if resolved:
+        flag = baseline / 'FOLLOWUP_REQUIRED.json'
+        if flag.exists():
+            save(baseline / 'FOLLOWUP_RESOLVED.json', json.loads(flag.read_text()))
+            flag.unlink()
+
+
+async def dispatch(args):
+    # The already-running NVFP4 baseline uses the original control code. Its next
+    # invocation (32K) resolves any >256 continuation before admitting long-context load.
+    baseline = args.output.parent / 'synthetic-8192'
+    if args.workload == 'synthetic' and args.input_tokens == 32768 and not args.cache and args.speculative == 'off':
+        if (baseline / 'FOLLOWUP_REQUIRED.json').exists():
+            await extend_saturation(args, baseline)
+    if args.workload == 'coding':
+        corpus = [json.loads(line) for line in args.corpus.read_text().splitlines()]
+        counts = {}
+        ranges = ((0, 8192), (8192, 32768), (32768, 65536), (65536, 130048))
+        async with httpx.AsyncClient(trust_env=False, timeout=60) as client:
+            lengths = [len(await tokenize(client, args.base, r['prompt'])) for r in corpus]
+        args.output.mkdir(parents=True, exist_ok=True)
+        for lo, hi in ranges:
+            label = f'native-{lo}-{hi}'
+            counts[label] = sum(lo <= n < hi for n in lengths)
+        save(args.output / 'INPUT_BUCKETS.json', {'ranges': counts, 'native_prompt_lengths': lengths,
+             'corpus_sha256': hashlib.sha256(args.corpus.read_bytes()).hexdigest(), 'padding_or_truncation': False})
+        for lo, hi in ranges:
+            label = f'native-{lo}-{hi}'
+            if not counts[label]:
+                continue
+            a = copy.copy(args)
+            a.input_range, a.input_label = [lo, hi], label
+            a.output = args.output.parent / ('coding-' + label)
+            await run(a)
+        return
+    await run(args)
+    if args.adaptive and (args.output / 'FOLLOWUP_REQUIRED.json').exists():
+        await extend_saturation(args, args.output)
+
+
 if __name__ == '__main__':
-    asyncio.run(run(parser().parse_args()))
+    asyncio.run(dispatch(parser().parse_args()))

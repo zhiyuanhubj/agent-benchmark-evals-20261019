@@ -19,6 +19,7 @@ def main():
     p.add_argument('--state', type=Path, required=True)
     p.add_argument('--precision', choices=['nvfp4', 'bf16'], required=True)
     p.add_argument('--reuse-prepared', action='store_true', help='Resume only from complete, pinned per-rank weight proofs')
+    p.add_argument('--client-on-node', action='store_true', help='Control from head, run each load client on the model head GPU host')
     a = p.parse_args()
     def interrupted(*_):
         raise KeyboardInterrupt('Slurm termination')
@@ -29,12 +30,15 @@ def main():
     job = int(os.environ['SLURM_JOB_ID'])
     assert plan['jobs'][a.precision] == job
     n = 1 if a.precision == 'nvfp4' else 2
-    hosts = subprocess.check_output(['scontrol', 'show', 'hostnames', os.environ['SLURM_JOB_NODELIST']], text=True).split()
+    # A recovery controller can itself run in a one-node step of a two-node job.
+    # Query the allocation instead of trusting that step's narrowed environment.
+    node_list = subprocess.check_output(['squeue', '-h', '-j', str(job), '-o', '%N'], text=True).strip()
+    hosts = subprocess.check_output(['scontrol', 'show', 'hostnames', node_list], text=True).split()
     assert len(hosts) == n
     base = 'http://' + hosts[0].removeprefix('ip-').replace('-', '.') + ':31420'
     root = a.state / a.precision
     root.mkdir(exist_ok=True)
-    prefix = ['srun', '--jobid=' + str(job), '--overlap', '--exact', '--gres=none', '-N' + str(n),
+    prefix = ['srun', '--jobid=' + str(job), '--nodelist=' + node_list, '--overlap', '--exact', '--gres=none', '-N' + str(n),
               '-n' + str(n), '--ntasks-per-node=1', '-c64', '--immediate=30', sys.executable,
               str(a.state / 'node.py')]
     common = ['--state', str(a.state), '--precision', a.precision]
@@ -49,7 +53,7 @@ def main():
             assert set(proof['verified_files']) == {f['file'] for f in plan['models'][a.precision]['files']}
     else:
         subprocess.run([*prefix, 'prepare', *common], check=True)
-    monitor = subprocess.Popen(['srun', '--jobid=' + str(job), '--overlap', '--exact', '--gres=none',
+    monitor = subprocess.Popen(['srun', '--jobid=' + str(job), '--nodelist=' + node_list, '--overlap', '--exact', '--gres=none',
         '-N' + str(n), '-n' + str(n), '--ntasks-per-node=1', '-c1', sys.executable,
         str(a.state / 'gpu.py'), '--output', str(root / 'gpu')])
     server = None
@@ -105,6 +109,10 @@ def main():
                         '--e2e-limit', str(plan['e2e_p95_limit_s']), *flags]
                     if adaptive:
                         command += ['--adaptive']
+                    if a.client_on_node:
+                        command = ['srun', '--jobid=' + str(job), '--nodelist=' + hosts[0],
+                            '--chdir=' + str(a.state), '--overlap', '--exact', '--gres=none',
+                            '-N1', '-n1', '-c8', '--immediate=30', *command]
                     result = subprocess.run(command)
                     if result.returncode:
                         failures.append({'configuration': phase, 'case': workload + '-' + str(tokens), 'returncode': result.returncode})

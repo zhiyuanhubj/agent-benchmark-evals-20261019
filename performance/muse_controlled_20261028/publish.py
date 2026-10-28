@@ -21,8 +21,9 @@ def main():
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     def git(*args):
         return subprocess.run(['git', '-C', str(a.repo), *args], check=True, capture_output=True, text=True)
-    git('pull', '--ff-only')
+    git('pull', '--rebase', 'origin', 'main')
     env = dict(os.environ, PYTHONPATH=str(a.state / 'plot_deps'))
+    subprocess.run([sys.executable, str(a.state / 'report.py'), '--state', str(a.state)], env=env, check=True)
     subprocess.run([sys.executable, str(a.state / 'plot.py'), '--state', str(a.state)], env=env, check=True)
     dest = a.repo / 'evidence/muse_controlled_perf_20261028'
     dest.mkdir(parents=True, exist_ok=True)
@@ -48,8 +49,13 @@ def main():
                 'states': states, 'rounds': rounds, 'raw_archives': receipts,
                 'controlled_rounds_completed': len(rounds), 'valid_rounds': sum(r['valid_curve_point'] for r in rounds),
                 'state_directory': str(a.state), 'private_prompt_and_response_bodies_uploaded': False}
+    acceptance = json.loads((a.state / 'report/acceptance.json').read_text())
+    progress['full_protocol_complete'] = acceptance['complete']
+    progress['complete_protocol_points'] = sum(r['status'] == 'complete' for r in acceptance['targets'])
+    progress['currently_enumerated_target_points'] = len(acceptance['targets'])
     (dest / 'progress.json').write_text(json.dumps(progress, indent=2) + '\n')
-    for name in ('all_rounds.csv', 'synthetic.png', 'synthetic.pdf', 'coding.png', 'coding.pdf', 'status.json'):
+    for name in ('all_rounds.csv', 'detailed_rounds.csv', 'detailed_points.csv', 'acceptance_matrix.csv',
+                 'acceptance.json', 'REPORT.zh-CN.md', 'synthetic.png', 'synthetic.pdf', 'coding.png', 'coding.pdf', 'status.json'):
         src = a.state / 'report' / name
         if src.exists():
             shutil.copyfile(src, dest / name)
