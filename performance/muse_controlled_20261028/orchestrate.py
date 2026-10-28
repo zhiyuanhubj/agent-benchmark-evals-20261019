@@ -18,6 +18,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('--state', type=Path, required=True)
     p.add_argument('--precision', choices=['nvfp4', 'bf16'], required=True)
+    p.add_argument('--reuse-prepared', action='store_true', help='Resume only from complete, pinned per-rank weight proofs')
     a = p.parse_args()
     def interrupted(*_):
         raise KeyboardInterrupt('Slurm termination')
@@ -41,7 +42,13 @@ def main():
     def update(phase, **kw):
         save(status, {'utc_unix': time.time(), 'job': job, 'hosts': hosts, 'precision': a.precision, 'phase': phase, **kw})
     update('preparing_and_verifying_pinned_weights')
-    subprocess.run([*prefix, 'prepare', *common], check=True)
+    if a.reuse_prepared:
+        for rank in range(n):
+            proof = json.loads((root / ('rank' + str(rank)) / 'weights.json').read_text())
+            assert proof['complete'] and proof['revision'] == plan['models'][a.precision]['revision']
+            assert set(proof['verified_files']) == {f['file'] for f in plan['models'][a.precision]['files']}
+    else:
+        subprocess.run([*prefix, 'prepare', *common], check=True)
     monitor = subprocess.Popen(['srun', '--jobid=' + str(job), '--overlap', '--exact', '--gres=none',
         '-N' + str(n), '-n' + str(n), '--ntasks-per-node=1', '-c1', sys.executable,
         str(a.state / 'gpu.py'), '--output', str(root / 'gpu')])

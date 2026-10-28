@@ -59,6 +59,8 @@ For a DeepSeek comparison, record its exact model revision, precision, hardware/
 
 ## Files and verification
 
+Storage recovery on October 28: BF16 rank 1's 28 TB NVMe had only about 37 GB free and its initial download stopped. The batch controller was paused to preserve the granted allocation while rank 0 continued its download. With the user's explicit cleanup authorization, an inactive, downloaded GLM-5 cache from ended allocation 2899 was removed after checking for open/mapped files. This reclaimed **1,507,764,948,992 bytes** and left **1,545,117,028,352 bytes** free. Training checkpoints, trajectories and evaluation results were retained. `repair_bf16_download.py` resumes only missing shards on local NVMe with a 100 GB reserve and a local Xet cache, then verifies every pinned file; `resume_bf16.py` starts a replacement controller only after both ranks' complete verification receipts exist. Model, image and measurement settings are unchanged. The original paused controller is released after replacement-controller cleanup.
+
 - `bench.py`: native streaming closed-loop load and statistics.
 - `node.py`: per-node pinned model preparation and serving.
 - `orchestrate.py`: autonomous configuration/case sequence inside the approved allocations.
