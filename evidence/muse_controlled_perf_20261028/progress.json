@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793220755.4591932,
+  "updated_unix": 1793221655.1558235,
   "jobs": [
     "3120|RUNNING|1|ip-10-1-101-159",
     "3121|RUNNING|2|ip-10-1-112-220,ip-10-1-114-210"
@@ -7,14 +7,17 @@
   "job_query_returncode": 0,
   "states": {
     "nvfp4": {
-      "utc_unix": 1793220690.1037846,
+      "utc_unix": 1793221611.6759539,
       "job": 3120,
       "hosts": [
         "ip-10-1-101-159"
       ],
       "precision": "nvfp4",
-      "phase": "starting_fixed_server_configuration",
-      "configuration": "cache-on-off"
+      "phase": "measuring",
+      "configuration": "cache-on-off",
+      "workload": "synthetic",
+      "input_tokens": 32768,
+      "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-on-off/synthetic-32768"
     },
     "bf16": {
       "utc_unix": 1793219282.8131962,
@@ -1629,6 +1632,143 @@
       "cache_hit_rate_tokens": 0.0,
       "valid_curve_point": true,
       "artifact": "bf16/cache-off-off/synthetic-65536/c001-r0/summary.json"
+    },
+    {
+      "measurement_start_monotonic": 8358983.138853153,
+      "measurement_end_monotonic": 8359881.352353347,
+      "measurement_seconds": 898.2135001942515,
+      "output_tokens_received_in_window": 33792,
+      "output_tokens_per_second": 37.621345028428095,
+      "output_tokens_per_second_per_gpu": 2.351334064276756,
+      "arrivals_in_window": 33,
+      "successful_arrivals_after_drain": 33,
+      "failed_arrivals_after_drain": 0,
+      "completed_in_window": 33,
+      "failed_in_window": 0,
+      "prompt_tokens_arrival_cohort": 2162688,
+      "output_tokens_arrival_cohort_including_drain": 33792,
+      "cached_prompt_tokens_arrival_cohort": 0,
+      "ttft_s": {
+        "n": 33,
+        "p50": 4.045045545324683,
+        "p95": 4.057031492702663
+      },
+      "tpot_s": {
+        "n": 33,
+        "p50": 0.022641690660045934,
+        "p95": 0.02269005387919506
+      },
+      "e2e_s": {
+        "n": 33,
+        "p50": 27.20817155390978,
+        "p95": 27.262603057175873
+      },
+      "decode_tokens_per_second": {
+        "n": 33,
+        "p50": 44.16631315278164,
+        "p95": 44.18625991494506
+      },
+      "decode_speed_samples": [
+        44.17517232384869,
+        44.17708328471091,
+        44.15997069695591,
+        44.00710416057572,
+        44.14947301037915,
+        44.159464700077415,
+        44.185517048483064,
+        44.082360307161586,
+        44.1537636101326,
+        44.17413350568853,
+        44.16631315278164,
+        44.16198511683221,
+        44.15940534828061,
+        44.16141043093117,
+        44.16146841746081,
+        44.17261041047338,
+        44.17936342944485,
+        44.19487530518209,
+        44.17545967971025,
+        44.183251365963145,
+        44.164885024968534,
+        44.187374214638055,
+        44.17954228065626,
+        44.05984707299762,
+        44.16445638213862,
+        44.08039559054326,
+        44.147193902316175,
+        44.14350517030439,
+        44.177221469408515,
+        44.170062678422745,
+        44.17942623945563,
+        44.181348970004485,
+        44.17996806050917
+      ],
+      "spec_verify_steps": 0,
+      "spec_num_proposed_drafts": 0,
+      "spec_num_correct_drafts": 0,
+      "spec_accept_length_weighted": null,
+      "spec_accept_rate_weighted": null,
+      "successful_completion_times": [
+        8359037.358912511,
+        8359064.577175845,
+        8359091.796948313,
+        8359119.094060846,
+        8359146.315477713,
+        8359173.533158959,
+        8359200.736069605,
+        8359228.003828089,
+        8359255.222859097,
+        8359282.44421711,
+        8359309.67297076,
+        8359336.889223364,
+        8359364.100245853,
+        8359391.328399844,
+        8359418.536803231,
+        8359445.751696623,
+        8359472.966191035,
+        8359500.16021488,
+        8359527.372835935,
+        8359554.572508616,
+        8359581.77635635,
+        8359608.996842659,
+        8359636.227567616,
+        8359663.505227814,
+        8359690.731735704,
+        8359717.996062643,
+        8359745.246205186,
+        8359772.47916042,
+        8359799.696382416,
+        8359826.898057579,
+        8359854.106075439,
+        8359881.301227744,
+        8359908.523560581
+      ],
+      "scenario": {
+        "input_tokens": 65536,
+        "cache": false,
+        "speculative": "off",
+        "workload": "synthetic"
+      },
+      "concurrency": 1,
+      "repeat": 1,
+      "measurement_start_unix": 1793220428.409169,
+      "measurement_end_unix": 1793221326.6226692,
+      "precision": "bf16",
+      "gpus": 16,
+      "stop_reason": "minimum_time_and_sample_count_met",
+      "warmup_seconds": 109.08758348226547,
+      "sample_target_met": true,
+      "duration_target_met": true,
+      "drain_seconds": 27.182491466403008,
+      "input_tokens": {
+        "n": 33,
+        "p50": 65536.0,
+        "p95": 65536.0
+      },
+      "prometheus_samples_in_window": 429,
+      "cache_hit_rate_tokens": 0.0,
+      "valid_curve_point": true,
+      "artifact": "bf16/cache-off-off/synthetic-65536/c001-r1/summary.json"
     },
     {
       "measurement_start_monotonic": 8342169.909462931,
@@ -21835,10 +21975,15 @@
       "bytes": 1783860,
       "sha256": "2afc28470dae211504a257e0c5b8ca801566b32939563c5044cf49c29d2ed041",
       "location": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-off-off/coding-native-8192-32768/c032-r2/requests.jsonl.gz"
+    },
+    "bf16/cache-off-off/synthetic-65536/c001-r1/requests.jsonl.gz": {
+      "bytes": 545258,
+      "sha256": "5e5d5d36897fa24282d20e004eedcce250390e77c92c20e3af44225f7f3b5b7c",
+      "location": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/bf16/cache-off-off/synthetic-65536/c001-r1/requests.jsonl.gz"
     }
   },
-  "controlled_rounds_completed": 101,
-  "valid_rounds": 99,
+  "controlled_rounds_completed": 102,
+  "valid_rounds": 100,
   "state_directory": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ",
   "private_prompt_and_response_bodies_uploaded": false,
   "full_protocol_complete": false,

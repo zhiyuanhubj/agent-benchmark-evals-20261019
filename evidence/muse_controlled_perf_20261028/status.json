@@ -1,18 +1,21 @@
 {
-  "rounds": 101,
-  "valid_rounds": 99,
+  "rounds": 102,
+  "valid_rounds": 100,
   "complete_points_with_3_repeats": 31,
   "complete_protocol_points": 31,
   "states": {
     "nvfp4": {
-      "utc_unix": 1793220690.1037846,
+      "utc_unix": 1793221611.6759539,
       "job": 3120,
       "hosts": [
         "ip-10-1-101-159"
       ],
       "precision": "nvfp4",
-      "phase": "starting_fixed_server_configuration",
-      "configuration": "cache-on-off"
+      "phase": "measuring",
+      "configuration": "cache-on-off",
+      "workload": "synthetic",
+      "input_tokens": 32768,
+      "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/nvfp4/cache-on-off/synthetic-32768"
     },
     "bf16": {
       "utc_unix": 1793219282.8131962,
