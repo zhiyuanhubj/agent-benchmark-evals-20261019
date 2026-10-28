@@ -1,0 +1,35 @@
+{
+  "updated_unix": 1793196538.231276,
+  "jobs": [
+    "3120|RUNNING|1|ip-10-1-101-159",
+    "3121|RUNNING|2|ip-10-1-112-220,ip-10-1-114-210"
+  ],
+  "job_query_returncode": 0,
+  "states": {
+    "nvfp4": {
+      "utc_unix": 1793196470.2068703,
+      "job": 3120,
+      "hosts": [
+        "ip-10-1-101-159"
+      ],
+      "precision": "nvfp4",
+      "phase": "preparing_and_verifying_pinned_weights"
+    },
+    "bf16": {
+      "utc_unix": 1793196470.41353,
+      "job": 3121,
+      "hosts": [
+        "ip-10-1-112-220",
+        "ip-10-1-114-210"
+      ],
+      "precision": "bf16",
+      "phase": "preparing_and_verifying_pinned_weights"
+    }
+  },
+  "rounds": [],
+  "raw_archives": {},
+  "controlled_rounds_completed": 0,
+  "valid_rounds": 0,
+  "state_directory": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ",
+  "private_prompt_and_response_bodies_uploaded": false
+}
