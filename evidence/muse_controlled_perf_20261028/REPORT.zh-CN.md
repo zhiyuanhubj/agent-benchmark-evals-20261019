@@ -2,7 +2,7 @@
 
 以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。
 
-更新时间：2026-10-28 16:06:46 UTC。
+更新时间：2026-10-28 16:21:50 UTC。
 
 配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。
 
@@ -15,6 +15,8 @@
 | nvfp4/8192 | False/off | 4 | 5 | 788.285 | 180/0 | 28.549 ± 0.021 | 62.894 ± 0.071 | 1.859/2.413 | 15.903/16.781 | 18.125/18.165 |
 | nvfp4/8192 | False/off | 8 | 5 | 600.501 | 200/0 | 45.242 ± 0.047 | 51.634 ± 0.067 | 3.072/4.837 | 19.370/21.416 | 22.906/22.963 |
 | nvfp4/8192 | False/off | 16 | 3 | 360.488 | 192/0 | 64.296 ± 0.130 | 39.768 ± 0.061 | 5.493/9.664 | 25.148/29.487 | 31.268/31.360 |
+| nvfp4/8192 | False/off | 32 | 3 | 360.492 | 288/0 | 102.246 ± 0.072 | 31.594 ± 0.035 | 10.373/19.125 | 31.652/40.199 | 42.896/43.028 |
+| nvfp4/8192 | False/off | 64 | 3 | 425.420 | 353/0 | 115.538 ± 0.070 | 20.907 ± 2.033 | 18.298/37.054 | 47.830/66.455 | 70.921/71.200 |
 
 当前吞吐—单用户速度曲线（仅含已验收测点）：
 
@@ -22,7 +24,7 @@
 
 coding+review 各 native 输入长度桶及投机开关分别成线：[coding.png](coding.png)。
 
-已完成 5 / 52 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
+已完成 7 / 52 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
 
 | 模型 | 输入/工作负载 | 缓存 | 投机 | 并发 | 有效重复/目标 | 状态 |
 |---|---|---|---|---:|---:|---|
@@ -31,8 +33,8 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | nvfp4 | synthetic/8192 | False | off | 4 | 5/5 | complete |
 | nvfp4 | synthetic/8192 | False | off | 8 | 5/5 | complete |
 | nvfp4 | synthetic/8192 | False | off | 16 | 3/3 | complete |
-| nvfp4 | synthetic/8192 | False | off | 32 | 2/3 | partial |
-| nvfp4 | synthetic/8192 | False | off | 64 | 0/3 | pending |
+| nvfp4 | synthetic/8192 | False | off | 32 | 3/3 | complete |
+| nvfp4 | synthetic/8192 | False | off | 64 | 3/3 | complete |
 | nvfp4 | synthetic/8192 | False | off | 128 | 0/3 | pending |
 | nvfp4 | synthetic/32768 | False | off | 1 | 0/3 | pending |
 | nvfp4 | synthetic/32768 | False | off | 8 | 0/3 | pending |
@@ -52,7 +54,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | nvfp4 | coding/native-input-bins-pending | False | NGRAM | 1 | 0/3 | pending |
 | nvfp4 | coding/native-input-bins-pending | False | NGRAM | 8 | 0/3 | pending |
 | nvfp4 | coding/native-input-bins-pending | False | NGRAM | 32 | 0/3 | pending |
-| bf16 | synthetic/8192 | False | off | 1 | 0/3 | pending |
+| bf16 | synthetic/8192 | False | off | 1 | 1/3 | partial |
 | bf16 | synthetic/8192 | False | off | 2 | 0/3 | pending |
 | bf16 | synthetic/8192 | False | off | 4 | 0/3 | pending |
 | bf16 | synthetic/8192 | False | off | 8 | 0/3 | pending |
