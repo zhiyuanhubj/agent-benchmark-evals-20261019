@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793268732.3985941,
+  "updated_unix": 1793269035.595961,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -327,40 +327,29 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 66,
-  "accepted_points": 21,
+  "valid_rounds": 69,
+  "accepted_points": 22,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
   "active_measurements": [
     {
-      "job": 3135,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c016-r2/progress.json",
-      "progress": {
-        "phase": "measurement",
-        "decode_seconds": 61.6947769112885,
-        "warmup_decode_seconds": 61.77990252804011,
-        "successful_measured_requests": 48,
-        "batches": 6
-      }
-    },
-    {
       "job": 3136,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-8192-32768/c016-r0/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-8192-32768/c016-r1/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 19.092520822945517,
-        "warmup_decode_seconds": 76.51600222976413,
-        "successful_measured_requests": 16,
-        "batches": 5
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 38.23594803386368,
+        "successful_measured_requests": 0,
+        "batches": 2
       }
     },
     {
       "job": 3137,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/spec-off/synthetic-8192/c004-r1/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/spec-off/synthetic-8192/c004-r2/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 133.14849156793207,
-        "warmup_decode_seconds": 66.68680537026376,
+        "decode_seconds": 133.40972793940455,
+        "warmup_decode_seconds": 66.65161762107164,
         "successful_measured_requests": 24,
         "batches": 9
       }
