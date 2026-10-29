@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793259775.9189668,
+  "updated_unix": 1793260002.9732332,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 12,
@@ -185,42 +185,31 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 7,
-  "accepted_points": 1,
+  "valid_rounds": 9,
+  "accepted_points": 2,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
   "active_measurements": [
-    {
-      "job": 3134,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c008-r2/progress.json",
-      "progress": {
-        "phase": "measurement",
-        "decode_seconds": 48.48141811043024,
-        "warmup_decode_seconds": 64.68015690892935,
-        "successful_measured_requests": 24,
-        "batches": 7
-      }
-    },
     {
       "job": 3135,
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c001-r1/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 89.11547490023077,
+        "decode_seconds": 222.8084165295586,
         "warmup_decode_seconds": 66.84206312708557,
-        "successful_measured_requests": 8,
-        "batches": 14
+        "successful_measured_requests": 20,
+        "batches": 26
       }
     },
     {
       "job": 3136,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-0-8192/c001-r1/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-0-8192/c001-r2/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 185.31992072617868,
-        "warmup_decode_seconds": 65.52118512458401,
-        "successful_measured_requests": 17,
-        "batches": 23
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 21.843906980881002,
+        "successful_measured_requests": 0,
+        "batches": 2
       }
     }
   ],
@@ -319,6 +308,14 @@
       "updated_unix": 1793258136.1843164,
       "same_warm_replica": true,
       "concurrency": "1,8,32"
+    }
+  },
+  "prefill_followups": {
+    "3135": {
+      "phase": "waiting_current_sweep",
+      "updated_unix": 1793259776.8892183,
+      "same_warm_replica": true,
+      "concurrency": "1,2,4,8,16,32,64,128,256"
     }
   },
   "measurement_kind": "real_KV_full_resident_decode_only_windows",
