@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-10-29 07:22:43 UTC
+更新时间：2026-10-29 07:27:47 UTC
 
 累计申请 12 个节点；完成 3 个有效重复、1 个满足重复要求的测点。
 
@@ -19,6 +19,14 @@
 3134|RUNNING|1|ip-10-1-114-210
 ```
 
+## 多组、多点矩阵
+
+NVFP4/BF16 × 8K/32K/64K/128K，共 8 组基础曲线；每组目标并发 1、2、4、8、16、32、64、128、256。coding 的两个实际长度桶 × 两种精度 × 投机开关，另有 8 组曲线，各目标并发 1、2、4、8、16、32。
+
+上限共 120 个独立配置点、364 次重复。实际遇到 KV、延迟或稳定性边界时保留失败记录并明确标注，不能把未测试点补成完成，也不宣称达到全硬件峰值。
+
+逐点计划与完成次数：[decode_matrix.csv](decode_matrix.csv)。当前 32K 的三点扫描正常继续；随后在同一热模型实例补测余下并发，原始记录保留。
+
 ## 定义
 
 每批实际完成 prefill 并生成 1024 tokens。取所有请求都进入 decode 的共同区间，额外剔除每个请求首尾各 64 tokens；区间内不补入新请求。检查 native KV retraction 计数未增加。
@@ -33,9 +41,11 @@
 
 配置与控制器：[测试代码](../../performance/muse_decode_20261029/README.md)。原始详细状态：[progress.json](progress.json)。
 
-![decode curve](decode_pareto_synthetic.png)
+![decode context groups](decode_pareto_synthetic_panels.png)
 
-![coding decode curve](decode_pareto_coding.png)
+![coding decode groups](decode_pareto_coding_panels.png)
+
+[全部 context 曲线叠加](decode_pareto_synthetic.png)；[coding 曲线叠加](decode_pareto_coding.png)。
 
 ## Prefill 独立测量
 
