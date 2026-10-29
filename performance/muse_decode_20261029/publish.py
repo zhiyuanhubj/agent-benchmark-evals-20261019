@@ -31,11 +31,33 @@ def main():
     lock=(a.root/'publish.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     allocation=json.loads((a.root/'ALLOCATIONS.json').read_text());jobs=allocation['jobs']
     queue=subprocess.run(['squeue','-h','-j',','.join(str(j['job']) for j in jobs),'-o','%i|%T|%D|%R'],capture_output=True,text=True)
-    rows=[];groups=defaultdict(list);states={}
+    rows=[];groups=defaultdict(list);states={};prefill_rows=[];prefill_groups=defaultdict(list);active=[];invalid=[]
     for job in jobs:
         state=Path(job['state']);s=state/'status.json'
         states[str(job['job'])]=json.loads(s.read_text()) if s.exists() else {'phase':'queued'}
         frames=[f for path in (state/job['precision']/'gpu').glob('*.jsonl.gz') for f in records(path)]
+        for path in state.glob('*/prefill/*/c*/summary.json'):
+            r=json.loads(path.read_text());counts=defaultdict(int)
+            for f in frames:
+                if any(w['engine_start_unix']<=f['unix']<w['engine_end_unix'] for w in r['windows']):
+                    for values in f.get('rows',[]):
+                        row=dict(zip(f['fields'],values))
+                        try:float(row['utilization.gpu']);float(row['memory.used'])
+                        except (ValueError,KeyError):continue
+                        counts[row['uuid']]+=1
+            gpu_ok=len(counts)==r['gpus'] and min(counts.values(),default=0)>=r['engine_seconds']*.8
+            d=distribution(r['request_prefill_latencies_s'])
+            row={'job':job['job'],'precision':r['precision'],'input_tokens':r['input_tokens'],'concurrency':r['concurrency'],
+                 'repeat':r['repeat'],'valid':r['valid'] and gpu_ok,'gpu_telemetry_complete':gpu_ok,
+                 'engine_seconds':r['engine_seconds'],'actual_input_tokens':r['actual_input_tokens'],
+                 'input_tokens_s_gpu':r['input_tokens_s_gpu'],'prefill_latency_p50_s':d['p50'],'prefill_latency_p95_s':d['p95'],
+                 'successful_requests':r['successful_requests'],'artifact':str(path)}
+            prefill_rows.append(row)
+            if row['valid']:prefill_groups[(r['precision'],r['input_tokens'],r['concurrency'])].append(r)
+        for path in state.glob('*/*/*/c*/progress.json'):
+            if not (path.parent/'summary.json').exists():active.append({'job':job['job'],'path':str(path),'progress':json.loads(path.read_text())})
+        for path in state.glob('*/*/*/c*/INVALID.json'):
+            invalid.append({'job':job['job'],'artifact':str(path),'record':json.loads(path.read_text())})
         for path in sorted(state.glob('*/spec-*/*/c*/summary.json')):
             r=json.loads(path.read_text());scenario=r['scenario'];counts=defaultdict(int);util=[];mem=[]
             windows=[(w['start_monotonic']+w['unix_offset'],w['end_monotonic']+w['unix_offset']) for w in r['windows']]
@@ -68,6 +90,43 @@ def main():
     git('sparse-checkout','set','--no-cone','/evidence/muse_decode_perf_20261029/')
     git('pull','--rebase','origin','main')
     dest=a.repo/'evidence/muse_decode_perf_20261029';dest.mkdir(parents=True,exist_ok=True)
+    prefill_points=[]
+    if prefill_rows:
+        with (dest/'prefill_rounds.csv').open('w') as f:
+            w=csv.DictWriter(f,fieldnames=list(prefill_rows[0]));w.writeheader();w.writerows(prefill_rows)
+    for key,rs in sorted(prefill_groups.items()):
+        if len(rs)<3:continue
+        precision,length,c=key;seconds=sum(r['engine_seconds'] for r in rs);tokens=sum(r['actual_input_tokens'] for r in rs)
+        ds=distribution([v for r in rs for v in r['request_prefill_latencies_s']])
+        prefill_points.append({'precision':precision,'input_tokens':length,'concurrency':c,'repeats':len(rs),
+             'input_tokens_s_gpu':tokens/seconds/rs[0]['gpus'],'engine_seconds':seconds,'actual_input_tokens':tokens,
+             'prefill_latency_p50_s':ds['p50'],'prefill_latency_p95_s':ds['p95'],
+             'throughput_sd':statistics.stdev(r['input_tokens_s_gpu'] for r in rs),
+             'latency_p50_sd':statistics.stdev(distribution(r['request_prefill_latencies_s'])['p50'] for r in rs)})
+    if prefill_points:
+        with (dest/'prefill_points.csv').open('w') as f:
+            w=csv.DictWriter(f,fieldnames=list(prefill_points[0]));w.writeheader();w.writerows(prefill_points)
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        for kind in ['throughput','pareto']:
+            fig,ax=plt.subplots(figsize=(11,7));lines=defaultdict(list)
+            for r in prefill_points:
+                group=(r['precision'],r['concurrency'] if kind=='throughput' else r['input_tokens'])
+                lines[group].append(r)
+            for key,values in sorted(lines.items()):
+                values.sort(key=lambda r:r['input_tokens'] if kind=='throughput' else r['concurrency'])
+                xs=[r['input_tokens']/1024 if kind=='throughput' else r['prefill_latency_p50_s'] for r in values]
+                label=f'{key[0]} / C={key[1]}' if kind=='throughput' else f'{key[0]} / {key[1]//1024}K'
+                ax.errorbar(xs,[r['input_tokens_s_gpu'] for r in values],
+                    xerr=None if kind=='throughput' else [r['latency_p50_sd'] for r in values],
+                    yerr=[r['throughput_sd'] for r in values],marker='o',capsize=3,label=label)
+            ax.set_xlabel('Input length (Ki tokens)' if kind=='throughput' else 'Native prefill phase latency p50 (seconds/request)')
+            ax.set_ylabel('Actual input tokens / native prefill phase seconds / GPU')
+            ax.set_title('Muse prefill-only cohorts — IN PROGRESS\n1 output token; includes engine scheduling + first-token sampling; error bars: repetition SD')
+            ax.grid(alpha=.25);ax.legend(fontsize=8);fig.tight_layout()
+            for suffix in ['png','pdf','svg']:fig.savefig(dest/('prefill_'+kind+'.'+suffix),dpi=180)
+            plt.close(fig)
     if rows:
         with (dest/'decode_rounds.csv').open('w') as f:
             w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
@@ -108,6 +167,8 @@ def main():
             plt.close(fig)
     progress={'updated_unix':time.time(),'allocation':allocation,'slurm':queue.stdout.splitlines(),'states':states,
               'valid_rounds':sum(r['valid'] for r in rows),'accepted_points':len(points),
+              'prefill_valid_rounds':sum(r['valid'] for r in prefill_rows),'prefill_accepted_points':len(prefill_points),
+              'active_measurements':active,'invalid_attempts':invalid,
               'measurement_kind':'real_KV_full_resident_decode_only_windows','serving_measurements_reused':False}
     (dest/'progress.json').write_text(json.dumps(progress,indent=2)+'\n')
     text=['# Muse decode-only 测试', '', '这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。', '',
@@ -122,6 +183,11 @@ def main():
           '服务器接入/流式传输仍有开销，本图不声称是 CUDA kernel 的纯设备计时。硬件、模型、并行和上下文未与 DeepInfer 对齐，不直接作吞吐倍数比较。', '',
           '配置与控制器：[测试代码](../../performance/muse_decode_20261029/README.md)。原始详细状态：[progress.json](progress.json)。']
     if points:text += ['', '![decode curve](decode_pareto_synthetic.png)', '', '![coding decode curve](decode_pareto_coding.png)']
+    text += ['', '## Prefill 独立测量', '',
+             f'已完成 {sum(r["valid"] for r in prefill_rows)} 个有效重复、{len(prefill_points)} 个三重复测点。', '',
+             '每请求实际 prefill 完整输入，只生成 1 token，不混入后续 decode 工作。分母取 native `forward_entry_time` 至 `prefill_finished_time` 的整批包络；分子为该批 native `prompt_tokens` 之和。保存客户端耗时，但不拿 TTFT 代替这个 native prefill 阶段计时。', '',
+             '该阶段计时包括 chunk 调度和首 token sampling，属于 engine 阶段 wall time，不宣称是独立 CUDA kernel 时间。每重复热身至少 60 秒，正式累计至少 120 秒及 32 个请求，三重复后画图，保留 GPU/后台遥测。']
+    if prefill_points:text += ['', '![prefill throughput](prefill_throughput.png)', '', '![prefill Pareto](prefill_pareto.png)']
     (dest/'README.zh-CN.md').write_text('\n'.join(text)+'\n')
     git('add','--sparse','--','evidence/muse_decode_perf_20261029')
     git('-c','user.name=Zhiyuan Hu','-c','user.email=29817400+zhiyuanhubj@users.noreply.github.com','commit','-m','Update independent Muse decode-only measurement progress')

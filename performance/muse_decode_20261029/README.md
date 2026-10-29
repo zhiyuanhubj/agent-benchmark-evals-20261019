@@ -44,7 +44,19 @@ NGRAM uses the framework's native target-only verification path. The previous ex
 
 `control.py` prepares and verifies weights, starts per-node GPU sampling and the pinned server, executes cases, and stops only containers in its own allocation. BF16 first reuses a fully verified local pinned copy; fresh downloads require enough NVMe space plus a reserve and never delete unrelated files. Requests run on the replica's head GPU host. Native request and timing artifacts remain under each job state directory.
 
-`publish.py` updates `evidence/muse_decode_perf_20261029/` every 15 minutes with queue status, per-round CSV, accepted point CSV, figures and explicit pending/failure states. It reads only the new decode summaries and does not relabel October 28 serving results.
+`publish.py` updates `evidence/muse_decode_perf_20261029/` every **5 minutes** with queue status, per-round CSV, accepted point CSV, figures and explicit pending/failure states. It reads only the new phase-specific measurements and does not relabel October 28 serving results.
+
+The first 8K attempt (3133) completed a valid warmup request but was incorrectly rejected because a zero-valued, lazily labelled Prometheus retraction counter had no series. Its failed warmup remains preserved. The corrected guard checks native per-request `num_retractions` as well as any cumulative series; missing both kinds of evidence still fails validation. Replacement job **3140** uses a separate state directory. A replay of the actual failed warmup verifies the guard correction. No failed warmup is promoted to a measured point.
+
+The first NVFP4 replica fully hashed all pinned shared files. Later replicas may reuse that complete cryptographic receipt only if every shared file has the expected size and its mtime/ctime predates the original allocation creation, establishing that the files were unchanged throughout and after verification. Reused receipts retain their original provenance.
+
+## Prefill-only cohorts
+
+For synthetic, speculation-off cases, `prefill.py` now runs before decode on each approved replica. It submits cohorts at concurrency 1/8/32, processes the complete real input, and generates exactly **one output token**. There is no subsequent decode workload in these cohorts.
+
+Native `forward_entry_time` and `prefill_finished_time` define each request's engine prefill phase. The complete cohort's phase envelope runs from the earliest forward entry to the latest prefill completion. Its numerator is the sum of actual native prompt-token counts, including each request once. Initial external queue and network time are excluded from the phase denominator; full client latency remains a separate measurement. Chunk scheduling, engine host overhead and first-token sampling are included: this is an engine prefill phase benchmark, not CUDA-kernel-only timing.
+
+Each repeat accumulates at least 60 seconds of warmup prefill time followed by at least 120 seconds of measured phase time and 32 successful requests; three repeats are required. Preserve raw requests, native timestamps, failures, input counts, backend traces and all physical GPU samples. Points lacking native timestamps, zero retractions/cache hits or sufficient GPU coverage are not plotted. The five-minute publisher writes `prefill_rounds.csv`, `prefill_points.csv`, `prefill_throughput.{png,pdf,svg}` (input length vs input tokens/s/GPU), and `prefill_pareto.{png,pdf,svg}` (prefill phase latency vs throughput), with repetition SD error bars. No prefill figure is declared complete while these fresh measurements are pending.
 
 Validation:
 

@@ -63,6 +63,18 @@ def counters(body):
     return result
 
 
+def no_kv_retractions(rows, before, after):
+    # The Prometheus Counter is lazily labelled and has no series until the
+    # first retraction. Native per-request counters are present even at zero.
+    native = [r.get('meta', {}).get('num_retractions') for r in rows]
+    if any(v is not None and v != 0 for v in native):
+        return False
+    b, a = before.get(RETRACTION_TOTAL), after.get(RETRACTION_TOTAL)
+    if b is not None or a is not None:
+        return sum(a or [0]) == sum(b or [0])
+    return bool(native) and all(v == 0 for v in native)
+
+
 class DecodeRound(Round):
     async def measure(self, client, prompts):
         self.directory.mkdir(parents=True, exist_ok=False)
@@ -81,9 +93,7 @@ class DecodeRound(Round):
                 after = await client.get(self.args.base + '/metrics');after.raise_for_status()
                 after = counters(after.text)
                 w = decode_window(rows, self.args.gpus)
-                retracted_before = before.get(RETRACTION_TOTAL)
-                retracted_after = after.get(RETRACTION_TOTAL)
-                if retracted_before is None or retracted_after is None or sum(retracted_after) != sum(retracted_before):
+                if w['valid'] and not no_kv_retractions(rows, before, after):
                     w.update(valid=False, reason='KV_retraction_or_missing_retraction_counter')
                 if w['valid'] and not self.scenario['cache'] and any(r['meta'].get('cached_tokens', 0) for r in rows):
                     w.update(valid=False, reason='unexpected_prefix_cache_hit')
@@ -154,6 +164,15 @@ async def main(args):
         save(args.output/'CONFIG.json',{'args':{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'server_info':info})
         prompts=await Prompts.build(client,args.base,corpus,scenario,20261029)
         save(args.output/'PROMPTS.json',{'templates':prompts.templates,'scenario':scenario,'seed':20261029})
+        state=args.output.parents[2]
+        planfile=state/'PLAN.json'
+        if args.workload=='synthetic' and args.speculative=='off' and planfile.exists() and json.loads(planfile.read_text()).get('prefill_first'):
+            from prefill import sweep as prefill_sweep
+            statusfile=state/'status.json'
+            current=json.loads(statusfile.read_text())
+            save(statusfile,{**current,'phase':'measuring_prefill_only','updated_unix':time.time()})
+            await prefill_sweep(args,client,prompts,state)
+            save(statusfile,{**current,'phase':'measuring_decode_only','updated_unix':time.time()})
         curve=[]
         cs=[int(c) for c in args.concurrency.split(',')]
         for c in cs:

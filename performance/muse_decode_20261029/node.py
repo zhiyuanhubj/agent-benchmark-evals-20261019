@@ -67,6 +67,21 @@ def main():
         manifest = plan['models'][a.precision]
         if a.precision == 'nvfp4':
             weights = Path(manifest['shared_path'])
+            # Shared immutable weights were fully hashed by the first replica.
+            # Reuse that receipt only when every file predates the allocation
+            # and therefore remained unchanged throughout that verification.
+            cutoff=json.loads((Path(plan['controller_root'])/'ALLOCATIONS.json').read_text())['created_unix']
+            stable=all((weights/r['file']).is_file() and (weights/r['file']).stat().st_size==r['bytes'] and
+                       (weights/r['file']).stat().st_ctime < cutoff and (weights/r['file']).stat().st_mtime < cutoff
+                       for r in manifest['files'])
+            if stable:
+                for receipt in sorted(Path(plan['controller_root']).glob('*/nvfp4/rank0/weights.json')):
+                    prior=json.loads(receipt.read_text())
+                    if prior.get('complete') and prior['revision']==manifest['revision'] and prior['path']==str(weights) and set(prior['verified_files'])=={r['file'] for r in manifest['files']}:
+                        prior['reused_verified_shared_receipt']=str(receipt)
+                        prior['metadata_unchanged_since_before_first_verification']=True
+                        (shared/'weights.json').write_text(json.dumps(prior,indent=2)+'\n')
+                        return
         else:
             weights = local / 'weights'
             # Reuse a complete local, pinned candidate before downloading 1.64 TB.

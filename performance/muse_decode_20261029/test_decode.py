@@ -1,8 +1,14 @@
 import unittest
-from decode import decode_window, counters, RETRACTION_TOTAL
+from decode import decode_window, counters, RETRACTION_TOTAL, no_kv_retractions
 
 
 class DecodeWindowTest(unittest.TestCase):
+    def test_lazy_counter_series_and_native_zero_are_valid(self):
+        self.assertTrue(no_kv_retractions([{'meta':{'num_retractions':0}}],{},{}))
+        self.assertFalse(no_kv_retractions([{'meta':{'num_retractions':1}}],{},{}))
+        self.assertFalse(no_kv_retractions([{'meta':{'num_retractions':0}}],{},{RETRACTION_TOTAL:[1]}))
+        self.assertFalse(no_kv_retractions([{'meta':{}}],{},{}))
+
     def test_retraction_validation_uses_monotonic_counter_not_resetting_gauge(self):
         body='sglang:num_retracted_reqs{pid="1"} 0\nsglang:num_retracted_requests_total{pid="1"} 7\n'
         c=counters(body)
