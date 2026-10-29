@@ -18,6 +18,8 @@ from pathlib import Path
 import httpx
 from native_client import Prompts, Round, distribution, save
 
+RETRACTION_TOTAL = 'sglang:num_retracted_requests_total'
+
 
 def decode_window(rows, gpus, guard_tokens=64):
     if not rows or any(not r['valid'] for r in rows):
@@ -55,7 +57,7 @@ def counters(body):
         if not line or line.startswith('#'):
             continue
         key = line.split('{', 1)[0].split(' ', 1)[0]
-        if key in ('sglang:num_retracted_reqs', 'sglang:max_total_num_tokens',
+        if key in (RETRACTION_TOTAL, 'sglang:max_total_num_tokens',
                    'sglang:max_total_num_tokens_swa', 'sglang:num_running_reqs', 'sglang:num_queue_reqs'):
             result.setdefault(key, []).append(float(line.rsplit(' ', 1)[-1]))
     return result
@@ -79,8 +81,8 @@ class DecodeRound(Round):
                 after = await client.get(self.args.base + '/metrics');after.raise_for_status()
                 after = counters(after.text)
                 w = decode_window(rows, self.args.gpus)
-                retracted_before = before.get('sglang:num_retracted_reqs')
-                retracted_after = after.get('sglang:num_retracted_reqs')
+                retracted_before = before.get(RETRACTION_TOTAL)
+                retracted_after = after.get(RETRACTION_TOTAL)
                 if retracted_before is None or retracted_after is None or sum(retracted_after) != sum(retracted_before):
                     w.update(valid=False, reason='KV_retraction_or_missing_retraction_counter')
                 if w['valid'] and not self.scenario['cache'] and any(r['meta'].get('cached_tokens', 0) for r in rows):

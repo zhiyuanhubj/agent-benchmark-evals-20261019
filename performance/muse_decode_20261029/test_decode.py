@@ -1,8 +1,14 @@
 import unittest
-from decode import decode_window
+from decode import decode_window, counters, RETRACTION_TOTAL
 
 
 class DecodeWindowTest(unittest.TestCase):
+    def test_retraction_validation_uses_monotonic_counter_not_resetting_gauge(self):
+        body='sglang:num_retracted_reqs{pid="1"} 0\nsglang:num_retracted_requests_total{pid="1"} 7\n'
+        c=counters(body)
+        self.assertEqual(c[RETRACTION_TOTAL],[7.])
+        self.assertNotIn('sglang:num_retracted_reqs',c)
+
     def test_excludes_prefill_and_tail_and_counts_actual_increments(self):
         # Last first token is t=2; earliest last token is t=5. Output jumps
         # deliberately differ, so C times an average speed cannot pass.
