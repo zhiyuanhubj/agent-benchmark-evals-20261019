@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793272681.861471,
+  "updated_unix": 1793272980.8815405,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -338,9 +338,9 @@
       "progress": {
         "phase": "warmup",
         "decode_seconds": 0,
-        "warmup_decode_seconds": 23.94079899881035,
+        "warmup_decode_seconds": 47.83869329188019,
         "successful_measured_requests": 0,
-        "batches": 1
+        "batches": 2
       }
     },
     {
@@ -348,10 +348,21 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-0-8192/c001-r1/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 48.19570933881914,
+        "decode_seconds": 317.9371757954359,
         "warmup_decode_seconds": 60.362176145776175,
-        "successful_measured_requests": 4,
-        "batches": 9
+        "successful_measured_requests": 27,
+        "batches": 32
+      }
+    },
+    {
+      "job": 3137,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/spec-off/synthetic-8192/c064-r2/progress.json",
+      "progress": {
+        "phase": "measurement",
+        "decode_seconds": 105.16749704163522,
+        "warmup_decode_seconds": 70.22223496437073,
+        "successful_measured_requests": 192,
+        "batches": 5
       }
     }
   ],
