@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793263251.888876,
+  "updated_unix": 1793263556.3569665,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 12,
@@ -214,8 +214,8 @@
       "updated_unix": 1793260822.177998
     }
   },
-  "valid_rounds": 34,
-  "accepted_points": 10,
+  "valid_rounds": 36,
+  "accepted_points": 11,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
   "active_measurements": [
@@ -223,22 +223,33 @@
       "job": 3134,
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c016-r1/progress.json",
       "progress": {
-        "phase": "warmup",
-        "decode_seconds": 0,
-        "warmup_decode_seconds": 58.90745078958571,
-        "successful_measured_requests": 0,
-        "batches": 3
+        "phase": "measurement",
+        "decode_seconds": 58.813897317275405,
+        "warmup_decode_seconds": 78.5020672287792,
+        "successful_measured_requests": 48,
+        "batches": 7
       }
     },
     {
       "job": 3135,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c004-r1/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c004-r2/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 42.47167372982949,
-        "warmup_decode_seconds": 70.83850110694766,
-        "successful_measured_requests": 12,
-        "batches": 8
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 28.331758094020188,
+        "successful_measured_requests": 0,
+        "batches": 2
+      }
+    },
+    {
+      "job": 3136,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-0-8192/c032-r0/progress.json",
+      "progress": {
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 21.55150259792572,
+        "successful_measured_requests": 0,
+        "batches": 1
       }
     }
   ],
