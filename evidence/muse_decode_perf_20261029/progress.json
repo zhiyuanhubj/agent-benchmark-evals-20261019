@@ -1,8 +1,8 @@
 {
-  "updated_unix": 1793253915.3643782,
+  "updated_unix": 1793254216.5418365,
   "allocation": {
     "created_unix": 1793251673.2838128,
-    "requested_nodes": 9,
+    "requested_nodes": 10,
     "gpus_per_node": 8,
     "jobs": [
       {
@@ -73,6 +73,17 @@
         "input_lengths": [
           131072
         ]
+      },
+      {
+        "job": 3140,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "baseline",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-retry1",
+        "input_lengths": [
+          8192
+        ],
+        "replaces_failed_job": 3133
       }
     ]
   },
@@ -82,6 +93,7 @@
     "3135|PENDING|1|(Resources)",
     "3136|PENDING|1|(Priority)",
     "3139|PENDING|1|(Priority)",
+    "3140|PENDING|1|(Priority)",
     "3134|RUNNING|1|ip-10-1-114-210"
   ],
   "states": {
@@ -102,13 +114,14 @@
       ]
     },
     "3134": {
-      "phase": "preparing_and_verifying_pinned_weights",
+      "phase": "starting_fixed_server",
       "job": 3134,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-114-210"
       ],
-      "updated_unix": 1793253382.3103323
+      "updated_unix": 1793254069.5879467,
+      "speculative": "off"
     },
     "3135": {
       "phase": "queued"
@@ -124,10 +137,102 @@
     },
     "3139": {
       "phase": "queued"
+    },
+    "3140": {
+      "phase": "queued"
     }
   },
   "valid_rounds": 0,
   "accepted_points": 0,
+  "prefill_valid_rounds": 0,
+  "prefill_accepted_points": 0,
+  "active_measurements": [],
+  "invalid_attempts": [
+    {
+      "job": 3133,
+      "artifact": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k/nvfp4/spec-off/synthetic-8192/c001-r0/INVALID.json",
+      "record": {
+        "valid": false,
+        "start_monotonic": 9543829.679735456,
+        "end_monotonic": 9543840.663188972,
+        "decode_seconds": 10.983453515917063,
+        "actual_output_tokens": 896,
+        "output_tokens_s_gpu": 10.197157008739666,
+        "request_decode_speeds": [
+          81.66734718615835
+        ],
+        "request_tpots_s": [
+          0.012244795924624918
+        ],
+        "requests": 1,
+        "failed_requests": 0,
+        "reason": "KV_retraction_or_missing_retraction_counter",
+        "batch": 0,
+        "phase": "warmup",
+        "metrics_before": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "metrics_after": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "attempted_requests": 1,
+        "native_successes": 1,
+        "native_failures": 0,
+        "all_native_output_tokens": 1024,
+        "unix_offset": 1783709509.4534533
+      }
+    }
+  ],
   "measurement_kind": "real_KV_full_resident_decode_only_windows",
   "serving_measurements_reused": false
 }
