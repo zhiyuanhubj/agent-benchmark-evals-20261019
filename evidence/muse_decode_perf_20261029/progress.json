@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793273588.7108073,
+  "updated_unix": 1793273891.2524412,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -327,7 +327,7 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 92,
+  "valid_rounds": 93,
   "accepted_points": 30,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
@@ -337,32 +337,32 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c032-r2/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 71.72163299005479,
+        "decode_seconds": 95.60687631834298,
         "warmup_decode_seconds": 71.74186947569251,
-        "successful_measured_requests": 96,
-        "batches": 6
+        "successful_measured_requests": 128,
+        "batches": 7
       }
     },
     {
       "job": 3136,
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-0-8192/c002-r0/progress.json",
       "progress": {
-        "phase": "warmup",
-        "decode_seconds": 0,
-        "warmup_decode_seconds": 29.319351482845377,
-        "successful_measured_requests": 0,
-        "batches": 2
+        "phase": "measurement",
+        "decode_seconds": 191.43114062503446,
+        "warmup_decode_seconds": 72.60328153363662,
+        "successful_measured_requests": 30,
+        "batches": 20
       }
     },
     {
       "job": 3137,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/spec-off/synthetic-8192/c128-r0/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/spec-off/synthetic-8192/c128-r1/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 82.01089941617101,
-        "warmup_decode_seconds": 81.92237417027354,
-        "successful_measured_requests": 256,
-        "batches": 4
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 81.93023029807955,
+        "successful_measured_requests": 0,
+        "batches": 2
       }
     }
   ],
