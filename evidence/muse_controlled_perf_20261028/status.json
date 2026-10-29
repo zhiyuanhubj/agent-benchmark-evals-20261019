@@ -1,8 +1,8 @@
 {
-  "rounds": 160,
-  "valid_rounds": 158,
-  "complete_points_with_3_repeats": 51,
-  "complete_protocol_points": 51,
+  "rounds": 163,
+  "valid_rounds": 161,
+  "complete_points_with_3_repeats": 52,
+  "complete_protocol_points": 52,
   "states": {
     "nvfp4": {
       "utc_unix": 1793228629.239163,
@@ -21,18 +21,20 @@
       ]
     },
     "bf16": {
-      "utc_unix": 1793237973.833679,
+      "utc_unix": 1793242142.885571,
       "job": 3121,
       "hosts": [
         "ip-10-1-112-220",
         "ip-10-1-114-210"
       ],
       "precision": "bf16",
-      "phase": "measuring",
-      "configuration": "cache-on-off",
-      "workload": "synthetic",
-      "input_tokens": 65536,
-      "output": "/fsx/home/zhiyuan/.private/muse_controlled_perf_20261028.7qXoZZ/bf16/cache-on-off/synthetic-65536"
+      "phase": "finished_with_incomplete_cases",
+      "failures": [
+        {
+          "configuration": "cache-off-NGRAM",
+          "reason": "Server failed readiness; see preserved startup log"
+        }
+      ]
     }
   }
 }
