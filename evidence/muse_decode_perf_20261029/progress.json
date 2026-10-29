@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793285994.8293126,
+  "updated_unix": 1793286294.9107885,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -176,7 +176,7 @@
     "3156|PENDING|2|(Priority)",
     "3157|PENDING|2|(Priority)",
     "3158|PENDING|2|(Priority)",
-    "3154|PENDING|1|(Resources)",
+    "3154|PENDING|1|(Priority)",
     "3155|PENDING|1|(Priority)",
     "3136|RUNNING|1|ip-10-1-88-35"
   ],
@@ -329,20 +329,20 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 127,
+  "valid_rounds": 128,
   "accepted_points": 42,
   "prefill_valid_rounds": 27,
   "prefill_accepted_points": 9,
   "active_measurements": [
     {
       "job": 3136,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-8192-32768/c032-r1/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-8192-32768/c032-r2/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 79.00750787975267,
-        "warmup_decode_seconds": 65.84831568383379,
-        "successful_measured_requests": 128,
-        "batches": 7
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 44.727231935888994,
+        "successful_measured_requests": 0,
+        "batches": 2
       }
     },
     {
