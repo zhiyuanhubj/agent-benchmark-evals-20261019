@@ -1,0 +1,121 @@
+{
+  "updated_unix": 1793252033.1676478,
+  "allocation": {
+    "created_unix": 1793251673.2838128,
+    "requested_nodes": 9,
+    "gpus_per_node": 8,
+    "jobs": [
+      {
+        "job": 3133,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "baseline",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k",
+        "input_lengths": [
+          8192
+        ]
+      },
+      {
+        "job": 3134,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k",
+        "input_lengths": [
+          32768
+        ]
+      },
+      {
+        "job": 3135,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k",
+        "input_lengths": [
+          65536
+        ]
+      },
+      {
+        "job": 3136,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec",
+        "input_lengths": []
+      },
+      {
+        "job": 3137,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "baseline",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k",
+        "input_lengths": [
+          8192
+        ]
+      },
+      {
+        "job": 3138,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "long_and_paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-long-spec",
+        "input_lengths": [
+          32768,
+          65536
+        ]
+      },
+      {
+        "job": 3139,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-128k",
+        "input_lengths": [
+          131072
+        ]
+      }
+    ]
+  },
+  "slurm": [
+    "3137|PENDING|2|(Priority)",
+    "3138|PENDING|2|(Priority)",
+    "3134|PENDING|1|(Resources)",
+    "3135|PENDING|1|(Priority)",
+    "3136|PENDING|1|(Priority)",
+    "3139|PENDING|1|(Priority)",
+    "3133|RUNNING|1|ip-10-1-114-210"
+  ],
+  "states": {
+    "3133": {
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3133,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-114-210"
+      ],
+      "updated_unix": 1793251893.5594213
+    },
+    "3134": {
+      "phase": "queued"
+    },
+    "3135": {
+      "phase": "queued"
+    },
+    "3136": {
+      "phase": "queued"
+    },
+    "3137": {
+      "phase": "queued"
+    },
+    "3138": {
+      "phase": "queued"
+    },
+    "3139": {
+      "phase": "queued"
+    }
+  },
+  "valid_rounds": 0,
+  "accepted_points": 0,
+  "measurement_kind": "real_KV_full_resident_decode_only_windows",
+  "serving_measurements_reused": false
+}
