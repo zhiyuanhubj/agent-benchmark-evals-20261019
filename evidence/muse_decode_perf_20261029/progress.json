@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793260527.4630108,
+  "updated_unix": 1793260835.7338605,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 12,
@@ -98,11 +98,8 @@
     ]
   },
   "slurm": [
-    "3137|PENDING|2|(Resources)",
-    "3138|PENDING|2|(Priority)",
-    "3141|PENDING|2|(Priority)",
-    "3139|PENDING|1|(Priority)",
-    "3140|PENDING|1|(Priority)",
+    "3141|RUNNING|2|ip-10-1-62-51,ip-10-1-113-136",
+    "3137|RUNNING|2|ip-10-1-27-73,ip-10-1-76-28",
     "3136|RUNNING|1|ip-10-1-88-35",
     "3135|RUNNING|1|ip-10-1-13-41",
     "3134|RUNNING|1|ip-10-1-114-210"
@@ -170,22 +167,55 @@
       "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-0-8192"
     },
     "3137": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3137,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-27-73",
+        "ip-10-1-76-28"
+      ],
+      "updated_unix": 1793260806.4565787
     },
     "3138": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3138,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-62-51",
+        "ip-10-1-113-136"
+      ],
+      "updated_unix": 1793260812.6164403
     },
     "3139": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3139,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-62-51"
+      ],
+      "updated_unix": 1793260816.3027248
     },
     "3140": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3140,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-113-136"
+      ],
+      "updated_unix": 1793260816.846934
     },
     "3141": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3141,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-62-51",
+        "ip-10-1-113-136"
+      ],
+      "updated_unix": 1793260822.177998
     }
   },
-  "valid_rounds": 12,
+  "valid_rounds": 13,
   "accepted_points": 3,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
@@ -194,11 +224,11 @@
       "job": 3134,
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c002-r1/progress.json",
       "progress": {
-        "phase": "warmup",
-        "decode_seconds": 0,
-        "warmup_decode_seconds": 24.394125420600176,
-        "successful_measured_requests": 0,
-        "batches": 2
+        "phase": "measurement",
+        "decode_seconds": 158.17606589011848,
+        "warmup_decode_seconds": 60.91557959280908,
+        "successful_measured_requests": 26,
+        "batches": 18
       }
     },
     {
@@ -206,19 +236,19 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c001-r2/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 122.55794959701598,
+        "decode_seconds": 311.9835489531979,
         "warmup_decode_seconds": 66.83390937838703,
-        "successful_measured_requests": 11,
-        "batches": 17
+        "successful_measured_requests": 28,
+        "batches": 34
       }
     },
     {
       "job": 3136,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-0-8192/c002-r0/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-0-8192/c002-r1/progress.json",
       "progress": {
         "phase": "measurement",
         "decode_seconds": 0,
-        "warmup_decode_seconds": 60.293865488725714,
+        "warmup_decode_seconds": 60.315071839722805,
         "successful_measured_requests": 0,
         "batches": 5
       }
