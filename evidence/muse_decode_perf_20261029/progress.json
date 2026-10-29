@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793275100.493109,
+  "updated_unix": 1793275405.133417,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -327,31 +327,31 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 100,
+  "valid_rounds": 101,
   "accepted_points": 33,
-  "prefill_valid_rounds": 11,
-  "prefill_accepted_points": 3,
+  "prefill_valid_rounds": 13,
+  "prefill_accepted_points": 4,
   "active_measurements": [
     {
       "job": 3135,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/prefill/synthetic-65536/c001-r2/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/prefill/synthetic-65536/c008-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "engine_seconds": 40.771305322647095,
-        "warmup_engine_seconds": 61.27937364578247,
-        "successful_requests": 8,
-        "batches": 20
+        "engine_seconds": 81.70521354675293,
+        "warmup_engine_seconds": 81.70926594734192,
+        "successful_requests": 16,
+        "batches": 4
       }
     },
     {
       "job": 3136,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-0-8192/c004-r1/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-0-8192/c004-r2/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 76.33176403265679,
-        "warmup_decode_seconds": 74.81807259167545,
-        "successful_measured_requests": 24,
-        "batches": 11
+        "decode_seconds": 93.71174160164082,
+        "warmup_decode_seconds": 71.00941381364828,
+        "successful_measured_requests": 28,
+        "batches": 12
       }
     },
     {
@@ -367,13 +367,13 @@
     },
     {
       "job": 3137,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/prefill/synthetic-8192/c001-r0/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/prefill/synthetic-8192/c001-r1/progress.json",
       "progress": {
-        "phase": "warmup",
-        "engine_seconds": 0,
-        "warmup_engine_seconds": 5.910145044326782,
-        "successful_requests": 0,
-        "batches": 12
+        "phase": "measurement",
+        "engine_seconds": 54.054227113723755,
+        "warmup_engine_seconds": 60.43472647666931,
+        "successful_requests": 110,
+        "batches": 233
       }
     }
   ],
