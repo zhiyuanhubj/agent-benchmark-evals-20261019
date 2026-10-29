@@ -2,9 +2,9 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-10-29 07:17:37 UTC
+更新时间：2026-10-29 07:22:43 UTC
 
-累计申请 12 个节点；完成 2 个有效重复、0 个满足重复要求的测点。
+累计申请 12 个节点；完成 3 个有效重复、1 个满足重复要求的测点。
 
 ## 调度实况
 
@@ -32,6 +32,10 @@
 服务器接入/流式传输仍有开销，本图不声称是 CUDA kernel 的纯设备计时。硬件、模型、并行和上下文未与 DeepInfer 对齐，不直接作吞吐倍数比较。
 
 配置与控制器：[测试代码](../../performance/muse_decode_20261029/README.md)。原始详细状态：[progress.json](progress.json)。
+
+![decode curve](decode_pareto_synthetic.png)
+
+![coding decode curve](decode_pareto_coding.png)
 
 ## Prefill 独立测量
 
