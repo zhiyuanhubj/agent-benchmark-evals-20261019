@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793278426.7893305,
+  "updated_unix": 1793278729.201626,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -236,15 +236,15 @@
       "nodes": [
         "ip-10-1-88-35"
       ],
-      "updated_unix": 1793272004.9182544,
+      "updated_unix": 1793278707.1041205,
       "speculative": "NGRAM",
       "workload": "coding",
       "input_tokens": 0,
       "input_range": [
-        0,
-        8192
+        8192,
+        32768
       ],
-      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-0-8192"
+      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-8192-32768"
     },
     "3137": {
       "phase": "finished_with_incomplete_cases",
@@ -329,22 +329,11 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 110,
-  "accepted_points": 36,
+  "valid_rounds": 111,
+  "accepted_points": 37,
   "prefill_valid_rounds": 27,
   "prefill_accepted_points": 9,
   "active_measurements": [
-    {
-      "job": 3136,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-NGRAM/coding-native-0-8192/c032-r2/progress.json",
-      "progress": {
-        "phase": "warmup",
-        "decode_seconds": 0,
-        "warmup_decode_seconds": 51.33755005785497,
-        "successful_measured_requests": 0,
-        "batches": 2
-      }
-    },
     {
       "job": 3137,
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/spec-off/synthetic-8192/c256-r0/progress.json",
