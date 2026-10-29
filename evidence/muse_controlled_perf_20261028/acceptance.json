@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793231574.1774528,
+  "generated_unix": 1793232476.7061837,
   "targets": [
     {
       "precision": "nvfp4",
@@ -613,9 +613,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 1,
-      "valid_repeats": 2,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "bf16",
@@ -819,17 +819,6 @@
       "valid_repeats": 0,
       "required_repeats": 3,
       "status": "pending"
-    },
-    {
-      "precision": "bf16",
-      "workload": "coding",
-      "input_label": "native-8192-32768",
-      "cache": false,
-      "speculative": "off",
-      "concurrency": 1,
-      "valid_repeats": 2,
-      "required_repeats": 3,
-      "status": "partial"
     },
     {
       "precision": "bf16",
