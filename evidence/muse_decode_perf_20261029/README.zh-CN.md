@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-10-29 06:47:22 UTC
+更新时间：2026-10-29 06:52:22 UTC
 
 累计申请 10 个节点；完成 0 个有效重复、0 个满足重复要求的测点。
 
@@ -34,7 +34,7 @@
 
 ## Prefill 独立测量
 
-已完成 7 个有效重复、2 个三重复测点。
+已完成 8 个有效重复、2 个三重复测点。
 
 每请求实际 prefill 完整输入，只生成 1 token，不混入后续 decode 工作。分母取 native `forward_entry_time` 至 `prefill_finished_time` 的整批包络；分子为该批 native `prompt_tokens` 之和。保存客户端耗时，但不拿 TTFT 代替这个 native prefill 阶段计时。
 
