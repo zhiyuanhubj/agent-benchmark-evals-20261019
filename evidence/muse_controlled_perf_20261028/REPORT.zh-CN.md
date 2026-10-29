@@ -2,7 +2,7 @@
 
 以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。
 
-更新时间：2026-10-29 01:53:07 UTC。
+更新时间：2026-10-29 02:08:12 UTC。
 
 配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。
 
@@ -119,7 +119,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | bf16 | synthetic/65536 | False | off | 1 | 3/3 | complete |
 | bf16 | synthetic/65536 | False | off | 8 | 3/3 | complete |
 | bf16 | synthetic/65536 | False | off | 32 | 3/3 | complete |
-| bf16 | synthetic/65536 | True | off | 1 | 0/3 | pending |
+| bf16 | synthetic/65536 | True | off | 1 | 1/3 | partial |
 | bf16 | synthetic/65536 | True | off | 8 | 0/3 | pending |
 | bf16 | synthetic/65536 | True | off | 32 | 0/3 | pending |
 | bf16 | coding/native-0-8192 | False | off | 1 | 3/3 | complete |
