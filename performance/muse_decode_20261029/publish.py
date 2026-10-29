@@ -219,14 +219,19 @@ def main():
               'prefill_followups':{str(j['job']):json.loads((Path(j['state'])/'PREFILL_FOLLOWUP.json').read_text()) for j in jobs if (Path(j['state'])/'PREFILL_FOLLOWUP.json').exists()},
               'measurement_kind':'real_KV_full_resident_decode_only_windows','serving_measurements_reused':False}
     (dest/'progress.json').write_text(json.dumps(progress,indent=2)+'\n')
+    queue_rows=[line.split('|') for line in queue.stdout.splitlines() if len(line.split('|'))==4]
+    running_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='RUNNING')
+    pending_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='PENDING')
+    preparation_failures=[job for job,state in states.items() if state.get('phase')=='failed_preparation']
     text=['# Muse decode-only 测试', '', '这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。', '',
           '更新时间：'+time.strftime('%Y-%m-%d %H:%M:%S UTC',time.gmtime()),'',
           f'累计申请 {allocation["requested_nodes"]} 个节点；完成 {sum(r["valid"] for r in rows)} 个有效重复、{len(points)} 个满足重复要求的测点。', '',
+          f'当前测试 allocation：运行 {running_nodes} 个节点、排队 {pending_nodes} 个节点；不含对外 API 与其他项目。准备阶段失败的作业：{", ".join(preparation_failures) or "无"}。这些基础设施失败不计为模型性能结果，具体原因及替代作业见 progress.json。', '',
           '## 调度实况', '', '```',queue.stdout.strip(),'```','',
           '## 多组、多点矩阵', '',
           'NVFP4/BF16 × 8K/32K/64K/128K，共 8 组基础曲线；每组目标并发 1、2、4、8、16、32、64、128、256。coding 的两个实际长度桶 × 两种精度 × 投机开关，另有 8 组曲线，各目标并发 1、2、4、8、16、32。', '',
           f'上限共 {len(planned)} 个独立配置点、{sum(r["required_repeats"] for r in planned)} 次重复。实际遇到 KV、延迟或稳定性边界时保留失败记录并明确标注，不能把未测试点补成完成，也不宣称达到全硬件峰值。', '',
-          '逐点计划与完成次数：[decode_matrix.csv](decode_matrix.csv)。当前 32K 的三点扫描正常继续；随后在同一热模型实例补测余下并发，原始记录保留。', '',
+          '逐点计划与完成次数：[decode_matrix.csv](decode_matrix.csv)。32K 已执行同一热模型实例的加密扫描；KV 回收触发的尝试不进入曲线。原始记录和每项作业最终状态见 progress.json。', '',
           '## 定义', '',
           '每批实际完成 prefill 并生成 1024 tokens。取所有请求都进入 decode 的共同区间，额外剔除每个请求首尾各 64 tokens；区间内不补入新请求。检查 native KV retraction 计数未增加。', '',
           '每重复热身至少 60 秒有效 decode；正式累计至少 120 秒有效 decode 和 32 个成功请求。不同批次之间 prefill/refill/排空时间不计入分母。这是多个纯 decode 区间之和，并非连续 120 秒的闭环 serving 窗口。', '',
