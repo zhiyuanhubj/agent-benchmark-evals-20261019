@@ -24,8 +24,8 @@ def decode_window(rows, gpus, guard_tokens=64):
         return {'valid': False, 'reason': 'request_failure', 'failed_requests': sum(not r['valid'] for r in rows)}
     # Trim 64 output tokens from both ends of every stream, beyond the warmup,
     # to exclude first-decode transients and transport-delayed completion tails.
-    start = math.nextafter(max(r['started'] + next(t for t,n in r['token_timing'] if n >= 1+guard_tokens) for r in rows), math.inf)
-    end = min(r['started'] + next(t for t,n in r['token_timing'] if n >= r['meta']['completion_tokens']-guard_tokens) for r in rows)
+    start = math.nextafter(max(r['started'] + next(t for t,n in r['token_timing'] if n >= max(1,guard_tokens)) for r in rows), math.inf)
+    end = min(r['started'] + next(t for t,n in r['token_timing'] if n >= min(r['meta']['completion_tokens'],r['meta']['completion_tokens']-guard_tokens+1)) for r in rows)
     if end <= start:
         return {'valid': False, 'reason': 'no_full_resident_decode_interval'}
     total, speeds, tpots = 0, [], []

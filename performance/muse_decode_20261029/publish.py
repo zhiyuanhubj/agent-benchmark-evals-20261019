@@ -10,6 +10,7 @@ import statistics
 import subprocess
 import sys
 import time
+import zlib
 from collections import defaultdict
 from pathlib import Path
 
@@ -22,7 +23,7 @@ def records(path):
             for line in f:
                 try:yield json.loads(line)
                 except json.JSONDecodeError:break
-    except (EOFError,OSError):return
+    except (EOFError,OSError,zlib.error):return
 
 
 def main():
@@ -59,6 +60,10 @@ def main():
                  'gpu_memory_mib_max':max(mem,default=None),'artifact':str(path)}
             rows.append(row)
             if valid:groups[(r['precision'],scenario['workload'],label,scenario['speculative'],r['concurrency'])].append(r)
+    if not (a.repo/'.git').exists():
+        subprocess.run(['git','clone','--filter=blob:none','--sparse','https://github.com/zhiyuanhubj/agent-benchmark-evals-20261019.git',str(a.repo)],check=True)
+        for key,value in [('user.name','Zhiyuan Hu'),('user.email','29817400+zhiyuanhubj@users.noreply.github.com')]:
+            subprocess.run(['git','-C',str(a.repo),'config',key,value],check=True)
     def git(*args):return subprocess.run(['git','-C',str(a.repo),*args],capture_output=True,text=True,check=True)
     git('sparse-checkout','set','--no-cone','/evidence/muse_decode_perf_20261029/')
     git('pull','--rebase','origin','main')
