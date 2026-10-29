@@ -1,8 +1,8 @@
 {
-  "updated_unix": 1793257953.0029876,
+  "updated_unix": 1793258257.8264842,
   "allocation": {
     "created_unix": 1793251673.2838128,
-    "requested_nodes": 10,
+    "requested_nodes": 12,
     "gpus_per_node": 8,
     "jobs": [
       {
@@ -84,12 +84,23 @@
           8192
         ],
         "replaces_failed_job": 3133
+      },
+      {
+        "job": 3141,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-128k",
+        "input_lengths": [
+          131072
+        ]
       }
     ]
   },
   "slurm": [
     "3137|PENDING|2|(Resources)",
     "3138|PENDING|2|(Priority)",
+    "3141|PENDING|2|(Priority)",
     "3139|PENDING|1|(Priority)",
     "3140|PENDING|1|(Priority)",
     "3136|RUNNING|1|ip-10-1-88-35",
@@ -138,13 +149,14 @@
       "speculative": "off"
     },
     "3136": {
-      "phase": "preparing_and_verifying_pinned_weights",
+      "phase": "starting_fixed_server",
       "job": 3136,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-88-35"
       ],
-      "updated_unix": 1793257922.2709527
+      "updated_unix": 1793258139.4402122,
+      "speculative": "off"
     },
     "3137": {
       "phase": "queued"
@@ -157,22 +169,25 @@
     },
     "3140": {
       "phase": "queued"
+    },
+    "3141": {
+      "phase": "queued"
     }
   },
-  "valid_rounds": 1,
+  "valid_rounds": 2,
   "accepted_points": 0,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
   "active_measurements": [
     {
       "job": 3134,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c001-r1/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c001-r2/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 331.55971766635776,
-        "warmup_decode_seconds": 66.3110221195966,
-        "successful_measured_requests": 30,
-        "batches": 36
+        "decode_seconds": 132.65490384027362,
+        "warmup_decode_seconds": 66.33590231649578,
+        "successful_measured_requests": 12,
+        "batches": 18
       }
     }
   ],
