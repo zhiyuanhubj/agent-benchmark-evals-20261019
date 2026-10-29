@@ -2,7 +2,7 @@
 
 以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。
 
-更新时间：2026-10-29 00:22:57 UTC。
+更新时间：2026-10-29 00:37:59 UTC。
 
 配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。
 
@@ -15,6 +15,7 @@
 | bf16/native-0-8192 | False/off | 32 | 3 | 360.447 | 288/0 | 52.979 ± 0.087 | 27.685 ± 0.145 | 1.747/2.356 | 36.121/37.036 | 38.687/38.909 |
 | bf16/native-8192-32768 | False/off | 1 | 3 | 2367.300 | 99/0 | 2.676 ± 0.001 | 44.195 ± 0.017 | 0.711/0.819 | 22.627/22.656 | 23.889/23.978 |
 | bf16/native-8192-32768 | False/off | 8 | 3 | 435.434 | 120/0 | 15.133 ± 0.008 | 33.644 ± 0.017 | 3.767/5.863 | 29.724/32.214 | 34.180/34.260 |
+| bf16/native-8192-32768 | False/off | 32 | 3 | 360.392 | 192/0 | 34.098 ± 0.002 | 22.063 ± 0.003 | 12.478/23.188 | 45.328/55.367 | 58.963/59.068 |
 | bf16/32768 | False/off | 1 | 3 | 2489.322 | 99/0 | 2.545 ± 0.002 | 44.184 ± 0.034 | 1.998/2.004 | 22.632/22.644 | 25.150/25.166 |
 | bf16/32768 | False/off | 8 | 3 | 617.147 | 120/0 | 12.442 ± 0.011 | 29.197 ± 0.035 | 9.185/15.861 | 34.270/41.021 | 44.259/44.409 |
 | bf16/32768 | False/off | 32 | 3 | 622.057 | 192/0 | 19.754 ± 0.013 | 14.492 ± 0.006 | 33.006/61.690 | 69.016/96.987 | 103.686/103.851 |
@@ -62,7 +63,7 @@
 
 coding+review 各 native 输入长度桶及投机开关分别成线：[coding.png](coding.png)。
 
-已完成 45 / 62 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
+已完成 46 / 62 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
 
 | 模型 | 输入/工作负载 | 缓存 | 投机 | 并发 | 有效重复/目标 | 状态 |
 |---|---|---|---|---:|---:|---|
@@ -123,7 +124,7 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | bf16 | coding/native-0-8192 | False | off | 32 | 3/3 | complete |
 | bf16 | coding/native-8192-32768 | False | off | 1 | 3/3 | complete |
 | bf16 | coding/native-8192-32768 | False | off | 8 | 3/3 | complete |
-| bf16 | coding/native-8192-32768 | False | off | 32 | 1/3 | partial |
+| bf16 | coding/native-8192-32768 | False | off | 32 | 3/3 | complete |
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 1 | 0/3 | pending |
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 8 | 0/3 | pending |
 | bf16 | coding/native-input-bins-pending | False | NGRAM | 32 | 0/3 | pending |
