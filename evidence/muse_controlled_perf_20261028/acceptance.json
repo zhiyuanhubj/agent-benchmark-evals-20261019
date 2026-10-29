@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793236986.2699127,
+  "generated_unix": 1793237887.3132017,
   "targets": [
     {
       "precision": "nvfp4",
@@ -492,9 +492,9 @@
       "cache": true,
       "speculative": "off",
       "concurrency": 8,
-      "valid_repeats": 1,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "partial"
+      "status": "complete"
     },
     {
       "precision": "bf16",
@@ -503,9 +503,9 @@
       "cache": true,
       "speculative": "off",
       "concurrency": 32,
-      "valid_repeats": 0,
+      "valid_repeats": 2,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
@@ -760,21 +760,10 @@
       "input_label": "32768",
       "cache": true,
       "speculative": "off",
-      "concurrency": 8,
-      "valid_repeats": 1,
+      "concurrency": 32,
+      "valid_repeats": 2,
       "required_repeats": 3,
       "status": "partial"
-    },
-    {
-      "precision": "bf16",
-      "workload": "synthetic",
-      "input_label": "32768",
-      "cache": true,
-      "speculative": "off",
-      "concurrency": 32,
-      "valid_repeats": 0,
-      "required_repeats": 3,
-      "status": "pending"
     },
     {
       "precision": "bf16",
