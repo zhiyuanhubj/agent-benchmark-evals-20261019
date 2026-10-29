@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793257652.52103,
+  "updated_unix": 1793257953.0029876,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 10,
@@ -88,12 +88,12 @@
     ]
   },
   "slurm": [
-    "3137|PENDING|2|(Priority)",
+    "3137|PENDING|2|(Resources)",
     "3138|PENDING|2|(Priority)",
-    "3135|PENDING|1|(Resources)",
-    "3136|PENDING|1|(Priority)",
     "3139|PENDING|1|(Priority)",
     "3140|PENDING|1|(Priority)",
+    "3136|RUNNING|1|ip-10-1-88-35",
+    "3135|RUNNING|1|ip-10-1-13-41",
     "3134|RUNNING|1|ip-10-1-114-210"
   ],
   "states": {
@@ -128,10 +128,23 @@
       "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768"
     },
     "3135": {
-      "phase": "queued"
+      "phase": "starting_fixed_server",
+      "job": 3135,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-13-41"
+      ],
+      "updated_unix": 1793257915.161014,
+      "speculative": "off"
     },
     "3136": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3136,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-88-35"
+      ],
+      "updated_unix": 1793257922.2709527
     },
     "3137": {
       "phase": "queued"
@@ -156,10 +169,10 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c001-r1/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 110.51890849135816,
+        "decode_seconds": 331.55971766635776,
         "warmup_decode_seconds": 66.3110221195966,
-        "successful_measured_requests": 10,
-        "batches": 16
+        "successful_measured_requests": 30,
+        "batches": 36
       }
     }
   ],
