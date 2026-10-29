@@ -2,15 +2,15 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-10-29 07:32:50 UTC
+更新时间：2026-10-29 07:37:51 UTC
 
 累计申请 12 个节点；完成 4 个有效重复、1 个满足重复要求的测点。
 
 ## 调度实况
 
 ```
-3137|PENDING|2|(Resources)
-3138|PENDING|2|(Priority)
+3137|PENDING|2|(None)
+3138|PENDING|2|(Resources)
 3141|PENDING|2|(Priority)
 3139|PENDING|1|(Priority)
 3140|PENDING|1|(Priority)
