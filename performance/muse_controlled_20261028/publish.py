@@ -26,6 +26,7 @@ def main():
     env = dict(os.environ, PYTHONPATH=str(a.state / 'plot_deps'))
     subprocess.run([sys.executable, str(a.state / 'report.py'), '--state', str(a.state)], env=env, check=True)
     subprocess.run([sys.executable, str(a.state / 'plot.py'), '--state', str(a.state)], env=env, check=True)
+    subprocess.run([sys.executable, str(a.state / 'pareto.py'), '--state', str(a.state)], env=env, check=True)
     dest = a.repo / 'evidence/muse_controlled_perf_20261028'
     dest.mkdir(parents=True, exist_ok=True)
     old = json.loads((dest / 'progress.json').read_text()) if (dest / 'progress.json').exists() else {}
@@ -55,7 +56,8 @@ def main():
     progress['complete_protocol_points'] = sum(r['status'] == 'complete' for r in acceptance['targets'])
     progress['currently_enumerated_target_points'] = len(acceptance['targets'])
     (dest / 'progress.json').write_text(json.dumps(progress, indent=2) + '\n')
-    for name in ('all_rounds.csv', 'detailed_rounds.csv', 'detailed_points.csv', 'acceptance_matrix.csv',
+    figures = tuple('decode_pareto_' + kind + '.' + suffix for kind in ('8k', 'long_context', 'coding') for suffix in ('png', 'pdf', 'svg'))
+    for name in (*figures, 'decode_pareto_8k.csv', 'all_rounds.csv', 'detailed_rounds.csv', 'detailed_points.csv', 'acceptance_matrix.csv',
                  'acceptance.json', 'reproducibility.json', 'REPORT.zh-CN.md', 'synthetic.png', 'synthetic.pdf', 'coding.png', 'coding.pdf', 'status.json'):
         src = a.state / 'report' / name
         if src.exists():

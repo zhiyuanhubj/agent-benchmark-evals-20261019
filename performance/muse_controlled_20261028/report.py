@@ -218,11 +218,15 @@ def main():
     write_csv(out / 'detailed_points.csv', point_rows)
     coverage = []
     for prec in ('nvfp4', 'bf16'):
+        statefile = a.state / prec / 'status.json'
+        state = json.loads(statefile.read_text()) if statefile.exists() else {}
         cases = [('synthetic', '8192', False, 'off', c) for c in (1, 2, 4, 8, 16, 32, 64, 128)]
         cases += [('synthetic', str(n), cache, 'off', c) for n in (32768, 65536) for cache in (False, True) for c in (1, 8, 32)]
         for spec in ('off', 'NGRAM'):
             phase = 'cache-off-' + spec
             bucketfile = a.state / prec / phase / 'coding-0/INPUT_BUCKETS.json'
+            if not bucketfile.exists() and spec != 'off':
+                bucketfile = a.state / prec / 'cache-off-off/coding-0/INPUT_BUCKETS.json'
             labels = [k for k, n in json.loads(bucketfile.read_text())['ranges'].items() if n] if bucketfile.exists() else ['native-input-bins-pending']
             cases += [('coding', label, False, spec, c) for label in labels for c in (1, 8, 32)]
         for workload, label, cache, spec, c in cases:
@@ -231,6 +235,9 @@ def main():
             valid = sum(protocol_valid(d) for d in ds)
             need = 5 if prec == 'nvfp4' and label == '8192' and c in (4, 8) else 3
             status = 'complete' if valid >= need else ('partial' if ds else 'pending')
+            phase = ('cache-on' if cache else 'cache-off') + '-' + spec
+            if valid < need and any(f.get('configuration') == phase for f in state.get('failures', [])):
+                status = 'failed_configuration'
             if workload == 'synthetic' and label == '8192' and not ds:
                 limit = a.state / prec / 'cache-off-off/synthetic-8192/LATENCY_LIMIT.json'
                 if limit.exists() and c > json.loads(limit.read_text())['concurrency']:
@@ -272,8 +279,13 @@ def main():
         if not r['complete']:
             continue
         text.append(f'| {r["precision"]}/{r["input_label"]} | {r["cache"]}/{r["speculative"]} | {r["concurrency"]} | {r["valid_repeats"]} | {fmt(r["measurement_s"])} | {r["requests"]}/{r["arrival_failures_all_repeats"]} | {fmt(r["tokens_s_gpu"])} ± {fmt(r["throughput_repeat_sd"])} | {fmt(r["decode_tokens_per_second_p50"])} ± {fmt(r["decode_p50_repeat_sd"])} | {fmt(r["ttft_s_p50"])}/{fmt(r["ttft_s_p95"])} | {fmt(r["tpot_s_p50"],1000)}/{fmt(r["tpot_s_p95"],1000)} | {fmt(r["e2e_s_p50"])}/{fmt(r["e2e_s_p95"])} |')
-    text += ['', '当前吞吐—单用户速度曲线（仅含已验收测点）：', '',
-             '![synthetic curve](synthetic.png)', '',
+    text += ['', '8K 基础吞吐—单用户速度曲线（仅含已验收测点）：', '',
+             '![8K serving Pareto curve](decode_pareto_8k.png)', '',
+             '可导出：[PDF](decode_pareto_8k.pdf)、[SVG](decode_pareto_8k.svg)、[数据 CSV](decode_pareto_8k.csv)。', '',
+             '32K/64K × 缓存开关分面图：', '',
+             '![Long-context Pareto curves](decode_pareto_long_context.png)', '',
+             '![Coding and review Pareto curves](decode_pareto_coding.png)', '',
+             '全部 synthetic 配置总览：[synthetic.png](synthetic.png)。', '',
              'coding+review 各 native 输入长度桶及投机开关分别成线：[coding.png](coding.png)。', '',
             f'已完成 {sum(r["status"] == "complete" for r in coverage)} / {len(coverage)} 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。', '',
             '| 模型 | 输入/工作负载 | 缓存 | 投机 | 并发 | 有效重复/目标 | 状态 |',
@@ -284,6 +296,13 @@ def main():
              '吞吐严格来自测量窗内收到的 native token 增量；延迟统计保留测量窗内入场请求的完整排空尾部。输出包括模型生成的 reasoning 和回答。', '',
              'GPU 指标来自所有物理 GPU 的 1 秒采样；KV/运行/排队指标来自 2 秒 Prometheus 原始记录。没有完整重复或 GPU 遥测的点不作为最终曲线点。', '',
              '误差棒为重复实验间的样本标准差。DeepSeek 未进行条件对齐的独立实测，本报告不补造对照数字。']
+    states = {prec: metadata['deployments'][prec]['current_state'] for prec in ('nvfp4', 'bf16')}
+    if any(s.get('phase', '').startswith('finished') for s in states.values()):
+        text[2] = '已结束的本轮任务存在未完成配置；基础曲线和已验收测点可以使用，全协议尚未完成。' if not complete else text[2]
+        text[6:6] = ['任务结束状态与缺口：', '', *[f'- {prec}: `{s.get("phase", "unknown")}`；{json.dumps(s.get("failures", []), ensure_ascii=False)}' for prec, s in states.items()], '',
+                    'BF16 并发 256 是扩展边界测试：三轮均结束，仅一轮有效；两轮测量入场请求共 9 个 ReadError，TTFT p95 已超过 60 秒。保留三轮记录，但不画为有效三重复曲线点。', '',
+                    'NVFP4 NGRAM: `NgramVerifyInput` 缺少 `draft_probs`；BF16 NGRAM: verify CUDA graph 分配 8 GiB page table 时 OOM。均无有效投机加速数字。', '',
+                    '与 [DeepInfer 原图](https://github.com/deepseek-ai/DeepInfer/blob/main/doc/images/decode_pareto.png) 采用同类坐标。其 [官方说明](https://github.com/deepseek-ai/DeepInfer#performance-benchmarks) 为 64×SM100 decode 测试；图中为 128K 上下文及固定 nextn=3。这里是 H200、包含 prefill 的闭环服务测量，不能据此直接比较绝对吞吐或断言精度差异的因果效果。', '']
     (out / 'REPORT.zh-CN.md').write_text('\n'.join(text) + '\n')
     save(out / 'acceptance.json', {'generated_unix': time.time(), 'targets': coverage,
          'unresolved_saturation_followups': unresolved,
