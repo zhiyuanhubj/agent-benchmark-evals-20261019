@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793264463.5640438,
+  "updated_unix": 1793264770.379502,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 12,
@@ -220,20 +220,20 @@
       "updated_unix": 1793260822.177998
     }
   },
-  "valid_rounds": 42,
+  "valid_rounds": 43,
   "accepted_points": 14,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
   "active_measurements": [
     {
       "job": 3135,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c008-r0/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c008-r1/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 66.45069008227438,
-        "warmup_decode_seconds": 66.4730726564303,
-        "successful_measured_requests": 32,
-        "batches": 8
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 16.659201003611088,
+        "successful_measured_requests": 0,
+        "batches": 1
       }
     },
     {
@@ -241,10 +241,10 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-8192-32768/c001-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 98.88321864040336,
+        "decode_seconds": 340.5698848271859,
         "warmup_decode_seconds": 65.9145067706122,
-        "successful_measured_requests": 9,
-        "batches": 15
+        "successful_measured_requests": 31,
+        "batches": 37
       }
     },
     {
@@ -252,10 +252,10 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k/bf16/spec-off/synthetic-8192/c001-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 101.01583025790751,
+        "decode_seconds": 363.5769697036594,
         "warmup_decode_seconds": 60.65589485038072,
-        "successful_measured_requests": 5,
-        "batches": 8
+        "successful_measured_requests": 18,
+        "batches": 21
       }
     }
   ],
