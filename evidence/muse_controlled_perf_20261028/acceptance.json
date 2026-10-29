@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1793232476.7061837,
+  "generated_unix": 1793233377.8844178,
   "targets": [
     {
       "precision": "nvfp4",
@@ -624,9 +624,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 8,
-      "valid_repeats": 0,
+      "valid_repeats": 3,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "complete"
     },
     {
       "precision": "bf16",
@@ -635,9 +635,9 @@
       "cache": false,
       "speculative": "off",
       "concurrency": 32,
-      "valid_repeats": 0,
+      "valid_repeats": 1,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
@@ -826,21 +826,10 @@
       "input_label": "native-8192-32768",
       "cache": false,
       "speculative": "off",
-      "concurrency": 8,
-      "valid_repeats": 0,
-      "required_repeats": 3,
-      "status": "pending"
-    },
-    {
-      "precision": "bf16",
-      "workload": "coding",
-      "input_label": "native-8192-32768",
-      "cache": false,
-      "speculative": "off",
       "concurrency": 32,
-      "valid_repeats": 0,
+      "valid_repeats": 1,
       "required_repeats": 3,
-      "status": "pending"
+      "status": "partial"
     },
     {
       "precision": "bf16",
