@@ -4,7 +4,9 @@ This experiment is separate from the October 28 end-to-end serving curves. Queue
 
 ## Resources and provenance
 
-Seven jobs request nine exclusive H200 nodes: NVFP4 jobs 3133/3134/3135/3136/3139 each use one node (8 GPUs); BF16 jobs 3137/3138 each use two nodes (16 GPUs). At submission, 3133 started and the remaining jobs requested **eight pending nodes**. Job 2989 continues the public API independently.
+The initial seven jobs requested nine exclusive H200 nodes. Job 3133's failed warmup is retained; replacement 3140 and the added BF16 128K job 3141 bring the live allocation target to eleven nodes, with twelve node requests cumulatively including failed 3133. Job 2989 continues the public API independently.
+
+At the user's October 29 instruction, dominick.reilly jobs **3066 and 3130** were cancelled. Both released nodes were obtained by this experiment: **3135 on ip-10-1-13-41**, and **3136 on ip-10-1-88-35**. Together with 3134, that gives three running decode replicas; eight nodes remain requested in pending jobs. `RESOURCE_UPDATE_20261029.json` records the handoff without publishing the cancelled jobs' private command lines.
 
 Pinned SGLang image: `lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a`.
 
@@ -29,12 +31,16 @@ The x coordinate is the median of individual request decoding speeds measured in
 | Job | Nodes | Work |
 |---|---:|---|
 | 3133 | 1 | NVFP4 8K baseline; C=1,2,4,8,16,32,64,128,256 |
-| 3134 | 1 | NVFP4 32K; C=1,8,32 |
-| 3135 | 1 | NVFP4 64K; C=1,8,32 |
-| 3136 | 1 | NVFP4 authentic coding/review, speculation off/on, paired controls |
+| 3134 | 1 | NVFP4 32K; current 1/8/32 scan followed by the missing dense-grid points on the same warm replica |
+| 3135 | 1 | NVFP4 64K; full C scan |
+| 3136 | 1 | NVFP4 authentic coding/review, speculation off/on; C=1,2,4,8,16,32 |
 | 3137 | 2 | BF16 8K baseline; same C scan |
-| 3138 | 2 | BF16 32K/64K plus paired coding speculation off/on |
-| 3139 | 1 | NVFP4 128K; C=1,8,32, for additional context-length reference |
+| 3138 | 2 | BF16 32K/64K full C scans plus paired coding speculation off/on |
+| 3139 | 1 | NVFP4 128K full C scan, for additional context-length reference |
+| 3140 | 1 | Replacement NVFP4 8K full C scan; failed 3133 artifacts remain separate |
+| 3141 | 2 | BF16 128K full C scan |
+
+The synthetic full scan is **1/2/4/8/16/32/64/128/256** for each precision and each of **8K/32K/64K/128K**, making eight configuration groups and up to 72 points. The two actual coding length bins, two precisions and speculation off/on form eight more groups, each with six concurrency points, for up to 48 points. Combined upper bounds are **16 groups, 120 unique configuration points, 364 repetitions** (including the extra NVFP4 8K c4/c8 repeats). Hardware, latency or stability boundaries can prevent higher points; these are documented rather than fabricated. `matrix.py` and its test distinguish unique configuration points from repeated measurements and retries. The publisher exports per-point completion in `decode_matrix.csv` and separate context/coding panels.
 
 A no-common-window, KV retraction, request error, or TPOT p95 over 300ms records a capacity/latency/error boundary; higher load is not labelled a measured hardware peak. Capacity is bounded by the pinned server admission cap. The 128K workload does not make the H200/Muse result a matched DeepInfer/SM100/DeepSeek experiment.
 
@@ -52,11 +58,15 @@ The first NVFP4 replica fully hashed all pinned shared files. Later replicas may
 
 ## Prefill-only cohorts
 
-For synthetic, speculation-off cases, `prefill.py` now runs before decode on each approved replica. It submits cohorts at concurrency 1/8/32, processes the complete real input, and generates exactly **one output token**. There is no subsequent decode workload in these cohorts.
+Decode now runs first. Synthetic, speculation-off cases defer `prefill.py` until their decode sweep finishes. The earlier 32K prefill data remain preserved. For a client already in memory before this ordering change, a separate supervisor waits for its completion and runs deferred prefill on the same warm replica before cleanup. Prefill submits cohorts at concurrency 1/8/32, processes the complete real input, and generates exactly **one output token**. There is no subsequent decode workload in these cohorts.
 
 Native `forward_entry_time` and `prefill_finished_time` define each request's engine prefill phase. The complete cohort's phase envelope runs from the earliest forward entry to the latest prefill completion. Its numerator is the sum of actual native prompt-token counts, including each request once. Initial external queue and network time are excluded from the phase denominator; full client latency remains a separate measurement. Chunk scheduling, engine host overhead and first-token sampling are included: this is an engine prefill phase benchmark, not CUDA-kernel-only timing.
 
 Each repeat accumulates at least 60 seconds of warmup prefill time followed by at least 120 seconds of measured phase time and 32 successful requests; three repeats are required. Preserve raw requests, native timestamps, failures, input counts, backend traces and all physical GPU samples. Points lacking native timestamps, zero retractions/cache hits or sufficient GPU coverage are not plotted. The five-minute publisher writes `prefill_rounds.csv`, `prefill_points.csv`, `prefill_throughput.{png,pdf,svg}` (input length vs input tokens/s/GPU), and `prefill_pareto.{png,pdf,svg}` (prefill phase latency vs throughput), with repetition SD error bars. No prefill figure is declared complete while these fresh measurements are pending.
+
+## In-flight sweep continuation
+
+`dense_followup.py` preserves the current 32K client's valid work, then fills the missing concurrency points using the same resident model and physical GPUs. It stops only the CPU coordinator's polling process; the measurement client, model server and GPU telemetry continue uninterrupted. PID, command, state directory and process birth tick must all match before a coordinator can receive a signal. A persistent supervisor waits for the original client to exit, saves its initial case configuration, starts the dense continuation with completed rounds reused, and resumes the original coordinator for normal cleanup. This preserves fixed deployment conditions across the curve without a second model load or duplicate load generators. A second supervisor preserves deferred 64K prefill for the client that was already running when decode-first ordering was requested. Their state and raw logs remain under the respective job directory.
 
 Validation:
 

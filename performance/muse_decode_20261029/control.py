@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Six independently queued replicas: pinned preparation, decode windows, cleanup."""
+"""Independently queued replicas: pinned preparation, decode windows, cleanup."""
 import argparse
 import json
 import os
@@ -64,7 +64,8 @@ def main():
             for workload,length,bucket in cases:
                 name='synthetic-'+str(length) if bucket is None else 'coding-native-'+str(bucket[0])+'-'+str(bucket[1])
                 directory=a.state/precision/('spec-'+spec)/name
-                cs='1,2,4,8,16,32,64,128,256' if plan['mode']=='baseline' else '1,8,32'
+                cs=(plan.get('decode_concurrency','1,2,4,8,16,32,64,128,256') if workload=='synthetic'
+                    else plan.get('coding_concurrency','1,2,4,8,16,32'))
                 command=['srun','--jobid='+str(job),'--nodelist='+hosts[0],'--chdir='+str(root),'--overlap','--exact','--gres=none',
                     '-N1','-n1','-c8',sys.executable,str(root/'decode.py'),'--base',base,'--output',str(directory),
                     '--precision',precision,'--gpus',str(n*8),'--corpus',str(a.state/'coding_prompts.jsonl'),

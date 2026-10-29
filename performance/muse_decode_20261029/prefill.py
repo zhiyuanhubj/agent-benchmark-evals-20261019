@@ -92,3 +92,22 @@ async def sweep(args,client,prompts,state):
             if (directory/'summary.json').exists():continue
             prompts.sequence=0
             await PrefillRound(args,{'cache':False,'speculative':'off','workload':'synthetic'},c,repeat,directory).measure(client,prompts)
+
+
+async def cli_main():
+    import argparse
+    import httpx
+    from pathlib import Path
+    from native_client import Prompts
+    p=argparse.ArgumentParser();p.add_argument('--base',required=True);p.add_argument('--state',type=Path,required=True)
+    p.add_argument('--precision',required=True);p.add_argument('--gpus',type=int,required=True);p.add_argument('--input-tokens',type=int,required=True)
+    args=p.parse_args()
+    scenario={'workload':'synthetic','input_tokens':args.input_tokens,'cache':False,'speculative':'off'}
+    async with httpx.AsyncClient(trust_env=False,timeout=600,limits=httpx.Limits(max_connections=128)) as client:
+        info=(await client.get(args.base+'/server_info')).json()
+        assert info['disable_radix_cache'] and not info.get('speculative_algorithm')
+        prompts=await Prompts.build(client,args.base,[],scenario,20261029)
+        await sweep(args,client,prompts,args.state)
+
+
+if __name__=='__main__':asyncio.run(cli_main())

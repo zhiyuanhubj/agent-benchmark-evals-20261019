@@ -152,6 +152,11 @@ class DecodeRound(Round):
 
 
 async def main(args):
+    state=args.output.parents[2]
+    planfile=state/'PLAN.json'
+    plan=json.loads(planfile.read_text()) if planfile.exists() else {}
+    concurrency_key='decode_concurrency' if args.workload=='synthetic' else 'coding_concurrency'
+    if plan.get(concurrency_key):args.concurrency=plan[concurrency_key]
     corpus = [json.loads(s) for s in args.corpus.read_text().splitlines()]
     scenario = {'workload':args.workload,'input_tokens':args.input_tokens,'cache':False,'speculative':args.speculative}
     if args.input_range:
@@ -164,8 +169,6 @@ async def main(args):
         save(args.output/'CONFIG.json',{'args':{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},'server_info':info})
         prompts=await Prompts.build(client,args.base,corpus,scenario,20261029)
         save(args.output/'PROMPTS.json',{'templates':prompts.templates,'scenario':scenario,'seed':20261029})
-        state=args.output.parents[2]
-        planfile=state/'PLAN.json'
         if args.workload=='synthetic' and args.speculative=='off' and planfile.exists() and json.loads(planfile.read_text()).get('prefill_first'):
             from prefill import sweep as prefill_sweep
             statusfile=state/'status.json'
@@ -173,22 +176,34 @@ async def main(args):
             save(statusfile,{**current,'phase':'measuring_prefill_only','updated_unix':time.time()})
             await prefill_sweep(args,client,prompts,state)
             save(statusfile,{**current,'phase':'measuring_decode_only','updated_unix':time.time()})
-        curve=[]
-        cs=[int(c) for c in args.concurrency.split(',')]
-        for c in cs:
-            repeats=5 if args.precision=='nvfp4' and args.input_tokens==8192 and c in (4,8) else 3
-            group=[]
-            for repeat in range(repeats):
-                directory=args.output/f'c{c:03d}-r{repeat}'
-                if (directory/'summary.json').exists():
-                    result=json.loads((directory/'summary.json').read_text())
-                else:
-                    prompts.sequence=0
-                    result=await DecodeRound(args,scenario,c,repeat,directory).measure(client,prompts)
-                group.append(result);curve.append(result)
-            if any(not r['valid'] for r in group) or max(r['tpot_s']['p95'] for r in group)>.3:
-                save(args.output/'DECODE_BOUNDARY.json',{'concurrency':c,'reason':'invalid_point_or_TPOT_p95_over_300ms'});break
-        save(args.output/'DONE.json',{'rounds':len(curve),'valid_rounds':sum(r['valid'] for r in curve)})
+        try:
+            await measure_grid(args,client,prompts,scenario)
+        finally:
+            if args.workload=='synthetic' and args.speculative=='off' and plan.get('prefill_after'):
+                from prefill import sweep as prefill_sweep
+                statusfile=state/'status.json';current=json.loads(statusfile.read_text())
+                save(statusfile,{**current,'phase':'measuring_deferred_prefill','updated_unix':time.time()})
+                await prefill_sweep(args,client,prompts,state)
+                save(statusfile,{**current,'phase':'decode_case_complete','updated_unix':time.time()})
+
+
+async def measure_grid(args,client,prompts,scenario):
+    curve=[]
+    cs=[int(c) for c in args.concurrency.split(',')]
+    for c in cs:
+        repeats=5 if args.precision=='nvfp4' and args.input_tokens==8192 and c in (4,8) else 3
+        group=[]
+        for repeat in range(repeats):
+            directory=args.output/f'c{c:03d}-r{repeat}'
+            if (directory/'summary.json').exists():
+                result=json.loads((directory/'summary.json').read_text())
+            else:
+                prompts.sequence=0
+                result=await DecodeRound(args,scenario,c,repeat,directory).measure(client,prompts)
+            group.append(result);curve.append(result)
+        if any(not r['valid'] for r in group) or max(r['tpot_s']['p95'] for r in group)>.3:
+            save(args.output/'DECODE_BOUNDARY.json',{'concurrency':c,'reason':'invalid_point_or_TPOT_p95_over_300ms'});break
+    save(args.output/'DONE.json',{'rounds':len(curve),'valid_rounds':sum(r['valid'] for r in curve)})
 
 
 def parser():
