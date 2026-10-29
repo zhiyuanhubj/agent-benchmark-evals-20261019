@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-10-29 05:51:40 UTC
+更新时间：2026-10-29 06:05:15 UTC
 
 累计申请 9 个节点；完成 0 个有效重复、0 个满足重复要求的测点。
 
@@ -11,11 +11,10 @@
 ```
 3137|PENDING|2|(Priority)
 3138|PENDING|2|(Priority)
-3134|PENDING|1|(Resources)
-3135|PENDING|1|(Priority)
+3135|PENDING|1|(Resources)
 3136|PENDING|1|(Priority)
 3139|PENDING|1|(Priority)
-3133|RUNNING|1|ip-10-1-114-210
+3134|RUNNING|1|ip-10-1-114-210
 ```
 
 ## 定义

@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793253100.3833978,
+  "updated_unix": 1793253915.3643782,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 9,
@@ -79,25 +79,36 @@
   "slurm": [
     "3137|PENDING|2|(Priority)",
     "3138|PENDING|2|(Priority)",
-    "3134|PENDING|1|(Resources)",
-    "3135|PENDING|1|(Priority)",
+    "3135|PENDING|1|(Resources)",
     "3136|PENDING|1|(Priority)",
     "3139|PENDING|1|(Priority)",
-    "3133|RUNNING|1|ip-10-1-114-210"
+    "3134|RUNNING|1|ip-10-1-114-210"
   ],
   "states": {
     "3133": {
-      "phase": "starting_fixed_server",
+      "phase": "finished_with_incomplete_cases",
       "job": 3133,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-114-210"
       ],
-      "updated_unix": 1793252582.4655476,
-      "speculative": "off"
+      "updated_unix": 1793253379.992668,
+      "failures": [
+        {
+          "speculative": "off",
+          "case": "synthetic-8192",
+          "returncode": 1
+        }
+      ]
     },
     "3134": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3134,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-114-210"
+      ],
+      "updated_unix": 1793253382.3103323
     },
     "3135": {
       "phase": "queued"
