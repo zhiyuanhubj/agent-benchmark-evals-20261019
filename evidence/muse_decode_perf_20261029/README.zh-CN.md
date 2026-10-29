@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-10-29 18:16:26 UTC
+更新时间：2026-10-29 18:21:28 UTC
 
 累计申请 20 个节点；完成 129 个有效重复、43 个满足重复要求的测点。
 
@@ -11,10 +11,10 @@
 ## 调度实况
 
 ```
-3156|PENDING|2|(Priority)
+3156|PENDING|2|(Resources)
 3157|PENDING|2|(Priority)
 3158|PENDING|2|(Priority)
-3155|PENDING|1|(Resources)
+3155|PENDING|1|(AssocGrpNodeLimit)
 3154|PENDING|1|(AssocGrpNodeLimit)
 ```
 
