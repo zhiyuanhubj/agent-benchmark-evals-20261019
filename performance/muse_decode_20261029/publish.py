@@ -121,8 +121,11 @@ def main():
                 ax.errorbar(xs,[r['input_tokens_s_gpu'] for r in values],
                     xerr=None if kind=='throughput' else [r['latency_p50_sd'] for r in values],
                     yerr=[r['throughput_sd'] for r in values],marker='o',capsize=3,label=label)
+                if kind=='pareto':
+                    for x,r in zip(xs,values):ax.annotate('C='+str(r['concurrency']),(x,r['input_tokens_s_gpu']),xytext=(5,5),textcoords='offset points',fontsize=8)
             ax.set_xlabel('Input length (Ki tokens)' if kind=='throughput' else 'Native prefill phase latency p50 (seconds/request)')
             ax.set_ylabel('Actual input tokens / native prefill phase seconds / GPU')
+            ax.set_xlim(left=0);ax.set_ylim(bottom=0)
             ax.set_title('Muse prefill-only cohorts — IN PROGRESS\n1 output token; includes engine scheduling + first-token sampling; error bars: repetition SD')
             ax.grid(alpha=.25);ax.legend(fontsize=8);fig.tight_layout()
             for suffix in ['png','pdf','svg']:fig.savefig(dest/('prefill_'+kind+'.'+suffix),dpi=180)
