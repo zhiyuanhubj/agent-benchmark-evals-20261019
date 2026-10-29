@@ -1,8 +1,19 @@
 # Muse 受控压测完整协议进度
 
-以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。
+已结束的本轮任务存在未完成配置；基础曲线和已验收测点可以使用，全协议尚未完成。
 
-更新时间：2026-10-29 05:23:34 UTC。
+更新时间：2026-10-29 05:25:01 UTC。
+
+任务结束状态与缺口：
+
+- nvfp4: `finished_with_incomplete_cases`；[{"configuration": "cache-off-NGRAM", "case": "coding-0", "returncode": 1}]
+- bf16: `finished_with_incomplete_cases`；[{"configuration": "cache-off-NGRAM", "reason": "Server failed readiness; see preserved startup log"}]
+
+BF16 并发 256 是扩展边界测试：三轮均结束，仅一轮有效；两轮测量入场请求共 9 个 ReadError，TTFT p95 已超过 60 秒。保留三轮记录，但不画为有效三重复曲线点。
+
+NVFP4 NGRAM: `NgramVerifyInput` 缺少 `draft_probs`；BF16 NGRAM: verify CUDA graph 分配 8 GiB page table 时 OOM。均无有效投机加速数字。
+
+与 [DeepInfer 原图](https://github.com/deepseek-ai/DeepInfer/blob/main/doc/images/decode_pareto.png) 采用同类坐标。其 [官方说明](https://github.com/deepseek-ai/DeepInfer#performance-benchmarks) 为 64×SM100 decode 测试；图中为 128K 上下文及固定 nextn=3。这里是 H200、包含 prefill 的闭环服务测量，不能据此直接比较绝对吞吐或断言精度差异的因果效果。
 
 配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。
 
@@ -63,13 +74,23 @@
 | nvfp4/8192 | False/off | 64 | 3 | 425.420 | 353/0 | 115.538 ± 0.070 | 20.907 ± 2.033 | 18.298/37.054 | 47.830/66.455 | 70.921/71.200 |
 | nvfp4/8192 | False/off | 128 | 3 | 731.265 | 698/0 | 134.439 ± 0.714 | 12.939 ± 1.054 | 30.995/69.050 | 77.284/113.133 | 121.370/122.869 |
 
-当前吞吐—单用户速度曲线（仅含已验收测点）：
+8K 基础吞吐—单用户速度曲线（仅含已验收测点）：
 
-![synthetic curve](synthetic.png)
+![8K serving Pareto curve](decode_pareto_8k.png)
+
+可导出：[PDF](decode_pareto_8k.pdf)、[SVG](decode_pareto_8k.svg)、[数据 CSV](decode_pareto_8k.csv)。
+
+32K/64K × 缓存开关分面图：
+
+![Long-context Pareto curves](decode_pareto_long_context.png)
+
+![Coding and review Pareto curves](decode_pareto_coding.png)
+
+全部 synthetic 配置总览：[synthetic.png](synthetic.png)。
 
 coding+review 各 native 输入长度桶及投机开关分别成线：[coding.png](coding.png)。
 
-已完成 52 / 62 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
+已完成 52 / 65 个当前列出的目标测点。真实 coding 输入分桶在准备后展开；自适应扩展另见 SATURATION/EXTENSION 记录。
 
 | 模型 | 输入/工作负载 | 缓存 | 投机 | 并发 | 有效重复/目标 | 状态 |
 |---|---|---|---|---:|---:|---|
@@ -99,12 +120,12 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | nvfp4 | coding/native-8192-32768 | False | off | 1 | 3/3 | complete |
 | nvfp4 | coding/native-8192-32768 | False | off | 8 | 3/3 | complete |
 | nvfp4 | coding/native-8192-32768 | False | off | 32 | 3/3 | complete |
-| nvfp4 | coding/native-0-8192 | False | NGRAM | 1 | 0/3 | pending |
-| nvfp4 | coding/native-0-8192 | False | NGRAM | 8 | 0/3 | pending |
-| nvfp4 | coding/native-0-8192 | False | NGRAM | 32 | 0/3 | pending |
-| nvfp4 | coding/native-8192-32768 | False | NGRAM | 1 | 0/3 | pending |
-| nvfp4 | coding/native-8192-32768 | False | NGRAM | 8 | 0/3 | pending |
-| nvfp4 | coding/native-8192-32768 | False | NGRAM | 32 | 0/3 | pending |
+| nvfp4 | coding/native-0-8192 | False | NGRAM | 1 | 0/3 | failed_configuration |
+| nvfp4 | coding/native-0-8192 | False | NGRAM | 8 | 0/3 | failed_configuration |
+| nvfp4 | coding/native-0-8192 | False | NGRAM | 32 | 0/3 | failed_configuration |
+| nvfp4 | coding/native-8192-32768 | False | NGRAM | 1 | 0/3 | failed_configuration |
+| nvfp4 | coding/native-8192-32768 | False | NGRAM | 8 | 0/3 | failed_configuration |
+| nvfp4 | coding/native-8192-32768 | False | NGRAM | 32 | 0/3 | failed_configuration |
 | bf16 | synthetic/8192 | False | off | 1 | 3/3 | complete |
 | bf16 | synthetic/8192 | False | off | 2 | 3/3 | complete |
 | bf16 | synthetic/8192 | False | off | 4 | 3/3 | complete |
@@ -131,9 +152,12 @@ coding+review 各 native 输入长度桶及投机开关分别成线：[coding.pn
 | bf16 | coding/native-8192-32768 | False | off | 1 | 3/3 | complete |
 | bf16 | coding/native-8192-32768 | False | off | 8 | 3/3 | complete |
 | bf16 | coding/native-8192-32768 | False | off | 32 | 3/3 | complete |
-| bf16 | coding/native-input-bins-pending | False | NGRAM | 1 | 0/3 | pending |
-| bf16 | coding/native-input-bins-pending | False | NGRAM | 8 | 0/3 | pending |
-| bf16 | coding/native-input-bins-pending | False | NGRAM | 32 | 0/3 | pending |
+| bf16 | coding/native-0-8192 | False | NGRAM | 1 | 0/3 | failed_configuration |
+| bf16 | coding/native-0-8192 | False | NGRAM | 8 | 0/3 | failed_configuration |
+| bf16 | coding/native-0-8192 | False | NGRAM | 32 | 0/3 | failed_configuration |
+| bf16 | coding/native-8192-32768 | False | NGRAM | 1 | 0/3 | failed_configuration |
+| bf16 | coding/native-8192-32768 | False | NGRAM | 8 | 0/3 | failed_configuration |
+| bf16 | coding/native-8192-32768 | False | NGRAM | 32 | 0/3 | failed_configuration |
 | bf16 | synthetic/8192 | False | off | 256 | 1/3 | partial |
 
 详细逐轮指标：[detailed_rounds.csv](detailed_rounds.csv)；逐请求合并后的测点统计：[detailed_points.csv](detailed_points.csv)。
