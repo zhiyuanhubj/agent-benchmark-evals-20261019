@@ -204,7 +204,7 @@ def main():
             fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.5,.935 if workload=='synthetic' else .895),ncol=len(handles),fontsize=9)
             fig.suptitle('Muse decode-only curves — IN PROGRESS\nFixed model/framework/parallel/KV configuration per line; labels: concurrency; error bars: repeat SD',fontsize=13,y=.995)
             fig.supxlabel('Per-request decode speed p50 (output tokens/s/user)',y=.035)
-            fig.supylabel('Actual decode-window output tokens / decode-window seconds / GPU',x=.025)
+            fig.supylabel('Actual decode-window output tokens / decode-window seconds / GPU',x=.025,fontsize=11)
             fig.subplots_adjust(left=.085,right=.98,top=.85 if workload=='synthetic' else .78,bottom=.105,wspace=.17,hspace=.25)
             for suffix in ['png','pdf','svg']:fig.savefig(dest/('decode_pareto_'+workload+'_panels.'+suffix),dpi=180)
             plt.close(fig)
