@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793260002.9732332,
+  "updated_unix": 1793260225.8693748,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 12,
@@ -185,31 +185,42 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 9,
+  "valid_rounds": 10,
   "accepted_points": 2,
   "prefill_valid_rounds": 9,
   "prefill_accepted_points": 3,
   "active_measurements": [
     {
-      "job": 3135,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c001-r1/progress.json",
+      "job": 3134,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c002-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 222.8084165295586,
-        "warmup_decode_seconds": 66.84206312708557,
-        "successful_measured_requests": 20,
-        "batches": 26
+        "decode_seconds": 24.344152817502618,
+        "warmup_decode_seconds": 60.86824567615986,
+        "successful_measured_requests": 4,
+        "batches": 7
+      }
+    },
+    {
+      "job": 3135,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k/nvfp4/spec-off/synthetic-65536/c001-r2/progress.json",
+      "progress": {
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 11.13987747579813,
+        "successful_measured_requests": 0,
+        "batches": 1
       }
     },
     {
       "job": 3136,
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-spec/nvfp4/spec-off/coding-native-0-8192/c001-r2/progress.json",
       "progress": {
-        "phase": "warmup",
-        "decode_seconds": 0,
-        "warmup_decode_seconds": 21.843906980881002,
-        "successful_measured_requests": 0,
-        "batches": 2
+        "phase": "measurement",
+        "decode_seconds": 152.6741824982455,
+        "warmup_decode_seconds": 65.53027141164057,
+        "successful_measured_requests": 14,
+        "batches": 20
       }
     }
   ],
@@ -297,6 +308,162 @@
         "all_native_output_tokens": 1024,
         "unix_offset": 1783709509.4534533
       }
+    },
+    {
+      "job": 3134,
+      "artifact": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k/nvfp4/spec-off/synthetic-32768/c032-r0/INVALID.json",
+      "record": {
+        "valid": false,
+        "start_monotonic": 9550515.572446786,
+        "end_monotonic": 9550537.583339771,
+        "decode_seconds": 22.010892985388637,
+        "actual_output_tokens": 28609,
+        "output_tokens_s_gpu": 162.47069132424198,
+        "request_decode_speeds": [
+          40.65634330952677,
+          40.71408383361241,
+          40.71280687044243,
+          40.71338417657396,
+          40.71389640780733,
+          40.709975289903035,
+          40.71313056202197,
+          40.71372360542703,
+          40.71071313992987,
+          40.71035536357156,
+          40.71123489038607,
+          40.712606799231644,
+          40.71328660129083,
+          40.71218461252449,
+          40.712023866086106,
+          40.711337890363865,
+          40.71182286567993,
+          40.71296654436882,
+          40.71087099633621,
+          40.70960785096684,
+          40.71236072771874,
+          40.711667681171924,
+          40.711076657797896,
+          40.71055331428803,
+          40.710152872441085,
+          40.709771772422876,
+          40.7093988824073,
+          40.70924272775498,
+          40.709088596468796,
+          40.70893389945558,
+          40.708782642980495,
+          40.70866015710012
+        ],
+        "request_tpots_s": [
+          0.024596407807430033,
+          0.024561525296424032,
+          0.024562295672274116,
+          0.024561947384746985,
+          0.024561638365033493,
+          0.024564004101668466,
+          0.02456210038863531,
+          0.024561742612672813,
+          0.02456355889819037,
+          0.0245637747710456,
+          0.024563244094473517,
+          0.024562416377102943,
+          0.024562006251008354,
+          0.0245626710901769,
+          0.02456276807287439,
+          0.02456318194928922,
+          0.02456288934296283,
+          0.024562199340355223,
+          0.024563463652988296,
+          0.024564225812758606,
+          0.02456256483597024,
+          0.02456298297164755,
+          0.0245633395649451,
+          0.024563655332314874,
+          0.024563896950555407,
+          0.024564126902755272,
+          0.02456435190528331,
+          0.024564446130515078,
+          0.02456453913553698,
+          0.024564632482634813,
+          0.024564723754332954,
+          0.024564797665677707
+        ],
+        "requests": 32,
+        "failed_requests": 0,
+        "reason": "KV_retraction_or_missing_retraction_counter",
+        "batch": 0,
+        "phase": "warmup",
+        "metrics_before": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "metrics_after": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ],
+          "sglang:num_retracted_requests_total": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "attempted_requests": 32,
+        "native_successes": 32,
+        "native_failures": 0,
+        "all_native_output_tokens": 32768,
+        "unix_offset": 1783709509.4534535
+      }
     }
   ],
   "planned_configuration_groups": 16,
@@ -304,10 +471,10 @@
   "planned_repetitions_upper_bound": 364,
   "dense_followups": {
     "3134": {
-      "phase": "waiting_current_sweep",
-      "updated_unix": 1793258136.1843164,
+      "phase": "extending_warm_replica",
+      "updated_unix": 1793260075.4046078,
       "same_warm_replica": true,
-      "concurrency": "1,8,32"
+      "concurrency": "1,2,4,8,16,32,64,128,256"
     }
   },
   "prefill_followups": {
