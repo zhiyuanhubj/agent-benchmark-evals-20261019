@@ -8,6 +8,7 @@ import shutil
 import signal
 import socket
 import subprocess
+import time
 from pathlib import Path
 
 IMAGE = 'lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a'
@@ -54,6 +55,13 @@ def main():
     run(cmd, env=env)
     # These jobs are dedicated to this suite; never stop another user's process.
     apps = subprocess.check_output(['nvidia-smi', '--query-compute-apps=pid', '--format=csv,noheader'], text=True).strip()
+    if a.action == 'prepare':
+        # Slurm can grant the next allocation before the prior GPU process exits.
+        for _ in range(24):
+            if not apps:
+                break
+            time.sleep(5)
+            apps = subprocess.check_output(['nvidia-smi', '--query-compute-apps=pid', '--format=csv,noheader'], text=True).strip()
     assert not apps, 'Allocated GPUs are occupied; refusing to overwrite a workload'
     hardware = subprocess.check_output(['nvidia-smi', '--query-gpu=name,uuid,driver_version,memory.total',
                                          '--format=csv,noheader,nounits'], text=True).splitlines()

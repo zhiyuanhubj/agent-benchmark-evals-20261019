@@ -28,7 +28,11 @@ def main():
             '--kill-on-bad-exit=1','-N'+str(n),'-n'+str(n),'--ntasks-per-node=1','-c48',sys.executable,str(root/'node.py')]
     common=['--state',str(a.state),'--precision',precision]
     status('preparing_and_verifying_pinned_weights')
-    subprocess.run([*prefix,'prepare',*common],check=True)
+    try:
+        subprocess.run([*prefix,'prepare',*common],check=True)
+    except BaseException as exc:
+        status('failed_preparation',error=type(exc).__name__+': '+str(exc))
+        raise
     monitor=subprocess.Popen(['srun','--jobid='+str(job),'--nodelist='+nodes,'--overlap','--exact','--gres=none',
         '-N'+str(n),'-n'+str(n),'--ntasks-per-node=1','-c1',sys.executable,str(root/'gpu.py'),'--output',str(a.state/precision/'gpu')])
     server=None;failures=[]
