@@ -2,7 +2,7 @@
 
 以下结果为进行中的测量；完整曲线、长上下文与投机对照尚未全部完成。
 
-更新时间：2026-10-29 03:08:17 UTC。
+更新时间：2026-10-29 03:23:18 UTC。
 
 配置、模型完整 revision、镜像 digest、实际启动命令、物理 GPU 与 native server_info：[reproducibility.json](reproducibility.json)。
 
