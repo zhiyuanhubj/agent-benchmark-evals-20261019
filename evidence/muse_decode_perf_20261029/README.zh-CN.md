@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-10-30 17:52:46 UTC
+更新时间：2026-10-30 17:57:45 UTC
 
 累计申请 20 个节点；完成 175 个有效重复、57 个满足重复要求的测点。
 
@@ -12,8 +12,8 @@
 
 ```
 3158|PENDING|2|(Resources)
-3157|PENDING|2|(AssocGrpNodeLimit)
-3156|PENDING|2|(AssocGrpNodeLimit)
+3157|PENDING|2|(None)
+3156|PENDING|2|(None)
 ```
 
 ## 多组、多点矩阵
