@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793399401.8440366,
+  "updated_unix": 1793399707.5461671,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -172,9 +172,7 @@
       }
     ]
   },
-  "slurm": [
-    "3158|RUNNING|2|ip-10-1-25-253,ip-10-1-112-220"
-  ],
+  "slurm": [],
   "states": {
     "3133": {
       "phase": "finished_with_incomplete_cases",
@@ -356,14 +354,15 @@
       "error": "CalledProcessError: Command '['srun', '--jobid=3157', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'prepare', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-spec-retry1', '--precision', 'bf16']' returned non-zero exit status 1."
     },
     "3158": {
-      "phase": "preparing_and_verifying_pinned_weights",
+      "phase": "failed_preparation",
       "job": 3158,
       "precision": "bf16",
       "nodes": [
         "ip-10-1-25-253",
         "ip-10-1-112-220"
       ],
-      "updated_unix": 1793398068.8629916
+      "updated_unix": 1793399599.6901913,
+      "error": "CalledProcessError: Command '['srun', '--jobid=3158', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'prepare', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-128k-retry1', '--precision', 'bf16']' returned non-zero exit status 1."
     }
   },
   "valid_rounds": 175,
