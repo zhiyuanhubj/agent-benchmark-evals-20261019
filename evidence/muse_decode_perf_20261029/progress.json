@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793394864.8551419,
+  "updated_unix": 1793395170.5930471,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -175,7 +175,7 @@
   "slurm": [
     "3158|PENDING|2|(Resources)",
     "3157|PENDING|2|(None)",
-    "3156|PENDING|2|(None)"
+    "3156|RUNNING|2|ip-10-1-25-253,ip-10-1-112-220"
   ],
   "states": {
     "3133": {
@@ -336,7 +336,14 @@
       ]
     },
     "3156": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3156,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-25-253",
+        "ip-10-1-112-220"
+      ],
+      "updated_unix": 1793395059.1873357
     },
     "3157": {
       "phase": "queued"
