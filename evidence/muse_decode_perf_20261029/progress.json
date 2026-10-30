@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793397893.6431904,
+  "updated_unix": 1793398189.8679285,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -173,8 +173,7 @@
     ]
   },
   "slurm": [
-    "3158|PENDING|2|(None)",
-    "3157|RUNNING|2|ip-10-1-25-253,ip-10-1-112-220"
+    "3158|RUNNING|2|ip-10-1-25-253,ip-10-1-112-220"
   ],
   "states": {
     "3133": {
@@ -346,17 +345,25 @@
       "error": "CalledProcessError: Command '['srun', '--jobid=3156', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'prepare', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-retry1', '--precision', 'bf16']' returned non-zero exit status 1."
     },
     "3157": {
-      "phase": "preparing_and_verifying_pinned_weights",
+      "phase": "failed_preparation",
       "job": 3157,
       "precision": "bf16",
       "nodes": [
         "ip-10-1-25-253",
         "ip-10-1-112-220"
       ],
-      "updated_unix": 1793396632.3689957
+      "updated_unix": 1793398066.3887978,
+      "error": "CalledProcessError: Command '['srun', '--jobid=3157', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'prepare', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-spec-retry1', '--precision', 'bf16']' returned non-zero exit status 1."
     },
     "3158": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3158,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-25-253",
+        "ip-10-1-112-220"
+      ],
+      "updated_unix": 1793398068.8629916
     }
   },
   "valid_rounds": 175,
