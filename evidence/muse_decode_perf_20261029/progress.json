@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793347982.0042033,
+  "updated_unix": 1793348290.6021552,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -306,24 +306,32 @@
       "confirmed_terminal_unix": 1793268071.7676282
     },
     "3154": {
-      "phase": "starting_fixed_server",
+      "phase": "measuring_decode_only",
       "job": 3154,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-69-108"
       ],
-      "updated_unix": 1793347222.3408654,
-      "speculative": "off"
+      "updated_unix": 1793348107.700453,
+      "speculative": "off",
+      "workload": "synthetic",
+      "input_tokens": 8192,
+      "input_range": null,
+      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192"
     },
     "3155": {
-      "phase": "starting_fixed_server",
+      "phase": "measuring_decode_only",
       "job": 3155,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-112-220"
       ],
-      "updated_unix": 1793347237.5605457,
-      "speculative": "off"
+      "updated_unix": 1793348108.2490306,
+      "speculative": "off",
+      "workload": "synthetic",
+      "input_tokens": 131072,
+      "input_range": null,
+      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-128k-retry1/nvfp4/spec-off/synthetic-131072"
     },
     "3156": {
       "phase": "queued"
@@ -349,6 +357,28 @@
         "warmup_decode_seconds": 50.467762518674135,
         "successful_measured_requests": 0,
         "batches": 1
+      }
+    },
+    {
+      "job": 3154,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c001-r0/progress.json",
+      "progress": {
+        "phase": "measurement",
+        "decode_seconds": 66.23327894322574,
+        "warmup_decode_seconds": 66.28467047214508,
+        "successful_measured_requests": 6,
+        "batches": 12
+      }
+    },
+    {
+      "job": 3155,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-128k-retry1/nvfp4/spec-off/synthetic-131072/c001-r0/progress.json",
+      "progress": {
+        "phase": "measurement",
+        "decode_seconds": 11.269610740244389,
+        "warmup_decode_seconds": 67.63820966333151,
+        "successful_measured_requests": 1,
+        "batches": 7
       }
     }
   ],
