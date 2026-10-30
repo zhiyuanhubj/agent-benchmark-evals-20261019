@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793347077.479183,
+  "updated_unix": 1793347378.7821918,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 20,
@@ -176,8 +176,8 @@
     "3157|PENDING|2|(Resources)",
     "3158|PENDING|2|(Priority)",
     "3156|PENDING|2|(None)",
-    "3155|PENDING|1|(None)",
-    "3154|PENDING|1|(None)"
+    "3155|RUNNING|1|ip-10-1-112-220",
+    "3154|RUNNING|1|ip-10-1-69-108"
   ],
   "states": {
     "3133": {
@@ -306,10 +306,24 @@
       "confirmed_terminal_unix": 1793268071.7676282
     },
     "3154": {
-      "phase": "queued"
+      "phase": "starting_fixed_server",
+      "job": 3154,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-69-108"
+      ],
+      "updated_unix": 1793347222.3408654,
+      "speculative": "off"
     },
     "3155": {
-      "phase": "queued"
+      "phase": "starting_fixed_server",
+      "job": 3155,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-112-220"
+      ],
+      "updated_unix": 1793347237.5605457,
+      "speculative": "off"
     },
     "3156": {
       "phase": "queued"
