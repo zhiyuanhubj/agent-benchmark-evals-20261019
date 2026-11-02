@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793605004.4246573,
-  "latest_decode_artifact_unix": 1793604208.0,
+  "updated_unix": 1793605304.559368,
+  "latest_decode_artifact_unix": 1793605169.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 30,
@@ -267,8 +267,8 @@
     ]
   },
   "slurm": [
-    "3273|PENDING|2|(None)",
-    "3274|PENDING|2|(Resources)",
+    "3273|PENDING|2|(Resources)",
+    "3274|PENDING|2|(Priority)",
     "3272|PENDING|2|(None)",
     "3271|RUNNING|2|ip-10-1-77-106,ip-10-1-114-210"
   ],
@@ -488,8 +488,8 @@
       "phase": "queued"
     }
   },
-  "valid_rounds": 177,
-  "accepted_points": 57,
+  "valid_rounds": 178,
+  "accepted_points": 58,
   "prefill_valid_rounds": 45,
   "prefill_accepted_points": 15,
   "active_measurements": [
@@ -517,13 +517,13 @@
     },
     {
       "job": 3271,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-20261102/bf16/spec-off/synthetic-65536/c001-r2/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-20261102/bf16/spec-off/synthetic-65536/c002-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 509.51910494081676,
-        "warmup_decode_seconds": 61.1733219511807,
-        "successful_measured_requests": 25,
-        "batches": 28
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 63.28794698603451,
+        "successful_measured_requests": 0,
+        "batches": 3
       }
     }
   ],
