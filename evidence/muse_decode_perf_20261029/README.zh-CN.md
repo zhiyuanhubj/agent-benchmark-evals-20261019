@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-11-02 11:38:35 UTC
+更新时间：2026-11-02 11:43:39 UTC
 
 最近 decode 结果写入时间：2026-11-02 10:17:54 UTC。报告刷新时间不代表新增测量。
 
@@ -14,8 +14,8 @@
 
 ```
 3274|PENDING|2|(Resources)
-3273|PENDING|2|(None)
-3272|PENDING|2|(None)
+3273|PENDING|2|(AssocGrpNodeLimit)
+3272|PENDING|2|(AssocGrpNodeLimit)
 ```
 
 ## 多组、多点矩阵
