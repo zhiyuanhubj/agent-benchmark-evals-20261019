@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793652784.7759578,
-  "latest_decode_artifact_unix": 1793652674.0,
+  "updated_unix": 1793653087.1082613,
+  "latest_decode_artifact_unix": 1793652950.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 32,
@@ -553,14 +553,14 @@
       ]
     },
     "3274": {
-      "phase": "measuring_decode_only",
+      "phase": "measuring_deferred_prefill",
       "job": 3274,
       "precision": "bf16",
       "nodes": [
         "ip-10-1-95-27",
         "ip-10-1-114-210"
       ],
-      "updated_unix": 1793644979.2729917,
+      "updated_unix": 1793653056.6448355,
       "speculative": "off",
       "workload": "synthetic",
       "input_tokens": 32768,
@@ -595,8 +595,8 @@
       "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536"
     }
   },
-  "valid_rounds": 238,
-  "accepted_points": 77,
+  "valid_rounds": 239,
+  "accepted_points": 78,
   "prefill_valid_rounds": 63,
   "prefill_accepted_points": 21,
   "active_measurements": [
@@ -624,13 +624,24 @@
     },
     {
       "job": 3274,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c016-r2/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/prefill/synthetic-32768/c001-r0/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 30.02257485128939,
-        "warmup_decode_seconds": 89.93512267619371,
-        "successful_measured_requests": 16,
-        "batches": 4
+        "phase": "warmup",
+        "engine_seconds": 0,
+        "warmup_engine_seconds": 17.911925077438354,
+        "successful_requests": 0,
+        "batches": 9
+      }
+    },
+    {
+      "job": 3290,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536/c048-r1/progress.json",
+      "progress": {
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 30.210325855761766,
+        "successful_measured_requests": 0,
+        "batches": 1
       }
     }
   ],
@@ -1600,6 +1611,162 @@
         "native_failures": 0,
         "all_native_output_tokens": 65536,
         "unix_offset": 1783709506.316175
+      }
+    },
+    {
+      "job": 3274,
+      "artifact": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c032-r0/INVALID.json",
+      "record": {
+        "valid": false,
+        "start_monotonic": 9943516.150266903,
+        "end_monotonic": 9943547.799685104,
+        "decode_seconds": 31.64941820129752,
+        "actual_output_tokens": 28640,
+        "output_tokens_s_gpu": 56.55712179652692,
+        "request_decode_speeds": [
+          28.306495776681043,
+          28.30638922153559,
+          28.30584515640348,
+          28.306083211330566,
+          28.306313659485728,
+          28.304068298676473,
+          28.30599514407936,
+          28.306239693772934,
+          28.304311665026223,
+          28.304236092368786,
+          28.30573576329154,
+          28.303791753134657,
+          28.306066112001293,
+          28.30511090947196,
+          28.303887214180882,
+          28.30416071206618,
+          28.30558086558704,
+          28.30591906496587,
+          28.3053035226203,
+          28.30492779186438,
+          28.304794527683466,
+          28.30500141520379,
+          28.304703271921905,
+          28.305506992176767,
+          28.305656205043995,
+          28.303968688647657,
+          28.304589467614367,
+          28.30507734749831,
+          28.304399619982902,
+          28.3044809438352,
+          28.304866429358754,
+          28.305430778805412
+        ],
+        "request_tpots_s": [
+          0.03532758020947977,
+          0.03532771319484284,
+          0.035328392226924035,
+          0.035328095114187774,
+          0.035327807500108374,
+          0.03533061005391797,
+          0.03532820502900304,
+          0.035327899813552034,
+          0.0353303062739955,
+          0.03533040060634648,
+          0.03532852876048027,
+          0.035330955255818315,
+          0.035328116455434155,
+          0.03532930866083843,
+          0.03533083609444916,
+          0.03533049469909545,
+          0.035328722090129085,
+          0.03532829998223574,
+          0.03532906825043745,
+          0.035329537222399406,
+          0.035329703560361525,
+          0.035329445327738386,
+          0.035329817465071044,
+          0.035328814293147465,
+          0.03532862805780149,
+          0.03533073439277392,
+          0.035329959515723874,
+          0.03532935055160282,
+          0.03533019648627347,
+          0.03533009497627983,
+          0.03532961381378456,
+          0.03532890941722681
+        ],
+        "requests": 32,
+        "failed_requests": 0,
+        "reason": "KV_retraction_or_missing_retraction_counter",
+        "batch": 0,
+        "phase": "warmup",
+        "metrics_before": {
+          "sglang:max_total_num_tokens": [
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "metrics_after": {
+          "sglang:num_retracted_requests_total": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ],
+          "sglang:max_total_num_tokens": [
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0,
+            7095870.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "attempted_requests": 32,
+        "native_successes": 32,
+        "native_failures": 0,
+        "all_native_output_tokens": 32768,
+        "unix_offset": 1783709506.3161752
       }
     }
   ],
