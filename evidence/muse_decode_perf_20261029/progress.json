@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793651885.1164448,
-  "latest_decode_artifact_unix": 1793651444.0,
+  "updated_unix": 1793652185.332053,
+  "latest_decode_artifact_unix": 1793651958.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 32,
@@ -600,7 +600,7 @@
       "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536"
     }
   },
-  "valid_rounds": 234,
+  "valid_rounds": 235,
   "accepted_points": 76,
   "prefill_valid_rounds": 63,
   "prefill_accepted_points": 21,
@@ -629,13 +629,13 @@
     },
     {
       "job": 3274,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c016-r0/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c016-r1/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 89.94034091383219,
-        "warmup_decode_seconds": 89.7173942103982,
-        "successful_measured_requests": 48,
-        "batches": 6
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 89.7384336721152,
+        "successful_measured_requests": 0,
+        "batches": 3
       }
     },
     {
@@ -643,10 +643,10 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k-dense-20261102/nvfp4/spec-off/synthetic-32768/c028-r2/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 22.731466090998765,
+        "decode_seconds": 90.89782366499549,
         "warmup_decode_seconds": 68.27476021699749,
-        "successful_measured_requests": 28,
-        "batches": 4
+        "successful_measured_requests": 112,
+        "batches": 7
       }
     },
     {
@@ -654,10 +654,10 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536/c048-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 30.25636533368379,
+        "decode_seconds": 60.5304050873965,
         "warmup_decode_seconds": 60.686223099939525,
-        "successful_measured_requests": 48,
-        "batches": 3
+        "successful_measured_requests": 96,
+        "batches": 4
       }
     }
   ],
