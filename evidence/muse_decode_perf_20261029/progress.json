@@ -1,9 +1,9 @@
 {
-  "updated_unix": 1793597989.4261994,
+  "updated_unix": 1793598297.4741814,
   "latest_decode_artifact_unix": 1793373419.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
-    "requested_nodes": 28,
+    "requested_nodes": 30,
     "gpus_per_node": 8,
     "jobs": [
       {
@@ -172,24 +172,6 @@
         ]
       },
       {
-        "job": 3270,
-        "nodes": 2,
-        "precision": "bf16",
-        "mode": "long",
-        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-20261102",
-        "input_lengths": [
-          32768
-        ],
-        "replaces_failed_job": 3156,
-        "excluded_nodes": [
-          "ip-10-1-25-253",
-          "ip-10-1-62-51",
-          "ip-10-1-113-136",
-          "ip-10-1-112-220"
-        ],
-        "placement_retry_limit": 6
-      },
-      {
         "job": 3271,
         "nodes": 2,
         "precision": "bf16",
@@ -240,14 +222,55 @@
           "ip-10-1-112-220"
         ],
         "placement_retry_limit": 6
+      },
+      {
+        "job": 3274,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102",
+        "input_lengths": [
+          32768
+        ],
+        "replaces_failed_job": 3156,
+        "excluded_nodes": [
+          "ip-10-1-25-253",
+          "ip-10-1-62-51",
+          "ip-10-1-113-136",
+          "ip-10-1-112-220"
+        ],
+        "placement_retry_limit": 6,
+        "replaces_job_reassigned_to_api": 3270
+      }
+    ],
+    "reassigned_to_public_api": [
+      {
+        "job": 3270,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-20261102",
+        "input_lengths": [
+          32768
+        ],
+        "replaces_failed_job": 3156,
+        "excluded_nodes": [
+          "ip-10-1-25-253",
+          "ip-10-1-62-51",
+          "ip-10-1-113-136",
+          "ip-10-1-112-220"
+        ],
+        "placement_retry_limit": 6,
+        "reassigned_unix": 1793598148.0689938,
+        "api_runtime": "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/restore_bf16_20261102"
       }
     ]
   },
   "slurm": [
-    "3270|PENDING|2|(Resources)",
     "3271|PENDING|2|(Priority)",
     "3272|PENDING|2|(Priority)",
-    "3273|PENDING|2|(Priority)"
+    "3273|PENDING|2|(Priority)",
+    "3274|PENDING|2|(Priority)"
   ],
   "states": {
     "3133": {
@@ -440,9 +463,6 @@
       "updated_unix": 1793399599.6901913,
       "error": "CalledProcessError: Command '['srun', '--jobid=3158', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'prepare', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-128k-retry1', '--precision', 'bf16']' returned non-zero exit status 1."
     },
-    "3270": {
-      "phase": "queued"
-    },
     "3271": {
       "phase": "queued"
     },
@@ -450,6 +470,9 @@
       "phase": "queued"
     },
     "3273": {
+      "phase": "queued"
+    },
+    "3274": {
       "phase": "queued"
     }
   },
