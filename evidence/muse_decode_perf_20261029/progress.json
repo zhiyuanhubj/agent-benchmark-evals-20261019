@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793654304.3495657,
-  "latest_decode_artifact_unix": 1793652950.0,
+  "updated_unix": 1793654602.1520762,
+  "latest_decode_artifact_unix": 1793654358.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 32,
@@ -595,9 +595,9 @@
       "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536"
     }
   },
-  "valid_rounds": 239,
+  "valid_rounds": 240,
   "accepted_points": 78,
-  "prefill_valid_rounds": 69,
+  "prefill_valid_rounds": 71,
   "prefill_accepted_points": 23,
   "active_measurements": [
     {
@@ -620,28 +620,6 @@
         "warmup_decode_seconds": 54.27708287164569,
         "successful_measured_requests": 0,
         "batches": 1
-      }
-    },
-    {
-      "job": 3274,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/prefill/synthetic-32768/c032-r0/progress.json",
-      "progress": {
-        "phase": "measurement",
-        "engine_seconds": 0,
-        "warmup_engine_seconds": 63.33205199241638,
-        "successful_requests": 0,
-        "batches": 1
-      }
-    },
-    {
-      "job": 3290,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536/c048-r1/progress.json",
-      "progress": {
-        "phase": "measurement",
-        "decode_seconds": 90.95467617269605,
-        "warmup_decode_seconds": 60.596341830678284,
-        "successful_measured_requests": 144,
-        "batches": 5
       }
     }
   ],
