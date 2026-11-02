@@ -13,5 +13,13 @@ class MatrixTest(unittest.TestCase):
         self.assertEqual(sum(r['required_repeats'] for r in rows),364)
         self.assertEqual(sum(r['workload']=='synthetic' for r in rows),72)
 
+    def test_dense_followup_adds_only_requested_points_and_keeps_base_sweep(self):
+        base={'precision':'bf16','mode':'long','input_lengths':[65536]}
+        dense={**base,'decode_concurrency':'40,48,56'}
+        rows=planned_points({'jobs':[base,dense,dense]})
+        self.assertEqual(len(rows),12)
+        self.assertEqual({r['concurrency'] for r in rows},set((1,2,4,8,16,32,40,48,56,64,128,256)))
+        self.assertEqual(len(planned_points({'jobs':[dense]})),3)
+
 
 if __name__=='__main__':unittest.main()

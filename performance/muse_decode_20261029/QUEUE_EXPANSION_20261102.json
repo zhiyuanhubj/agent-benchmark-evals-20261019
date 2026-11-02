@@ -1,0 +1,47 @@
+{
+  "utc": 1793619912.4024434,
+  "user_request": "你帮我多排队几个节点进去啊",
+  "jobs": [
+    {
+      "job": 3288,
+      "nodes": 2,
+      "precision": "bf16",
+      "mode": "long",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-dense-20261102",
+      "input_lengths": [
+        65536
+      ],
+      "decode_concurrency": "40,48,56",
+      "purpose": "additional_dense_points",
+      "placement_retry_limit": 6
+    },
+    {
+      "job": 3289,
+      "nodes": 1,
+      "precision": "nvfp4",
+      "mode": "long",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k-dense-20261102",
+      "input_lengths": [
+        32768
+      ],
+      "decode_concurrency": "20,24,28",
+      "purpose": "additional_dense_points",
+      "placement_retry_limit": 6
+    },
+    {
+      "job": 3290,
+      "nodes": 1,
+      "precision": "nvfp4",
+      "mode": "long",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102",
+      "input_lengths": [
+        65536
+      ],
+      "decode_concurrency": "40,48,56",
+      "purpose": "additional_dense_points",
+      "placement_retry_limit": 6
+    }
+  ],
+  "added_nodes": 4,
+  "purpose": "Additional points within previously observed valid-to-invalid concurrency intervals, three repeats each; no change to measurement parameters."
+}

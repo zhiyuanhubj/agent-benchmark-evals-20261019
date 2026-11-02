@@ -7,7 +7,9 @@ def planned_points(allocation):
     points = {}
     for job in allocation['jobs']:
         precision = job['precision']
-        cases = [('synthetic', str(n), 'off', SYNTHETIC_C) for n in job['input_lengths']]
+        synthetic_cs = tuple(int(c) for c in job['decode_concurrency'].split(',')) if job.get('decode_concurrency') else SYNTHETIC_C
+        assert synthetic_cs and all(c > 0 for c in synthetic_cs)
+        cases = [('synthetic', str(n), 'off', synthetic_cs) for n in job['input_lengths']]
         if job['mode'] in ('paired_spec', 'long_and_paired_spec'):
             cases += [('coding', label, spec, CODING_C)
                       for label in ('native-0-8192', 'native-8192-32768') for spec in ('off', 'NGRAM')]
