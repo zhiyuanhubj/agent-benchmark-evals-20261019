@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793632354.3134758,
+  "updated_unix": 1793632653.778125,
   "latest_decode_artifact_unix": 1793632263.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -306,9 +306,9 @@
     ]
   },
   "slurm": [
+    "3274|PENDING|2|(Resources)",
     "3288|PENDING|2|(Priority)",
     "3290|PENDING|1|(Priority)",
-    "3274|PENDING|2|(None)",
     "3289|PENDING|1|(Priority)",
     "3273|PENDING|2|(None)",
     "3272|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210"
@@ -577,6 +577,17 @@
         "warmup_decode_seconds": 54.27708287164569,
         "successful_measured_requests": 0,
         "batches": 1
+      }
+    },
+    {
+      "job": 3272,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-128k-20261102/bf16/spec-off/synthetic-131072/c016-r1/progress.json",
+      "progress": {
+        "phase": "measurement",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 62.95820381306112,
+        "successful_measured_requests": 0,
+        "batches": 2
       }
     }
   ],
