@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-11-02 18:11:56 UTC
+更新时间：2026-11-02 18:16:57 UTC
 
 最近 decode 结果写入时间：2026-11-02 17:16:37 UTC。报告刷新时间不代表新增测量。
 
@@ -13,11 +13,11 @@
 ## 调度实况
 
 ```
-3288|PENDING|2|(Resources)
+3288|PENDING|2|(AssocGrpNodeLimit)
 3274|PENDING|2|(AssocGrpNodeLimit)
 3273|PENDING|2|(AssocGrpNodeLimit)
-3290|PENDING|1|(Priority)
-3289|PENDING|1|(Priority)
+3290|PENDING|1|(AssocGrpNodeLimit)
+3289|PENDING|1|(AssocGrpNodeLimit)
 3272|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210
 ```
 
