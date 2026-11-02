@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-11-02 10:43:09 UTC
+更新时间：2026-11-02 10:48:11 UTC
 
 最近 decode 结果写入时间：2026-11-02 10:17:54 UTC。报告刷新时间不代表新增测量。
 
@@ -59,7 +59,7 @@ NVFP4/BF16 × 8K/32K/64K/128K，共 8 组基础曲线；每组目标并发 1、2
 
 ## Prefill 独立测量
 
-已完成 51 个有效重复、17 个三重复测点。
+已完成 52 个有效重复、17 个三重复测点。
 
 每请求实际 prefill 完整输入，只生成 1 token，不混入后续 decode 工作。分母取 native `forward_entry_time` 至 `prefill_finished_time` 的整批包络；分子为该批 native `prompt_tokens` 之和。保存客户端耗时，但不拿 TTFT 代替这个 native prefill 阶段计时。
 
