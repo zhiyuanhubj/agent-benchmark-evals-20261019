@@ -1,0 +1,72 @@
+{
+  "utc": 1793642410.528871,
+  "request": "Use local H200 and label actual hardware",
+  "deepinfer_commit": "553741557a57df44a46fb3ab72b6aafeaf945337",
+  "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+  "source_archive": {
+    "repo": "https://github.com/deepseek-ai/DeepInfer",
+    "commit": "553741557a57df44a46fb3ab72b6aafeaf945337",
+    "archive_sha256": "0d91157e59946f123861558309528f5e0ecc995f0b30702c9f3f3bbec38e0e0f",
+    "bytes": 2329171
+  },
+  "vendor_archives": [
+    {
+      "name": "DeepGEMM",
+      "commit": "1fc9c66975ee322d628b3288534ca0e9ce12a64d",
+      "archive_sha256": "435cca587a266ef79893310d5050413d7e056a48d5bcbc07d165a6241fcf5434",
+      "bytes": 335727
+    },
+    {
+      "name": "FlashMLA",
+      "commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+      "archive_sha256": "81034ea54e568d6b5ff3c9a7ebbf5a022306c1209cf75858f80249484a58770f",
+      "bytes": 299683
+    }
+  ],
+  "finding": "Pinned FlashMLA sparse decode entry requires SM100f; direct H200 use requires an alternate compatible kernel path or a port. This is a source audit, not a GPU execution result.",
+  "guard": {
+    "url": "https://github.com/deepseek-ai/FlashMLA/blob/2e5429fc5653bab6e081f09477126f731882a6a9/csrc/api/sparse_decode.cpp#L190",
+    "line": 190,
+    "file_sha256": "95e80b055de6da3471f27f49296368c8c17392e90bc745d188c5af31e21a6bb6"
+  },
+  "deepinfer_callsite": "https://github.com/deepseek-ai/DeepInfer/blob/553741557a57df44a46fb3ab72b6aafeaf945337/deepinfer/model_executor/layers/attention_backend.py",
+  "gpu_execution_attempted": false,
+  "performance_results_available": false,
+  "original_sm100_reference_retained": true,
+  "h200_deepinfer_job_submitted": false,
+  "h200_sglang_job_submitted": false,
+  "local_baseline_requested": {
+    "model_repo": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "revision": "1bae0e1088993b9b82de08f59de5be5a34e42170",
+    "gpus": 8,
+    "gpu_type": "H200",
+    "input_tokens": 8192,
+    "output_tokens": 1024,
+    "global_concurrency": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "repeats": 3,
+    "warmup_decode_seconds": 60,
+    "measurement_decode_seconds": 120,
+    "minimum_measured_requests": 32,
+    "speculation": "off",
+    "prefix_cache": "off",
+    "kv_cache": "fp8_e4m3",
+    "tp_requested": 8,
+    "ep_requested": 8,
+    "sglang_image_if_selected": "lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a",
+    "sglang_image_model_class_present": true,
+    "sglang_runtime_validation_pending": true
+  },
+  "local_weights_metadata_matches": 0,
+  "local_weights_content_hash_pending": true,
+  "framework_choice": "pending_user_preference"
+}
