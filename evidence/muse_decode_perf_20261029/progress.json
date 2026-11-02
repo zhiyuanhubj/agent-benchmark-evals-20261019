@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793661850.6348462,
-  "latest_decode_artifact_unix": 1793661700.0,
+  "updated_unix": 1793662149.529779,
+  "latest_decode_artifact_unix": 1793661857.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 32,
@@ -306,8 +306,7 @@
     ]
   },
   "slurm": [
-    "3288|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210",
-    "3290|RUNNING|1|ip-10-1-13-41"
+    "3288|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210"
   ],
   "states": {
     "3133": {
@@ -594,22 +593,18 @@
       "failures": []
     },
     "3290": {
-      "phase": "measuring_decode_only",
+      "phase": "finished",
       "job": 3290,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-13-41"
       ],
-      "updated_unix": 1793645253.6561654,
-      "speculative": "off",
-      "workload": "synthetic",
-      "input_tokens": 65536,
-      "input_range": null,
-      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536"
+      "updated_unix": 1793661869.4707303,
+      "failures": []
     }
   },
-  "valid_rounds": 248,
-  "accepted_points": 80,
+  "valid_rounds": 249,
+  "accepted_points": 81,
   "prefill_valid_rounds": 72,
   "prefill_accepted_points": 24,
   "active_measurements": [
@@ -636,14 +631,14 @@
       }
     },
     {
-      "job": 3290,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536/c056-r2/progress.json",
+      "job": 3288,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-dense-20261102/bf16/spec-off/synthetic-65536/c048-r2/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 93.62055230606347,
-        "warmup_decode_seconds": 62.40562858060002,
-        "successful_measured_requests": 168,
-        "batches": 5
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 38.53178344108164,
+        "successful_measured_requests": 0,
+        "batches": 1
       }
     }
   ],
