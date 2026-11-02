@@ -277,7 +277,14 @@ def main():
     (dest/'README.zh-CN.md').write_text('\n'.join(text)+'\n')
     git('add','--sparse','--','evidence/muse_decode_perf_20261029')
     git('-c','user.name=Zhiyuan Hu','-c','user.email=29817400+zhiyuanhubj@users.noreply.github.com','commit','-m','Update independent Muse decode-only measurement progress')
-    print(git('push','origin','HEAD:main').stderr,flush=True)
+    for attempt in range(4):
+        try:
+            print(git('push','origin','HEAD:main').stderr,flush=True)
+            break
+        except subprocess.CalledProcessError as exc:
+            if attempt==3 or not any(reason in (exc.stderr or '') for reason in ['[rejected]','non-fast-forward','fetch first']):
+                raise
+            git('pull','--rebase','origin','main')
 
 
 if __name__=='__main__':main()
