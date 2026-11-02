@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793650974.5884194,
-  "latest_decode_artifact_unix": 1793650719.0,
+  "updated_unix": 1793651283.6713355,
+  "latest_decode_artifact_unix": 1793651075.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 32,
@@ -600,8 +600,8 @@
       "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536"
     }
   },
-  "valid_rounds": 230,
-  "accepted_points": 74,
+  "valid_rounds": 232,
+  "accepted_points": 75,
   "prefill_valid_rounds": 63,
   "prefill_accepted_points": 21,
   "active_measurements": [
@@ -629,13 +629,13 @@
     },
     {
       "job": 3274,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c008-r1/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c008-r2/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 49.96461436524987,
-        "warmup_decode_seconds": 74.93392930552363,
-        "successful_measured_requests": 16,
-        "batches": 5
+        "decode_seconds": 24.890890158712864,
+        "warmup_decode_seconds": 74.80072893574834,
+        "successful_measured_requests": 8,
+        "batches": 4
       }
     },
     {
@@ -643,21 +643,21 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k-dense-20261102/nvfp4/spec-off/synthetic-32768/c028-r1/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 22.69229679399905,
+        "decode_seconds": 90.99516527399555,
         "warmup_decode_seconds": 68.20360271299614,
-        "successful_measured_requests": 28,
-        "batches": 4
+        "successful_measured_requests": 112,
+        "batches": 7
       }
     },
     {
       "job": 3290,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536/c040-r2/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536/c048-r0/progress.json",
       "progress": {
-        "phase": "measurement",
-        "decode_seconds": 117.80778838694096,
-        "warmup_decode_seconds": 88.3812586767599,
-        "successful_measured_requests": 160,
-        "batches": 7
+        "phase": "warmup",
+        "decode_seconds": 0,
+        "warmup_decode_seconds": 30.373053707182407,
+        "successful_measured_requests": 0,
+        "batches": 1
       }
     }
   ],
