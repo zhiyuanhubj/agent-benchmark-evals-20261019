@@ -2,16 +2,21 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-11-02 05:05:48 UTC
+更新时间：2026-11-02 05:09:34 UTC
 
-累计申请 20 个节点；完成 175 个有效重复、57 个满足重复要求的测点。
+最近 decode 结果写入时间：2026-10-30 15:16:59 UTC。报告刷新时间不代表新增测量。
 
-当前测试 allocation：运行 0 个节点、排队 0 个节点；不含对外 API 与其他项目。准备阶段失败的作业：3138, 3139, 3140, 3141, 3156, 3157, 3158。这些基础设施失败不计为模型性能结果，具体原因及替代作业见 progress.json。
+累计申请 28 个节点；完成 175 个有效重复、57 个满足重复要求的测点。
+
+当前测试 allocation：运行 0 个节点、排队 8 个节点；不含对外 API 与其他项目。准备阶段失败的作业：3138, 3139, 3140, 3141, 3156, 3157, 3158。这些基础设施失败不计为模型性能结果，具体原因及替代作业见 progress.json。
 
 ## 调度实况
 
 ```
-
+3270|PENDING|2|(Resources)
+3271|PENDING|2|(Priority)
+3272|PENDING|2|(Priority)
+3273|PENDING|2|(Priority)
 ```
 
 ## 多组、多点矩阵
@@ -35,6 +40,16 @@ NVFP4/BF16 × 8K/32K/64K/128K，共 8 组基础曲线；每组目标并发 1、2
 服务器接入/流式传输仍有开销，本图不声称是 CUDA kernel 的纯设备计时。硬件、模型、并行和上下文未与 DeepInfer 对齐，不直接作吞吐倍数比较。
 
 配置与控制器：[测试代码](../../performance/muse_decode_20261029/README.md)。原始详细状态：[progress.json](progress.json)。
+
+## DeepInfer 外部参考
+
+新增叠图：DeepInfer 64×SM100、每 DP rank 并发、设定投机接受率折算；Muse 为 H200、全局并发、native token 实测。硬件和统计口径不同，不能直接计算速度倍数。官方曲线为固定 commit 的 PNG 数字化值，并非本地复测。
+
+![external reference, logarithmic Y](decode_vs_deepinfer_log.png)
+
+[同尺度线性图](decode_vs_deepinfer_linear.png)；[来源、原图、数字化数据与差异说明](reference/README.zh-CN.md)。
+
+## Muse 实测曲线
 
 ![decode context groups](decode_pareto_synthetic_panels.png)
 
