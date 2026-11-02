@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793599027.072963,
+  "updated_unix": 1793599328.4888446,
   "latest_decode_artifact_unix": 1793373419.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -267,9 +267,10 @@
     ]
   },
   "slurm": [
-    "3274|PENDING|2|(None)",
-    "3273|PENDING|2|(None)",
-    "3272|PENDING|2|(None)"
+    "3274|PENDING|2|(JobHeldUser)",
+    "3273|PENDING|2|(JobHeldUser)",
+    "3272|PENDING|2|(JobHeldUser)",
+    "3271|RUNNING|2|ip-10-1-77-106,ip-10-1-114-210"
   ],
   "states": {
     "3133": {
@@ -1208,25 +1209,7 @@
       "returncode": 0
     }
   },
-  "placement_retries": {
-    "3271": [
-      {
-        "updated_unix": 1793598976.7100785,
-        "job": 3271,
-        "failed_nodes": [
-          "ip-10-1-77-106"
-        ],
-        "excluded_nodes": [
-          "ip-10-1-112-220",
-          "ip-10-1-113-136",
-          "ip-10-1-25-253",
-          "ip-10-1-62-51",
-          "ip-10-1-77-106"
-        ],
-        "reason": "insufficient_local_NVMe"
-      }
-    ]
-  },
+  "placement_retries": {},
   "measurement_kind": "real_KV_full_resident_decode_only_windows",
   "serving_measurements_reused": false
 }
