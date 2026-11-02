@@ -32,6 +32,19 @@ def main():
     prefix=['srun','--jobid='+str(job),'--nodelist='+nodes,'--chdir='+str(root),'--overlap','--exact','--gres=none',
             '--kill-on-bad-exit=1','-N'+str(n),'-n'+str(n),'--ntasks-per-node=1','-c48',sys.executable,str(root/'node.py')]
     common=['--state',str(a.state),'--precision',precision]
+    if plan.get('peer_stage_receipt'):
+        receipt=Path(plan['peer_stage_receipt']);deadline=time.monotonic()+7200
+        status('waiting_for_verified_peer_weights')
+        expected={row['file'] for row in plan['models'][precision]['files']}
+        while True:
+            try:
+                proof=json.loads(receipt.read_text())
+                if proof.get('valid') and set(proof.get('verified_files',[]))==expected:
+                    break
+            except (FileNotFoundError,json.JSONDecodeError):pass
+            if time.monotonic()>deadline:
+                status('failed_peer_staging_timeout');raise RuntimeError('Pinned peer staging did not finish in two hours')
+            time.sleep(5)
     status('preparing_and_verifying_pinned_weights')
     preparation_started=time.time()
     try:

@@ -123,6 +123,16 @@ def main(runtime):
                            'nonempty_stream_events':token_events,'reasoning_events':reasoning_events,'answer_events':answer_events})
         assert len(checks)==3
         assert sum(check['reasoning_events'] for check in checks)>0, 'No reasoning stream observed during BF16 validation'
+        full=client.post(cfg['public_base']+'/chat/completions',headers=headers,
+                         json={'model':'muse-spark-open-bf16','messages':[{'role':'user','content':'计算 37×43，最终回答只写乘积。'}],
+                               'max_tokens':4096,'reasoning_effort':'low','stream':False},timeout=180)
+        full.raise_for_status();reply=full.json();message=reply['choices'][0]['message']
+        assert message.get('reasoning_content') and '1591' in (message.get('content') or '')
+        assert reply['choices'][0]['finish_reason']=='stop'
+        save(runtime/'FULL_GENERATION_RESPONSE.json',reply)
+        save(runtime/'FULL_GENERATION_VALIDATION.json',{'updated_unix':time.time(),'job':cfg['job'],'http':200,
+             'reasoning_chars':len(message['reasoning_content']),'final_content':message['content'],
+             'finish_reason':'stop','usage':reply.get('usage'),'complete_answer_verified':True})
         unauthorized=client.get(cfg['public_base']+'/models');assert unauthorized.status_code==401
         save(runtime/'VALIDATION.json',{'updated_unix':time.time(),'job':cfg['job'],'precision':'bf16','gpus':16,
                                       'global_admission_cap':8,'original_three_keys_preserved':True,'checks':checks,'unauthenticated_http':401})

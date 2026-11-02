@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Prepare/serve only the freshly allocated controlled-test hosts."""
 import argparse
-import hashlib
 import json
 import os
 import shutil
@@ -10,7 +9,7 @@ import socket
 import subprocess
 import time
 from pathlib import Path
-from placement import choose_weights
+from placement import choose_weights, verify_files
 
 IMAGE = 'lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a'
 
@@ -107,18 +106,7 @@ def main():
                 from huggingface_hub import snapshot_download
                 snapshot_download(manifest['repo'], revision=manifest['revision'],
                                   local_dir=weights, allow_patterns=[r['file'] for r in manifest['files']], max_workers=8)
-        checked = []
-        for row in manifest['files']:
-            target = weights / row['file']
-            assert target.is_file() and target.stat().st_size == row['bytes'], str(target)
-            h = hashlib.sha256() if row['algorithm'] == 'sha256' else hashlib.sha1()
-            if row['algorithm'] == 'git-blob-sha1':
-                h.update(('blob ' + str(row['bytes']) + '\0').encode())
-            with target.open('rb') as stream:
-                for block in iter(lambda: stream.read(16 * 2**20), b''):
-                    h.update(block)
-            assert h.hexdigest() == row['expected'], 'Pinned weight mismatch: ' + str(target)
-            checked.append(row['file'])
+        checked = verify_files(weights, manifest, workers=8 if a.precision=='bf16' else 2)
         (shared / 'weights.json').write_text(json.dumps({'path': str(weights), 'repo': manifest['repo'],
             'revision': manifest['revision'], 'verified_files': checked, 'complete': True}, indent=2))
         return

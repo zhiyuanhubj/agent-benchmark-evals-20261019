@@ -50,6 +50,10 @@ NGRAM uses the framework's native target-only verification path. The previous ex
 
 The November 2 BF16 continuation queues 32K, 64K, 128K and paired coding as four independent two-node jobs. Each allocation performs a storage preflight on both ranks before image pulling or distributed weight staging. Complete local pinned copies remain subject to full hash verification. A disk-capacity failure records the required/free byte counts and may requeue only that same owned job, adding the failing host to its exclusions, at most six times. This does not delete weights, checkpoints or another workload. Other preparation errors remain explicit failures.
 
+Slurm placement changes are performed only while the job is pending: the failing batch requests `requeuehold`, and `placement_watcher.py` checks ownership, clears the old required node list, applies the recorded exclusions, then releases that owned job. Cryptographic verification of local BF16 weights uses eight CPU workers with unchanged pinned hashes.
+
+`peer_weights.py` supports an authenticated, manifest-limited copy from another node in the same owned allocation. Every file is hash-verified before its temporary file is promoted; only verified complete files are reused on restart. Direct streaming requires remaining bytes plus a 32 GiB scratch reserve and checks that reserve throughout transfer. It creates no HF/Xet chunk cache. The normal model preparation still performs full pinned verification afterwards. A receipt-gated controller can wait for this transfer before starting preparation, without the short batch-start readiness deadline interrupting a long copy. Neither transport nor preparation time enters the measurement denominator.
+
 ## DeepInfer external reference overlay
 
 `reference_plot.py` adds shared linear and logarithmic comparison figures, including a 128K context panel. The reference uses the pinned official PNG and preserves its Apache-2.0 license, SHA-256, commit, pixel calibration and extracted CSV. The upstream repository has no raw sweep JSONL for this published figure; digitized coordinates are approximate and have no fabricated repetition error bars.

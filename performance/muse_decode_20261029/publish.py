@@ -222,6 +222,7 @@ def main():
               'dense_followups':{str(j['job']):json.loads((Path(j['state'])/'DENSE_EXTENSION.json').read_text()) for j in jobs if (Path(j['state'])/'DENSE_EXTENSION.json').exists()},
               'prefill_followups':{str(j['job']):json.loads((Path(j['state'])/'PREFILL_FOLLOWUP.json').read_text()) for j in jobs if (Path(j['state'])/'PREFILL_FOLLOWUP.json').exists()},
               'placement_retries':{str(j['job']):json.loads((Path(j['state'])/'PLACEMENT_RETRIES.json').read_text()) for j in jobs if (Path(j['state'])/'PLACEMENT_RETRIES.json').exists()},
+              'peer_transfers':{str(j['job']):json.loads((Path(j['state'])/'PEER_TRANSFER.json').read_text()) for j in jobs if (Path(j['state'])/'PEER_TRANSFER.json').exists()},
               'measurement_kind':'real_KV_full_resident_decode_only_windows','serving_measurements_reused':False}
     (dest/'progress.json').write_text(json.dumps(progress,indent=2)+'\n')
     api_descriptor=a.root/'PUBLIC_API.json'
@@ -229,8 +230,10 @@ def main():
         api=json.loads(api_descriptor.read_text());runtime=Path(api['runtime'])
         public_status=json.loads((runtime/'PUBLIC_STATUS.json').read_text()) if (runtime/'PUBLIC_STATUS.json').exists() else {'phase':'waiting_allocation'}
         validation=json.loads((runtime/'VALIDATION.json').read_text()) if (runtime/'VALIDATION.json').exists() else None
+        full_validation=json.loads((runtime/'FULL_GENERATION_VALIDATION.json').read_text()) if (runtime/'FULL_GENERATION_VALIDATION.json').exists() else None
         snapshot={k:api[k] for k in ['job','precision','gpus','global_admission_cap']}
-        snapshot.update(public_base='https://muse.zhiyuanllm.com/v1',status=public_status,validation=validation,report_updated_unix=time.time())
+        snapshot.update(public_base='https://muse.zhiyuanllm.com/v1',status=public_status,validation=validation,
+                        full_generation_validation=full_validation,report_updated_unix=time.time())
         (dest/'muse_api_status.json').write_text(json.dumps(snapshot,indent=2)+'\n')
         ready=public_status.get('phase')=='active'
         note=['# Muse BF16 API 恢复状态','',
@@ -238,6 +241,7 @@ def main():
               f'专用 Slurm 作业 {api["job"]}；BF16 权重，16×H200，TP16/EP16；接入上限为全局 8 路同时生成，更多请求排队。该配置上限不是新一轮吞吐实测结果。','',
               'Base URL：`https://muse.zhiyuanllm.com/v1`；模型别名：`muse-spark-open` / `muse-spark-open-bf16`。','',
               '原三个客户端 key 不轮换；ready 前验证三把 key 的公网流式输出及未鉴权 401，thinking 和工具解析由 Muse parser 透传。','',
+              '完整生成额外验证：'+('已验证 thinking 与最终回答均非空，37×43 最终回答为 1591，finish_reason=stop。短流式探测的 128-token 上限不代表服务输出上限。' if full_validation and full_validation.get('complete_answer_verified') else '尚未完成。'),' ',
               '域名或 /v1/models 返回响应不能证明 GPU 模型已就绪。自动激活器在核对 allocation 归属、后端 BF16 配置和原三 key 的实际生成后才标记 active；allocation 结束后停用旧后端路由。','',
               '[机器可读状态](muse_api_status.json)；[部署代码与说明](../../deployment/muse-openai-api/README.zh-CN.md)。','']
         (dest/'MUSE_API_BF16_STATUS.zh-CN.md').write_text('\n'.join(note))
