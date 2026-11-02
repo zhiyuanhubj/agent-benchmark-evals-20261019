@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793598723.8359544,
+  "updated_unix": 1793599027.072963,
   "latest_decode_artifact_unix": 1793373419.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -267,10 +267,9 @@
     ]
   },
   "slurm": [
-    "3272|PENDING|2|(Resources)",
-    "3273|PENDING|2|(Priority)",
-    "3274|PENDING|2|(Priority)",
-    "3271|PENDING|2|(Resources)"
+    "3274|PENDING|2|(None)",
+    "3273|PENDING|2|(None)",
+    "3272|PENDING|2|(None)"
   ],
   "states": {
     "3133": {
@@ -464,7 +463,15 @@
       "error": "CalledProcessError: Command '['srun', '--jobid=3158', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'prepare', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-128k-retry1', '--precision', 'bf16']' returned non-zero exit status 1."
     },
     "3271": {
-      "phase": "queued"
+      "phase": "failed_preparation",
+      "job": 3271,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-77-106",
+        "ip-10-1-114-210"
+      ],
+      "updated_unix": 1793598976.7007864,
+      "error": "CalledProcessError: Command '['srun', '--jobid=3271', '--nodelist=ip-10-1-77-106,ip-10-1-114-210', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'preflight', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-20261102', '--precision', 'bf16']' returned non-zero exit status 1."
     },
     "3272": {
       "phase": "queued"
@@ -1201,7 +1208,25 @@
       "returncode": 0
     }
   },
-  "placement_retries": {},
+  "placement_retries": {
+    "3271": [
+      {
+        "updated_unix": 1793598976.7100785,
+        "job": 3271,
+        "failed_nodes": [
+          "ip-10-1-77-106"
+        ],
+        "excluded_nodes": [
+          "ip-10-1-112-220",
+          "ip-10-1-113-136",
+          "ip-10-1-25-253",
+          "ip-10-1-62-51",
+          "ip-10-1-77-106"
+        ],
+        "reason": "insufficient_local_NVMe"
+      }
+    ]
+  },
   "measurement_kind": "real_KV_full_resident_decode_only_windows",
   "serving_measurements_reused": false
 }
