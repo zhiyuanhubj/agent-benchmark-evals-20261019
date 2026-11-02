@@ -48,6 +48,16 @@ NGRAM uses the framework's native target-only verification path. The previous ex
 
 ## Execution and reporting
 
+The November 2 BF16 continuation queues 32K, 64K, 128K and paired coding as four independent two-node jobs. Each allocation performs a storage preflight on both ranks before image pulling or distributed weight staging. Complete local pinned copies remain subject to full hash verification. A disk-capacity failure records the required/free byte counts and may requeue only that same owned job, adding the failing host to its exclusions, at most six times. This does not delete weights, checkpoints or another workload. Other preparation errors remain explicit failures.
+
+## DeepInfer external reference overlay
+
+`reference_plot.py` adds shared linear and logarithmic comparison figures, including a 128K context panel. The reference uses the pinned official PNG and preserves its Apache-2.0 license, SHA-256, commit, pixel calibration and extracted CSV. The upstream repository has no raw sweep JSONL for this published figure; digitized coordinates are approximate and have no fabricated repetition error bars.
+
+DeepInfer's published curve uses 64 SM100 GPUs in one scale-up domain, EP64/DP64, context 131072 and fixed nextn=3. Its labels are requests per DP rank (multiply by 64 for the global request count). Its axes use mean engine steps/s multiplied by the assumed acceptance factor tau=3.25, rather than request P50 or actual accepted native token counts. These differences remain visible in the figures; no H200 conversion or direct speedup ratio is inferred. The release lists NVIDIA SM100 support, so an H200 reproduction is not assumed to work. Original Muse-only figures remain separate.
+
+## Artifact publication
+
 `control.py` prepares and verifies weights, starts per-node GPU sampling and the pinned server, executes cases, and stops only containers in its own allocation. BF16 first reuses a fully verified local pinned copy; fresh downloads require enough NVMe space plus a reserve and never delete unrelated files. Requests run on the replica's head GPU host. Native request and timing artifacts remain under each job state directory.
 
 `publish.py` updates `evidence/muse_decode_perf_20261029/` every **5 minutes** with queue status, per-round CSV, accepted point CSV, figures and explicit pending/failure states. It reads only the new phase-specific measurements and does not relabel October 28 serving results.
@@ -74,4 +84,4 @@ Validation:
 python -m unittest discover -s performance/muse_decode_20261029 -p 'test_*.py' -v
 ```
 
-Tests cover token-window boundaries with unequal actual token increments, prefill/tail exclusion, failed requests and non-overlapping cohorts. GPU integration remains pending until allocations start; tests are not experimental results.
+Tests cover token-window boundaries with unequal actual token increments, prefill/tail exclusion, failed requests and non-overlapping cohorts, storage capacity/reuse, retry ownership and digitized-reference provenance. The reference test needs the same NumPy/Pillow dependencies as the plot publisher. Unit tests do not count as experimental results; actual GPU measurements and pending BF16 continuations are recorded separately.

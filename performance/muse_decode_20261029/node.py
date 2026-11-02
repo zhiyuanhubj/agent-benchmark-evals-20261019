@@ -10,6 +10,7 @@ import socket
 import subprocess
 import time
 from pathlib import Path
+from placement import choose_weights
 
 IMAGE = 'lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a'
 
@@ -27,7 +28,7 @@ def docker(*args):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument('action', choices=['prepare', 'serve', 'stop'])
+    p.add_argument('action', choices=['preflight', 'prepare', 'serve', 'stop'])
     p.add_argument('--state', type=Path, required=True)
     p.add_argument('--precision', choices=['nvfp4', 'bf16'], required=True)
     p.add_argument('--cache', action='store_true')
@@ -55,7 +56,7 @@ def main():
     run(cmd, env=env)
     # These jobs are dedicated to this suite; never stop another user's process.
     apps = subprocess.check_output(['nvidia-smi', '--query-compute-apps=pid', '--format=csv,noheader'], text=True).strip()
-    if a.action == 'prepare':
+    if a.action in ('preflight', 'prepare'):
         # Slurm can grant the next allocation before the prior GPU process exits.
         for _ in range(24):
             if not apps:
@@ -67,6 +68,13 @@ def main():
                                          '--format=csv,noheader,nounits'], text=True).splitlines()
     assert len(hardware) == 8 and all('H200' in row for row in hardware)
     (shared / 'hardware.json').write_text(json.dumps({'hostname': socket.gethostname(), 'gpus': hardware}, indent=2))
+    if a.action == 'preflight':
+        if a.precision == 'bf16':
+            placement = choose_weights('/opt/dlami/nvme', local, plan['models'][a.precision], shutil.disk_usage(local).free)
+            placement.update(job=int(job), hostname=socket.gethostname(), updated_unix=time.time())
+            (shared / 'placement.json').write_text(json.dumps(placement, indent=2) + '\n')
+            assert placement['valid'], 'Insufficient local NVMe space; placement.json records required and available bytes'
+        return
     cmd, env = docker('image', 'inspect', IMAGE)
     if subprocess.run(cmd, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode:
         cmd, env = docker('pull', IMAGE)
@@ -91,16 +99,10 @@ def main():
                         (shared/'weights.json').write_text(json.dumps(prior,indent=2)+'\n')
                         return
         else:
-            weights = local / 'weights'
-            # Reuse a complete local, pinned candidate before downloading 1.64 TB.
-            for candidate in sorted(Path('/opt/dlami/nvme').glob('zhiyuan-muse-perf-*/weights')):
-                if all((candidate/r['file']).is_file() and (candidate/r['file']).stat().st_size==r['bytes'] and
-                       (candidate/r['file']).resolve().is_relative_to(candidate.resolve()) for r in manifest['files']):
-                    weights=candidate;break
+            placement = choose_weights('/opt/dlami/nvme', local, manifest, shutil.disk_usage(local).free)
+            assert placement['valid'], 'Insufficient local NVMe space; preflight placement is no longer available'
+            weights = Path(placement['path'])
             if not all((weights/r['file']).is_file() and (weights/r['file']).stat().st_size==r['bytes'] for r in manifest['files']):
-                needed=sum(r['bytes'] for r in manifest['files'] if not (weights/r['file']).exists())
-                free=shutil.disk_usage(local).free
-                assert free > needed+250*2**30, f'Insufficient local NVMe space: free={free}, missing={needed}; no unrelated files deleted'
                 os.environ['HF_XET_CACHE']=str(local/'xet-cache')
                 from huggingface_hub import snapshot_download
                 snapshot_download(manifest['repo'], revision=manifest['revision'],

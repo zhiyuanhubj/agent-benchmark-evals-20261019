@@ -208,7 +208,11 @@ def main():
             fig.subplots_adjust(left=.085,right=.98,top=.85 if workload=='synthetic' else .78,bottom=.105,wspace=.17,hspace=.25)
             for suffix in ['png','pdf','svg']:fig.savefig(dest/('decode_pareto_'+workload+'_panels.'+suffix),dpi=180)
             plt.close(fig)
-    progress={'updated_unix':time.time(),'allocation':allocation,'slurm':queue.stdout.splitlines(),'states':states,
+    if points and (Path(__file__).parent/'reference/deepinfer_reference.json').exists():
+        from reference_plot import render_comparison
+        render_comparison(points,Path(__file__).parent/'reference',dest)
+    latest_decode_artifact_unix=max((Path(row['artifact']).stat().st_mtime for row in rows),default=None)
+    progress={'updated_unix':time.time(),'latest_decode_artifact_unix':latest_decode_artifact_unix,'allocation':allocation,'slurm':queue.stdout.splitlines(),'states':states,
               'valid_rounds':sum(r['valid'] for r in rows),'accepted_points':len(points),
               'prefill_valid_rounds':sum(r['valid'] for r in prefill_rows),'prefill_accepted_points':len(prefill_points),
               'active_measurements':active,'invalid_attempts':invalid,
@@ -217,6 +221,7 @@ def main():
               'planned_repetitions_upper_bound':sum(r['required_repeats'] for r in planned),
               'dense_followups':{str(j['job']):json.loads((Path(j['state'])/'DENSE_EXTENSION.json').read_text()) for j in jobs if (Path(j['state'])/'DENSE_EXTENSION.json').exists()},
               'prefill_followups':{str(j['job']):json.loads((Path(j['state'])/'PREFILL_FOLLOWUP.json').read_text()) for j in jobs if (Path(j['state'])/'PREFILL_FOLLOWUP.json').exists()},
+              'placement_retries':{str(j['job']):json.loads((Path(j['state'])/'PLACEMENT_RETRIES.json').read_text()) for j in jobs if (Path(j['state'])/'PLACEMENT_RETRIES.json').exists()},
               'measurement_kind':'real_KV_full_resident_decode_only_windows','serving_measurements_reused':False}
     (dest/'progress.json').write_text(json.dumps(progress,indent=2)+'\n')
     queue_rows=[line.split('|') for line in queue.stdout.splitlines() if len(line.split('|'))==4]
@@ -225,6 +230,7 @@ def main():
     preparation_failures=[job for job,state in states.items() if state.get('phase')=='failed_preparation']
     text=['# Muse decode-only 测试', '', '这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。', '',
           '更新时间：'+time.strftime('%Y-%m-%d %H:%M:%S UTC',time.gmtime()),'',
+          '最近 decode 结果写入时间：'+(time.strftime('%Y-%m-%d %H:%M:%S UTC',time.gmtime(latest_decode_artifact_unix)) if latest_decode_artifact_unix else '尚无')+'。报告刷新时间不代表新增测量。','',
           f'累计申请 {allocation["requested_nodes"]} 个节点；完成 {sum(r["valid"] for r in rows)} 个有效重复、{len(points)} 个满足重复要求的测点。', '',
           f'当前测试 allocation：运行 {running_nodes} 个节点、排队 {pending_nodes} 个节点；不含对外 API 与其他项目。准备阶段失败的作业：{", ".join(preparation_failures) or "无"}。这些基础设施失败不计为模型性能结果，具体原因及替代作业见 progress.json。', '',
           '## 调度实况', '', '```',queue.stdout.strip(),'```','',
@@ -239,7 +245,11 @@ def main():
           '投机对照保持采样参数不变，使用 NGRAM 原生 target-only 验证路径；移除不受支持的 draft_probs rejection 路径。对照双方均固定 decode graph max batch 32，防止之前 8 GiB verify page-table 分配失败。', '',
           '服务器接入/流式传输仍有开销，本图不声称是 CUDA kernel 的纯设备计时。硬件、模型、并行和上下文未与 DeepInfer 对齐，不直接作吞吐倍数比较。', '',
           '配置与控制器：[测试代码](../../performance/muse_decode_20261029/README.md)。原始详细状态：[progress.json](progress.json)。']
-    if points:text += ['', '![decode context groups](decode_pareto_synthetic_panels.png)', '',
+    if points:text += ['', '## DeepInfer 外部参考', '',
+                      '新增叠图：DeepInfer 64×SM100、每 DP rank 并发、设定投机接受率折算；Muse 为 H200、全局并发、native token 实测。硬件和统计口径不同，不能直接计算速度倍数。官方曲线为固定 commit 的 PNG 数字化值，并非本地复测。', '',
+                      '![external reference, logarithmic Y](decode_vs_deepinfer_log.png)', '',
+                      '[同尺度线性图](decode_vs_deepinfer_linear.png)；[来源、原图、数字化数据与差异说明](reference/README.zh-CN.md)。', '',
+                      '## Muse 实测曲线', '', '![decode context groups](decode_pareto_synthetic_panels.png)', '',
                       '![coding decode groups](decode_pareto_coding_panels.png)', '',
                       '[全部 context 曲线叠加](decode_pareto_synthetic.png)；[coding 曲线叠加](decode_pareto_coding.png)。']
     text += ['', '## Prefill 独立测量', '',

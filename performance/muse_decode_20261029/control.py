@@ -11,6 +11,7 @@ from pathlib import Path
 
 import httpx
 from native_client import save
+from placement import retry_placement
 
 
 def main():
@@ -28,8 +29,15 @@ def main():
             '--kill-on-bad-exit=1','-N'+str(n),'-n'+str(n),'--ntasks-per-node=1','-c48',sys.executable,str(root/'node.py')]
     common=['--state',str(a.state),'--precision',precision]
     status('preparing_and_verifying_pinned_weights')
+    preparation_started=time.time()
     try:
+        subprocess.run([*prefix,'preflight',*common],check=True)
         subprocess.run([*prefix,'prepare',*common],check=True)
+    except subprocess.CalledProcessError as exc:
+        status('failed_preparation',error=type(exc).__name__+': '+str(exc))
+        if retry_placement(a.state,plan,job,hosts,preparation_started,save):
+            return
+        raise
     except BaseException as exc:
         status('failed_preparation',error=type(exc).__name__+': '+str(exc))
         raise
