@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793644324.6206503,
+  "updated_unix": 1793644627.7733653,
   "latest_decode_artifact_unix": 1793639797.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -307,10 +307,9 @@
   },
   "slurm": [
     "3288|PENDING|2|(None)",
-    "3274|PENDING|2|(None)",
-    "3290|PENDING|1|(None)",
-    "3289|RUNNING|1|ip-10-1-122-30",
-    "3273|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210"
+    "3274|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210",
+    "3290|RUNNING|1|ip-10-1-13-41",
+    "3289|RUNNING|1|ip-10-1-122-30"
   ],
   "states": {
     "3133": {
@@ -538,33 +537,54 @@
       ]
     },
     "3273": {
-      "phase": "starting_fixed_server",
+      "phase": "failed",
       "job": 3273,
       "precision": "bf16",
       "nodes": [
         "ip-10-1-95-27",
         "ip-10-1-114-210"
       ],
-      "updated_unix": 1793644274.855906,
-      "speculative": "off"
+      "updated_unix": 1793644545.377842,
+      "error": "RuntimeError: {'speculative': 'off', 'reason': 'server_failed_readiness'}",
+      "failures": [
+        {
+          "speculative": "off",
+          "reason": "server_failed_readiness"
+        }
+      ]
     },
     "3274": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3274,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-95-27",
+        "ip-10-1-114-210"
+      ],
+      "updated_unix": 1793644547.6135702
     },
     "3288": {
       "phase": "queued"
     },
     "3289": {
-      "phase": "preparing_and_verifying_pinned_weights",
+      "phase": "starting_fixed_server",
       "job": 3289,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-122-30"
       ],
-      "updated_unix": 1793644185.5872347
+      "updated_unix": 1793644387.1913407,
+      "speculative": "off"
     },
     "3290": {
-      "phase": "queued"
+      "phase": "starting_fixed_server",
+      "job": 3290,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-13-41"
+      ],
+      "updated_unix": 1793644351.260997,
+      "speculative": "off"
     }
   },
   "valid_rounds": 211,
