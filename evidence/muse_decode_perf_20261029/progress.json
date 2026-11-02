@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793644931.7716668,
+  "updated_unix": 1793645232.9544387,
   "latest_decode_artifact_unix": 1793639797.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -554,15 +554,19 @@
       ]
     },
     "3274": {
-      "phase": "starting_fixed_server",
+      "phase": "measuring_decode_only",
       "job": 3274,
       "precision": "bf16",
       "nodes": [
         "ip-10-1-95-27",
         "ip-10-1-114-210"
       ],
-      "updated_unix": 1793644778.6457186,
-      "speculative": "off"
+      "updated_unix": 1793644979.2729917,
+      "speculative": "off",
+      "workload": "synthetic",
+      "input_tokens": 32768,
+      "input_range": null,
+      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768"
     },
     "3288": {
       "phase": "queued"
@@ -613,6 +617,17 @@
         "warmup_decode_seconds": 54.27708287164569,
         "successful_measured_requests": 0,
         "batches": 1
+      }
+    },
+    {
+      "job": 3274,
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c001-r0/progress.json",
+      "progress": {
+        "phase": "measurement",
+        "decode_seconds": 122.24431275948882,
+        "warmup_decode_seconds": 61.1388647146523,
+        "successful_measured_requests": 6,
+        "batches": 9
       }
     }
   ],
