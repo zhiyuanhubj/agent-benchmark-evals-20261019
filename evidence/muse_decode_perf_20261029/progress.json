@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793616800.1364493,
+  "updated_unix": 1793617099.6707542,
   "latest_decode_artifact_unix": 1793614674.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -267,10 +267,9 @@
     ]
   },
   "slurm": [
-    "3273|PENDING|2|(Resources)",
-    "3274|PENDING|2|(Priority)",
-    "3272|PENDING|2|(None)",
-    "3271|RUNNING|2|ip-10-1-77-106,ip-10-1-114-210"
+    "3274|PENDING|2|(Resources)",
+    "3273|PENDING|2|(None)",
+    "3272|PENDING|2|(None)"
   ],
   "states": {
     "3133": {
@@ -464,19 +463,21 @@
       "error": "CalledProcessError: Command '['srun', '--jobid=3158', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'prepare', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-128k-retry1', '--precision', 'bf16']' returned non-zero exit status 1."
     },
     "3271": {
-      "phase": "measuring_deferred_prefill",
+      "phase": "finished_with_incomplete_cases",
       "job": 3271,
       "precision": "bf16",
       "nodes": [
         "ip-10-1-77-106",
         "ip-10-1-114-210"
       ],
-      "updated_unix": 1793614983.7187464,
-      "speculative": "off",
-      "workload": "synthetic",
-      "input_tokens": 65536,
-      "input_range": null,
-      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-20261102/bf16/spec-off/synthetic-65536"
+      "updated_unix": 1793616943.9589548,
+      "failures": [
+        {
+          "speculative": "off",
+          "case": "synthetic-65536",
+          "returncode": 1
+        }
+      ]
     },
     "3272": {
       "phase": "queued"
@@ -490,8 +491,8 @@
   },
   "valid_rounds": 193,
   "accepted_points": 63,
-  "prefill_valid_rounds": 53,
-  "prefill_accepted_points": 17,
+  "prefill_valid_rounds": 54,
+  "prefill_accepted_points": 18,
   "active_measurements": [
     {
       "job": 3137,
