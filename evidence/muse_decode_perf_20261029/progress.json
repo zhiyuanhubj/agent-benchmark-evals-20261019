@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793647655.4584816,
-  "latest_decode_artifact_unix": 1793647344.0,
+  "updated_unix": 1793647954.9430163,
+  "latest_decode_artifact_unix": 1793647650.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 32,
@@ -600,8 +600,8 @@
       "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536"
     }
   },
-  "valid_rounds": 217,
-  "accepted_points": 70,
+  "valid_rounds": 218,
+  "accepted_points": 71,
   "prefill_valid_rounds": 63,
   "prefill_accepted_points": 21,
   "active_measurements": [
@@ -629,13 +629,13 @@
     },
     {
       "job": 3274,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c001-r2/progress.json",
+      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-32k-api-replacement-20261102/bf16/spec-off/synthetic-32768/c002-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 631.225960880518,
-        "warmup_decode_seconds": 61.1114013902843,
-        "successful_measured_requests": 31,
-        "batches": 34
+        "decode_seconds": 147.04893739707768,
+        "warmup_decode_seconds": 63.02209058217704,
+        "successful_measured_requests": 14,
+        "batches": 10
       }
     },
     {
@@ -643,21 +643,21 @@
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k-dense-20261102/nvfp4/spec-off/synthetic-32768/c024-r0/progress.json",
       "progress": {
         "phase": "measurement",
-        "decode_seconds": 0,
+        "decode_seconds": 71.62357106999843,
         "warmup_decode_seconds": 71.58425374699891,
-        "successful_measured_requests": 0,
-        "batches": 3
+        "successful_measured_requests": 72,
+        "batches": 6
       }
     },
     {
       "job": 3290,
       "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102/nvfp4/spec-off/synthetic-65536/c040-r1/progress.json",
       "progress": {
-        "phase": "warmup",
+        "phase": "measurement",
         "decode_seconds": 0,
-        "warmup_decode_seconds": 29.43601633887738,
+        "warmup_decode_seconds": 88.21744049806148,
         "successful_measured_requests": 0,
-        "batches": 1
+        "batches": 3
       }
     }
   ],
