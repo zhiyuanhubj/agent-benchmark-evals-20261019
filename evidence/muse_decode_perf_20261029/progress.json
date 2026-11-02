@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793619958.5121326,
+  "updated_unix": 1793620259.1577425,
   "latest_decode_artifact_unix": 1793614674.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -306,12 +306,12 @@
     ]
   },
   "slurm": [
+    "3288|PENDING|2|(Priority)",
     "3274|PENDING|2|(AssocGrpNodeLimit)",
-    "3273|PENDING|2|(AssocGrpNodeLimit)",
-    "3272|PENDING|2|(AssocGrpNodeLimit)",
     "3290|PENDING|1|(Priority)",
+    "3273|PENDING|2|(AssocGrpNodeLimit)",
     "3289|PENDING|1|(Priority)",
-    "3288|PENDING|2|(Priority)"
+    "3272|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210"
   ],
   "states": {
     "3133": {
@@ -522,7 +522,14 @@
       ]
     },
     "3272": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3272,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-95-27",
+        "ip-10-1-114-210"
+      ],
+      "updated_unix": 1793620195.8295798
     },
     "3273": {
       "phase": "queued"

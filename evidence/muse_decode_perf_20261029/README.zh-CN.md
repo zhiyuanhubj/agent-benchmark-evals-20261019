@@ -2,23 +2,23 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-11-02 11:45:58 UTC
+更新时间：2026-11-02 11:50:59 UTC
 
 最近 decode 结果写入时间：2026-11-02 10:17:54 UTC。报告刷新时间不代表新增测量。
 
 累计申请 32 个节点；完成 193 个有效重复、63 个满足重复要求的测点。
 
-当前测试 allocation：运行 0 个节点、排队 10 个节点；不含对外 API 与其他项目。准备阶段失败的作业：3138, 3139, 3140, 3141, 3156, 3157, 3158。这些基础设施失败不计为模型性能结果，具体原因及替代作业见 progress.json。
+当前测试 allocation：运行 2 个节点、排队 8 个节点；不含对外 API 与其他项目。准备阶段失败的作业：3138, 3139, 3140, 3141, 3156, 3157, 3158。这些基础设施失败不计为模型性能结果，具体原因及替代作业见 progress.json。
 
 ## 调度实况
 
 ```
-3274|PENDING|2|(AssocGrpNodeLimit)
-3273|PENDING|2|(AssocGrpNodeLimit)
-3272|PENDING|2|(AssocGrpNodeLimit)
-3290|PENDING|1|(Priority)
-3289|PENDING|1|(Priority)
 3288|PENDING|2|(Priority)
+3274|PENDING|2|(AssocGrpNodeLimit)
+3290|PENDING|1|(Priority)
+3273|PENDING|2|(AssocGrpNodeLimit)
+3289|PENDING|1|(Priority)
+3272|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210
 ```
 
 ## 多组、多点矩阵
