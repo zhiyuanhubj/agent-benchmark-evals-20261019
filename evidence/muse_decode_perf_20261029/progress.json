@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793599637.759403,
+  "updated_unix": 1793599874.8944395,
   "latest_decode_artifact_unix": 1793373419.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -267,9 +267,9 @@
     ]
   },
   "slurm": [
-    "3274|PENDING|2|(JobHeldUser)",
-    "3273|PENDING|2|(JobHeldUser)",
-    "3272|PENDING|2|(JobHeldUser)",
+    "3273|PENDING|2|(Resources)",
+    "3274|PENDING|2|(Priority)",
+    "3272|PENDING|2|(None)",
     "3271|RUNNING|2|ip-10-1-77-106,ip-10-1-114-210"
   ],
   "states": {
@@ -1209,6 +1209,17 @@
     }
   },
   "placement_retries": {},
+  "peer_transfers": {
+    "3271": {
+      "bytes_received": 296197901514,
+      "reused_verified_bytes": 0,
+      "total_bytes": 1644365720753,
+      "completed_files": 16,
+      "total_files": 78,
+      "updated_unix": 1793599874.7883003,
+      "elapsed_seconds": 414.36152625083923
+    }
+  },
   "measurement_kind": "real_KV_full_resident_decode_only_windows",
   "serving_measurements_reused": false
 }

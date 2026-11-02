@@ -7,7 +7,7 @@
   "status": {
     "phase": "active",
     "job": 3270,
-    "updated_unix": 1793599625.1201522,
+    "updated_unix": 1793599851.4846694,
     "native_base": "http://10.1.27.73:31420",
     "public_base": "https://muse.zhiyuanllm.com/v1",
     "validated_unix": 1793599433.5489771
@@ -47,5 +47,23 @@
     ],
     "unauthenticated_http": 401
   },
-  "report_updated_unix": 1793599637.7936063
+  "full_generation_validation": {
+    "http": 200,
+    "elapsed_seconds": 2.8283228874206543,
+    "model": "muse-spark-open-bf16",
+    "reasoning_chars": 264,
+    "final_content": "1591",
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 156,
+      "total_tokens": 238,
+      "completion_tokens": 82,
+      "prompt_tokens_details": {
+        "cached_tokens": 141
+      },
+      "reasoning_tokens": 74
+    },
+    "complete_answer_verified": true
+  },
+  "report_updated_unix": 1793599874.947193
 }
