@@ -1,9 +1,9 @@
 {
-  "updated_unix": 1793619819.639136,
+  "updated_unix": 1793619958.5121326,
   "latest_decode_artifact_unix": 1793614674.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
-    "requested_nodes": 30,
+    "requested_nodes": 32,
     "gpus_per_node": 8,
     "jobs": [
       {
@@ -241,6 +241,45 @@
         ],
         "placement_retry_limit": 6,
         "replaces_job_reassigned_to_api": 3270
+      },
+      {
+        "job": 3288,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-dense-20261102",
+        "input_lengths": [
+          65536
+        ],
+        "decode_concurrency": "40,48,56",
+        "purpose": "additional_dense_points",
+        "placement_retry_limit": 6
+      },
+      {
+        "job": 3289,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-32k-dense-20261102",
+        "input_lengths": [
+          32768
+        ],
+        "decode_concurrency": "20,24,28",
+        "purpose": "additional_dense_points",
+        "placement_retry_limit": 6
+      },
+      {
+        "job": 3290,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "long",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-64k-dense-20261102",
+        "input_lengths": [
+          65536
+        ],
+        "decode_concurrency": "40,48,56",
+        "purpose": "additional_dense_points",
+        "placement_retry_limit": 6
       }
     ],
     "reassigned_to_public_api": [
@@ -267,9 +306,12 @@
     ]
   },
   "slurm": [
-    "3274|PENDING|2|(Resources)",
+    "3274|PENDING|2|(AssocGrpNodeLimit)",
     "3273|PENDING|2|(AssocGrpNodeLimit)",
-    "3272|PENDING|2|(AssocGrpNodeLimit)"
+    "3272|PENDING|2|(AssocGrpNodeLimit)",
+    "3290|PENDING|1|(Priority)",
+    "3289|PENDING|1|(Priority)",
+    "3288|PENDING|2|(Priority)"
   ],
   "states": {
     "3133": {
@@ -486,6 +528,15 @@
       "phase": "queued"
     },
     "3274": {
+      "phase": "queued"
+    },
+    "3288": {
+      "phase": "queued"
+    },
+    "3289": {
+      "phase": "queued"
+    },
+    "3290": {
       "phase": "queued"
     }
   },
@@ -1416,8 +1467,8 @@
     }
   ],
   "planned_configuration_groups": 16,
-  "planned_configuration_points_upper_bound": 120,
-  "planned_repetitions_upper_bound": 364,
+  "planned_configuration_points_upper_bound": 129,
+  "planned_repetitions_upper_bound": 391,
   "dense_followups": {
     "3134": {
       "phase": "failed",
