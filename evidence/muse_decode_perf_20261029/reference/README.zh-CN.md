@@ -22,6 +22,13 @@
 这只能比较该部署条件下的模型与框架组合，不能归因为框架本身。官方发布列出的 NVIDIA 支持是 SM100，并未声明 H200 支持，因此不能假定 DeepInfer 可直接在本集群复现。
 若要严格重现官方图，需要其支持的硬件与规模、模型和 engine-step 测量协议。
 
+## H200 本地复测
+
+用户要求用现有 H200 进行本地对照；新 H200 曲线只采用本地实际测量，原 SM100 参考数值和标注保留。
+DeepSeek + DeepInfer 的 H200 行目前是待实测：固定版本的关键稀疏 Decode 算子要求 SM100f，尚未提交 H200 推理作业。
+SGLang 镜像内已找到 DeepSeek V4.1 实现；若采用该框架，会明确标为 SGLang 并先做运行验证。
+具体硬件表、固定口径、模型文件版本及源码检查证据见 [H200 本地对照方案](../../../performance/muse_decode_20261029/H200_LOCAL_COMPARISON_20261102.zh-CN.md)。
+
 ![shared logarithmic axes](../decode_vs_deepinfer_log.png)
 
 ![shared linear axes](../decode_vs_deepinfer_linear.png)
