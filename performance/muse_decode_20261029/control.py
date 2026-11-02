@@ -17,6 +17,10 @@ from placement import retry_placement
 def main():
     p=argparse.ArgumentParser();p.add_argument('--state',type=Path,required=True);a=p.parse_args()
     plan=json.loads((a.state/'PLAN.json').read_text());root=Path(plan['controller_root'])
+    if plan.get('dedicated_api_service'):
+        from bf16_backend import run
+        run(a.state,plan)
+        return
     precision=plan['precision'];job=int(os.environ['SLURM_JOB_ID']);assert job==plan['jobs'][precision]
     n=1 if precision=='nvfp4' else 2
     nodes=subprocess.check_output(['squeue','-h','-j',str(job),'-o','%N'],text=True).strip()
