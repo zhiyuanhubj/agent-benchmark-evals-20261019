@@ -6,8 +6,8 @@
 |---|---|---|---|
 | Muse NVFP4 | SGLang，原固定镜像 | 8×H200 | 已有本地实测，剩余补点独立排队 |
 | Muse BF16 | SGLang，同一固定镜像 | 16×H200 | 本地测试进行中 |
-| DeepSeek V4.1 Flash 1017 | DeepInfer | 目标8×H200 | 源码检查发现关键算子架构限制；尚未执行 GPU 推理，也未提交此框架的 GPU 作业 |
-| DeepSeek V4.1 Flash 1017 | SGLang，同一固定镜像 | 目标8×H200 | 已核实镜像包含模型实现；配置已准备，实际运行及框架选择待确认 |
+| DeepSeek V4.1 Flash 1017 | DeepInfer | 目标8×H200 | 已提交独立H200依赖编译与算子入口验证；正式模型吞吐测试尚未开始 |
+| DeepSeek V4.1 Flash 1017 | SGLang，同一固定镜像 | 目标8×H200 | 备用对照方案；镜像包含模型实现，尚未启动 |
 
 原 DeepInfer 官方参考仍标为64×SM100。该行的原始数字和硬件标注保留；H200 的待实测行没有速度或吞吐数值。
 
@@ -28,3 +28,7 @@
 DeepSeek 模型固定为 `deepseek-ai/DeepSeek-V4.1-Flash-1017`，revision 和文件级校验信息见 [固定文件清单](DEEPSEEK_H200_PINNED_FILES_20261102.json)。本地同体积权重只能作为待校验候选；完整文件内容哈希和运行验证完成后才用于正式结果。
 
 [机器可读兼容性记录](H200_COMPATIBILITY_20261102.json) · [Muse 当前曲线和进度](../../evidence/muse_decode_perf_20261029/README.zh-CN.md)
+
+## 2026-11-03 执行更新
+
+DeepInfer 的H200验证已实际分配过节点。先确认原镜像NVCC13.0不足，随后在隔离NVMe环境配置NVCC13.2.86并修复构建依赖。该阶段是固定版本算子的编译和入口检查，尚无DeepInfer在H200上的模型吞吐数据。具体作业和日志见[验证记录](../../evidence/muse_decode_perf_20261029/deepinfer-h200-probe/)。

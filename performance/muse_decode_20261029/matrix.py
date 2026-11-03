@@ -12,7 +12,9 @@ def planned_points(allocation):
         cases = [('synthetic', str(n), 'off', synthetic_cs) for n in job['input_lengths']]
         if job['mode'] in ('paired_spec', 'long_and_paired_spec'):
             cases += [('coding', label, spec, CODING_C)
-                      for label in ('native-0-8192', 'native-8192-32768') for spec in ('off', 'NGRAM')]
+                      for label in (tuple('native-'+str(lo)+'-'+str(hi) for lo,hi in job['coding_input_ranges'])
+                                    if job.get('coding_input_ranges') else ('native-0-8192', 'native-8192-32768'))
+                      for spec in job.get('speculative_algorithms', ('off', 'NGRAM'))]
         for workload, label, spec, cs in cases:
             for c in cs:
                 key = precision, workload, label, spec, c

@@ -65,6 +65,8 @@ def main():
         configs=[]
         if plan['input_lengths']:configs.append(('off',False))
         if plan['mode'] in ('paired_spec','long_and_paired_spec'):configs += [('off',True),('NGRAM',True)]
+        if plan.get('speculative_algorithms'):
+            configs=[c for c in configs if c[0] in plan['speculative_algorithms']]
         for spec, paired_graphs in configs:
             status('starting_fixed_server',speculative=spec)
             label=spec+('-paired-graphs' if paired_graphs else '')
@@ -90,6 +92,8 @@ def main():
                 cases += [('synthetic',length,None) for length in plan['input_lengths']]
             if paired_graphs:
                 cases += [('coding',0,(0,8192)),('coding',0,(8192,32768))]
+                if plan.get('coding_input_ranges'):
+                    cases=[c for c in cases if list(c[2]) in plan['coding_input_ranges']]
             for workload,length,bucket in cases:
                 name='synthetic-'+str(length) if bucket is None else 'coding-native-'+str(bucket[0])+'-'+str(bucket[1])
                 directory=a.state/precision/('spec-'+spec)/name

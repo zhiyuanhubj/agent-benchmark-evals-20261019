@@ -1,5 +1,8 @@
 # Independent Muse decode-only curves — October 29
 
+<!-- ttft-and-recovery-20261103 -->
+[8K/1K首token延迟P50/P95及逐请求数据](TTFT_8K_20261103.zh-CN.md) · [H200本地对照与DeepInfer适配进度](H200_LOCAL_COMPARISON_20261102.zh-CN.md)。BF16 coding按四组独立恢复；8K并发256读取错误单独重测，已有有效点保留。
+
 This experiment is separate from the October 28 end-to-end serving curves. Queueing, successful preparation and a healthy server do not count as measured results.
 
 ## Resources and provenance

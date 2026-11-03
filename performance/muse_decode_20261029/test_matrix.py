@@ -21,5 +21,14 @@ class MatrixTest(unittest.TestCase):
         self.assertEqual({r['concurrency'] for r in rows},set((1,2,4,8,16,32,40,48,56,64,128,256)))
         self.assertEqual(len(planned_points({'jobs':[dense]})),3)
 
+    def test_parallel_coding_partitions_preserve_original_24_points(self):
+        base={'precision':'bf16','mode':'paired_spec','input_lengths':[]}
+        jobs=[{**base,'coding_input_ranges':[bucket],'speculative_algorithms':[spec]}
+              for bucket in ([0,8192],[8192,32768]) for spec in ('off','NGRAM')]
+        expected=planned_points({'jobs':[base]})
+        actual=planned_points({'jobs':jobs})
+        self.assertEqual(actual,expected)
+        self.assertTrue(all(len(planned_points({'jobs':[j]}))==6 for j in jobs))
+
 
 if __name__=='__main__':unittest.main()

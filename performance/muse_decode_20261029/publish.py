@@ -6,6 +6,7 @@ import fcntl
 import gzip
 import json
 import os
+import shutil
 import statistics
 import subprocess
 import sys
@@ -89,6 +90,11 @@ def main():
             subprocess.run(['git','-C',str(a.repo),'config',key,value],check=True)
     def git(*args):return subprocess.run(['git','-C',str(a.repo),*args],capture_output=True,text=True,check=True)
     git('sparse-checkout','set','--no-cone','/evidence/muse_decode_perf_20261029/')
+    dirty=git('diff','--name-only').stdout.splitlines()+git('ls-files','--others','--exclude-standard').stdout.splitlines()
+    if dirty:
+        assert all(p.startswith('evidence/muse_decode_perf_20261029/') for p in dirty),'Preserve unrelated worktree changes'
+        git('add','--','evidence/muse_decode_perf_20261029')
+        git('commit','-m','Preserve generated decode snapshot after interrupted publication')
     git('pull','--rebase','origin','main')
     dest=a.repo/'evidence/muse_decode_perf_20261029';dest.mkdir(parents=True,exist_ok=True)
     prefill_points=[]
@@ -224,6 +230,18 @@ def main():
               'placement_retries':{str(j['job']):json.loads((Path(j['state'])/'PLACEMENT_RETRIES.json').read_text()) for j in jobs if (Path(j['state'])/'PLACEMENT_RETRIES.json').exists()},
               'peer_transfers':{str(j['job']):json.loads((Path(j['state'])/'PEER_TRANSFER.json').read_text()) for j in jobs if (Path(j['state'])/'PEER_TRANSFER.json').exists()},
               'measurement_kind':'real_KV_full_resident_decode_only_windows','serving_measurements_reused':False}
+    recovery_path=a.root/'RESOURCE_RECOVERY_20261103.json'
+    if recovery_path.exists():
+        recovery=json.loads(recovery_path.read_text());progress['resource_recovery']={'utc':recovery['utc'],'jobs':recovery['jobs']}
+        probes=[]
+        for entry in recovery['jobs']:
+            if entry['role']!='deepinfer_h200_dependency_probe':continue
+            state=Path(entry['state']);snapshot=dest/'deepinfer-h200-probe'/state.name;snapshot.mkdir(parents=True,exist_ok=True)
+            result=state/'probe-result.json'
+            probes.append({**entry,'result':json.loads(result.read_text()) if result.exists() else {'phase':'queued'}})
+            for source in [*state.glob('*.json'),*state.glob('*.txt'),*state.glob('*.log')]:
+                shutil.copy2(source,snapshot/source.name)
+        progress['deepinfer_h200_dependency_probes']=probes
     (dest/'progress.json').write_text(json.dumps(progress,indent=2)+'\n')
     api_descriptor=a.root/'PUBLIC_API.json'
     if api_descriptor.exists():
@@ -249,10 +267,14 @@ def main():
     running_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='RUNNING')
     pending_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='PENDING')
     preparation_failures=[job for job,state in states.items() if state.get('phase')=='failed_preparation']
+    count_points=lambda precision,workload:sum(p['precision']==precision and p['workload']==workload for p in points)
     text=['# Muse decode-only 测试', '', '这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。', '',
           '更新时间：'+time.strftime('%Y-%m-%d %H:%M:%S UTC',time.gmtime()),'',
           '最近 decode 结果写入时间：'+(time.strftime('%Y-%m-%d %H:%M:%S UTC',time.gmtime(latest_decode_artifact_unix)) if latest_decode_artifact_unix else '尚无')+'。报告刷新时间不代表新增测量。','',
           f'累计申请 {allocation["requested_nodes"]} 个节点；完成 {sum(r["valid"] for r in rows)} 个有效重复、{len(points)} 个满足重复要求的测点。', '',
+          f'当前基础曲线有效点：BF16 {count_points("bf16","synthetic")} 个，NVFP4 {count_points("nvfp4","synthetic")} 个；coding有效点：BF16 {count_points("bf16","coding")} 个，NVFP4 {count_points("nvfp4","coding")} 个。BF16 coding四组单独续测，不重跑已有有效基础测点。', '',
+          '最高并发失败需分别解释：部分点证实KV回收；8K并发256还有流式ReadError，已单独续测，不能将这些读取错误直接称为硬件KV上限。失败或没有全驻留Decode区间的尝试不进入有效曲线。', '',
+          'DeepInfer H200依赖验证及编译日志：[原始验证记录](deepinfer-h200-probe/)。这是算子兼容性准备，尚无DeepInfer H200模型吞吐测点。', '',
           f'当前测试 allocation：运行 {running_nodes} 个节点、排队 {pending_nodes} 个节点；不含对外 API 与其他项目。准备阶段失败的作业：{", ".join(preparation_failures) or "无"}。这些基础设施失败不计为模型性能结果，具体原因及替代作业见 progress.json。', '',
           '## 调度实况', '', '```',queue.stdout.strip(),'```','',
           '## 多组、多点矩阵', '',
