@@ -1,9 +1,9 @@
 {
-  "updated_unix": 1793725338.8336573,
+  "updated_unix": 1793725645.0485148,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
-    "requested_nodes": 32,
+    "requested_nodes": 40,
     "gpus_per_node": 8,
     "jobs": [
       {
@@ -280,6 +280,86 @@
         "decode_concurrency": "40,48,56",
         "purpose": "additional_dense_points",
         "placement_retry_limit": 6
+      },
+      {
+        "name": "bf16-coding-short-off-20261103",
+        "job": 3375,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-short-off-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            0,
+            8192
+          ]
+        ],
+        "speculative_algorithms": [
+          "off"
+        ],
+        "replaces_failed_job": 3273
+      },
+      {
+        "name": "bf16-coding-long-off-20261103",
+        "job": 3376,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-long-off-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            8192,
+            32768
+          ]
+        ],
+        "speculative_algorithms": [
+          "off"
+        ],
+        "replaces_failed_job": 3273
+      },
+      {
+        "name": "bf16-coding-short-ngram-20261103",
+        "job": 3377,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-short-ngram-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            0,
+            8192
+          ]
+        ],
+        "speculative_algorithms": [
+          "NGRAM"
+        ],
+        "replaces_failed_job": 3273
+      },
+      {
+        "name": "bf16-coding-long-ngram-20261103",
+        "job": 3378,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-long-ngram-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            8192,
+            32768
+          ]
+        ],
+        "speculative_algorithms": [
+          "NGRAM"
+        ],
+        "replaces_failed_job": 3273
       }
     ],
     "reassigned_to_public_api": [
@@ -305,7 +385,12 @@
       }
     ]
   },
-  "slurm": [],
+  "slurm": [
+    "3375|PENDING|2|(Priority)",
+    "3376|PENDING|2|(Priority)",
+    "3377|PENDING|2|(Priority)",
+    "3378|PENDING|2|(Priority)"
+  ],
   "states": {
     "3133": {
       "phase": "finished_with_incomplete_cases",
@@ -595,6 +680,18 @@
       ],
       "updated_unix": 1793661869.4707303,
       "failures": []
+    },
+    "3375": {
+      "phase": "queued"
+    },
+    "3376": {
+      "phase": "queued"
+    },
+    "3377": {
+      "phase": "queued"
+    },
+    "3378": {
+      "phase": "queued"
     }
   },
   "valid_rounds": 253,
