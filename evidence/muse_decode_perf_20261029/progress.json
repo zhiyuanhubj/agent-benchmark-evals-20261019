@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793745161.801468,
+  "updated_unix": 1793745459.6302624,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -448,8 +448,8 @@
     "3377|PENDING|2|(Resources)",
     "3378|PENDING|2|(Priority)",
     "3376|PENDING|2|(None)",
-    "3375|PENDING|2|(None)",
     "3388|PENDING|2|(Priority)",
+    "3375|PENDING|2|(None)",
     "3389|RUNNING|1|ip-10-1-27-73"
   ],
   "states": {
@@ -2562,7 +2562,12 @@
       "retain_after_work": true,
       "full_model_benchmark_submitted": false,
       "result": {
-        "phase": "queued"
+        "utc": 1793745377.691524,
+        "phase": "dependency_build_or_import_failed",
+        "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+        "valid_performance_points": 0,
+        "error": "CalledProcessError: Command '['/opt/sglang/bin/python', '-m', 'pip', 'wheel', '--no-build-isolation', '--no-deps', '--wheel-dir', '/work/wheels', '/work/FlashMLA']' returned non-zero exit status 1.",
+        "full_model_inference_attempted": false
       }
     }
   ]
