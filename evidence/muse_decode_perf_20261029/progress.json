@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793728818.337207,
+  "updated_unix": 1793729122.7263334,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -774,14 +774,18 @@
       "phase": "queued"
     },
     "3389": {
-      "phase": "starting_fixed_server",
+      "phase": "measuring_decode_only",
       "job": 3389,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-27-73"
       ],
-      "updated_unix": 1793728098.4845486,
-      "speculative": "off"
+      "updated_unix": 1793729020.1244118,
+      "speculative": "off",
+      "workload": "synthetic",
+      "input_tokens": 8192,
+      "input_range": null,
+      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-c256-retained-20261103/nvfp4/spec-off/synthetic-8192"
     }
   },
   "valid_rounds": 253,
