@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793745459.6302624,
+  "updated_unix": 1793745758.386517,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -448,8 +448,8 @@
     "3377|PENDING|2|(Resources)",
     "3378|PENDING|2|(Priority)",
     "3376|PENDING|2|(None)",
-    "3388|PENDING|2|(Priority)",
     "3375|PENDING|2|(None)",
+    "3388|RUNNING|2|ip-10-1-25-253,ip-10-1-112-220",
     "3389|RUNNING|1|ip-10-1-27-73"
   ],
   "states": {
@@ -771,7 +771,15 @@
       ]
     },
     "3388": {
-      "phase": "queued"
+      "phase": "failed_preparation",
+      "job": 3388,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-25-253",
+        "ip-10-1-112-220"
+      ],
+      "updated_unix": 1793745572.6510408,
+      "error": "CalledProcessError: Command '['srun', '--jobid=3388', '--nodelist=ip-10-1-25-253,ip-10-1-112-220', '--chdir=/fsx/home/zhiyuan/.private/muse_decode_perf_20261029', '--overlap', '--exact', '--gres=none', '--kill-on-bad-exit=1', '-N2', '-n2', '--ntasks-per-node=1', '-c48', '/fsx/home/zhiyuan/AgentCompass/.venv/bin/python', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/node.py', 'preflight', '--state', '/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-c256-retained-20261103', '--precision', 'bf16']' returned non-zero exit status 1."
     },
     "3389": {
       "phase": "finished_with_incomplete_cases",
