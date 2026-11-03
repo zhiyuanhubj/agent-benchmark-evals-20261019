@@ -1,6 +1,6 @@
 {
-  "updated_unix": 1793667905.3339934,
-  "latest_decode_artifact_unix": 1793666382.0,
+  "updated_unix": 1793668208.915194,
+  "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
     "requested_nodes": 32,
@@ -305,9 +305,7 @@
       }
     ]
   },
-  "slurm": [
-    "3288|RUNNING|2|ip-10-1-95-27,ip-10-1-114-210"
-  ],
+  "slurm": [],
   "states": {
     "3133": {
       "phase": "finished_with_incomplete_cases",
@@ -568,19 +566,15 @@
       ]
     },
     "3288": {
-      "phase": "measuring_decode_only",
+      "phase": "finished",
       "job": 3288,
       "precision": "bf16",
       "nodes": [
         "ip-10-1-95-27",
         "ip-10-1-114-210"
       ],
-      "updated_unix": 1793655203.2858617,
-      "speculative": "off",
-      "workload": "synthetic",
-      "input_tokens": 65536,
-      "input_range": null,
-      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-dense-20261102/bf16/spec-off/synthetic-65536"
+      "updated_unix": 1793668028.6068213,
+      "failures": []
     },
     "3289": {
       "phase": "finished",
@@ -603,8 +597,8 @@
       "failures": []
     }
   },
-  "valid_rounds": 252,
-  "accepted_points": 82,
+  "valid_rounds": 253,
+  "accepted_points": 83,
   "prefill_valid_rounds": 72,
   "prefill_accepted_points": 24,
   "active_measurements": [
@@ -628,17 +622,6 @@
         "warmup_decode_seconds": 54.27708287164569,
         "successful_measured_requests": 0,
         "batches": 1
-      }
-    },
-    {
-      "job": 3288,
-      "path": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-64k-dense-20261102/bf16/spec-off/synthetic-65536/c056-r2/progress.json",
-      "progress": {
-        "phase": "measurement",
-        "decode_seconds": 118.41059569828212,
-        "warmup_decode_seconds": 78.82653275318444,
-        "successful_measured_requests": 168,
-        "batches": 5
       }
     }
   ],
