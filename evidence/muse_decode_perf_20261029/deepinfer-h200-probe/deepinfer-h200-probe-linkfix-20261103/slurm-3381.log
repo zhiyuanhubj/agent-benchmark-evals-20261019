@@ -1,0 +1,65 @@
+HEAD is now at 2e5429f Open-source release for Ascend 950 (2026.09.30) (#229)
+Collecting nvidia-cuda-nvcc==13.2.86
+  Using cached nvidia_cuda_nvcc-13.2.86-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.9 kB)
+Collecting nvidia-cuda-runtime==13.2.86
+  Using cached nvidia_cuda_runtime-13.2.86-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.8 kB)
+Collecting nvidia-cuda-crt==13.2.86
+  Using cached nvidia_cuda_crt-13.2.86-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.7 kB)
+Collecting nvidia-nvvm==13.2.86
+  Using cached nvidia_nvvm-13.2.86-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl.metadata (1.7 kB)
+Using cached nvidia_cuda_nvcc-13.2.86-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (44.0 MB)
+Using cached nvidia_cuda_runtime-13.2.86-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.3 MB)
+Using cached nvidia_cuda_crt-13.2.86-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (133 kB)
+Using cached nvidia_nvvm-13.2.86-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (64.3 MB)
+Installing collected packages: nvidia-nvvm, nvidia-cuda-runtime, nvidia-cuda-crt, nvidia-cuda-nvcc
+
+Successfully installed nvidia-cuda-crt-13.2.86 nvidia-cuda-nvcc-13.2.86 nvidia-cuda-runtime-13.2.86 nvidia-nvvm-13.2.86
+WARNING: Target directory /work/compiler/nvidia already exists. Specify --upgrade to force replacement.
+WARNING: Target directory /work/compiler/nvidia_nvvm-13.2.86.dist-info already exists. Specify --upgrade to force replacement.
+WARNING: Target directory /work/compiler/nvidia_cuda_runtime-13.2.86.dist-info already exists. Specify --upgrade to force replacement.
+WARNING: Target directory /work/compiler/nvidia_cuda_nvcc-13.2.86.dist-info already exists. Specify --upgrade to force replacement.
+WARNING: Target directory /work/compiler/nvidia_cuda_crt-13.2.86.dist-info already exists. Specify --upgrade to force replacement.
+
+[notice] A new release of pip is available: 26.2.1 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+Processing /work/FlashMLA
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: flash_mla
+  Building wheel for flash_mla (pyproject.toml): started
+  Building wheel for flash_mla (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Building wheel for flash_mla (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [12 lines of output]
+      Build target: CUDA
+      Compiling using NVCC 13.2
+      running bdist_wheel
+      running build
+      running build_py
+      running build_ext
+      W1103 17:16:55.603000 257 torch/utils/cpp_extension.py:652] The detected CUDA version (13.2) has a minor version mismatch with the version that was used to compile PyTorch (13.0). Most likely this shouldn't be a problem.
+      W1103 17:16:55.604000 257 torch/utils/cpp_extension.py:662] There are no x86_64-linux-gnu-g++ version bounds defined for CUDA version 13.2
+      building 'flash_mla.cuda' extension
+      ninja: no work to do.
+      x86_64-linux-gnu-g++ -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -shared -Wl,-O1 -Wl,-Bsymbolic-functions /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/api/api.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/api/dense_bwd.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/api/dense_fwd.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/api/fused_norm_rope_attn_rope_cast_fwd.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/api/sparse_decode.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/api/sparse_prefill.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/decode/sparse/head64/instantiations/v41_h64.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/decode/sparse/head64/instantiations/v41_h64_no_split.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/decode/sparse/head64/instantiations/v41fp4_h64.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/decode/sparse/head64/instantiations/v41fp4_h64_no_split.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/dense/fmha_cutlass_bwd_sm100.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/dense/fmha_cutlass_fwd_sm100.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h128_decode_nonorm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h128_decode_norm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h128_prefill_nonorm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h128_prefill_norm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h64_decode_nonorm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h64_decode_norm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h64_prefill_nonorm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41_h64_prefill_norm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41fp4_h128_decode_nonorm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41fp4_h128_decode_norm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41fp4_h64_decode_nonorm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/core_attn/instantiations/v41fp4_h64_decode_norm.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/permute_q_b_proj/kernel.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fused_norm_rope_attn_rope_cast_fwd/permute_wv_proj/kernel.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fwd/head128/instantiations/phase1_k512.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fwd/head64/instantiations/phase1_h64_k512.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fwd_for_small_topk/head128/instantiations/phase1_decode_k512_v41.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fwd_for_small_topk/head128/instantiations/phase1_decode_k512_v41_splitkv.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fwd_for_small_topk/head128/instantiations/phase1_decode_k512_v41fp4.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fwd_for_small_topk/head128/instantiations/phase1_decode_k512_v41fp4_splitkv.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/sm100/prefill/sparse/fwd_for_small_topk/head128/instantiations/phase1_k512.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/smxx/decode/combine/combine.o /work/FlashMLA/build/temp.linux-x86_64-cpython-312/csrc/cuda_kernels/smxx/decode/get_decoding_sched_meta/get_decoding_sched_meta.o -L/opt/sglang/lib/python3.12/site-packages/torch/lib -L/work/compiler/nvidia/cu13/lib64 -L/usr/lib/x86_64-linux-gnu -lc10 -ltorch -ltorch_cpu -ltorch_python -lcudart -lc10_cuda -ltorch_cuda -o build/lib.linux-x86_64-cpython-312/flash_mla/cuda.cpython-312-x86_64-linux-gnu.so -L/work/compiler/nvidia/cu13/targets/x86_64-linux/lib/stubs -L/work/compiler/nvidia/cu13/targets/sbsa-linux/lib/stubs -lcuda
+      error: [Errno 13] Permission denied: 'lspci'
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for flash_mla
+Failed to build flash_mla
+
+[notice] A new release of pip is available: 26.2.1 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+ERROR: Failed to build one or more wheels
+Traceback (most recent call last):
+  File "/evidence/deepinfer_probe_inside.py", line 58, in <module>
+    run([sys.executable,'-m','pip','wheel','--no-build-isolation','--no-deps','--wheel-dir',str(wheels),str(source)],env=env)
+  File "/evidence/deepinfer_probe_inside.py", line 9, in run
+    def run(args,**kw):return subprocess.run(args,check=True,text=True,**kw)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/sglang/bin/python', '-m', 'pip', 'wheel', '--no-build-isolation', '--no-deps', '--wheel-dir', '/work/wheels', '/work/FlashMLA']' returned non-zero exit status 1.

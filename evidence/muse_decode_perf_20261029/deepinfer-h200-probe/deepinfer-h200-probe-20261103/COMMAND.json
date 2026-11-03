@@ -1,0 +1,23 @@
+[
+  "docker",
+  "--host=unix:///var/run/docker.sock",
+  "run",
+  "--rm",
+  "--init",
+  "--name",
+  "zhiyuan-deepinfer-h200-probe-3379",
+  "--gpus",
+  "all",
+  "--network",
+  "host",
+  "--ipc",
+  "host",
+  "-v",
+  "/opt/dlami/nvme/zhiyuan-deepinfer-h200-probe-3379:/work",
+  "-v",
+  "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-20261103:/evidence",
+  "--entrypoint",
+  "python",
+  "lmsysorg/sglang@sha256:8cfc5a72cb296771f5f8a4a4688cb6d05685610a830cbb616fa4ab0eb7bb2b0a",
+  "/evidence/deepinfer_probe_inside.py"
+]

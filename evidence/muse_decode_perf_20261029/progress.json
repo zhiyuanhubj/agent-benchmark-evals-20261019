@@ -1,9 +1,9 @@
 {
-  "updated_unix": 1793726182.230499,
+  "updated_unix": 1793726490.4869845,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
-    "requested_nodes": 40,
+    "requested_nodes": 43,
     "gpus_per_node": 8,
     "jobs": [
       {
@@ -360,6 +360,34 @@
           "NGRAM"
         ],
         "replaces_failed_job": 3273
+      },
+      {
+        "name": "nvfp4-8k-c256-repair-20261103",
+        "job": 3382,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-c256-repair-20261103",
+        "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity."
+      },
+      {
+        "name": "bf16-8k-c256-repair-20261103",
+        "job": 3383,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k-c256-repair-20261103",
+        "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity."
       }
     ],
     "reassigned_to_public_api": [
@@ -386,10 +414,12 @@
     ]
   },
   "slurm": [
-    "3378|PENDING|2|(Priority)",
-    "3377|PENDING|2|(Priority)",
-    "3376|PENDING|2|(Priority)",
-    "3375|PENDING|2|(Priority)"
+    "3378|PENDING|2|(None)",
+    "3377|PENDING|2|(None)",
+    "3376|PENDING|2|(None)",
+    "3375|PENDING|2|(None)",
+    "3383|PENDING|2|(None)",
+    "3382|RUNNING|1|ip-10-1-27-73"
   ],
   "states": {
     "3133": {
@@ -691,6 +721,19 @@
       "phase": "queued"
     },
     "3378": {
+      "phase": "queued"
+    },
+    "3382": {
+      "phase": "starting_fixed_server",
+      "job": 3382,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-27-73"
+      ],
+      "updated_unix": 1793726235.4754722,
+      "speculative": "off"
+    },
+    "3383": {
       "phase": "queued"
     }
   },
@@ -1960,5 +2003,243 @@
     }
   },
   "measurement_kind": "real_KV_full_resident_decode_only_windows",
-  "serving_measurements_reused": false
+  "serving_measurements_reused": false,
+  "resource_recovery": {
+    "utc": 1793725543.0052059,
+    "jobs": [
+      {
+        "name": "api-bf16-20261103",
+        "job": 3374,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "api_service",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/api-bf16-20261103",
+        "input_lengths": [],
+        "role": "api"
+      },
+      {
+        "name": "bf16-coding-short-off-20261103",
+        "job": 3375,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-short-off-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            0,
+            8192
+          ]
+        ],
+        "speculative_algorithms": [
+          "off"
+        ],
+        "replaces_failed_job": 3273
+      },
+      {
+        "name": "bf16-coding-long-off-20261103",
+        "job": 3376,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-long-off-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            8192,
+            32768
+          ]
+        ],
+        "speculative_algorithms": [
+          "off"
+        ],
+        "replaces_failed_job": 3273
+      },
+      {
+        "name": "bf16-coding-short-ngram-20261103",
+        "job": 3377,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-short-ngram-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            0,
+            8192
+          ]
+        ],
+        "speculative_algorithms": [
+          "NGRAM"
+        ],
+        "replaces_failed_job": 3273
+      },
+      {
+        "name": "bf16-coding-long-ngram-20261103",
+        "job": 3378,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "paired_spec",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-coding-long-ngram-20261103",
+        "input_lengths": [],
+        "role": "coding",
+        "coding_input_ranges": [
+          [
+            8192,
+            32768
+          ]
+        ],
+        "speculative_algorithms": [
+          "NGRAM"
+        ],
+        "replaces_failed_job": 3273
+      },
+      {
+        "job": 3379,
+        "nodes": 1,
+        "role": "deepinfer_h200_dependency_probe",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-20261103",
+        "submitted_utc": 1793725708.85668,
+        "deepinfer_commit": "553741557a57df44a46fb3ab72b6aafeaf945337",
+        "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+        "full_model_benchmark_submitted": false,
+        "valid_performance_points": 0
+      },
+      {
+        "job": 3380,
+        "nodes": 1,
+        "role": "deepinfer_h200_dependency_probe",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-cuda132-20261103",
+        "submitted_utc": 1793725885.6599796,
+        "replaces_failed_probe": 3379,
+        "toolchain": "isolated NVCC 13.2.86",
+        "full_model_benchmark_submitted": false
+      },
+      {
+        "job": 3381,
+        "nodes": 1,
+        "role": "deepinfer_h200_dependency_probe",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-linkfix-20261103",
+        "submitted_utc": 1793726182.1103706,
+        "replaces_failed_probe": 3380,
+        "reuse_build_job": 3380,
+        "toolchain": "isolated NVCC 13.2.86, runtime linker and tools fixed",
+        "full_model_benchmark_submitted": false
+      },
+      {
+        "name": "nvfp4-8k-c256-repair-20261103",
+        "job": 3382,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-c256-repair-20261103",
+        "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity."
+      },
+      {
+        "name": "bf16-8k-c256-repair-20261103",
+        "job": 3383,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k-c256-repair-20261103",
+        "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity."
+      },
+      {
+        "job": 3384,
+        "nodes": 1,
+        "role": "deepinfer_h200_dependency_probe",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-pciutils-20261103",
+        "submitted_utc": 1793726402.96416,
+        "replaces_failed_probe": 3381,
+        "reuse_build_job": 3380,
+        "toolchain": "isolated NVCC 13.2.86, runtime linker and pciutils build dependency",
+        "full_model_benchmark_submitted": false
+      }
+    ]
+  },
+  "deepinfer_h200_dependency_probes": [
+    {
+      "job": 3379,
+      "nodes": 1,
+      "role": "deepinfer_h200_dependency_probe",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-20261103",
+      "submitted_utc": 1793725708.85668,
+      "deepinfer_commit": "553741557a57df44a46fb3ab72b6aafeaf945337",
+      "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+      "full_model_benchmark_submitted": false,
+      "valid_performance_points": 0,
+      "result": {
+        "utc": 1793725737.771086,
+        "phase": "dependency_build_or_import_failed",
+        "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+        "valid_performance_points": 0,
+        "error": "CalledProcessError: Command '['/opt/sglang/bin/python', '-m', 'pip', 'wheel', '--no-build-isolation', '--no-deps', '--wheel-dir', '/work/wheels', '/work/FlashMLA']' returned non-zero exit status 1.",
+        "full_model_inference_attempted": false
+      }
+    },
+    {
+      "job": 3380,
+      "nodes": 1,
+      "role": "deepinfer_h200_dependency_probe",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-cuda132-20261103",
+      "submitted_utc": 1793725885.6599796,
+      "replaces_failed_probe": 3379,
+      "toolchain": "isolated NVCC 13.2.86",
+      "full_model_benchmark_submitted": false,
+      "result": {
+        "utc": 1793726068.4892147,
+        "phase": "dependency_build_or_import_failed",
+        "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+        "valid_performance_points": 0,
+        "error": "CalledProcessError: Command '['/opt/sglang/bin/python', '-m', 'pip', 'wheel', '--no-build-isolation', '--no-deps', '--wheel-dir', '/work/wheels', '/work/FlashMLA']' returned non-zero exit status 1.",
+        "full_model_inference_attempted": false
+      }
+    },
+    {
+      "job": 3381,
+      "nodes": 1,
+      "role": "deepinfer_h200_dependency_probe",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-linkfix-20261103",
+      "submitted_utc": 1793726182.1103706,
+      "replaces_failed_probe": 3380,
+      "reuse_build_job": 3380,
+      "toolchain": "isolated NVCC 13.2.86, runtime linker and tools fixed",
+      "full_model_benchmark_submitted": false,
+      "result": {
+        "utc": 1793726217.3858397,
+        "phase": "dependency_build_or_import_failed",
+        "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+        "valid_performance_points": 0,
+        "error": "CalledProcessError: Command '['/opt/sglang/bin/python', '-m', 'pip', 'wheel', '--no-build-isolation', '--no-deps', '--wheel-dir', '/work/wheels', '/work/FlashMLA']' returned non-zero exit status 1.",
+        "full_model_inference_attempted": false
+      }
+    },
+    {
+      "job": 3384,
+      "nodes": 1,
+      "role": "deepinfer_h200_dependency_probe",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-probe-pciutils-20261103",
+      "submitted_utc": 1793726402.96416,
+      "replaces_failed_probe": 3381,
+      "reuse_build_job": 3380,
+      "toolchain": "isolated NVCC 13.2.86, runtime linker and pciutils build dependency",
+      "full_model_benchmark_submitted": false,
+      "result": {
+        "phase": "queued"
+      }
+    }
+  ]
 }

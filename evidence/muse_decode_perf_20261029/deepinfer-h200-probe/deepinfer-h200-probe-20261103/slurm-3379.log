@@ -1,0 +1,60 @@
+Cloning into '/work/FlashMLA'...
+HEAD is now at 2e5429f Open-source release for Ascend 950 (2026.09.30) (#229)
+Submodule 'csrc/3rdparty/cutlass' (https://github.com/NVIDIA/cutlass.git) registered for path 'csrc/3rdparty/cutlass'
+Cloning into '/work/FlashMLA/csrc/3rdparty/cutlass'...
+From https://github.com/NVIDIA/cutlass
+ * branch            4faf1a1568cf1e4ad8ff71846a13e16f2a6a6f6b -> FETCH_HEAD
+Submodule path 'csrc/3rdparty/cutlass': checked out '4faf1a1568cf1e4ad8ff71846a13e16f2a6a6f6b'
+WARNING: The directory '/work/pip-cache' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Processing /work/FlashMLA
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Preparing metadata (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [22 lines of output]
+      Build target: CUDA
+      Compiling using NVCC 13.0
+      Traceback (most recent call last):
+        File "/opt/sglang/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
+          main()
+        File "/opt/sglang/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
+          json_out["return_val"] = hook(**hook_input["kwargs"])
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/opt/sglang/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 175, in prepare_metadata_for_build_wheel
+          return hook(metadata_directory, config_settings)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/opt/sglang/lib/python3.12/site-packages/setuptools/build_meta.py", line 380, in prepare_metadata_for_build_wheel
+          self.run_setup()
+        File "/opt/sglang/lib/python3.12/site-packages/setuptools/build_meta.py", line 520, in run_setup
+          super().run_setup(setup_script=setup_script)
+        File "/opt/sglang/lib/python3.12/site-packages/setuptools/build_meta.py", line 317, in run_setup
+          exec(code, locals())  # noqa: S102 # exec is intentional here
+          ^^^^^^^^^^^^^^^^^^^^
+        File "<string>", line 318, in <module>
+        File "<string>", line 304, in main
+        File "<string>", line 108, in build_on_cuda_platform
+      AssertionError: Compiling the kernels requires NVCC 13.1 or higher (cvt with .scaled::n2::ue8m0).
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+
+[notice] A new release of pip is available: 26.2.1 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+error: metadata-generation-failed
+
+× Encountered error while generating package metadata.
+╰─> from file:///work/FlashMLA
+
+note: This is an issue with the package mentioned above, not pip.
+hint: See above for details.
+Traceback (most recent call last):
+  File "/evidence/deepinfer_probe_inside.py", line 39, in <module>
+    run([sys.executable,'-m','pip','wheel','--no-build-isolation','--no-deps','--wheel-dir',str(wheels),str(source)],env=env)
+  File "/evidence/deepinfer_probe_inside.py", line 9, in run
+    def run(args,**kw):return subprocess.run(args,check=True,text=True,**kw)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/sglang/bin/python', '-m', 'pip', 'wheel', '--no-build-isolation', '--no-deps', '--wheel-dir', '/work/wheels', '/work/FlashMLA']' returned non-zero exit status 1.
