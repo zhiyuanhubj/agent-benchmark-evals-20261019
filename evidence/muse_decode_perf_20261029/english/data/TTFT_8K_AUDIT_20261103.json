@@ -1,0 +1,470 @@
+{
+  "utc": 1793726290.5422904,
+  "scenario": "8K input / 1K output, cold prefix cache, speculation off; full cohort requests; warmup excluded",
+  "ttft_includes_actual_prefill": true,
+  "not_closed_loop_serving_measurement": true,
+  "rows": [
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 1,
+      "repeats": 3,
+      "successful_measured_requests": 96,
+      "ttft_s": {
+        "n": 96,
+        "p50": 0.6090664053335786,
+        "p95": 0.611965395975858
+      },
+      "decode_speed_p50": 81.26878429045126
+    },
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 2,
+      "repeats": 3,
+      "successful_measured_requests": 96,
+      "ttft_s": {
+        "n": 96,
+        "p50": 1.0814640540629625,
+        "p95": 1.2151571018621325
+      },
+      "decode_speed_p50": 73.93649536187169
+    },
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 4,
+      "repeats": 5,
+      "successful_measured_requests": 180,
+      "ttft_s": {
+        "n": 180,
+        "p50": 1.866893402300775,
+        "p95": 2.4188582289963962
+      },
+      "decode_speed_p50": 65.19676352700944
+    },
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 8,
+      "repeats": 5,
+      "successful_measured_requests": 320,
+      "ttft_s": {
+        "n": 320,
+        "p50": 3.063659925945103,
+        "p95": 4.828818390704692
+      },
+      "decode_speed_p50": 56.6105809923738
+    },
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 16,
+      "repeats": 3,
+      "successful_measured_requests": 336,
+      "ttft_s": {
+        "n": 336,
+        "p50": 5.479723973199725,
+        "p95": 9.657656471710652
+      },
+      "decode_speed_p50": 47.35047262720153
+    },
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 32,
+      "repeats": 3,
+      "successful_measured_requests": 576,
+      "ttft_s": {
+        "n": 576,
+        "p50": 10.320373219437897,
+        "p95": 19.06404237356037
+      },
+      "decode_speed_p50": 43.533408317156024
+    },
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 64,
+      "repeats": 3,
+      "successful_measured_requests": 960,
+      "ttft_s": {
+        "n": 960,
+        "p50": 20.00658641755581,
+        "p95": 37.1441472068429
+      },
+      "decode_speed_p50": 31.606145835959314
+    },
+    {
+      "precision": "nvfp4",
+      "gpus": 8,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 128,
+      "repeats": 3,
+      "successful_measured_requests": 1536,
+      "ttft_s": {
+        "n": 1536,
+        "p50": 39.46584093570709,
+        "p95": 73.71693291096017
+      },
+      "decode_speed_p50": 22.939976655020338
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 1,
+      "repeats": 3,
+      "successful_measured_requests": 96,
+      "ttft_s": {
+        "n": 96,
+        "p50": 0.4978976431302726,
+        "p95": 0.5011804224923253
+      },
+      "decode_speed_p50": 44.42704459520628
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 2,
+      "repeats": 3,
+      "successful_measured_requests": 96,
+      "ttft_s": {
+        "n": 96,
+        "p50": 0.8816751120612025,
+        "p95": 1.0156311742030084
+      },
+      "decode_speed_p50": 43.0517759680488
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 4,
+      "repeats": 3,
+      "successful_measured_requests": 96,
+      "ttft_s": {
+        "n": 96,
+        "p50": 1.4752976512536407,
+        "p95": 1.9583238824270666
+      },
+      "decode_speed_p50": 40.36486261108155
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 8,
+      "repeats": 3,
+      "successful_measured_requests": 120,
+      "ttft_s": {
+        "n": 120,
+        "p50": 2.4468339602462947,
+        "p95": 3.9032506638206543
+      },
+      "decode_speed_p50": 36.50681076451847
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 16,
+      "repeats": 3,
+      "successful_measured_requests": 240,
+      "ttft_s": {
+        "n": 240,
+        "p50": 4.419117136392742,
+        "p95": 7.797716142702848
+      },
+      "decode_speed_p50": 30.520657329621542
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 32,
+      "repeats": 3,
+      "successful_measured_requests": 384,
+      "ttft_s": {
+        "n": 384,
+        "p50": 8.307321575470269,
+        "p95": 15.36895081466064
+      },
+      "decode_speed_p50": 29.3407226202675
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 64,
+      "repeats": 3,
+      "successful_measured_requests": 768,
+      "ttft_s": {
+        "n": 768,
+        "p50": 16.14795831311494,
+        "p95": 29.995660301065072
+      },
+      "decode_speed_p50": 25.55462064934817
+    },
+    {
+      "precision": "bf16",
+      "gpus": 16,
+      "input_tokens": 8192,
+      "output_tokens": 1024,
+      "concurrency": 128,
+      "repeats": 3,
+      "successful_measured_requests": 1152,
+      "ttft_s": {
+        "n": 1152,
+        "p50": 31.89423624193296,
+        "p95": 59.71984740025364
+      },
+      "decode_speed_p50": 21.757404058103862
+    }
+  ],
+  "model_versions": {
+    "nvfp4": {
+      "repo": "meta-models/Muse-Spark-Open-816B-A42B-NVFP4",
+      "revision": "4239e4db19376904f2e82c167e78f70abb5455fe"
+    },
+    "bf16": {
+      "repo": "meta-models/Muse-Spark-Open-816B-A42B",
+      "revision": "0fb02478b02565b2ce7fc57e6051c91172774ac9"
+    }
+  },
+  "source_summaries": [
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c001-r0/summary.json",
+      "summary_sha256": "b204deec661fb755694cd06d60dc5df87a26149a33981b2091bcbdff759e500e"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c001-r1/summary.json",
+      "summary_sha256": "355290b3ded10233c034af5a28225b865b798c829c3e13a2913fb5540023b6cc"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c001-r2/summary.json",
+      "summary_sha256": "4ed693277b20a1e2d12618225c0f0eed2097e48e9c0a3c69cc44c8a9ccc644e2"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c002-r0/summary.json",
+      "summary_sha256": "f6259d1f936ed1822d8392e461483cb629cad21e337101885792ab1ee951e2aa"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c002-r1/summary.json",
+      "summary_sha256": "637e14553070970e147089d56e8b01a08e35ce2611c612465946007599c0687d"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c002-r2/summary.json",
+      "summary_sha256": "f286b52caa0f46f557938f319d9993a453c5059c806159e1f747f6869cf9db49"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c004-r0/summary.json",
+      "summary_sha256": "cab872173c5273a4c1343f2193affdf543e5bfa6bfd1fd7443a1c84961840302"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c004-r1/summary.json",
+      "summary_sha256": "5837468dd73352964ecfc3a34f0e1bbc3882f1379b1f485078d0f572a3ecc72b"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c004-r2/summary.json",
+      "summary_sha256": "5219ebf4e3704963adbb84011bfe72822c720c1a1e1c880605f8ff646890bb83"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c004-r3/summary.json",
+      "summary_sha256": "33a39cd03ec2bff45f414ea38d9be51072579247f1325ae8e7837c5cd3ab78e2"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c004-r4/summary.json",
+      "summary_sha256": "a6c783c78df62d493c77ed7acbe8ed924bf564967fb9c4cb77771916fe6827c6"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c008-r0/summary.json",
+      "summary_sha256": "32d18b04bb853895722da1e226139b80606ce0fe69941dc7b271284f9a5808c5"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c008-r1/summary.json",
+      "summary_sha256": "596953c4fb9a6fce45b9c36c73388137dfa8469982411f0afe14937ce88a2799"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c008-r2/summary.json",
+      "summary_sha256": "1d13b2c796d9791cd1c281817205556b2783b1253f1a225f77a523cec5d2db50"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c008-r3/summary.json",
+      "summary_sha256": "9799e800a798402ff911ca083b577bd2e763e7e495b57d9a61dea8a7baab9a6c"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c008-r4/summary.json",
+      "summary_sha256": "d3ae753283b6c81520bdde1edaf83b90ae1763e539ce980387205de6d1e3fdcb"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c016-r0/summary.json",
+      "summary_sha256": "cfb888f644b9fb522782ab2a9dd8aa42990325a2bded75cb4c5674a58ee0779f"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c016-r1/summary.json",
+      "summary_sha256": "b82655ebfd00b4128e8d694346de7496b8d57391368c49c20e5a1e5a02be0b12"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c016-r2/summary.json",
+      "summary_sha256": "5d30816ead50c8c05910450d1c4fd17ca5a232c474de248ab7b7ef8bb5dced33"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c032-r0/summary.json",
+      "summary_sha256": "6e843ef019b73706a60d8e3a2ff0815b43da4ba22f25504078091a677730bce3"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c032-r1/summary.json",
+      "summary_sha256": "c94defc0eb4721b8bdef8bcccb3b5be981c18ee8eb822466d06601d22f3f9ec5"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c032-r2/summary.json",
+      "summary_sha256": "1b0d721e2160cba703e0d32dfca370de72200c447dfb309cb56a204c73466372"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c064-r0/summary.json",
+      "summary_sha256": "0a0ee73619350d8a6f836345f5860a6a1871f8df646f829a168bcb96c1123aa6"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c064-r1/summary.json",
+      "summary_sha256": "78fbf0fa01214b97d6ebe254e55c17cded87aa96f9451ac28b9e099ea6f614d8"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c064-r2/summary.json",
+      "summary_sha256": "72bcf0721044cf86c7e69e5f49d9b14425d4f6b725b79c33f5c4d3f2c20b8c11"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c128-r0/summary.json",
+      "summary_sha256": "3bdb9b3ba6dd9b2aa97c729503f2dac99817fbb0c00360f64bdebbd7b6d65be8"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c128-r1/summary.json",
+      "summary_sha256": "e1b92f1a32c08c55e8bf567248ab8235a9d0345e94a8559e99662f441eadbd8b"
+    },
+    {
+      "summary": "nvfp4-8k-retry2/nvfp4/spec-off/synthetic-8192/c128-r2/summary.json",
+      "summary_sha256": "51d394668087448c7f46fcfa180e228edfcdcc4bdf0e4e724462e42c5a789265"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c001-r0/summary.json",
+      "summary_sha256": "e5afd4ebcfabfc1f3cdf85e4256987a778fde72d597223b0ab5db31d414ea072"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c001-r1/summary.json",
+      "summary_sha256": "39289ffdda388b8ee4e0d1f87585f1d56a8cc464a4b2b97b272a853b0890e08d"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c001-r2/summary.json",
+      "summary_sha256": "6180a46e37d305c326e1d6720d58a73cc71390c59adcfe9c79e79e0faa86b2d2"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c002-r0/summary.json",
+      "summary_sha256": "cdd76993113762bd52b857e55a6c644ea455a8ee8d206818657f5a42a165a699"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c002-r1/summary.json",
+      "summary_sha256": "4d01c74c173bae96523e49e6c45a0b90324e907f7f73f4059d1c70aff61349ba"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c002-r2/summary.json",
+      "summary_sha256": "d12b7b618dcb63df5b3f2c678a39e19661581545b790366e96941eada4335802"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c004-r0/summary.json",
+      "summary_sha256": "762baff99df66cc91dc75cdfa4b458a5f18bfe10b00de7961a12e9d3482c4aff"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c004-r1/summary.json",
+      "summary_sha256": "6d43b59c7ccb3a05788431189c9f455526489032933bc64266108f840c1a378c"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c004-r2/summary.json",
+      "summary_sha256": "1bc8af9a393a4f4396d450d17991260900b3b5a2204a128313f0f5b9c83eb7c3"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c008-r0/summary.json",
+      "summary_sha256": "97b44fce96724036711a3b230d030cd34cdd114fc1601fc6cc486d56544ca5ab"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c008-r1/summary.json",
+      "summary_sha256": "71ceb2c36c052f0fed3c185da6ae9041bc6d6dc19459e06835f15455fa7b0571"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c008-r2/summary.json",
+      "summary_sha256": "4aa4986f624590cb5ac7c10b6571d232137be75442c1e16db828e43e5ac9a3e2"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c016-r0/summary.json",
+      "summary_sha256": "21f2a66aa222d458923bb45a7fcf98e9559cbbfb363b999e2dc82afb96cbebbd"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c016-r1/summary.json",
+      "summary_sha256": "474507b8663640d98c2afd0c9e3928fbb6aec843a60a38fd28dad43b4aa26d8d"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c016-r2/summary.json",
+      "summary_sha256": "23f7b997db2cb2713d66e8510a873e9bafb6c82eb495fd4452148258cc439561"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c032-r0/summary.json",
+      "summary_sha256": "6992ad6d629a370698c740faacb404769205ea4e6882affcc5fba9d2baa06c14"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c032-r1/summary.json",
+      "summary_sha256": "563e7c5db001f6b53d3faeecfdc4c3a23c7270aef262f42fcc816993cf85c6af"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c032-r2/summary.json",
+      "summary_sha256": "46decb874b8d2fb3dea82e57bb0e21fc926659671a2bd2a0ce6a10b3076644f9"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c064-r0/summary.json",
+      "summary_sha256": "2bc0c0c6978b739902bdaaaf0969c3a9ca73e69ba5865554207caee9ee7e6710"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c064-r1/summary.json",
+      "summary_sha256": "f4502edf2ac2248e7f7cc56c17527e8485b9ca74e186094155cecc78485b8863"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c064-r2/summary.json",
+      "summary_sha256": "d5059baa8e1356742c2e1e956516a4b234c913d0df2385939056203a37dda94a"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c128-r0/summary.json",
+      "summary_sha256": "7b420ccd4dc8f0b14076827ced140bd4b6fb1b79e07216ffe7698546a6b726d7"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c128-r1/summary.json",
+      "summary_sha256": "ba034895aa850a0b9859e9c3809d8a6de89ba8924497fb79c930eccfabb3f79e"
+    },
+    {
+      "summary": "bf16-8k/bf16/spec-off/synthetic-8192/c128-r2/summary.json",
+      "summary_sha256": "62327d8bf9003e8a0da58097bde924502681ab72688a531af749b9fc31a584f7"
+    }
+  ],
+  "raw_metric_rows": 7052,
+  "raw_metrics_uncompressed_sha256": "755c170cd0e663681f478beab54013df93ad34fa753a8136b8998cfe74608eeb"
+}

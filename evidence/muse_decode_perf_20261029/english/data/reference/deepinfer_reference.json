@@ -1,0 +1,137 @@
+{
+  "repository": "https://github.com/deepseek-ai/DeepInfer",
+  "commit": "553741557a57df44a46fb3ab72b6aafeaf945337",
+  "image_path": "doc/images/decode_pareto.png",
+  "image_sha256": "26d9f0f990c236f61f5b86e248062c4436b2fef6f5852961359b15a2d4c5c65f",
+  "data_origin": "digitized_from_official_png_not_raw_benchmark_records",
+  "hardware": "64 x NVIDIA SM100 GPUs; one scale-up domain (README)",
+  "model": "DeepSeek V4.1 Flash",
+  "context_tokens": 131072,
+  "ep_size": 64,
+  "dp_size": 64,
+  "cp_size": 1,
+  "nextn": 3,
+  "draft_acceptance_assumption": 0.75,
+  "tau": 3.25,
+  "concurrency_labels": "decode_num_requests per DP rank; global = label * 64",
+  "axis_definition": "x = decode_avg_sps * tau; y = x * requests_per_DP_rank / cp",
+  "x_statistic": "mean_step_rate_times_tau; NOT per-request P50",
+  "error_bars": "not available in published figure; none fabricated",
+  "pixel_axes": {
+    "x_ticks": [
+      [
+        0,
+        145
+      ],
+      [
+        50,
+        307
+      ],
+      [
+        100,
+        469
+      ],
+      [
+        150,
+        632
+      ],
+      [
+        200,
+        794
+      ],
+      [
+        250,
+        956
+      ],
+      [
+        300,
+        1119
+      ],
+      [
+        350,
+        1281
+      ]
+    ],
+    "y_ticks": [
+      [
+        0,
+        780
+      ],
+      [
+        5000,
+        680
+      ],
+      [
+        10000,
+        579
+      ],
+      [
+        15000,
+        477
+      ],
+      [
+        20000,
+        376
+      ],
+      [
+        25000,
+        275
+      ],
+      [
+        30000,
+        174
+      ]
+    ]
+  },
+  "markers": [
+    {
+      "requests_per_dp_rank": 8,
+      "approx_pixel": [
+        1201,
+        728
+      ]
+    },
+    {
+      "requests_per_dp_rank": 16,
+      "approx_pixel": [
+        1166,
+        679
+      ]
+    },
+    {
+      "requests_per_dp_rank": 32,
+      "approx_pixel": [
+        1110,
+        588
+      ]
+    },
+    {
+      "requests_per_dp_rank": 64,
+      "approx_pixel": [
+        944,
+        462
+      ]
+    },
+    {
+      "requests_per_dp_rank": 128,
+      "approx_pixel": [
+        724,
+        319
+      ]
+    },
+    {
+      "requests_per_dp_rank": 256,
+      "approx_pixel": [
+        479,
+        249
+      ]
+    }
+  ],
+  "digitization_uncertainty_pixels": 1.0,
+  "source_links": {
+    "readme": "https://github.com/deepseek-ai/DeepInfer/blob/553741557a57df44a46fb3ab72b6aafeaf945337/README.md",
+    "plot_code": "https://github.com/deepseek-ai/DeepInfer/blob/553741557a57df44a46fb3ab72b6aafeaf945337/examples/sweep/plot_pareto.py",
+    "benchmark_code": "https://github.com/deepseek-ai/DeepInfer/blob/553741557a57df44a46fb3ab72b6aafeaf945337/examples/benchmark.py",
+    "original_figure": "https://github.com/deepseek-ai/DeepInfer/blob/553741557a57df44a46fb3ab72b6aafeaf945337/doc/images/decode_pareto.png"
+  }
+}
