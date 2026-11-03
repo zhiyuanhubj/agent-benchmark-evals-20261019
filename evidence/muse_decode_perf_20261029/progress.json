@@ -1,9 +1,9 @@
 {
-  "updated_unix": 1793728012.8697057,
+  "updated_unix": 1793728219.952404,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
-    "requested_nodes": 43,
+    "requested_nodes": 44,
     "gpus_per_node": 8,
     "jobs": [
       {
@@ -374,6 +374,34 @@
         "role": "point_repair",
         "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-c256-repair-20261103",
         "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity."
+      },
+      {
+        "name": "bf16-c256-retained-20261103",
+        "job": 3388,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-c256-retained-20261103",
+        "retain_after_work": true
+      },
+      {
+        "name": "nvfp4-c256-retained-20261103",
+        "job": 3389,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-c256-retained-20261103",
+        "retain_after_work": true
       }
     ],
     "reassigned_to_public_api": [
@@ -417,10 +445,12 @@
     ]
   },
   "slurm": [
-    "3378|PENDING|2|(None)",
-    "3377|PENDING|2|(None)",
-    "3376|PENDING|2|(None)",
-    "3375|PENDING|2|(None)"
+    "3376|PENDING|2|(AssocGrpNodeLimit)",
+    "3377|PENDING|2|(Resources)",
+    "3378|PENDING|2|(Priority)",
+    "3375|PENDING|2|(AssocGrpNodeLimit)",
+    "3388|PENDING|2|(Priority)",
+    "3389|RUNNING|1|ip-10-1-27-73"
   ],
   "states": {
     "3133": {
@@ -739,6 +769,19 @@
           "returncode": 1
         }
       ]
+    },
+    "3388": {
+      "phase": "queued"
+    },
+    "3389": {
+      "phase": "starting_fixed_server",
+      "job": 3389,
+      "precision": "nvfp4",
+      "nodes": [
+        "ip-10-1-27-73"
+      ],
+      "updated_unix": 1793728098.4845486,
+      "speculative": "off"
     }
   },
   "valid_rounds": 253,
@@ -2283,6 +2326,43 @@
         "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/api-bf16-renewal-20261103",
         "dependency": "afterany:3383",
         "submitted_utc": 1793727748.8877285
+      },
+      {
+        "name": "bf16-c256-retained-20261103",
+        "job": 3388,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-c256-retained-20261103",
+        "retain_after_work": true
+      },
+      {
+        "name": "nvfp4-c256-retained-20261103",
+        "job": 3389,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-c256-retained-20261103",
+        "retain_after_work": true
+      },
+      {
+        "name": "deepinfer-h200-retained",
+        "job": 3390,
+        "nodes": 1,
+        "role": "deepinfer_h200_dependency_probe",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-retained-20261103",
+        "retain_after_work": true,
+        "full_model_benchmark_submitted": false
       }
     ]
   },
@@ -2360,6 +2440,18 @@
         "valid_performance_points": 0,
         "error": "CalledProcessError: Command '['git', '-C', '/work/FlashMLA', 'checkout', '--detach', '2e5429fc5653bab6e081f09477126f731882a6a9']' returned non-zero exit status 128.",
         "full_model_inference_attempted": false
+      }
+    },
+    {
+      "name": "deepinfer-h200-retained",
+      "job": 3390,
+      "nodes": 1,
+      "role": "deepinfer_h200_dependency_probe",
+      "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer-h200-retained-20261103",
+      "retain_after_work": true,
+      "full_model_benchmark_submitted": false,
+      "result": {
+        "phase": "queued"
       }
     }
   ]
