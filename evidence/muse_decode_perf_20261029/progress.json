@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793726490.4869845,
+  "updated_unix": 1793726797.3105128,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -418,7 +418,7 @@
     "3377|PENDING|2|(None)",
     "3376|PENDING|2|(None)",
     "3375|PENDING|2|(None)",
-    "3383|PENDING|2|(None)",
+    "3383|RUNNING|2|ip-10-1-76-28,ip-10-1-112-220",
     "3382|RUNNING|1|ip-10-1-27-73"
   ],
   "states": {
@@ -734,7 +734,14 @@
       "speculative": "off"
     },
     "3383": {
-      "phase": "queued"
+      "phase": "preparing_and_verifying_pinned_weights",
+      "job": 3383,
+      "precision": "bf16",
+      "nodes": [
+        "ip-10-1-76-28",
+        "ip-10-1-112-220"
+      ],
+      "updated_unix": 1793726624.5178964
     }
   },
   "valid_rounds": 253,
