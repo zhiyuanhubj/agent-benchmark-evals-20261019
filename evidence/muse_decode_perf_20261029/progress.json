@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793729444.7455323,
+  "updated_unix": 1793729736.1496842,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -774,18 +774,20 @@
       "phase": "queued"
     },
     "3389": {
-      "phase": "measuring_decode_only",
+      "phase": "finished_with_incomplete_cases",
       "job": 3389,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-27-73"
       ],
-      "updated_unix": 1793729020.1244118,
-      "speculative": "off",
-      "workload": "synthetic",
-      "input_tokens": 8192,
-      "input_range": null,
-      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-c256-retained-20261103/nvfp4/spec-off/synthetic-8192"
+      "updated_unix": 1793729473.4198227,
+      "failures": [
+        {
+          "speculative": "off",
+          "case": "synthetic-8192",
+          "returncode": 1
+        }
+      ]
     }
   },
   "valid_rounds": 253,
@@ -2031,6 +2033,78 @@
         "native_successes": 251,
         "native_failures": 5,
         "all_native_output_tokens": 257024,
+        "unix_offset": 1785422966.664024
+      }
+    },
+    {
+      "job": 3389,
+      "artifact": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-c256-retained-20261103/nvfp4/spec-off/synthetic-8192/c256-r0/INVALID.json",
+      "record": {
+        "valid": false,
+        "reason": "request_failure",
+        "failed_requests": 3,
+        "batch": 1,
+        "phase": "warmup",
+        "metrics_before": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "metrics_after": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "attempted_requests": 256,
+        "native_successes": 253,
+        "native_failures": 3,
+        "all_native_output_tokens": 259072,
         "unix_offset": 1785422966.664024
       }
     }
