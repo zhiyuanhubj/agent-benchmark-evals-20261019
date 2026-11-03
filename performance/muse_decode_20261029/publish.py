@@ -301,6 +301,8 @@ def main():
              '该阶段计时包括 chunk 调度和首 token sampling，属于 engine 阶段 wall time，不宣称是独立 CUDA kernel 时间。每重复热身至少 60 秒，正式累计至少 120 秒及 32 个请求，三重复后画图，保留 GPU/后台遥测。']
     if prefill_points:text += ['', '![prefill throughput](prefill_throughput.png)', '', '![prefill Pareto](prefill_pareto.png)']
     (dest/'README.zh-CN.md').write_text('\n'.join(text)+'\n')
+    from export_english_bundle import export
+    export(a.root,dest)
     git('add','--sparse','--','evidence/muse_decode_perf_20261029')
     git('-c','user.name=Zhiyuan Hu','-c','user.email=29817400+zhiyuanhubj@users.noreply.github.com','commit','-m','Update independent Muse decode-only measurement progress')
     for attempt in range(4):

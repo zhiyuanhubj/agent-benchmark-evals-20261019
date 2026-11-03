@@ -64,7 +64,7 @@ def main(runtime):
                 subprocess.run(['systemctl','--user','restart',cfg['relay_unit']],check=True)
         status('waiting_allocation' if phase=='PENDING' else 'allocation_unavailable',slurm_state=phase)
         return
-    markerfile=runtime/'BACKEND.json'
+    markerfile=Path(cfg.get('backend_runtime_dir',runtime))/'BACKEND.json'
     marker=json.loads(markerfile.read_text()) if markerfile.exists() else {}
     if not backend_matches(marker,cfg['job'],hosts,time.time()):
         status('waiting_backend_readiness',backend_phase=marker.get('phase','not_started'));return

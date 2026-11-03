@@ -1,6 +1,7 @@
 """Retry only startup transport errors, preserving all raw outputs and logs."""
 import argparse,json,os,subprocess,sys,time
 from pathlib import Path
+from retain_allocation import retain
 
 def retryable(state):
     marker=state/'status.json'
@@ -20,7 +21,9 @@ def main():
         again=r.returncode!=0 and attempt<2 and retryable(a.state)
         attempts.append({'attempt':attempt+1,'started_utc':began,'ended_utc':time.time(),'returncode':r.returncode,'retrying_transport_startup':again})
         path=a.state/'STARTUP_RECOVERY.json';tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps({'job':os.environ['SLURM_JOB_ID'],'attempts':attempts},indent=2));tmp.replace(path)
-        if not again:raise SystemExit(r.returncode)
+        if not again:
+            if os.environ.get('MUSE_API_HEAD_COORDINATOR')!='1':retain(a.state,r.returncode)
+            raise SystemExit(r.returncode)
         time.sleep(30)
 
 if __name__=='__main__':main()

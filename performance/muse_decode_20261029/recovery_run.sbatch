@@ -8,5 +8,8 @@
 #SBATCH --exclusive
 #SBATCH --requeue
 #SBATCH --time=12:00:00
-set -euo pipefail
-exec /fsx/home/zhiyuan/AgentCompass/.venv/bin/python -u /fsx/home/zhiyuan/.private/muse_decode_perf_20261029/recovery_entry.py --state "$1"
+set -uo pipefail
+/fsx/home/zhiyuan/AgentCompass/.venv/bin/python -u /fsx/home/zhiyuan/.private/muse_decode_perf_20261029/recovery_entry.py --state "$1"
+task_rc=$?
+/fsx/home/zhiyuan/AgentCompass/.venv/bin/python -u /fsx/home/zhiyuan/.private/muse_decode_perf_20261029/retain_allocation.py --state "$1" --returncode "$task_rc"
+exit "$task_rc"

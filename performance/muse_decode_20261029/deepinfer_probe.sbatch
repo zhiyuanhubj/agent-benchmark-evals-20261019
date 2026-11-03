@@ -9,5 +9,8 @@
 #SBATCH --exclusive
 #SBATCH --time=02:00:00
 #SBATCH --time-min=01:00:00
-set -euo pipefail
-exec /fsx/home/zhiyuan/AgentCompass/.venv/bin/python -u /fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer_probe_entry.py --state "$1"
+set -uo pipefail
+/fsx/home/zhiyuan/AgentCompass/.venv/bin/python -u /fsx/home/zhiyuan/.private/muse_decode_perf_20261029/deepinfer_probe_entry.py --state "$1"
+task_rc=$?
+/fsx/home/zhiyuan/AgentCompass/.venv/bin/python -u /fsx/home/zhiyuan/.private/muse_decode_perf_20261029/retain_allocation.py --state "$1" --returncode "$task_rc"
+exit "$task_rc"

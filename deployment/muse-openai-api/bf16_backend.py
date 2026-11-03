@@ -40,7 +40,12 @@ def run(state,plan):
     started=time.time()
     try:
         subprocess.run([*prefix,'preflight',*common],check=True)
-        subprocess.run([*prefix,'prepare',*common],check=True)
+        if plan.get('reuse_verified_weights_state'):
+            reuse=['srun','--jobid='+str(job),'--nodelist='+nodes,'--chdir='+str(root),'--overlap','--exact','--gres=none',
+                   '--kill-on-bad-exit=1','-N2','-n2','--ntasks-per-node=1','-c2',sys.executable,str(root/'reuse_api_weights.py'),'--state',str(state)]
+            subprocess.run(reuse,check=True)
+        else:
+            subprocess.run([*prefix,'prepare',*common],check=True)
     except subprocess.CalledProcessError as exc:
         status('failed_preparation',error=type(exc).__name__)
         if retry_placement(state,plan,job,hosts,started,save):return

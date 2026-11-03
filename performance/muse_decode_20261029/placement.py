@@ -43,6 +43,9 @@ def choose_weights(nvme, local, manifest, free_bytes, reserve=250 * 2**30):
 
 def retry_placement(state, plan, job, hosts, started, save):
     """Requeue only our allocation, only for fresh disk-capacity failures."""
+    keep = Path(plan['controller_root']) / 'KEEP_ALLOCATIONS_20261103.json' if plan.get('controller_root') else None
+    if keep and keep.exists() and json.loads(keep.read_text()).get('enabled'):
+        return False  # User requested retention: diagnose the current node instead of releasing it.
     limit = plan.get('placement_retry_limit', 0)
     journal = state / 'PLACEMENT_RETRIES.json'
     previous = json.loads(journal.read_text()) if journal.exists() else []

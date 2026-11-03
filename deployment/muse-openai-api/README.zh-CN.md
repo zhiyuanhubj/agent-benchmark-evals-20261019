@@ -1,5 +1,7 @@
 # Muse OpenAI API 部署代码
 
+**2026-11-03 update:** The BF16 API is restored and generation-validated. [English restoration record and lease/renewal details](RESTORE_BF16_20261103.md). Live status remains authoritative.
+
 2026-11-02 已安排优先恢复 BF16：专用两节点作业 **3270**，初始接入上限 8 路同时生成；原三个客户端 key 沿用。提交时处于节点排队阶段，尚未恢复可用；**是否就绪以[实时恢复状态](../../evidence/muse_decode_perf_20261029/MUSE_API_BF16_STATUS.zh-CN.md)为准**，报告每五分钟更新。2026-10-27 的 NVFP4 部署为历史记录，不能证明服务现在可用。
 
 新增 [BF16 后端控制器](bf16_backend.py) 和 [自动激活器](activate_bf16.py)：核对 Slurm allocation 归属，优先复用并完整校验本地权重，验证 BF16/TP16/EP16/两节点配置后再切换网关。激活器通过原三个 key 分别验证公网 SSE 生成、thinking 字段透传，并检查无 key 返回 401。路由切换保留 key 文件、角色和用量数据库；不把 NVFP4 模型别名映射为 BF16。allocation 失效后停用旧后端路由，避免继续向已移交的节点转发请求。
