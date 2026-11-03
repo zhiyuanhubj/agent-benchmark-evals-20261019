@@ -1,16 +1,16 @@
 {
-  "job": 3374,
+  "job": 3383,
   "precision": "bf16",
   "gpus": 16,
   "global_admission_cap": 8,
   "public_base": "https://muse.zhiyuanllm.com/v1",
   "status": {
-    "phase": "waiting_allocation",
-    "job": 3374,
-    "updated_unix": 1793727392.8582811,
-    "slurm_state": "PENDING"
+    "phase": "waiting_backend_readiness",
+    "job": 3383,
+    "updated_unix": 1793727677.532818,
+    "backend_phase": "starting_api_model"
   },
   "validation": null,
   "full_generation_validation": null,
-  "report_updated_unix": 1793727395.9755287
+  "report_updated_unix": 1793727705.7080553
 }

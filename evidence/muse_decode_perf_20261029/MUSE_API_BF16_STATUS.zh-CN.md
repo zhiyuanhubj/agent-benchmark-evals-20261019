@@ -1,8 +1,8 @@
 # Muse BF16 API 恢复状态
 
-状态：尚未恢复可用，当前阶段：waiting_allocation
+状态：尚未恢复可用，当前阶段：waiting_backend_readiness
 
-专用 Slurm 作业 3374；BF16 权重，16×H200，TP16/EP16；接入上限为全局 8 路同时生成，更多请求排队。该配置上限不是新一轮吞吐实测结果。
+专用 Slurm 作业 3383；BF16 权重，16×H200，TP16/EP16；接入上限为全局 8 路同时生成，更多请求排队。该配置上限不是新一轮吞吐实测结果。
 
 Base URL：`https://muse.zhiyuanllm.com/v1`；模型别名：`muse-spark-open` / `muse-spark-open-bf16`。
 

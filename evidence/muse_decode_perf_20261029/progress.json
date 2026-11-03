@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793727395.8601575,
+  "updated_unix": 1793727705.57059,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -374,20 +374,6 @@
         "role": "point_repair",
         "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-c256-repair-20261103",
         "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity."
-      },
-      {
-        "name": "bf16-8k-c256-repair-20261103",
-        "job": 3383,
-        "nodes": 2,
-        "precision": "bf16",
-        "mode": "baseline",
-        "input_lengths": [
-          8192
-        ],
-        "decode_concurrency": "256",
-        "role": "point_repair",
-        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k-c256-repair-20261103",
-        "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity."
       }
     ],
     "reassigned_to_public_api": [
@@ -410,6 +396,23 @@
         "placement_retry_limit": 6,
         "reassigned_unix": 1793598148.0689938,
         "api_runtime": "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/restore_bf16_20261102"
+      },
+      {
+        "name": "bf16-8k-c256-repair-20261103",
+        "job": 3383,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "baseline",
+        "input_lengths": [
+          8192
+        ],
+        "decode_concurrency": "256",
+        "role": "point_repair",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/bf16-8k-c256-repair-20261103",
+        "purpose": "Retry original C256 target after stream ReadError; do not classify transport errors as KV capacity.",
+        "reassigned_utc": 1793727456.4308436,
+        "reason": "User prioritizes restoring public BF16 API",
+        "interruption_is_not_model_failure": true
       }
     ]
   },
@@ -417,9 +420,7 @@
     "3378|PENDING|2|(None)",
     "3377|PENDING|2|(None)",
     "3376|PENDING|2|(None)",
-    "3375|PENDING|2|(None)",
-    "3383|RUNNING|2|ip-10-1-76-28,ip-10-1-112-220",
-    "3382|RUNNING|1|ip-10-1-27-73"
+    "3375|PENDING|2|(None)"
   ],
   "states": {
     "3133": {
@@ -724,28 +725,20 @@
       "phase": "queued"
     },
     "3382": {
-      "phase": "measuring_decode_only",
+      "phase": "finished_with_incomplete_cases",
       "job": 3382,
       "precision": "nvfp4",
       "nodes": [
         "ip-10-1-27-73"
       ],
-      "updated_unix": 1793727156.351339,
-      "speculative": "off",
-      "workload": "synthetic",
-      "input_tokens": 8192,
-      "input_range": null,
-      "output": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-c256-repair-20261103/nvfp4/spec-off/synthetic-8192"
-    },
-    "3383": {
-      "phase": "preparing_and_verifying_pinned_weights",
-      "job": 3383,
-      "precision": "bf16",
-      "nodes": [
-        "ip-10-1-76-28",
-        "ip-10-1-112-220"
-      ],
-      "updated_unix": 1793727152.898659
+      "updated_unix": 1793727610.2312217,
+      "failures": [
+        {
+          "speculative": "off",
+          "case": "synthetic-8192",
+          "returncode": 1
+        }
+      ]
     }
   },
   "valid_rounds": 253,
@@ -1910,6 +1903,78 @@
         "all_native_output_tokens": 32768,
         "unix_offset": 1783709506.3161752
       }
+    },
+    {
+      "job": 3382,
+      "artifact": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/nvfp4-8k-c256-repair-20261103/nvfp4/spec-off/synthetic-8192/c256-r0/INVALID.json",
+      "record": {
+        "valid": false,
+        "reason": "request_failure",
+        "failed_requests": 5,
+        "batch": 1,
+        "phase": "warmup",
+        "metrics_before": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "metrics_after": {
+          "sglang:max_total_num_tokens": [
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0,
+            9760021.0
+          ],
+          "sglang:max_total_num_tokens_swa": [
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0,
+            573697.0
+          ],
+          "sglang:num_running_reqs": [
+            0.0
+          ],
+          "sglang:num_queue_reqs": [
+            0.0
+          ]
+        },
+        "attempted_requests": 256,
+        "native_successes": 251,
+        "native_failures": 5,
+        "all_native_output_tokens": 257024,
+        "unix_offset": 1785422966.664024
+      }
     }
   ],
   "planned_configuration_groups": 16,
@@ -2189,6 +2254,26 @@
         "reuse_build_job": 3380,
         "toolchain": "isolated NVCC 13.2.86, runtime linker and pciutils build dependency",
         "full_model_benchmark_submitted": false
+      },
+      {
+        "name": "api-bf16-20261103",
+        "job": 3383,
+        "nodes": 2,
+        "precision": "bf16",
+        "mode": "api_service",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/api-bf16-handoff-3383-20261103",
+        "input_lengths": [],
+        "role": "api",
+        "runtime": "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/restore_bf16_20261102",
+        "public_base": "https://muse.zhiyuanllm.com/v1",
+        "owner": "zhiyuan",
+        "gpus": 16,
+        "global_admission_cap": 8,
+        "reuses_owned_allocation": true,
+        "backend_guardian_unit": "muse-api-handoff-3383-20261103.service",
+        "submitted_utc": 1793727456.4504383,
+        "replaces_job": 3374,
+        "lease_anchor_job": 3383
       }
     ]
   },
@@ -2260,7 +2345,12 @@
       "toolchain": "isolated NVCC 13.2.86, runtime linker and pciutils build dependency",
       "full_model_benchmark_submitted": false,
       "result": {
-        "phase": "queued"
+        "utc": 1793727623.5190723,
+        "phase": "dependency_build_or_import_failed",
+        "flashmla_commit": "2e5429fc5653bab6e081f09477126f731882a6a9",
+        "valid_performance_points": 0,
+        "error": "CalledProcessError: Command '['git', '-C', '/work/FlashMLA', 'checkout', '--detach', '2e5429fc5653bab6e081f09477126f731882a6a9']' returned non-zero exit status 128.",
+        "full_model_inference_attempted": false
       }
     }
   ]
