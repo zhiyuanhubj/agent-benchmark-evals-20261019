@@ -94,7 +94,7 @@ def main(runtime):
         subprocess.run(['systemctl','--user','restart',cfg['relay_unit']],check=True)
         for _ in range(30):
             try:
-                h=client.get('http://127.0.0.1:8119/healthz');h.raise_for_status();break
+                h=client.get(cfg.get('local_relay_base','http://127.0.0.1:8119')+'/healthz');h.raise_for_status();break
             except httpx.HTTPError:time.sleep(1)
         else:raise RuntimeError('Local BF16 relay health check did not pass')
         h=client.get(cfg['public_base'].removesuffix('/v1')+'/healthz');h.raise_for_status()

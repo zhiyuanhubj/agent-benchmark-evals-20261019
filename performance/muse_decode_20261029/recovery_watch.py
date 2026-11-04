@@ -28,12 +28,12 @@ def main():
   phase,hosts,_=scheduler(renewal);future_state=Path(api['renewal_state']);future_plan=json.loads((future_state/'PLAN.json').read_text());marker=Path(future_plan['api_runtime_dir'])/'BACKEND.json'
   if phase=='RUNNING' and marker.exists():
    proof=json.loads(marker.read_text());actual_hosts=run(['scontrol','show','hostnames',hosts]).split()
-   if backend_matches(proof,renewal,actual_hosts,time.time()):
+   if backend_matches(proof,renewal,actual_hosts,time.time(),future_plan['precision']):
     try:
-     response=httpx.post(proof['native_base']+'/v1/chat/completions',json={'model':'muse-spark-open-bf16','messages':[{'role':'user','content':'What is 2+3? Reply with just the number.'}],'max_tokens':1024,'reasoning_effort':'low','stream':False},timeout=30,trust_env=False);response.raise_for_status();answer=response.json()['choices'][0];assert answer['message'].get('content','').strip()=='5' and answer.get('finish_reason')=='stop'
-     previous_job=api['job'];api.update(job=renewal,state=str(future_state),precision='bf16',gpus=16,nodes=2);api.pop('renewal_job');api.pop('renewal_state')
+     response=httpx.post(proof['native_base']+'/v1/chat/completions',json={'model':'muse-spark-open-'+future_plan['precision'],'messages':[{'role':'user','content':'What is 2+3? Reply with just the number.'}],'max_tokens':1024,'reasoning_effort':'low','stream':False},timeout=30,trust_env=False);response.raise_for_status();answer=response.json()['choices'][0];assert answer['message'].get('content','').strip()=='5' and answer.get('finish_reason')=='stop'
+     previous_job=api['job'];api.update(job=renewal,state=str(future_state),precision=future_plan['precision'],gpus=8 if future_plan['precision']=='nvfp4' else 16,nodes=1 if future_plan['precision']=='nvfp4' else 2);api.pop('renewal_job');api.pop('renewal_state')
      end=re.search(r'EndTime=(\S+)',run(['scontrol','show','job',str(renewal),'-o'])).group(1);api.update(lease_end_utc=end+' UTC',lease_end_unix=datetime.datetime.fromisoformat(end).replace(tzinfo=datetime.timezone.utc).timestamp())
-     save(R/'PUBLIC_API.json',api);rt=Path(api['runtime']);cfg=json.loads((rt/'RESTORE.json').read_text());cfg.update(job=renewal,state=str(future_state),backend_runtime_dir=future_plan['api_runtime_dir'],precision='bf16');save(rt/'RESTORE.json',cfg)
+     save(R/'PUBLIC_API.json',api);rt=Path(api['runtime']);cfg=json.loads((rt/'RESTORE.json').read_text());cfg.update(job=renewal,state=str(future_state),backend_runtime_dir=future_plan['api_runtime_dir'],precision=future_plan['precision']);save(rt/'RESTORE.json',cfg)
      entry={**api,'role':'api','replaces_job':previous_job,'submitted_utc':time.time(),'previous_allocation_retained':True};d['jobs'].append(entry);save(REG,d);latest[api['name']]=entry
     except (httpx.HTTPError,AssertionError,KeyError,ValueError) as exc:warnings.append({'job':renewal,'reason':'Standby API not promoted: '+type(exc).__name__})
  for key,e in latest.items():
@@ -53,7 +53,7 @@ def main():
     if renewal_phase in ('PENDING','RUNNING','CONFIGURING'):
      newstate=api.pop('renewal_state');api.pop('renewal_job');api.update(job=renewal,state=newstate);save(R/'PUBLIC_API.json',api)
      rt=Path(api['runtime']);cfg=json.loads((rt/'RESTORE.json').read_text());cfg.update(job=renewal,state=newstate);save(rt/'RESTORE.json',cfg)
-     cfg['backend_runtime_dir']=json.loads((Path(newstate)/'PLAN.json').read_text())['api_runtime_dir'];cfg['precision']='bf16';save(rt/'RESTORE.json',cfg)
+     cfg['backend_runtime_dir']=json.loads((Path(newstate)/'PLAN.json').read_text())['api_runtime_dir'];cfg['precision']=json.loads((Path(newstate)/'PLAN.json').read_text())['precision'];save(rt/'RESTORE.json',cfg)
      d['jobs'].append({**api,'role':'api','replaces_job':e['job'],'submitted_utc':time.time()});save(REG,d)
      continue
   if e['role']=='coding' and phase=='COMPLETED':continue
@@ -65,10 +65,11 @@ def main():
    warnings.append({'job':e['job'],'reason':'Two startup allocation retries exhausted; inspect logs.'});continue
   newstate=R/(key+'-retry'+str(number+1));newstate.mkdir(exist_ok=False)
   plan=json.loads((state/'PLAN.json').read_text());plan.pop('reuse_verified_weights_state',None);shutil.copy2(state/'coding_prompts.jsonl',newstate/'coding_prompts.jsonl')
-  args=['sbatch','--parsable','--hold','--nodes=2','--job-name=muse-'+key+'-r'+str(number+1),'--output='+str(newstate/'slurm-%j.log'),'--time='+('1-00:00:00' if e['role']=='api' else '08:00:00'),'--time-min='+('08:00:00' if e['role']=='api' else '03:00:00')]
+  precision=plan['precision'];node_count=1 if precision=='nvfp4' else 2
+  args=['sbatch','--parsable','--hold','--nodes='+str(node_count),'--job-name=muse-'+key+'-r'+str(number+1),'--output='+str(newstate/'slurm-%j.log'),'--time='+('1-00:00:00' if e['role']=='api' else '08:00:00'),'--time-min='+('08:00:00' if e['role']=='api' else '03:00:00')]
   excluded=plan.get('excluded_nodes',[])
   if excluded:args.append('--exclude='+','.join(excluded))
-  job=int(run([*args,str(R/'recovery_run.sbatch'),str(newstate)]).split(';')[0]);plan['jobs']={'bf16':job};save(newstate/'PLAN.json',plan)
+  job=int(run([*args,str(R/'recovery_run.sbatch'),str(newstate)]).split(';')[0]);plan['jobs']={precision:job};save(newstate/'PLAN.json',plan)
   updated={**e,'job':job,'state':str(newstate),'resubmission_count':number+1,'replaces_job':e['job'],'submitted_utc':time.time()};d['jobs'].append(updated);save(REG,d)
   if e['role']=='api':
    api=json.loads((R/'PUBLIC_API.json').read_text());api.update(job=job,state=str(newstate));save(R/'PUBLIC_API.json',api)

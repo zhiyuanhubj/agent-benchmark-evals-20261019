@@ -270,6 +270,26 @@ def main():
               '域名或 /v1/models 返回响应不能证明 GPU 模型已就绪。自动激活器在核对 allocation 归属、后端精度配置和原三 key 的实际生成后才标记 active；allocation 结束后停用旧后端路由。','',
               '[机器可读状态](muse_api_status.json)；[部署代码与说明](../../deployment/muse-openai-api/README.zh-CN.md)。','']
         (dest/'MUSE_API_BF16_STATUS.zh-CN.md').write_text('\n'.join(note))
+    v2_descriptor=a.root/'PUBLIC_API_V2.json'
+    if v2_descriptor.exists():
+        api=json.loads(v2_descriptor.read_text());rt=Path(api['runtime'])
+        public=json.loads((rt/'PUBLIC_STATUS.json').read_text()) if (rt/'PUBLIC_STATUS.json').exists() else {'phase':'waiting_backend_readiness'}
+        validation=json.loads((rt/'VALIDATION.json').read_text()) if (rt/'VALIDATION.json').exists() else None
+        full=json.loads((rt/'FULL_GENERATION_VALIDATION.json').read_text()) if (rt/'FULL_GENERATION_VALIDATION.json').exists() else None
+        if validation and validation.get('job')!=api['job']:validation=None
+        if full and full.get('job')!=api['job']:full=None
+        snapshot={k:api[k] for k in ['job','precision','gpus','global_admission_cap','public_base','lease_end_utc']}
+        snapshot.update(status=public,validation=validation,full_generation_validation=full,report_updated_unix=time.time())
+        (dest/'muse_api_v2_status.json').write_text(json.dumps(snapshot,indent=2)+'\n')
+        ready=public.get('phase')=='active' and public.get('job')==api['job'] and bool(full and full.get('complete_answer_verified'))
+        note=['# Muse BF16 API at /v2','',f"Status: {'active and publicly validated' if ready else public.get('phase','unknown')}.",'',
+              f"Base URL: `{api['public_base']}`. Use the same original three client keys and the common model name `muse-spark-open`.",'',
+              f"Allocation {api['job']}: BF16 on 16 H200 GPUs, TP16/EP16, FP8 e4m3 KV cache, maximum 8 running requests. Prefix caching is enabled; speculation is disabled.",'',
+              'The NVFP4 endpoint remains at `/v1`. Each precision has an independent backend, relay, activation timer, and standby path. Internal native SGLang APIs use `/v1` for both precisions.','',
+              'Readiness requires all three keys to pass streaming checks and a complete generated answer with reasoning. Historical receipts from other allocations are excluded.','',
+              f"Scheduler-enforced lease ends: {api['lease_end_utc']}. No allocation was cancelled for this handoff.",'',
+              '[Usage and code](../../deployment/muse-openai-api/DUAL_ENDPOINTS.md); [public validation receipts](muse_api_v2_status.json).','']
+        (dest/'MUSE_API_V2_STATUS.md').write_text('\n'.join(note))
     queue_rows=[line.split('|') for line in queue.stdout.splitlines() if len(line.split('|'))==4]
     running_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='RUNNING')
     pending_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='PENDING')

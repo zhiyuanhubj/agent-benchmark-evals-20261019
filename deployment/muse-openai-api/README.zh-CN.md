@@ -1,3 +1,5 @@
+[NVFP4 /v1 与 BF16 /v2 使用说明（English）](DUAL_ENDPOINTS.md)
+
 # Muse OpenAI API 部署代码
 
 **2026-11-03 update:** The BF16 API is restored and generation-validated. [English restoration record and lease/renewal details](RESTORE_BF16_20261103.md). Live status remains authoritative.

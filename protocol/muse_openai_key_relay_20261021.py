@@ -18,6 +18,8 @@ CONFIG = Path(os.environ['MUSE_OPENAI_RELAY_CONFIG'])
 config = json.loads(CONFIG.read_text())
 upstream = config['upstream_base'].rstrip('/')
 assert upstream.startswith('http://') or upstream.startswith('https://')
+API_PREFIX = config.get('api_prefix', '/v1')
+assert API_PREFIX in ('/v1', '/v2'), 'Unsupported API prefix'
 models = config['models']
 assert models and all(isinstance(alias, str) and isinstance(model, str)
                       for alias, model in models.items())
@@ -77,6 +79,7 @@ async def usage_status(request: Request):
 
 
 @app.get('/healthz')
+@app.get(API_PREFIX + '/healthz')
 async def health():
     try:
         response = await app.state.http.get(upstream + '/models', timeout=10)
@@ -88,14 +91,14 @@ async def health():
         return JSONResponse({'status': 'upstream_unavailable'}, status_code=503)
 
 
-@app.get('/v1/models')
+@app.get(API_PREFIX + '/models')
 async def list_models(request: Request):
     permitted = allowed(request)
     return {'object': 'list', 'data': [{'id': alias, 'object': 'model', 'owned_by': 'zhiyuan'}
                                       for alias in sorted(permitted)]}
 
 
-@app.get('/v1/models/{alias}')
+@app.get(API_PREFIX + '/models/{alias}')
 async def get_model(alias: str, request: Request):
     permitted = allowed(request)
     if alias not in permitted:
@@ -103,7 +106,7 @@ async def get_model(alias: str, request: Request):
     return {'id': alias, 'object': 'model', 'owned_by': 'zhiyuan'}
 
 
-@app.post('/v1/{operation:path}')
+@app.post(API_PREFIX + '/{operation:path}')
 async def forward(operation: str, request: Request):
     if operation not in ('chat/completions', 'completions'):
         raise HTTPException(404, 'Unsupported endpoint')

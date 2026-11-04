@@ -3,5 +3,8 @@ credentials-file: /absolute/path/to/YOUR_TUNNEL_ID.json
 
 ingress:
   - hostname: muse.example.com
+    path: ^/v2(/.*)?$
+    service: http://127.0.0.1:8120
+  - hostname: muse.example.com
     service: http://127.0.0.1:8119
   - service: http_status:404

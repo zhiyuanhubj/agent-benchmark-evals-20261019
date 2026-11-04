@@ -1,0 +1,47 @@
+{
+  "upstream_base": "http://BF16_HEAD_NODE:31420/v1",
+  "models": {
+    "muse-spark-open": "muse-spark-open-bf16",
+    "muse-spark-open-bf16": "muse-spark-open-bf16"
+  },
+  "keys": [
+    {
+      "file": "/replace/me/primary.key",
+      "label": "primary",
+      "models": [
+        "muse-spark-open",
+        "muse-spark-open-bf16"
+      ]
+    },
+    {
+      "file": "/replace/me/client-01.key",
+      "label": "client-01",
+      "models": [
+        "muse-spark-open",
+        "muse-spark-open-bf16"
+      ]
+    },
+    {
+      "file": "/replace/me/client-02.key",
+      "label": "client-02",
+      "models": [
+        "muse-spark-open",
+        "muse-spark-open-bf16"
+      ]
+    },
+    {
+      "file": "/replace/me/client-03.key",
+      "label": "client-03",
+      "models": [
+        "muse-spark-open",
+        "muse-spark-open-bf16"
+      ]
+    }
+  ],
+  "usage_db": "/path/to/private/v2-usage.sqlite3",
+  "background_idle_seconds": 120,
+  "admin_labels": [
+    "primary"
+  ],
+  "api_prefix": "/v2"
+}
