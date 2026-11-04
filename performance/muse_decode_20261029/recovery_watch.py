@@ -31,9 +31,9 @@ def main():
    if backend_matches(proof,renewal,actual_hosts,time.time()):
     try:
      response=httpx.post(proof['native_base']+'/v1/chat/completions',json={'model':'muse-spark-open-bf16','messages':[{'role':'user','content':'What is 2+3? Reply with just the number.'}],'max_tokens':1024,'reasoning_effort':'low','stream':False},timeout=30,trust_env=False);response.raise_for_status();answer=response.json()['choices'][0];assert answer['message'].get('content','').strip()=='5' and answer.get('finish_reason')=='stop'
-     previous_job=api['job'];api.update(job=renewal,state=str(future_state));api.pop('renewal_job');api.pop('renewal_state')
+     previous_job=api['job'];api.update(job=renewal,state=str(future_state),precision='bf16',gpus=16,nodes=2);api.pop('renewal_job');api.pop('renewal_state')
      end=re.search(r'EndTime=(\S+)',run(['scontrol','show','job',str(renewal),'-o'])).group(1);api.update(lease_end_utc=end+' UTC',lease_end_unix=datetime.datetime.fromisoformat(end).replace(tzinfo=datetime.timezone.utc).timestamp())
-     save(R/'PUBLIC_API.json',api);rt=Path(api['runtime']);cfg=json.loads((rt/'RESTORE.json').read_text());cfg.update(job=renewal,state=str(future_state),backend_runtime_dir=future_plan['api_runtime_dir']);save(rt/'RESTORE.json',cfg)
+     save(R/'PUBLIC_API.json',api);rt=Path(api['runtime']);cfg=json.loads((rt/'RESTORE.json').read_text());cfg.update(job=renewal,state=str(future_state),backend_runtime_dir=future_plan['api_runtime_dir'],precision='bf16');save(rt/'RESTORE.json',cfg)
      entry={**api,'role':'api','replaces_job':previous_job,'submitted_utc':time.time(),'previous_allocation_retained':True};d['jobs'].append(entry);save(REG,d);latest[api['name']]=entry
     except (httpx.HTTPError,AssertionError,KeyError,ValueError) as exc:warnings.append({'job':renewal,'reason':'Standby API not promoted: '+type(exc).__name__})
  for key,e in latest.items():
@@ -53,7 +53,7 @@ def main():
     if renewal_phase in ('PENDING','RUNNING','CONFIGURING'):
      newstate=api.pop('renewal_state');api.pop('renewal_job');api.update(job=renewal,state=newstate);save(R/'PUBLIC_API.json',api)
      rt=Path(api['runtime']);cfg=json.loads((rt/'RESTORE.json').read_text());cfg.update(job=renewal,state=newstate);save(rt/'RESTORE.json',cfg)
-     cfg['backend_runtime_dir']=json.loads((Path(newstate)/'PLAN.json').read_text())['api_runtime_dir'];save(rt/'RESTORE.json',cfg)
+     cfg['backend_runtime_dir']=json.loads((Path(newstate)/'PLAN.json').read_text())['api_runtime_dir'];cfg['precision']='bf16';save(rt/'RESTORE.json',cfg)
      d['jobs'].append({**api,'role':'api','replaces_job':e['job'],'submitted_utc':time.time()});save(REG,d)
      continue
   if e['role']=='coding' and phase=='COMPLETED':continue

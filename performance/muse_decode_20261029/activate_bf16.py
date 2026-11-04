@@ -15,7 +15,7 @@ def save(path,data):
     tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n');tmp.chmod(0o600);os.replace(tmp,path)
 
 
-def allocation_hosts(job,owner):
+def allocation_hosts(job,owner,precision='bf16'):
     r=subprocess.run(['squeue','-h','-j',str(job),'-o','%u|%T|%N'],capture_output=True,text=True)
     if r.returncode:
         if 'Invalid job id' in r.stderr:return None,'not_allocated'
@@ -26,35 +26,36 @@ def allocation_hosts(job,owner):
     if user!=owner:raise RuntimeError('Slurm owner mismatch')
     if phase!='RUNNING':return None,phase
     hosts=subprocess.check_output(['scontrol','show','hostnames',nodes],text=True).split()
-    assert len(hosts)==2
+    assert len(hosts)==(1 if precision=='nvfp4' else 2)
     return hosts,phase
 
 
-def backend_matches(marker,job,hosts,now):
+def backend_matches(marker,job,hosts,now,precision='bf16'):
     expected='http://'+hosts[0].removeprefix('ip-').replace('-','.')+':31420'
-    return (marker.get('job')==job and marker.get('nodes')==hosts and marker.get('precision')=='bf16'
+    return (marker.get('job')==job and marker.get('nodes')==hosts and marker.get('precision')==precision
             and marker.get('phase')=='ready_api_backend' and marker.get('native_base')==expected
-            and marker.get('gpus')==16 and marker.get('global_admission_cap')==8
+            and marker.get('gpus')==(8 if precision=='nvfp4' else 16) and marker.get('global_admission_cap')==8
             and 0<=now-marker.get('updated_unix',0)<90)
 
 
-def gateway_config(old,restoration_id,upstream):
-    aliases=['muse-spark-open','muse-spark-open-bf16']
+def gateway_config(old,restoration_id,upstream,precision='bf16'):
+    aliases=['muse-spark-open','muse-spark-open-'+precision]
     # The input config is never mutated; all existing key paths and labels survive.
     d=json.loads(json.dumps(old));d['upstream_base']=upstream
-    d['models']={alias:'muse-spark-open-bf16' for alias in aliases}
+    d['models']={alias:'muse-spark-open-'+precision for alias in aliases}
     for binding in d['keys']:binding['models']=aliases[:]
     d['restoration_id']=restoration_id
     return d
 
 
 def main(runtime):
-    runtime=Path(runtime);cfg=json.loads((runtime/'RESTORE.json').read_text())
+    runtime=Path(runtime);cfg=json.loads((runtime/'RESTORE.json').read_text());precision=cfg.get('precision','bf16');model='muse-spark-open-'+precision
+    assert precision in ('bf16','nvfp4')
     lock=(runtime/'activation.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     statusfile=runtime/'PUBLIC_STATUS.json'
     previous=json.loads(statusfile.read_text()) if statusfile.exists() else {}
     def status(phase,**kw):save(statusfile,dict(phase=phase,job=cfg['job'],updated_unix=time.time(),**kw))
-    hosts,phase=allocation_hosts(cfg['job'],cfg['owner'])
+    hosts,phase=allocation_hosts(cfg['job'],cfg['owner'],precision)
     gateway=runtime/'gateway-bf16.json'
     if hosts is None:
         if gateway.exists():
@@ -66,14 +67,15 @@ def main(runtime):
         return
     markerfile=Path(cfg.get('backend_runtime_dir',runtime))/'BACKEND.json'
     marker=json.loads(markerfile.read_text()) if markerfile.exists() else {}
-    if not backend_matches(marker,cfg['job'],hosts,time.time()):
+    if not backend_matches(marker,cfg['job'],hosts,time.time(),precision):
         status('waiting_backend_readiness',backend_phase=marker.get('phase','not_started'));return
     base=marker['native_base']
     with httpx.Client(trust_env=False,timeout=30) as client:
         r=client.get(base+'/v1/models');r.raise_for_status()
-        assert 'muse-spark-open-bf16' in {x['id'] for x in r.json()['data']}
+        assert model in {x['id'] for x in r.json()['data']}
         info=client.get(base+'/server_info');info.raise_for_status();info=info.json()
-        assert info['dtype']=='bfloat16' and not info.get('quantization') and info['tp_size']==16
+        from bf16_backend import verify_bf16
+        verify_bf16(info,precision)
         assert info['max_running_requests']==8 and info['reasoning_parser']=='muse'
         expected=base+'/v1'
         current=json.loads(gateway.read_text()) if gateway.exists() else {}
@@ -84,9 +86,9 @@ def main(runtime):
         if not (runtime/'gateway-before.json').exists():
             old=json.loads(Path(cfg['previous_gateway']).read_text());save(runtime/'gateway-before.json',old)
         else:old=json.loads((runtime/'gateway-before.json').read_text())
-        save(gateway,gateway_config(old,cfg['restoration_id'],expected))
+        save(gateway,gateway_config(old,cfg['restoration_id'],expected,precision))
         dropin=Path(cfg['dropin']);dropin.parent.mkdir(parents=True,exist_ok=True)
-        tmp=dropin.with_suffix('.tmp');tmp.write_text('[Unit]\nDescription=Key-mapped OpenAI-compatible Muse Spark BF16 API\n\n[Service]\nEnvironment=MUSE_OPENAI_RELAY_CONFIG='+str(gateway)+'\n')
+        tmp=dropin.with_suffix('.tmp');tmp.write_text('[Unit]\nDescription=Key-mapped OpenAI-compatible Muse Spark API\n\n[Service]\nEnvironment=MUSE_OPENAI_RELAY_CONFIG='+str(gateway)+'\n')
         os.replace(tmp,dropin)
         subprocess.run(['systemctl','--user','daemon-reload'],check=True)
         subprocess.run(['systemctl','--user','restart',cfg['relay_unit']],check=True)
@@ -102,8 +104,8 @@ def main(runtime):
             key=Path(binding['file']).read_text().strip()
             headers={'Authorization':'Bearer '+key}
             models=client.get(cfg['public_base']+'/models',headers=headers);models.raise_for_status()
-            assert 'muse-spark-open-bf16' in {x['id'] for x in models.json()['data']}
-            body={'model':'muse-spark-open-bf16','messages':[{'role':'user','content':'请计算 37×43，并简短解释。'}],
+            assert model in {x['id'] for x in models.json()['data']}
+            body={'model':model,'messages':[{'role':'user','content':'请计算 37×43，并简短解释。'}],
                   'max_tokens':128,'reasoning_effort':'high' if binding['label']=='client-01' else 'low',
                   'stream':True,'stream_options':{'include_usage':True}}
             token_events=0;reasoning_events=0;answer_events=0;done=False
@@ -124,7 +126,7 @@ def main(runtime):
         assert len(checks)==3
         assert sum(check['reasoning_events'] for check in checks)>0, 'No reasoning stream observed during BF16 validation'
         full=client.post(cfg['public_base']+'/chat/completions',headers=headers,
-                         json={'model':'muse-spark-open-bf16','messages':[{'role':'user','content':'计算 37×43，最终回答只写乘积。'}],
+                         json={'model':model,'messages':[{'role':'user','content':'计算 37×43，最终回答只写乘积。'}],
                                'max_tokens':4096,'reasoning_effort':'low','stream':False},timeout=180)
         full.raise_for_status();reply=full.json();message=reply['choices'][0]['message']
         assert message.get('reasoning_content') and '1591' in (message.get('content') or '')
@@ -134,7 +136,7 @@ def main(runtime):
              'reasoning_chars':len(message['reasoning_content']),'final_content':message['content'],
              'finish_reason':'stop','usage':reply.get('usage'),'complete_answer_verified':True})
         unauthorized=client.get(cfg['public_base']+'/models');assert unauthorized.status_code==401
-        save(runtime/'VALIDATION.json',{'updated_unix':time.time(),'job':cfg['job'],'precision':'bf16','gpus':16,
+        save(runtime/'VALIDATION.json',{'updated_unix':time.time(),'job':cfg['job'],'precision':precision,'gpus':8 if precision=='nvfp4' else 16,
                                       'global_admission_cap':8,'original_three_keys_preserved':True,'checks':checks,'unauthenticated_http':401})
         status('active',native_base=base,public_base=cfg['public_base'],validated_unix=time.time())
 
