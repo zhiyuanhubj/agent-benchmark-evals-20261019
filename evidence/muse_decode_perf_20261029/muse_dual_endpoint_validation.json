@@ -1,0 +1,80 @@
+{
+  "updated_unix": 1793781486.7033381,
+  "identical_original_key_files": true,
+  "model_alias": "muse-spark-open",
+  "key_checks": [
+    {
+      "label": "client-01",
+      "version": "v1",
+      "models_http": 200
+    },
+    {
+      "label": "client-01",
+      "version": "v2",
+      "models_http": 200
+    },
+    {
+      "label": "client-02",
+      "version": "v1",
+      "models_http": 200
+    },
+    {
+      "label": "client-02",
+      "version": "v2",
+      "models_http": 200
+    },
+    {
+      "label": "client-03",
+      "version": "v1",
+      "models_http": 200
+    },
+    {
+      "label": "client-03",
+      "version": "v2",
+      "models_http": 200
+    }
+  ],
+  "generations": [
+    {
+      "version": "v1",
+      "precision": "nvfp4",
+      "response_model": "muse-spark-open-nvfp4",
+      "http": 200,
+      "final_content": "1591",
+      "reasoning_chars": 474,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 160,
+        "total_tokens": 308,
+        "completion_tokens": 148,
+        "prompt_tokens_details": {
+          "cached_tokens": 141
+        },
+        "reasoning_tokens": 140
+      }
+    },
+    {
+      "version": "v2",
+      "precision": "bf16",
+      "response_model": "muse-spark-open-bf16",
+      "http": 200,
+      "final_content": "1591",
+      "reasoning_chars": 1473,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 160,
+        "total_tokens": 491,
+        "completion_tokens": 331,
+        "prompt_tokens_details": {
+          "cached_tokens": 141
+        },
+        "reasoning_tokens": 323
+      }
+    }
+  ],
+  "unauthenticated_http": {
+    "v1": 401,
+    "v2": 401
+  },
+  "passed": true
+}
