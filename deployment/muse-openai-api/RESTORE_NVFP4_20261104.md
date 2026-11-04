@@ -18,4 +18,4 @@ The runtime now accepts both NVFP4 and BF16 plans. Backend verification checks p
 
 The allocation has a scheduler-enforced expiry of **2026-11-04 17:48:15 UTC**. Retention prevents automatic release on task completion; it does not extend a Slurm lease or guarantee immediate standby allocation. Do not create synthetic GPU traffic to disguise idle capacity.
 
-At the time of the initial code commit, model startup is in progress. Runtime validation files determine whether the public service is actually ready.
+Public validation completed at **2026-11-04 06:48 UTC**: health HTTP 200; all three original client keys completed SSE streams; reasoning events were observed; an additional full response returned `1591` for `37 * 43`, with nonempty reasoning and `finish_reason=stop`. Unauthenticated requests returned HTTP 401. The three 128-token stream probes test streaming and authentication; a separate 4096-token-budget request verifies a complete final answer. Subsequent availability depends on the live allocation and backend health.

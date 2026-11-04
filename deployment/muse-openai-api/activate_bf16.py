@@ -1,4 +1,4 @@
-"""Head-node timer: validate an owned BF16 allocation, then preserve keys and switch routing."""
+"""Head-node timer: validate owned Muse allocations, preserve keys, and switch routing."""
 import argparse
 import fcntl
 import json
@@ -79,7 +79,7 @@ def main(runtime):
         assert info['max_running_requests']==8 and info['reasoning_parser']=='muse'
         expected=base+'/v1'
         current=json.loads(gateway.read_text()) if gateway.exists() else {}
-        if previous.get('phase')=='active' and current.get('upstream_base')==expected:
+        if previous.get('phase')=='active' and previous.get('job')==cfg['job'] and current.get('upstream_base')==expected:
             health=client.get(cfg['public_base'].removesuffix('/v1')+'/healthz');health.raise_for_status()
             status('active',native_base=base,public_base=cfg['public_base'],validated_unix=previous.get('validated_unix'))
             return
@@ -124,7 +124,7 @@ def main(runtime):
             checks.append({'label':binding['label'],'models_http':models.status_code,'stream_completed':done,
                            'nonempty_stream_events':token_events,'reasoning_events':reasoning_events,'answer_events':answer_events})
         assert len(checks)==3
-        assert sum(check['reasoning_events'] for check in checks)>0, 'No reasoning stream observed during BF16 validation'
+        assert sum(check['reasoning_events'] for check in checks)>0, 'No reasoning stream observed during Muse API validation'
         full=client.post(cfg['public_base']+'/chat/completions',headers=headers,
                          json={'model':model,'messages':[{'role':'user','content':'计算 37×43，最终回答只写乘积。'}],
                                'max_tokens':4096,'reasoning_effort':'low','stream':False},timeout=180)

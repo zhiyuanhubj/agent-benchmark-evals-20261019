@@ -1,4 +1,4 @@
-"""Dedicated BF16 API allocation; uses the pinned benchmark node preparation code."""
+"""Dedicated Muse API allocations using pinned benchmark node preparation."""
 import json
 import os
 import signal
@@ -68,7 +68,7 @@ def run(state,plan):
                         assert 'muse-spark-open-'+precision in {x['id'] for x in m.json()['data']}
                         break
                     except httpx.HTTPError:time.sleep(10)
-                else:raise RuntimeError('BF16 model readiness timeout')
+                else:raise RuntimeError('Muse model readiness timeout')
                 save(runtime/'SERVER_INFO.json',info)
                 status('ready_api_backend',model_revision=plan['models'][precision]['revision'])
                 health_failures=0
