@@ -1,10 +1,10 @@
 # Muse BF16 API at /v2
 
-Status: active and publicly validated.
+Status: waiting_backend_readiness.
 
 Base URL: `https://muse.zhiyuanllm.com/v2`. Use the same original three client keys and the common model name `muse-spark-open`.
 
-Allocation 3388: BF16 on 16 H200 GPUs, TP16/EP16, FP8 e4m3 KV cache, maximum 8 running requests. Prefix caching is enabled; speculation is disabled.
+Allocation 3387: BF16 on 16 H200 GPUs, TP16/EP16, FP8 e4m3 KV cache, maximum 8 running requests. Prefix caching is enabled; speculation is disabled.
 
 The NVFP4 endpoint remains at `/v1`. Each precision has an independent backend, relay, activation timer, and standby path. Internal native SGLang APIs use `/v1` for both precisions.
 
