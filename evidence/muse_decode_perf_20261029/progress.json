@@ -1,5 +1,5 @@
 {
-  "updated_unix": 1793773877.3873236,
+  "updated_unix": 1793774178.547039,
   "latest_decode_artifact_unix": 1793668010.0,
   "allocation": {
     "created_unix": 1793251673.2838128,
@@ -2482,6 +2482,30 @@
         "held_for_api_renewal": [],
         "replaces_job": 3383,
         "submitted_utc": 1793736009.637119
+      },
+      {
+        "name": "api-bf16-20261103",
+        "job": 3389,
+        "nodes": 1,
+        "precision": "nvfp4",
+        "mode": "api_service",
+        "state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/api-nvfp4-handoff-3389-20261104",
+        "input_lengths": [],
+        "role": "api",
+        "runtime": "/fsx/home/zhiyuan/.private/muse_openai_api_20261021/restore_bf16_20261102",
+        "public_base": "https://muse.zhiyuanllm.com/v1",
+        "owner": "zhiyuan",
+        "gpus": 8,
+        "global_admission_cap": 8,
+        "reuses_owned_allocation": true,
+        "backend_guardian_unit": "muse-api-handoff-3389-20261104.service",
+        "lease_end_utc": "2026-11-04T17:48:15 UTC",
+        "lease_end_unix": 1793814495.0,
+        "held_for_api_renewal": [],
+        "renewal_job": 3387,
+        "renewal_state": "/fsx/home/zhiyuan/.private/muse_decode_perf_20261029/api-bf16-renewal-20261103",
+        "submitted_utc": 1793773962.024142,
+        "replaces_job": 3387
       }
     ]
   },
