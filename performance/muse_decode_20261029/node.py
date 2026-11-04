@@ -136,6 +136,12 @@ def main():
                  '-e', 'GLOO_SOCKET_IFNAME=' + iface]
         for device in sorted(Path('/dev/infiniband').iterdir()):
             args += ['--device=' + str(device)]
+    if plan.get('api_environment'):
+        assert plan.get('dedicated_api_service'), 'API environment overrides cannot alter benchmark plans'
+        for key, value in plan['api_environment'].items():
+            assert key in ('NCCL_DEBUG','NCCL_DEBUG_SUBSYS','NCCL_NET','NCCL_NET_PLUGIN','NCCL_IB_DISABLE')
+            assert isinstance(value,str) and '\n' not in value
+            args += ['-e',key+'='+value]
     size = '8' if a.precision == 'nvfp4' else '16'
     model = 'muse-spark-open-' + a.precision
     server = ['--model-path', '/weights', '--served-model-name', model, '--tp-size', size, '--ep-size', size,

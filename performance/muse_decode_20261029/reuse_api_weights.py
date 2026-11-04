@@ -9,7 +9,12 @@ source=Path(plan['reuse_verified_weights_state'])/'bf16'/('rank'+str(rank))/'wei
 assert weights.is_relative_to(Path('/opt/dlami/nvme')) and proof['complete'] and proof['revision']==manifest['revision']
 assert set(proof['verified_files'])=={r['file'] for r in manifest['files']}
 for row in manifest['files']:
- f=weights/row['file'];s=f.stat();assert f.resolve().is_relative_to(weights) and s.st_size==row['bytes'] and s.st_mtime<=cutoff and s.st_ctime<=cutoff, str(f)
+ f=weights/row['file'];s=f.stat();assert f.resolve().is_relative_to(weights) and s.st_size==row['bytes'],str(f)
+ if proof.get('file_metadata'):
+  actual={'size':s.st_size,'mtime_ns':s.st_mtime_ns,'ctime_ns':s.st_ctime_ns,'inode':s.st_ino,'device':s.st_dev}
+  assert actual==proof['file_metadata'][row['file']], 'File changed since checksum verification: '+str(f)
+ else:
+  assert s.st_mtime<=cutoff and s.st_ctime<=cutoff, str(f)
 target=a.state/'bf16'/('rank'+str(rank));target.mkdir(parents=True,exist_ok=True)
 proof.update(reused_verified_state=str(source),source_receipt_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),file_metadata_unchanged_since_verification=True)
 (target/'weights.json').write_text(json.dumps(proof,indent=2)+'\n');print(json.dumps({'rank':rank,'reused_files':len(manifest['files']),'revision':manifest['revision']}))

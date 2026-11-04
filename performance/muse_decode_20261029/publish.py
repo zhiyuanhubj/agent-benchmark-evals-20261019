@@ -290,6 +290,8 @@ def main():
               f"Scheduler-enforced lease ends: {api['lease_end_utc']}. No allocation was cancelled for this handoff.",'',
               '[Usage and code](../../deployment/muse-openai-api/DUAL_ENDPOINTS.md); [public validation receipts](muse_api_v2_status.json).','']
         (dest/'MUSE_API_V2_STATUS.md').write_text('\n'.join(note))
+    dual_validation=a.root/'DUAL_ENDPOINT_VALIDATION_20261104.json'
+    if dual_validation.exists():shutil.copy2(dual_validation,dest/'muse_dual_endpoint_validation.json')
     queue_rows=[line.split('|') for line in queue.stdout.splitlines() if len(line.split('|'))==4]
     running_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='RUNNING')
     pending_nodes=sum(int(row[2]) for row in queue_rows if row[1]=='PENDING')

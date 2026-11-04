@@ -17,5 +17,5 @@ else:
  assert sys.argv[1]=='fetch' and socket.gethostname()=='ip-10-1-25-253'
  weights=Path('/opt/dlami/nvme/zhiyuan-muse-perf-3388-0/weights')
  result=fetch('http://10.1.112.220:31481',weights,manifest,token,state/'PEER_TRANSFER.json',workers=16)
- target=state/'bf16/rank0';target.mkdir(parents=True,exist_ok=True);(target/'weights.json').write_text(json.dumps({'path':str(weights),'repo':manifest['repo'],'revision':manifest['revision'],'complete':True,'verified_files':result['verified_files'],'verified_by':'streaming peer transfer SHA-256','transfer_receipt':str(state/'PEER_TRANSFER.json')},indent=2)+'\n')
+ target=state/'bf16/rank0';target.mkdir(parents=True,exist_ok=True);(target/'weights.json').write_text(json.dumps({'path':str(weights),'repo':manifest['repo'],'revision':manifest['revision'],'complete':True,'verified_files':result['verified_files'],'verified_by':'streaming peer transfer SHA-256','transfer_receipt':str(state/'PEER_TRANSFER.json'),'file_metadata':result['file_metadata']},indent=2)+'\n')
  print(json.dumps({'valid':result['valid'],'bytes_received':result['bytes_received'],'elapsed_seconds':result['elapsed_seconds']}))

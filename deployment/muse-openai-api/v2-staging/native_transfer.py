@@ -30,7 +30,7 @@ def source_handler(weights,manifest,token):
  return Handler
 
 def fetch_native(base,target,manifest,token,progress,workers=16,reserve=32*2**30):
- target=Path(target);target.mkdir(parents=True,exist_ok=True);rows=manifest['files'];total=sum(x['bytes'] for x in rows);began=time.time();done=threading.Event();complete=[];lock=threading.Lock()
+ target=Path(target);target.mkdir(parents=True,exist_ok=True);rows=manifest['files'];total=sum(x['bytes'] for x in rows);began=time.time();done=threading.Event();complete=[];file_metadata={};lock=threading.Lock()
  config=progress.parent/'peer-curl.conf';config.write_text('header = "Authorization: Bearer '+token+'"\n');config.chmod(0o600)
  def sizes():
   count=0
@@ -45,12 +45,15 @@ def fetch_native(base,target,manifest,token,progress,workers=16,reserve=32*2**30
    data={'bytes_received':sizes(),'initial_resumable_bytes':initial,'total_bytes':total,'completed_files':n,'total_files':len(rows),'elapsed_seconds':time.time()-began,'updated_unix':time.time(),'method':'native curl resume + sendfile + SHA-256'}
    t=progress.with_suffix('.tmp');t.write_text(json.dumps(data)+'\n');t.replace(progress)
  reporter=threading.Thread(target=report,daemon=True);reporter.start()
+ def signature(st):return {'size':st.st_size,'mtime_ns':st.st_mtime_ns,'ctime_ns':st.st_ctime_ns,'inode':st.st_ino,'device':st.st_dev}
  def verify(p,row):
+  before=signature(p.stat())
   h=hashlib.sha256() if row['algorithm']=='sha256' else hashlib.sha1()
   if row['algorithm']=='git-blob-sha1':h.update(('blob '+str(row['bytes'])+'\0').encode())
   with p.open('rb') as f:
    for block in iter(lambda:f.read(16*2**20),b''):h.update(block)
   assert h.hexdigest()==row['expected'],'Pinned checksum mismatch: '+row['file']
+  assert signature(p.stat())==before,'File changed during checksum verification: '+row['file']
  def one(row):
   p=target/row['file'];part=p.with_name(p.name+'.peer-partial');p.parent.mkdir(parents=True,exist_ok=True)
   if not p.exists():
@@ -59,9 +62,10 @@ def fetch_native(base,target,manifest,token,progress,workers=16,reserve=32*2**30
    assert part.stat().st_size==row['bytes'];verify(part,row);part.replace(p)
   else:
    assert p.stat().st_size==row['bytes'];verify(p,row)
-  with lock:complete.append(row['file'])
+  with lock:
+   complete.append(row['file']);file_metadata[row['file']]=signature(p.stat())
  try:
   with ThreadPoolExecutor(max_workers=workers) as pool:list(pool.map(one,rows))
  finally:done.set();reporter.join()
- result={'valid':True,'bytes_received':total,'total_bytes':total,'initial_resumable_bytes':initial,'verified_files':complete,'elapsed_seconds':time.time()-began,'updated_unix':time.time(),'method':'native curl resume + sendfile + SHA-256'}
+ result={'valid':True,'bytes_received':total,'total_bytes':total,'initial_resumable_bytes':initial,'verified_files':complete,'file_metadata':file_metadata,'elapsed_seconds':time.time()-began,'updated_unix':time.time(),'method':'native curl resume + sendfile + SHA-256'}
  t=progress.with_suffix('.tmp');t.write_text(json.dumps(result,indent=2)+'\n');t.replace(progress);return result

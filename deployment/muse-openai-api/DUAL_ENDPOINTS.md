@@ -1,5 +1,7 @@
 # Muse OpenAI-Compatible API: NVFP4 and BF16
 
+BF16 public validation passed on **2026-11-04 at 08:37 UTC**: all three original keys completed reasoning streams; a separate full generation returned `1591` for `37 * 43` with nonempty reasoning and a normal stop. NVFP4 `/v1` remained online.
+
 The two endpoints use the **same original three client keys**, the same OpenAI-compatible request format, and the common model name **`muse-spark-open`**. Select precision by changing only the base URL.
 
 | Precision | Base URL | Explicit model alias | Hardware | Maximum running requests |
@@ -7,7 +9,7 @@ The two endpoints use the **same original three client keys**, the same OpenAI-c
 | NVFP4 | `https://muse.zhiyuanllm.com/v1` | `muse-spark-open-nvfp4` | 8 H200 GPUs | 8 |
 | BF16 | `https://muse.zhiyuanllm.com/v2` | `muse-spark-open-bf16` | 16 H200 GPUs | 8 |
 
-The admission caps are service configuration limits, not newly measured throughput results. Additional requests queue. Both services use SGLang, FP8 e4m3 KV cache, enabled prefix caching, disabled speculation, and the Muse reasoning/tool parsers. The original key files and key labels are preserved. Keys are excluded from Git.
+The admission caps are service configuration limits, not newly measured throughput results. Additional requests queue. Both services use SGLang, FP8 e4m3 KV cache, enabled prefix caching, disabled speculation, and the Muse reasoning/tool parsers. The BF16 API explicitly selects the Libfabric network plugin for its two-node EFA transport. These API-only overrides do not change the benchmark plans. The original key files and key labels are preserved. Keys are excluded from Git.
 
 ## Request example
 
@@ -43,7 +45,7 @@ Current allocations have scheduler-enforced leases. Retention prevents task-comp
 - [Independent BF16 standby watcher](../../performance/muse_decode_20261029/v2_watch.py)
 - [Pinned node-local staging tools](v2-staging/)
 
-The staging tools are the exact allocation-specific operator scripts and require adapting job IDs, node addresses, state directories, and local storage paths for another cluster. They resume authenticated native copies and verify every staged file against its pinned SHA-256 or Git-blob hash. No cache-eviction tool or dataset contents are included.
+The staging tools are the exact allocation-specific operator scripts and require adapting job IDs, node addresses, state directories, and local storage paths for another cluster. They resume authenticated native copies and verify every staged file against its pinned SHA-256 or Git-blob hash. No cache-eviction tool or dataset contents are included. Reuse receipts bind verified files to exact size, nanosecond timestamps, inode, and device when available, avoiding cross-filesystem clock comparisons; legacy receipts retain the conservative timestamp check. Timestamp-ambiguous files were rehashed before creating exact-metadata receipts.
 
 Run the relay regression check from the repository root:
 
