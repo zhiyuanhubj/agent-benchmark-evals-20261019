@@ -1,6 +1,6 @@
 # Muse Public API Status
 
-Status: waiting_allocation.
+Status: waiting_backend_readiness.
 
 Allocation: 3425; precision: NVFP4; hardware: 8 H200 GPUs; TP8/EP8; maximum running requests: 8.
 
