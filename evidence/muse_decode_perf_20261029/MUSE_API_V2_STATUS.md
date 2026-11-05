@@ -1,6 +1,6 @@
 # Muse BF16 API at /v2
 
-Status: activation_or_validation_failed.
+Status: active and publicly validated.
 
 Base URL: `https://muse.zhiyuanllm.com/v2`. Use the same original three client keys and the common model name `muse-spark-open`.
 
