@@ -7,11 +7,11 @@
   "lease_end_utc": "2026-11-04T22:39:28 UTC",
   "status": {
     "phase": "activation_or_validation_failed",
-    "updated_unix": 1793891650.2222824,
+    "updated_unix": 1793891921.3511083,
     "error_type": "HTTPStatusError"
   },
   "validation": {
-    "updated_unix": 1793890961.0225782,
+    "updated_unix": 1793891809.8216865,
     "job": 3387,
     "precision": "bf16",
     "gpus": 16,
@@ -38,30 +38,30 @@
         "label": "client-03",
         "models_http": 200,
         "stream_completed": true,
-        "nonempty_stream_events": 119,
-        "reasoning_events": 63,
-        "answer_events": 56
+        "nonempty_stream_events": 125,
+        "reasoning_events": 125,
+        "answer_events": 0
       }
     ],
     "unauthenticated_http": 401
   },
   "full_generation_validation": {
-    "updated_unix": 1793890960.994708,
+    "updated_unix": 1793891809.7900732,
     "job": 3387,
     "http": 200,
-    "reasoning_chars": 423,
+    "reasoning_chars": 640,
     "final_content": "1591",
     "finish_reason": "stop",
     "usage": {
       "prompt_tokens": 156,
-      "total_tokens": 296,
-      "completion_tokens": 140,
+      "total_tokens": 340,
+      "completion_tokens": 184,
       "prompt_tokens_details": {
         "cached_tokens": 141
       },
-      "reasoning_tokens": 132
+      "reasoning_tokens": 176
     },
     "complete_answer_verified": true
   },
-  "report_updated_unix": 1793891666.4679298
+  "report_updated_unix": 1793891946.2788563
 }
