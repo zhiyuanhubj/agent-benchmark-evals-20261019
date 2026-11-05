@@ -6,12 +6,15 @@
   "public_base": "https://muse.zhiyuanllm.com/v2",
   "lease_end_utc": "2026-11-04T22:39:28 UTC",
   "status": {
-    "phase": "activation_or_validation_failed",
-    "updated_unix": 1793891921.3511083,
-    "error_type": "HTTPStatusError"
+    "phase": "active",
+    "job": 3387,
+    "updated_unix": 1793892220.5534449,
+    "native_base": "http://10.1.25.253:31420",
+    "public_base": "https://muse.zhiyuanllm.com/v2",
+    "validated_unix": 1793892055.5034297
   },
   "validation": {
-    "updated_unix": 1793891809.8216865,
+    "updated_unix": 1793892055.4966438,
     "job": 3387,
     "precision": "bf16",
     "gpus": 16,
@@ -38,30 +41,30 @@
         "label": "client-03",
         "models_http": 200,
         "stream_completed": true,
-        "nonempty_stream_events": 125,
-        "reasoning_events": 125,
-        "answer_events": 0
+        "nonempty_stream_events": 114,
+        "reasoning_events": 51,
+        "answer_events": 63
       }
     ],
     "unauthenticated_http": 401
   },
   "full_generation_validation": {
-    "updated_unix": 1793891809.7900732,
+    "updated_unix": 1793892055.450919,
     "job": 3387,
     "http": 200,
-    "reasoning_chars": 640,
+    "reasoning_chars": 186,
     "final_content": "1591",
     "finish_reason": "stop",
     "usage": {
       "prompt_tokens": 156,
-      "total_tokens": 340,
-      "completion_tokens": 184,
+      "total_tokens": 215,
+      "completion_tokens": 59,
       "prompt_tokens_details": {
-        "cached_tokens": 141
+        "cached_tokens": 155
       },
-      "reasoning_tokens": 176
+      "reasoning_tokens": 51
     },
     "complete_answer_verified": true
   },
-  "report_updated_unix": 1793891946.2788563
+  "report_updated_unix": 1793892224.7191906
 }
