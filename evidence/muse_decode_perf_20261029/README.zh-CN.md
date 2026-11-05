@@ -2,7 +2,7 @@
 
 这是独立新测量，尚未完成；不复用之前包含 prefill 的服务曲线。
 
-更新时间：2026-11-05 06:09:37 UTC
+更新时间：2026-11-05 06:14:43 UTC
 
 最近 decode 结果写入时间：2026-11-03 01:06:50 UTC。报告刷新时间不代表新增测量。
 
@@ -19,10 +19,10 @@ DeepInfer H200依赖验证及编译日志：[原始验证记录](deepinfer-h200-
 ## 调度实况
 
 ```
-3376|PENDING|2|(AssocGrpNodeLimit)
-3377|PENDING|2|(Resources)
+3376|PENDING|2|(Resources)
+3377|PENDING|2|(Priority)
 3378|PENDING|2|(Priority)
-3375|PENDING|2|(AssocGrpNodeLimit)
+3375|PENDING|2|(None)
 ```
 
 ## 多组、多点矩阵
