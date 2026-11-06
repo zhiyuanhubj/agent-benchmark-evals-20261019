@@ -1,6 +1,6 @@
 # Muse H200 Decode Performance: Code and Exact Plot Data
 
-Snapshot generated: 2026-11-06 02:55:47 UTC. This package contains **83 accepted decode points**, **253 valid decode repetitions**, and **24 accepted prefill points**. Snapshot refresh time is not the time of a new GPU measurement. Work is still in progress; failed and unmeasured configurations are not successful points.
+Snapshot generated: 2026-11-06 03:00:40 UTC. This package contains **83 accepted decode points**, **253 valid decode repetitions**, and **24 accepted prefill points**. Snapshot refresh time is not the time of a new GPU measurement. Work is still in progress; failed and unmeasured configurations are not successful points.
 
 ## Start here
 
