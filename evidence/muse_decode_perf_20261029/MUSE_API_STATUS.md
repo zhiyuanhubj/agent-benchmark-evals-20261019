@@ -1,8 +1,8 @@
 # Muse Public API Status
 
-Status: active.
+Status: waiting_allocation.
 
-Allocation: 3425; precision: NVFP4; hardware: 8 H200 GPUs; TP8/EP8; maximum running requests: 8.
+Allocation: 3510; precision: NVFP4; hardware: 8 H200 GPUs; TP8/EP8; maximum running requests: 8.
 
 Base URL: `https://muse.zhiyuanllm.com/v1`; aliases: `muse-spark-open` and `muse-spark-open-nvfp4`.
 
